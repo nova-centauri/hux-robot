@@ -4,10 +4,14 @@
 
 ## Locked enough to write down
 
+Electric-only is a lock. **4S LiPo is a class lean**, not a pack lock.
+
 | Piece | Choice | Notes |
 | --- | --- | --- |
+| Powertrain | **Electric-only** | No ICE, no hybrid. Whole robot. |
+| Battery class | **4S LiPo** (RC car/boat packs) | Nominal **~14.8V** / full **~16.8V**. Capacity and C-rating **TBD**. No pack SKU. |
 | RC RX | **TBS Nano RX** | Bind to the FC (or a dedicated link into the FC). |
-| Wheels | **Brushless** (ESC + BLDC per wheel) | Exact motor/ESC models TBD. |
+| Wheels | **Brushless** (ESC + BLDC per wheel) | Exact motor/ESC models TBD. Diameter / tire: see [`mechanical.md`](mechanical.md). |
 | Companion | **Raspberry Pi** | Cameras + pathfinding inference. Not on the FC. |
 | Wi‑Fi telem | **Pi first** | ESP32 only as an optional thin telemetry bridge. |
 
@@ -23,6 +27,33 @@ Candidates already on hand:
 - Mamba F405
 
 When one is actually on the bench and blinking, record it here and in [`../NOTES.md`](../NOTES.md). Until then the line is **FC: TBD**.
+
+## Battery — 4S LiPo class (intent)
+
+Steve 2026-09-20: the robot is **electric**. Lean is **4S LiPo** as used in RC cars/boats. That is a *class*, not a pack.
+
+| Item | Intent | Status |
+| --- | --- | --- |
+| Chemistry / cell count | 4S LiPo | Class lean. Not a locked SKU. |
+| Nominal / full | **~14.8V** / **~16.8V** | Use these when thinking about ESC / servo / BEC *ranges*. Do not invent a sag curve. |
+| Capacity (mAh) | TBD | No spend. Do not guess a pack size into a BOM. |
+| C-rating / max current | TBD | Follows actuators + wheel ESCs once those exist. |
+| Power bus / PDB / BEC | **TBD** | Box only. Do not invent a finished distribution board or a BEC shopping list. |
+| Charging / balance lead / connector | TBD | Not this document. |
+
+Power rail sketch (not a harness):
+
+```
+4S LiPo (class, TBD pack)
+        │
+        ▼
+   power bus TBD  ──► wheel ESC / BLDC
+        │         ──► hip + knee actuators (TBD class)
+        │         ──► FC (TBD) + RX + companion (via BEC/UBEC/PDB — all TBD)
+        └── do not draw a finished PDB here
+```
+
+When a real pack is on the bench, record cell count, measured resting voltage, connector, and who it actually feeds. Until then: **4S LiPo class, power bus TBD**.
 
 ## Split-brain sketch (intent)
 
@@ -49,7 +80,8 @@ See [`checklists/electronics-bringup.md`](checklists/electronics-bringup.md).
 
 ## Do not
 
-- Do not buy a “better” FC, ESC, or Pi for this scaffold.
+- Do not buy a “better” FC, ESC, Pi, or LiPo for this scaffold.
 - Do not recommend spend.
-- Do not invent a finished PDB / BEC / battery stack.
-- Do not treat any candidate as selected.
+- Do not invent a finished PDB / BEC / battery stack or a pack SKU.
+- Do not treat 4S as a locked pack, and do not treat any FC candidate as selected.
+- Do not lock hip / knee actuators here. Those are mechanical research (see [`mechanical.md`](mechanical.md)).
