@@ -67,7 +67,7 @@ Also cite Hattori (already in [`../requirements.md`](../requirements.md)): [STRI
 
 **Extract:** IMU → balance PID → ODrive torque/velocity; how load cells sit in the loop; NRF remote packet shape; bring-up order (IMU zero, ODrive encode, estop on RST).
 
-**Do not:** copy the GPL-2.0 firmware into Hux. Do not shop the README.
+**Do not:** copy the GPL-2.0 firmware into Hux. Do not shop the README. Do not take ODrive **63xx** / hoverboard hub motors as Hux wheel hardware — that class is too heavy for a 4–6 lb V1. Steal the IMU → PID → torque *pattern* (R18), not the iron.
 
 ### 4. XRobots/Stairs — stair-climbing robot (different mechanism)
 

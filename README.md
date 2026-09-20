@@ -13,7 +13,7 @@ This repo is the source of truth for Steve Barrett's Hux project. It is a docs-a
 | Item | State |
 | --- | --- |
 | Research | Packet in [`docs/research/`](docs/research/) — study before build |
-| Requirements | Draft captured in [`docs/requirements.md`](docs/requirements.md) |
+| Requirements | Draft captured in [`docs/requirements.md`](docs/requirements.md) — V1 **under 6 lb** (aim 4–5 lb); wheel motors = torque bandwidth |
 | Flight controller | **TBD** — candidates listed, not locked |
 | Mechanical V1 | First printable wheel-leg is **Phase D** (after study). Not started. |
 | Spend | None. No purchases until Steve asks. Prefer parts already on hand. |
@@ -37,10 +37,10 @@ software/     companion compute — Pi cameras / pathfinding (empty)
 ## Docs
 
 - [Research](docs/research/) — research-first stance, XRobots shortlist, study plan (Phases A–D)
-- [Requirements](docs/requirements.md) — hard/soft requirements, candidate hardware, no-spend rule
+- [Requirements](docs/requirements.md) — hard/soft requirements, candidate hardware, no-spend rule; R24 mass, R25 wheel-drive class
 - [Vision](docs/vision.md) — stair gait, split-brain intent, lessons to steal
-- [Mechanical](docs/mechanical.md) — wheel-leg, linkages + springs, 9.5" stroke
-- [Electronics](docs/electronics.md) — FC TBD, TBS Nano RX, brushless wheels, Wi‑Fi telem, Pi
+- [Mechanical](docs/mechanical.md) — wheel-leg, linkages + springs, 9.5" stroke, mass-budget TBD lines
+- [Electronics](docs/electronics.md) — FC TBD, TBS Nano RX, brushless wheel-drive *class* (FOC / gimbal), Wi‑Fi telem, Pi
 - [Software](docs/software.md) — blink → spin → balance → cameras later
 - [Checklists](docs/checklists/) — prefer these over fake finished stacks
 

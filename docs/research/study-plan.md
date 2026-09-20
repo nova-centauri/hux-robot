@@ -28,7 +28,8 @@ Prefer parts already on hand. Upstream READMEs (especially SonicRobot) are **not
 
 **Extract (write notes here or in [`../../NOTES.md`](../../NOTES.md)):**
 
-- [ ] Control loops: IMU (MPU6050 / GY-521 class) → filter/fusion → pitch/roll error → **PID** → wheel command (torque / velocity / current — record which).
+- [ ] Control loops: IMU (MPU6050 / GY-521 class) → filter/fusion → pitch/roll error → **PID** → wheel command (torque / velocity / current — record which). Prefer extracting **FOC / torque-mode** patterns (R18) over inventing a Hux inverter.
+- [ ] Wheel-drive *class* vs mass: Hux V1 is **under 6 lb** (aim 4–5 lb). StackForce mini wheeled-legged (~540 g, 2208 gimbal + FOC) is a **scale** reference — not a kit. SonicRobot ODrive 63xx / hoverboard class is too heavy; steal loops, not motors.
 - [ ] Outer hold: TallBalancer position hold vs velocity hold; what the encoder buys vs the IMU.
 - [ ] SonicRobot extras: load cells in the loop; ODrive + Teensy split; estop / RST; CAN vs UART to drives.
 - [ ] Remote patterns: RobotX TX/RX sketches; SonicRobot nRF remote; what the stick maps to (tilt setpoint, speed, yaw). Hux RX is **TBS Nano** — steal *semantics*, not the radio.

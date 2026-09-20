@@ -40,8 +40,9 @@ V1 Hux prefers **strong linkages + springs** over pure serial belts for simplici
 ## Explicitly TBD
 
 - Flight controller choice (candidates only; see requirements).
-- Exact wheel BLDC / ESC models.
+- Exact wheel BLDC / ESC models. Class is reaction-speed / torque-bandwidth FOC on 4S, sized for ~4–6" skinny rubber (R25). No SKU.
+- V1 mass-budget line items (R24: **under 6 lb**, aim 4–5 lb). Sketch only — see [`mechanical.md`](mechanical.md).
 - Full body CAD, second-leg copy, and stair gait software.
 - Spend. No purchases until Steve approves. Prefer parts already on hand.
 
-Mechanical V1 is one printable wheel-leg sized toward 9.5", not a finished robot.
+Mechanical V1 is one printable wheel-leg sized toward 9.5", not a finished robot. The finished V1 still has to come in under 6 lb.

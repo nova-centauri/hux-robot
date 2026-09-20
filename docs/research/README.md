@@ -9,6 +9,8 @@ This packet is the working study set. It does not replace [`../requirements.md`]
 | [xrobots.md](xrobots.md) | Curated XRobots shortlist, why each matters, study order |
 | [study-plan.md](study-plan.md) | Phased checklist before hardware (Phases A–D) |
 
+Scale pointer (not a kit, not a buy): [StackForce mini wheeled-legged](https://wiki.seeedstudio.com/stackforce_mini_wheeled_legged_robot/) is ~**540 g** and uses **2208** gimbal motors + FOC. Useful as a *mass / motor-class* reference for Hux's under-6 lb / 4–5 lb aim. Do not treat it as a Hux kit lock. SonicRobot-class ODrive **63xx** / hoverboard hubs are the opposite — study the loops, not the iron.
+
 Inspiration already in requirements: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori.com/blog/wheeled-biped-v2).
 
 ## Stance
