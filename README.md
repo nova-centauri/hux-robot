@@ -40,7 +40,7 @@ software/     companion compute — Pi cameras / pathfinding (empty)
 - [Requirements](docs/requirements.md) — hard/soft requirements, candidate hardware, no-spend rule; R24 mass (soft); R6 / R16 / R26 / R27 actuator baseline
 - [Vision](docs/vision.md) — stair gait, split-brain intent, lessons to steal
 - [Mechanical](docs/mechanical.md) — wheel-leg, linkages + springs, 9.5" stroke, aspirational mass, V1 actuator baseline
-- [Electronics](docs/electronics.md) — FC TBD, TBS Nano RX, brushless FOC wheels, leg-drive baseline, Wi‑Fi telem, Pi
+- [Electronics](docs/electronics.md) — FC TBD, TBS Nano RX, 8-axis I/O (FOC wheels + 4 steppers + 2 roll), TMC-class drivers, Wi‑Fi telem, Pi
 - [Software](docs/software.md) — blink → spin → balance → cameras later
 - [Checklists](docs/checklists/) — prefer these over fake finished stacks
 

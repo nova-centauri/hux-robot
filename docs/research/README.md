@@ -10,6 +10,8 @@ This packet is the working study set. It does not replace [`../requirements.md`]
 | [study-plan.md](study-plan.md) | Phased checklist before hardware (Phases A–D) |
 | [actuators-legs.md](actuators-legs.md) | Working V1 actuator baseline + trade: knee stepper+reduction, swing stepper+belt, roll dynamic, wheels FOC. Mass aspirational. |
 
+I/O (R29): **8 axes** — 2 wheel FOC + 4 steppers + 2 hip-roll dynamic. FC does **not** drive stepper coils; TMC-class / multi-axis driver board(s) sit in between. Preferred: FC = IMU + wheel FOC (+ roll if PWM/CAN); Pi or dedicated stepper controller = 4× step/dir. Drone firmware as stepper host is a V1 anti-pattern. [`../electronics.md`](../electronics.md).
+
 Working V1 actuator baseline (Steve confirmed): **wheels = brushless FOC**; **knee = stepper with belt/gear reduction** (not bare); **hip swing = stepper + belt** (belt = that joint's reduction, not a second actuator); **hip roll is in V1** as **dynamic FOC BLDC / small QDD / fast servo** (not a stepper). Experimental / may not work — still include so we can learn. One-leg CoG shift is a V1 **best-effort** goal. Mass **4–5 lb / under 6 lb** is still aspirational. Details: [`actuators-legs.md`](actuators-legs.md). No SKU, no spend.
 
 Inspiration already in requirements: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori.com/blog/wheeled-biped-v2).

@@ -49,6 +49,46 @@ FOC / torque-mode can hold with less waste if springs take gravity (R7). Another
 
 Do not invent a PDB / BEC / stepper-driver BOM. Do not recommend spend.
 
+## Actuator I/O architecture (8 axes)
+
+Steve 2026-09-20. **Class locked. SKU not. FC still TBD.** Count the axes before we pretend a Wing board can host everything.
+
+| Count | Axis | Drive class |
+| --- | --- | --- |
+| 2 | Wheels (L / R) | Brushless FOC |
+| 4 | Steppers: L/R **knee** + L/R **hip swing** | Stepper + reduction (R26) |
+| 2 | Hip **roll** (L / R) | Dynamic FOC BLDC / small QDD / fast bus servo (R16 / R27). Experimental. |
+| **8** | **V1 total** | Not eight identical motors. |
+
+**The FC does not drive stepper coils.** Coil current belongs on **stepper driver board(s)** — **TMC-class** or other **multi-axis** driver *class* — sitting between a host (FC **or** Pi **or** a dedicated stepper controller) and the four steppers. Step/dir (or a bus the driver already speaks) is the interface. GPIO-toggling phases from a flight controller is out.
+
+No driver SKU. “TMC-class / multi-axis” is a family, not a cart.
+
+### Preferred split (V1)
+
+| Host | Owns | Why |
+| --- | --- | --- |
+| **FC** (TBD) | IMU + attitude + **wheel FOC**. **Hip roll** too *if* the link is honest (**PWM / CAN** / equivalent). TBS Nano RX. | Balance loop and fast torque live here. Roll is in that loop (best-effort). |
+| **Pi** *or* a **dedicated stepper controller** | The **four steppers**, via driver board(s), **step/dir** | Position / pose on knee + swing. Not a 1 kHz CoG loop. |
+
+The Pi already owns cameras / pathfinding / Wi‑Fi telem. Adding step/dir for four slow position axes is honest. A dedicated stepper controller is the same class of idea if the Pi should stay busy. **TBD which of those two hosts the step/dir.** Not a buy.
+
+Hip-roll **if not** PWM/CAN-friendly on the chosen FC: treat it like the wheels (external FOC / servo bus), still **not** a stepper, still on the balance side of the split. Do not move roll onto the stepper controller to “use leftover channels.”
+
+### Anti-pattern — drone firmware as stepper host
+
+A **Wing** FC can **spare pins**. That does not make **drone firmware** (Betaflight / INAV / similar) a stepper host.
+
+V1 anti-pattern:
+
+- Bit-bang step/dir (or worse, coil phases) from a flight-stack mixer / resource map
+- Steal DShot / motor outputs as fake steppers
+- “The F765 has UART and timers, so we can run four TMC chips in the INAV task”
+
+Even if the silicon can toggle pins, the firmware is a poor stepper host: timing, blocking, and no honest current loop. **Do not do this for V1.** Spare pins are for RX, telem, and maybe roll PWM/CAN — not for becoming a CNC controller.
+
+FC lock is still **TBD**. This paragraph does not pick Wing vs drone FC. It forbids using whichever we pick as a coil driver.
+
 ### Mass is not a driver veto
 
 V1 mass is **aspirational 4–5 lb / under 6 lb** (R24). Soft. A capable roll driver + motor that pushes past 6 lb is allowed. A tiny stepper driver that “saves” grams and then misses steps on roll is the worse trade.
@@ -56,17 +96,20 @@ V1 mass is **aspirational 4–5 lb / under 6 lb** (R24). Soft. A capable roll dr
 ## Split-brain sketch (intent)
 
 ```
-TBS Nano RX ──► FC (TBD) ──► ESC/BLDC wheels (brushless FOC)
-                    │            └──► knee: stepper + belt/gear reduction
-                    │            └──► hip swing: stepper + belt (belt = reducer)
-                    │            └──► hip roll: FOC / small QDD / fast servo (V1, experimental)
+TBS Nano RX ──► FC (TBD) ──► wheel FOC (2× BLDC)
+                    │            └──► hip roll (2× dynamic) if PWM/CAN
                     │
                     └── IMU / attitude
-Raspberry Pi ── cameras, pathfinding, Wi‑Fi telem
+
+Pi ── cameras, pathfinding, Wi‑Fi telem
+  └── *or dedicated stepper controller* ──► TMC-class / multi-axis driver(s)
+                                              └──► 4× steppers step/dir
+                                                  (L/R knee, L/R hip swing)
+
 ESP32 (optional) ── thin Wi‑Fi/telem bridge if we keep the Pi busy
 ```
 
-This is a box diagram, not a harness.
+**8 axes.** FC does **not** drive stepper coils. This is a box diagram, not a harness. No SKU.
 
 ## Bring-up order (no carpet)
 
@@ -86,3 +129,4 @@ See [`checklists/electronics-bringup.md`](checklists/electronics-bringup.md).
 - Do not treat any FC candidate or actuator *SKU* as selected. The actuator *class* baseline is locked.
 - Do not put steppers on the wheels or on hip roll to make the BOM uniform.
 - Do not omit the hip-roll driver channel from V1 “until V2.”
+- Do not drive stepper **coils** from the FC. Do not host four steppers in drone firmware just because a Wing board has spare pins.

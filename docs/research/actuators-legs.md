@@ -93,6 +93,8 @@ Steve confirmed the split. This is no longer a maybe.
 
 **FC TBD.** The baseline does not pick a flight controller, a stepper driver IC, a FOC board, a NEMA size, or a belt pitch.
 
+**I/O (R29):** 8 axes (2 wheel FOC + 4 steppers + 2 hip-roll dynamic). The FC does **not** drive stepper coils — TMC-class / multi-axis driver board(s) sit in between. Preferred: FC = IMU + wheel FOC (+ roll if PWM/CAN); Pi or a dedicated stepper controller = 4× step/dir. Drone firmware as stepper host is a V1 anti-pattern. See [`../electronics.md`](../electronics.md).
+
 ## Mass (aspirational)
 
 | Target | Status |
@@ -140,6 +142,6 @@ Write real notes here or in [`../../NOTES.md`](../../NOTES.md) when watched, not
 
 - Requirements: [`../requirements.md`](../requirements.md) — R24 mass (aspirational); R6 / R16 / R26 / R27 baseline; R28 residual risk
 - Mechanical: [`../mechanical.md`](../mechanical.md) — DOF split, COTS belts, mass sketch
-- Electronics: [`../electronics.md`](../electronics.md) — drivers as classes; hold current; wheels FOC
+- Electronics: [`../electronics.md`](../electronics.md) — 8-axis I/O, TMC-class drivers, preferred host split; hold current; wheels FOC
 - Hip-roll / one-leg loop: [`../software.md`](../software.md), R16–R18
 - Study plan: [`study-plan.md`](study-plan.md)

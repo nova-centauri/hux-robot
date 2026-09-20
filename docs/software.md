@@ -8,11 +8,11 @@ Prefer checklists and milestone order over a fake finished stack.
 
 | Layer | Job | When |
 | --- | --- | --- |
-| FC firmware | IMU, attitude, wheel (and likely leg) actuation, TBS RX | After an FC is on the bench. Stack **TBD** with the FC. |
-| Pi companion | Camera stream, later pathfinding inference, Wi‑Fi telem | After two-leg teleop. |
+| FC firmware | IMU, attitude, **wheel FOC**, TBS RX. **Hip roll** if PWM/CAN. | After an FC is on the bench. Stack **TBD** with the FC. **Not** a stepper-coil host. |
+| Pi companion *or* dedicated stepper controller | **4× steppers** (knee + swing) via TMC-class / multi-axis driver(s), **step/dir**. Pi also: cameras, later pathfinding, Wi‑Fi telem. | Stepper host **TBD** (Pi vs dedicated). After wheels blink. |
 | ESP32 (optional) | Thin Wi‑Fi / telemetry bridge | Only if the Pi should not own that link. |
 
-Do not pick Betaflight vs INAV vs ArduPilot vs custom here. That choice follows the FC, and the FC is TBD.
+Do not pick Betaflight vs INAV vs ArduPilot vs custom here. That choice follows the FC, and the FC is TBD. **Do not** pick a drone stack *because* it might bit-bang steppers — that is a V1 anti-pattern (R29). See [`electronics.md`](electronics.md).
 
 ## One-leg / hip roll (V1, experimental)
 

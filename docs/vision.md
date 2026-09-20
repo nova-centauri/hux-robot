@@ -19,7 +19,8 @@ Open-loop step onto a 9.5" fixture comes before a closed-loop stair gait. Camera
 
 | Role | Where | Notes |
 | --- | --- | --- |
-| IMU, attitude, wheel (and likely leg) actuation | Flight controller | **FC is TBD.** Do not block mechanical work on this. |
+| IMU, attitude, wheel FOC (+ hip roll if PWM/CAN) | Flight controller | **FC is TBD.** Does **not** drive stepper coils. |
+| Four steppers (knee + swing), step/dir | Pi *or* dedicated stepper controller, via TMC-class / multi-axis driver(s) | Host TBD. Not drone firmware. |
 | Cameras, pathfinding inference | Raspberry Pi | Not on the FC. |
 | Wi‑Fi telemetry | Pi first | ESP32 only if we want a thin bridge off the Pi. |
 | Pilot stick | TBS Nano RX | Bind to the FC (or a dedicated link into the FC). |

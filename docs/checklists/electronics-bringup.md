@@ -10,5 +10,6 @@
 - [ ] Wi‑Fi telemetry from the Pi (ESP32 bridge only if needed).
 - [ ] Two-leg teleop later — not this checklist.
 - [ ] Record the surviving FC in [`../electronics.md`](../electronics.md) only after blink + spin.
+- [ ] Stepper path later, not this checklist: TMC-class / multi-axis driver(s) + Pi or dedicated controller, **step/dir**. Do not bit-bang coils from the bench FC.
 
-Do not write a fake harness, PDB, or battery architecture here.
+Do not write a fake harness, PDB, or battery architecture here. Do not treat drone firmware as a stepper host (R29).

@@ -25,6 +25,7 @@ Inspiration: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori
 | R26 | **Knee** = stepper **with belt/gear reduction**; **hip swing** = stepper **+ belt** | Working V1 baseline (Steve confirmed). Knee is **not** a bare stepper. Hip-swing **belt is the reduction for that joint** — not a duplicate actuator. COTS NEMA-class or smaller. No SKU. Trade: [`research/actuators-legs.md`](research/actuators-legs.md). |
 | R27 | **Hip roll** actuator = **dynamic** (FOC BLDC / **small** QDD / fast bus servo) — **not a stepper** | Working V1 baseline. Experimental. High-rate torque + ideally backdrivable. Pairs with planted-wheel fore/aft (R17 when that lands). Include mechanically even if the first loop is ugly. |
 | R28 | All-stepper is **not** the baseline. If later forced: **closed-loop**, **minimal-backlash** belts, **accept lower one-leg bandwidth** | Residual risk only. Do not fake a CoG shift in software. Do not delete the V1 roll axis. Wheels stay brushless FOC (R6). |
+| R29 | **8 axes**; FC does **not** drive stepper coils | 2 wheel BLDC + 4 steppers + 2 hip-roll dynamic. Stepper driver board(s) (TMC-class / multi-axis) between host and motors. Preferred: FC = IMU + wheel FOC (+ hip-roll if PWM/CAN); Pi or dedicated stepper controller = 4× step/dir. Drone firmware as stepper host is a V1 **anti-pattern**. Spec: [`electronics.md`](electronics.md). |
 
 IDs **R10–R15**, **R17–R23**, and **R25** are unused here so concurrent 2026-09-20 hardware, modes, reuse-control, fabrication, and wheel-drive-class notes can take them without renumbering this packet.
 
@@ -36,7 +37,7 @@ IDs **R10–R15**, **R17–R23**, and **R25** are unused here so concurrent 2026
 
 ## Soft / architecture intent
 
-- Split brain: FC = IMU + attitude + wheel (and likely leg) actuation; Pi = vision + inference; ESP32 optional Wi‑Fi/telemetry bridge.
+- Split brain: FC = IMU + attitude + **wheel FOC** (+ **hip roll** if PWM/CAN). **Four steppers** (knee + swing) sit behind TMC-class / multi-axis **driver board(s)** on the **Pi or a dedicated stepper controller** (step/dir). The FC does **not** drive stepper coils. ESP32 optional Wi‑Fi/telemetry bridge. See R29 / [`electronics.md`](electronics.md).
 - V1 mass lean is **aspirational 4–5 lb** / **under 6 lb**. Not a kill-switch. Exceeding 6 lb is allowed if it buys capability. Do not reject a hip-roll class to protect a spreadsheet.
 - Working V1 actuator baseline (Steve confirmed): **wheels = brushless FOC**; **knee = stepper with belt/gear reduction** (not bare); **hip swing = stepper + belt** (belt = that joint's reduction, not a second actuator); **hip roll is in V1** as a **dynamic** FOC BLDC / small QDD / fast servo (**not** a stepper). Experimental / may not work — still include mechanically and in control modes. One-leg CoG shift is a **V1 goal (best-effort)**. All-stepper is residual risk (R28), not the plan.
 - Hip swing and hip roll are different DOFs. A stepper that is fine on swing is still wrong on roll (missed steps, resonance, belt stretch/backlash, no useful backdrive). Trade: [`research/actuators-legs.md`](research/actuators-legs.md).
@@ -55,9 +56,10 @@ IDs **R10–R15**, **R17–R23**, and **R25** are unused here so concurrent 2026
 
 ## Recommended default (proposal)
 
-- **FC:** **TBD** (Steve 2026-09-20). Candidates remain F765 Wing / F722 Wing / F722 drone / Mamba F405. Prefer a Wing board when we lock; do not block mechanical work on this.
+- **FC:** **TBD** (Steve 2026-09-20). Candidates remain F765 Wing / F722 Wing / F722 drone / Mamba F405. Prefer a Wing board when we lock; do not block mechanical work on this. Spare pins do **not** make drone firmware a stepper host (R29).
 - **Mass:** aspirational **4–5 lb** / **under 6 lb**. Soft. OK to exceed for capability (R24).
 - **Actuator baseline (locked class, not SKU):** wheels = brushless FOC (R6). Knee = stepper **with** belt/gear reduction. Hip swing = stepper + belt (belt = reduction, not a second actuator). Hip roll **in V1** = dynamic FOC BLDC / small QDD / fast servo, experimental, best-effort CoG shift (R16 / R27). All-stepper is not the baseline (R28).
+- **I/O (R29):** 8 axes. FC does not drive stepper coils. TMC-class / multi-axis driver board(s). Preferred host split above. Drone firmware as stepper host = V1 anti-pattern. No SKU.
 - **Wheels:** brushless FOC. Not steppers.
 - **Companion:** Raspberry Pi for cameras + pathfinding inference.
 - **Wi‑Fi:** Pi first; ESP32 if we want a thin telemetry bridge off the Pi.
