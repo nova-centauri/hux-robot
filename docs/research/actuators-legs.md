@@ -89,7 +89,7 @@ Lab machines that *prove the control pattern* are usually too heavy and too cost
 
 | Lab ref | What it proves | Why it is not a Hux V1 buy |
 | --- | --- | --- |
-| **[Upkie](https://github.com/upkie/upkie)** hips/knees = [mjbots qdd100](https://mjbots.com/products/qdd100-beta-3) (~**16 Nm** peak &lt; 1 s; module ~**507 g**) | QDD + FOC, torque/position from an existing driver, wheeled-biped hip/knee layout. Joint limits: [Upkie kinematics](https://upkie.github.io/upkie/kinematics.html). | Six qdd100-class modules would be ~3 kg of actuators **alone** — already over a 4–5 lb robot. Capability reference. |
+| **[Upkie](https://github.com/upkie/upkie)** hips/knees = [mjbots qdd100](https://mjbots.com/products/qdd100-beta-3) (~**16 Nm** peak under 1 s; module ~**507 g**) | QDD + FOC, torque/position from an existing driver, wheeled-biped hip/knee layout. Joint limits: [Upkie kinematics](https://upkie.github.io/upkie/kinematics.html). | Six qdd100-class modules would be ~3 kg of actuators **alone** — already over a 4–5 lb robot. Capability reference. |
 | **[DIABLO](https://arxiv.org/abs/2407.21500)** — 6-DoF wheeled biped, **all direct-drive** (M1502D class; platform ~**23 kg**) | Gearbox-free bandwidth, backdrive, roll/height/split controllers on a wheeled biped. | Lab / product mass and cost. Pattern: direct-drive *behavior*, not a Hux joint. |
 
 Do not put **63xx / hoverboard** iron on a Hux *leg* either. That class is a SonicRobot study object (IMU → PID → torque), not a V1 hip or knee. Same mass argument as the concurrent wheel-drive note.
