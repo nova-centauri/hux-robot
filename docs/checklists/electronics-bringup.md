@@ -2,13 +2,20 @@
 
 **Status:** not started. **FC: TBD.** No spend.
 
-- [ ] Choose a *bench* board from the on-hand pile (F765 Wing / F722 Wing / F722 drone / Mamba F405). This is not a lock.
-- [ ] Power on the bench, nothing spinning.
-- [ ] Blink an LED.
-- [ ] Bind **TBS Nano RX** (or confirm it talks to the FC).
-- [ ] Restrained **brushless wheel spin** (tied down, not on carpet).
-- [ ] Wi‑Fi telemetry from the Pi (ESP32 bridge only if needed).
-- [ ] Two-leg teleop later — not this checklist.
-- [ ] Record the surviving FC in [`../electronics.md`](../electronics.md) only after blink + spin.
+Phased class list (not a BOM): [`../electronics-minimum.md`](../electronics-minimum.md). This page is the **P0–P1** bench ticks. Later phases stay on that plan until the rows below are real.
 
-Do not write a fake harness, PDB, or battery architecture here.
+- [ ] **P0** — Choose a *bench* board from the on-hand pile (F765 Wing / F722 Wing / F722 drone / Mamba F405). This is not a lock.
+- [ ] **P0** — Power on the bench, nothing spinning. USB / safe rail is enough.
+- [ ] **P0** — Blink an LED.
+- [ ] **P0** — Bind **TBS Nano RX** (or confirm it talks to the FC).
+- [ ] **P1** — Restrained **FOC / brushless wheel spin** (tied down, not on carpet). One channel, then two.
+- [ ] Record the surviving FC in [`../electronics.md`](../electronics.md) only after blink + spin. Line stays **FC: TBD** until Steve locks.
+
+After P0–P1 (not this pass until the rows above are real):
+
+- [ ] **P2** — `PARKED` + `TWO_WHEEL` on both wheels + IMU. Modes: [`../software.md`](../software.md).
+- [ ] **P3** — stepper driver bank + 4 steppers (knees + hip swings). FC does **not** drive coils.
+- [ ] **P4** — 2× hip-roll dynamic actuators into `LEFT_ONLY` / `RIGHT_ONLY`.
+- [ ] **P5** — Wi‑Fi telemetry from the Pi (ESP32 bridge only if needed). Cameras / pathfinding later.
+
+Do not write a fake harness, PDB, or battery architecture here. Class-level rails only: [`../electronics-minimum.md`](../electronics-minimum.md).

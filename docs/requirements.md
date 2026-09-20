@@ -1,6 +1,6 @@
 # Hux requirements
 
-Draft from Steve, 2026-09-20. Source of truth: this GitHub repo (`nova-centauri/hux-robot`). Architecture intent is also folded into [`vision.md`](vision.md) and [`electronics.md`](electronics.md).
+Draft from Steve, 2026-09-20. Source of truth: this GitHub repo (`nova-centauri/hux-robot`). Architecture intent is also folded into [`vision.md`](vision.md), [`electronics.md`](electronics.md), and the minimum electronics plan [`electronics-minimum.md`](electronics-minimum.md).
 
 ## Goal
 
@@ -50,9 +50,9 @@ Tracked in [`../NOTES.md`](../NOTES.md). Summary:
 
 1. Confirm SoT URL (`nova-centauri/hux-robot`) — this repo.
 2. Size + print first wheel-leg for ~9.5" step (FC stays TBD).
-3. Blink LED → restrained wheel spin once an FC is on the bench (not on carpet).
-4. Two-leg balance teleop (TBS + Wi‑Fi telem).
-5. One-leg balance.
-6. Open-loop step-up toward 9.5" riser fixture.
-7. Camera stream → local pathfinding later.
-8. Lock FC into [`electronics.md`](electronics.md) when ready.
+3. Blink LED → restrained wheel spin once an FC is on the bench (not on carpet). Electronics **P0–P1**: [`electronics-minimum.md`](electronics-minimum.md).
+4. Two-leg balance teleop (`PARKED` / `TWO_WHEEL`; TBS). **P2.** Wi‑Fi can wait.
+5. One-leg balance (`LEFT_ONLY` / `RIGHT_ONLY`) after hip-roll class (**P4**).
+6. Open-loop step-up toward 9.5" riser fixture. Not before the four manual modes.
+7. Camera stream → local pathfinding later (**P5**).
+8. Lock FC into [`electronics.md`](electronics.md) when ready. Until then **FC: TBD**.

@@ -24,7 +24,7 @@ Open-loop step onto a 9.5" fixture comes before a closed-loop stair gait. Camera
 | Wi‑Fi telemetry | Pi first | ESP32 only if we want a thin bridge off the Pi. |
 | Pilot stick | TBS Nano RX | Bind to the FC (or a dedicated link into the FC). |
 
-See [`electronics.md`](electronics.md) and [`software.md`](software.md).
+See [`electronics.md`](electronics.md), [`electronics-minimum.md`](electronics-minimum.md) (P0–P5 classes), and [`software.md`](software.md) (manual modes).
 
 ## Lessons to steal (Hattori STRIDE V2)
 

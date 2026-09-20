@@ -4,13 +4,15 @@
 
 V1 target is **one printable wheel-leg** with a linkage + spring stub, sized toward a **~9.5"** step. Do not wait on the flight controller for this.
 
+Working V1 actuator **classes** (not SKUs): 2× FOC wheels, 2× knee stepper+reduction, 2× hip-swing stepper+belt, 2× hip-roll dynamic **in V1**. What must power them: [`electronics-minimum.md`](electronics-minimum.md).
+
 ## Intent
 
-- Two legs, each ending in a **brushless driven wheel**.
+- Two legs, each ending in a **brushless FOC** driven wheel.
 - Legs via **strong linkages + springs** (gravity compensation / energy return).
 - Prefer linkage over pure serial belts for V1 simplicity.
 - Design stroke and clearance around a ~9.5" residential riser (up and down).
-- Extra DOF is desirable later (stairs / fall recovery); do not invent a 6-DOF stack on paper.
+- Extra DOF: **hip roll is in V1** (experimental). Do not invent a 6-DOF stack on paper.
 
 ## Hattori notes (steal, do not copy blindly)
 
