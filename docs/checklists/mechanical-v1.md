@@ -10,6 +10,8 @@ Target: one side only, linkage + spring stub, stroke/clearance toward a **~9.5"*
 - [ ] Linkage layout.
 - [ ] Spring stub (gravity assist).
 - [ ] Wheel hub / BLDC mount (motor model TBD — do not buy).
+- [ ] Leg actuator class noted: stepper+belt allowed on knee / hip swing; hip roll prefers FOC BLDC / QDD / fast bus servo. No SKU.
+- [ ] Mass lean in view (aspirational 4–5 lb / under 6 lb; overrun OK for capability).
 - [ ] First print + fit.
 - [ ] Raised wheel can reach a 9.5" tread without self-collision.
 - [ ] Only then: consider a second-leg copy.

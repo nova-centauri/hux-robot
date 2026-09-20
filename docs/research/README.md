@@ -8,6 +8,9 @@ This packet is the working study set. It does not replace [`../requirements.md`]
 | --- | --- |
 | [xrobots.md](xrobots.md) | Curated XRobots shortlist, why each matters, study order |
 | [study-plan.md](study-plan.md) | Phased checklist before hardware (Phases A–D) |
+| [actuators-legs.md](actuators-legs.md) | Stepper + belt/gear trade: OK on knee / hip swing; weak on hip roll. Mass aspirational. |
+
+Leg actuators (Steve 2026-09-20 later): very small steppers + belt/gear are an honest class for **knee and hip swing**. They are a **weak** class for **hip roll** (CoG loop). Mass **4–5 lb / under 6 lb** is aspirational — OK to exceed for capability. Details: [`actuators-legs.md`](actuators-legs.md). No SKU, no spend.
 
 Inspiration already in requirements: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori.com/blog/wheeled-biped-v2).
 

@@ -29,6 +29,7 @@ Prefer parts already on hand. Upstream READMEs (especially SonicRobot) are **not
 **Extract (write notes here or in [`../../NOTES.md`](../../NOTES.md)):**
 
 - [ ] Control loops: IMU (MPU6050 / GY-521 class) → filter/fusion → pitch/roll error → **PID** → wheel command (torque / velocity / current — record which).
+- [ ] Leg-actuator *class* vs DOF: which upstream machines use steppers vs BLDC on **swing/knee** vs a **roll / lean** axis. Hux lean: stepper+belt allowed on knee / hip swing; hip roll wants FOC BLDC / QDD / fast bus servo ([`actuators-legs.md`](actuators-legs.md)). Do not assume they named the axes the way we do.
 - [ ] Outer hold: TallBalancer position hold vs velocity hold; what the encoder buys vs the IMU.
 - [ ] SonicRobot extras: load cells in the loop; ODrive + Teensy split; estop / RST; CAN vs UART to drives.
 - [ ] Remote patterns: RobotX TX/RX sketches; SonicRobot nRF remote; what the stick maps to (tilt setpoint, speed, yaw). Hux RX is **TBS Nano** — steal *semantics*, not the radio.
@@ -89,7 +90,8 @@ Hux cycle (from [`../vision.md`](../vision.md)): **lift → 1-leg balance → pl
 Use [`../checklists/mechanical-v1.md`](../checklists/mechanical-v1.md) and [`../mechanical.md`](../mechanical.md). This phase is the existing “first printable wheel-leg” milestone — **gated** by A–C.
 
 - [ ] Phases A–C actually done (not skipped to make the repo look busy).
-- [ ] One-side envelope, linkage + spring stub, stroke toward 9.5" (requirements R7).
+- [ ] One-side envelope, linkage + spring stub, stroke toward 9.5" (requirements R7). Mass is **aspirational** 4–5 lb / under 6 lb (R24) — do not kill a capable hip-roll class to hit a number.
+- [ ] Actuator class on the sketch: stepper+belt OK on knee / hip swing; hip roll marked FOC/QDD/bus-servo (or an explicit all-stepper risk). No SKU.
 - [ ] Fit-check print: raised wheel can reach a 9.5" tread without self-collision.
 - [ ] No second-leg copy until the first articulates.
 - [ ] No FC lock, no BOM, no carpet spin-up as part of this print.
