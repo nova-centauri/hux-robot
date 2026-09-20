@@ -1,6 +1,6 @@
 # RAI Institute — Roadrunner
 
-Steve shared this as research inspiration. **Watch and extract heuristics. Do not start build work from it.**
+Steve shared this as research inspiration (one of [two X shares](inspiration.md)). **Watch and extract heuristics. Do not start build work from it.**
 
 Roadrunner is a **lab prototype** with a learned (RL) policy stack. Hux's path stays [XRobots](xrobots.md) + Hattori + a **TBD** flight controller. There is no public CAD or firmware to vendor. No spend.
 

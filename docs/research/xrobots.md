@@ -11,7 +11,7 @@ Also cite Hattori (already in [`../requirements.md`](../requirements.md)): [STRI
 1. **RobotX** — wheeled-biped / dynamic-balance lineage (playlist, then `ArduinoCode_current`)
 2. **TallBalancer** — two-wheel balance with position / velocity hold (MPU6050 + ODrive patterns)
 3. **SonicRobot** — taller balancer; load cells, Teensy, ODrive BLDC (electronics lessons)
-4. **Stairs + Hattori STRIDE V2** — stair heuristics → Hux 9.5" lift → 1-leg balance → plant. Watch [Roadrunner](roadrunner.md) alongside Hattori (lab RL demo; not our stack).
+4. **Stairs + Hattori STRIDE V2** — stair heuristics → Hux 9.5" lift → 1-leg balance → plant. Watch [Steve's inspirations](inspiration.md) alongside: Roadrunner (lab) and the FrRonconi student balancer (maker-scale).
 5. **YouCanBuildBiPed** — simple biped kinematics
 6. **BallWheels / BeltWheelRobot / Ball-BIke** — wheel / balance edge cases
 7. **Mid-Walker, BalancingStrandbeest** — optional
@@ -100,7 +100,7 @@ Also cite Hattori (already in [`../requirements.md`](../requirements.md)): [STRI
 
 Hux V1 still prefers **strong linkages + springs** (requirements R7). That bias stays; Hattori is a lesson source, not CAD.
 
-Also watch alongside (Steve share): [RAI Institute — Roadrunner](roadrunner.md) — ~15 kg lab wheeled biped; one-wheel balance, stairs both ways, symmetric knees. **RL policy stack, not the Hux maker path.**
+Also watch alongside (Steve X shares; [inspiration.md](inspiration.md)): [RAI Roadrunner](roadrunner.md) (lab RL; not our stack) and the FrRonconi **3-month student** two-leg/wheel balancer (closer Hux early-R&D vibe). Inspiration only.
 
 ---
 

@@ -6,7 +6,7 @@ Early R&D for a **wheeled biped**: two legs that end in driven wheels.
 
 This repo is the source of truth for Steve Barrett's Hux project. It is a docs-and-layout scaffold — not a finished robot.
 
-**Research first.** Study James Bruton / [XRobots](https://github.com/XRobots), Hattori, and [RAI Roadrunner](docs/research/roadrunner.md) before hardware. Do not vendor upstream trees yet. RobotX is GPL3 — that conflicts with Hux's MIT if we adapt code; Steve decides, we do not relicense. Packet: [`docs/research/`](docs/research/).
+**Research first.** Study James Bruton / [XRobots](https://github.com/XRobots), Hattori, and Steve's [X-share inspirations](docs/research/inspiration.md) (Roadrunner + FrRonconi student balancer) before hardware. Do not vendor upstream trees yet. RobotX is GPL3 — that conflicts with Hux's MIT if we adapt code; Steve decides, we do not relicense. Packet: [`docs/research/`](docs/research/).
 
 ## Status
 
@@ -36,7 +36,7 @@ software/     companion compute — Pi cameras / pathfinding (empty)
 
 ## Docs
 
-- [Research](docs/research/) — research-first stance, XRobots shortlist, Roadrunner note, study plan (Phases A–D)
+- [Research](docs/research/) — research-first stance, XRobots shortlist, inspiration shares, study plan (Phases A–D)
 - [Requirements](docs/requirements.md) — hard/soft requirements, candidate hardware, no-spend rule
 - [Vision](docs/vision.md) — stair gait, split-brain intent, lessons to steal
 - [Mechanical](docs/mechanical.md) — wheel-leg, linkages + springs, 9.5" stroke
@@ -50,7 +50,7 @@ Study before we copy. Licenses differ; RobotX is GPL3.
 
 - [docs/research/xrobots.md](docs/research/xrobots.md) — James Bruton / [XRobots](https://github.com/XRobots) shortlist ([RobotX](https://github.com/XRobots/RobotX), [TallBalancer](https://github.com/XRobots/TallBalancer), [SonicRobot](https://github.com/XRobots/SonicRobot), [Stairs](https://github.com/XRobots/Stairs))
 - [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori.com/blog/wheeled-biped-v2)
-- [RAI Institute — Roadrunner](docs/research/roadrunner.md) — lab wheeled biped; watch alongside Hattori, not a Hux stack
+- [Steve's X-share inspirations](docs/research/inspiration.md) — RAI Roadrunner (lab) and FrRonconi student two-leg/wheel balancer (maker-scale); inspiration only, not a Hux stack
 
 ## License
 
