@@ -2,7 +2,7 @@
 
 Phased research checklist. Tick only when the work is real. **No spend** until Steve asks. **FC stays TBD.** Printable wheel-leg is **Phase D**, not Phase A.
 
-Track milestones in [`../../NOTES.md`](../../NOTES.md). Shortlist and links: [`xrobots.md`](xrobots.md). Cite/adapt rules: [`README.md`](README.md).
+Track milestones in [`../../NOTES.md`](../../NOTES.md). Shortlist and links: [`xrobots.md`](xrobots.md). Lab inspiration (watch alongside Hattori): [`roadrunner.md`](roadrunner.md). Cite/adapt rules: [`README.md`](README.md).
 
 ## Gates
 
@@ -38,7 +38,7 @@ Prefer parts already on hand. Upstream READMEs (especially SonicRobot) are **not
 
 ---
 
-## Phase B — Map Stairs + Hattori onto Hux's 9.5" cycle
+## Phase B — Map Stairs + Hattori (+ Roadrunner) onto Hux's 9.5" cycle
 
 **Goal:** a Hux-shaped step cycle, not a clone of either machine.
 
@@ -46,6 +46,7 @@ Hux cycle (from [`../vision.md`](../vision.md)): **lift → 1-leg balance → pl
 
 - [ ] Watch [XRobots/Stairs](https://github.com/XRobots/Stairs) ([video](https://youtu.be/MUyFDWbXrZ0)). Different mechanism. List **heuristics only** (timing, commit-to-step, missed tread, sensors vs open-loop).
 - [ ] Re-read [Hattori STRIDE V2](https://www.alex-hattori.com/blog/wheeled-biped-v2) (already in requirements): extra DOF, serial/linkage knee vs parallel, wheel diameter, open-loop swing-leg stepping.
+- [ ] Watch [RAI Roadrunner](roadrunner.md) **alongside Hattori** (RAI page + [YouTube](https://www.youtube.com/watch?v=9kae-UAME1U)). Extract: one-wheel balance as a gate; drive vs step; knee symmetry for up/down. **Lab RL policy stack — not our maker path** (XRobots + TBD FC). No CAD/code to vendor.
 - [ ] Measure or note a **real** ~9.5" riser/fixture (height, tread, nosing) when Steve has one — still no print.
 - [ ] Sketch Hux step-up and step-down as states, not CAD:
 
@@ -59,7 +60,7 @@ Hux cycle (from [`../vision.md`](../vision.md)): **lift → 1-leg balance → pl
 - [ ] Mark which states can stay **open-loop** on a fixture (Hux milestone: open-loop step) vs which need closed-loop balance.
 - [ ] Note one-leg balance risks on a nosing (BallWheels / BeltWheel / Ball-BIke are optional edge-case reading).
 
-**Done when:** the 9.5" cycle is written as Hux states with citations to Stairs + Hattori, and we have explicitly said Stairs geometry is **not** Hux geometry.
+**Done when:** the 9.5" cycle is written as Hux states with citations to Stairs + Hattori (+ Roadrunner for one-wheel / multimodal / knee-symmetry heuristics), and we have explicitly said Stairs geometry is **not** Hux geometry.
 
 ---
 

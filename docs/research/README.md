@@ -7,14 +7,17 @@ This packet is the working study set. It does not replace [`../requirements.md`]
 | Doc | What it is |
 | --- | --- |
 | [xrobots.md](xrobots.md) | Curated XRobots shortlist, why each matters, study order |
+| [roadrunner.md](roadrunner.md) | RAI Institute Roadrunner — lab wheeled biped; watch alongside Hattori |
 | [study-plan.md](study-plan.md) | Phased checklist before hardware (Phases A–D) |
 
 Inspiration already in requirements: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori.com/blog/wheeled-biped-v2).
 
+Also watch (Steve share; not a build source): [RAI Institute — Roadrunner](roadrunner.md).
+
 ## Stance
 
 1. **Learn the lineage** — RobotX (wheeled biped / dynamic balance), then TallBalancer and SonicRobot for IMU → PID → wheel-torque and remote patterns.
-2. **Map stairs** — XRobots Stairs is a different mechanism. Steal heuristics, not geometry. Pair it with Hattori for Hux's lift → one-leg balance → plant cycle on a **~9.5"** riser.
+2. **Map stairs** — XRobots Stairs is a different mechanism. Steal heuristics, not geometry. Pair it with Hattori (and [Roadrunner](roadrunner.md)) for Hux's lift → one-leg balance → plant cycle on a **~9.5"** riser.
 3. **Decide license + adapt vs rewrite** — Steve decides. Do not relicense Hux to absorb copyleft code, and do not pretend GPL/LGPL sources are MIT.
 4. **Only then** print a wheel-leg fit-check. Mechanical V1 is Phase D, not the next commit.
 
@@ -28,7 +31,7 @@ Respect each upstream license. XRobots repos are **not** one license. RobotX is 
 
 When a note, sketch, or later file is informed by upstream, record:
 
-- Project name and org (`XRobots/RobotX`, Hattori STRIDE V2, …)
+- Project name and org (`XRobots/RobotX`, Hattori STRIDE V2, RAI Roadrunner, …)
 - URL (repo, playlist, or post)
 - License as stated by the author **and** the `LICENSE` file if they disagree
 - What we took (idea, heuristic, control topology) versus what we did **not** copy
