@@ -33,15 +33,17 @@ Inspiration: [Alex Hattori — wheeled biped V2](https://www.alex-hattori.com/bl
 - Extra leg DOF helps stairs and fall recovery.
 - Larger wheels help terrain.
 - Serial / linkage knees beat “knees on both sides” parallel for stairs.
+- **Wheel motors at the wheel** beat remote-drive from the hip. Hux V1 places the BLDC **at the rim** (hub / coaxial).
 - Springs for gravity assist if actuators are small (Hattori V1 used torsion springs; V2 dropped them because actuators were not the limit).
 
-V1 Hux prefers **strong linkages + springs** over pure serial belts for simplicity. That is a starting bias, not a locked CAD package.
+V1 Hux prefers **strong linkages + springs** over *pure* serial belts for simplicity. Belts still run from **high-mounted** knee / hip-swing steppers to the pivots (one inside the leg, one outside). That is a starting layout, not a locked CAD package. See [`mechanical.md`](mechanical.md).
 
 ## Explicitly TBD
 
 - Flight controller choice (candidates only; see requirements).
-- Exact wheel BLDC / ESC models.
+- Exact wheel BLDC / ESC models (kV match is a goal, not a picked number).
+- Hip-roll actuator placement (do not drop CoG with a heavy pair if avoidable).
 - Full body CAD, second-leg copy, and stair gait software.
 - Spend. No purchases until Steve approves. Prefer parts already on hand.
 
-Mechanical V1 is one printable wheel-leg sized toward 9.5", not a finished robot.
+Mechanical V1 is one printable wheel-leg sized toward 9.5", not a finished robot. Layout: motor-at-wheel, steppers high, belts one inside / one outside.

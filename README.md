@@ -15,7 +15,7 @@ This repo is the source of truth for Steve Barrett's Hux project. It is a docs-a
 | Research | Packet in [`docs/research/`](docs/research/) — study before build |
 | Requirements | Draft captured in [`docs/requirements.md`](docs/requirements.md) |
 | Flight controller | **TBD** — candidates listed, not locked |
-| Mechanical V1 | First printable wheel-leg is **Phase D** (after study). Not started. |
+| Mechanical V1 | Layout intent captured (motor-at-wheel, high steppers, in/out belts). First printable wheel-leg is **Phase D** (after study). Not started. |
 | Spend | None. No purchases until Steve asks. Prefer parts already on hand. |
 
 First milestones live in [`NOTES.md`](NOTES.md).
@@ -39,7 +39,7 @@ software/     companion compute — Pi cameras / pathfinding (empty)
 - [Research](docs/research/) — research-first stance, XRobots shortlist, study plan (Phases A–D)
 - [Requirements](docs/requirements.md) — hard/soft requirements, candidate hardware, no-spend rule
 - [Vision](docs/vision.md) — stair gait, split-brain intent, lessons to steal
-- [Mechanical](docs/mechanical.md) — wheel-leg, linkages + springs, 9.5" stroke
+- [Mechanical](docs/mechanical.md) — wheel-leg, motor-at-wheel, high steppers + in/out belts, linkages + springs, 9.5" stroke
 - [Electronics](docs/electronics.md) — FC TBD, TBS Nano RX, brushless wheels, Wi‑Fi telem, Pi
 - [Software](docs/software.md) — blink → spin → balance → cameras later
 - [Checklists](docs/checklists/) — prefer these over fake finished stacks

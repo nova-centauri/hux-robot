@@ -7,7 +7,7 @@
 | Piece | Choice | Notes |
 | --- | --- | --- |
 | RC RX | **TBS Nano RX** | Bind to the FC (or a dedicated link into the FC). |
-| Wheels | **Brushless** (ESC + BLDC per wheel) | Exact motor/ESC models TBD. |
+| Wheels | **Brushless** (ESC + BLDC per wheel) | Exact motor/ESC models TBD. Motor sits **at the wheel** (hub / coaxial) — layout [`mechanical.md`](mechanical.md). kV vs 4S vs diameter is a sizing **goal**, not a SKU. |
 | Companion | **Raspberry Pi** | Cameras + pathfinding inference. Not on the FC. |
 | Wi‑Fi telem | **Pi first** | ESP32 only as an optional thin telemetry bridge. |
 
@@ -37,6 +37,8 @@ ESP32 (optional) ── thin Wi‑Fi/telem bridge if we keep the Pi busy
 
 This is a box diagram, not a harness.
 
+Wheel motors are **at the rim**, not remote from the hip. Knee / hip-swing steppers sit **high**; their drivers and coil leads still follow the concurrent **electronics-minimum** / **actuator baseline** (FC does not drive stepper coils). Mechanical envelope and belt-path ports: [`mechanical.md`](mechanical.md). Minimum electronics classes: [`electronics-minimum.md`](electronics-minimum.md) when that lands.
+
 ## Bring-up order (no carpet)
 
 See [`checklists/electronics-bringup.md`](checklists/electronics-bringup.md).
@@ -53,3 +55,4 @@ See [`checklists/electronics-bringup.md`](checklists/electronics-bringup.md).
 - Do not recommend spend.
 - Do not invent a finished PDB / BEC / battery stack.
 - Do not treat any candidate as selected.
+- Do not invent a wheel-motor kV or SKU. Placement is **at the wheel** ([`mechanical.md`](mechanical.md)).
