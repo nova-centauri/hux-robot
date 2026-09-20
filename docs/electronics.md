@@ -11,7 +11,7 @@
 | Pose / logic rails | **Controlled step-down** from 4S | BEC / regulator *class* to **5V / 6V / 7.4V** as the actuator needs. SKU **TBD**. |
 | RC RX | **TBS Nano RX** | Bind to the FC (or a dedicated link into the FC). |
 | Wheels | **Brushless** (ESC + BLDC + encoder per wheel) | Motor-at-wheel. Exact models TBD. |
-| Knee / hip | **Servo vs stepper+belt TBD** | Lean servos if one-leg (~2×) load demands it. No SKU. |
+| Knee / hip swing | **Servo vs stepper+belt TBD** | Both open. Size either for one-leg (~2×) load. No SKU. No lean. |
 | Companion | **Raspberry Pi** | Cameras + pathfinding inference. Not on the FC. |
 | Wi‑Fi telem | **Pi first** | ESP32 only as an optional thin telemetry bridge. |
 
@@ -60,9 +60,9 @@ Power rail sketch (not a harness):
 
 When a real pack is on the bench, record cell count, measured resting voltage, connector, and who it actually feeds. Until then: **4S preferred, step-down for pose/logic, no BEC SKU.**
 
-## Leg drive class — reopened
+## Leg drive class — undecided
 
-**Servo vs stepper+belt is TBD.** Not locked to steppers. Lean **high-torque servos** if one-leg standing load (~2×; R14) demands it. Wheels stay brushless. See [`mechanical.md`](mechanical.md) and [`research/inspiration.md`](research/inspiration.md).
+**Servo vs stepper+belt is TBD.** Do not lock either. Both are open options for knee and hip swing. Size **whichever we pick** for one-leg standing load (~2×; R14). Wheels stay brushless. See [`mechanical.md`](mechanical.md) and [`research/inspiration.md`](research/inspiration.md).
 
 Do not pick a servo voltage (6V vs 7.4V vs 8.4V) or a stepper driver SKU here. The rail *exists* so whichever class we pick does not brown out when the wheels snap the CoG back.
 

@@ -46,13 +46,13 @@ Inspiration: [I built a self-balancing robot from scratch](https://www.youtube.c
 - **Serviceable modular prints** — threaded inserts; independently removable parts.
 - **Wheel-under-CoG** correction: rotate the planted wheel back under the mass. Their loop is a simple P; Hux still studies XRobots PID.
 
-Their stack is 3S + Arduino + 40 kg-class servos and **no stair / one-leg plant**. Hux prefers **4S + step-down**, FC/Pi, and sizes plant-side joints for **~2×** one-wheel load. Leg class is **servo vs stepper+belt TBD** (lean servos if that load demands it).
+Their stack is 3S + Arduino + 40 kg-class servos and **no stair / one-leg plant**. Hux prefers **4S + step-down**, FC/Pi, and sizes plant-side joints for **~2×** one-wheel load. Knee / hip swing class is **servo vs stepper+belt TBD** — both open, no lean.
 
 ## Explicitly TBD
 
 - Flight controller choice (candidates only; see requirements).
 - Exact wheel BLDC / ESC / encoder models.
-- Knee / hip class: **servo vs stepper+belt** (not locked).
+- Knee / hip swing: **servo vs stepper+belt TBD** (both open, no lean).
 - BEC / regulator SKU and pack capacity.
 - Full body CAD, second-leg copy, and stair gait software.
 - Spend. No purchases until Steve approves. Prefer parts already on hand.

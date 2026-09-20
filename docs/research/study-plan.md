@@ -92,7 +92,7 @@ Use [`../checklists/mechanical-v1.md`](../checklists/mechanical-v1.md) and [`../
 
 - [ ] Phases A–C actually done (not skipped to make the repo look busy).
 - [ ] One-side envelope, linkage + spring stub, stroke toward 9.5" (requirements R7). Jointed motion keeps CoG over contact; motor-at-wheel + encoder; serviceable inserts.
-- [ ] Plant-side joints sized for **one-wheel standing load (~2×)**. Leg class **servo vs stepper+belt TBD** (lean servos if that load demands it). No SKU.
+- [ ] Plant-side joints sized for **one-wheel standing load (~2×)**. Leg class **servo vs stepper+belt TBD** (both open; no lean). No SKU.
 - [ ] Fit-check print: raised wheel can reach a 9.5" tread without self-collision.
 - [ ] No second-leg copy until the first articulates.
 - [ ] No FC lock, no BOM, no carpet spin-up as part of this print.

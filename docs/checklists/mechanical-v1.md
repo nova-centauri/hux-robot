@@ -12,7 +12,7 @@ Target: one side only, linkage + spring stub, stroke/clearance toward a **~9.5"*
 - [ ] Wheel hub / BLDC + encoder mount (motor-at-wheel; model TBD — do not buy).
 - [ ] Service: threaded inserts; independently removable parts.
 - [ ] Plant-side knee / hip / hip-roll sized for **one-wheel standing load (~2×)**, not two-wheel average.
-- [ ] Leg actuator class: **servo vs stepper+belt TBD** (lean servos if that load demands it). No SKU.
+- [ ] Leg actuator class: **servo vs stepper+belt TBD** (both open; size for ~2×; no lean). No SKU.
 - [ ] First print + fit.
 - [ ] Raised wheel can reach a 9.5" tread without self-collision.
 - [ ] Only then: consider a second-leg copy.

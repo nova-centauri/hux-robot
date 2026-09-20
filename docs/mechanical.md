@@ -14,17 +14,17 @@ V1 target is **one printable wheel-leg** with a linkage + spring stub, sized tow
 - **Serviceable modular prints:** threaded inserts, independently removable parts, inside access.
 - **Size plant-side joints for one-wheel standing load** (~2× two-wheel stance). See R14 below.
 
-## Leg actuators — reopened (servo vs stepper+belt TBD)
+## Leg actuators — servo vs stepper+belt TBD
 
-Steve 2026-09-20 follow-up. **Class is not locked.** A concurrent packet locked knee / hip-swing to stepper+belt — **that lock is lifted.**
+Steve 2026-09-20. **Do not lock either class.** Knee and hip swing stay **undecided**. A concurrent packet locked stepper+belt — **that lock is lifted.** Do not write a servo lean into the baseline either.
 
-| Joint | Status | Lean |
+| Joint | Status | Notes |
 | --- | --- | --- |
 | **Wheels** | Brushless + encoder at the wheel (R6) | Locked *class* (brushless). SKU TBD. |
-| **Knee / hip swing** | **Servo vs stepper+belt TBD** | Lean **high-torque servos** if one-leg load (R14) demands it. Serra used 40 kg-class servos per leg — **evidence, not a Hux SKU.** |
+| **Knee / hip swing** | **Servo vs stepper+belt TBD** | Both are open options. Size **either** for one-leg plant load (R14). Serra's 40 kg-class servos are a data point, not a Hux SKU and not a preference. |
 | **Hip roll** | Class TBD; **size for ~2× plant-side load** if the axis exists | Do not size roll for average two-wheel stance. |
 
-No NEMA size, no servo SKU, no belt pitch, no spend. Pick the class when a real one-leg load case exists — not to match a video.
+No NEMA size, no servo SKU, no belt pitch, no spend. No “lean servos” / “lean steppers” in this baseline. Pick the class later — not to match a video.
 
 R7 still stands. A servo or a stepper+belt can drive a linkage; springs still assist gravity.
 
@@ -71,7 +71,7 @@ Use this instead of a fake finished BOM. Tick in [`NOTES.md`](../NOTES.md) when 
 - [ ] Wheel hub / BLDC + encoder mount (motor-at-wheel; model still TBD).
 - [ ] Service: threaded inserts; independently removable parts; inside access.
 - [ ] Plant-side joints (knee / hip / hip roll) sized for **one-wheel standing load (~2×)**, not two-wheel average.
-- [ ] Leg actuator class on the sketch: **servo vs stepper+belt TBD** (lean servos if R14 demands it). No SKU, no buy.
+- [ ] Leg actuator class on the sketch: **servo vs stepper+belt TBD** (both open; size for R14). No SKU, no buy, no lean.
 - [ ] Print + fit the first leg. No second copy until the first one articulates.
 - [ ] Clearance check: raised wheel can reach the next 9.5" tread without self-collision.
 
