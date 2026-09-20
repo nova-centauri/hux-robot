@@ -1,0 +1,74 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+.coverage
+
+# Secrets / credentials
+*.pem
+*.key
+!*.pub
+secrets.yaml
+secrets.yml
+credentials.json
+id_rsa
+id_ed25519
+*_secret*
+*.secrets
+
+# Firmware / embedded build output
+.pio/
+.pioenvs/
+.piolibdeps/
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+*.elf
+*.hex
+*.bin
+*.map
+*.o
+*.d
+compile_commands.json
+.cache/
+
+# CAD / CAM scratch (keep intentional exports: .stl .3mf .step .stp)
+*.bak
+*.BAK
+*~
+*.tmp
+*.FCBak
+*.FCStd1
+*.FCStd2
+~$*
+*.sldprt.bak
+*.f3d.bak
+*.blend1
+*.fcstd1
+
+# Electronics EDA backups
+*-backups/
+*.kicad_pcb-bak
+*.kicad_sch-bak
+_autosave-*
+\#auto_saved_files\#
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+*.swp
+*.swo
+.vscode/
