@@ -9,8 +9,8 @@ Target: one side only, linkage + spring stub, stroke/clearance toward a **~9.5"*
 - [ ] Printable envelope for one wheel-leg.
 - [ ] Linkage layout.
 - [ ] Spring stub (gravity assist).
-- [ ] Wheel hub / BLDC mount (motor model TBD — do not buy).
-- [ ] First print + fit.
+- [ ] Wheel hub / BLDC mount (motor model TBD — do not buy). Lathe/mill welcome; see [`../capabilities.md`](../capabilities.md).
+- [ ] First print and/or machine + fit.
 - [ ] Raised wheel can reach a 9.5" tread without self-collision.
 - [ ] Only then: consider a second-leg copy.
 

@@ -28,7 +28,7 @@ Working notes. Tick boxes only when the work is real.
 - Research: [`docs/research/README.md`](docs/research/README.md) · shortlist [`docs/research/xrobots.md`](docs/research/xrobots.md) · plan [`docs/research/study-plan.md`](docs/research/study-plan.md)
 - XRobots: https://github.com/XRobots · RobotX (GPL3): https://github.com/XRobots/RobotX
 - Requirements: [`docs/requirements.md`](docs/requirements.md)
-- Parts on hand: [`docs/parts-on-hand.md`](docs/parts-on-hand.md)
+- Parts on hand: [`docs/parts-on-hand.md`](docs/parts-on-hand.md) · shop tools [`docs/capabilities.md`](docs/capabilities.md) (not parts; fab welcome)
 - Electronics: [`docs/electronics.md`](docs/electronics.md) · minimum plan [`docs/electronics-minimum.md`](docs/electronics-minimum.md)
 - Mechanical: [`docs/mechanical.md`](docs/mechanical.md) — **5" preferred**, 4–6" range
 - Vision: [`docs/vision.md`](docs/vision.md)

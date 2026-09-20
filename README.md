@@ -18,6 +18,7 @@ This repo is the source of truth for Steve Barrett's Hux project. It is a docs-a
 | Mechanical V1 | First printable wheel-leg is **Phase D** (after study). Not started. |
 | Spend | Wheels already ordered 2026-09-20 (document only). **No new spend** until Steve asks. Prefer parts already on hand. |
 | Parts on hand | Inventory in [`docs/parts-on-hand.md`](docs/parts-on-hand.md) — owned ≠ reserved |
+| Shop / fab | Tools (not parts) in [`docs/capabilities.md`](docs/capabilities.md) — mill, lathe, weld; fab welcome |
 
 First milestones live in [`NOTES.md`](NOTES.md).
 
@@ -44,6 +45,7 @@ software/     companion compute — Pi cameras / pathfinding (empty)
 - [Electronics](docs/electronics.md) — FC TBD, TBS Nano RX, brushless wheels, Wi‑Fi telem, Pi
 - [Minimum electronics](docs/electronics-minimum.md) — P0–P5 class list (no SKU, no new spend)
 - [Parts on hand](docs/parts-on-hand.md) — owned / ordered inventory (not a buy list)
+- [Shop capabilities](docs/capabilities.md) — mill, lathe, bender, brake, bandsaw, solder, weld, breadboards (not parts)
 - [Software](docs/software.md) — blink → spin → balance → cameras later
 - [Checklists](docs/checklists/) — prefer these over fake finished stacks
 

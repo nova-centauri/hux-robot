@@ -2,7 +2,7 @@
 
 **Status:** TBD. No wiring diagram, no locked FC, no new spend.
 
-**Parts on hand** (owned / ordered — not a buy list): [`parts-on-hand.md`](parts-on-hand.md). **Minimum set** (classes, P0–P5, no SKU): [`electronics-minimum.md`](electronics-minimum.md).
+**Parts on hand** (owned / ordered — not a buy list): [`parts-on-hand.md`](parts-on-hand.md). **Minimum set** (classes, P0–P5, no SKU): [`electronics-minimum.md`](electronics-minimum.md). **Shop / proto** (tools, not parts): [`capabilities.md`](capabilities.md) — soldering and breadboards are welcome for bench bring-up.
 
 ## Locked enough to write down
 

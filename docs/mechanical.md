@@ -1,10 +1,12 @@
 # Mechanical
 
-**Status:** TBD. No CAD, no printed parts, no locked geometry.
+**Status:** TBD. No CAD, no printed or machined customs, no locked geometry.
 
 V1 target is **one printable wheel-leg** with a linkage + spring stub, sized toward a **~9.5"** step. Do not wait on the flight controller for this.
 
 **Parts on hand:** [`parts-on-hand.md`](parts-on-hand.md). A 5" walker-wheel pair is already ordered (document only).
+
+**Shop / fab:** Steve has mill, lathe, bender, brake, bandsaw, solder, weld, breadboards — see [`capabilities.md`](capabilities.md). Hardware fab is **intentional and welcome**. Customs may be **machined, bent, or welded** as well as 3D printed. The **in-wheel BLDC hub** is a natural lathe/mill part (donor Zantle rubber). Still **prefer COTS structure** (carbon rod / stock) where it fits; **draft-friendly print still for plastics**.
 
 ## Intent
 
@@ -40,8 +42,8 @@ Use this instead of a fake finished BOM. Tick in [`NOTES.md`](../NOTES.md) when 
 - [ ] Sketch wheel diameter vs. step height vs. knee stroke (**5" preferred**, 4–6" range).
 - [ ] Pick a printable wheel-leg envelope (one side only).
 - [ ] Linkage layout + spring stub (gravity assist, not decorative).
-- [ ] Wheel hub / BLDC mount (motor model still TBD).
-- [ ] Print + fit the first leg. No second copy until the first one articulates.
+- [ ] Wheel hub / BLDC mount (motor model still TBD). Lathe/mill is welcome — this is a natural shop part, not print-only.
+- [ ] Print and/or machine + fit the first leg. No second copy until the first one articulates.
 - [ ] Clearance check: raised wheel can reach the next 9.5" tread without self-collision.
 
 ## Out of scope for V1
