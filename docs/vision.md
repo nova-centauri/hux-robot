@@ -41,7 +41,7 @@ V1 Hux prefers **strong linkages + springs** over pure serial belts for simplici
 
 - Flight controller choice (candidates only; see requirements).
 - Exact wheel BLDC / ESC models.
-- Actuator *SKUs* (class baseline is locked: wheels FOC; knee stepper+reduction; swing stepper+belt; roll dynamic unless deferred — [`research/actuators-legs.md`](research/actuators-legs.md)).
+- Actuator *SKUs* (class baseline is locked: wheels FOC; knee stepper+reduction; swing stepper+belt; hip roll **in V1** as experimental dynamic FOC/small-QDD/fast servo — [`research/actuators-legs.md`](research/actuators-legs.md)).
 - V1 mass: aspirational 4–5 lb / under 6 lb; OK to exceed for capability.
 - Full body CAD, second-leg copy, and stair gait software.
 - Spend. No purchases until Steve approves. Prefer parts already on hand.

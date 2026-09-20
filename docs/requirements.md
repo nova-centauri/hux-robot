@@ -21,11 +21,12 @@ Inspiration: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori
 | R7 | Legs via **strong linkages + springs** | Gravity compensation / energy return; prefer linkage over pure serial belts for V1 simplicity |
 | R8 | Local compute for **pathfinding inference** | Needs cameras; not on the FC |
 | R9 | Cameras | At least one stream for teleop; stereo/depth later for stairs |
+| R16 | **Hip roll** is **in V1** (experimental) | Steve 2026-09-20: start somewhere. Best-effort CoG shift for one-leg (`LEFT_ONLY` / `RIGHT_ONLY`). **Do not defer to V2.** May not work as hoped — still ship the axis and the modes. If a concurrent note treated hip roll as TBD/optional for V1, this update supersedes that softness. Spec: [`research/actuators-legs.md`](research/actuators-legs.md). |
 | R26 | **Knee** = stepper **with belt/gear reduction**; **hip swing** = stepper **+ belt** | Working V1 baseline (Steve confirmed). Knee is **not** a bare stepper. Hip-swing **belt is the reduction for that joint** — not a duplicate actuator. COTS NEMA-class or smaller. No SKU. Trade: [`research/actuators-legs.md`](research/actuators-legs.md). |
-| R27 | **Hip roll** = **dynamic** (FOC BLDC / QDD / fast bus servo) — **not a stepper** | Working V1 baseline. Required for CoG shift unless Steve **explicitly defers** the axis (R16 when that lands). High-rate torque + ideally backdrivable. Pairs with planted-wheel fore/aft (R17 when that lands). |
-| R28 | All-stepper is **not** the baseline. If later forced: **closed-loop**, **minimal-backlash** belts, **accept lower one-leg bandwidth** | Residual risk only. Do not fake a CoG shift in software. Wheels stay brushless FOC (R6). |
+| R27 | **Hip roll** actuator = **dynamic** (FOC BLDC / **small** QDD / fast bus servo) — **not a stepper** | Working V1 baseline. Experimental. High-rate torque + ideally backdrivable. Pairs with planted-wheel fore/aft (R17 when that lands). Include mechanically even if the first loop is ugly. |
+| R28 | All-stepper is **not** the baseline. If later forced: **closed-loop**, **minimal-backlash** belts, **accept lower one-leg bandwidth** | Residual risk only. Do not fake a CoG shift in software. Do not delete the V1 roll axis. Wheels stay brushless FOC (R6). |
 
-IDs **R10–R23** and **R25** are unused here so concurrent 2026-09-20 hardware, modes, hip-roll / reuse-control, fabrication, and wheel-drive-class notes can take them without renumbering this packet.
+IDs **R10–R15**, **R17–R23**, and **R25** are unused here so concurrent 2026-09-20 hardware, modes, reuse-control, fabrication, and wheel-drive-class notes can take them without renumbering this packet.
 
 ## Soft requirements
 
@@ -37,7 +38,7 @@ IDs **R10–R23** and **R25** are unused here so concurrent 2026-09-20 hardware,
 
 - Split brain: FC = IMU + attitude + wheel (and likely leg) actuation; Pi = vision + inference; ESP32 optional Wi‑Fi/telemetry bridge.
 - V1 mass lean is **aspirational 4–5 lb** / **under 6 lb**. Not a kill-switch. Exceeding 6 lb is allowed if it buys capability. Do not reject a hip-roll class to protect a spreadsheet.
-- Working V1 actuator baseline (Steve confirmed): **wheels = brushless FOC**; **knee = stepper with belt/gear reduction** (not bare); **hip swing = stepper + belt** (belt = that joint's reduction, not a second actuator); **hip roll = dynamic FOC/QDD/fast servo**, not a stepper, **required for CoG shift unless explicitly deferred**. All-stepper is residual risk (R28), not the plan.
+- Working V1 actuator baseline (Steve confirmed): **wheels = brushless FOC**; **knee = stepper with belt/gear reduction** (not bare); **hip swing = stepper + belt** (belt = that joint's reduction, not a second actuator); **hip roll is in V1** as a **dynamic** FOC BLDC / small QDD / fast servo (**not** a stepper). Experimental / may not work — still include mechanically and in control modes. One-leg CoG shift is a **V1 goal (best-effort)**. All-stepper is residual risk (R28), not the plan.
 - Hip swing and hip roll are different DOFs. A stepper that is fine on swing is still wrong on roll (missed steps, resonance, belt stretch/backlash, no useful backdrive). Trade: [`research/actuators-legs.md`](research/actuators-legs.md).
 - Stepper **hold current** is heat and **4S** drain (R11 when that lands). Not free just because the robot is standing.
 - Belt/pulley/rod reduction on swing/knee fits **COTS structure** (R19 when that lands). Printed parts stay joints / tensioners / hubs.
@@ -50,13 +51,13 @@ IDs **R10–R23** and **R25** are unused here so concurrent 2026-09-20 hardware,
 - Compute: ESP32, Raspberry Pi
 - RX: TBS Nano RX
 - Motors: brushless FOC for wheels (exact models TBD). No SKU.
-- Hip / knee / hip-roll: **class baseline locked** (R26–R27). SKU still TBD. No buy.
+- Hip / knee / hip-roll: **class baseline locked** (R16 / R26–R27). Hip roll ships in V1 (experimental). SKU still TBD. No buy.
 
 ## Recommended default (proposal)
 
 - **FC:** **TBD** (Steve 2026-09-20). Candidates remain F765 Wing / F722 Wing / F722 drone / Mamba F405. Prefer a Wing board when we lock; do not block mechanical work on this.
 - **Mass:** aspirational **4–5 lb** / **under 6 lb**. Soft. OK to exceed for capability (R24).
-- **Actuator baseline (locked class, not SKU):** wheels = brushless FOC (R6). Knee = stepper **with** belt/gear reduction. Hip swing = stepper + belt (belt = reduction, not a second actuator). Hip roll = dynamic FOC/QDD/fast servo, required for CoG shift unless explicitly deferred (R26–R27). All-stepper is not the baseline (R28).
+- **Actuator baseline (locked class, not SKU):** wheels = brushless FOC (R6). Knee = stepper **with** belt/gear reduction. Hip swing = stepper + belt (belt = reduction, not a second actuator). Hip roll **in V1** = dynamic FOC BLDC / small QDD / fast servo, experimental, best-effort CoG shift (R16 / R27). All-stepper is not the baseline (R28).
 - **Wheels:** brushless FOC. Not steppers.
 - **Companion:** Raspberry Pi for cameras + pathfinding inference.
 - **Wi‑Fi:** Pi first; ESP32 if we want a thin telemetry bridge off the Pi.
@@ -72,7 +73,7 @@ Tracked in [`../NOTES.md`](../NOTES.md). Summary:
 2. Size + print first wheel-leg for ~9.5" step (FC stays TBD).
 3. Blink LED → restrained wheel spin once an FC is on the bench (not on carpet).
 4. Two-leg balance teleop (TBS + Wi‑Fi telem).
-5. One-leg balance.
+5. One-leg balance — V1 **best-effort** CoG shift via hip roll + planted-wheel fore/aft (may not work as hoped; still try).
 6. Open-loop step-up toward 9.5" riser fixture.
 7. Camera stream → local pathfinding later.
 8. Lock FC into [`electronics.md`](electronics.md) when ready.

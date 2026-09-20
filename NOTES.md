@@ -10,7 +10,7 @@ Working notes. Tick boxes only when the work is real.
 - [ ] **FC TBD** — still not locked. Candidates: F765 Wing / F722 Wing / F722 drone / Mamba F405. Record the bench choice in [`docs/electronics.md`](docs/electronics.md) when one actually blinks.
 - [ ] **Blink, then spin** — LED on the bench FC, then a restrained brushless wheel (not on carpet).
 - [ ] **Two-leg balance** teleop (TBS Nano RX + Wi‑Fi telem).
-- [ ] **One-leg balance** — gate before any stair cycle.
+- [ ] **One-leg balance** — V1 **best-effort** CoG shift (hip roll + planted-wheel fore/aft). Experimental; may not work as hoped. Still try. Gate before any stair cycle.
 - [ ] **Open-loop step** toward a 9.5" riser fixture.
 - [ ] **Cameras later** — one teleop stream, then Pi pathfinding. Not on the FC.
 
@@ -27,6 +27,6 @@ Working notes. Tick boxes only when the work is real.
 
 - Research: [`docs/research/README.md`](docs/research/README.md) · shortlist [`docs/research/xrobots.md`](docs/research/xrobots.md) · plan [`docs/research/study-plan.md`](docs/research/study-plan.md) · legs [`docs/research/actuators-legs.md`](docs/research/actuators-legs.md)
 - XRobots: https://github.com/XRobots · RobotX (GPL3): https://github.com/XRobots/RobotX
-- Requirements: [`docs/requirements.md`](docs/requirements.md) — R24 mass aspirational; **baseline** R6 wheels FOC, R26 knee=stepper+reduction / swing=stepper+belt, R27 hip roll dynamic (required unless deferred); R28 all-stepper = residual risk
+- Requirements: [`docs/requirements.md`](docs/requirements.md) — R24 mass aspirational; **baseline** R6 wheels FOC, R26 knee=stepper+reduction / swing=stepper+belt, R16/R27 hip roll **in V1** (dynamic, experimental); R28 all-stepper = residual risk
 - Vision: [`docs/vision.md`](docs/vision.md)
 - Inspiration: https://www.alex-hattori.com/blog/wheeled-biped-v2

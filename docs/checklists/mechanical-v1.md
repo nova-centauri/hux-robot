@@ -10,7 +10,7 @@ Target: one side only, linkage + spring stub, stroke/clearance toward a **~9.5"*
 - [ ] Linkage layout.
 - [ ] Spring stub (gravity assist).
 - [ ] Wheel hub / FOC BLDC mount (motor model TBD — do not buy).
-- [ ] Leg actuator baseline: knee = stepper **with** belt/gear reduction; hip swing = stepper + belt (belt = reducer, not a second actuator); hip roll = dynamic FOC/QDD/fast servo or an **explicit deferral**. No SKU.
+- [ ] Leg actuator baseline: knee = stepper **with** belt/gear reduction; hip swing = stepper + belt (belt = reducer, not a second actuator); **hip roll in V1** (dynamic FOC / small QDD / fast servo, experimental). No SKU. No V2 deferral.
 - [ ] Mass lean in view (aspirational 4–5 lb / under 6 lb; overrun OK for capability).
 - [ ] First print + fit.
 - [ ] Raised wheel can reach a 9.5" tread without self-collision.

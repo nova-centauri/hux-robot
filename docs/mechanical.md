@@ -10,9 +10,9 @@ V1 target is **one printable wheel-leg** with a linkage + spring stub, sized tow
 - Legs via **strong linkages + springs** (gravity compensation / energy return).
 - Prefer linkage over pure serial belts for V1 simplicity.
 - Design stroke and clearance around a ~9.5" residential riser (up and down).
-- Extra DOF is desirable later (stairs / fall recovery); do not invent a 6-DOF stack on paper.
+- Extra DOF: **hip roll is in V1** (experimental CoG shift). Do not invent a 6-DOF stack on paper.
 - V1 mass lean is **aspirational 4–5 lb / under 6 lb**. Not a hard ceiling. OK to exceed for a capable hip-roll joint.
-- Working V1 actuator baseline (Steve confirmed): **knee = stepper with belt/gear reduction** (not bare); **hip swing = stepper + belt** (belt = that joint's reduction, not a second actuator); **hip roll = dynamic FOC/QDD/fast servo**, not a stepper, required for CoG shift unless explicitly deferred. Trade: [`research/actuators-legs.md`](research/actuators-legs.md).
+- Working V1 actuator baseline (Steve confirmed): **knee = stepper with belt/gear reduction** (not bare); **hip swing = stepper + belt** (belt = that joint's reduction, not a second actuator); **hip roll is in V1** as **dynamic FOC BLDC / small QDD / fast servo** (not a stepper). Experimental — may not work; still leave room for the joint. Trade: [`research/actuators-legs.md`](research/actuators-legs.md).
 
 ## Mass (aspirational, not a gate)
 
@@ -30,7 +30,7 @@ Steve confirmed. **Class is locked. SKU is not.** Hip **swing** (rotation / pitc
 | --- | --- | --- |
 | **Knee** | **Stepper with belt/gear reduction** | Not a bare stepper. Reduction is required. COTS NEMA-class or smaller + pulleys/gears (R19 when that lands). |
 | **Hip swing** | **Stepper + belt** | The **belt is the reduction for that joint** — not a duplicate actuator. |
-| **Hip roll** | **Dynamic:** FOC BLDC / QDD / fast bus servo | **Not a stepper.** Required for CoG shift unless Steve **explicitly defers** the axis. High-rate torque, ideally backdrivable. |
+| **Hip roll** | **In V1.** **Dynamic:** FOC BLDC / **small** QDD / fast bus servo | **Not a stepper. Not V2.** Experimental — may not work as hoped. Still design the axis so we can learn. Best-effort CoG shift with the planted wheel. |
 | **Wheels** | **Brushless FOC** (R6) | Balance actuator. Not a stepper. |
 
 All-stepper is **not** this baseline. If later forced: closed-loop, minimal-backlash belts, and **accept lower one-leg bandwidth** (R28). Firmware will not erase that.
@@ -57,7 +57,7 @@ Use this instead of a fake finished BOM. Tick in [`NOTES.md`](../NOTES.md) when 
 - [ ] Pick a printable wheel-leg envelope (one side only).
 - [ ] Linkage layout + spring stub (gravity assist, not decorative).
 - [ ] Wheel hub / FOC BLDC mount (motor model still TBD).
-- [ ] Leg actuator baseline on the sketch: knee = stepper **with** belt/gear; hip swing = stepper + belt (belt = reducer, not a second motor); hip roll = dynamic FOC/QDD/fast servo or an **explicit deferral**. No SKU, no buy. See [`research/actuators-legs.md`](research/actuators-legs.md).
+- [ ] Leg actuator baseline on the sketch: knee = stepper **with** belt/gear; hip swing = stepper + belt (belt = reducer, not a second motor); **hip roll axis in V1** = dynamic FOC BLDC / small QDD / fast servo (experimental). No SKU, no buy, no V2 deferral. See [`research/actuators-legs.md`](research/actuators-legs.md).
 - [ ] Print + fit the first leg. No second copy until the first one articulates.
 - [ ] Clearance check: raised wheel can reach the next 9.5" tread without self-collision.
 - [ ] Running mass check vs **aspirational** 4–5 lb / under 6 lb. Overrun is allowed if it buys capability — write down why.
@@ -69,6 +69,7 @@ Use this instead of a fake finished BOM. Tick in [`NOTES.md`](../NOTES.md) when 
 - Locking an FC mount before the FC is chosen.
 - Locking a NEMA size, belt pitch, or hip-roll SKU.
 - A **bare** stepper on the knee, a second hip-swing motor “plus a belt,” or a stepper on hip roll / wheels.
+- Dropping hip roll from V1 “until we have a better actuator.” Start somewhere.
 - Treating under 6 lb as a hard gate that kills a capable roll actuator.
 
 CAD drops in [`../cad/`](../cad/).

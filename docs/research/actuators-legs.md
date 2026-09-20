@@ -13,11 +13,15 @@ Architecture is locked. Parts are not. Mass stays **soft**.
 | **Wheels** | **Brushless FOC** | Already R6. Torque-mode / reaction-speed class when R25 lands. Not a stepper. |
 | **Knee** | **Stepper with belt/gear reduction** | Not a bare stepper. The reduction is required for torque and resolution. |
 | **Hip swing** (rotation / pitch) | **Stepper + belt** | The **belt is the reduction for that joint** — not a second actuator, not a second motor. |
-| **Hip roll** (balance angling) | **Dynamic:** FOC BLDC / QDD / fast bus servo | **Not a stepper.** Required for CoG shift unless Steve **explicitly defers** the axis (R16 when that lands). |
+| **Hip roll** (balance angling) | **In V1.** **Dynamic:** FOC BLDC / **small** QDD / fast bus servo | **Not a stepper. Not deferred to V2.** Experimental — may not work as hoped. Still ship the joint and the control modes so we can learn. Best-effort one-leg CoG shift. |
 
-Do not put a bare stepper on the knee. Do not add a second hip-swing actuator “plus a belt.” Do not put a stepper on hip roll to match the knees. Do not put a stepper on the rim.
+Do not put a bare stepper on the knee. Do not add a second hip-swing actuator “plus a belt.” Do not put a stepper on hip roll to match the knees. Do not put a stepper on the rim. Do not drop hip roll from V1 CAD or modes to wait for a better actuator.
 
-IDs: R6 / R26 / R27. All-stepper (R28) is a residual risk path, **not** this baseline.
+IDs: R6 / R16 / R26 / R27. All-stepper (R28) is a residual risk path, **not** this baseline.
+
+### V1 implication — start somewhere
+
+One-leg (`LEFT_ONLY` / `RIGHT_ONLY`) **CoG shift is a V1 goal (best-effort)**. Hip roll ships in V1 even if the first actuator is imperfect. Pair it with planted-wheel fore/aft. It **may not work as hoped**. That is acceptable. What is not acceptable: omitting the joint, omitting the modes, or waiting for V2. Leave room in the ~10" stance (when that note lands) and in the harness.
 
 ## DOF map (do not collapse these)
 
@@ -25,7 +29,7 @@ IDs: R6 / R26 / R27. All-stepper (R28) is a residual risk path, **not** this bas
 | --- | --- | --- |
 | **Hip rotation / swing** (hip *pitch*) | Lift and swing a wheeled leg for the stair cycle | Repeatable position. Hold a pose while the other side balances. Speed matters; it is not the CoG loop. |
 | **Knee** | Fold / extend for stroke and ~9.5" clearance | Same class of problem as hip swing: position, hold, COTS reduction. |
-| **Hip roll** (balance angling) | Shift body CoG over the **planted** wheel for one-leg (`LEFT_ONLY` / `RIGHT_ONLY`) | High-rate **torque** corrections. Ideally **backdrivable**. Pairs with planted-wheel fore/aft (inverted-pendulum pitch). Distinct from swing (R16 / R17 when those land). |
+| **Hip roll** (balance angling) | Shift body CoG over the **planted** wheel for one-leg (`LEFT_ONLY` / `RIGHT_ONLY`) | **V1 goal (best-effort).** High-rate **torque** corrections. Ideally **backdrivable**. Pairs with planted-wheel fore/aft. Distinct from swing. Experimental — include the axis even if the first loop is ugly. |
 | **Wheels** | Contact, yaw, and pitch balance | **Brushless FOC** (baseline). Not a stepper problem. |
 
 Hip swing and hip roll are **different joints**. A stepper that is fine on swing can still be the wrong machine on roll.
@@ -68,7 +72,7 @@ Not a buy list. The **baseline is already chosen** (table at the top). This is l
 | --- | --- | --- |
 | **Stepper + belt / gear** | **Baseline** for knee + hip **swing**. Pose hold. COTS pulleys. Knee needs the reduction (not bare). Swing belt = that joint's reducer. | Frame size, ratio, open- vs closed-loop, belt pitch, backlash budget |
 | **FOC BLDC + gearbox / cycloidal** | Hip **roll** (and any joint that needs rate + torque). Same family as the wheel-drive lean. | Ratio, backdrive, packaging at a ~10" stance |
-| **Quasi-direct drive (QDD)** | Hip **roll**. Fast, proprioceptive, shock-tolerant | Mass at the joint, whether anything on hand is in this class |
+| **Quasi-direct drive (QDD)** | Hip **roll** (prefer **small** QDD if this class is filled). Fast, proprioceptive, shock-tolerant | Mass at the joint, whether anything on hand is in this class |
 | **Fast bus servo class** | Hip **roll** if a strong, fast unit is already on the bench and the bus is honest | Speed, reliability, 4S-side voltage, whether it is actually backdrivable |
 | **Linear + linkage + springs** | Matches R7. Can produce “rotation” at a joint | Stroke, force, whether it can do roll *and* swing |
 
@@ -82,10 +86,10 @@ Steve confirmed the split. This is no longer a maybe.
 
 1. **Knee = stepper with belt/gear reduction.** Not a bare stepper. Reduction is required.
 2. **Hip swing = stepper + belt.** The belt *is* the reduction for that joint — one motor, not a second actuator.
-3. **Hip roll = dynamic (FOC BLDC / QDD / fast bus servo).** Not a stepper. **Required for CoG shift** unless Steve explicitly defers the axis. That joint is in the CoG loop with the planted wheel. It wants torque bandwidth and, ideally, backdrivability.
+3. **Hip roll is in V1.** Dynamic class: FOC BLDC / **small** QDD / fast bus servo. **Not a stepper. Not V2.** Experimental — it may not work as hoped. Still include the joint mechanically and in `LEFT_ONLY` / `RIGHT_ONLY` so we can learn. One-leg CoG shift is a **V1 goal (best-effort)**, paired with planted-wheel fore/aft. Start somewhere.
 4. **Wheels = brushless FOC.** Already R6. Not steppers.
-5. **If someone later insists all joints are steppers (not the baseline):** require **closed-loop** steppers, **minimal-backlash** belts, and **accept lower one-leg balance bandwidth**. That is R28 — a **risk**, not the plan. Do not fake a CoG shift in software to cover a stiff roll joint.
-6. **Mass does not veto (1)–(4).** A capable roll actuator that pushes V1 past 6 lb is allowed. A tiny stepper on roll that “saves” the budget and then misses steps is the worse trade.
+5. **If someone later insists all joints are steppers (not the baseline):** require **closed-loop** steppers, **minimal-backlash** belts, and **accept even lower one-leg balance bandwidth**. That is R28 — a **risk**, not the plan. Do not fake a CoG shift in software to cover a stiff roll joint, and do not delete the V1 roll axis to avoid embarrassment.
+6. **Mass does not veto (1)–(4).** A capable (even imperfect) roll actuator that pushes V1 past 6 lb is allowed. A tiny stepper on roll that “saves” the budget and then misses steps is the worse trade. Skipping roll “until V2” is also not the baseline.
 
 **FC TBD.** The baseline does not pick a flight controller, a stepper driver IC, a FOC board, a NEMA size, or a belt pitch.
 
@@ -130,12 +134,12 @@ Write real notes here or in [`../../NOTES.md`](../../NOTES.md) when watched, not
 - [ ] Whether their one-leg / lean axis is torque-mode or position-mode.
 - [ ] Hold-current vs spring-assist: who lets the spring take gravity so the motor can drop current.
 
-**Done when:** we can explain in our own words why the baseline puts reduction steppers on swing/knee and a dynamic actuator on roll, with citations, without a SKU.
+**Done when:** we can explain in our own words why V1 puts reduction steppers on swing/knee and an experimental dynamic actuator on roll, with citations, without a SKU.
 
 ## Pointers
 
-- Requirements: [`../requirements.md`](../requirements.md) — R24 mass (aspirational); R6 / R26 / R27 baseline; R28 residual risk
+- Requirements: [`../requirements.md`](../requirements.md) — R24 mass (aspirational); R6 / R16 / R26 / R27 baseline; R28 residual risk
 - Mechanical: [`../mechanical.md`](../mechanical.md) — DOF split, COTS belts, mass sketch
 - Electronics: [`../electronics.md`](../electronics.md) — drivers as classes; hold current; wheels FOC
-- Hip-roll / one-leg loop (when that note lands): [`../software.md`](../software.md), R16–R18
+- Hip-roll / one-leg loop: [`../software.md`](../software.md), R16–R18
 - Study plan: [`study-plan.md`](study-plan.md)

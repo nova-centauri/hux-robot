@@ -9,7 +9,7 @@
 | RC RX | **TBS Nano RX** | Bind to the FC (or a dedicated link into the FC). |
 | Wheels | **Brushless FOC** (ESC + BLDC per wheel) | Working V1 baseline. Exact motor/ESC models TBD. Not steppers. |
 | Knee / hip swing | **Stepper + reduction** | Knee: belt/gear (not bare). Swing: belt **is** the reducer — not a second actuator. SKU TBD. |
-| Hip roll | **Dynamic** FOC / QDD / fast servo | Not a stepper. Required for CoG shift unless explicitly deferred. SKU TBD. |
+| Hip roll | **In V1.** **Dynamic** FOC BLDC / small QDD / fast servo | Not a stepper. Experimental — may not work. Still wire the axis and the modes. SKU TBD. |
 | Companion | **Raspberry Pi** | Cameras + pathfinding inference. Not on the FC. |
 | Wi‑Fi telem | **Pi first** | ESP32 only as an optional thin telemetry bridge. |
 
@@ -34,7 +34,7 @@ Steve 2026-09-20 (confirmed). **FC still TBD.** Class is locked. Driver BOM is n
 | --- | --- | --- |
 | **Knee** | **Stepper with belt/gear reduction** | Not a bare stepper. Stepper driver *class* later. Open-loop or closed-loop + encoder. Holding a pose is the job. |
 | **Hip swing** | **Stepper + belt** | Belt **is** the reduction — not a second actuator, not a second driver channel for a second motor. |
-| **Hip roll** | **Dynamic:** FOC BLDC / QDD / fast bus servo | **Not a stepper.** Required for CoG shift unless explicitly deferred. Torque-mode / high-rate current loop. Ideally backdrivable. |
+| **Hip roll** | **In V1.** **Dynamic:** FOC BLDC / **small** QDD / fast bus servo | **Not a stepper. Not V2.** Experimental. Torque-mode / high-rate current loop. Ideally backdrivable. Include the driver channel even if the first loop is ugly. |
 | **Wheels** | **Brushless FOC** (R6) | Already the baseline. Not steppers. |
 
 Do not put a stepper on hip roll to “match” the knees. Missed steps, resonance, and belt stretch/backlash hurt the CoG loop that pairs with wheel fore-aft.
@@ -59,7 +59,7 @@ V1 mass is **aspirational 4–5 lb / under 6 lb** (R24). Soft. A capable roll dr
 TBS Nano RX ──► FC (TBD) ──► ESC/BLDC wheels (brushless FOC)
                     │            └──► knee: stepper + belt/gear reduction
                     │            └──► hip swing: stepper + belt (belt = reducer)
-                    │            └──► hip roll: FOC / QDD / fast servo (or explicit deferral)
+                    │            └──► hip roll: FOC / small QDD / fast servo (V1, experimental)
                     │
                     └── IMU / attitude
 Raspberry Pi ── cameras, pathfinding, Wi‑Fi telem
@@ -85,3 +85,4 @@ See [`checklists/electronics-bringup.md`](checklists/electronics-bringup.md).
 - Do not invent a finished PDB / BEC / battery / stepper-driver stack.
 - Do not treat any FC candidate or actuator *SKU* as selected. The actuator *class* baseline is locked.
 - Do not put steppers on the wheels or on hip roll to make the BOM uniform.
+- Do not omit the hip-roll driver channel from V1 “until V2.”
