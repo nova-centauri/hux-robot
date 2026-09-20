@@ -37,10 +37,23 @@ Inspiration: [Alex Hattori — wheeled biped V2](https://www.alex-hattori.com/bl
 
 V1 Hux prefers **strong linkages + springs** over pure serial belts for simplicity. That is a starting bias, not a locked CAD package.
 
+## Lessons to steal (Build Some Stuff / Serra)
+
+Inspiration: [I built a self-balancing robot from scratch](https://www.youtube.com/watch?v=K1lzzVGCzAQ) — notes in [`research/inspiration.md`](research/inspiration.md). **Steal packaging and loop geometry. Do not vendor files.**
+
+- **In-wheel BLDC + encoder** — motor at the wheel for the balance actuator.
+- **Jointed legs keep CoG over wheel contact** as height changes.
+- **Serviceable modular prints** — threaded inserts; independently removable parts.
+- **Wheel-under-CoG** correction: rotate the planted wheel back under the mass. Their loop is a simple P; Hux still studies XRobots PID.
+
+Their stack is 3S + Arduino + 40 kg-class servos and **no stair / one-leg plant**. Hux prefers **4S + step-down**, FC/Pi, and sizes plant-side joints for **~2×** one-wheel load. Leg class is **servo vs stepper+belt TBD** (lean servos if that load demands it).
+
 ## Explicitly TBD
 
 - Flight controller choice (candidates only; see requirements).
-- Exact wheel BLDC / ESC models.
+- Exact wheel BLDC / ESC / encoder models.
+- Knee / hip class: **servo vs stepper+belt** (not locked).
+- BEC / regulator SKU and pack capacity.
 - Full body CAD, second-leg copy, and stair gait software.
 - Spend. No purchases until Steve approves. Prefer parts already on hand.
 

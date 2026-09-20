@@ -25,11 +25,11 @@ Prefer parts already on hand. Upstream READMEs (especially SonicRobot) are **not
 - [ ] Read [XRobots/RobotX](https://github.com/XRobots/RobotX) `ArduinoCode_current/` (`IMU_*`, `RobotX020` / `RobotX201a`, remotes). Note GPL3 README vs LGPL `LICENSE` file; do not vendor.
 - [ ] Watch [TallBalancer](https://youtu.be/VYU8CRTD2cA). Read `Code/pos_hold` and `Code/vel_hold` ([MIT](https://github.com/XRobots/TallBalancer)).
 - [ ] Watch [SonicRobot playlist](https://www.youtube.com/playlist?list=PLpwJoq86vov_tZ3rsMCH5sylqGT5s9TcU) bring-up. Read `ARobot08/`, `Remote017/`, `Scale01/` ([GPL-2.0](https://github.com/XRobots/SonicRobot)). Study only; no shopping from the README.
-- [ ] Watch [Build Some Stuff — Arduino self-balancing robot](https://www.youtube.com/watch?v=K1lzzVGCzAQ) (Steve share; notes in [`inspiration.md`](inspiration.md)). Maker two-wheel balancer: BLDC-in-wheel + encoders, jointed servo legs keep CoG over contact, simple **P** (wheel under CoG). **Inspiration only.** Not a stair / one-leg plant machine. Do not shop Printables or the PCBWay board.
+- [ ] Watch [Build Some Stuff — Arduino self-balancing robot](https://www.youtube.com/watch?v=K1lzzVGCzAQ) (Steve share; notes in [`inspiration.md`](inspiration.md)). **Steal:** in-wheel BLDC+encoder, jointed legs keep CoG over contact, serviceable modular prints, simple **P** (wheel under CoG). Not a stair / one-leg plant machine. Do not shop Printables or the PCBWay board.
 
 **Extract (write notes here or in [`../../NOTES.md`](../../NOTES.md)):**
 
-- [ ] Control loops: IMU (MPU6050 / GY-521 class) → filter/fusion → pitch/roll error → **PID** → wheel command (torque / velocity / current — record which). Optional contrast: Serra's simple **P** (rotate wheels under CoG) in [`inspiration.md`](inspiration.md) — teaching geometry, not a Hux controller. That machine has **no stair / one-leg plant**.
+- [ ] Control loops: IMU (MPU6050 / GY-521 class) → filter/fusion → pitch/roll error → **PID** → wheel command (torque / velocity / current — record which). Steal Serra's **wheel-under-CoG** geometry ([`inspiration.md`](inspiration.md)); their simple **P** is teaching, not a Hux controller. That machine has **no stair / one-leg plant**.
 - [ ] Outer hold: TallBalancer position hold vs velocity hold; what the encoder buys vs the IMU.
 - [ ] SonicRobot extras: load cells in the loop; ODrive + Teensy split; estop / RST; CAN vs UART to drives.
 - [ ] Remote patterns: RobotX TX/RX sketches; SonicRobot nRF remote; what the stick maps to (tilt setpoint, speed, yaw). Hux RX is **TBS Nano** — steal *semantics*, not the radio.
@@ -58,6 +58,7 @@ Hux cycle (from [`../vision.md`](../vision.md)): **lift → 1-leg balance → pl
   6. Transfer / plant. Repeat.
 
 - [ ] Mark which states can stay **open-loop** on a fixture (Hux milestone: open-loop step) vs which need closed-loop balance.
+- [ ] On the one-leg / plant states: plant-side knee, hip, and hip roll see **~2×** two-wheel load ([`../mechanical.md`](../mechanical.md) / R14). Size for that case. Serra never showed this.
 - [ ] Note one-leg balance risks on a nosing (BallWheels / BeltWheel / Ball-BIke are optional edge-case reading).
 
 **Done when:** the 9.5" cycle is written as Hux states with citations to Stairs + Hattori, and we have explicitly said Stairs geometry is **not** Hux geometry.
@@ -90,7 +91,8 @@ Hux cycle (from [`../vision.md`](../vision.md)): **lift → 1-leg balance → pl
 Use [`../checklists/mechanical-v1.md`](../checklists/mechanical-v1.md) and [`../mechanical.md`](../mechanical.md). This phase is the existing “first printable wheel-leg” milestone — **gated** by A–C.
 
 - [ ] Phases A–C actually done (not skipped to make the repo look busy).
-- [ ] One-side envelope, linkage + spring stub, stroke toward 9.5" (requirements R7).
+- [ ] One-side envelope, linkage + spring stub, stroke toward 9.5" (requirements R7). Jointed motion keeps CoG over contact; motor-at-wheel + encoder; serviceable inserts.
+- [ ] Plant-side joints sized for **one-wheel standing load (~2×)**. Leg class **servo vs stepper+belt TBD** (lean servos if that load demands it). No SKU.
 - [ ] Fit-check print: raised wheel can reach a 9.5" tread without self-collision.
 - [ ] No second-leg copy until the first articulates.
 - [ ] No FC lock, no BOM, no carpet spin-up as part of this print.
@@ -101,7 +103,7 @@ Use [`../checklists/mechanical-v1.md`](../checklists/mechanical-v1.md) and [`../
 
 ## Explicitly not this plan
 
-- Buying ODrives, Teensys, load cells, or a “better” FC because SonicRobot used them.
+- Buying ODrives, Teensys, load cells, 40 kg servos, or a “better” FC because a video used them.
 - Locking Betaflight / INAV / ArduPilot / custom (follows FC; FC is TBD).
 - Cameras / pathfinding (later, on the Pi).
 - Closed-loop stair gait software.

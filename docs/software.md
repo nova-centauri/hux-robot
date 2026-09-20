@@ -14,6 +14,12 @@ Prefer checklists and milestone order over a fake finished stack.
 
 Do not pick Betaflight vs INAV vs ArduPilot vs custom here. That choice follows the FC, and the FC is TBD.
 
+## Balance geometry (steal, not a stack)
+
+From [Build Some Stuff / Serra](research/inspiration.md): when pushed off center, **rotate the wheels back under the CoG**. Steal that correction geometry for two-leg *and* one-leg (planted wheel). Their published loop is a simple **P**. Hux Phase A still extracts IMU → PID → wheel command from XRobots. Do not flash an Arduino Nano or treat P-only as the V1 controller.
+
+One-leg (R2) is the same geometry on a narrower support, with plant-side joints holding **~2×** two-wheel load ([`mechanical.md`](mechanical.md)). Software cannot hide an undersized knee.
+
 ## First software, in order
 
 Tracked in [`../NOTES.md`](../NOTES.md).

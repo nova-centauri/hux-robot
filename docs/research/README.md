@@ -7,12 +7,12 @@ This packet is the working study set. It does not replace [`../requirements.md`]
 | Doc | What it is |
 | --- | --- |
 | [xrobots.md](xrobots.md) | Curated XRobots shortlist, why each matters, study order |
-| [inspiration.md](inspiration.md) | Steve shares — Build Some Stuff / Serra Arduino balancer; inspiration only |
+| [inspiration.md](inspiration.md) | Steve shares — Build Some Stuff / Serra; **steal** packaging + wheel-under-CoG; do not vendor |
 | [study-plan.md](study-plan.md) | Phased checklist before hardware (Phases A–D) |
 
 Inspiration already in requirements: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori.com/blog/wheeled-biped-v2).
 
-Steve's video share (inspiration only; not a build source): [inspiration.md](inspiration.md) — [Kelton Serra / Build Some Stuff](https://www.youtube.com/watch?v=K1lzzVGCzAQ) Arduino two-wheel balancer (BLDC-in-wheel, jointed servo legs, simple P). Not stairs.
+Steve's video share: [inspiration.md](inspiration.md) — [Kelton Serra / Build Some Stuff](https://www.youtube.com/watch?v=K1lzzVGCzAQ). **Steal** in-wheel BLDC+encoder, CoG-over-contact legs, serviceable prints, wheel-under-CoG loop. Not a build source. Not stairs. Leg class on Hux is **servo vs stepper+belt TBD**.
 
 ## Stance
 
@@ -81,4 +81,4 @@ Watching, learning, and rewriting from understanding is the default path that ke
 - A Hux BOM or shopping list (including Serra's YouTube / PCBWay parts list)
 - Vendoring `XRobots/*` or Serra Printables / Gerbers / firmware
 - Starting the printable wheel-leg before Phase D
-- Changing [`../vision.md`](../vision.md)
+- Rewriting the stair north star in [`../vision.md`](../vision.md) (steal-list pointers from this packet are allowed)

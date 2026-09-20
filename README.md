@@ -39,8 +39,8 @@ software/     companion compute — Pi cameras / pathfinding (empty)
 - [Research](docs/research/) — research-first stance, XRobots shortlist, study plan (Phases A–D)
 - [Requirements](docs/requirements.md) — hard/soft requirements, candidate hardware, no-spend rule
 - [Vision](docs/vision.md) — stair gait, split-brain intent, lessons to steal
-- [Mechanical](docs/mechanical.md) — wheel-leg, linkages + springs, 9.5" stroke
-- [Electronics](docs/electronics.md) — FC TBD, TBS Nano RX, brushless wheels, Wi‑Fi telem, Pi
+- [Mechanical](docs/mechanical.md) — wheel-leg, linkages + springs, 9.5" stroke, ~2× plant-side load, servo vs stepper TBD
+- [Electronics](docs/electronics.md) — FC TBD, 4S + step-down, TBS Nano RX, brushless wheels, Wi‑Fi telem, Pi
 - [Software](docs/software.md) — blink → spin → balance → cameras later
 - [Checklists](docs/checklists/) — prefer these over fake finished stacks
 
@@ -50,6 +50,7 @@ Study before we copy. Licenses differ; RobotX is GPL3.
 
 - [docs/research/xrobots.md](docs/research/xrobots.md) — James Bruton / [XRobots](https://github.com/XRobots) shortlist ([RobotX](https://github.com/XRobots/RobotX), [TallBalancer](https://github.com/XRobots/TallBalancer), [SonicRobot](https://github.com/XRobots/SonicRobot), [Stairs](https://github.com/XRobots/Stairs))
 - [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori.com/blog/wheeled-biped-v2)
+- [Build Some Stuff / Kelton Serra](docs/research/inspiration.md) — steal in-wheel BLDC+encoder, CoG-over-contact legs, serviceable prints, wheel-under-CoG. Do not vendor.
 
 ## License
 
