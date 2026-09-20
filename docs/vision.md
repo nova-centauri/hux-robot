@@ -44,4 +44,4 @@ V1 Hux prefers **strong linkages + springs** over pure serial belts for simplici
 - Full body CAD, second-leg copy, and stair gait software.
 - Spend. No purchases until Steve approves. Prefer parts already on hand.
 
-Mechanical V1 is one printable wheel-leg sized toward 9.5", not a finished robot.
+Mechanical V1 is one wheel-leg (printed customs on COTS stock) sized toward 9.5", not a finished robot. Several 2D layouts before Blender — see [`mechanical.md`](mechanical.md).

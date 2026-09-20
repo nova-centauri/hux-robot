@@ -12,6 +12,7 @@ Track milestones in [`../../NOTES.md`](../../NOTES.md). Shortlist and links: [`x
 | Phase B 9.5" cycle sketch | Treating Stairs CAD as Hux geometry |
 | Phase C (adapt vs rewrite + license) | Vendoring any `XRobots/*` tree |
 | Phase D | Buying parts, locking an FC, or claiming Mechanical V1 started |
+| Several 2D layouts (R23) | Any Blender / 3D CAD, even inside Phase D |
 
 Prefer parts already on hand. Upstream READMEs (especially SonicRobot) are **not** a Hux BOM.
 
@@ -86,15 +87,17 @@ Hux cycle (from [`../vision.md`](../vision.md)): **lift → 1-leg balance → pl
 
 **Goal:** first mechanical fit-check. Still no spend unless Steve asks. FC still TBD; do not block the print on electronics.
 
-Use [`../checklists/mechanical-v1.md`](../checklists/mechanical-v1.md) and [`../mechanical.md`](../mechanical.md). This phase is the existing “first printable wheel-leg” milestone — **gated** by A–C.
+Use [`../checklists/mechanical-v1.md`](../checklists/mechanical-v1.md) and [`../mechanical.md`](../mechanical.md). This phase is the existing “first printable wheel-leg” milestone — **gated** by A–C, and then by **several 2D layouts before Blender** (R23).
 
 - [ ] Phases A–C actually done (not skipped to make the repo look busy).
-- [ ] One-side envelope, linkage + spring stub, stroke toward 9.5" (requirements R7).
+- [ ] **Several 2D sketch layouts** exist (side / front / top + linkage). **No Blender / 3D CAD until this is ticked** (R23).
+- [ ] COTS structure chosen where possible (R19). Draft on customs (R20). Wire ports (R21). Service access (R22).
+- [ ] One-side envelope, linkage + spring stub, stroke toward 9.5" (requirements R7) — printed **customs on stock**, not a printed spar.
 - [ ] Fit-check print: raised wheel can reach a 9.5" tread without self-collision.
 - [ ] No second-leg copy until the first articulates.
 - [ ] No FC lock, no BOM, no carpet spin-up as part of this print.
 
-**Done when:** a real print exists or Steve explicitly defers print. A CAD `.gitkeep` is not a fit-check.
+**Done when:** a real print exists or Steve explicitly defers print. A CAD `.gitkeep` is not a fit-check. A `.blend` with no 2D layouts is a process miss.
 
 ---
 
