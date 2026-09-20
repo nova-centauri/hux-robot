@@ -12,7 +12,7 @@ See also: [`electronics.md`](electronics.md) · [`electronics-minimum.md`](elect
 
 | Item | Qty | Status | Specs/link | Hux use | Notes |
 | --- | --- | --- | --- | --- | --- |
-| Zantle Universal Walker Wheels Replacement — 5 inch, grey | 1 pair | **Ordered 2026-09-20 (Steve)** | [Amazon B0D534PDRT](https://www.amazon.com/dp/B0D534PDRT). Listing: 5" rubber wheels; for walkers with ~1" tube / 0.31" adjustment holes; includes 1 pair wheels + 2 pairs caster fittings; up to ~300 lb capacity rating; 8 height adjustments on stem. ~$14.59 when ordered. | Rubber wheel (and maybe axle geometry) for a **custom hub + in-wheel BLDC**. Matches the ~5" skinny-rubber hypothesis. | **Already purchased — document only.** Walker *caster/fork* assemblies for free-rolling medical walkers — **not** ready-made BLDC hubs. Discard or adapt the walker stem/fork as needed. Measure bore/OD when they arrive. Reserved for Hux: **yes** (this order). |
+| Zantle Universal Walker Wheels Replacement — 5 inch, grey | 1 pair | **Ordered 2026-09-20 (Steve)** | [Amazon B0D534PDRT](https://www.amazon.com/dp/B0D534PDRT). Listing: 5" rubber wheels; for walkers with ~1" tube / 0.31" adjustment holes; includes 1 pair wheels + 2 pairs caster fittings; up to ~300 lb capacity rating; 8 height adjustments on stem. ~$14.59 when ordered. | **Disposable donor rubber** for the first custom hub / in-wheel BLDC. Matches the ~5" skinny-rubber hypothesis. | **Already purchased — document only.** Walker *caster/fork* assemblies — **not** ready-made BLDC hubs. Steve 2026-09-20: **OK to hack apart** for the first hub, **or replace later**. Treat as disposable donor rubber, not a part to preserve. Discard the stem/fork as needed. Measure bore/OD when they arrive. Reserved for Hux: **yes** (this order). |
 
 ## Electronics
 
@@ -32,7 +32,7 @@ On-hand pile from project notes. **On hand (Steve)** means owned today, not “o
 
 | Item | Qty | Status | Specs/link | Hux use | Notes |
 | --- | --- | --- | --- | --- | --- |
-| Wheel BLDC / in-wheel hub motor | — | none yet | — | Custom hub on the 5" rubber (see Mechanical). FOC + encoder *class* when one exists. | The Zantle order is **wheels / caster forks**, not motors. |
+| Wheel BLDC / in-wheel hub motor | — | none yet | — | Custom hub on the 5" **donor** rubber (see Mechanical). FOC + encoder *class* when one exists. | The Zantle order is **wheels / caster forks**, not motors. OK to hack the rubber off the walker hub. |
 | Wheel FOC driver / ESC | — | none yet | — | Per-wheel FOC channel. | — |
 | Knee / hip-swing stepper + reduction | — | none yet | — | Pose joints (when that class lands). | — |
 | Hip-roll actuator | — | none yet | — | Dynamic roll (when that class lands). | — |

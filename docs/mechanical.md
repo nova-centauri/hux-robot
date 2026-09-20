@@ -20,7 +20,7 @@ Steve 2026-09-20. Soft, not CAD. Do not treat this as locked geometry.
 
 - **Range still:** ~**4–6"** skinny rubber.
 - **Preferred now:** **5"** — a pair of 5" Zantle walker wheels is already ordered. Inventory: [`parts-on-hand.md`](parts-on-hand.md).
-- **Caveat:** those parts are walker *caster/fork* assemblies (free-rolling medical walkers), not ready-made BLDC hubs. Plan to use the **rubber wheel** (and maybe axle geometry) with a **custom hub for in-wheel BLDC**. Discard or adapt the walker stem/fork as needed.
+- **Caveat:** those parts are walker *caster/fork* assemblies (free-rolling medical walkers), not ready-made BLDC hubs. Steve 2026-09-20: **OK to hack apart** for the first hub, **or replace later**. Treat as **disposable donor rubber** — not a part to preserve. Discard the stem/fork as needed.
 - Measure bore / OD / width when they arrive. Stroke still owns the 9.5" step.
 
 ## Hattori notes (steal, do not copy blindly)
