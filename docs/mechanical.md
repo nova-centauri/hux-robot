@@ -12,7 +12,7 @@ V1 target is **one printable wheel-leg** with a linkage + spring stub, sized tow
 - Design stroke and clearance around a ~9.5" residential riser (up and down).
 - **~10"** overall width hypothesis (outside-to-outside of the stance). Measure before CAD lock.
 - Likely a **hip roll** axis so the body can shift CoG over the planted wheel. **TBD if mandatory for V1.** Distinct from hip pitch / knee rotation.
-- Extra DOF is desirable later (stairs / fall recovery); hip **roll** is the one extra axis we are actually talking about for CoG shift. Do not invent a 6-DOF stack on paper.
+- Extra DOF is desirable later (stairs / fall recovery). Hip roll is the extra axis on the table for CoG shift; still **TBD if V1 must have it**. Do not invent a 6-DOF stack on paper.
 
 ## V1 width envelope (~10")
 
@@ -31,7 +31,7 @@ Tick the width sketch in the V1 checklist when it exists. Do not print a second-
 
 One-leg balance (`LEFT_ONLY` / `RIGHT_ONLY`) needs the body CoG over the **planted** wheel. A **roll axis at the hips** is the likely way to do that: lean the torso toward the planted side so the CoG projection sits on that contact patch.
 
-This is **not** the same joint as hip pitch (swing / lift the leg for a step) or knee rotation. Those still matter for the stair cycle. Hip **roll** is the coronal CoG-shift DOF.
+This is **not** the same joint as hip pitch (swing / lift the leg for a step) or knee rotation. Those still matter for the stair cycle. Hip **roll** is the side-to-side CoG-shift DOF.
 
 | Mode | What hip roll is for |
 | --- | --- |

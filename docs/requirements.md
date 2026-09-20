@@ -13,7 +13,7 @@ Inspiration: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori
 | ID | Requirement | Notes |
 | --- | --- | --- |
 | R1 | Balance on **two** wheeled legs | Baseline stance / teleop |
-| R2 | Balance on **one** wheeled leg | Gate before stair cycle |
+| R2 | Balance on **one** wheeled leg | Gate before stair cycle. Full loop is R16–R18 (`LEFT_ONLY` / `RIGHT_ONLY`). |
 | R3 | Step **up or down ~9.5"** | Nominal residential riser target; design leg stroke/clearance around this |
 | R4 | Wi‑Fi telemetry | Companion or bridge |
 | R5 | RC control via **TBS Nano RX** | Bind to FC (or dedicated link into FC) |
