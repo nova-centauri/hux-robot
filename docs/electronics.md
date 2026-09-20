@@ -1,6 +1,8 @@
 # Electronics
 
-**Status:** TBD. No wiring diagram, no locked FC, no spend.
+**Status:** TBD. No wiring diagram, no locked FC, no new spend.
+
+**Parts on hand** (owned / ordered — not a buy list): [`parts-on-hand.md`](parts-on-hand.md). **Minimum set** (classes, P0–P5, no SKU): [`electronics-minimum.md`](electronics-minimum.md).
 
 ## Locked enough to write down
 
@@ -15,7 +17,7 @@
 
 **Do not lock an FC in this repo.** Steve 2026-09-20: leave it TBD. Prefer a Wing board *when* we lock. Mechanical work is not blocked.
 
-Candidates already on hand:
+Candidates already on hand (owned, **not** reserved unless a row says so — [`parts-on-hand.md`](parts-on-hand.md)):
 
 - F765 Wing
 - F722 Wing
@@ -50,6 +52,6 @@ See [`checklists/electronics-bringup.md`](checklists/electronics-bringup.md).
 ## Do not
 
 - Do not buy a “better” FC, ESC, or Pi for this scaffold.
-- Do not recommend spend.
+- Do not recommend spend. Wheels already ordered are documented on [`parts-on-hand.md`](parts-on-hand.md) only.
 - Do not invent a finished PDB / BEC / battery stack.
 - Do not treat any candidate as selected.

@@ -26,14 +26,16 @@ Inspiration: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori
 
 - Split brain: FC = IMU + attitude + wheel (and likely leg) actuation; Pi = vision + inference; ESP32 optional Wi‑Fi/telemetry bridge.
 - Hattori V2 lessons to steal: extra leg DOF helps stairs/fall recovery; larger wheels help terrain; serial/linkage knees beat “knees both sides” parallel for stairs; springs for gravity assist if actuators are small.
-- No spend until Steve approves purchases. Prefer parts he already owns.
+- No **new** spend until Steve approves purchases. Prefer parts he already owns. Inventory: [`parts-on-hand.md`](parts-on-hand.md).
 
 ## Candidate hardware (on hand)
+
+Inventory (owned / ordered, reserved TBD): [`parts-on-hand.md`](parts-on-hand.md).
 
 - FC: F722 Wing, F765 Wing, F722 drone FC, Mamba F405
 - Compute: ESP32, Raspberry Pi
 - RX: TBS Nano RX
-- Motors: brushless for wheels (exact models TBD)
+- Motors: brushless for wheels (exact models TBD). 5" rubber already ordered — that is a wheel, not a motor.
 
 ## Recommended default (proposal)
 
@@ -42,7 +44,7 @@ Inspiration: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori
 - **Wi‑Fi:** Pi first; ESP32 if we want a thin telemetry bridge off the Pi.
 - **V1 mechanical target:** one printable wheel-leg with linkage+spring stub sized toward 9.5" step, before full stair gait software.
 
-Do not buy anything for this list. Do not lock the FC in this scaffold.
+Do not buy anything for this list. Wheels already ordered are on [`parts-on-hand.md`](parts-on-hand.md) only. Do not lock the FC in this scaffold.
 
 ## Milestone order
 

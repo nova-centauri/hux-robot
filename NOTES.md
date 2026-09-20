@@ -7,6 +7,7 @@ Working notes. Tick boxes only when the work is real.
 - [x] **Create SoT** — this repo (`nova-centauri/hux-robot`) holds the scaffold + Steve's requirements.
 - [ ] **Research first** — study XRobots + Hattori per [`docs/research/`](docs/research/). Phases A–C before any print. No vendoring. RobotX is GPL3; do not relicense Hux (MIT) without Steve.
 - [ ] **First printable wheel-leg** for a **~9.5"** step (**Phase D**). FC stays TBD; do not block the print on electronics. Do not start this to skip research.
+- [x] **Parts on hand (docs)** — inventory started in [`docs/parts-on-hand.md`](docs/parts-on-hand.md). Wheels ordered 2026-09-20 (Steve). Electronics pile listed; reserved-for-Hux is TBD. No new spend.
 - [ ] **FC TBD** — still not locked. Candidates: F765 Wing / F722 Wing / F722 drone / Mamba F405. Record the bench choice in [`docs/electronics.md`](docs/electronics.md) when one actually blinks.
 - [ ] **Blink, then spin** — LED on the bench FC, then a restrained brushless wheel (not on carpet).
 - [ ] **Two-leg balance** teleop (TBS Nano RX + Wi‑Fi telem).
@@ -17,7 +18,7 @@ Working notes. Tick boxes only when the work is real.
 ## Constraints (do not “helpfully” violate)
 
 - Research before hardware. Packet: [`docs/research/`](docs/research/).
-- No spend until Steve asks. Prefer parts already on hand.
+- No **new** spend until Steve asks. Prefer parts already on hand. Wheels already ordered — document only ([`docs/parts-on-hand.md`](docs/parts-on-hand.md)).
 - Do not lock an FC in docs to make the repo look finished.
 - Do not vendor XRobots trees or relicense (MIT Hux vs GPL3 RobotX) unless Steve decides.
 - Prefer [`docs/checklists/`](docs/checklists/) over fake stacks, fake BOMs, and fake CAD.
@@ -27,5 +28,8 @@ Working notes. Tick boxes only when the work is real.
 - Research: [`docs/research/README.md`](docs/research/README.md) · shortlist [`docs/research/xrobots.md`](docs/research/xrobots.md) · plan [`docs/research/study-plan.md`](docs/research/study-plan.md)
 - XRobots: https://github.com/XRobots · RobotX (GPL3): https://github.com/XRobots/RobotX
 - Requirements: [`docs/requirements.md`](docs/requirements.md)
+- Parts on hand: [`docs/parts-on-hand.md`](docs/parts-on-hand.md)
+- Electronics: [`docs/electronics.md`](docs/electronics.md) · minimum plan [`docs/electronics-minimum.md`](docs/electronics-minimum.md)
+- Mechanical: [`docs/mechanical.md`](docs/mechanical.md) — **5" preferred**, 4–6" range
 - Vision: [`docs/vision.md`](docs/vision.md)
 - Inspiration: https://www.alex-hattori.com/blog/wheeled-biped-v2

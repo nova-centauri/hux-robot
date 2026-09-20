@@ -16,7 +16,8 @@ This repo is the source of truth for Steve Barrett's Hux project. It is a docs-a
 | Requirements | Draft captured in [`docs/requirements.md`](docs/requirements.md) |
 | Flight controller | **TBD** — candidates listed, not locked |
 | Mechanical V1 | First printable wheel-leg is **Phase D** (after study). Not started. |
-| Spend | None. No purchases until Steve asks. Prefer parts already on hand. |
+| Spend | Wheels already ordered 2026-09-20 (document only). **No new spend** until Steve asks. Prefer parts already on hand. |
+| Parts on hand | Inventory in [`docs/parts-on-hand.md`](docs/parts-on-hand.md) — owned ≠ reserved |
 
 First milestones live in [`NOTES.md`](NOTES.md).
 
@@ -39,8 +40,10 @@ software/     companion compute — Pi cameras / pathfinding (empty)
 - [Research](docs/research/) — research-first stance, XRobots shortlist, study plan (Phases A–D)
 - [Requirements](docs/requirements.md) — hard/soft requirements, candidate hardware, no-spend rule
 - [Vision](docs/vision.md) — stair gait, split-brain intent, lessons to steal
-- [Mechanical](docs/mechanical.md) — wheel-leg, linkages + springs, 9.5" stroke
+- [Mechanical](docs/mechanical.md) — wheel-leg, linkages + springs, 9.5" stroke; **5" wheels preferred** (4–6" range)
 - [Electronics](docs/electronics.md) — FC TBD, TBS Nano RX, brushless wheels, Wi‑Fi telem, Pi
+- [Minimum electronics](docs/electronics-minimum.md) — P0–P5 class list (no SKU, no new spend)
+- [Parts on hand](docs/parts-on-hand.md) — owned / ordered inventory (not a buy list)
 - [Software](docs/software.md) — blink → spin → balance → cameras later
 - [Checklists](docs/checklists/) — prefer these over fake finished stacks
 

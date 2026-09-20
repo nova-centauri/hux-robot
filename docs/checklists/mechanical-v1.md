@@ -5,7 +5,7 @@
 Target: one side only, linkage + spring stub, stroke/clearance toward a **~9.5"** riser.
 
 - [ ] Measure a real riser / fixture (height, tread, nosing).
-- [ ] Wheel diameter vs. step vs. knee stroke sketch.
+- [ ] Wheel diameter vs. step vs. knee stroke sketch (**5" preferred**, 4–6" range). See [`../parts-on-hand.md`](../parts-on-hand.md).
 - [ ] Printable envelope for one wheel-leg.
 - [ ] Linkage layout.
 - [ ] Spring stub (gravity assist).
