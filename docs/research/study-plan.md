@@ -2,7 +2,7 @@
 
 Phased research checklist. Tick only when the work is real. **No spend** until Steve asks. **FC stays TBD.** Printable wheel-leg is **Phase D**, not Phase A.
 
-Track milestones in [`../../NOTES.md`](../../NOTES.md). Shortlist and links: [`xrobots.md`](xrobots.md). Cite/adapt rules: [`README.md`](README.md).
+Track milestones in [`../../NOTES.md`](../../NOTES.md). Shortlist and links: [`xrobots.md`](xrobots.md). Steve video share (Serra / Build Some Stuff balancer): [`inspiration.md`](inspiration.md). Cite/adapt rules: [`README.md`](README.md).
 
 ## Gates
 
@@ -25,10 +25,11 @@ Prefer parts already on hand. Upstream READMEs (especially SonicRobot) are **not
 - [ ] Read [XRobots/RobotX](https://github.com/XRobots/RobotX) `ArduinoCode_current/` (`IMU_*`, `RobotX020` / `RobotX201a`, remotes). Note GPL3 README vs LGPL `LICENSE` file; do not vendor.
 - [ ] Watch [TallBalancer](https://youtu.be/VYU8CRTD2cA). Read `Code/pos_hold` and `Code/vel_hold` ([MIT](https://github.com/XRobots/TallBalancer)).
 - [ ] Watch [SonicRobot playlist](https://www.youtube.com/playlist?list=PLpwJoq86vov_tZ3rsMCH5sylqGT5s9TcU) bring-up. Read `ARobot08/`, `Remote017/`, `Scale01/` ([GPL-2.0](https://github.com/XRobots/SonicRobot)). Study only; no shopping from the README.
+- [ ] Watch [Build Some Stuff — Arduino self-balancing robot](https://www.youtube.com/watch?v=K1lzzVGCzAQ) (Steve share; notes in [`inspiration.md`](inspiration.md)). Maker two-wheel balancer: BLDC-in-wheel + encoders, jointed servo legs keep CoG over contact, simple **P** (wheel under CoG). **Inspiration only.** Not a stair / one-leg plant machine. Do not shop Printables or the PCBWay board.
 
 **Extract (write notes here or in [`../../NOTES.md`](../../NOTES.md)):**
 
-- [ ] Control loops: IMU (MPU6050 / GY-521 class) → filter/fusion → pitch/roll error → **PID** → wheel command (torque / velocity / current — record which).
+- [ ] Control loops: IMU (MPU6050 / GY-521 class) → filter/fusion → pitch/roll error → **PID** → wheel command (torque / velocity / current — record which). Optional contrast: Serra's simple **P** (rotate wheels under CoG) in [`inspiration.md`](inspiration.md) — teaching geometry, not a Hux controller. That machine has **no stair / one-leg plant**.
 - [ ] Outer hold: TallBalancer position hold vs velocity hold; what the encoder buys vs the IMU.
 - [ ] SonicRobot extras: load cells in the loop; ODrive + Teensy split; estop / RST; CAN vs UART to drives.
 - [ ] Remote patterns: RobotX TX/RX sketches; SonicRobot nRF remote; what the stick maps to (tilt setpoint, speed, yaw). Hux RX is **TBS Nano** — steal *semantics*, not the radio.
@@ -71,7 +72,7 @@ Hux cycle (from [`../vision.md`](../vision.md)): **lift → 1-leg balance → pl
   - **Study only / rewrite** (default; keeps Hux MIT)
   - **Adapt later** (cite, keep license file, only if license allows)
   - **Vendor** (explicit no for now; never a whole XRobots tree in this phase)
-- [ ] **License decision (Steve):** Hux is MIT. RobotX is GPL3 per README (LGPL file unresolved). SonicRobot is GPL-2.0. **Do not relicense Hux or upstream without Steve.** Options to record:
+- [ ] **License decision (Steve):** Hux is MIT. RobotX is GPL3 per README (LGPL file unresolved). SonicRobot is GPL-2.0. Serra's PCBWay board is **CC BY-NC-ND** — study in place; do not vendor. **Do not relicense Hux or upstream without Steve.** Options to record:
   - Keep Hux MIT — study + clean-room rewrite only; MIT XRobots repos optional later with attribution.
   - Dual-repo / plugin — copyleft firmware lives elsewhere, Hux stays MIT docs + original code.
   - Relicense Hux to GPL-3.0 if we truly vendor RobotX — **Steve only.**
