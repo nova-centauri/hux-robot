@@ -13,7 +13,7 @@ Inspiration already in requirements: [Alex Hattori — STRIDE wheeled biped V2](
 
 ## Stance
 
-1. **Learn the lineage** — RobotX (wheeled biped / dynamic balance), then TallBalancer and SonicRobot for IMU → PID → wheel-torque and remote patterns.
+1. **Learn the lineage** — RobotX (wheeled biped / dynamic balance), then TallBalancer and SonicRobot for IMU → PID → wheel-torque and remote patterns. Hux V1 **reuses** those patterns (plus FC attitude / ODrive torque / Hattori–Mini-Cheetah-style stacks as pointers). **TBD which we adopt.** Do not write a novel balance controller.
 2. **Map stairs** — XRobots Stairs is a different mechanism. Steal heuristics, not geometry. Pair it with Hattori for Hux's lift → one-leg balance → plant cycle on a **~9.5"** riser.
 3. **Decide license + adapt vs rewrite** — Steve decides. Do not relicense Hux to absorb copyleft code, and do not pretend GPL/LGPL sources are MIT.
 4. **Only then** print a wheel-leg fit-check. Mechanical V1 is Phase D, not the next commit.

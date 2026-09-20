@@ -33,7 +33,7 @@ Also cite Hattori (already in [`../requirements.md`](../requirements.md)): [STRI
 
 **Look at:** playlist first; then `ArduinoCode_current/` (`IMU_*`, `RobotX020` / `RobotX201a`, `RemoteRX002`, `Rermote002` — typo is upstream). Older `ArduinoCode/` is history.
 
-**Extract:** how pitch/roll from IMU becomes wheel command; remote TX/RX split; what is open-loop versus closed-loop when a leg leaves the ground.
+**Extract:** how pitch/roll from IMU becomes wheel command; remote TX/RX split; what is open-loop versus closed-loop when a leg leaves the ground; whether they shift CoG / roll onto the planted wheel or treat one-leg as wheel-only pitch. Hux one-leg is hip-roll **plus** planted-wheel fore/aft ([`../software.md`](../software.md) R17) — steal the pattern, do not invent a new one.
 
 **Do not:** vendor the tree. GPL3 (or unresolved LGPL) cannot be folded into MIT Hux without a Phase C license decision.
 
@@ -49,7 +49,7 @@ Also cite Hattori (already in [`../requirements.md`](../requirements.md)): [STRI
 
 **Look at:** the video, then the two firmware folders side by side. Note how remote (if any) overlays the hold loops.
 
-**Extract:** cascaded loops (angle inner, position/velocity outer); IMU calibration habit; what ODrive is asked to do versus what the MCU integrates.
+**Extract:** cascaded loops (angle inner, position/velocity outer); IMU calibration habit; what ODrive is asked to do versus what the MCU integrates. This is a first-stop **reuse** candidate for Hux wheel-pitch balance (R18) — still Phase C, still not a stack lock.
 
 **Hux note:** TallBalancer is MIT, so later adaptation is license-easier than RobotX — still Phase C, still cite. Do not treat ODrive as a Hux buy. FC stays TBD; this is a pattern source, not a stack lock.
 

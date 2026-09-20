@@ -29,6 +29,7 @@ Prefer parts already on hand. Upstream READMEs (especially SonicRobot) are **not
 **Extract (write notes here or in [`../../NOTES.md`](../../NOTES.md)):**
 
 - [ ] Control loops: IMU (MPU6050 / GY-521 class) → filter/fusion → pitch/roll error → **PID** → wheel command (torque / velocity / current — record which).
+- [ ] One-leg: how (or whether) they shift CoG / roll vs relying on wheel-only when a contact leaves. Map onto Hux **hip-roll + planted-wheel pitch** (R16 / R17). Do not invent a Hux controller in this phase — extract, cite, stop.
 - [ ] Outer hold: TallBalancer position hold vs velocity hold; what the encoder buys vs the IMU.
 - [ ] SonicRobot extras: load cells in the loop; ODrive + Teensy split; estop / RST; CAN vs UART to drives.
 - [ ] Remote patterns: RobotX TX/RX sketches; SonicRobot nRF remote; what the stick maps to (tilt setpoint, speed, yaw). Hux RX is **TBS Nano** — steal *semantics*, not the radio.
@@ -52,7 +53,7 @@ Hux cycle (from [`../vision.md`](../vision.md)): **lift → 1-leg balance → pl
   1. Two-leg balance (teleop baseline).
   2. One-leg balance **gate**.
   3. Lift wheeled leg (stroke / clearance toward 9.5").
-  4. Hold on planted wheel (Phase A loop under a narrower support).
+  4. Hold on planted wheel (Phase A loop under a narrower support: hip roll to put CoG over that wheel **and** wheel fore/aft under the CoG).
   5. Place raised wheel on next tread.
   6. Transfer / plant. Repeat.
 
@@ -89,7 +90,7 @@ Hux cycle (from [`../vision.md`](../vision.md)): **lift → 1-leg balance → pl
 Use [`../checklists/mechanical-v1.md`](../checklists/mechanical-v1.md) and [`../mechanical.md`](../mechanical.md). This phase is the existing “first printable wheel-leg” milestone — **gated** by A–C.
 
 - [ ] Phases A–C actually done (not skipped to make the repo look busy).
-- [ ] One-side envelope, linkage + spring stub, stroke toward 9.5" (requirements R7).
+- [ ] One-side envelope, linkage + spring stub, stroke toward 9.5" (requirements R7), shareable with a **~10"** overall width (R15). Hip roll noted or explicitly deferred (R16).
 - [ ] Fit-check print: raised wheel can reach a 9.5" tread without self-collision.
 - [ ] No second-leg copy until the first articulates.
 - [ ] No FC lock, no BOM, no carpet spin-up as part of this print.
