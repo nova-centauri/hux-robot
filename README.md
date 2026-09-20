@@ -41,7 +41,7 @@ software/     companion compute — Pi cameras / pathfinding (empty)
 - [Vision](docs/vision.md) — stair gait, split-brain intent, lessons to steal
 - [Mechanical](docs/mechanical.md) — wheel-leg, linkages + springs, 9.5" stroke
 - [Electronics](docs/electronics.md) — FC TBD, TBS Nano RX, brushless wheels, Wi‑Fi telem, Pi
-- [Software](docs/software.md) — blink → spin → balance → cameras later
+- [Software](docs/software.md) — blink → spin → **four manual modes** → open-loop step → cameras later
 - [Checklists](docs/checklists/) — prefer these over fake finished stacks
 
 ## Inspiration

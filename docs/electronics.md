@@ -46,6 +46,7 @@ See [`checklists/electronics-bringup.md`](checklists/electronics-bringup.md).
 3. Restrained wheel spin (prop-off equivalent: robot tied down, not free on carpet).
 4. TBS stick into the FC.
 5. Wi‑Fi telemetry from the Pi (or ESP32 bridge).
+6. Manual modes (Parked → 2-wheel → left-only → right-only) — [`checklists/software-bringup.md`](checklists/software-bringup.md). Not firmware in this repo.
 
 ## Do not
 

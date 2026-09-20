@@ -4,4 +4,4 @@ Empty on purpose. FC firmware / embedded bring-up lives here **after** an FC is 
 
 - Flight controller is **TBD** (candidates in [`../docs/electronics.md`](../docs/electronics.md)).
 - Do not pick Betaflight / INAV / ArduPilot / custom in this stub.
-- First jobs: blink LED, then restrained wheel spin. See [`../docs/checklists/electronics-bringup.md`](../docs/checklists/electronics-bringup.md).
+- First jobs: blink LED, then restrained wheel spin, then the four manual modes. See [`../docs/checklists/electronics-bringup.md`](../docs/checklists/electronics-bringup.md) and [`../docs/checklists/software-bringup.md`](../docs/checklists/software-bringup.md).

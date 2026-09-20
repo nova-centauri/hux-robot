@@ -19,8 +19,11 @@ Inspiration: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori
 | R5 | RC control via **TBS Nano RX** | Bind to FC (or dedicated link into FC) |
 | R6 | **Brushless** driven wheels | ESC + BLDC per wheel |
 | R7 | Legs via **strong linkages + springs** | Gravity compensation / energy return; prefer linkage over pure serial belts for V1 simplicity |
-| R8 | Local compute for **pathfinding inference** | Needs cameras; not on the FC |
+| R8 | Local compute for **pathfinding inference** | Needs cameras; not on the FC. **Motion** from this stack waits on R14. |
 | R9 | Cameras | At least one stream for teleop; stereo/depth later for stairs |
+| R14 | Four **manual control modes** before any automated motion | Steve 2026-09-20. **Parked**, **2-wheel balance**, **left wheel only**, **right wheel only**. Pilot selects via RC (TBS Nano, likely aux / flight-modes style). Wi‑Fi telem reports the active mode. Autonomy, pathfinding motion, and open-loop step wait until these work. Spec: [`software.md`](software.md). |
+
+IDs **R10–R13** are unused here so concurrent 2026-09-20 hardware notes can take them without renumbering this gate.
 
 ## Soft / architecture intent
 
@@ -51,8 +54,9 @@ Tracked in [`../NOTES.md`](../NOTES.md). Summary:
 1. Confirm SoT URL (`nova-centauri/hux-robot`) — this repo.
 2. Size + print first wheel-leg for ~9.5" step (FC stays TBD).
 3. Blink LED → restrained wheel spin once an FC is on the bench (not on carpet).
-4. Two-leg balance teleop (TBS + Wi‑Fi telem).
-5. One-leg balance.
-6. Open-loop step-up toward 9.5" riser fixture.
-7. Camera stream → local pathfinding later.
-8. Lock FC into [`electronics.md`](electronics.md) when ready.
+4. Manual modes from RC (R14): Parked → 2-wheel → left-only → right-only. Telem reports the mode. Automation waits.
+5. Two-leg balance teleop (2-wheel mode; TBS + Wi‑Fi telem).
+6. One-leg balance (left-only and right-only).
+7. Open-loop step-up toward 9.5" riser fixture — not before R14.
+8. Camera stream → local pathfinding later. Pathfinding motion waits on R14.
+9. Lock FC into [`electronics.md`](electronics.md) when ready.

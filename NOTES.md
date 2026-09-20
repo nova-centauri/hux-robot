@@ -9,10 +9,11 @@ Working notes. Tick boxes only when the work is real.
 - [ ] **First printable wheel-leg** for a **~9.5"** step (**Phase D**). FC stays TBD; do not block the print on electronics. Do not start this to skip research.
 - [ ] **FC TBD** — still not locked. Candidates: F765 Wing / F722 Wing / F722 drone / Mamba F405. Record the bench choice in [`docs/electronics.md`](docs/electronics.md) when one actually blinks.
 - [ ] **Blink, then spin** — LED on the bench FC, then a restrained brushless wheel (not on carpet).
-- [ ] **Two-leg balance** teleop (TBS Nano RX + Wi‑Fi telem).
-- [ ] **One-leg balance** — gate before any stair cycle.
-- [ ] **Open-loop step** toward a 9.5" riser fixture.
-- [ ] **Cameras later** — one teleop stream, then Pi pathfinding. Not on the FC.
+- [ ] **Manual modes first** — Parked → 2-wheel → left-only → right-only from RC (TBS Nano, likely aux / flight-modes). Wi‑Fi telem reports the active mode. **Automation waits** (no open-loop step, no pathfinding motion). Spec: [`docs/software.md`](docs/software.md). Checklist: [`docs/checklists/software-bringup.md`](docs/checklists/software-bringup.md).
+- [ ] **Two-leg balance** teleop (2-wheel mode; TBS Nano RX + Wi‑Fi telem).
+- [ ] **One-leg balance** — left-only and right-only; gate before any stair cycle.
+- [ ] **Open-loop step** toward a 9.5" riser fixture. Not before the four manual modes work.
+- [ ] **Cameras later** — one teleop stream, then Pi pathfinding. Not on the FC. Pathfinding autonomy waits on the manual modes.
 
 ## Constraints (do not “helpfully” violate)
 

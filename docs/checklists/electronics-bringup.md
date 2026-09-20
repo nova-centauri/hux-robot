@@ -8,7 +8,11 @@
 - [ ] Bind **TBS Nano RX** (or confirm it talks to the FC).
 - [ ] Restrained **brushless wheel spin** (tied down, not on carpet).
 - [ ] Wi‑Fi telemetry from the Pi (ESP32 bridge only if needed).
-- [ ] Two-leg teleop later — not this checklist.
 - [ ] Record the surviving FC in [`../electronics.md`](../electronics.md) only after blink + spin.
 
+After blink + spin, **software** modes (not this pass until the rows above are real):
+
+- [ ] **Parked** → **2-wheel** → **left-only** → **right-only** from RC, before any open-loop step. Full list: [`software-bringup.md`](software-bringup.md).
+
 Do not write a fake harness, PDB, or battery architecture here.
+
