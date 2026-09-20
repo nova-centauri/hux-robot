@@ -13,7 +13,7 @@ This repo is the source of truth for Steve Barrett's Hux project. It is a docs-a
 | Item | State |
 | --- | --- |
 | Research | Packet in [`docs/research/`](docs/research/) — study before build |
-| Requirements | Draft captured in [`docs/requirements.md`](docs/requirements.md) — mass **aspirational** 4–5 lb / under 6 lb; stepper+belt OK on knee / hip swing |
+| Requirements | Draft captured in [`docs/requirements.md`](docs/requirements.md) — mass **aspirational**; V1 actuators: wheels FOC, knee stepper+reduction, swing stepper+belt, roll dynamic |
 | Flight controller | **TBD** — candidates listed, not locked |
 | Mechanical V1 | First printable wheel-leg is **Phase D** (after study). Not started. |
 | Spend | None. No purchases until Steve asks. Prefer parts already on hand. |
@@ -36,11 +36,11 @@ software/     companion compute — Pi cameras / pathfinding (empty)
 
 ## Docs
 
-- [Research](docs/research/) — research-first stance, XRobots shortlist, study plan (Phases A–D), [leg-actuator trade](docs/research/actuators-legs.md)
-- [Requirements](docs/requirements.md) — hard/soft requirements, candidate hardware, no-spend rule; R24 mass (soft); R26–R28 actuator split
+- [Research](docs/research/) — research-first stance, XRobots shortlist, study plan (Phases A–D), [V1 actuator baseline](docs/research/actuators-legs.md)
+- [Requirements](docs/requirements.md) — hard/soft requirements, candidate hardware, no-spend rule; R24 mass (soft); R6 / R26 / R27 actuator baseline
 - [Vision](docs/vision.md) — stair gait, split-brain intent, lessons to steal
-- [Mechanical](docs/mechanical.md) — wheel-leg, linkages + springs, 9.5" stroke, aspirational mass, stepper vs roll class
-- [Electronics](docs/electronics.md) — FC TBD, TBS Nano RX, brushless wheels, leg-drive *classes*, Wi‑Fi telem, Pi
+- [Mechanical](docs/mechanical.md) — wheel-leg, linkages + springs, 9.5" stroke, aspirational mass, V1 actuator baseline
+- [Electronics](docs/electronics.md) — FC TBD, TBS Nano RX, brushless FOC wheels, leg-drive baseline, Wi‑Fi telem, Pi
 - [Software](docs/software.md) — blink → spin → balance → cameras later
 - [Checklists](docs/checklists/) — prefer these over fake finished stacks
 

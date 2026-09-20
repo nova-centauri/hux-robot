@@ -7,7 +7,9 @@
 | Piece | Choice | Notes |
 | --- | --- | --- |
 | RC RX | **TBS Nano RX** | Bind to the FC (or a dedicated link into the FC). |
-| Wheels | **Brushless** (ESC + BLDC per wheel) | Exact motor/ESC models TBD. |
+| Wheels | **Brushless FOC** (ESC + BLDC per wheel) | Working V1 baseline. Exact motor/ESC models TBD. Not steppers. |
+| Knee / hip swing | **Stepper + reduction** | Knee: belt/gear (not bare). Swing: belt **is** the reducer — not a second actuator. SKU TBD. |
+| Hip roll | **Dynamic** FOC / QDD / fast servo | Not a stepper. Required for CoG shift unless explicitly deferred. SKU TBD. |
 | Companion | **Raspberry Pi** | Cameras + pathfinding inference. Not on the FC. |
 | Wi‑Fi telem | **Pi first** | ESP32 only as an optional thin telemetry bridge. |
 
@@ -24,19 +26,20 @@ Candidates already on hand:
 
 When one is actually on the bench and blinking, record it here and in [`../NOTES.md`](../NOTES.md). Until then the line is **FC: TBD**.
 
-## Leg drive classes (intent — no SKU)
+## Leg drive classes — working V1 baseline (no SKU)
 
-Steve 2026-09-20 (later update). **FC still TBD.** This is a *class* split, not a driver BOM. No locked stepper, FOC board, bus servo, or encoder. No shopping links. Trade study: [`research/actuators-legs.md`](research/actuators-legs.md).
+Steve 2026-09-20 (confirmed). **FC still TBD.** Class is locked. Driver BOM is not. No locked stepper, FOC board, bus servo, or encoder. No shopping links. Trade: [`research/actuators-legs.md`](research/actuators-legs.md).
 
-| Joint | Drive lean (TBD) | Electronics implication |
+| Joint | Working baseline | Electronics implication |
 | --- | --- | --- |
-| **Knee** and **hip swing** | Stepper + belt/gear **allowed** | Stepper driver *class* later. Open-loop or closed-loop + encoder. Holding a pose is the job. |
-| **Hip roll** | Prefer **FOC BLDC / QDD / fast bus servo** | Torque-mode / high-rate current loop. Ideally backdrivable. Same family of thinking as the wheel-drive lean (R18 / R25 when those land). |
-| **Wheels** | FOC BLDC (R6) | Already brushless. Not steppers. |
+| **Knee** | **Stepper with belt/gear reduction** | Not a bare stepper. Stepper driver *class* later. Open-loop or closed-loop + encoder. Holding a pose is the job. |
+| **Hip swing** | **Stepper + belt** | Belt **is** the reduction — not a second actuator, not a second driver channel for a second motor. |
+| **Hip roll** | **Dynamic:** FOC BLDC / QDD / fast bus servo | **Not a stepper.** Required for CoG shift unless explicitly deferred. Torque-mode / high-rate current loop. Ideally backdrivable. |
+| **Wheels** | **Brushless FOC** (R6) | Already the baseline. Not steppers. |
 
 Do not put a stepper on hip roll to “match” the knees. Missed steps, resonance, and belt stretch/backlash hurt the CoG loop that pairs with wheel fore-aft.
 
-**If all joints are steppers (Steve override):** closed-loop drivers that actually use the encoder, short low-backlash belts, and a written acceptance of **lower one-leg bandwidth**. Do not invent a Hux stepper stack to paper over that.
+**All-stepper is not the baseline.** If later forced: closed-loop drivers that actually use the encoder, short low-backlash belts, and a written acceptance of **lower one-leg bandwidth** (R28). Do not invent a Hux stepper stack to paper over that.
 
 ### Hold current, heat, 4S
 
@@ -53,9 +56,10 @@ V1 mass is **aspirational 4–5 lb / under 6 lb** (R24). Soft. A capable roll dr
 ## Split-brain sketch (intent)
 
 ```
-TBS Nano RX ──► FC (TBD) ──► ESC/BLDC wheels (FOC lean)
-                    │            └──► knee / hip-swing: stepper+belt class TBD
-                    │            └──► hip roll: FOC BLDC / QDD / bus-servo class TBD
+TBS Nano RX ──► FC (TBD) ──► ESC/BLDC wheels (brushless FOC)
+                    │            └──► knee: stepper + belt/gear reduction
+                    │            └──► hip swing: stepper + belt (belt = reducer)
+                    │            └──► hip roll: FOC / QDD / fast servo (or explicit deferral)
                     │
                     └── IMU / attitude
 Raspberry Pi ── cameras, pathfinding, Wi‑Fi telem
@@ -79,5 +83,5 @@ See [`checklists/electronics-bringup.md`](checklists/electronics-bringup.md).
 - Do not buy a “better” FC, ESC, Pi, stepper, pulley set, FOC board, or encoder for this scaffold.
 - Do not recommend spend. Do not paste shopping links as “buy this.”
 - Do not invent a finished PDB / BEC / battery / stepper-driver stack.
-- Do not treat any candidate (FC or actuator class) as selected.
+- Do not treat any FC candidate or actuator *SKU* as selected. The actuator *class* baseline is locked.
 - Do not put steppers on the wheels or on hip roll to make the BOM uniform.
