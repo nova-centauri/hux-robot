@@ -8,7 +8,8 @@ Target: one side only, linkage + spring stub, stroke/clearance toward a **~9.5"*
 - [ ] Wheel diameter vs. step vs. knee stroke sketch.
 - [ ] Printable envelope for one wheel-leg.
 - [ ] Linkage layout.
-- [ ] Spring stub (gravity assist).
+- [ ] Spring stub (gravity assist). Knee is the axis that most needs this.
+- [ ] Leg actuator *classes* noted by axis (hip roll / hip swing / knee). No SKU — [`../research/actuators-legs.md`](../research/actuators-legs.md).
 - [ ] Wheel hub / BLDC mount (motor model TBD — do not buy).
 - [ ] First print + fit.
 - [ ] Raised wheel can reach a 9.5" tread without self-collision.

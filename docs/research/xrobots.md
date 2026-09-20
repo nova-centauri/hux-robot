@@ -98,7 +98,7 @@ Also cite Hattori (already in [`../requirements.md`](../requirements.md)): [STRI
 
 **Extract (do not copy blindly):** extra DOF for stairs/fall recovery; wheel-at-wheel vs remote belts; springs only if actuators are small; invert-the-knee vs linkage trade for climbing both ways.
 
-Hux V1 still prefers **strong linkages + springs** (requirements R7). That bias stays; Hattori is a lesson source, not CAD.
+Hux V1 still prefers **strong linkages + springs** (requirements R7). That bias stays; Hattori is a lesson source, not CAD. Knee gravity compensation is the strongest reason to keep the spring — see [`actuators-legs.md`](actuators-legs.md).
 
 ---
 

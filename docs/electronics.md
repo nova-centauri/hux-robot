@@ -28,7 +28,7 @@ When one is actually on the bench and blinking, record it here and in [`../NOTES
 
 ```
 TBS Nano RX ──► FC (TBD) ──► ESC/BLDC wheels
-                    │            └──► leg actuators (TBD)
+                    │            └──► leg actuators (TBD **by axis** — see below)
                     │
                     └── IMU / attitude
 Raspberry Pi ── cameras, pathfinding, Wi‑Fi telem
@@ -36,6 +36,18 @@ ESP32 (optional) ── thin Wi‑Fi/telem bridge if we keep the Pi busy
 ```
 
 This is a box diagram, not a harness.
+
+## Leg actuators — TBD by axis role
+
+Do not treat “leg actuators” as one part. Hip **roll**, hip **swing**, and **knee** are different jobs. Decision note: [`research/actuators-legs.md`](research/actuators-legs.md) (R26).
+
+| Axis | Electronics lean (TBD, not locked) |
+| --- | --- |
+| Hip roll | Highest bandwidth, continuous small corrections, prefer backdrivable. Small QDD / FOC BLDC + low reduction, **or** a fast digital bus servo. Two of them — mass-critical. |
+| Hip swing | Position + speed, intermittent. **Share the hip-roll family** (same serial bus **or** same CAN/FOC QDD) for drivers and spares. |
+| Knee | Highest gravity + 9.5" step torque. One size up in that family, **or** linear + linkage + spring. Heaviest pair. |
+
+Reuse **position / torque modes the existing drivers already expose** (R18). Do not invent a Hux joint controller. Avoid 63xx / hoverboard as *leg* actuators. No SKU. No spend.
 
 ## Bring-up order (no carpet)
 
@@ -53,3 +65,4 @@ See [`checklists/electronics-bringup.md`](checklists/electronics-bringup.md).
 - Do not recommend spend.
 - Do not invent a finished PDB / BEC / battery stack.
 - Do not treat any candidate as selected.
+- Do not lock a leg-actuator SKU or force one type onto hip roll, hip swing, and knee. Classes by axis: [`research/actuators-legs.md`](research/actuators-legs.md).

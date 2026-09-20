@@ -45,7 +45,7 @@ Prefer parts already on hand. Upstream READMEs (especially SonicRobot) are **not
 Hux cycle (from [`../vision.md`](../vision.md)): **lift → 1-leg balance → plant** on a **~9.5"** riser.
 
 - [ ] Watch [XRobots/Stairs](https://github.com/XRobots/Stairs) ([video](https://youtu.be/MUyFDWbXrZ0)). Different mechanism. List **heuristics only** (timing, commit-to-step, missed tread, sensors vs open-loop).
-- [ ] Re-read [Hattori STRIDE V2](https://www.alex-hattori.com/blog/wheeled-biped-v2) (already in requirements): extra DOF, serial/linkage knee vs parallel, wheel diameter, open-loop swing-leg stepping.
+- [ ] Re-read [Hattori STRIDE V2](https://www.alex-hattori.com/blog/wheeled-biped-v2) (already in requirements): extra DOF, serial/linkage knee vs parallel, wheel diameter, open-loop swing-leg stepping. Pair with [`actuators-legs.md`](actuators-legs.md): knee gets springs/linkage gravity compensation; hip roll is a different (bandwidth) job.
 - [ ] Measure or note a **real** ~9.5" riser/fixture (height, tread, nosing) when Steve has one — still no print.
 - [ ] Sketch Hux step-up and step-down as states, not CAD:
 
@@ -89,7 +89,7 @@ Hux cycle (from [`../vision.md`](../vision.md)): **lift → 1-leg balance → pl
 Use [`../checklists/mechanical-v1.md`](../checklists/mechanical-v1.md) and [`../mechanical.md`](../mechanical.md). This phase is the existing “first printable wheel-leg” milestone — **gated** by A–C.
 
 - [ ] Phases A–C actually done (not skipped to make the repo look busy).
-- [ ] One-side envelope, linkage + spring stub, stroke toward 9.5" (requirements R7).
+- [ ] One-side envelope, linkage + spring stub, stroke toward 9.5" (requirements R7). Leg actuator *classes* noted by axis (R26 / [`actuators-legs.md`](actuators-legs.md)) — not a SKU, not one type for all three.
 - [ ] Fit-check print: raised wheel can reach a 9.5" tread without self-collision.
 - [ ] No second-leg copy until the first articulates.
 - [ ] No FC lock, no BOM, no carpet spin-up as part of this print.
@@ -100,7 +100,7 @@ Use [`../checklists/mechanical-v1.md`](../checklists/mechanical-v1.md) and [`../
 
 ## Explicitly not this plan
 
-- Buying ODrives, Teensys, load cells, or a “better” FC because SonicRobot used them.
+- Buying ODrives, Teensys, load cells, or a “better” FC because SonicRobot used them. Buying qdd100 / DIABLO / StackForce kits because they appear in [`actuators-legs.md`](actuators-legs.md) — those are patterns, not a Hux cart.
 - Locking Betaflight / INAV / ArduPilot / custom (follows FC; FC is TBD).
 - Cameras / pathfinding (later, on the Pi).
 - Closed-loop stair gait software.

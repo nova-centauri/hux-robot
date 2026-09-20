@@ -17,14 +17,15 @@ Working notes. Tick boxes only when the work is real.
 ## Constraints (do not “helpfully” violate)
 
 - Research before hardware. Packet: [`docs/research/`](docs/research/).
-- No spend until Steve asks. Prefer parts already on hand.
+- No spend until Steve asks. Prefer parts already on hand. Do not buy a qdd100, DIABLO joint, or bus servo “to make progress.”
 - Do not lock an FC in docs to make the repo look finished.
+- Do not lock one actuator type for hip roll, hip swing, and knee. Jobs differ (R26).
 - Do not vendor XRobots trees or relicense (MIT Hux vs GPL3 RobotX) unless Steve decides.
 - Prefer [`docs/checklists/`](docs/checklists/) over fake stacks, fake BOMs, and fake CAD.
 
 ## Pointers
 
-- Research: [`docs/research/README.md`](docs/research/README.md) · shortlist [`docs/research/xrobots.md`](docs/research/xrobots.md) · plan [`docs/research/study-plan.md`](docs/research/study-plan.md)
+- Research: [`docs/research/README.md`](docs/research/README.md) · shortlist [`docs/research/xrobots.md`](docs/research/xrobots.md) · plan [`docs/research/study-plan.md`](docs/research/study-plan.md) · leg actuators [`docs/research/actuators-legs.md`](docs/research/actuators-legs.md) (R26: by axis role, no SKU)
 - XRobots: https://github.com/XRobots · RobotX (GPL3): https://github.com/XRobots/RobotX
 - Requirements: [`docs/requirements.md`](docs/requirements.md)
 - Vision: [`docs/vision.md`](docs/vision.md)

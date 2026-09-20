@@ -8,6 +8,7 @@ This packet is the working study set. It does not replace [`../requirements.md`]
 | --- | --- |
 | [xrobots.md](xrobots.md) | Curated XRobots shortlist, why each matters, study order |
 | [study-plan.md](study-plan.md) | Phased checklist before hardware (Phases A–D) |
+| [actuators-legs.md](actuators-legs.md) | Leg actuators **by axis role** — hip roll ≠ hip swing ≠ knee. Classes only; no SKU |
 
 Inspiration already in requirements: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori.com/blog/wheeled-biped-v2).
 
@@ -75,7 +76,7 @@ Watching, learning, and rewriting from understanding is the default path that ke
 ## Out of scope for this packet
 
 - Locking an FC
-- A Hux BOM or shopping list
+- A Hux BOM or shopping list (including a locked hip/knee SKU — [`actuators-legs.md`](actuators-legs.md) is classes only)
 - Vendoring `XRobots/*`
 - Starting the printable wheel-leg before Phase D
 - Changing [`../vision.md`](../vision.md)

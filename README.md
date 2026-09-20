@@ -36,11 +36,11 @@ software/     companion compute — Pi cameras / pathfinding (empty)
 
 ## Docs
 
-- [Research](docs/research/) — research-first stance, XRobots shortlist, study plan (Phases A–D)
-- [Requirements](docs/requirements.md) — hard/soft requirements, candidate hardware, no-spend rule
+- [Research](docs/research/) — research-first stance, XRobots shortlist, study plan (Phases A–D), [leg actuators by axis](docs/research/actuators-legs.md)
+- [Requirements](docs/requirements.md) — hard/soft requirements, candidate hardware, no-spend rule; R26 actuators by axis
 - [Vision](docs/vision.md) — stair gait, split-brain intent, lessons to steal
-- [Mechanical](docs/mechanical.md) — wheel-leg, linkages + springs, 9.5" stroke
-- [Electronics](docs/electronics.md) — FC TBD, TBS Nano RX, brushless wheels, Wi‑Fi telem, Pi
+- [Mechanical](docs/mechanical.md) — wheel-leg, linkages + springs, 9.5" stroke; hip roll / hip swing / knee are different jobs
+- [Electronics](docs/electronics.md) — FC TBD, TBS Nano RX, brushless wheels, Wi‑Fi telem, Pi; leg actuators TBD by axis
 - [Software](docs/software.md) — blink → spin → balance → cameras later
 - [Checklists](docs/checklists/) — prefer these over fake finished stacks
 
