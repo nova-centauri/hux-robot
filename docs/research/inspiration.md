@@ -134,6 +134,20 @@ Hux path stays XRobots + Hattori for loops and stairs. Serra is the **maker-scal
 
 ---
 
+## 4. Tazer — uni wheeled biped (learn from the mistakes)
+
+Full note: [tazer-lessons.md](tazer-lessons.md).
+
+Steve 2026-09-21: watch [My Robot almost got me Kicked out of Uni](https://www.youtube.com/watch?v=gqnW9qBCHnM) and **learn a lot from this guy's mistakes.**
+
+Maker-scale ~0.7 m (~2 ft) wheeled biped: octagonal carbon-fiber tube legs, 6× GIM8108 QDD, CAN, Teensy 4.1 + BNO055, T8S RC, dual 6S (~48 V) + buck, silicone tires (not TPU).
+
+**Hux take:** anti-patterns, not a stack. GIM8108-class stays a *candidate* (not ordered). Carbon tubes confirmed. Keep **4S + step-down**; still plan a real power bus for FOC stalls. Start with simple PID / existing control (R18), not LQR-on-a-bad-model. Rubber, not TPU. Wet-cut carbon. Do not buy his 48 V / Teensy bill.
+
+Twelve numbered mistakes live on [tazer-lessons.md](tazer-lessons.md).
+
+---
+
 ## Cite
 
 When a later note is informed by these shares, record:
@@ -148,8 +162,8 @@ What we **steal**: vibe (maker-scale first prototype); capability existence (two
 ## Do not
 
 - Start a Hux build, print, or firmware branch from these clips
-- Spend, or treat student / RAI / Serra actuators as a Hux spec
-- Lock an FC (Roadrunner's RL trainer, anyone's Teensy / LQR in a thesis, or Serra's Nano 33 BLE)
+- Spend, or treat student / RAI / Serra / Tazer actuators as a Hux spec
+- Lock an FC (Roadrunner's RL trainer, Tazer's Teensy, anyone's LQR in a thesis, or Serra's Nano 33 BLE)
 - Vendor SK8O / Ascento / Roadrunner / Printables / PCBWay trees
 - Order the PCBWay board or shop the YouTube BOM
 - Lock steppers or servos — knee / hip swing stay **TBD** (both open, no lean)
