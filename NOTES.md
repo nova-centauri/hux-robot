@@ -7,7 +7,7 @@ Working notes. Tick boxes only when the work is real.
 ## First milestones
 
 - [x] **Create SoT** — this repo (`nova-centauri/hux-robot`) holds the scaffold + Steve's requirements.
-- [ ] **Research first** — study XRobots + Hattori + Steve's inspirations (Roadrunner, FrRonconi student balancer, Serra / Build Some Stuff) per [`docs/research/`](docs/research/). Phases A–C before any print. No vendoring. RobotX is GPL3; do not relicense Hux (MIT) without Steve. Steal Serra *packaging* (in-wheel BLDC+encoder, CoG-over-contact, serviceable prints, wheel-under-CoG) — not their files. Roadrunner is a lab RL demo; the student clip is closer vibe — neither is a Hux stack.
+- [ ] **Research first** — study XRobots + Hattori + Steve's inspirations (Roadrunner, FrRonconi student balancer, Serra / Build Some Stuff, **Tazer mistakes**) per [`docs/research/`](docs/research/). Phases A–C before any print. No vendoring. RobotX is GPL3; do not relicense Hux (MIT) without Steve. Steal Serra *packaging* (in-wheel BLDC+encoder, CoG-over-contact, serviceable prints, wheel-under-CoG) — not their files. Roadrunner is a lab RL demo; the student clip is closer vibe — neither is a Hux stack. Tazer is anti-patterns (wrong first motors, TPU tires, skinny power, LQR-too-early).
 - [ ] **2D layouts, then first wheel-leg** for a **~9.5"** step (**Phase D**) — **carbon-tube** upper / lower spars + printed / machined end fittings, inside **~24" tall / ~10" wide**. Size plant-side joints for **~2×** one-leg load. FC stays TBD; do not block the print on electronics. Do not start this to skip research. Do not buy tube or a GIM8108 to fill a class. **No Blender before 2D** (R23).
 - [ ] **FC TBD** — still not locked. Candidates: F765 Wing / F722 Wing / F722 drone / Mamba F405. Record the bench choice in [`docs/electronics.md`](docs/electronics.md) when one actually blinks.
 - [ ] **Blink, then spin** — LED on the bench FC, then a restrained in-wheel brushless FOC (not on carpet).
@@ -35,7 +35,7 @@ Working notes. Tick boxes only when the work is real.
 ## Pointers
 
 - Decisions: [`docs/decisions.md`](docs/decisions.md)
-- Research: [`docs/research/README.md`](docs/research/README.md) · shortlist [`docs/research/xrobots.md`](docs/research/xrobots.md) · inspirations [`docs/research/inspiration.md`](docs/research/inspiration.md) · Roadrunner [`docs/research/roadrunner.md`](docs/research/roadrunner.md) · actuators [`docs/research/actuators-legs.md`](docs/research/actuators-legs.md) · plan [`docs/research/study-plan.md`](docs/research/study-plan.md)
+- Research: [`docs/research/README.md`](docs/research/README.md) · shortlist [`docs/research/xrobots.md`](docs/research/xrobots.md) · inspirations [`docs/research/inspiration.md`](docs/research/inspiration.md) · Roadrunner [`docs/research/roadrunner.md`](docs/research/roadrunner.md) · Tazer [`docs/research/tazer-lessons.md`](docs/research/tazer-lessons.md) · actuators [`docs/research/actuators-legs.md`](docs/research/actuators-legs.md) · plan [`docs/research/study-plan.md`](docs/research/study-plan.md)
 - XRobots: https://github.com/XRobots · RobotX (GPL3): https://github.com/XRobots/RobotX
 - Requirements: [`docs/requirements.md`](docs/requirements.md) — R10 electric-only · R11 4S + step-down · R12 servo vs stepper TBD · R13 5" preferred · R14 modes · R16 hip roll in V1 · R24 mass soft · R34 carbon tubes · R35 ~24" · R36 ~2× plant
 - Parts on hand: [`docs/parts-on-hand.md`](docs/parts-on-hand.md) (GIM8108-8 in Candidates) · shop tools [`docs/capabilities.md`](docs/capabilities.md)

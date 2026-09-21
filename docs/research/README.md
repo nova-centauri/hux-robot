@@ -10,13 +10,14 @@ This packet is the working study set. It does not replace [`../requirements.md`]
 | [inspiration.md](inspiration.md) | Steve's shares — Roadrunner, FrRonconi student balancer, Serra / Build Some Stuff; inspiration only |
 | [roadrunner.md](roadrunner.md) | RAI Institute Roadrunner — lab wheeled biped; watch alongside Hattori |
 | [actuators-legs.md](actuators-legs.md) | Axis-role trade; hip roll in V1; servo vs stepper TBD; GIM8108-8 candidate |
+| [tazer-lessons.md](tazer-lessons.md) | Tazer wheeled biped — learn from the mistakes (anti-patterns) |
 | [study-plan.md](study-plan.md) | Phased checklist before hardware (Phases A–D) |
 
 Decision log (not research, but the lock list): [`../decisions.md`](../decisions.md).
 
 Inspiration already in requirements: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori.com/blog/wheeled-biped-v2).
 
-Steve's shares (inspiration only; not a build source): [inspiration.md](inspiration.md) — [Roadrunner](roadrunner.md) (lab), the FrRonconi 3-month student two-leg/wheel balancer (closer Hux vibe), and Serra / Build Some Stuff (steal packaging).
+Steve's shares (inspiration only; not a build source): [inspiration.md](inspiration.md) — [Roadrunner](roadrunner.md) (lab), the FrRonconi 3-month student two-leg/wheel balancer (closer Hux vibe), Serra / Build Some Stuff (steal packaging), and [Tazer](tazer-lessons.md) (learn from the mistakes).
 
 ## Stance
 

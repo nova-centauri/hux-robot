@@ -22,7 +22,7 @@ These must stay true on `main`. Later rows in the log explain how we got here.
 | Fabrication | **COTS** structure, **draft-friendly** customs, **wire ports**, **serviceability**, **2D before Blender** |
 | Shop | Mill / lathe / brake / bender / bandsaw / weld / solder / breadboards. Fab is welcome. |
 | Stepper I/O (if chosen) | **FC does not drive stepper coils.** Stepper drivers / Pi for pose. |
-| Research | Steal **Build Some Stuff (Serra)** + **Roadrunner** + **FrRonconi** + **XRobots** as research / inspiration. Do not vendor. |
+| Research | Steal **Build Some Stuff (Serra)** + **Roadrunner** + **FrRonconi** + **XRobots** as research / inspiration. **Tazer**: learn from the mistakes (anti-patterns). Do not vendor. |
 | Candidate (not ordered) | **GIM8108-8** noted for knee / swing. Not a lock. Not a buy. |
 
 ---
@@ -137,6 +137,12 @@ Steal [Kelton Serra / Build Some Stuff](research/inspiration.md) **packaging**, 
 ### 2026-09-21 — consolidation PR (this file)
 
 Open PRs **#5–#15** conflicted with each other and with `main` (which already had #1–#4). Unique content is merged here. **Latest intent wins** on actuators and mass. After this lands, close #5–#15 as obsolete.
+
+### 2026-09-21 — Tazer lessons (folded into consolidation)
+
+Steve shared [Tazer — My Robot almost got me Kicked out of Uni](https://www.youtube.com/watch?v=gqnW9qBCHnM): **learn a lot from this guy's mistakes.** Note: [`research/tazer-lessons.md`](research/tazer-lessons.md).
+
+Does **not** change locks. Reinforces: GIM8108-class is a live *candidate* (still not ordered); carbon tubes confirmed; 4S stays preferred (lighter than his ~48 V) but FOC stalls still need a real power bus, not a logic PCB; start with simple PID / existing control (R18), not LQR-on-a-bad-model; rubber not TPU; carbon-dust PPE; serviceability + software torque limits later.
 
 ---
 

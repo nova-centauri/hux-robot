@@ -122,6 +122,8 @@ Prefer existing excellent control systems / patterns. Cite them as **research po
 
 Phase A of [`research/study-plan.md`](research/study-plan.md) is where we extract how those loops actually work. Phase C is where Steve picks adapt vs rewrite. Until then: **no Hux-original balance firmware**, no fake mixer, no invented gains.
 
+Tazer spent a long time on **LQR with a bad model**; a **PID cascade** is what actually balanced. That is R18 in someone else's blood. Do not start V1 on LQR. See [`research/tazer-lessons.md`](research/tazer-lessons.md).
+
 If a pointer is copyleft (RobotX, SonicRobot), keep Hux MIT unless Steve decides. Watching and rewriting from understanding is the default.
 
 ## First software, in order

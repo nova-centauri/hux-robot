@@ -41,6 +41,8 @@ Wheel FOC on a two-wheel (and later one-wheel) balancer is a **high-draw** load.
 
 **Rule:** 4S pack → **controlled step-down** (BEC / regulator *class*) for **5 V / 6 V / 7.4 V** servo or logic rails. Do not feed a 5–7.4 V servo bus from raw 4S. Do not hang pose actuators on the same unregulated tap as the wheel ESCs.
 
+**Power bus (Tazer anti-pattern):** FOC stalls are high-current. Plan **dedicated power distribution** (PDB / harness *class*), not skinny traces and **not** the FC or a logic PCB as the motor bus. Tazer's 6-axis machine nearly blew a board used as a power plane. Hux 4S is lighter than his ~48 V stack and still needs a real bus. No PDB SKU. See [`research/tazer-lessons.md`](research/tazer-lessons.md).
+
 | Item | Intent | Status |
 | --- | --- | --- |
 | Chemistry / cell count | 4S LiPo (preferred) | Class lean. Not a locked SKU. |
@@ -172,6 +174,7 @@ See [`checklists/electronics-bringup.md`](checklists/electronics-bringup.md) and
 - Do not buy a “better” FC, ESC, BEC, servo, stepper, Pi, LiPo, FOC board, or encoder for this scaffold.
 - Do not recommend spend. Do not paste shopping links as “buy this.”
 - Do not invent a finished PDB / BEC SKU or a pack size.
+- Do not feed motor current through the FC or a delicate logic PCB (Tazer).
 - Do not run pose actuators on raw 4S, or on the same unregulated tap as wheel FOC.
 - Do not lock servo vs stepper+belt.
 - Do not treat any FC candidate or actuator *SKU* as selected. Hip-roll *class* (dynamic, in V1) is locked.

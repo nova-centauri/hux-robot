@@ -38,7 +38,7 @@ Printed or machined **fittings at the ends** only:
 - Belt mounts / pulley faces
 - Joint flanges (hip, knee, wheel)
 
-Do not print a carbon-tube-shaped spar. Do not turn a tube on the lathe to “make a nicer spar.” Cut COTS tube to length (bandsaw is enough); the shop owns the **ends**. Tube diameter / wall **TBD**. No carbon-tube SKU.
+Do not print a carbon-tube-shaped spar. Do not turn a tube on the lathe to “make a nicer spar.” Cut COTS tube to length (bandsaw is enough); the shop owns the **ends**. **Wet-cut + respirator** — carbon dust (Tazer; [`capabilities.md`](capabilities.md)). Tube diameter / wall **TBD**. No carbon-tube SKU.
 
 ### Height envelope — ~24" at full extension (R35)
 

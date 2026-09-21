@@ -169,6 +169,7 @@ Pilot selects via **TBS Nano** (likely aux / flight-modes). Wi‑Fi telem report
 - **Do not lock servo vs stepper+belt.** Document both paths.
 - **Do not drive stepper coils from the FC.** Do not host four steppers in drone firmware because a Wing board has spare pins.
 - **Do not write a finished harness, PDB layout, or BEC shopping list.** Rails are a box in the diagram.
+- **Do not feed motor current through the FC or a logic PCB** (Tazer anti-pattern). Dedicated power distribution *class* only.
 - **Do not treat this table as a BOM.** It is a phased class list.
 
 ## What to record when something is real

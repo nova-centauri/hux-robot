@@ -27,10 +27,11 @@ Prefer parts already on hand. Upstream READMEs (especially SonicRobot) are **not
 - [ ] Watch [SonicRobot playlist](https://www.youtube.com/playlist?list=PLpwJoq86vov_tZ3rsMCH5sylqGT5s9TcU) bring-up. Read `ARobot08/`, `Remote017/`, `Scale01/` ([GPL-2.0](https://github.com/XRobots/SonicRobot)). Study only; no shopping from the README.
 - [ ] Watch the [FrRonconi student two-leg/wheel balancer](inspiration.md) (Steve X share). Maker-scale, 3-month first prototype — closer Hux vibe than lab Roadrunner. **Inspiration only.** Extract: what a small-team two-leg/wheel balance demo looks like. Not a stack. FC TBD.
 - [ ] Watch [Build Some Stuff / Kelton Serra](inspiration.md). Steal packaging (in-wheel BLDC+encoder, CoG-over-contact, serviceable prints, wheel-under-CoG). **Do not vendor files.** Not stairs. Knee / hip swing stay **servo vs stepper+belt TBD**.
+- [ ] Watch [Tazer — My Robot almost got me Kicked out of Uni](tazer-lessons.md). **Learn from the mistakes** (wrong first motors, TPU tires, skinny power / logic-PCB bus, CAN termination, LQR-too-early, no homing, carbon dust). Not a stack. Do not buy GIM8108 or 48 V because he did.
 
 **Extract (write notes here or in [`../../NOTES.md`](../../NOTES.md)):**
 
-- [ ] Control loops: IMU (MPU6050 / GY-521 class) → filter/fusion → pitch/roll error → **PID** → wheel command (torque / velocity / current — record which). **Reuse existing patterns** (R18) — do not invent a Hux stack in this phase.
+- [ ] Control loops: IMU (MPU6050 / GY-521 class) → filter/fusion → pitch/roll error → **PID** → wheel command (torque / velocity / current — record which). **Reuse existing patterns** (R18) — do not invent a Hux stack in this phase. Tazer: LQR-on-a-bad-model wasted time; PID cascade is what balanced.
 - [ ] Torque-bandwidth vs continuous power for the **wheel** as a balance actuator (R25). Mass class is **soft** (R24) — still do not shop SonicRobot 63xx / hoverboard iron.
 - [ ] Outer hold: TallBalancer position hold vs velocity hold; what the encoder buys vs the IMU.
 - [ ] SonicRobot extras: load cells in the loop; ODrive + Teensy split; estop / RST; CAN vs UART to drives.

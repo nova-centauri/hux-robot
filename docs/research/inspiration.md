@@ -9,6 +9,7 @@ These sit **next to** the study set — they do not replace [XRobots](xrobots.md
 | 1 | [RAI Institute — Roadrunner](roadrunner.md) | Lab RL prototype (~15 kg) | Stairs, one-wheel balance, multimodal drive. **Not our maker path.** |
 | 2 | FrRonconi student two-leg/wheel balancer (this page) | Maker-scale, **3-month** student first prototype | Closer vibe to Hux early R&D than lab Roadrunner. |
 | 3 | [Build Some Stuff / Kelton Serra](#3-build-some-stuff--kelton-serra--arduino-self-balancing-robot) | Maker, fully 3D-printed two-wheel balancer | In-wheel BLDC+encoder; jointed legs keep CoG over contact; serviceable modular prints; wheel-under-CoG. **Not stairs.** |
+| 4 | [Tazer — uni wheeled biped](tazer-lessons.md) | Maker, ~0.7 m carbon-tube legs, 6× GIM8108 | **Learn from the mistakes:** wrong first motors, TPU tires, skinny power, LQR-too-early, carbon dust. Not a Hux stack. |
 
 Packaging and loop geometry land in [`../mechanical.md`](../mechanical.md), [`../electronics.md`](../electronics.md), and [`../software.md`](../software.md).
 
@@ -140,8 +141,9 @@ When a later note is informed by these shares, record:
 - **Roadrunner** — RAI Institute; URLs in [roadrunner.md](roadrunner.md). No public CAD/code.
 - **FrRonconi share** — https://x.com/FrRonconii/status/1373657222480269317 ; quote the 2-student / 3-month line. If we later confirm SK8O as the machine, add AA4CC / CTU names and whatever license their materials state. Until then: **inspiration, not a vendor.**
 - **Build Some Stuff / Kelton Serra** — [YouTube](https://www.youtube.com/watch?v=K1lzzVGCzAQ); [Printables](https://www.printables.com/model/1533590-self-balancing-robot-arduino); [PCBWay PCB](https://www.pcbway.com/project/shareproject/Self_Balancing_Robot_PCB_b7f23d41.html) (CC BY-NC-ND)
+- **Tazer** — [My Robot almost got me Kicked out of Uni](https://www.youtube.com/watch?v=gqnW9qBCHnM); lessons in [tazer-lessons.md](tazer-lessons.md)
 
-What we **steal**: vibe (maker-scale first prototype); capability existence (two-leg/wheel balance; Roadrunner's stairs / one-wheel); packaging (in-wheel BLDC+encoder, CoG-over-contact as height changes, serviceable modular prints, wheel-under-CoG correction geometry). What we did **not** copy: geometry files, Gerbers, firmware, policy, 3S / Arduino stack, 40 kg servo SKU, or anyone's parts list.
+What we **steal**: vibe (maker-scale first prototype); capability existence (two-leg/wheel balance; Roadrunner's stairs / one-wheel); packaging (in-wheel BLDC+encoder, CoG-over-contact as height changes, serviceable modular prints, wheel-under-CoG correction geometry); Tazer **anti-patterns** (wrong first motors, TPU tires, skinny power, LQR-too-early). What we did **not** copy: geometry files, Gerbers, firmware, policy, 3S / Arduino / 48 V / Teensy stacks, 40 kg servo SKU, GIM8108 buys, or anyone's parts list.
 
 ## Do not
 

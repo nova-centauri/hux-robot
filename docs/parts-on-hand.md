@@ -51,7 +51,7 @@ Research pointers only. **Not a buy list. No spend.** Do not treat a row here as
 
 | Item | Qty | Status | Specs/link | Hux use | Notes |
 | --- | --- | --- | --- | --- | --- |
-| **GIM8108-8** | — | **Not ordered.** Candidate only. | GIM8108-class integrated BLDC + reduction (8:1 class). Exact vendor page TBD when we research, not shop. | **Knee / hip swing** candidate (R12). Size whichever class we pick for ~2× plant load (R36). | Steve 2026-09-21: noted as a candidate. Aligns with servo vs stepper+belt remaining **TBD** — this is a third *family* data point, not a lean and not an order. No SKU lock. |
+| **GIM8108-8** | — | **Not ordered.** Candidate only. | GIM8108-class integrated BLDC + reduction (8:1 class). Exact vendor page TBD when we research, not shop. | **Knee / hip swing** candidate (R12). Size whichever class we pick for ~2× plant load (R36). | Steve 2026-09-21: noted as a candidate. Tazer later ran 6× GIM8108 on a ~2 ft carbon-tube wheeled biped — **data point, not a buy** ([`research/tazer-lessons.md`](research/tazer-lessons.md)). Aligns with servo vs stepper+belt remaining **TBD**. No SKU lock. |
 
 ## Other
 

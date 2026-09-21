@@ -12,7 +12,7 @@ Hardware fab is **intentional and welcome**. Hux is allowed to be milled, turned
 | Lathe | Round work: hubs, shafts, spacers, registers | Pair with the mill for the first custom wheel hub. |
 | Metal bender | Brackets, light formed sheet | Prefer COTS stock as the blank. |
 | Metal brake | Folds / flanges in sheet | Same — form stock; do not invent a sheet SKU. |
-| Bandsaw | Cut stock to length | Carbon rod / tube / bar / plate. **Do not mill a spar that a tube already is.** |
+| Bandsaw | Cut stock to length | Carbon rod / tube / bar / plate. **Do not mill a spar that a tube already is.** **Carbon dust:** respirator + **wet cut** (Tazer lesson). Do not dry-saw a cloud of carbon into the mill. |
 
 ## Join / proto
 
@@ -27,6 +27,7 @@ Hardware fab is **intentional and welcome**. Hux is allowed to be milled, turned
 - **Customs may be machined, bent, or welded** as well as 3D printed. Do not treat “printable” as the only legal custom.
 - The **in-wheel BLDC hub** (donor Zantle rubber + custom hub) is a **natural lathe / mill part**. That is the intended first shop job, not a stretch goal.
 - Still **prefer COTS structure** (carbon rod / tube, metal stock, fasteners) where it fits. Do not mill a spar that a tube already is (R19 / R34).
+- **Carbon-fiber dust is not a toy.** Respirator and wet cut when the bandsaw hits tube. See [`research/tazer-lessons.md`](research/tazer-lessons.md).
 - **Draft-friendly print still for plastics** — joints, clamps, brackets, fairings. Print is welcome; it is not the only shop.
 
 Do not add a tooling shopping list here. Do not recommend machines, inserts, or stock SKUs. When a real custom exists, drop CAD / 2D in [`../cad/`](../cad/) and note it in [`../NOTES.md`](../NOTES.md).
