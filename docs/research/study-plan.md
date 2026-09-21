@@ -2,7 +2,7 @@
 
 Phased research checklist. Tick only when the work is real. **No spend** until Steve asks. **FC stays TBD.** Printable wheel-leg is **Phase D**, not Phase A.
 
-Track milestones in [`../../NOTES.md`](../../NOTES.md). Shortlist and links: [`xrobots.md`](xrobots.md). Steve inspirations (Roadrunner + FrRonconi student balancer + Serra / Build Some Stuff + Tazer + Stompy): [`inspiration.md`](inspiration.md). Roadrunner detail: [`roadrunner.md`](roadrunner.md). Stompy CAD→sim→real: [`stompy-sim2real.md`](stompy-sim2real.md). Actuator trade: [`actuators-legs.md`](actuators-legs.md). Cite/adapt rules: [`README.md`](README.md). Decision log: [`../decisions.md`](../decisions.md).
+Track milestones in [`../../NOTES.md`](../../NOTES.md). Shortlist and links: [`xrobots.md`](xrobots.md). Steve inspirations (Roadrunner + FrRonconi student balancer + Serra / Build Some Stuff + Tazer + Stompy + Diablo): [`inspiration.md`](inspiration.md). Roadrunner detail: [`roadrunner.md`](roadrunner.md). Stompy CAD→sim→real: [`stompy-sim2real.md`](stompy-sim2real.md). Diablo wheeled-leg: [`diablo.md`](diablo.md). Actuator trade: [`actuators-legs.md`](actuators-legs.md). Cite/adapt rules: [`README.md`](README.md). Decision log: [`../decisions.md`](../decisions.md).
 
 ## Gates
 
@@ -29,10 +29,11 @@ Prefer parts already on hand. Upstream READMEs (especially SonicRobot) are **not
 - [ ] Watch [Build Some Stuff / Kelton Serra](inspiration.md). Steal packaging (in-wheel BLDC+encoder, CoG-over-contact, serviceable prints, wheel-under-CoG). **Do not vendor files.** Not stairs. Knee / hip swing stay **servo vs stepper+belt TBD**.
 - [ ] Watch [Tazer — My Robot almost got me Kicked out of Uni](tazer-lessons.md). **Learn from the mistakes** (wrong first motors, TPU tires, skinny power / logic-PCB bus, CAN termination, LQR-too-early, no homing, carbon dust). Not a stack. Do not buy GIM8108 or 48 V because he did.
 - [ ] Watch [Stompy — I Trained a Robot in Simulation. Then I Made It Walk.](stompy-sim2real.md). Steal CAD/reality match: fixture / home pose, dual-encoder zero at the **CAD** pose, measure-vs-CAD, tether, default angles in CAD **and** firmware. Walking ≠ Hux. **Do not require RL walking for V1.** Keep reuse simple balance (R18). Sim later for geometry / stairs — **not** day-one wheel balance.
+- [ ] Watch [ETA Prime — Diablo](diablo.md) and skim [arXiv:2407.21500](https://ar5iv.labs.arxiv.org/html/2407.21500). Steal: split brain (Pi vs motor board), DD/QDD as a *class*, **LQR/PID before RL**, height as named states, aux contact later, payload vs posture. **Do not buy Diablo.** Not 22 kg. No head / cargo V1. Keep R18. Hardware **TBD**. Shop / SDK are a cite, not a cart.
 
 **Extract (write notes here or in [`../../NOTES.md`](../../NOTES.md)):**
 
-- [ ] Control loops: IMU (MPU6050 / GY-521 class) → filter/fusion → pitch/roll error → **PID** → wheel command (torque / velocity / current — record which). **Reuse existing patterns** (R18) — do not invent a Hux stack in this phase. Tazer: LQR-on-a-bad-model wasted time; PID cascade is what balanced.
+- [ ] Control loops: IMU (MPU6050 / GY-521 class) → filter/fusion → pitch/roll error → **PID** → wheel command (torque / velocity / current — record which). **Reuse existing patterns** (R18) — do not invent a Hux stack in this phase. Tazer: LQR-on-a-bad-model wasted time; PID cascade is what balanced. Diablo: model-based LQR worked *because* the plant was high-bandwidth DD — still **not** a V1 LQR project.
 - [ ] Torque-bandwidth vs continuous power for the **wheel** as a balance actuator (R25). Mass class is **soft** (R24) — still do not shop SonicRobot 63xx / hoverboard iron.
 - [ ] Outer hold: TallBalancer position hold vs velocity hold; what the encoder buys vs the IMU.
 - [ ] SonicRobot extras: load cells in the loop; ODrive + Teensy split; estop / RST; CAN vs UART to drives.
@@ -54,6 +55,7 @@ Hux cycle (from [`../vision.md`](../vision.md)): **lift → 1-leg balance → pl
 - [ ] Watch [RAI Roadrunner](roadrunner.md) **alongside Hattori** (RAI page + [YouTube](https://www.youtube.com/watch?v=9kae-UAME1U); listed in [inspiration.md](inspiration.md)). Extract: one-wheel balance as a gate; drive vs step; knee symmetry for up/down. **Lab RL policy stack — not our maker path** (XRobots + TBD FC). No CAD/code to vendor.
 - [ ] If / when a Hux model exists for **geometry or the 9.5" cycle** (not day-one wheel balance): keep CAD → exported model → whatever script uses it in lockstep. Stompy: a foot-geometry change forced CAD + URDF + sim + **retrain**. See [stompy-sim2real.md](stompy-sim2real.md). Do **not** stand up an RL walker to tick this.
 - [ ] Measure or note a **real** ~9.5" riser/fixture (height, tread, nosing) when Steve has one — still no print.
+- [ ] Note Diablo standing / squat / creep as **height-as-state** existence (plus ~8 cm curb / jump). That does **not** add Hux modes. V1 stays `PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY`. Aux contact and payload-vs-height are later, not this cycle.
 - [ ] Sketch Hux step-up and step-down as states, not CAD:
 
   1. Two-leg balance (teleop baseline — `TWO_WHEEL`).
@@ -114,5 +116,6 @@ Use [`../checklists/mechanical-v1.md`](../checklists/mechanical-v1.md) and [`../
 - Cameras / pathfinding (later, on the Pi).
 - Closed-loop stair gait software.
 - Training an **RL walking policy** / buying a Jetson “because Stompy.” Hux V1 keeps **simple reused balance** (R18).
+- Buying Diablo (or M1502D / their Pi4 + motor board) “because wheeled-leg.” Not 22 kg. No head DoF / cargo for V1.
 - Relicensing by implication.
 - Opening Blender before 2D layouts (R23).

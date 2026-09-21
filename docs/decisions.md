@@ -22,7 +22,7 @@ These must stay true on `main`. Later rows in the log explain how we got here.
 | Fabrication | **COTS** structure, **draft-friendly** customs, **wire ports**, **serviceability**, **2D before Blender** |
 | Shop | Mill / lathe / brake / bender / bandsaw / weld / solder / breadboards. Fab is welcome. |
 | Stepper I/O (if chosen) | **FC does not drive stepper coils.** Stepper drivers / Pi for pose. |
-| Research | Steal **Build Some Stuff (Serra)** + **Roadrunner** + **FrRonconi** + **XRobots** as research / inspiration. **Tazer**: learn from the mistakes (anti-patterns). **Stompy**: CAD/reality match + shared zero; **not** RL walking for V1. Do not vendor. |
+| Research | Steal **Build Some Stuff (Serra)** + **Roadrunner** + **FrRonconi** + **XRobots** as research / inspiration. **Tazer**: learn from the mistakes (anti-patterns). **Stompy**: CAD/reality match + shared zero; **not** RL walking for V1. **Diablo**: split brain, DD/QDD class, LQR/PID before RL, height as states; **do not buy**; not 22 kg; no head/cargo V1. Do not vendor. |
 | Candidate (not ordered) | **GIM8108-8** noted for knee / swing. Not a lock. Not a buy. |
 
 ---
@@ -149,6 +149,12 @@ Does **not** change locks. Reinforces: GIM8108-class is a live *candidate* (stil
 Steve asked to analyze [Stompy](https://www.youtube.com/watch?v=gEjg179fvmc) (Kayden Knapik — week-build RL walking biped), especially simulations and matching CAD to reality. Note: [`research/stompy-sim2real.md`](research/stompy-sim2real.md). Indexed from [`research/inspiration.md`](research/inspiration.md), [`research/study-plan.md`](research/study-plan.md), and [`research/README.md`](research/README.md).
 
 Does **not** change locks. Walking ≠ Hux wheeled balance — still steal fixture / home pose, measure-vs-CAD, tether, default angles in CAD+firmware, and a later CAD→model lockstep for geometry / stairs. **Do not require RL walking for Hux V1.** Keep **reuse simple balance control** (R18). Sim is not a day-one wheel-balance task. No spend. No Jetson / Robstride / mjlab lock.
+
+### 2026-09-21 — #18 Diablo wheeled-leg research
+
+Steve shared [ETA Prime's Diablo review](https://www.youtube.com/watch?v=S5PoZ8aNwvs) plus paper [arXiv:2407.21500](https://ar5iv.labs.arxiv.org/html/2407.21500) (Direct Drive Tech / DDTRobot commercial self-balancing wheeled-leg). Note: [`research/diablo.md`](research/diablo.md). Indexed from [`research/inspiration.md`](research/inspiration.md), [`research/study-plan.md`](research/study-plan.md), and [`research/README.md`](research/README.md). Shop / SDK cited only.
+
+Does **not** change locks. Steal: split brain (Pi vs motor board), DD/QDD as a *class* for high-bandwidth joints, **LQR/PID before RL**, height modes as states, aux contact later, payload vs height. **Do not buy Diablo.** Do not scale Hux to ~22 kg. No head tilt / cargo / creep rollers for V1. Keep **reuse simple balance** (R18). Hardware stays **TBD**. No spend. No M1502D / ROS2 / Pi4-as-FC lock.
 
 ---
 
