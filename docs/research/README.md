@@ -7,18 +7,22 @@ This packet is the working study set. It does not replace [`../requirements.md`]
 | Doc | What it is |
 | --- | --- |
 | [xrobots.md](xrobots.md) | Curated XRobots shortlist, why each matters, study order |
-| [inspiration.md](inspiration.md) | Steve's X shares — Roadrunner + FrRonconi student balancer; inspiration only |
+| [inspiration.md](inspiration.md) | Steve's shares — Roadrunner, FrRonconi student balancer, Serra / Build Some Stuff; inspiration only |
 | [roadrunner.md](roadrunner.md) | RAI Institute Roadrunner — lab wheeled biped; watch alongside Hattori |
+| [actuators-legs.md](actuators-legs.md) | Axis-role trade; hip roll in V1; servo vs stepper TBD; GIM8108-8 candidate |
+| [tazer-lessons.md](tazer-lessons.md) | Tazer wheeled biped — learn from the mistakes (anti-patterns) |
 | [study-plan.md](study-plan.md) | Phased checklist before hardware (Phases A–D) |
+
+Decision log (not research, but the lock list): [`../decisions.md`](../decisions.md).
 
 Inspiration already in requirements: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori.com/blog/wheeled-biped-v2).
 
-Steve's X shares (inspiration only; not a build source): [inspiration.md](inspiration.md) — [Roadrunner](roadrunner.md) (lab) and the FrRonconi 3-month student two-leg/wheel balancer (closer Hux vibe).
+Steve's shares (inspiration only; not a build source): [inspiration.md](inspiration.md) — [Roadrunner](roadrunner.md) (lab), the FrRonconi 3-month student two-leg/wheel balancer (closer Hux vibe), Serra / Build Some Stuff (steal packaging), and [Tazer](tazer-lessons.md) (learn from the mistakes).
 
 ## Stance
 
 1. **Learn the lineage** — RobotX (wheeled biped / dynamic balance), then TallBalancer and SonicRobot for IMU → PID → wheel-torque and remote patterns.
-2. **Map stairs** — XRobots Stairs is a different mechanism. Steal heuristics, not geometry. Pair it with Hattori (and [Roadrunner](roadrunner.md); see [inspiration.md](inspiration.md)) for Hux's lift → one-leg balance → plant cycle on a **~9.5"** riser.
+2. **Map stairs** — XRobots Stairs is a different mechanism. Steal heuristics, not geometry. Pair it with Hattori (and [Roadrunner](roadrunner.md); see [inspiration.md](inspiration.md)) for Hux's lift → one-leg balance → plant cycle on a **~9.5"** riser. Serra is packaging, not stairs.
 3. **Decide license + adapt vs rewrite** — Steve decides. Do not relicense Hux to absorb copyleft code, and do not pretend GPL/LGPL sources are MIT.
 4. **Only then** print a wheel-leg fit-check. Mechanical V1 is Phase D, not the next commit.
 
@@ -32,7 +36,7 @@ Respect each upstream license. XRobots repos are **not** one license. RobotX is 
 
 When a note, sketch, or later file is informed by upstream, record:
 
-- Project name and org (`XRobots/RobotX`, Hattori STRIDE V2, RAI Roadrunner, FrRonconi / student balancer, …)
+- Project name and org (`XRobots/RobotX`, Hattori STRIDE V2, RAI Roadrunner, FrRonconi / student balancer, Build Some Stuff / Serra, …)
 - URL (repo, playlist, or post)
 - License as stated by the author **and** the `LICENSE` file if they disagree
 - What we took (idea, heuristic, control topology) versus what we did **not** copy
@@ -81,5 +85,6 @@ Watching, learning, and rewriting from understanding is the default path that ke
 - Locking an FC
 - A Hux BOM or shopping list
 - Vendoring `XRobots/*`
-- Starting the printable wheel-leg before Phase D
-- Changing [`../vision.md`](../vision.md)
+- Starting the first wheel-leg before Phase D
+- Opening Blender before 2D layouts (R23)
+- Changing [`../vision.md`](../vision.md) without a Steve decision (log it in [`../decisions.md`](../decisions.md))
