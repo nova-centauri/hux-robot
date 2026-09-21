@@ -2,7 +2,7 @@
 
 Phased research checklist. Tick only when the work is real. **No spend** until Steve asks. **FC stays TBD.** Printable wheel-leg is **Phase D**, not Phase A.
 
-Track milestones in [`../../NOTES.md`](../../NOTES.md). Shortlist and links: [`xrobots.md`](xrobots.md). Steve X-share inspirations (Roadrunner + FrRonconi student balancer): [`inspiration.md`](inspiration.md). Roadrunner detail: [`roadrunner.md`](roadrunner.md). Cite/adapt rules: [`README.md`](README.md).
+Track milestones in [`../../NOTES.md`](../../NOTES.md). Shortlist and links: [`xrobots.md`](xrobots.md). Steve inspirations (Roadrunner + FrRonconi student balancer + Serra / Build Some Stuff): [`inspiration.md`](inspiration.md). Roadrunner detail: [`roadrunner.md`](roadrunner.md). Actuator trade: [`actuators-legs.md`](actuators-legs.md). Cite/adapt rules: [`README.md`](README.md). Decision log: [`../decisions.md`](../decisions.md).
 
 ## Gates
 
@@ -11,7 +11,7 @@ Track milestones in [`../../NOTES.md`](../../NOTES.md). Shortlist and links: [`x
 | Phase A notes (loops + remotes) | Phase B stair mapping as “done” |
 | Phase B 9.5" cycle sketch | Treating Stairs CAD as Hux geometry |
 | Phase C (adapt vs rewrite + license) | Vendoring any `XRobots/*` tree |
-| Phase D | Buying parts, locking an FC, or claiming Mechanical V1 started |
+| Phase D | Buying parts, locking an FC, opening Blender before 2D, or claiming Mechanical V1 started |
 
 Prefer parts already on hand. Upstream READMEs (especially SonicRobot) are **not** a Hux BOM.
 
@@ -26,10 +26,12 @@ Prefer parts already on hand. Upstream READMEs (especially SonicRobot) are **not
 - [ ] Watch [TallBalancer](https://youtu.be/VYU8CRTD2cA). Read `Code/pos_hold` and `Code/vel_hold` ([MIT](https://github.com/XRobots/TallBalancer)).
 - [ ] Watch [SonicRobot playlist](https://www.youtube.com/playlist?list=PLpwJoq86vov_tZ3rsMCH5sylqGT5s9TcU) bring-up. Read `ARobot08/`, `Remote017/`, `Scale01/` ([GPL-2.0](https://github.com/XRobots/SonicRobot)). Study only; no shopping from the README.
 - [ ] Watch the [FrRonconi student two-leg/wheel balancer](inspiration.md) (Steve X share). Maker-scale, 3-month first prototype — closer Hux vibe than lab Roadrunner. **Inspiration only.** Extract: what a small-team two-leg/wheel balance demo looks like. Not a stack. FC TBD.
+- [ ] Watch [Build Some Stuff / Kelton Serra](inspiration.md). Steal packaging (in-wheel BLDC+encoder, CoG-over-contact, serviceable prints, wheel-under-CoG). **Do not vendor files.** Not stairs. Knee / hip swing stay **servo vs stepper+belt TBD**.
 
 **Extract (write notes here or in [`../../NOTES.md`](../../NOTES.md)):**
 
-- [ ] Control loops: IMU (MPU6050 / GY-521 class) → filter/fusion → pitch/roll error → **PID** → wheel command (torque / velocity / current — record which).
+- [ ] Control loops: IMU (MPU6050 / GY-521 class) → filter/fusion → pitch/roll error → **PID** → wheel command (torque / velocity / current — record which). **Reuse existing patterns** (R18) — do not invent a Hux stack in this phase.
+- [ ] Torque-bandwidth vs continuous power for the **wheel** as a balance actuator (R25). Mass class is **soft** (R24) — still do not shop SonicRobot 63xx / hoverboard iron.
 - [ ] Outer hold: TallBalancer position hold vs velocity hold; what the encoder buys vs the IMU.
 - [ ] SonicRobot extras: load cells in the loop; ODrive + Teensy split; estop / RST; CAN vs UART to drives.
 - [ ] Remote patterns: RobotX TX/RX sketches; SonicRobot nRF remote; what the stick maps to (tilt setpoint, speed, yaw). Hux RX is **TBS Nano** — steal *semantics*, not the radio.
@@ -51,10 +53,10 @@ Hux cycle (from [`../vision.md`](../vision.md)): **lift → 1-leg balance → pl
 - [ ] Measure or note a **real** ~9.5" riser/fixture (height, tread, nosing) when Steve has one — still no print.
 - [ ] Sketch Hux step-up and step-down as states, not CAD:
 
-  1. Two-leg balance (teleop baseline).
-  2. One-leg balance **gate**.
-  3. Lift wheeled leg (stroke / clearance toward 9.5").
-  4. Hold on planted wheel (Phase A loop under a narrower support).
+  1. Two-leg balance (teleop baseline — `TWO_WHEEL`).
+  2. One-leg balance **gate** (`LEFT_ONLY` / `RIGHT_ONLY`): hip roll **in V1** + planted-wheel fore/aft (R16 / R17).
+  3. Lift wheeled leg (stroke / clearance toward 9.5" inside a **~24"** full-extension envelope).
+  4. Hold on planted wheel (Phase A loop under a narrower support). Size plant-side joints for **~2×** load (R36).
   5. Place raised wheel on next tread.
   6. Transfer / plant. Repeat.
 
@@ -88,13 +90,14 @@ Hux cycle (from [`../vision.md`](../vision.md)): **lift → 1-leg balance → pl
 
 **Goal:** first mechanical fit-check. Still no spend unless Steve asks. FC still TBD; do not block the print on electronics.
 
-Use [`../checklists/mechanical-v1.md`](../checklists/mechanical-v1.md) and [`../mechanical.md`](../mechanical.md). This phase is the existing “first printable wheel-leg” milestone — **gated** by A–C.
+Use [`../checklists/mechanical-v1.md`](../checklists/mechanical-v1.md) and [`../mechanical.md`](../mechanical.md). This phase is the existing “first wheel-leg” milestone — **gated** by A–C **and** by **several 2D layouts** (R23).
 
 - [ ] Phases A–C actually done (not skipped to make the repo look busy).
-- [ ] One-side envelope, linkage + spring stub, stroke toward 9.5" (requirements R7).
-- [ ] Fit-check print: raised wheel can reach a 9.5" tread without self-collision.
+- [ ] **Several 2D sketch layouts** (side / front / top + linkage) before any Blender / 3D CAD (R23). Show motor-at-wheel and belt runs if belts.
+- [ ] One-side envelope: **carbon-tube spars** + end fittings, linkage + spring stub, stroke toward 9.5" inside **~24" tall / ~10" wide** (R7 / R34 / R35).
+- [ ] Fit-check: raised wheel can reach a 9.5" tread **with margin**, without self-collision.
 - [ ] No second-leg copy until the first articulates.
-- [ ] No FC lock, no BOM, no carpet spin-up as part of this print.
+- [ ] No FC lock, no BOM, no carpet spin-up as part of this print. No new spend.
 
 **Done when:** a real print exists or Steve explicitly defers print. A CAD `.gitkeep` is not a fit-check.
 
@@ -103,7 +106,9 @@ Use [`../checklists/mechanical-v1.md`](../checklists/mechanical-v1.md) and [`../
 ## Explicitly not this plan
 
 - Buying ODrives, Teensys, load cells, or a “better” FC because SonicRobot used them.
-- Locking Betaflight / INAV / ArduPilot / custom (follows FC; FC is TBD).
+- Locking Betaflight / INAV / ArduPilot / custom (follows FC; FC is TBD). Do not pick a drone stack as a stepper host (R29).
+- Locking servo vs stepper+belt for knee / swing. Both stay open.
 - Cameras / pathfinding (later, on the Pi).
 - Closed-loop stair gait software.
 - Relicensing by implication.
+- Opening Blender before 2D layouts (R23).

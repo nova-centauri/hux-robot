@@ -11,7 +11,7 @@ Also cite Hattori (already in [`../requirements.md`](../requirements.md)): [STRI
 1. **RobotX** — wheeled-biped / dynamic-balance lineage (playlist, then `ArduinoCode_current`)
 2. **TallBalancer** — two-wheel balance with position / velocity hold (MPU6050 + ODrive patterns)
 3. **SonicRobot** — taller balancer; load cells, Teensy, ODrive BLDC (electronics lessons)
-4. **Stairs + Hattori STRIDE V2** — stair heuristics → Hux 9.5" lift → 1-leg balance → plant. Watch [Steve's inspirations](inspiration.md) alongside: Roadrunner (lab) and the FrRonconi student balancer (maker-scale).
+4. **Stairs + Hattori STRIDE V2** — stair heuristics → Hux 9.5" lift → 1-leg balance → plant. Watch [Steve's inspirations](inspiration.md) alongside: Roadrunner (lab), the FrRonconi student balancer (maker-scale), and Serra / Build Some Stuff (packaging).
 5. **YouCanBuildBiPed** — simple biped kinematics
 6. **BallWheels / BeltWheelRobot / Ball-BIke** — wheel / balance edge cases
 7. **Mid-Walker, BalancingStrandbeest** — optional
@@ -67,7 +67,7 @@ Also cite Hattori (already in [`../requirements.md`](../requirements.md)): [STRI
 
 **Extract:** IMU → balance PID → ODrive torque/velocity; how load cells sit in the loop; NRF remote packet shape; bring-up order (IMU zero, ODrive encode, estop on RST).
 
-**Do not:** copy the GPL-2.0 firmware into Hux. Do not shop the README.
+**Do not:** copy the GPL-2.0 firmware into Hux. Do not shop the README. Steal **loops**, not 63xx / hoverboard iron — that class is the wrong default for Hux wheels (R25). Mass is soft (R24); still do not treat the upstream BOM as ours.
 
 ### 4. XRobots/Stairs — stair-climbing robot (different mechanism)
 
