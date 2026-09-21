@@ -22,7 +22,7 @@ These must stay true on `main`. Later rows in the log explain how we got here.
 | Fabrication | **COTS** structure, **draft-friendly** customs, **wire ports**, **serviceability**, **2D before Blender** |
 | Shop | Mill / lathe / brake / bender / bandsaw / weld / solder / breadboards. Fab is welcome. |
 | Stepper I/O (if chosen) | **FC does not drive stepper coils.** Stepper drivers / Pi for pose. |
-| Research | Steal **Build Some Stuff (Serra)** + **Roadrunner** + **FrRonconi** + **XRobots** as research / inspiration. **Tazer**: learn from the mistakes (anti-patterns). Do not vendor. |
+| Research | Steal **Build Some Stuff (Serra)** + **Roadrunner** + **FrRonconi** + **XRobots** as research / inspiration. **Tazer**: learn from the mistakes (anti-patterns). **Stompy**: CAD/reality match + shared zero; **not** RL walking for V1. Do not vendor. |
 | Candidate (not ordered) | **GIM8108-8** noted for knee / swing. Not a lock. Not a buy. |
 
 ---
@@ -143,6 +143,12 @@ Open PRs **#5–#15** conflicted with each other and with `main` (which already 
 Steve shared [Tazer — My Robot almost got me Kicked out of Uni](https://www.youtube.com/watch?v=gqnW9qBCHnM): **learn a lot from this guy's mistakes.** Note: [`research/tazer-lessons.md`](research/tazer-lessons.md).
 
 Does **not** change locks. Reinforces: GIM8108-class is a live *candidate* (still not ordered); carbon tubes confirmed; 4S stays preferred (lighter than his ~48 V) but FOC stalls still need a real power bus, not a logic PCB; start with simple PID / existing control (R18), not LQR-on-a-bad-model; rubber not TPU; carbon-dust PPE; serviceability + software torque limits later.
+
+### 2026-09-21 — Stompy CAD→sim→real (this PR)
+
+Steve asked to analyze [Stompy](https://www.youtube.com/watch?v=gEjg179fvmc) (Kayden Knapik — week-build RL walking biped), especially simulations and matching CAD to reality. Note: [`research/stompy-sim2real.md`](research/stompy-sim2real.md). Indexed from [`research/inspiration.md`](research/inspiration.md), [`research/study-plan.md`](research/study-plan.md), and [`research/README.md`](research/README.md).
+
+Does **not** change locks. Walking ≠ Hux wheeled balance — still steal fixture / home pose, measure-vs-CAD, tether, default angles in CAD+firmware, and a later CAD→model lockstep for geometry / stairs. **Do not require RL walking for Hux V1.** Keep **reuse simple balance control** (R18). Sim is not a day-one wheel-balance task. No spend. No Jetson / Robstride / mjlab lock.
 
 ---
 

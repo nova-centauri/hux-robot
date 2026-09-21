@@ -10,6 +10,7 @@ These sit **next to** the study set — they do not replace [XRobots](xrobots.md
 | 2 | FrRonconi student two-leg/wheel balancer (this page) | Maker-scale, **3-month** student first prototype | Closer vibe to Hux early R&D than lab Roadrunner. |
 | 3 | [Build Some Stuff / Kelton Serra](#3-build-some-stuff--kelton-serra--arduino-self-balancing-robot) | Maker, fully 3D-printed two-wheel balancer | In-wheel BLDC+encoder; jointed legs keep CoG over contact; serviceable modular prints; wheel-under-CoG. **Not stairs.** |
 | 4 | [Tazer — uni wheeled biped](tazer-lessons.md) | Maker, ~0.7 m carbon-tube legs, 6× GIM8108 | **Learn from the mistakes:** wrong first motors, TPU tires, skinny power, LQR-too-early, carbon dust. Not a Hux stack. |
+| 5 | [Stompy — Kayden Knapik](stompy-sim2real.md) | Maker, 6-DOF 3D-printed **walker** (week build, RL) | CAD pose = physical home; CAD→URDF→sim lockstep; resting geometry biases gait; tether. **Not** RL walking for Hux V1. |
 
 Packaging and loop geometry land in [`../mechanical.md`](../mechanical.md), [`../electronics.md`](../electronics.md), and [`../software.md`](../software.md).
 
@@ -148,6 +149,18 @@ Twelve numbered mistakes live on [tazer-lessons.md](tazer-lessons.md).
 
 ---
 
+## 5. Stompy — Kayden Knapik (CAD → sim → real)
+
+Full note: [stompy-sim2real.md](stompy-sim2real.md).
+
+Steve 2026-09-21: analyze [I Trained a Robot in Simulation. Then I Made It Walk.](https://www.youtube.com/watch?v=gEjg179fvmc) — especially **simulations and matching CAD to reality**.
+
+Maker-scale **6-DOF 3D-printed walking biped** (week build; RL policy on a Jetson). Walking challenges **differ** from Hux's wheeled biped. **Still learn.**
+
+**Hux take:** steal the **shared zero** (physical stand = CAD pose; dual encoders zeroed there), the CAD→URDF→sim lockstep (a foot change forced a full update + retrain), resting-geometry bias, tether, and “sim later for geometry / stairs.” **Do not require RL walking for Hux V1.** Keep **reuse simple balance control** (R18).
+
+---
+
 ## Cite
 
 When a later note is informed by these shares, record:
@@ -156,14 +169,16 @@ When a later note is informed by these shares, record:
 - **FrRonconi share** — https://x.com/FrRonconii/status/1373657222480269317 ; quote the 2-student / 3-month line. If we later confirm SK8O as the machine, add AA4CC / CTU names and whatever license their materials state. Until then: **inspiration, not a vendor.**
 - **Build Some Stuff / Kelton Serra** — [YouTube](https://www.youtube.com/watch?v=K1lzzVGCzAQ); [Printables](https://www.printables.com/model/1533590-self-balancing-robot-arduino); [PCBWay PCB](https://www.pcbway.com/project/shareproject/Self_Balancing_Robot_PCB_b7f23d41.html) (CC BY-NC-ND)
 - **Tazer** — [My Robot almost got me Kicked out of Uni](https://www.youtube.com/watch?v=gqnW9qBCHnM); lessons in [tazer-lessons.md](tazer-lessons.md)
+- **Stompy** — [I Trained a Robot in Simulation. Then I Made It Walk.](https://www.youtube.com/watch?v=gEjg179fvmc) (Kayden Knapik); lessons in [stompy-sim2real.md](stompy-sim2real.md)
 
-What we **steal**: vibe (maker-scale first prototype); capability existence (two-leg/wheel balance; Roadrunner's stairs / one-wheel); packaging (in-wheel BLDC+encoder, CoG-over-contact as height changes, serviceable modular prints, wheel-under-CoG correction geometry); Tazer **anti-patterns** (wrong first motors, TPU tires, skinny power, LQR-too-early). What we did **not** copy: geometry files, Gerbers, firmware, policy, 3S / Arduino / 48 V / Teensy stacks, 40 kg servo SKU, GIM8108 buys, or anyone's parts list.
+What we **steal**: vibe (maker-scale first prototype); capability existence (two-leg/wheel balance; Roadrunner's stairs / one-wheel); packaging (in-wheel BLDC+encoder, CoG-over-contact as height changes, serviceable modular prints, wheel-under-CoG correction geometry); Tazer **anti-patterns** (wrong first motors, TPU tires, skinny power, LQR-too-early); Stompy **CAD/reality match** (fixture / home pose, measure-vs-CAD, tether, default angles in CAD+firmware, sim lockstep later). What we did **not** copy: geometry files, Gerbers, firmware, policy, 3S / Arduino / 48 V / Teensy / Jetson stacks, 40 kg servo SKU, GIM8108 / Robstride buys, or anyone's parts list. **Not** an RL-walking requirement for Hux V1.
 
 ## Do not
 
 - Start a Hux build, print, or firmware branch from these clips
-- Spend, or treat student / RAI / Serra / Tazer actuators as a Hux spec
-- Lock an FC (Roadrunner's RL trainer, Tazer's Teensy, anyone's LQR in a thesis, or Serra's Nano 33 BLE)
+- Spend, or treat student / RAI / Serra / Tazer / Stompy actuators as a Hux spec
+- Lock an FC (Roadrunner's RL trainer, Stompy's Jetson + mjlab, Tazer's Teensy, anyone's LQR in a thesis, or Serra's Nano 33 BLE)
+- Require RL walking — or any learned gait — for Hux V1; keep reuse simple balance (R18)
 - Vendor SK8O / Ascento / Roadrunner / Printables / PCBWay trees
 - Order the PCBWay board or shop the YouTube BOM
 - Lock steppers or servos — knee / hip swing stay **TBD** (both open, no lean)

@@ -2,7 +2,7 @@
 
 Phased research checklist. Tick only when the work is real. **No spend** until Steve asks. **FC stays TBD.** Printable wheel-leg is **Phase D**, not Phase A.
 
-Track milestones in [`../../NOTES.md`](../../NOTES.md). Shortlist and links: [`xrobots.md`](xrobots.md). Steve inspirations (Roadrunner + FrRonconi student balancer + Serra / Build Some Stuff): [`inspiration.md`](inspiration.md). Roadrunner detail: [`roadrunner.md`](roadrunner.md). Actuator trade: [`actuators-legs.md`](actuators-legs.md). Cite/adapt rules: [`README.md`](README.md). Decision log: [`../decisions.md`](../decisions.md).
+Track milestones in [`../../NOTES.md`](../../NOTES.md). Shortlist and links: [`xrobots.md`](xrobots.md). Steve inspirations (Roadrunner + FrRonconi student balancer + Serra / Build Some Stuff + Tazer + Stompy): [`inspiration.md`](inspiration.md). Roadrunner detail: [`roadrunner.md`](roadrunner.md). Stompy CAD→sim→real: [`stompy-sim2real.md`](stompy-sim2real.md). Actuator trade: [`actuators-legs.md`](actuators-legs.md). Cite/adapt rules: [`README.md`](README.md). Decision log: [`../decisions.md`](../decisions.md).
 
 ## Gates
 
@@ -28,6 +28,7 @@ Prefer parts already on hand. Upstream READMEs (especially SonicRobot) are **not
 - [ ] Watch the [FrRonconi student two-leg/wheel balancer](inspiration.md) (Steve X share). Maker-scale, 3-month first prototype — closer Hux vibe than lab Roadrunner. **Inspiration only.** Extract: what a small-team two-leg/wheel balance demo looks like. Not a stack. FC TBD.
 - [ ] Watch [Build Some Stuff / Kelton Serra](inspiration.md). Steal packaging (in-wheel BLDC+encoder, CoG-over-contact, serviceable prints, wheel-under-CoG). **Do not vendor files.** Not stairs. Knee / hip swing stay **servo vs stepper+belt TBD**.
 - [ ] Watch [Tazer — My Robot almost got me Kicked out of Uni](tazer-lessons.md). **Learn from the mistakes** (wrong first motors, TPU tires, skinny power / logic-PCB bus, CAN termination, LQR-too-early, no homing, carbon dust). Not a stack. Do not buy GIM8108 or 48 V because he did.
+- [ ] Watch [Stompy — I Trained a Robot in Simulation. Then I Made It Walk.](stompy-sim2real.md). Steal CAD/reality match: fixture / home pose, dual-encoder zero at the **CAD** pose, measure-vs-CAD, tether, default angles in CAD **and** firmware. Walking ≠ Hux. **Do not require RL walking for V1.** Keep reuse simple balance (R18). Sim later for geometry / stairs — **not** day-one wheel balance.
 
 **Extract (write notes here or in [`../../NOTES.md`](../../NOTES.md)):**
 
@@ -36,7 +37,7 @@ Prefer parts already on hand. Upstream READMEs (especially SonicRobot) are **not
 - [ ] Outer hold: TallBalancer position hold vs velocity hold; what the encoder buys vs the IMU.
 - [ ] SonicRobot extras: load cells in the loop; ODrive + Teensy split; estop / RST; CAN vs UART to drives.
 - [ ] Remote patterns: RobotX TX/RX sketches; SonicRobot nRF remote; what the stick maps to (tilt setpoint, speed, yaw). Hux RX is **TBS Nano** — steal *semantics*, not the radio.
-- [ ] Bring-up order they actually used (IMU zero, drive calibrate, restrained spin). Map onto [`../checklists/electronics-bringup.md`](../checklists/electronics-bringup.md) later — do not flash a Hux FC in this phase.
+- [ ] Bring-up order they actually used (IMU zero, drive calibrate, restrained spin). Map onto [`../checklists/electronics-bringup.md`](../checklists/electronics-bringup.md) later — do not flash a Hux FC in this phase. Stompy add-on: a **stand that is the CAD home**, encoders zeroed there, belt/tether on first move.
 
 **Done when:** we can explain the balance loop and remote overlay in our own words, with citations, without a copy of their firmware in this repo.
 
@@ -51,6 +52,7 @@ Hux cycle (from [`../vision.md`](../vision.md)): **lift → 1-leg balance → pl
 - [ ] Watch [XRobots/Stairs](https://github.com/XRobots/Stairs) ([video](https://youtu.be/MUyFDWbXrZ0)). Different mechanism. List **heuristics only** (timing, commit-to-step, missed tread, sensors vs open-loop).
 - [ ] Re-read [Hattori STRIDE V2](https://www.alex-hattori.com/blog/wheeled-biped-v2) (already in requirements): extra DOF, serial/linkage knee vs parallel, wheel diameter, open-loop swing-leg stepping.
 - [ ] Watch [RAI Roadrunner](roadrunner.md) **alongside Hattori** (RAI page + [YouTube](https://www.youtube.com/watch?v=9kae-UAME1U); listed in [inspiration.md](inspiration.md)). Extract: one-wheel balance as a gate; drive vs step; knee symmetry for up/down. **Lab RL policy stack — not our maker path** (XRobots + TBD FC). No CAD/code to vendor.
+- [ ] If / when a Hux model exists for **geometry or the 9.5" cycle** (not day-one wheel balance): keep CAD → exported model → whatever script uses it in lockstep. Stompy: a foot-geometry change forced CAD + URDF + sim + **retrain**. See [stompy-sim2real.md](stompy-sim2real.md). Do **not** stand up an RL walker to tick this.
 - [ ] Measure or note a **real** ~9.5" riser/fixture (height, tread, nosing) when Steve has one — still no print.
 - [ ] Sketch Hux step-up and step-down as states, not CAD:
 
@@ -111,5 +113,6 @@ Use [`../checklists/mechanical-v1.md`](../checklists/mechanical-v1.md) and [`../
 - Locking servo vs stepper+belt for knee / swing. Both stay open.
 - Cameras / pathfinding (later, on the Pi).
 - Closed-loop stair gait software.
+- Training an **RL walking policy** / buying a Jetson “because Stompy.” Hux V1 keeps **simple reused balance** (R18).
 - Relicensing by implication.
 - Opening Blender before 2D layouts (R23).
