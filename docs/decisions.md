@@ -144,7 +144,7 @@ Steve shared [Tazer — My Robot almost got me Kicked out of Uni](https://www.yo
 
 Does **not** change locks. Reinforces: GIM8108-class is a live *candidate* (still not ordered); carbon tubes confirmed; 4S stays preferred (lighter than his ~48 V) but FOC stalls still need a real power bus, not a logic PCB; start with simple PID / existing control (R18), not LQR-on-a-bad-model; rubber not TPU; carbon-dust PPE; serviceability + software torque limits later.
 
-### 2026-09-21 — Stompy CAD→sim→real (this PR)
+### 2026-09-21 — #17 Stompy CAD→sim→real
 
 Steve asked to analyze [Stompy](https://www.youtube.com/watch?v=gEjg179fvmc) (Kayden Knapik — week-build RL walking biped), especially simulations and matching CAD to reality. Note: [`research/stompy-sim2real.md`](research/stompy-sim2real.md). Indexed from [`research/inspiration.md`](research/inspiration.md), [`research/study-plan.md`](research/study-plan.md), and [`research/README.md`](research/README.md).
 
