@@ -124,6 +124,8 @@ Phase A of [`research/study-plan.md`](research/study-plan.md) is where we extrac
 
 Tazer spent a long time on **LQR with a bad model**; a **PID cascade** is what actually balanced. That is R18 in someone else's blood. Do not start V1 on LQR. See [`research/tazer-lessons.md`](research/tazer-lessons.md).
 
+Stompy is a week-build **RL walker** — CAD/reality match, not a Hux V1 stack. **Do not require RL walking.** Keep this reuse list. See [`research/stompy-sim2real.md`](research/stompy-sim2real.md).
+
 If a pointer is copyleft (RobotX, SonicRobot), keep Hux MIT unless Steve decides. Watching and rewriting from understanding is the default.
 
 ## First software, in order
