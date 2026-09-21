@@ -133,7 +133,7 @@ No shopping links. No invented SKU. **On-hand?** is “known in the pile today,�
 | Flight controller | Wing / drone FC **class** | 1 | **FC: TBD.** Prefer Wing *when* we lock. Do not treat a blink as a lock. | P0 | **Yes — candidates:** F765 Wing, F722 Wing, F722 drone FC, Mamba F405 |
 | RC receiver | **TBS Nano RX** | 1 | Bind to the FC (or a dedicated link into the FC). | P0 | **Yes** |
 | Wheel drivers | **FOC ESC / BLDC driver** class | 2 | One channel in P1, then both. Current / voltage range follows 4S. SKU **TBD**. | P1 | **TBD** |
-| Wheel motors | **In-wheel BLDC + encoder** class | 2 | Brushless FOC (not steppers). Exact models **TBD**. 5" rubber already ordered — that is a **wheel**, not a motor. | P1 | **TBD** (motors unknown). Rubber: [`parts-on-hand.md`](parts-on-hand.md) |
+| Wheel motors | **In-wheel BLDC + encoder** class | 2 | Brushless FOC (not steppers). Exact models **TBD**. About **3 N·m peak** at the settled 6" wheel — not a SKU. 5" Zantle is a bench donor, not the foot. | P1 | **TBD** (motors unknown). [`research/leg-geometry.md`](research/leg-geometry.md). |
 | Pose brain | **Pi** *or* dedicated MCU *or* servo bus | 1 | **TBD** with the class. FC does **not** bit-bang stepper coils. | P3 | Pi: **yes** (companion pile). Dedicated MCU: **TBD** |
 | Pose drivers | TMC-class / multi-axis **or** servo channels | 4 ch | Between brain and pose joints. No driver SKU. | P3 | **TBD** |
 | Knee + hip-swing motors | **Servo *or* stepper + reduction** | 4 | Class **TBD**. Size for ~2× plant. **GIM8108-8** candidate (not ordered). | P3 | **TBD** |

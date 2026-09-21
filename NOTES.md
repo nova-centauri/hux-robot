@@ -8,7 +8,7 @@ Working notes. Tick boxes only when the work is real.
 
 - [x] **Create SoT** — this repo (`nova-centauri/hux-robot`) holds the scaffold + Steve's requirements.
 - [ ] **Research first** — study XRobots + Hattori + Steve's inspirations (Roadrunner, FrRonconi student balancer, Serra / Build Some Stuff, **Tazer mistakes**, **Stompy CAD/reality**) per [`docs/research/`](docs/research/). Phases A–C before any print. No vendoring. RobotX is GPL3; do not relicense Hux (MIT) without Steve. Steal Serra *packaging* (in-wheel BLDC+encoder, CoG-over-contact, serviceable prints, wheel-under-CoG) — not their files. Roadrunner is a lab RL demo; the student clip is closer vibe — neither is a Hux stack. Tazer is anti-patterns (wrong first motors, TPU tires, skinny power, LQR-too-early). Stompy is CAD/home-pose / sim lockstep — **not** an RL-walking requirement (R18).
-- [ ] **2D layouts, then first wheel-leg** for a **~9.5"** step (**Phase D**) — **carbon-tube** upper / lower spars + printed / machined end fittings, inside **~24" tall / ~10" wide**. Size plant-side joints for **~2×** one-leg load. FC stays TBD; do not block the print on electronics. Do not start this to skip research. Do not buy tube or a GIM8108 to fill a class. **No Blender before 2D** (R23).
+- [ ] **2D layouts, then first wheel-leg** for a **9.5" × 9.5"** step (**Phase D**) — **carbon-tube** upper / lower spars + printed / machined end fittings, inside **~24" tall / ~10" wide**. Settled draw: **7.5" + 7.5"** tubes, **6" × ~1.25"** real rubber, hip over the axle ([`docs/research/leg-geometry.md`](docs/research/leg-geometry.md)). Size plant-side joints for **~2×** one-leg load. FC stays TBD; do not block the print on electronics. Do not start this to skip research. Do not buy tube, a tire, or a GIM8108 to fill a class. **No Blender before 2D** (R23).
 - [ ] **FC TBD** — still not locked. Candidates: F765 Wing / F722 Wing / F722 drone / Mamba F405. Record the bench choice in [`docs/electronics.md`](docs/electronics.md) when one actually blinks.
 - [ ] **Blink, then spin** — LED on the bench FC, then a restrained in-wheel brushless FOC (not on carpet).
 - [ ] **Manual modes** — `PARKED` → `TWO_WHEEL` → `LEFT_ONLY` → `RIGHT_ONLY` from TBS **before** any autonomy.
@@ -20,7 +20,7 @@ Working notes. Tick boxes only when the work is real.
 ## Constraints (do not “helpfully” violate)
 
 - Research before hardware. Packet: [`docs/research/`](docs/research/).
-- No **new** spend until Steve asks. Prefer parts already on hand. 5" Zantle wheels already ordered — document only ([`docs/parts-on-hand.md`](docs/parts-on-hand.md)).
+- First buy is open: 6×1.25 tires, tubes, and 16 mm carbon tube only ([`docs/bom.md`](docs/bom.md)). No motors yet. 5" Zantle wheels already ordered — bench donor, not the foot ([`docs/parts-on-hand.md`](docs/parts-on-hand.md)). Wheel size is **settled at 6" OD**.
 - Do not lock an FC in docs to make the repo look finished.
 - Do not lock knee / hip swing to steppers or servos. **Servo vs stepper+belt TBD** — both open, no lean. Size either for one-leg (~2×) load. **GIM8108-8** is a candidate, not an order.
 - **Hip roll is in V1** (dynamic FOC / QDD / fast servo), even if imperfect. Not a stepper. Not V2.
@@ -35,9 +35,9 @@ Working notes. Tick boxes only when the work is real.
 ## Pointers
 
 - Decisions: [`docs/decisions.md`](docs/decisions.md)
-- Research: [`docs/research/README.md`](docs/research/README.md) · shortlist [`docs/research/xrobots.md`](docs/research/xrobots.md) · inspirations [`docs/research/inspiration.md`](docs/research/inspiration.md) · Roadrunner [`docs/research/roadrunner.md`](docs/research/roadrunner.md) · Tazer [`docs/research/tazer-lessons.md`](docs/research/tazer-lessons.md) · Stompy [`docs/research/stompy-sim2real.md`](docs/research/stompy-sim2real.md) · actuators [`docs/research/actuators-legs.md`](docs/research/actuators-legs.md) · plan [`docs/research/study-plan.md`](docs/research/study-plan.md)
+- Research: [`docs/research/README.md`](docs/research/README.md) · shortlist [`docs/research/xrobots.md`](docs/research/xrobots.md) · inspirations [`docs/research/inspiration.md`](docs/research/inspiration.md) · Roadrunner [`docs/research/roadrunner.md`](docs/research/roadrunner.md) · Tazer [`docs/research/tazer-lessons.md`](docs/research/tazer-lessons.md) · Stompy [`docs/research/stompy-sim2real.md`](docs/research/stompy-sim2real.md) · actuators [`docs/research/actuators-legs.md`](docs/research/actuators-legs.md) · **leg geometry** [`docs/research/leg-geometry.md`](docs/research/leg-geometry.md) · plan [`docs/research/study-plan.md`](docs/research/study-plan.md)
 - XRobots: https://github.com/XRobots · RobotX (GPL3): https://github.com/XRobots/RobotX
-- Requirements: [`docs/requirements.md`](docs/requirements.md) — R10 electric-only · R11 4S + step-down · R12 servo vs stepper TBD · R13 5" preferred · R14 modes · R16 hip roll in V1 · R24 mass soft · R34 carbon tubes · R35 ~24" · R36 ~2× plant
+- Requirements: [`docs/requirements.md`](docs/requirements.md) — R10 electric-only · R11 4S + step-down · R12 servo vs stepper TBD · R13 **6" OD** locked (Zantle is a bench donor) · R14 modes · R16 hip roll in V1 · R24 mass soft · R34 carbon tubes · R35 ~24" · R36 ~2× plant
 - Parts on hand: [`docs/parts-on-hand.md`](docs/parts-on-hand.md) (GIM8108-8 in Candidates) · shop tools [`docs/capabilities.md`](docs/capabilities.md)
 - Electronics: [`docs/electronics.md`](docs/electronics.md) · minimum [`docs/electronics-minimum.md`](docs/electronics-minimum.md)
 - Mechanical: [`docs/mechanical.md`](docs/mechanical.md) — carbon tubes, ~24" × ~10", in-wheel FOC, hip roll in V1, servo vs stepper TBD

@@ -12,10 +12,10 @@ These must stay true on `main`. Later rows in the log explain how we got here.
 
 | Topic | Locked intent |
 | --- | --- |
-| Stairs | Nominal riser **~9.5"**. Stroke / clearance owns the step. |
+| Stairs | **9.5" rise × 9.5" going** (nosing to nosing). Rise was already the north star. Going is the design tread the wheel was settled against. A deeper real tread is spare. |
 | Modes | **`PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY`** before any autonomy |
 | Power | **All-electric.** **4S LiPo** class + **regulated step-down** for pose / logic. TBS Nano RX. **FC TBD.** |
-| Wheels | **In-wheel BLDC FOC.** **5" Zantle** donor pair **ordered** (hackable). Band **4–6"**; **5" preferred.** |
+| Wheels | **6" OD locked** (a real tire at **5.75–6.25"** still counts). Width **~1–1.25"**. Real rubber, torsionally stiff. **In-wheel BLDC FOC.** Zantle 5" is a bench donor, not the foot. Not a buy. No spokes. |
 | Knee + hip swing | **Servo vs stepper+belt TBD.** Size for **~2× one-leg plant load.** No lean. |
 | Hip roll | **IN V1** (dynamic FOC / QDD / fast servo), even if imperfect. Not a stepper. Not V2. |
 | Structure / envelope | **Carbon fiber tubes** for upper / lower leg spars. **~24"** full extension. **~10"** width. Mass budget **soft / blown.** |
@@ -155,6 +155,34 @@ Does **not** change locks. Walking ≠ Hux wheeled balance — still steal fixtu
 Steve shared [ETA Prime's Diablo review](https://www.youtube.com/watch?v=S5PoZ8aNwvs) plus paper [arXiv:2407.21500](https://ar5iv.labs.arxiv.org/html/2407.21500) (Direct Drive Tech / DDTRobot commercial self-balancing wheeled-leg). Note: [`research/diablo.md`](research/diablo.md). Indexed from [`research/inspiration.md`](research/inspiration.md), [`research/study-plan.md`](research/study-plan.md), and [`research/README.md`](research/README.md). Shop / SDK cited only.
 
 Does **not** change locks. Steal: split brain (Pi vs motor board), DD/QDD as a *class* for high-bandwidth joints, **LQR/PID before RL**, height modes as states, aux contact later, payload vs height. **Do not buy Diablo.** Do not scale Hux to ~22 kg. No head tilt / cargo / creep rollers for V1. Keep **reuse simple balance** (R18). Hardware stays **TBD**. No spend. No M1502D / ROS2 / Pi4-as-FC lock.
+
+### 2026-09-21 — leg geometry + wheel contact
+
+Steve asked for a plan review and new leg math. The ordered walker wheels are not a good enough foot. He is considering a small spoked bike tire with real rubber. Carpet and interior floors can wait.
+
+Study: [`research/leg-geometry.md`](research/leg-geometry.md). **No spend. No tire SKU. Spokes not locked.**
+
+- **R13 updated.** The **4–6" / 5" preferred** contact plan is dropped. Zantle stays a disposable **bench donor**. Working draw is **~8" OD**, **~1–1.25" wide**, real rubber, torsionally stiff, until a real tread is measured. A **12–16"** kids bike wheel fails the tread, the **~10"** width, or the reaction-speed trade.
+- Hip over the wheel: knee gravity is the poke (a few N·m); a spring cancels the two-leg share. Hip roll sees the large moment when the other wheel unloads (`m g ×` half-track, ~6.5 N·m at 6 kg on the draw).
+- Tubes stay stiff (bending above ~40 Hz). Give lives in the spring and in radial tire compliance.
+- The old **~0.8 N·m** wheel figure is historical (2 kg). Wheel target on the 8" draw is about **3–4 N·m peak**. Not a SKU.
+
+### 2026-09-21 — wheel settled at 6"
+
+Steve: the wheel has to fit comfortably on one stair so the robot can pivot and place the raised wheel on the next step. Settle the diameter early.
+
+Study update: [`research/leg-geometry.md`](research/leg-geometry.md). **No spend. No tire SKU.**
+
+- **Design step is 9.5" rise × 9.5" going**, nosing to nosing. The going matches the riser already in R3. A deeper measured tread is spare margin, not a reason to grow the wheel. Reopen only if a measured going is under ~9".
+- **R13 settled at 6" overall diameter** (5.75–6.25" still counts), width ~1–1.25", real rubber, torsionally stiff. The whole tire sits between the nosing planes with about **±1.75"** of balance roll, and about **2.5"** of air under a 1" soffit.
+- The **~8" working draw is withdrawn.** On a 9.5" going it leaves about ±0.75" of roll. A 12" kids wheel does not enter the slot.
+- Leg draw follows: **7.5" + 7.5"** tubes, **6"** of body above the hip. Wheel peak about **3 N·m** on the 6 kg example. Not a motor SKU.
+
+### 2026-09-21 — first buy
+
+Steve asked whether a BOM existed and said he wants parts coming. There was no buy list. [`bom.md`](bom.md) is that list.
+
+Spend is open **only** for 3× **6×1.25** ribbed pneumatic tires, 3× matching tubes, and 2× **1 m** carbon tube (**16 mm OD**, 12–14 mm ID). Motors, GIM8108, drivers, and another FC stay unauthorized. Zantle, the on-hand FC pile, TBS Nano, ESP32, and the Pi are not reordered.
 
 ---
 

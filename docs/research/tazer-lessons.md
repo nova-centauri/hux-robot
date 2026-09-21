@@ -18,7 +18,7 @@ Maker-scale **wheeled biped**, about **0.7 m (~2 ft)** tall — same height clas
 | Teensy 4.1 + BNO055 IMU | **Not a Hux FC.** Hux FC stays **TBD** (on-hand Wing / drone pile). Steal “IMU on the balance brain,” not the MCU. |
 | T8S RC | Hux RX is **TBS Nano**. Steal stick *semantics*, not the radio. |
 | Dual **6S in series (~48 V)** for actuators, buck for logic | Hux prefers **4S + regulated step-down** (R11). His bus is heavier than we want. The lesson is **serious power distribution for FOC stalls**, not “copy 48 V.” |
-| Silicone / real rubber tires (not TPU) | Aligns with Hux **5" Zantle donor rubber** (hackable). Do not print TPU treads as the traction plan. |
+| Silicone / real rubber tires (not TPU) | Real rubber stands. The **5" Zantle is a bench donor, not the foot.** Settled contact is **6" OD**, torsionally stiff ([`leg-geometry.md`](leg-geometry.md)). Do not print TPU treads. |
 | Backdrivable **low-reduction** actuators for impacts | Matches hip-roll **dynamic / QDD / fast servo** lean (R16 / R27). Do not put a stiff stepper on roll. |
 
 **Do not** vendor his files, copy his 48 V stack, lock GIM8108, or buy a Teensy “because Tazer.”
@@ -28,7 +28,7 @@ Maker-scale **wheeled biped**, about **0.7 m (~2 ft)** tall — same height clas
 Focus of this note. Rewrite in Hux terms.
 
 1. **Wrong motors the first time.** Bad advice → wrong actuator type → **~$600 wasted**. Verify the *class* (QDD / backdrivable vs stiff position vs hobby servo) **before** anyone spends. Hux already forbids spend until Steve asks and forbids SKU locks. Treat “a friend said buy X” as a research pointer, not a cart.
-2. **TPU tires = zero traction.** Use **real rubber / silicone**. Hux: 5" walker-wheel donors are the first rubber, not a printed TPU tread.
+2. **TPU tires = zero traction.** Use **real rubber / silicone**. Hux: not a printed TPU tread. The 5" walker donors are bench rubber only. The settled contact is a torsionally stiff **6"** tire ([`leg-geometry.md`](leg-geometry.md)).
 3. **Power path underspec’d.** His actuators were about **7 A nominal / 22 A stall each**. Six axes can demand huge current. A PCB used as the power bus nearly blew. **Plan dedicated power distribution**, not skinny traces. Hux 4S is lighter than his 48 V stack and still needs a real bus for two FOC wheels + pose + roll stalls.
 4. **Don’t feed all motor power through a delicate logic PCB.** Separate power plane / harness from the FC / Pi / IMU board. The FC is TBD — still do not route wheel-ESC current across it.
 5. **CAN termination gotchas.** Actuators may already have terminators. He burned **14 hours** on this. If Hux later uses CAN (roll / QDD path), treat termination as a first-class bring-up item, not a footnote.
@@ -46,7 +46,7 @@ Focus of this note. Rewrite in Hux terms.
 2. **Carbon tubes are the confirmed path** (R34). His ~2 ft machine is a scale rhyme with Hux ~24".
 3. **4S may be lighter than his ~48 V stack** — keep 4S + step-down (R11). Still need **serious PDB / harness** for FOC stalls. Do not use the FC or a logic PCB as the power bus.
 4. **Prefer simple balance first** (PID cascade / existing patterns). LQR-with-a-wrong-model is how you lose a month. R18.
-5. **Rubber, not TPU.** Donor Zantle 5" already ordered.
+5. **Rubber, not TPU.** Zantle 5" is ordered as a bench donor. The foot is real rubber at **6"** ([`leg-geometry.md`](leg-geometry.md)). Not a buy.
 6. **Log this as inspiration + anti-patterns**, not as a shopping list.
 
 ## Cite

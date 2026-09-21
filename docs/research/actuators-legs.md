@@ -28,7 +28,7 @@ One-leg (`LEFT_ONLY` / `RIGHT_ONLY`) **CoG shift is a V1 goal (best-effort)**. H
 | DOF | Job on Hux | What the actuator must do |
 | --- | --- | --- |
 | **Hip rotation / swing** (hip *pitch*) | Lift and swing a wheeled leg for the stair cycle | Repeatable position. Hold a pose while the other side balances. Speed matters; it is not the CoG loop. |
-| **Knee** | Fold / extend for stroke and ~9.5" clearance | Same class of problem as hip swing: position, hold, COTS reduction if steppers. Highest gravity + step torque. Springs / linkage gravity compensation strongly recommended (Hattori). |
+| **Knee** | Fold / extend for stroke and the 9.5" step | Position and hold. With the hip kept over the wheel, gravity torque is the **knee poke** (about **4.4 N·m** one-leg at 6 kg on the 7.5" / 6" leg, ~2.2 N·m of that on a spring). Hip **roll** sees the larger moment. Springs / linkage still strongly recommended. Math: [`leg-geometry.md`](leg-geometry.md). |
 | **Hip roll** (balance angling) | Shift body CoG over the **planted** wheel for one-leg (`LEFT_ONLY` / `RIGHT_ONLY`) | **V1 goal (best-effort).** High-rate **torque** corrections. Ideally **backdrivable**. Pairs with planted-wheel fore/aft. Distinct from swing. Experimental — include the axis even if the first loop is ugly. |
 | **Wheels** | Contact, yaw, and pitch balance | **In-wheel brushless FOC** (baseline). Not a stepper problem. |
 
@@ -68,7 +68,7 @@ Do not “fix” roll weakness by stacking more belt ratio or a bigger NEMA. Tha
 
 Serra's 40 kg-class servos are a **data point** that high-torque servos can pose jointed legs — **not** a Hux SKU and **not** a preference. Size either class for R36. Run servos on the **regulated** rail (R11), not raw 4S.
 
-**GIM8108-8** is a noted *candidate* for knee / swing (not ordered). Treat it as a family data point next to “hobby servo” and “stepper + belt,” not a lock. See [`../parts-on-hand.md`](../parts-on-hand.md) Candidates.
+**GIM8108-8** is a noted *candidate* for knee / swing (not ordered). Treat it as a family data point next to “hobby servo” and “stepper + belt,” not a lock. Published nominal torque (~7.5 N·m) sits next to the **hip-roll** moment in [`leg-geometry.md`](leg-geometry.md) (~6.5 N·m at 6 kg). A sprung knee on the settled leg only has to make up ~2.2 N·m. The 6" wheel wants about **3 N·m** and does not want this mass at the axle. Still not a buy. See [`../parts-on-hand.md`](../parts-on-hand.md) Candidates.
 
 ## Other classes still on the table
 

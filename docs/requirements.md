@@ -14,7 +14,7 @@ Inspiration: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori
 | --- | --- | --- |
 | R1 | Balance on **two** wheeled legs | Baseline stance / teleop |
 | R2 | Balance on **one** wheeled leg | Gate before stair cycle |
-| R3 | Step **up or down ~9.5"** | Nominal residential riser; design stroke / clearance around this |
+| R3 | Step **up or down a 9.5" × 9.5" step** | Rise **and** going, nosing to nosing. Stroke owns the rise. The going is what the wheel has to sit in. [`research/leg-geometry.md`](research/leg-geometry.md). |
 | R4 | Wi‑Fi telemetry | Companion or bridge |
 | R5 | RC control via **TBS Nano RX** | Bind to FC (or dedicated link into FC) |
 | R6 | **In-wheel brushless FOC** driven wheels | ESC + BLDC + encoder per wheel. Motor **at the rim** (R30). Not steppers. SKU TBD. |
@@ -24,7 +24,7 @@ Inspiration: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori
 | R10 | **Electric-only** powertrain | Entire robot is electric. No ICE, no hybrid. |
 | R11 | Battery: **4S LiPo** class + **regulated step-down** | Nominal **~14.8 V** / full **~16.8 V**. Capacity / C **TBD**. Step down to **5 V / 6 V / 7.4 V** pose or logic rails so high-draw wheel FOC does not brown out planted joints. No pack / BEC SKU. |
 | R12 | Knee + hip swing: **servo vs stepper+belt TBD** | **Do not lock either.** Both open. Size whichever we pick for one-leg plant load (R36). Powerful / fast / reliable still required. **GIM8108-8** is a *candidate* for these axes — not ordered, not locked. See [`research/actuators-legs.md`](research/actuators-legs.md). |
-| R13 | Wheels **~4–6"** skinny, sturdy, some rubber | **5" preferred.** 5" Zantle donor pair **ordered** (hackable) — [`parts-on-hand.md`](parts-on-hand.md). Diameter not locked geometry. Stroke still owns the 9.5" (R3). |
+| R13 | Wheels: **6" OD**, **~1–1.25" wide**, real rubber, torsionally stiff | **Locked.** A measured OD of **5.75–6.25"** still counts. Whole tire sits in the 9.5" going with ~±1.75" of roll. 5" Zantle is a bench donor, not the foot. Not a buy. No spokes. [`research/leg-geometry.md`](research/leg-geometry.md). |
 | R14 | Four **manual** modes before autonomy | **`PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY`**. Spec: [`software.md`](software.md). Gate before open-loop step, pathfinding motion, stair scripts. |
 | R15 | V1 overall width **~10"** | Hypothesis; measure before CAD lock. Body + hip spacing + wheel thickness share the budget. |
 | R16 | **Hip roll is IN V1** | Dynamic FOC / QDD / fast servo (R27). Experimental — may not work as hoped. Still ship the joint and the one-leg modes. **Not a stepper. Not V2.** |
@@ -68,7 +68,7 @@ Inspiration: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori
 - Fabrication: COTS first (R19), draft-friendly customs (R20), wire ports (R21), service access (R22), **2D before Blender** (R23).
 - Hattori V2 lessons: extra leg DOF helps stairs / fall recovery; larger wheels help terrain; serial / linkage knees beat “knees both sides” parallel for stairs; springs for gravity assist if actuators are small; **motors at the wheels**.
 - Serra / Build Some Stuff lessons (packaging, not files): in-wheel BLDC + encoder; jointed legs keep CoG over contact as height changes; serviceable modular prints; wheel-under-CoG geometry. See [`research/inspiration.md`](research/inspiration.md).
-- No **new** spend until Steve approves purchases. Prefer parts he already owns. 5" wheels already ordered — document only.
+- No **new** spend until Steve approves purchases. Prefer parts he already owns. 5" Zantle wheels already ordered — bench donor only. The 6" wheel is a locked size, not an order.
 
 ## Candidate hardware (on hand / ordered)
 
@@ -77,7 +77,7 @@ Inventory (owned / ordered, reserved TBD): [`parts-on-hand.md`](parts-on-hand.md
 - FC: F722 Wing, F765 Wing, F722 drone FC, Mamba F405
 - Compute: ESP32, Raspberry Pi
 - RX: TBS Nano RX
-- Wheels: 5" Zantle donor rubber **ordered** (not a BLDC hub)
+- Wheels: **6" OD** locked. 5" Zantle **bench donor** ordered (not a BLDC hub, not the foot). [`research/leg-geometry.md`](research/leg-geometry.md).
 - Motors: in-wheel brushless FOC (exact models TBD)
 - Battery: 4S LiPo *class*. No pack SKU. Capacity / C **TBD**.
 - Knee / hip swing: **servo vs stepper+belt TBD**. GIM8108-8 candidate (not ordered).
@@ -88,7 +88,7 @@ Inventory (owned / ordered, reserved TBD): [`parts-on-hand.md`](parts-on-hand.md
 
 - **FC:** **TBD** (Steve 2026-09-20). Candidates remain F765 Wing / F722 Wing / F722 drone / Mamba F405. Prefer a Wing board when we lock; do not block mechanical work. Spare pins do **not** make drone firmware a stepper host (R29).
 - **Battery:** **4S LiPo class** + **controlled step-down** to pose / logic rails. Capacity / C / pack / BEC SKU **TBD**.
-- **Wheels:** in-wheel brushless FOC; **5" preferred** (4–6" band). Donor rubber already ordered.
+- **Wheels:** in-wheel brushless FOC. **6" OD × ~1–1.25"** real rubber, torsionally stiff. Locked size, not a buy. Zantle 5" is a bench donor. Geometry: [`research/leg-geometry.md`](research/leg-geometry.md).
 - **Knee / hip swing:** **servo vs stepper+belt TBD.** Both open. Size for one-leg (~2×) load. GIM8108-8 is a candidate only.
 - **Hip roll:** **in V1**, dynamic class, experimental / best-effort CoG shift.
 - **Companion:** Raspberry Pi for cameras + pathfinding inference. Possible stepper brain if that class is chosen.

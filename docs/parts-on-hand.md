@@ -1,6 +1,6 @@
 # Parts on hand
 
-**Status:** inventory started 2026-09-20. **Docs only.** Not a shopping list. **No new spend.**
+**Status:** inventory started 2026-09-20. What to buy is [`bom.md`](bom.md). This page stays the owned / ordered list. First buy authorized 2026-09-21 is tires, tubes, and carbon tube only.
 
 This page records what Steve already **owns** or has **already ordered**, plus a short **candidates** list that is explicitly **not owned / not ordered**. Owned ≠ reserved for Hux. If a row does not say reserved, treat reservation as **TBD**.
 
@@ -20,7 +20,7 @@ Do not list these as rows above. They are not parts on hand.
 
 | Item | Qty | Status | Specs/link | Hux use | Notes |
 | --- | --- | --- | --- | --- | --- |
-| Zantle Universal Walker Wheels Replacement — 5 inch, grey | 1 pair | **Ordered 2026-09-20 (Steve)** | [Amazon B0D534PDRT](https://www.amazon.com/dp/B0D534PDRT). Listing: 5" rubber wheels; for walkers with ~1" tube / 0.31" adjustment holes; includes 1 pair wheels + 2 pairs caster fittings; up to ~300 lb capacity rating; 8 height adjustments on stem. ~$14.59 when ordered. | **Disposable donor rubber** for the first custom hub / in-wheel BLDC (lathe / mill is the natural shop path — [`capabilities.md`](capabilities.md)). Matches the **5" preferred** skinny-rubber hypothesis. | **Already purchased — document only.** Walker *caster / fork* assemblies — **not** ready-made BLDC hubs. Steve 2026-09-20: **OK to hack apart** for the first hub, **or replace later**. Treat as disposable donor rubber, not a part to preserve. Discard the stem / fork as needed. Measure bore / OD when they arrive. Reserved for Hux: **yes** (this order). |
+| Zantle Universal Walker Wheels Replacement — 5 inch, grey | 1 pair | **Ordered 2026-09-20 (Steve)** | [Amazon B0D534PDRT](https://www.amazon.com/dp/B0D534PDRT). Listing: 5" rubber wheels; for walkers with ~1" tube / 0.31" adjustment holes; includes 1 pair wheels + 2 pairs caster fittings; up to ~300 lb capacity rating; 8 height adjustments on stem. Package ~1.5 lb. ~$14.59 when ordered. | **Bench donor only** — hack apart to learn a hub / restrained spin. **Not the foot.** Settled foot is **6" OD** real rubber ([`research/leg-geometry.md`](research/leg-geometry.md)). Lathe / mill path: [`capabilities.md`](capabilities.md). | **Already purchased — document only.** Walker *caster / fork* assemblies — **not** ready-made BLDC hubs. Steve 2026-09-20: **OK to hack apart**. Steve 2026-09-21: not the contact; diameter settled at 6". Discard the stem / fork as needed. Measure bore / OD / width / mass when they arrive. Reserved for Hux: **yes** (this order). Do not cut the 7.5" tubes to suit 5". |
 
 ## Electronics
 
@@ -40,7 +40,7 @@ On-hand pile from project notes. **On hand (Steve)** means owned today, not “o
 
 | Item | Qty | Status | Specs/link | Hux use | Notes |
 | --- | --- | --- | --- | --- | --- |
-| Wheel BLDC / in-wheel hub motor | — | none yet | — | Custom hub on the 5" **donor** rubber (see Mechanical). FOC + encoder *class* when one exists. | The Zantle order is **wheels / caster forks**, not motors. OK to hack the rubber off the walker hub. |
+| Wheel BLDC / in-wheel hub motor | — | none yet | — | Custom hub. First spin can use the 5" **donor** rubber. The foot is the settled **6"** real-rubber wheel. FOC + encoder *class* when one exists. Target about **3 N·m peak** — not a SKU. | The Zantle order is **wheels / caster forks**, not motors. OK to hack the rubber off the walker hub. |
 | Wheel FOC driver / ESC | — | none yet | — | Per-wheel FOC channel. | — |
 | Knee / hip-swing actuator | — | none yet | — | Pose joints. Class **servo vs stepper+belt TBD**. | See Candidates. |
 | Hip-roll actuator | — | none yet | — | Dynamic roll **in V1**. | — |
@@ -57,4 +57,4 @@ Research pointers only. **Not a buy list. No spend.** Do not treat a row here as
 
 | Item | Qty | Status | Specs/link | Hux use | Notes |
 | --- | --- | --- | --- | --- | --- |
-| — | — | none yet | — | Fasteners, wire, springs, packs, cameras, carbon tube | Not inventoried. Do not invent a BOM to fill this table. |
+| — | — | none yet | — | Fasteners, wire, springs, packs, cameras | Not inventoried. Buy lines live on [`bom.md`](bom.md), not in this table. |

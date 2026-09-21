@@ -21,7 +21,7 @@ Maker-scale **6-DOF 3D-printed walker** built in a living room in **under a week
 | **40 V** power-tool pack → motors; step-down **~19 V** to the Jetson | Hux prefers **4S + regulated step-down** (R11). Steal “serious bus + a real step-down,” not 40 V. |
 | Robstride CAN hub (several CAN buses over USB-C) | Pattern, not a bus lock. |
 | Logitech gamepad | Hux RX is **TBS Nano**. Steal stick *semantics* later, not the radio. |
-| TPU / flexible foot pads; later **angled** soles | Hux plants **wheels** (5" Zantle rubber). Foot-pad SKUs are irrelevant. The **geometry-biases-gait** lesson is not. |
+| TPU / flexible foot pads; later **angled** soles | Hux plants **wheels** (settled **6"** real rubber; 5" Zantle is a bench donor). Foot-pad SKUs are irrelevant. The **geometry-biases-gait** lesson is not. |
 | ~**$1,000–$1,300** (video vs LinkedIn) | Not a Hux budget. No spend. |
 
 **Do not** vendor his CAD / policy, copy the 40 V / Jetson / Robstride bill, or treat Fauna Walker as Hux geometry.

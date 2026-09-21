@@ -2,7 +2,7 @@
 
 Phased research checklist. Tick only when the work is real. **No spend** until Steve asks. **FC stays TBD.** Printable wheel-leg is **Phase D**, not Phase A.
 
-Track milestones in [`../../NOTES.md`](../../NOTES.md). Shortlist and links: [`xrobots.md`](xrobots.md). Steve inspirations (Roadrunner + FrRonconi student balancer + Serra / Build Some Stuff + Tazer + Stompy + Diablo): [`inspiration.md`](inspiration.md). Roadrunner detail: [`roadrunner.md`](roadrunner.md). Stompy CAD→sim→real: [`stompy-sim2real.md`](stompy-sim2real.md). Diablo wheeled-leg: [`diablo.md`](diablo.md). Actuator trade: [`actuators-legs.md`](actuators-legs.md). Cite/adapt rules: [`README.md`](README.md). Decision log: [`../decisions.md`](../decisions.md).
+Track milestones in [`../../NOTES.md`](../../NOTES.md). Shortlist and links: [`xrobots.md`](xrobots.md). Steve inspirations (Roadrunner + FrRonconi student balancer + Serra / Build Some Stuff + Tazer + Stompy + Diablo): [`inspiration.md`](inspiration.md). Roadrunner detail: [`roadrunner.md`](roadrunner.md). Stompy CAD→sim→real: [`stompy-sim2real.md`](stompy-sim2real.md). Diablo wheeled-leg: [`diablo.md`](diablo.md). Actuator trade: [`actuators-legs.md`](actuators-legs.md). Leg math: [`leg-geometry.md`](leg-geometry.md). Cite/adapt rules: [`README.md`](README.md). Decision log: [`../decisions.md`](../decisions.md).
 
 ## Gates
 
@@ -95,10 +95,10 @@ Hux cycle (from [`../vision.md`](../vision.md)): **lift → 1-leg balance → pl
 
 **Goal:** first mechanical fit-check. Still no spend unless Steve asks. FC still TBD; do not block the print on electronics.
 
-Use [`../checklists/mechanical-v1.md`](../checklists/mechanical-v1.md) and [`../mechanical.md`](../mechanical.md). This phase is the existing “first wheel-leg” milestone — **gated** by A–C **and** by **several 2D layouts** (R23).
+Use [`../checklists/mechanical-v1.md`](../checklists/mechanical-v1.md), [`../mechanical.md`](../mechanical.md), and the settled draw in [`leg-geometry.md`](leg-geometry.md). This phase is the existing “first wheel-leg” milestone — **gated** by A–C **and** by **several 2D layouts** (R23).
 
 - [ ] Phases A–C actually done (not skipped to make the repo look busy).
-- [ ] **Several 2D sketch layouts** (side / front / top + linkage) before any Blender / 3D CAD (R23). Show motor-at-wheel and belt runs if belts.
+- [ ] **Several 2D sketch layouts** (side / front / top + linkage) before any Blender / 3D CAD (R23). Show motor-at-wheel and belt runs if belts. Use the settled draw in [`leg-geometry.md`](leg-geometry.md): 6" wheel in the 9.5" × 9.5" slot, 7.5"+7.5" tubes, hip over the axle.
 - [ ] One-side envelope: **carbon-tube spars** + end fittings, linkage + spring stub, stroke toward 9.5" inside **~24" tall / ~10" wide** (R7 / R34 / R35).
 - [ ] Fit-check: raised wheel can reach a 9.5" tread **with margin**, without self-collision.
 - [ ] No second-leg copy until the first articulates.

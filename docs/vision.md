@@ -34,7 +34,7 @@ See [`electronics.md`](electronics.md) and [`software.md`](software.md).
 Inspiration: [Alex Hattori — wheeled biped V2](https://www.alex-hattori.com/blog/wheeled-biped-v2).
 
 - Extra leg DOF helps stairs and fall recovery. Hux **hip roll is in V1**.
-- Larger wheels help terrain. Hux V1 still leans **skinny ~5"** for stair tread contact.
+- Larger wheels help open terrain. Hux settles at **6" OD × ~1–1.25"** so the tire sits in a **9.5" × 9.5"** step with room to pivot and place the other wheel. [`research/leg-geometry.md`](research/leg-geometry.md).
 - Serial / linkage knees beat “knees on both sides” parallel for stairs.
 - Springs for gravity assist if actuators are small (Hattori V1 used torsion springs; V2 dropped them because actuators were not the limit).
 - Wheel motors **at the wheel**.

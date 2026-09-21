@@ -4,7 +4,7 @@
 
 V1 target is **one wheel-leg** — printed / machined **fittings** on **carbon-tube spars** — with a linkage + spring stub, sized toward a **~9.5"** step. Envelope: up to **~24" tall at full extension**, **~10" wide**. Do not wait on the flight controller. **Do not open Blender until several 2D sketch layouts exist** (R23).
 
-**Parts on hand:** [`parts-on-hand.md`](parts-on-hand.md). A **5"** walker-wheel pair is already ordered (document only; hackable donor rubber).
+**Parts on hand:** [`parts-on-hand.md`](parts-on-hand.md). A **5"** walker-wheel pair is already ordered — **bench donor only**, not the foot. Wheel diameter is **settled at 6" OD**: [`research/leg-geometry.md`](research/leg-geometry.md).
 
 **Shop / fab:** [`capabilities.md`](capabilities.md). End fittings (hubs, belt mounts, joint flanges) are a natural print / mill / lathe job. **Do not mill a spar that a carbon tube already is** (R19 / R34).
 
@@ -44,9 +44,9 @@ Do not print a carbon-tube-shaped spar. Do not turn a tube on the lathe to “ma
 
 Hux may stand up to **~24" tall at full extension** (wheel contact to top of stance). This is the **primary scale change** vs the earlier compact lean.
 
-Still gated by **R3**: the raised wheel must reach a **~9.5"** residential riser **with margin**. Taller tubes buy stroke and clearance; they do not replace the step. **5"** wheels are already on order — stroke still owns the riser; the rim is not the climb.
+Still gated by **R3**: the raised wheel must reach a **~9.5"** residential riser **with margin**. Taller tubes buy stroke and clearance; they do not replace the step. The axle-to-axle rise is **9.5" for any wheel diameter** — a bigger tire does not make the lift shorter. Stroke still owns the riser.
 
-Sketch wheel diameter vs. step vs. knee stroke **against this 24" cap**. Do not grow past ~24" on paper to invent extra reach.
+Settled draw against the 24" cap ([`research/leg-geometry.md`](research/leg-geometry.md)): **7.5" + 7.5"** equal tubes, **~6"** of body above the hip, **6" OD** wheel. Do not grow past ~24" on paper to invent extra reach. Do not grow the wheel if a real tread is deeper than 9.5".
 
 ### Width envelope (~10") (R15)
 
@@ -84,7 +84,7 @@ Sketch lines (fill when something is weighed — empty TBD is correct):
 | --- | --- |
 | **Belt runs get longer** | Knee / hip-swing reducers (if belts) span more tube. Plan tension, idlers, and service along the spar. Wires must not occupy the belt path (R21). |
 | **Actuators sit at the joints** | Servo / stepper / **GIM8108-class** *candidate* at **hip and knee**, with **tube between**. The spar is empty length, not a motor house. Class is **not locked** (R12). No SKU. |
-| **CoG sits higher** | Helps: inverted-pendulum fall is slower (`ω ≈ √(g/h)`). Hurts: more inertia; longer disturbance arms; a ~10" stance still has to put CoG over one ~5" contact. Static hip-roll torque for a given lateral shift is about `m g d` (height drops out); the dynamics do not. |
+| **CoG sits higher** | Helps: inverted-pendulum fall is slower (`ω ≈ √(g/h)`). At the working stance that doubling time is about **145 ms**. Hurts: more inertia and a longer disturbance arm. Static moment about the planted wheel is `m g d` (height drops out): ~**6.5 N·m** at 6 kg if the CoG is still on an ~8.75" track's centerline. |
 
 Do not hang joint mass in the middle of a tube to “use the length.” Do not invent a GIM8108 buy to fill the class.
 
@@ -116,15 +116,17 @@ Access to fasteners, batteries, FC (bay — board still TBD), and actuators as *
 
 **Gate:** 2D layouts exist **before** Blender (or other 3D CAD). Several views: side, front, top, plus linkage / stroke. The 2D set must show **motor-at-wheel**, the **~24" / ~10"** envelope, and **inside/outside belt runs** if belts are on the sketch. A `.blend` with no preceding 2D is a process miss.
 
-## Wheels — diameter + in-wheel drive
+## Wheels — 6" OD, in-wheel drive
 
-Diameter is **undecided geometry**. Soft preference **5"** (4–6" band). Steve 2026-09-20 / 09-21:
+Steve 2026-09-21: settle the wheel so it fits comfortably on one step. The robot pivots on the planted wheel and sets the raised wheel on the next step. Full math: [`research/leg-geometry.md`](research/leg-geometry.md). **Size is locked. Not a buy.**
 
-- **5" Zantle** walker wheels **ordered** — disposable donor rubber, OK to hack apart. Measure bore / OD on arrival. [`parts-on-hand.md`](parts-on-hand.md).
-- Must be **skinny**, **sturdy**, and have **some rubber**. Hard plastic-only rims are not the intent.
+- **6" overall diameter** (a real tire at **5.75–6.25"** still counts). Width **~1–1.25"**. Real rubber, torsionally stiff (high pressure or a firm elastomer). Radial give for a nosing. Not carcass twist between the encoder and the ground.
+- Design step is **9.5" rise × 9.5" going**, nosing to nosing. The whole tire sits between the nosings with about **±1.75"** of roll (~±6° of lean at a 17" hip) and about **2.5"** of air under a 1" soffit. That is the pivot-and-place margin.
+- **No spokes.** A turned hub with the rubber on it. A 12" kids wheel is wider than the slot.
+- **5" Zantle** stays a disposable **bench donor**. Do not cut the 7.5" tubes to suit it. [`parts-on-hand.md`](parts-on-hand.md).
 - Drive is **in-wheel brushless FOC** (R6 / R30). Motor / ESC / encoder models TBD. No wheel-motor SKU.
 
-**5" (or 6") wheel vs ~9.5" riser:** the wheel size is about how the rim sits on and reaches a tread (contact patch, nosing, fitting on the run). It does **not** own the step height. **Leg stroke / clearance** still has to lift a wheeled foot onto a ~9.5" riser.
+The rim still does **not** own the step height. The axle rises 9.5" whatever the diameter. The going owns how large a tire can sit there and still roll.
 
 ### Motor at the wheel (R30)
 
@@ -144,11 +146,11 @@ The wheel motor is a **balance actuator**. Catch a tip on one skinny rim — tor
 
 Candidate *classes* (not buys) — see [`electronics.md`](electronics.md):
 
-- Lightweight: gimbal BLDC ~2208–4108 + FOC + magnetic encoder. [StackForce mini](https://wiki.seeedstudio.com/stackforce_mini_wheeled_legged_robot/) (~540 g / 2208) is a **scale** reference, not a kit lock.
-- Mid: small outrunner + planetary / cycloidal if one-leg needs more torque.
+- Lightweight: gimbal BLDC ~2208–4108 + FOC + magnetic encoder, **with reduction**. Bare ~0.5 N·m is trim on the 6" wheel, not a catch. [StackForce mini](https://wiki.seeedstudio.com/stackforce_mini_wheeled_legged_robot/) (~540 g / 2208) is a **scale** reference, not a kit lock.
+- Mid: small outrunner + planetary / cycloidal. This is the honest band for about **3 N·m** peak at the 6" contact.
 - Avoid for Hux: large ODrive 63xx / hoverboard hubs (SonicRobot class — steal loops, not iron).
 
-Rough physics (order-of-magnitude, **historical 2 kg / 0.25 m numbers** — mass is now soft and height is ~24"): at ~2 kg and ~0.25 m CoG, a ~10° tip needs on the order of **~0.8 Nm** at the CoG. **One-leg** puts that on **one** wheel. A taller / heavier Hux changes the number; do not treat 0.8 Nm as a locked rating. Recompute when we weigh a real machine.
+Wheel torque target (one planted wheel, ~6 kg example, **6" OD**): about **0.8 / 1.5 / 2.2 N·m** to stop a **10° / 20° / 30°** fall, so about **3 N·m peak**. On the step itself the shelf caps the catch at about **±6°** before the tire crosses a nosing. Formula: [`research/leg-geometry.md`](research/leg-geometry.md). The old **~0.8 N·m** line was a 2 kg machine. Do not hang a GIM8108-class actuator on the axle. Axle speed for balance is roughly **60–380 rpm**. Recompute when a robot is weighed.
 
 ## Hip roll axis (CoG shift) — IN V1
 
@@ -220,7 +222,7 @@ Applies when pose joints use belts (stepper+belt path, or a servo+belt reducer).
 
 From [STRIDE V2](https://www.alex-hattori.com/blog/wheeled-biped-v2):
 
-- Larger wheels help terrain; small wheels + low clearance make grass / rocks a non-starter. Hux V1 still leans **skinny ~5"** for stair tread contact — that is a stair choice, not a forgotten terrain lesson.
+- Larger wheels help open terrain. On a **9.5" × 9.5"** step the settled diameter is **6"**, skinny enough that two tires fit in **~10"**. [`research/leg-geometry.md`](research/leg-geometry.md).
 - Serial / linkage knees are kinder to stairs than parallel “knees both sides.”
 - **Wheel motors at the wheel** are simpler than remote-drive belts (cables need to survive flailing). Hux V1 **locks that placement** (R30).
 - Springs are worth it if actuators are small.
@@ -242,7 +244,7 @@ Use this instead of a fake finished BOM. Canonical box list: [`checklists/mechan
 
 - [ ] Measure a real ~9.5" riser / fixture (riser, tread, nosing).
 - [ ] **Several 2D sketch layouts** (side / front / top + linkage) show **motor-at-wheel**, **~24" / ~10"** envelope, and **inside/outside belt runs** if belts. **No Blender until this is real** (R23).
-- [ ] Sketch wheel diameter vs. step height vs. knee stroke against a **~24"** full-extension cap (**5"** wheels preferred / already ordered).
+- [ ] Sketch the settled **6"** wheel inside the **9.5" × 9.5"** slot, with **7.5" + 7.5"** tubes and **~6"** above the hip ([`research/leg-geometry.md`](research/leg-geometry.md)).
 - [ ] **COTS carbon tubes** for upper + lower main lengths. Printed / machined **end fittings** only. Do not print the spar (R34 / R19).
 - [ ] Customs have **draft**, wire **ports**, **service** access (R20–R22).
 - [ ] Linkage layout + spring stub. Jointed motion keeps CoG over wheel contact as height changes.
@@ -255,7 +257,7 @@ Use this instead of a fake finished BOM. Canonical box list: [`checklists/mechan
 ## Out of scope for V1
 
 - Full stair gait hardware (two finished legs + body).
-- **New** spend on actuators, carbon tube, or wheels. The 5" pair is **already ordered** — document only.
+- **New** spend on actuators, carbon tube, or wheels. The 5" pair is **already ordered** — bench donor only. The 6" size is not an order.
 - Locking an FC mount *model* before the FC is chosen (the **bay** still gets designed).
 - Locking servo vs stepper+belt, a tube OD / wall, GIM8108 SKU, or belt pitch.
 - Printing or machining a spar that COTS carbon tube already is.

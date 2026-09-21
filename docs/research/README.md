@@ -13,6 +13,7 @@ This packet is the working study set. It does not replace [`../requirements.md`]
 | [tazer-lessons.md](tazer-lessons.md) | Tazer wheeled biped — learn from the mistakes (anti-patterns) |
 | [stompy-sim2real.md](stompy-sim2real.md) | Stompy week-build RL walker — CAD/reality match, shared zero; **not** RL walking for Hux V1 |
 | [diablo.md](diablo.md) | Diablo (DDTRobot) — commercial wheeled-leg; LQR + DD; steal split brain / height states; **do not buy** |
+| [leg-geometry.md](leg-geometry.md) | Leg math. Wheel settled at **6" OD** on a **9.5" × 9.5"** step. Walker wheel is a bench donor. |
 | [study-plan.md](study-plan.md) | Phased checklist before hardware (Phases A–D) |
 
 Decision log (not research, but the lock list): [`../decisions.md`](../decisions.md).

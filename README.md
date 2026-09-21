@@ -20,7 +20,7 @@ This repo is the source of truth for Steve Barrett's Hux project. It is a docs-a
 | Flight controller | **TBD** — candidates listed, not locked |
 | Mechanical V1 | First wheel-leg is **Phase D** (after study + 2D). Not started. **~24" × ~10"**, carbon-tube spars. |
 | Modes | `PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY` before autonomy |
-| Spend | Wheels already ordered 2026-09-20 (document only). **No new spend** until Steve asks. Prefer parts already on hand. |
+| Spend | First buy is tires, tubes, and carbon tube ([`docs/bom.md`](docs/bom.md)). 5" walker wheels already ordered as a bench donor. Wheel size **settled at 6" OD**. Motors not authorized. |
 | Parts on hand | Inventory in [`docs/parts-on-hand.md`](docs/parts-on-hand.md) — owned ≠ reserved |
 | Shop / fab | Tools (not parts) in [`docs/capabilities.md`](docs/capabilities.md) — mill, lathe, weld; fab welcome |
 
@@ -46,10 +46,11 @@ software/     companion compute — Pi cameras / pathfinding (empty)
 - [Research](docs/research/) — research-first stance, XRobots shortlist, inspiration shares, actuator trade, study plan (Phases A–D)
 - [Requirements](docs/requirements.md) — hard / soft requirements, candidate hardware, no-spend rule
 - [Vision](docs/vision.md) — stair gait, split-brain intent, lessons to steal
-- [Mechanical](docs/mechanical.md) — carbon-tube spars, ~24" × ~10", in-wheel FOC, hip roll in V1, servo vs stepper TBD, ~2× plant load
+- [Mechanical](docs/mechanical.md) — carbon-tube spars, ~24" × ~10", in-wheel FOC, hip roll in V1, servo vs stepper TBD, ~2× plant load. Leg math: [research/leg-geometry.md](docs/research/leg-geometry.md)
 - [Electronics](docs/electronics.md) — FC TBD, 4S + step-down, TBS Nano RX, in-wheel FOC, 8-axis I/O
 - [Minimum electronics](docs/electronics-minimum.md) — P0–P5 class list (no SKU, no new spend)
 - [Parts on hand](docs/parts-on-hand.md) — owned / ordered inventory + candidates (GIM8108-8 not ordered)
+- [First buy](docs/bom.md) — 6×1.25 tires, tubes, 16 mm carbon tube. Motors not on this list.
 - [Shop capabilities](docs/capabilities.md) — mill, lathe, bender, brake, bandsaw, solder, weld, breadboards (not parts)
 - [Software](docs/software.md) — blink → spin → four manual modes → cameras later
 - [Checklists](docs/checklists/) — prefer these over fake finished stacks

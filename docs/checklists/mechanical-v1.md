@@ -8,7 +8,7 @@ Target: one side only — **carbon-tube spars** + printed / machined **end fitti
 
 - [ ] Measure a real riser / fixture (height, tread, nosing).
 - [ ] **Several 2D layouts** (side / front / top + linkage) show **motor-at-wheel**, **~24" / ~10"** envelope, and **inside/outside belt runs** if belts. **No Blender until this is real** (R23).
-- [ ] Wheel diameter vs. step vs. knee stroke is in that 2D set. **5"** preferred / already ordered (4–6" band). Stroke owns the 9.5".
+- [ ] Wheel vs. step vs. knee stroke is in that 2D set. **6" OD** tire centered in the **9.5" × 9.5"** slot, **7.5" + 7.5"** tubes, **~6"** above the hip ([`../research/leg-geometry.md`](../research/leg-geometry.md)). Zantle 5" is a bench donor, not the foot. Stroke owns the rise.
 - [ ] **COTS carbon tubes** for upper + lower main lengths. Printed / machined **end fittings** only (hubs, belt mounts, joint flanges). Do not print or mill the spar (R34 / R19).
 - [ ] Customs have **draft**, no lazy undercuts, printable orientation (R20). Machined / bent / welded customs are welcome.
 - [ ] **Wire ports / cable paths** through links and body (R21). Leads do not occupy a belt run.

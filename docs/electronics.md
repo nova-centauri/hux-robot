@@ -70,12 +70,12 @@ When a real pack is on the bench, record cell count, measured resting voltage, c
 
 ## Wheel drive class (R25) — no SKU
 
-The wheel motor is a **balance actuator**. Hux has to catch a tip on one skinny rim. That is a torque-bandwidth / reaction-speed problem, not a “how many continuous watts can we dump into a 5" wheel” problem.
+The wheel motor is a **balance actuator**. Hux has to catch a tip on one skinny rim. That is a torque-bandwidth / reaction-speed problem, not a continuous-watts problem. On the settled **6" / ~6 kg** example, a 30° one-leg catch is about **2.2 N·m** — target about **3 N·m peak**. On the step the shelf caps the catch at about ±6°. Math: [`research/leg-geometry.md`](research/leg-geometry.md).
 
 | Criterion | Intent | Status |
 | --- | --- | --- |
 | What we optimize | **Reaction speed / torque bandwidth** for inverted-pendulum balance | Not max continuous power |
-| Wheel | **~4–6"** skinny rubber; **5" preferred** | 5" donor rubber ordered. See [`mechanical.md`](mechanical.md). |
+| Wheel | **6" OD × ~1–1.25"** real rubber, torsionally stiff. Size locked, not a buy. | 5" Zantle is a **bench donor**, not the foot. [`research/leg-geometry.md`](research/leg-geometry.md). |
 | Placement | **In-wheel** (hub / coaxial) | R30 |
 | Bus | **4S** (~14.8 V nom / ~16.8 V full) | Class lean (R11). Not a pack lock. |
 | Mass | Two wheel motors + drivers must **leave room** for pose joints, structure, pack, FC, Pi | Mass budget **soft** (R24). |
@@ -86,8 +86,8 @@ The wheel motor is a **balance actuator**. Hux has to catch a tip on one skinny 
 
 | Class | Why it is on the list | Still TBD / not a lock |
 | --- | --- | --- |
-| **Lightweight:** gimbal BLDC **~2208–4108** + FOC driver + magnetic encoder | Fast torque, low mass. Scale reference: [StackForce mini](https://wiki.seeedstudio.com/stackforce_mini_wheeled_legged_robot/) ~**540 g** / **2208**. *Scale* only — **not a kit lock**. | Stator size, kV, which FOC board, which encoder |
-| **Mid:** small outrunner + planetary / cycloidal | If a 5–6" rim + **one-leg** needs more torque than a gimbal can give at the shaft | Ratio, backlash, reflected inertia, packaging at the wheel |
+| **Lightweight:** gimbal BLDC **~2208–4108** + FOC driver + magnetic encoder | Fast torque, low mass. Scale reference: [StackForce mini](https://wiki.seeedstudio.com/stackforce_mini_wheeled_legged_robot/) ~**540 g** / **2208**. *Scale* only — **not a kit lock**. | Bare ~0.5 N·m arrests about 6° on the 6" / 6 kg example. Honest here **with reduction**, or on a much lighter machine. Stator, ratio, kV, FOC board, encoder all TBD. |
+| **Mid:** small outrunner + planetary / cycloidal | Honest band for about **3 N·m peak** at the 6" contact. Still not a hoverboard hub. | Ratio, backlash, reflected inertia, packaging at the wheel |
 | **Avoid as a default:** large ODrive **63xx** / hoverboard hub motors | SonicRobot-class hardware. Fine to *study* for IMU → PID → torque. Heavy for a maker Hux. Mass is soft now — still do not shop the SonicRobot README. | Do not treat upstream parts lists as a Hux BOM |
 
 Prefer **reusing** a FOC / torque-mode stack that already exists ([SimpleFOC](https://simplefoc.com/) and gimbal-class patterns) over designing a Hux inverter (R18). **TBD which stack we adopt.**
