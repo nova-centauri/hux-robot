@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hux hardware</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page">
+    <header class="mast">
+      <div>
+        <p class="kicker">Hux</p>
+        <h1>Hardware</h1>
+        <p>What we would buy, what is already here, and what is only a class estimate. Order now is the only authorized spend. Nothing below with an estimate is a chosen part.</p>
+        <nav class="pages" aria-label="Pages">
+          <a href="index.html">Drawings</a>
+          <a href="flow.html">Data flow</a>
+          <a href="hardware.html" aria-current="page">Hardware</a>
+        </nav>
+      </div>
+      <div class="stamp">
+        Model 2026-09-22<br>
+        6" × 1.25" wheel<br>
+        7.5" + 7.5" tubes<br>
+        24" tall · 14" wide
+      </div>
+    </header>
+
+    <div class="totals">
+      <div><span>Order now</span><strong>$89.41</strong>Tires, tubes, carbon tube. Shipping extra.</div>
+      <div><span>Later, class estimate</span><strong>~$1,050</strong>Actuators are most of it, and none are chosen.</div>
+      <div><span>Working total</span><strong>~$1,140</strong>Order now plus the estimates. A wrong actuator guess moves this.</div>
+    </div>
+
+    <section class="block">
+      <h2>Order now — $89.41</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Qty</th><th>Part</th><th>Line</th><th>Role</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>3</td>
+              <td>6×1.25 ribbed tire, 3.75" bead, high pressure</td>
+              <td>$33</td>
+              <td>Two feet and a spare. <a href="https://www.scooterworks.com/products/universal-parts-6x1-25-tire-154-18">Scooterworks 154-18</a>.</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>6×1.25 inner tube, bent stem</td>
+              <td>$23.85</td>
+              <td>Matches the tire. <a href="https://electricscooterparts.com/tubes.html">ElectricScooterParts TUB-6X1.25</a>.</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Carbon tube, 16 mm OD, 12–14 mm ID, 1 m</td>
+              <td>$32.56</td>
+              <td>Upper and lower spars. <a href="https://windcatcherrc.com/product/carbon-fiber-tube-16mm-x-14mm-x-1000mm/">Windcatcher 16×14×1000</a>.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>On hand — $0</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Qty</th><th>Part</th><th>State</th><th>Role</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Flight controller</td><td><span class="chip hand">On hand</span></td><td>F765 Wing, F722 Wing, F722 drone, or Mamba F405. Not locked.</td></tr>
+            <tr><td>1</td><td>IMU</td><td><span class="chip hand">On the FC</span></td><td>Already on whichever flight controller comes off the shelf.</td></tr>
+            <tr><td>1</td><td>TBS Nano RX</td><td><span class="chip settled">On hand</span></td><td>Pilot link. Binds into the flight controller.</td></tr>
+            <tr><td>1</td><td>Raspberry Pi</td><td><span class="chip later">On hand</span></td><td>Cameras, faces, and pathfinding later. Not required to balance.</td></tr>
+            <tr><td>0–1</td><td>ESP32</td><td><span class="chip later">On hand</span></td><td>Optional telemetry bridge if the Pi should not own the radio link.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Shop and bench — not in the total</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Qty</th><th>Part</th><th>State</th><th>Role</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>2</td><td>Wheel hub</td><td><span class="chip open">Shop</span></td><td>Lathe and mill. Bead seat 3.75".</td></tr>
+            <tr><td>1 pair</td><td>Zantle 5" walker wheel</td><td><span class="chip bench">Bench</span></td><td>Already bought. Not the foot.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="callout">GIM8108-8 is a yardstick, seen near $85. It is not an order and it is not in the total. Nominal 7.5 N·m is tight for the 9.5 N·m roll example at 6 kg on the 14 inch stance, and it is a 48 V class part. Hux is 4S.</p>
+    </section>
+
+    <section class="block">
+      <h2>Actuators — ~$810, class estimate</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Qty</th><th>Part</th><th>Est.</th><th>Role</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>2</td><td>In-wheel brushless + encoder</td><td>~$130</td><td>About 3 N·m peak. No store link until a motor is chosen.</td></tr>
+            <tr><td>2</td><td>Wheel encoder</td><td>in motor</td><td>Counted with the wheel motor. Not a second line.</td></tr>
+            <tr><td>2</td><td>Wheel FOC driver</td><td>~$80</td><td>No driver picked.</td></tr>
+            <tr><td>2</td><td>Hip roll actuator</td><td>~$200</td><td>About 9.5 N·m at 6 kg on the 14" stance. Not a stepper.</td></tr>
+            <tr><td>4</td><td>Knee and hip-swing actuator</td><td>~$400</td><td>Class estimate if they are small geared motors. A belt-and-stepper set would be less. Servo versus stepper is still open.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Power — ~$60, look first</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Qty</th><th>Part</th><th>Est.</th><th>Role</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>4S LiPo</td><td>~$40</td><td>Skip this if a drone pack is already on the shelf.</td></tr>
+            <tr><td>1</td><td>Step-down and distribution</td><td>~$20</td><td>Logic and pose off the motor rail. No board picked.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Cameras and face — ~$180, later</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Qty</th><th>Part</th><th>Est.</th><th>Role</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>2</td><td>Front stereo pair</td><td>~$40</td><td>Part of the seven-camera estimate. No module picked.</td></tr>
+            <tr><td>5</td><td>Back, left, right, top, bottom</td><td>~$100</td><td>About $20 each. No module picked.</td></tr>
+            <tr><td>1</td><td>Preset-face display</td><td>~$20</td><td>About 2.2" × 1.0". No panel picked.</td></tr>
+            <tr><td>2</td><td>RGB in each eye socket</td><td>~$20</td><td>Shines into the orbital cavity. The light is the eye.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="note">
+      Same figures as <a href="../../docs/bom.md">docs/bom.md</a>.
+      Inventory of what is already here is <a href="../../docs/parts-on-hand.md">docs/parts-on-hand.md</a>.
+      Hubs, fasteners, wire, and bearings are shop stock and are not in the total.
+      Shipping, tax, and a wrong actuator guess move the $1,140. The $89.41 does not.
+    </footer>
+  </div>
+</body>
+</html>

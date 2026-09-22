@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hux data flow</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page">
+    <header class="mast">
+      <div>
+        <p class="kicker">Hux</p>
+        <h1>Data flow</h1>
+        <p>How a stick command reaches a joint, and where the current goes. These are classes. No harness, and no board is chosen.</p>
+        <nav class="pages" aria-label="Pages">
+          <a href="index.html">Drawings</a>
+          <a href="flow.html" aria-current="page">Data flow</a>
+          <a href="hardware.html">Hardware</a>
+        </nav>
+      </div>
+      <div class="stamp">
+        Model 2026-09-22<br>
+        6" × 1.25" wheel<br>
+        7.5" + 7.5" tubes<br>
+        24" tall · 14" wide
+      </div>
+    </header>
+
+    <section class="stage">
+      <h3>Command</h3>
+      <div class="lanes">
+        <div class="branch">
+          <div class="node"><b>Pilot stick</b><span>Crossfire radio. Not a Hux board.</span></div>
+          <div class="arrow" aria-hidden="true">→</div>
+          <div class="node"><b>TBS Nano RX</b><span>On hand. Binds into the flight controller.</span></div>
+          <div class="arrow" aria-hidden="true">→</div>
+          <div class="node"><b>Flight controller + IMU</b><span>Board not chosen. On the shelf: F765 Wing, F722 Wing, F722 drone, Mamba F405. Runs attitude, wheel torque, and the four modes.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stage">
+      <h3>Power</h3>
+      <div class="lanes">
+        <div class="branch">
+          <div class="node"><b>4S pack</b><span>Class is locked. Look through the drone pile before buying one. About 14.8 V nominal, 16.8 V full.</span></div>
+          <div class="arrow" aria-hidden="true">→</div>
+          <div class="node"><b>Power split</b><span>Wheel and roll current stay on the pack. Do not route motor current through the flight controller.</span></div>
+          <div class="arrow" aria-hidden="true">→</div>
+          <div class="node"><b>Step-down rail</b><span>5 / 6 / 7.4 V for the controller, the receiver, and the pose joints.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stage">
+      <h3>Motion</h3>
+      <div class="lanes">
+        <p class="hint">Three branches leave the flight controller in parallel. Wheel current stays on the pack.</p>
+        <div class="branch">
+          <div class="node"><b>Wheel FOC ×2</b><span>Torque mode. About 3 N·m peak at the 6 inch wheel, roughly 60–380 rpm. Drivers not chosen.</span></div>
+          <div class="arrow" aria-hidden="true">→</div>
+          <div class="node"><b>In-wheel motors ×2</b><span>Brushless, encoder on each, motor at the hub. The hub is turned on the lathe. Not ordered.</span></div>
+        </div>
+        <div class="branch">
+          <div class="node"><b>Hip roll ×2</b><span>In V1. Dynamic class, not a stepper. On the 14 inch stance the 6 kg example is about 9.5 N·m when the other wheel lifts. Driver path is PWM, CAN, or its own FOC.</span></div>
+        </div>
+        <div class="branch">
+          <div class="node"><b>Knee and hip swing ×4</b><span>Servo, or stepper plus a belt. Still open. A spring holds about 2.2 N·m of the two-leg crouch so the motor is free to move. If they are steppers, the flight controller does not drive the coils.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stage">
+      <h3>Modes</h3>
+      <div class="lanes">
+        <div class="modes">
+          <div class="mode-name">PARKED</div>
+          <div class="mode-name">TWO_WHEEL</div>
+          <div class="mode-name">LEFT_ONLY</div>
+          <div class="mode-name">RIGHT_ONLY</div>
+        </div>
+        <p class="hint">The pilot selects these on the stick. One-leg modes do not themselves lift a foot.</p>
+      </div>
+    </section>
+
+    <section class="stage">
+      <h3>Later</h3>
+      <div class="lanes">
+        <p class="hint">Not required to balance. Pathfinding comes after the four modes.</p>
+        <div class="branch">
+          <div class="node"><b>Pi</b><span>On hand. Owns the cameras, the face display, and the eye lights.</span></div>
+          <div class="arrow word">or</div>
+          <div class="node"><b>ESP32</b><span>On hand. Optional thin telemetry bridge if the Pi should not own the radio link.</span></div>
+        </div>
+        <div class="branch">
+          <div class="node"><b>Cameras ×7</b><span>Two on the front for stereo. One each on the back, left, right, top, and bottom. Small modules. Not bought.</span></div>
+          <div class="node"><b>Face display</b><span>Small screen on the front for a few preset faces. Roughly 2.2 by 1.0 inches.</span></div>
+          <div class="node"><b>Eye lights ×2</b><span>The eyes are sockets. An RGB shines into each orbital cavity for expression. The light is the eye, not a separate lamp.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="note">
+      Same plan as <a href="../../docs/electronics.md">docs/electronics.md</a> and <a href="../../docs/electronics-minimum.md">docs/electronics-minimum.md</a>.
+      The flight controller stays TBD until one of the boards on the shelf blinks.
+    </footer>
+  </div>
+</body>
+</html>

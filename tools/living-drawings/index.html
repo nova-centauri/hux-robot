@@ -10,8 +10,14 @@
   <div class="page">
     <header class="mast">
       <div>
-        <h1>Hux living drawings</h1>
-        <p>Side and top views of the working model, plus the electronics we actually have a plan for. Drag the joints, request a wheel position, or play the climb. The stair is the settled 9.5 by 9.5 inch step.</p>
+        <p class="kicker">Hux</p>
+        <h1>Living drawings</h1>
+        <p>Side and top views of the working model, and the stair climb. Drag the joints, request a wheel position, or press Play. The stair is the settled 9.5 by 9.5 inch step.</p>
+        <nav class="pages" aria-label="Pages">
+          <a href="index.html" aria-current="page">Drawings</a>
+          <a href="flow.html">Data flow</a>
+          <a href="hardware.html">Hardware</a>
+        </nav>
       </div>
       <div class="stamp">
         Model 2026-09-22<br>
@@ -87,6 +93,18 @@
           <p class="hint small">The mass sits over the planted wheel whenever the other wheel is off. The 12.75" sway from the trailing wheel to the leading wheel happens during the gather, with both wheels down, and never has to come back: the leading foot is next step's planted foot. Hip axes drawn 5.4" off the centerline (assumption). Numbers at the hips are leg lean from vertical.</p>
         </div>
       </div>
+      <div class="transport">
+        <button type="button" id="pairPlay" class="play" aria-pressed="false">Play</button>
+        <label>Speed
+          <select id="speed">
+            <option value="1" selected>Real time</option>
+            <option value="0.5">Half</option>
+            <option value="0.25">Quarter</option>
+            <option value="0.1">Tenth</option>
+          </select>
+        </label>
+        <span class="now" id="climbStatus">step 0</span>
+      </div>
       <svg id="timeline" class="strip" role="img" aria-label="Phases of one step against real time"></svg>
       <svg id="traces" class="strip tall" role="img" aria-label="Knee torque and forward angular momentum over one step"></svg>
       <div class="controls pair-controls">
@@ -120,7 +138,6 @@
             <button type="button" id="pairBalance">Both balance</button>
             <button type="button" id="pairStep">Left down, right up</button>
             <button type="button" id="pairCopy">Copy right to left</button>
-            <button type="button" id="pairPlay" aria-pressed="false">Play the climb</button>
           </div>
         </div>
       </div>
@@ -130,14 +147,6 @@
             <option value="joints">Joint angles</option>
             <option value="wheels">Wheel positions</option>
             <option value="climb">Climb the stairs</option>
-          </select>
-        </label>
-        <label class="mode">Speed
-          <select id="speed">
-            <option value="1">Real time</option>
-            <option value="0.5">Half</option>
-            <option value="0.25">Quarter</option>
-            <option value="0.1">Tenth</option>
           </select>
         </label>
         <div id="wheelDrive" hidden>
@@ -188,85 +197,6 @@
       </div>
       <div class="readout" id="verdict"></div>
     </article>
-
-    <section class="block">
-      <h2>Signal and power, in order</h2>
-      <div class="flow">
-        <div class="flow-row">
-          <div class="node"><b>Pilot stick</b><span>Crossfire radio. Not a Hux board.</span></div>
-          <div class="arrow">→</div>
-          <div class="node"><b>TBS Nano RX</b><span>On hand. Binds into the flight controller.</span></div>
-          <div class="arrow">→</div>
-          <div class="node"><b>Flight controller + IMU</b><span>Board not chosen. On the shelf: F765 Wing, F722 Wing, F722 drone, Mamba F405. Runs attitude, wheel torque, and the four modes.</span></div>
-        </div>
-        <div class="flow-row">
-          <div class="node"><b>4S pack</b><span>Class is locked. Look through the drone pile before buying one. About 14.8 V nominal, 16.8 V full.</span></div>
-          <div class="arrow">→</div>
-          <div class="node"><b>Power split</b><span>Wheel and roll current stay on the pack. A step-down makes 5 / 6 / 7.4 V for logic and pose. Do not route motor current through the flight controller.</span></div>
-          <div class="arrow">→</div>
-          <div class="node"><b>Step-down rail</b><span>Feeds the controller, the receiver, and the pose joints.</span></div>
-        </div>
-        <div class="flow-row">
-          <div class="node"><b>Wheel FOC ×2</b><span>Torque mode. About 3 N·m peak at the 6 inch wheel, roughly 60–380 rpm. Drivers not chosen.</span></div>
-          <div class="arrow">→</div>
-          <div class="node"><b>In-wheel motors ×2</b><span>Brushless, encoder on each, motor at the hub. The hub is turned on the lathe. Not ordered.</span></div>
-        </div>
-        <div class="flow-row">
-          <div class="node"><b>Hip roll ×2</b><span>In V1. Dynamic class, not a stepper. On the 14 inch stance the 6 kg example is about 9.5 N·m when the other wheel lifts. Driver path is PWM, CAN, or its own FOC.</span></div>
-          <div class="arrow">+</div>
-          <div class="node"><b>Knee and hip swing ×4</b><span>Servo, or stepper plus a belt. Still open. A spring holds about 2.2 N·m of the two-leg crouch so the motor is free to move. If they are steppers, the flight controller does not drive the coils.</span></div>
-        </div>
-        <div class="flow-row">
-          <div class="node"><b>Modes</b><span>PARKED, TWO_WHEEL, LEFT_ONLY, RIGHT_ONLY. The pilot selects them. One-leg modes do not themselves lift a foot.</span></div>
-          <div class="arrow">→</div>
-          <div class="node"><b>Pi, later</b><span>On hand. Owns the cameras, the face display, and the eye lights. Pathfinding comes after the four modes. Not required to balance.</span></div>
-          <div class="arrow">or</div>
-          <div class="node"><b>ESP32</b><span>On hand. Optional thin telemetry bridge if the Pi should not own the radio link.</span></div>
-        </div>
-        <div class="flow-row">
-          <div class="node"><b>Cameras ×7</b><span>Two on the front for stereo. One each on the back, left, right, top, and bottom. Small modules. Not bought.</span></div>
-          <div class="arrow">→</div>
-          <div class="node"><b>Face display</b><span>Small screen on the front for a few preset faces. Roughly 2.2 by 1.0 inches.</span></div>
-          <div class="arrow">+</div>
-          <div class="node"><b>Eye lights ×2</b><span>The eyes are sockets. An RGB shines into each orbital cavity for expression. The light is the eye, not a separate lamp.</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="block">
-      <h2>Parts we are working from</h2>
-      <table>
-        <thead>
-          <tr><th>Group</th><th>Part</th><th>Qty</th><th>State</th><th>Est.</th><th>Role</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Structure</td><td>6×1.25 ribbed tire, 3.75" bead, high pressure</td><td>3</td><td><span class="chip buy">First buy</span></td><td>$33</td><td>Two feet and a spare. <a href="https://www.scooterworks.com/products/universal-parts-6x1-25-tire-154-18">Scooterworks 154-18</a>.</td></tr>
-          <tr><td>Structure</td><td>6×1.25 inner tube, bent stem</td><td>3</td><td><span class="chip buy">First buy</span></td><td>$23.85</td><td>Matches the tire. <a href="https://electricscooterparts.com/tubes.html">ElectricScooterParts TUB-6X1.25</a>.</td></tr>
-          <tr><td>Structure</td><td>Carbon tube, 16 mm OD, 12–14 mm ID, 1 m</td><td>2</td><td><span class="chip buy">First buy</span></td><td>$32.56</td><td>Upper and lower spars. <a href="https://windcatcherrc.com/product/carbon-fiber-tube-16mm-x-14mm-x-1000mm/">Windcatcher 16×14×1000</a>.</td></tr>
-          <tr><td>Structure</td><td>Wheel hub</td><td>2</td><td><span class="chip open">Shop</span></td><td>—</td><td>Lathe and mill. Bead seat 3.75". Not in the total.</td></tr>
-          <tr><td>Structure</td><td>Zantle 5" walker wheel</td><td>1 pair</td><td><span class="chip bench">Bench</span></td><td>paid</td><td>Already bought. Not the foot.</td></tr>
-          <tr><td>Motors</td><td>In-wheel brushless + encoder</td><td>2</td><td><span class="chip open">Open</span></td><td>~$130</td><td>About 3 N·m peak. Class estimate. No store link until a motor is chosen.</td></tr>
-          <tr><td>Motors</td><td>Wheel FOC driver</td><td>2</td><td><span class="chip open">Open</span></td><td>~$80</td><td>Class estimate. No driver picked.</td></tr>
-          <tr><td>Motors</td><td>Hip roll actuator</td><td>2</td><td><span class="chip open">Open</span></td><td>~$200</td><td>About 9.5 N·m at 6 kg on the 14" stance. Not a stepper.</td></tr>
-          <tr><td>Motors</td><td>Knee and hip-swing actuator</td><td>4</td><td><span class="chip open">Open</span></td><td>~$400</td><td>Class estimate if they are small geared motors. A belt-and-stepper set would be less.</td></tr>
-          <tr><td>Motors</td><td>GIM8108-8</td><td>—</td><td><span class="chip bench">Do not buy</span></td><td>—</td><td>Yardstick only, seen near $85. Not in the total. 7.5 N·m nominal is tight for the 9.5 N·m roll example.</td></tr>
-          <tr><td>Sensors</td><td>IMU</td><td>1</td><td><span class="chip hand">On the FC</span></td><td>$0</td><td>On the flight controller already on the shelf.</td></tr>
-          <tr><td>Sensors</td><td>Wheel encoder</td><td>2</td><td><span class="chip open">Open</span></td><td>in motor</td><td>Counted with the wheel motor.</td></tr>
-          <tr><td>Cameras</td><td>Front stereo pair</td><td>2</td><td><span class="chip later">Later</span></td><td>~$40</td><td>Part of the seven-camera estimate. No module picked.</td></tr>
-          <tr><td>Cameras</td><td>Back, left, right, top, bottom</td><td>5</td><td><span class="chip later">Later</span></td><td>~$100</td><td>About $20 each. No module picked.</td></tr>
-          <tr><td>Face</td><td>Preset-face display</td><td>1</td><td><span class="chip later">Later</span></td><td>~$20</td><td>About 2.2" × 1.0". No panel picked.</td></tr>
-          <tr><td>Face</td><td>RGB in each eye socket</td><td>2</td><td><span class="chip later">Later</span></td><td>~$20</td><td>Shines into the orbital cavity.</td></tr>
-          <tr><td>Compute</td><td>Flight controller</td><td>1</td><td><span class="chip hand">On hand</span></td><td>$0</td><td>F765 Wing, F722 Wing, F722 drone, or Mamba F405. Not locked.</td></tr>
-          <tr><td>Compute</td><td>Raspberry Pi</td><td>1</td><td><span class="chip later">On hand</span></td><td>$0</td><td>Cameras, faces, pathfinding later.</td></tr>
-          <tr><td>Radio</td><td>TBS Nano RX</td><td>1</td><td><span class="chip settled">On hand</span></td><td>$0</td><td>Pilot link.</td></tr>
-          <tr><td>Radio</td><td>ESP32</td><td>0–1</td><td><span class="chip later">On hand</span></td><td>$0</td><td>Optional telemetry bridge.</td></tr>
-          <tr><td>Power</td><td>4S LiPo</td><td>1</td><td><span class="chip open">Look first</span></td><td>~$40</td><td>Skip if a drone pack is already on the shelf.</td></tr>
-          <tr><td>Power</td><td>Step-down and distribution</td><td>1</td><td><span class="chip open">Open</span></td><td>~$20</td><td>Logic and pose off the motor rail.</td></tr>
-          <tr><td></td><td><strong>Order now</strong></td><td></td><td></td><td><strong>$89.41</strong></td><td>Tires, tubes, carbon tube. Shipping extra.</td></tr>
-          <tr><td></td><td><strong>Working total</strong></td><td></td><td></td><td><strong>~$1,140</strong></td><td>Order now plus the class estimates. Actuators are most of it and are not chosen.</td></tr>
-        </tbody>
-      </table>
-    </section>
 
     <footer class="note">
       Numbers that are settled come from <code>docs/research/leg-geometry.md</code> and <code>docs/bom.md</code>. The climb dynamics are explained in <code>docs/research/stair-climb-dynamics.md</code>.

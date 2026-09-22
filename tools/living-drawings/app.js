@@ -40,9 +40,10 @@
     mu: document.getElementById("knobMu")
   };
   let playing = false;
-  let playTimer = 0;
+  let playFrame = 0;
   let playBase = 0;
   let playT0 = 0;
+  let playRate = 1;
   let held = null;
   let writingScrub = false;
 
@@ -52,7 +53,22 @@
 
   /* One step of the climb plays in this many ms: the real cycle time divided by the speed. */
   function period() {
-    return K.climb().T * 1000 / Number(speed.value || 1);
+    return K.climb().T * 1000 / playRate;
+  }
+
+  function syncRate() {
+    playRate = Number(speed.value || 1);
+  }
+
+  function setPlayLabel(on) {
+    pairPlay.textContent = on ? "Pause" : "Play";
+    pairPlay.setAttribute("aria-pressed", on ? "true" : "false");
+  }
+
+  function haltClock() {
+    playing = false;
+    cancelAnimationFrame(playFrame);
+    setPlayLabel(false);
   }
 
   const presets = {
@@ -165,9 +181,11 @@
       writingScrub = false;
     }
     const shown = playing ? playBase + (performance.now() - playT0) / period() : (held ? held.p : Number(climb.value));
-    document.getElementById("climbOut").textContent = frame.climbing
+    const status = frame.climbing
       ? "step " + frame.step + " · " + frame.t.toFixed(2) + " s · " + frame.phase
       : "step " + Math.floor(shown);
+    document.getElementById("climbOut").textContent = status;
+    document.getElementById("climbStatus").textContent = status;
     drawSide(c);
     drawTop(c);
     drawPair(frame);
@@ -967,10 +985,7 @@
     const p = playBase + (performance.now() - playT0) / period();
     held = { step: Math.floor(p), f: p - Math.floor(p), p: p };
     climb.value = String(p);
-    playing = false;
-    clearInterval(playTimer);
-    pairPlay.textContent = "Play the climb";
-    pairPlay.setAttribute("aria-pressed", "false");
+    haltClock();
     syncDrive();
   }
 
@@ -1019,12 +1034,7 @@
   [rHip, rKnee, lHip, lKnee, headX, headY].forEach(function (el) {
     el.addEventListener("input", function () {
       if (playing || held || pairDrive.value === "climb") {
-        if (playing) {
-          playing = false;
-          clearInterval(playTimer);
-          pairPlay.textContent = "Play the climb";
-          pairPlay.setAttribute("aria-pressed", "false");
-        }
+        if (playing) haltClock();
         held = null;
         pairDrive.value = "joints";
         syncDrive();
@@ -1034,12 +1044,7 @@
   });
   [rWheelX, rWheelY, lWheelX, lWheelY].forEach(function (el) {
     el.addEventListener("input", function () {
-      if (playing) {
-        playing = false;
-        clearInterval(playTimer);
-        pairPlay.textContent = "Play the climb";
-        pairPlay.setAttribute("aria-pressed", "false");
-      }
+      if (playing) haltClock();
       held = null;
       pairDrive.value = "wheels";
       syncDrive();
@@ -1085,12 +1090,7 @@
   });
   climb.addEventListener("input", function () {
     if (writingScrub) return;
-    if (playing) {
-      playing = false;
-      clearInterval(playTimer);
-      pairPlay.textContent = "Play the climb";
-      pairPlay.setAttribute("aria-pressed", "false");
-    }
+    if (playing) haltClock();
     const p = Number(climb.value) || 0;
     held = { step: Math.floor(p), f: p - Math.floor(p), p: p };
     pairDrive.value = "climb";
@@ -1103,8 +1103,14 @@
       playBase = p;
       playT0 = performance.now();
     }
+    syncRate();
     draw();
   });
+  function playLoop() {
+    if (!playing) return;
+    draw();
+    playFrame = requestAnimationFrame(playLoop);
+  }
   pairPlay.addEventListener("click", function () {
     if (playing) {
       stopPlay();
@@ -1113,20 +1119,17 @@
       draw();
       return;
     }
+    syncRate();
     const start = held ? held.p : Number(climb.value) || 0;
     playBase = start;
     playT0 = performance.now();
     playing = true;
     held = { step: Math.floor(start), f: start - Math.floor(start), p: start };
     pairDrive.value = "climb";
-    pairPlay.textContent = "Stop";
-    pairPlay.setAttribute("aria-pressed", "true");
+    setPlayLabel(true);
     syncDrive();
-    clearInterval(playTimer);
-    playTimer = setInterval(function () {
-      if (!playing) return;
-      draw();
-    }, 32);
+    cancelAnimationFrame(playFrame);
+    playFrame = requestAnimationFrame(playLoop);
   });
   setPair(
     { theta: M.balanceTheta, phi: M.balancePhi },
