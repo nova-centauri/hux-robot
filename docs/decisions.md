@@ -18,7 +18,7 @@ These must stay true on `main`. Later rows in the log explain how we got here.
 | Wheels | **6" OD locked** (a real tire at **5.75–6.25"** still counts). Width **~1–1.25"**. Real rubber, torsionally stiff. **In-wheel BLDC FOC.** Zantle 5" is a bench donor, not the foot. Not a buy. No spokes. |
 | Knee + hip swing | **Servo vs stepper+belt TBD.** Size for **~2× one-leg plant load.** No lean. |
 | Hip roll | **IN V1** (dynamic FOC / QDD / fast servo), even if imperfect. Not a stepper. Not V2. |
-| Structure / envelope | **Carbon fiber tubes** for upper / lower leg spars. **~24"** full extension. **~10"** width. Mass budget **soft / blown.** |
+| Structure / envelope | **Carbon fiber tubes** for upper / lower leg spars. **~24"** full extension. **~14"** outside width. Head inside, wheels and legs outside the head. Mass budget **soft / blown.** |
 | Fabrication | **COTS** structure, **draft-friendly** customs, **wire ports**, **serviceability**, **2D before Blender** |
 | Shop | Mill / lathe / brake / bender / bandsaw / weld / solder / breadboards. Fab is welcome. |
 | Stepper I/O (if chosen) | **FC does not drive stepper coils.** Stepper drivers / Pi for pose. |
@@ -183,6 +183,16 @@ Study update: [`research/leg-geometry.md`](research/leg-geometry.md). **No spend
 Steve asked whether a BOM existed and said he wants parts coming. There was no buy list. [`bom.md`](bom.md) is that list.
 
 Spend is open **only** for 3× **6×1.25** ribbed pneumatic tires, 3× matching tubes, and 2× **1 m** carbon tube (**16 mm OD**, 12–14 mm ID). Motors, GIM8108, drivers, and another FC stay unauthorized. Zantle, the on-hand FC pile, TBS Nano, ESP32, and the Pi are not reordered.
+
+### 2026-09-21 — knee to the rear, face, cameras
+
+On the living drawings, Steve wants the **knee behind** the hip. Poke stays about **2.9"** at the 92% stance. The page also carries rough motor bulk (not a buy), seven cameras (front stereo pair plus back, sides, top, bottom), a small front display for preset faces, and an RGB in each eye socket. The lit socket is the eye. None of the face or camera parts are authorized to buy.
+
+### 2026-09-21 — 14" wide, BOM prices
+
+Overall width moves from **~10"** to **~14"** (R15). The head stays a narrower unit, about **7"** on the drawing. Wheels and legs are outside it. Track is about **12.75"** with a 1.25" tire, so the one-leg moment at 6 kg is about **9.5 N·m**.
+
+[`bom.md`](bom.md) now has store links, line prices, and totals. **$89.41** is the authorized order. The working total of about **$1,140** includes class estimates for parts that are not chosen and not authorized.
 
 ---
 

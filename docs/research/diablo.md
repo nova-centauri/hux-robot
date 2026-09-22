@@ -18,7 +18,7 @@ The paper maps the same six **M1502D** motors as **2 wheels + 2 hip + 2 knee**. 
 
 Compute on the unit ETA Prime reviewed: **Raspberry Pi 4 + motor / controller board** (Pi on GPIO / serial to the drive board). The paper's lab stack is a **micro-controller** (ChibiOS, BMI088 IMU, CAN to drives) plus a mini-PC over UART. The [open SDK](https://diablo-sdk-docs.readthedocs.io/en/latest/) / [ROS2 package](https://github.com/DDTRobot/diablo_ros2) supports Raspberry Pi and an X3Pi variant. **Open SDK / ROS2** is the commercial development path. Do not treat Pi4, their MCU, or ROS2 Foxy as a Hux lock.
 
-Standing vs creeping is the payload story: **~4 kg standing**, **~80 kg creeping** (head-down, driven wheels + **auxiliary rollers** under the head so the body does not scrape). Shop: no-load **jump ~8 cm**. Paper: ~8 cm obstacle / curb class on flat ground; head height travel ~20 cm. Width **540 mm** — more than **twice** Hux's **~10"** stance.
+Standing vs creeping is the payload story: **~4 kg standing**, **~80 kg creeping** (head-down, driven wheels + **auxiliary rollers** under the head so the body does not scrape). Shop: no-load **jump ~8 cm**. Paper: ~8 cm obstacle / curb class on flat ground; head height travel ~20 cm. Width **540 mm** — about **1.5×** Hux's **~14"** stance.
 
 This is a **paid platform**, not a maker first-prototype. Do not buy it. Do not scale Hux to 22 kg because theirs is.
 
@@ -71,7 +71,7 @@ Rewrite in Hux terms. **Do not buy the robot. Do not copy their 22 kg / 540 mm /
 
 | Diablo | Hux |
 | --- | --- |
-| Commercial ~22.9 kg, 540 mm wide, paid SDK platform | Maker R&D; **~10"** width; **~24"** full extension; mass **soft** — still not 22 kg |
+| Commercial ~22.9 kg, 540 mm wide, paid SDK platform | Maker R&D; **~14"** width; **~24"** full extension; mass **soft** — still not 22 kg |
 | 6× M1502D direct-drive; Pi4 + motor board (or MCU + mini-PC) | Wheels FOC; hip roll dynamic in V1; knee / swing **TBD**; **FC TBD** + Pi later |
 | Standing 4 kg / creeping 80 kg; aux rollers; top cargo; head tilt | No head DoF, no cargo bay, no creep rollers for **V1** |
 | Model-based **LQR** + PD auxiliaries; ROS2 SDK | **Reuse simple balance** (R18). Phase A = XRobots IMU → PID → wheel. No ROS lock |

@@ -1,47 +1,58 @@
-# First buy
+# Bill of materials
 
-Started **2026-09-21** because Steve asked for parts coming. This is the buy list. Inventory of what is already owned stays on [`parts-on-hand.md`](parts-on-hand.md).
+Started **2026-09-21**. Prices are page prices or class estimates from that day. Shipping and tax are extra. A tire outside **5.75–6.25"** overall, or wider than **~1.25"**, does not count as the foot.
 
-**Authorized now:** the Order now table only. **Not authorized:** motors, drivers, GIM8108, another flight controller, an 8" or 12" tire, a caster-wheel assembly.
+**To order now: $89.41.** That is the only authorized spend.
 
-Prices are what the pages showed on 2026-09-21. Confirm stock, then measure what arrives. A tire outside **5.75–6.25"** overall, or wider than **~1.25"**, does not count as the settled foot.
+**Working total if the later estimates are bought as written: about $1,120.** The actuator block is most of that, and it is not chosen.
 
-## Order now
+Inventory of what is already here: [`parts-on-hand.md`](parts-on-hand.md).
 
-Two feet, one spare, and spar stock. The hub is a lathe part, so buy the rubber and the tube, not a finished caster.
+## Order now — $89.41
 
-| Qty | What | Spec that matters | Where | About |
-| --- | --- | --- | --- | --- |
-| **3** | **6×1.25 pneumatic tire**, ribbed, tube-type | Nominal **6 × 1.25"**. Bead seat **3.75" ID**. Pressure class **50–85 PSI** (higher is the stiffer carcass). Ribbed, not a knobby. Cheng Shin 6×1¼ publishes **153 mm OD** (~6.02") and **32 mm** section (~1.26"), which is the size we want. | [Scooterworks 154-18](https://www.scooterworks.com/products/universal-parts-6x1-25-tire-154-18) ($11, 85 PSI, 3.75" bead). If that page is sold out, the same size from a scooter-parts house. [DIY Mobility 6×1¼ rib](https://diymobilityparts.com/collections/pneumatic-wheelchair-tires) lists a C-179 rib at about $12. | ~$11 each |
-| **3** | **6×1.25 inner tube**, bent Schrader stem | Must say **6×1.25** or **6×1¼**, inner about **3.75"**. A bent stem clears a hub flange. | [ElectricScooterParts TUB-6X1.25](https://electricscooterparts.com/tubes.html) ($7.95). | ~$8 each |
-| **2** | **Carbon tube, 1 m** | **16 mm OD, 12–14 mm ID** (1–2 mm wall). Round. Pultruded or roll-wrapped. One meter covers four 7.5" links; the second meter is the mis-cut. Wet-cut, respirator. | Example in stock when checked: [Windcatcher 16×14×1000 mm](https://windcatcherrc.com/product/carbon-fiber-tube-16mm-x-14mm-x-1000mm/) (~$16). A 16×12 or 16×13 stick is the stiffer wall if you see one at a similar price. | ~$16 each |
+| Qty | What | Unit | Line | Store |
+| --- | --- | ---: | ---: | --- |
+| 3 | 6×1.25 ribbed pneumatic tire, 85 PSI, 3.75" bead | $11.00 | $33.00 | [Scooterworks 154-18](https://www.scooterworks.com/products/universal-parts-6x1-25-tire-154-18). If that page is out: [DIY Mobility 6×1¼ rib](https://diymobilityparts.com/collections/pneumatic-wheelchair-tires) at about $12. |
+| 3 | 6×1.25 inner tube, bent Schrader stem | $7.95 | $23.85 | [ElectricScooterParts TUB-6X1.25](https://electricscooterparts.com/tubes.html) |
+| 2 | Carbon tube, 16×14 mm, 1 m | $16.28 | $32.56 | [Windcatcher 16×14×1000](https://windcatcherrc.com/product/carbon-fiber-tube-16mm-x-14mm-x-1000mm/). A 16×12 or 16×13 stick is the stiffer wall if the price is close. |
+| | **Total to order now** | | **$89.41** | Shipping extra. |
 
-Roughly **$100** before shipping. That is the whole first buy.
+## Already here — $0 more
 
-When the tires arrive: inflate, measure OD and width, write the numbers on [`parts-on-hand.md`](parts-on-hand.md). Bead seat for the hub drawing is **3.75"**.
-
-## Already here — do not buy again
-
-| Item | Status |
+| Item | Notes |
 | --- | --- |
-| Zantle 5" walker pair | Ordered. Bench donor. Not the foot. |
-| F722 Wing, F765 Wing, F722 drone FC, Mamba F405 | On hand. FC still not locked. Blink one of these. |
+| Zantle 5" walker pair | Already bought, about $15. Bench donor, not the foot. |
+| F722 Wing, F765 Wing, F722 drone FC, Mamba F405 | On hand. Pick one to blink. Not a new board. |
 | TBS Nano RX | On hand. |
-| ESP32, Raspberry Pi | On hand. Not needed to start the wheel. |
+| Raspberry Pi, ESP32 | On hand. Face, cameras, and telemetry later. |
 
-Look through the drone pile for a **4S LiPo** before buying a pack. Connector and capacity stay open until a wheel driver exists.
+Look through the drone pile for a **4S** before buying the pack line below.
 
-## Do not order yet
+## Later — class estimates, not a cart
 
-| Leave it | Why |
-| --- | --- |
-| Wheel motors, FOC drivers, encoders | Target is about **3 N·m** peak at **60–380 rpm** on 4S. No SKU. A motor bought before the hub drawing is the Tazer "wrong motors" spend. |
-| **GIM8108-8**, any 6-pack of actuators | Candidate for knee / swing only. Not a lock. Nominal rating is 48 V; Hux is 4S. Do not buy a set. |
-| Knee, hip-swing, hip-roll actuators | Servo vs stepper is still open. Roll class is open. |
-| Another flight controller, ODrive, Teensy, Jetson | Boards for blink are already on the shelf. |
-| 8", 10", 12" tires, knobbies, caster forks | 6×1.25 is the settled foot. A caster hub gets hacked off, which we already did once with the Zantle. |
-| Cameras, a new Pi | After the wheels balance. |
+No SKU is locked on these. The dollar is a midpoint so the total is not a blank. Do not buy them off this table.
 
-## What this file is not
+| Qty | What | Est. each | Line | Store / note |
+| --- | --- | ---: | ---: | --- |
+| 1 | 4S LiPo, small pack | $40 | $40 | No pack picked. Skip if a drone pack is already on the shelf. |
+| 2 | In-wheel brushless + encoder, about 3 N·m | $65 | $130 | No motor picked. Do not buy before the hub drawing. |
+| 2 | Wheel FOC driver | $40 | $80 | No driver picked. |
+| 2 | Hip roll actuator | $100 | $200 | Yardstick only: [GIM8108-8, seen near $85](https://aifitlab.com/products/steadywin-gim8108-8-planetary-reducer-servo-motor). Nominal 7.5 N·m is tight for the **9.5 N·m** example at 6 kg on the 14" stance. Not an order. 48 V class, Hux is 4S. |
+| 4 | Knee and hip-swing actuator | $100 | $400 | Same class estimate if they are small QDD units. A stepper-plus-belt set would be less. Class is still open. |
+| 7 | Cameras (2 front, plus back, sides, top, bottom) | $20 | $140 | No module picked. |
+| 1 | Small front display, about 2.2" × 1.0" | $20 | $20 | Preset faces. No panel picked. |
+| 2 | RGB into the eye sockets | $10 | $20 | The lit socket is the eye. No LED picked. |
+| 1 | Step-down and distribution | $20 | $20 | Logic and pose off the motor rail. No board picked. |
+| | **Later estimate** | | **$1,050** | |
 
-A full robot BOM. Fasteners, bearings, the hub blank, wire, and the 4S pack get lines when a drawing or a driver exists. Until then they are shop stock or "look first."
+Hubs, fasteners, wire, and bearings are shop stock. They are not in the total.
+
+## Totals
+
+| | Amount |
+| --- | ---: |
+| Order now | $89.41 |
+| Later, class estimate | $1,050 |
+| **Working total** | **about $1,140** |
+
+Shipping, tax, and a wrong actuator guess move the $1,140. The $89.41 does not.

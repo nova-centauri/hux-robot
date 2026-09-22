@@ -21,7 +21,7 @@ IDs: R6 / R12 / R16 / R26 / R27 / R36. All-stepper (R28) is a residual risk path
 
 ### V1 implication — start somewhere
 
-One-leg (`LEFT_ONLY` / `RIGHT_ONLY`) **CoG shift is a V1 goal (best-effort)**. Hip roll ships in V1 even if the first actuator is imperfect. Pair it with planted-wheel fore/aft. It **may not work as hoped**. That is acceptable. What is not acceptable: omitting the joint, omitting the modes, or waiting for V2. Leave room in the ~10" stance and in the harness.
+One-leg (`LEFT_ONLY` / `RIGHT_ONLY`) **CoG shift is a V1 goal (best-effort)**. Hip roll ships in V1 even if the first actuator is imperfect. Pair it with planted-wheel fore/aft. It **may not work as hoped**. That is acceptable. What is not acceptable: omitting the joint, omitting the modes, or waiting for V2. Leave room in the ~14" stance and in the harness. The legs sit outside the head.
 
 ## DOF map (do not collapse these)
 
@@ -68,7 +68,7 @@ Do not “fix” roll weakness by stacking more belt ratio or a bigger NEMA. Tha
 
 Serra's 40 kg-class servos are a **data point** that high-torque servos can pose jointed legs — **not** a Hux SKU and **not** a preference. Size either class for R36. Run servos on the **regulated** rail (R11), not raw 4S.
 
-**GIM8108-8** is a noted *candidate* for knee / swing (not ordered). Treat it as a family data point next to “hobby servo” and “stepper + belt,” not a lock. Published nominal torque (~7.5 N·m) sits next to the **hip-roll** moment in [`leg-geometry.md`](leg-geometry.md) (~6.5 N·m at 6 kg). A sprung knee on the settled leg only has to make up ~2.2 N·m. The 6" wheel wants about **3 N·m** and does not want this mass at the axle. Still not a buy. See [`../parts-on-hand.md`](../parts-on-hand.md) Candidates.
+**GIM8108-8** is a noted *candidate* for knee / swing (not ordered). Treat it as a family data point next to “hobby servo” and “stepper + belt,” not a lock. Published nominal torque (~7.5 N·m) sits next to the **hip-roll** moment in [`leg-geometry.md`](leg-geometry.md) (~9.5 N·m at 6 kg on the 14" stance). A sprung knee on the settled leg only has to make up ~2.2 N·m. The 6" wheel wants about **3 N·m** and does not want this mass at the axle. Still not a buy. See [`../parts-on-hand.md`](../parts-on-hand.md) Candidates.
 
 ## Other classes still on the table
 
@@ -79,7 +79,7 @@ Not a buy list.
 | **Stepper + belt / gear** | Open option for knee + hip **swing**. Pose hold. COTS pulleys. | Frame size, ratio, open- vs closed-loop, belt pitch, backlash budget |
 | **High-torque servo class** | Open option for knee + hip **swing**. Simple integration if something on hand is strong enough. | Speed, reliability, regulated-rail voltage, whether it holds ~2× plant |
 | **GIM8108-class** (or similar integrated BLDC + reduction) | Candidate for knee / swing. Not ordered. | Whether it is the honest pose class vs servo / stepper |
-| **FOC BLDC + gearbox / cycloidal** | Hip **roll** (and any joint that needs rate + torque). Same family as the wheel-drive lean. | Ratio, backdrive, packaging at a ~10" stance |
+| **FOC BLDC + gearbox / cycloidal** | Hip **roll** (and any joint that needs rate + torque). Same family as the wheel-drive lean. | Ratio, backdrive, packaging outside a ~7" head, inside the ~14" stance |
 | **Quasi-direct drive (QDD)** | Hip **roll** (prefer **small** QDD if this class is filled). Fast, proprioceptive, shock-tolerant | Mass at the joint, whether anything on hand is in this class |
 | **Fast bus servo class** | Hip **roll** if a strong, fast unit is already on the bench and the bus is honest | Speed, reliability, whether it is actually backdrivable |
 | **Linear + linkage + springs** | Matches R7. Can produce “rotation” at a joint | Stroke, force, whether it can do roll *and* swing |

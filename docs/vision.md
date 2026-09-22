@@ -63,7 +63,7 @@ Their stack is 3S + Arduino + 40 kg-class servos and **no stair / one-leg plant*
 
 - **~9.5"** riser (stroke owns this)
 - **~24"** tall at full extension
-- **~10"** wide
+- **~14"** wide, head inside, wheels and legs outside the head
 - Carbon-tube spars; printed / machined end fittings
 - Mass budget **soft / blown**
 

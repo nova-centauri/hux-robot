@@ -26,7 +26,7 @@ Inspiration: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori
 | R12 | Knee + hip swing: **servo vs stepper+belt TBD** | **Do not lock either.** Both open. Size whichever we pick for one-leg plant load (R36). Powerful / fast / reliable still required. **GIM8108-8** is a *candidate* for these axes — not ordered, not locked. See [`research/actuators-legs.md`](research/actuators-legs.md). |
 | R13 | Wheels: **6" OD**, **~1–1.25" wide**, real rubber, torsionally stiff | **Locked.** A measured OD of **5.75–6.25"** still counts. Whole tire sits in the 9.5" going with ~±1.75" of roll. 5" Zantle is a bench donor, not the foot. Not a buy. No spokes. [`research/leg-geometry.md`](research/leg-geometry.md). |
 | R14 | Four **manual** modes before autonomy | **`PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY`**. Spec: [`software.md`](software.md). Gate before open-loop step, pathfinding motion, stair scripts. |
-| R15 | V1 overall width **~10"** | Hypothesis; measure before CAD lock. Body + hip spacing + wheel thickness share the budget. |
+| R15 | V1 overall width **~14"** | Outside-to-outside, wheels included. The head sits inside. Legs and wheels are outside the head. |
 | R16 | **Hip roll is IN V1** | Dynamic FOC / QDD / fast servo (R27). Experimental — may not work as hoped. Still ship the joint and the one-leg modes. **Not a stepper. Not V2.** |
 | R17 | One-leg balance is a **full loop** | (a) hip roll keeps weight over the planted wheel, **and** (b) that wheel drives fore/aft so the contact stays under the CoG. |
 | R18 | **Reuse existing control** | Explicit non-goal: writing a novel Hux balance stack from scratch for V1. TBD which we adopt. |
@@ -44,7 +44,7 @@ Inspiration: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori
 | R32 | Pose-actuator mass **high** | If steppers: mount **above the knee**; belts to the pivots. Do not hang pose motors at the shin or wheel. |
 | R33 | If belts: **one inside, one outside**; integrate pulley where possible | Clearance / service / no rub. Face assignment TBD on the 2D set. Draft-friendly printed tooth form (R20) or COTS pulley fallback. |
 | R34 | Primary **upper + lower leg spars** are **carbon fiber tubes** | COTS (R19). Printed / machined **fittings at the ends** only (hubs, belt mounts, joint flanges). Do not print or mill the spar. Tube OD / wall TBD. |
-| R35 | V1 envelope up to **~24" tall at full extension** | Primary scale change is **height**. Still must reach a **~9.5"** riser **with margin** (R3). Width stays **~10"** (R15). |
+| R35 | V1 envelope up to **~24" tall at full extension** | Still must reach a **~9.5"** riser **with margin** (R3). Width is **~14"** (R15). |
 | R36 | **One-wheel standing load** ≈ **2×** two-wheel stance | Plant-side knee, hip swing, and hip roll see roughly all the weight on one leg path. **Size for that case**, not average two-wheel load. Rule of thumb until we weigh a real Hux. |
 
 ## Soft requirements
@@ -60,7 +60,7 @@ Inspiration: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori
 - Entire robot is **electric**. **4S LiPo** preferred; pack capacity / C and the power bus stay **TBD**. Pose / logic on **regulated** rails. Do not invent a stack.
 - **Knee + hip swing undecided** (Steve 2026-09-20 follow-up). Document both servo and stepper+belt. Do not prefer one in the baseline. Size either for R36. **GIM8108-8** is a candidate, not an order.
 - **Hip roll ships in V1** even if the first actuator is imperfect. One-leg CoG shift is a **best-effort** goal.
-- V1 scale: **~24" tall at full extension** (R35), **~10" wide** (R15). Height is the primary scale change. Leg geometry still owns the **~9.5"** step (R3) with margin.
+- V1 scale: **~24" tall at full extension** (R35), **~14" wide** (R15). The head is inside that width. Leg geometry still owns the **~9.5"** step (R3) with margin.
 - Structure: **carbon tubes** for the long bits of upper and lower leg (R34). Shop fittings at the ends — print / mill / lathe; see [`capabilities.md`](capabilities.md). Inventory: [`parts-on-hand.md`](parts-on-hand.md).
 - Longer tubes → **longer belt runs** if a belt is the joint reducer. Joint actuators sit at **hip / knee** with tube between.
 - Higher CoG: slower inverted-pendulum fall (helps) and more inertia / longer disturbance arms (hurts).
@@ -93,7 +93,7 @@ Inventory (owned / ordered, reserved TBD): [`parts-on-hand.md`](parts-on-hand.md
 - **Hip roll:** **in V1**, dynamic class, experimental / best-effort CoG shift.
 - **Companion:** Raspberry Pi for cameras + pathfinding inference. Possible stepper brain if that class is chosen.
 - **Wi‑Fi:** Pi first; ESP32 if we want a thin telemetry bridge off the Pi.
-- **V1 mechanical target:** one wheel-leg — carbon-tube spars + printed / machined end fittings + linkage / spring stub — sized toward a 9.5" step, inside a **~24" tall / ~10" wide** envelope, **2D layouts first**.
+- **V1 mechanical target:** one wheel-leg — carbon-tube spars + printed / machined end fittings + linkage / spring stub — sized toward a 9.5" step, inside a **~24" tall / ~14" wide** envelope, **2D layouts first**.
 - **Mass:** soft. 4–5 lb / under 6 lb is historical preference, not a gate.
 
 Do not buy anything for this list. Wheels already ordered stay on [`parts-on-hand.md`](parts-on-hand.md) only. Do not lock the FC, a tube, or a joint SKU.

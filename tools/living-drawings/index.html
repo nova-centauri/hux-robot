@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hux living drawings</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page">
+    <header class="mast">
+      <div>
+        <h1>Hux living drawings</h1>
+        <p>Side and top views of the working model, plus the electronics we actually have a plan for. Drag the joints, request a wheel position, or play the climb. The stair is the settled 9.5 by 9.5 inch step.</p>
+      </div>
+      <div class="stamp">
+        Model 2026-09-21<br>
+        6" × 1.25" wheel<br>
+        7.5" + 7.5" tubes<br>
+        24" tall · 14" wide
+      </div>
+    </header>
+
+    <div class="views">
+      <article class="card">
+        <h2>Side — one leg</h2>
+        <p class="hint">Positive hip angle puts the knee to the rear. Knee bend brings the lower tube forward under the hip. Balance is the 92% crouch, hip over the axle, knee behind. Request a wheel position and the hip and knee follow. The red dot is the center of mass, and the dashed line is gravity down to the tread under it. Motor boxes are rough envelopes, not parts.</p>
+        <svg id="side" class="sheet" role="img" aria-label="Side view of one Hux leg"></svg>
+        <div class="controls">
+          <div class="presets" role="group" aria-label="Poses">
+            <button type="button" data-pose="straight">Straight</button>
+            <button type="button" data-pose="balance">Balance</button>
+            <button type="button" data-pose="crouch">Crouch</button>
+            <button type="button" data-pose="place">Place on next step</button>
+          </div>
+          <label class="mode">View
+            <select id="mode">
+              <option value="planted">Wheel planted on this tread</option>
+              <option value="swing">Hip fixed, wheel swings</option>
+              <option value="wheel">Request a wheel position</option>
+            </select>
+          </label>
+          <div id="jointAsk">
+            <label>Hip <output id="hipOut"></output>
+              <input id="hip" type="range" min="-40" max="170" step="0.1" value="23">
+            </label>
+            <label>Knee bend <output id="kneeOut"></output>
+              <input id="knee" type="range" min="-180" max="180" step="0.1" value="46">
+            </label>
+          </div>
+          <div id="wheelAsk" hidden>
+            <label>Hip forward <output id="hipLeanOut"></output>
+              <input id="hipLean" type="range" min="-6" max="16" step="0.1" value="0">
+            </label>
+            <label>Wheel X <output id="wheelXOut"></output>
+              <input id="wheelX" type="range" min="-4" max="16" step="0.1" value="0">
+            </label>
+            <label>Wheel Y <output id="wheelYOut"></output>
+              <input id="wheelY" type="range" min="3" max="22" step="0.1" value="3">
+            </label>
+          </div>
+        </div>
+        <div class="readout" id="sideRead"></div>
+      </article>
+
+      <article class="card">
+        <h2>Top — stance and body</h2>
+        <p class="hint">Overall width is 14 inches. The head is the center box. Wheels and legs sit outside it. Track is 12.75 inches with a 1.25 inch tire. The knee folds rearward.</p>
+        <svg id="top" class="sheet" role="img" aria-label="Top view of Hux stance and body"></svg>
+        <div class="controls">
+          <label>Hip roll <output id="rollOut"></output>
+            <input id="roll" type="range" min="-20" max="20" step="0.1" value="0">
+          </label>
+        </div>
+        <div class="readout" id="topRead"></div>
+      </article>
+    </div>
+
+    <article class="card pair-wrap">
+      <h2>Side — both legs on the stair</h2>
+      <p class="hint">Same leg, drawn twice. The left leg is the far one and is lighter. Both hips sit on the head. Request either joint angles or wheel positions; the other follows. Play climbs the stair. The shin cannot put the center of mass over the front wheel while the rear wheel is still down, so the rear leg shoves the body forward and the rear wheel leaves as that momentum carries the mass across. The body stands up after the mass is over the front contact. The red dot is the center of mass. The red tick on it is its velocity at full speed. The scrubber slows the shove so it can be seen.</p>
+      <svg id="pair" class="sheet" role="img" aria-label="Side view of both Hux legs on a stair"></svg>
+      <div class="controls pair-controls">
+        <div class="leg-right">
+          <h3>Right leg</h3>
+          <label>Hip <output id="rHipOut"></output>
+            <input id="rHip" type="range" min="-40" max="170" step="0.1">
+          </label>
+          <label>Knee bend <output id="rKneeOut"></output>
+            <input id="rKnee" type="range" min="-180" max="180" step="0.1">
+          </label>
+        </div>
+        <div class="leg-left">
+          <h3>Left leg</h3>
+          <label>Hip <output id="lHipOut"></output>
+            <input id="lHip" type="range" min="-40" max="170" step="0.1">
+          </label>
+          <label>Knee bend <output id="lKneeOut"></output>
+            <input id="lKnee" type="range" min="-180" max="180" step="0.1">
+          </label>
+        </div>
+        <div>
+          <h3>Head</h3>
+          <label>X, forward <output id="headXOut"></output>
+            <input id="headX" type="range" min="-8" max="80" step="0.1" value="0">
+          </label>
+          <label>Y, hip height <output id="headYOut"></output>
+            <input id="headY" type="range" min="8" max="80" step="0.1" value="16.8">
+          </label>
+          <div class="presets">
+            <button type="button" id="pairBalance">Both balance</button>
+            <button type="button" id="pairStep">Left down, right up</button>
+            <button type="button" id="pairCopy">Copy right to left</button>
+            <button type="button" id="pairPlay" aria-pressed="false">Play the climb</button>
+          </div>
+        </div>
+      </div>
+      <div class="controls climb-bar">
+        <label class="mode">Drive
+          <select id="pairDrive">
+            <option value="joints">Joint angles</option>
+            <option value="wheels">Wheel positions</option>
+            <option value="climb">Climb the stairs</option>
+          </select>
+        </label>
+        <div id="wheelDrive" hidden>
+          <label>Right wheel X <output id="rWheelXOut"></output>
+            <input id="rWheelX" type="range" min="-8" max="80" step="0.1" value="0">
+          </label>
+          <label>Right wheel Y <output id="rWheelYOut"></output>
+            <input id="rWheelY" type="range" min="3" max="80" step="0.1" value="3">
+          </label>
+          <label>Left wheel X <output id="lWheelXOut"></output>
+            <input id="lWheelX" type="range" min="-8" max="80" step="0.1" value="0">
+          </label>
+          <label>Left wheel Y <output id="lWheelYOut"></output>
+            <input id="lWheelY" type="range" min="3" max="80" step="0.1" value="3">
+          </label>
+        </div>
+        <label>Along the climb <output id="climbOut"></output>
+          <input id="climb" type="range" min="0" max="4" step="0.001" value="0">
+        </label>
+      </div>
+      <div class="readout" id="pairRead"></div>
+    </article>
+
+    <section class="block">
+      <h2>Signal and power, in order</h2>
+      <div class="flow">
+        <div class="flow-row">
+          <div class="node"><b>Pilot stick</b><span>Crossfire radio. Not a Hux board.</span></div>
+          <div class="arrow">→</div>
+          <div class="node"><b>TBS Nano RX</b><span>On hand. Binds into the flight controller.</span></div>
+          <div class="arrow">→</div>
+          <div class="node"><b>Flight controller + IMU</b><span>Board not chosen. On the shelf: F765 Wing, F722 Wing, F722 drone, Mamba F405. Runs attitude, wheel torque, and the four modes.</span></div>
+        </div>
+        <div class="flow-row">
+          <div class="node"><b>4S pack</b><span>Class is locked. Look through the drone pile before buying one. About 14.8 V nominal, 16.8 V full.</span></div>
+          <div class="arrow">→</div>
+          <div class="node"><b>Power split</b><span>Wheel and roll current stay on the pack. A step-down makes 5 / 6 / 7.4 V for logic and pose. Do not route motor current through the flight controller.</span></div>
+          <div class="arrow">→</div>
+          <div class="node"><b>Step-down rail</b><span>Feeds the controller, the receiver, and the pose joints.</span></div>
+        </div>
+        <div class="flow-row">
+          <div class="node"><b>Wheel FOC ×2</b><span>Torque mode. About 3 N·m peak at the 6 inch wheel, roughly 60–380 rpm. Drivers not chosen.</span></div>
+          <div class="arrow">→</div>
+          <div class="node"><b>In-wheel motors ×2</b><span>Brushless, encoder on each, motor at the hub. The hub is turned on the lathe. Not ordered.</span></div>
+        </div>
+        <div class="flow-row">
+          <div class="node"><b>Hip roll ×2</b><span>In V1. Dynamic class, not a stepper. On the 14 inch stance the 6 kg example is about 9.5 N·m when the other wheel lifts. Driver path is PWM, CAN, or its own FOC.</span></div>
+          <div class="arrow">+</div>
+          <div class="node"><b>Knee and hip swing ×4</b><span>Servo, or stepper plus a belt. Still open. A spring holds about 2.2 N·m of the two-leg crouch so the motor is free to move. If they are steppers, the flight controller does not drive the coils.</span></div>
+        </div>
+        <div class="flow-row">
+          <div class="node"><b>Modes</b><span>PARKED, TWO_WHEEL, LEFT_ONLY, RIGHT_ONLY. The pilot selects them. One-leg modes do not themselves lift a foot.</span></div>
+          <div class="arrow">→</div>
+          <div class="node"><b>Pi, later</b><span>On hand. Owns the cameras, the face display, and the eye lights. Pathfinding comes after the four modes. Not required to balance.</span></div>
+          <div class="arrow">or</div>
+          <div class="node"><b>ESP32</b><span>On hand. Optional thin telemetry bridge if the Pi should not own the radio link.</span></div>
+        </div>
+        <div class="flow-row">
+          <div class="node"><b>Cameras ×7</b><span>Two on the front for stereo. One each on the back, left, right, top, and bottom. Small modules. Not bought.</span></div>
+          <div class="arrow">→</div>
+          <div class="node"><b>Face display</b><span>Small screen on the front for a few preset faces. Roughly 2.2 by 1.0 inches.</span></div>
+          <div class="arrow">+</div>
+          <div class="node"><b>Eye lights ×2</b><span>The eyes are sockets. An RGB shines into each orbital cavity for expression. The light is the eye, not a separate lamp.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Parts we are working from</h2>
+      <table>
+        <thead>
+          <tr><th>Group</th><th>Part</th><th>Qty</th><th>State</th><th>Est.</th><th>Role</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Structure</td><td>6×1.25 ribbed tire, 3.75" bead, high pressure</td><td>3</td><td><span class="chip buy">First buy</span></td><td>$33</td><td>Two feet and a spare. <a href="https://www.scooterworks.com/products/universal-parts-6x1-25-tire-154-18">Scooterworks 154-18</a>.</td></tr>
+          <tr><td>Structure</td><td>6×1.25 inner tube, bent stem</td><td>3</td><td><span class="chip buy">First buy</span></td><td>$23.85</td><td>Matches the tire. <a href="https://electricscooterparts.com/tubes.html">ElectricScooterParts TUB-6X1.25</a>.</td></tr>
+          <tr><td>Structure</td><td>Carbon tube, 16 mm OD, 12–14 mm ID, 1 m</td><td>2</td><td><span class="chip buy">First buy</span></td><td>$32.56</td><td>Upper and lower spars. <a href="https://windcatcherrc.com/product/carbon-fiber-tube-16mm-x-14mm-x-1000mm/">Windcatcher 16×14×1000</a>.</td></tr>
+          <tr><td>Structure</td><td>Wheel hub</td><td>2</td><td><span class="chip open">Shop</span></td><td>—</td><td>Lathe and mill. Bead seat 3.75". Not in the total.</td></tr>
+          <tr><td>Structure</td><td>Zantle 5" walker wheel</td><td>1 pair</td><td><span class="chip bench">Bench</span></td><td>paid</td><td>Already bought. Not the foot.</td></tr>
+          <tr><td>Motors</td><td>In-wheel brushless + encoder</td><td>2</td><td><span class="chip open">Open</span></td><td>~$130</td><td>About 3 N·m peak. Class estimate. No store link until a motor is chosen.</td></tr>
+          <tr><td>Motors</td><td>Wheel FOC driver</td><td>2</td><td><span class="chip open">Open</span></td><td>~$80</td><td>Class estimate. No driver picked.</td></tr>
+          <tr><td>Motors</td><td>Hip roll actuator</td><td>2</td><td><span class="chip open">Open</span></td><td>~$200</td><td>About 9.5 N·m at 6 kg on the 14" stance. Not a stepper.</td></tr>
+          <tr><td>Motors</td><td>Knee and hip-swing actuator</td><td>4</td><td><span class="chip open">Open</span></td><td>~$400</td><td>Class estimate if they are small geared motors. A belt-and-stepper set would be less.</td></tr>
+          <tr><td>Motors</td><td>GIM8108-8</td><td>—</td><td><span class="chip bench">Do not buy</span></td><td>—</td><td>Yardstick only, seen near $85. Not in the total. 7.5 N·m nominal is tight for the 9.5 N·m roll example.</td></tr>
+          <tr><td>Sensors</td><td>IMU</td><td>1</td><td><span class="chip hand">On the FC</span></td><td>$0</td><td>On the flight controller already on the shelf.</td></tr>
+          <tr><td>Sensors</td><td>Wheel encoder</td><td>2</td><td><span class="chip open">Open</span></td><td>in motor</td><td>Counted with the wheel motor.</td></tr>
+          <tr><td>Cameras</td><td>Front stereo pair</td><td>2</td><td><span class="chip later">Later</span></td><td>~$40</td><td>Part of the seven-camera estimate. No module picked.</td></tr>
+          <tr><td>Cameras</td><td>Back, left, right, top, bottom</td><td>5</td><td><span class="chip later">Later</span></td><td>~$100</td><td>About $20 each. No module picked.</td></tr>
+          <tr><td>Face</td><td>Preset-face display</td><td>1</td><td><span class="chip later">Later</span></td><td>~$20</td><td>About 2.2" × 1.0". No panel picked.</td></tr>
+          <tr><td>Face</td><td>RGB in each eye socket</td><td>2</td><td><span class="chip later">Later</span></td><td>~$20</td><td>Shines into the orbital cavity.</td></tr>
+          <tr><td>Compute</td><td>Flight controller</td><td>1</td><td><span class="chip hand">On hand</span></td><td>$0</td><td>F765 Wing, F722 Wing, F722 drone, or Mamba F405. Not locked.</td></tr>
+          <tr><td>Compute</td><td>Raspberry Pi</td><td>1</td><td><span class="chip later">On hand</span></td><td>$0</td><td>Cameras, faces, pathfinding later.</td></tr>
+          <tr><td>Radio</td><td>TBS Nano RX</td><td>1</td><td><span class="chip settled">On hand</span></td><td>$0</td><td>Pilot link.</td></tr>
+          <tr><td>Radio</td><td>ESP32</td><td>0–1</td><td><span class="chip later">On hand</span></td><td>$0</td><td>Optional telemetry bridge.</td></tr>
+          <tr><td>Power</td><td>4S LiPo</td><td>1</td><td><span class="chip open">Look first</span></td><td>~$40</td><td>Skip if a drone pack is already on the shelf.</td></tr>
+          <tr><td>Power</td><td>Step-down and distribution</td><td>1</td><td><span class="chip open">Open</span></td><td>~$20</td><td>Logic and pose off the motor rail.</td></tr>
+          <tr><td></td><td><strong>Order now</strong></td><td></td><td></td><td><strong>$89.41</strong></td><td>Tires, tubes, carbon tube. Shipping extra.</td></tr>
+          <tr><td></td><td><strong>Working total</strong></td><td></td><td></td><td><strong>~$1,140</strong></td><td>Order now plus the class estimates. Actuators are most of it and are not chosen.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer class="note">
+      Numbers that are settled come from <code>docs/research/leg-geometry.md</code> and <code>docs/bom.md</code>.
+      The knee folds to the rear. The 6 inch body height above the hip is the working assumption. Body length on the drawing is 8 inches and is not a decision. Motor boxes are rough bulk, not a shopping list.
+      Mass in the roll readout is the 6 kg example, not a weight target.
+    </footer>
+  </div>
+  <script src="kin.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

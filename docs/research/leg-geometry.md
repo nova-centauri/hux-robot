@@ -25,7 +25,7 @@ A deeper real stair is spare room. It is not a reason to grow the wheel. Reopen 
 - North star stays lift → one-leg balance → plant (R3). Modes stay `PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY` before any autonomy (R14).
 - **In-wheel brushless FOC** (R6 / R30). **Hip roll in V1**, dynamic class, not a stepper (R16 / R27).
 - Knee and hip swing stay **servo vs stepper+belt TBD** (R12). **GIM8108-8** stays a candidate, not an order.
-- **Carbon-tube** spars, fittings at the ends (R34). Envelope **~24" × ~10"** (R35 / R15). **2D before Blender** (R23).
+- **Carbon-tube** spars, fittings at the ends (R34). Envelope **~24" × ~14"** (R35 / R15). Head inside, wheels and legs outside the head. **2D before Blender** (R23).
 - Mass stays **soft** (R24). **4S + step-down** (R11). Plant-side joints sized for one wheel (R36).
 - Linkages + springs (R7). Shop can turn a hub ([`../capabilities.md`](../capabilities.md)).
 
@@ -57,7 +57,7 @@ ____________|__________________|__________  this tread
 
 On a code 10" going the same 6" tire has **±2"** of roll. On an 11" going, **±2.5"**. The landing tolerance is that same gap: the raised axle has to arrive within **±1.75"** of the center of the next 9.5" slot. An 8" tire would have demanded **±0.75"**, which is a precision place, not a pivot.
 
-A 12" spoked kids wheel cannot enter the slot. Width stays **~1–1.25"** so two tires still fit in the 10" stance (a 2" kids tire uses about 4.3" of that stance).
+A 12" spoked kids wheel cannot enter the slot. Tire width stays **~1–1.25"**. Overall stance is **~14"**, and those tires sit outside the head.
 
 ## Settled leg
 
@@ -74,11 +74,13 @@ axle                                    3" above contact
 └──────── 6" wheel, ~1–1.25" wide ─────  contact
 ```
 
-Balance stance shortens the leg to 92% (links about **23°** off vertical). Knee sits about **2.9"** off the weight line. Hip stays over the axle.
+Balance stance shortens the leg to 92% (links about **23°** off vertical). Knee sits about **2.9"** off the weight line, **to the rear**. Hip stays over the axle. Steve 2026-09-21: the knee folds backward, not forward.
 
 Reach at that stance, swing axle one 9.5" going forward and 9.5" up: about **4.3"** of leg still unused. The swing leg is not stretched out flat.
 
 If the body needs 8" above the hip instead of 6", each link loses an inch (6.5" + 6.5"). Do not grow the wheel to "use" that. The diameter is settled.
+
+The 7.5" lower tube cannot pass through the nosing. With both wheels down, the rear wheel can roll to the front of its slot and the hip can come forward until the rear leg is nearly straight. On this draw the center of mass is still about 2.7" behind the front contact there. Lifting the rear wheel and then standing up would tip the robot back down the stair. The living-drawings climb throws the mass instead. Over about 0.42 s the rear leg shoves the body forward while both wheels stay down. The rear wheel leaves with the mass still 2.7" behind the front contact and with about 0.78 kg·m²/s of forward angular momentum about that contact. The inertia of the 6 kg example about the contact is about 0.36 kg·m². Gravity takes about 0.77 kg·m²/s of that momentum before the mass reaches the contact, so the shove just crests. Only then does the body stand up and the trailing foot come up. Ends of one cycle are the start of the next. The mass is the 6 kg example split as a picture (body 4.0, hips 0.8, each knee 0.25, each wheel 0.35), not a weighed robot. The contact check uses a 0.7 friction cone. The steepest part of the shove sits on that cone.
 
 ## Assumptions behind the torque numbers
 
@@ -100,17 +102,17 @@ The wheel cannot help sideways. At the moment one wheel unloads, if the CoG is s
 
 `τ = m · g · (track / 2)`
 
-Track for a **1.25"** tire inside a 10" body is about **8.75"**. Height cancels. Once the CoG is over the planted wheel, the moment falls to the leftover offset: **1.5 N·m per inch at 6 kg**.
+Overall width is **14"**. A **1.25"** tire flush with the outside puts the track at **12.75"** (center to center). The head is about **7"** wide, so the legs and wheels are outside it. Height cancels. Once the CoG is over the planted wheel, the moment falls to the leftover offset: **1.5 N·m per inch at 6 kg**.
 
-| Mass | ~1" tire (track 9") | **~1.25" tire (track 8.75")** |
-| ---: | ---: | ---: |
-| 4 kg | 4.5 N·m | 4.4 N·m |
-| **6 kg** | 6.7 N·m | **6.5 N·m** |
-| 8 kg | 9.0 N·m | 8.7 N·m |
+| Mass | Moment, CoG still centered (track 12.75") |
+| ---: | ---: |
+| 4 kg | 6.4 N·m |
+| **6 kg** | **9.5 N·m** |
+| 8 kg | 12.7 N·m |
 
 Size **peak** roll torque to beat that full moment. Size **continuous** for an inch or two of leftover error, not for sitting at the full moment. Roll inertia is small because the body is narrow, so the shift is quick once the torque exists.
 
-**GIM8108-8 yardstick** (published SteadyWin-class numbers, **not a buy**): about **7.5 N·m** nominal, **22 N·m** stall, **~380 g**. The 6.5 N·m example sits next to the nominal rating. On **4S** the published output speed constant (~6.7 rpm/V) is only about **110 rpm** at 16.8 V. Hip roll does not need the 48 V top speed. Do not hang this mass on the axle. The wheel does not need 7.5 N·m.
+**GIM8108-8 yardstick** (published SteadyWin-class numbers, **not a buy**): about **7.5 N·m** nominal, **22 N·m** stall, **~380 g**. The **9.5 N·m** example at 6 kg is above that nominal rating and under the stall, so this class can make the shift and is tight if it has to hold the full moment. On **4S** the published output speed constant (~6.7 rpm/V) is only about **110 rpm** at 16.8 V. Hip roll does not need the 48 V top speed. Do not hang this mass on the axle. The wheel does not need 7.5 N·m.
 
 ## Flexible — springs, not whippy tubes
 
@@ -155,9 +157,9 @@ Balance wheels scrub. A soft black carcass marks hard floors and sinks into carp
 Not Blender. One side view, one front view.
 
 1. The **9.5" × 9.5"** slot with the **6"** tire centered and the **1.75"** gaps drawn.
-2. **7.5" + 7.5"** tubes, **6"** above the hip, 24" and 10" envelopes boxed. Width of the tire **~1–1.25"**.
+2. **7.5" + 7.5"** tubes, **6"** above the hip, 24" tall and **14"** wide. Head about **7"** inside that. Tire **~1–1.25"**.
 3. Hip over the axle at 92% stance. Raised axle 9.5" up and 9.5" forward, inside the next slot (±1.75").
-4. Spring noted at ~**2.2 N·m** for a 6 kg two-leg stance. Hip roll ~**6.5 N·m** at 6 kg on an 8.75" track.
+4. Spring noted at ~**2.2 N·m** for a 6 kg two-leg stance. Hip roll ~**9.5 N·m** at 6 kg on the 12.75" track.
 5. Motor **at the wheel**, about **3 N·m peak**. Pose actuators high. Inside/outside belt runs only if that class is the one being sketched.
 
 ## What this note does not do

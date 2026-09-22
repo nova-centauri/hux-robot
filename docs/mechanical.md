@@ -2,7 +2,7 @@
 
 **Status:** TBD. No CAD, no printed or machined customs, no locked geometry.
 
-V1 target is **one wheel-leg** — printed / machined **fittings** on **carbon-tube spars** — with a linkage + spring stub, sized toward a **~9.5"** step. Envelope: up to **~24" tall at full extension**, **~10" wide**. Do not wait on the flight controller. **Do not open Blender until several 2D sketch layouts exist** (R23).
+V1 target is **one wheel-leg** — printed / machined **fittings** on **carbon-tube spars** — with a linkage + spring stub, sized toward a **~9.5"** step. Envelope: up to **~24" tall at full extension**, **~14" wide**. The head sits inside that width. Wheels and legs are outside the head. Do not wait on the flight controller. **Do not open Blender until several 2D sketch layouts exist** (R23).
 
 **Parts on hand:** [`parts-on-hand.md`](parts-on-hand.md). A **5"** walker-wheel pair is already ordered — **bench donor only**, not the foot. Wheel diameter is **settled at 6" OD**: [`research/leg-geometry.md`](research/leg-geometry.md).
 
@@ -21,7 +21,7 @@ V1 target is **one wheel-leg** — printed / machined **fittings** on **carbon-t
 - **Serviceable modular customs:** threaded inserts, independently removable parts, inside access (R22 + Serra).
 - **Size plant-side joints for one-wheel standing load** (~2× two-wheel stance, R36).
 - Extra DOF is desirable later (stairs / fall recovery); do not invent a 6-DOF stack on paper.
-- **Primary scale change is height**, not width. Width hypothesis stays **~10"** (R15).
+- Overall width is **~14"** (R15). The head is inside. Wheels and legs are outside the head.
 - Entire robot is **electric**. Battery class is 4S LiPo — see [`electronics.md`](electronics.md).
 
 ## Scale + structure (Steve 2026-09-21)
@@ -48,15 +48,15 @@ Still gated by **R3**: the raised wheel must reach a **~9.5"** residential riser
 
 Settled draw against the 24" cap ([`research/leg-geometry.md`](research/leg-geometry.md)): **7.5" + 7.5"** equal tubes, **~6"** of body above the hip, **6" OD** wheel. Do not grow past ~24" on paper to invent extra reach. Do not grow the wheel if a real tread is deeper than 9.5".
 
-### Width envelope (~10") (R15)
+### Width envelope (~14") (R15)
 
-Overall width stays **~10"** outside-to-outside unless Steve changes it. Height moved; width did not.
+Overall width is **~14"** outside-to-outside, wheels included. Steve 2026-09-21. The head is a narrower unit in the middle. Legs and wheels stand outside it.
 
 Implications:
 
 - A narrow stance keeps the CoG closer to either wheel, so a hip-roll lean can actually put weight over the planted contact.
-- Body width, hip spacing, and wheel thickness share the same 10" budget. Do not grow the torso and then “add legs beside it.”
-- Measure a real stance / doorway / stair width before treating 10" as geometry.
+- A 1.25" tire flush with the outside puts the track at about **12.75"**. The head drawing is about **7"** wide, so there is room for the leg between the head and the tire.
+- A doorway is still wider than 14". The stair slot is the tight constraint, and that constraint is the tread, not this width.
 
 ### Mass — blown / soft (R24)
 
@@ -84,7 +84,7 @@ Sketch lines (fill when something is weighed — empty TBD is correct):
 | --- | --- |
 | **Belt runs get longer** | Knee / hip-swing reducers (if belts) span more tube. Plan tension, idlers, and service along the spar. Wires must not occupy the belt path (R21). |
 | **Actuators sit at the joints** | Servo / stepper / **GIM8108-class** *candidate* at **hip and knee**, with **tube between**. The spar is empty length, not a motor house. Class is **not locked** (R12). No SKU. |
-| **CoG sits higher** | Helps: inverted-pendulum fall is slower (`ω ≈ √(g/h)`). At the working stance that doubling time is about **145 ms**. Hurts: more inertia and a longer disturbance arm. Static moment about the planted wheel is `m g d` (height drops out): ~**6.5 N·m** at 6 kg if the CoG is still on an ~8.75" track's centerline. |
+| **CoG sits higher** | Helps: inverted-pendulum fall is slower (`ω ≈ √(g/h)`). At the working stance that doubling time is about **145 ms**. Hurts: more inertia and a longer disturbance arm. Static moment about the planted wheel is `m g d` (height drops out): ~**9.5 N·m** at 6 kg if the CoG is still on the **12.75"** track's centerline. |
 
 Do not hang joint mass in the middle of a tube to “use the length.” Do not invent a GIM8108 buy to fill the class.
 
@@ -114,7 +114,7 @@ Access to fasteners, batteries, FC (bay — board still TBD), and actuators as *
 
 ### 5. Process — several 2D sketch layouts before Blender (R23)
 
-**Gate:** 2D layouts exist **before** Blender (or other 3D CAD). Several views: side, front, top, plus linkage / stroke. The 2D set must show **motor-at-wheel**, the **~24" / ~10"** envelope, and **inside/outside belt runs** if belts are on the sketch. A `.blend` with no preceding 2D is a process miss.
+**Gate:** 2D layouts exist **before** Blender (or other 3D CAD). Several views: side, front, top, plus linkage / stroke. The 2D set must show **motor-at-wheel**, the **~24" / ~14"** envelope, and **inside/outside belt runs** if belts are on the sketch. A `.blend` with no preceding 2D is a process miss.
 
 ## Wheels — 6" OD, in-wheel drive
 
@@ -222,7 +222,7 @@ Applies when pose joints use belts (stepper+belt path, or a servo+belt reducer).
 
 From [STRIDE V2](https://www.alex-hattori.com/blog/wheeled-biped-v2):
 
-- Larger wheels help open terrain. On a **9.5" × 9.5"** step the settled diameter is **6"**, skinny enough that two tires fit in **~10"**. [`research/leg-geometry.md`](research/leg-geometry.md).
+- Larger wheels help open terrain. On a **9.5" × 9.5"** step the settled diameter is **6"**. Overall width is **~14"**, with the tires outside the head. [`research/leg-geometry.md`](research/leg-geometry.md).
 - Serial / linkage knees are kinder to stairs than parallel “knees both sides.”
 - **Wheel motors at the wheel** are simpler than remote-drive belts (cables need to survive flailing). Hux V1 **locks that placement** (R30).
 - Springs are worth it if actuators are small.
@@ -243,7 +243,7 @@ Do not vendor their STLs, Fusion, or Gerbers. Do not buy their 40 kg servos or 3
 Use this instead of a fake finished BOM. Canonical box list: [`checklists/mechanical-v1.md`](checklists/mechanical-v1.md). Tick in [`NOTES.md`](../NOTES.md) when something is real.
 
 - [ ] Measure a real ~9.5" riser / fixture (riser, tread, nosing).
-- [ ] **Several 2D sketch layouts** (side / front / top + linkage) show **motor-at-wheel**, **~24" / ~10"** envelope, and **inside/outside belt runs** if belts. **No Blender until this is real** (R23).
+- [ ] **Several 2D sketch layouts** (side / front / top + linkage) show **motor-at-wheel**, **~24" / ~14"** envelope, and **inside/outside belt runs** if belts. **No Blender until this is real** (R23).
 - [ ] Sketch the settled **6"** wheel inside the **9.5" × 9.5"** slot, with **7.5" + 7.5"** tubes and **~6"** above the hip ([`research/leg-geometry.md`](research/leg-geometry.md)).
 - [ ] **COTS carbon tubes** for upper + lower main lengths. Printed / machined **end fittings** only. Do not print the spar (R34 / R19).
 - [ ] Customs have **draft**, wire **ports**, **service** access (R20–R22).

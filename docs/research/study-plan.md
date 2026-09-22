@@ -99,7 +99,7 @@ Use [`../checklists/mechanical-v1.md`](../checklists/mechanical-v1.md), [`../mec
 
 - [ ] Phases A–C actually done (not skipped to make the repo look busy).
 - [ ] **Several 2D sketch layouts** (side / front / top + linkage) before any Blender / 3D CAD (R23). Show motor-at-wheel and belt runs if belts. Use the settled draw in [`leg-geometry.md`](leg-geometry.md): 6" wheel in the 9.5" × 9.5" slot, 7.5"+7.5" tubes, hip over the axle.
-- [ ] One-side envelope: **carbon-tube spars** + end fittings, linkage + spring stub, stroke toward 9.5" inside **~24" tall / ~10" wide** (R7 / R34 / R35).
+- [ ] One-side envelope: **carbon-tube spars** + end fittings, linkage + spring stub, stroke toward 9.5" inside **~24" tall / ~14" wide** (R7 / R34 / R35).
 - [ ] Fit-check: raised wheel can reach a 9.5" tread **with margin**, without self-collision.
 - [ ] No second-leg copy until the first articulates.
 - [ ] No FC lock, no BOM, no carpet spin-up as part of this print. No new spend.
