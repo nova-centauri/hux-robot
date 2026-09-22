@@ -124,9 +124,11 @@ Phase A of [`research/study-plan.md`](research/study-plan.md) is where we extrac
 
 Tazer spent a long time on **LQR with a bad model**; a **PID cascade** is what actually balanced. That is R18 in someone else's blood. Do not start V1 on LQR. See [`research/tazer-lessons.md`](research/tazer-lessons.md).
 
-Stompy is a week-build **RL walker** — CAD/reality match, not a Hux V1 stack. **Do not require RL walking.** Keep this reuse list. See [`research/stompy-sim2real.md`](research/stompy-sim2real.md).
+Stompy is a week-build **RL walker** — CAD/reality match, not a Hux V1 stack. **Do not require RL walking.** Keep this reuse list. See [`research/stompy-sim2real.md`](research/stompy-sim2real.md). Diablo and Tazer say the same order: **LQR / PID before RL**. A later twin / dojo does **not** replace this section.
 
 If a pointer is copyleft (RobotX, SonicRobot), keep Hux MIT unless Steve decides. Watching and rewriting from understanding is the default.
+
+**Motion control (class, not a vendor):** wheels and hip roll want **high-bandwidth FOC / QDD / model-based** loops. That is the plant we want, not a SKU. Knee / hip swing stay **servo vs stepper+belt TBD**.
 
 ## First software, in order
 
@@ -141,6 +143,18 @@ Tracked in [`../NOTES.md`](../NOTES.md).
 7. **Camera stream** — one teleop stream first. **P5**.
 8. **Local pathfinding** — later, on the Pi, not on the FC. Pathfinding **motion** waits on the manual modes.
 
+## Phased roadmap
+
+Steve, 2026-09-22. Three phases. Do **not** invert them. R14 and R18 stay.
+
+| Phase | What | Not |
+| --- | --- | --- |
+| **V1 — classical balance + modes** | Blink → spin → `PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY` from TBS. Reuse an existing simple balance pattern (R18). High-bandwidth FOC / QDD / model-based **class** on wheels and hip roll. Open-loop 9.5" fixture after the four modes work. | An RL gate. A novel Hux V1 controller. A sim trainer before the robot stands. |
+| **Later — CAD / URDF twin lockstep** | When CAD exists: CAD, exported model, and firmware zeros stay the **same robot** (Stompy lesson). Geometry edits flow through all three. | A day-one wheel-balance task. A Jetson / mjlab / Isaac lock. |
+| **Horizon — sim dojo / RL** | Identical digital twin + domain-randomized dojo so a policy trained in sim can run locally. Later terrains: stairs, rubble, dirt, fall leaves, wet mud. | A replacement for R18. A V1 blocker. A reason to skip modes. |
+
+V1 may / should stand and balance with classical / reused control **before** any of the later two. The twin and the dojo are the cool long-term goal, not the next firmware folder.
+
 ## Repo homes (empty)
 
 - [`../firmware/`](../firmware/) — FC / embedded bring-up.
@@ -150,7 +164,7 @@ Tracked in [`../NOTES.md`](../NOTES.md).
 
 - Closed-loop stair gait.
 - Stereo / depth for stairs.
-- Simulation (MuJoCo or otherwise).
+- Simulation (MuJoCo or otherwise) as a **V1** job. The twin / dojo is a **horizon**, not this folder today.
 - A requirements-complete autonomy stack.
 - A **novel Hux V1 balance controller** (R18). Study existing patterns; do not invent one to fill `firmware/`.
 - Firmware that implements the mode machine or the one-leg loop (FC is TBD; this page is the spec).

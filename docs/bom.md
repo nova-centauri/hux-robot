@@ -2,6 +2,8 @@
 
 Started **2026-09-21**. Prices are page prices or class estimates from that day. Shipping and tax are extra. A tire outside **5.75–6.25"** overall, or wider than **~1.25"**, does not count as the foot.
 
+The BOM is **need-driven**: the project buys what the design needs. Inventory ([`parts-on-hand.md`](parts-on-hand.md)) is a reference, not a design driver. Steve owns edits to the order-now breakout.
+
 **To order now: $89.41.** That is the only authorized spend.
 
 **Working total if the later estimates are bought as written: about $1,120.** The actuator block is most of that, and it is not chosen.

@@ -2,7 +2,7 @@
 
 **Status:** early R&D. Nothing here is a finished design.
 
-Hux is a wheeled biped: two legs that end in driven wheels. The north star is stairs — climb and descend a nominal **~9.5"** residential riser — not a polished indoor rover.
+Hux is a wheeled biped: two legs that end in driven wheels. The near-term north star is stairs — climb and descend a nominal **~9.5"** residential riser — not a polished indoor rover. The long-term twin / dojo sits after that; it does not replace stairs.
 
 Decision log: [`decisions.md`](decisions.md).
 
@@ -16,6 +16,16 @@ Decision log: [`decisions.md`](decisions.md).
 6. Plant. Repeat up or down.
 
 Open-loop step onto a 9.5" fixture comes before a closed-loop stair gait. Cameras and pathfinding come after the four **manual** modes work.
+
+## Near-term vs long-term
+
+**Near-term:** stand upright, the four **manual** modes, then a **9.5"** stair cycle. Classical / reused balance first (R18) — not an RL gate. The envelope on `main` is already **~24" × ~14"**, **6" foot**, carbon-tube spars; living drawings and [`research/stair-climb-dynamics.md`](research/stair-climb-dynamics.md) are the current draw, not the old ~10" / soft-5" era.
+
+**Long-term north star:** an **identical digital twin** plus a **training dojo** (ML/RL) so a policy trained in sim can run locally on the robot. Eventually train stairs, rubble, dirt, fall leaves, wet mud. That is a **horizon**, not a V1 blocker. Phasing: [`software.md`](software.md).
+
+**Inventory does not drive design.** [`parts-on-hand.md`](parts-on-hand.md) informs options. The project needs what it needs — prefer the correct actuators and wheels over the shelf. The Zantle 5" is a bench donor, already documented.
+
+**Motion control:** high-bandwidth **FOC / QDD / model-based** loops where they matter (wheels, hip roll). Class only. No vendor lock.
 
 ## Split brain (intent, not implemented)
 
@@ -75,6 +85,6 @@ Their stack is 3S + Arduino + 40 kg-class servos and **no stair / one-leg plant*
 - BEC / regulator SKU and pack capacity.
 - Tube OD / wall, belt pitch, hip-roll SKU.
 - Full body CAD, second-leg copy, and stair gait software.
-- Spend. No **new** purchases until Steve approves. Prefer parts already on hand.
+- Spend. No **new** purchases until Steve approves. Authorized cart stays the [`bom.md`](bom.md) order-now list. Inventory is a reference, not a design driver.
 
 Mechanical V1 is one wheel-leg (carbon-tube spars + end fittings) sized toward 9.5", not a finished robot.
