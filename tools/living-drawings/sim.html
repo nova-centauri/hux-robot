@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hux 3D sandbox</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="sim.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="page">
+    <header class="mast">
+      <div>
+        <p class="kicker">Hux</p>
+        <h1>3D sandbox</h1>
+        <p>Drive the working model around a course with real rigid-body physics. Same geometry and lump masses as the drawings. Every motor is a torque with a limit. The balance loop is an LQR that only sees what the robot could sense. First pass: a place to play and to find where the design breaks, not the digital twin.</p>
+        <nav class="pages" aria-label="Pages">
+          <a href="index.html">Drawings</a>
+          <a href="sim.html" aria-current="page">3D sandbox</a>
+          <a href="flow.html">Data flow</a>
+          <a href="software.html">Software</a>
+          <a href="hardware.html">Hardware</a>
+        </nav>
+      </div>
+      <div class="stamp">
+        Model 2026-09-22<br>
+        6" × 1.25" wheel<br>
+        7.5" + 7.5" tubes<br>
+        24" tall · 14" wide
+      </div>
+    </header>
+
+    <article class="card sim-card">
+      <div class="sim-stage" id="stage" tabindex="0" aria-label="3D view of Hux. Click here, then drive with the keyboard; keys are listed under the view.">
+        <canvas id="view"></canvas>
+        <div class="hud hud-left" id="hudLeft" aria-live="polite">Loading physics…</div>
+        <div class="hud hud-right" id="hudRight"></div>
+        <div class="hud hud-banner" id="banner" hidden></div>
+        <div class="pad" id="pad" aria-hidden="true">
+          <button type="button" data-hold="up">▲</button>
+          <button type="button" data-hold="left">◀</button>
+          <button type="button" data-hold="down">▼</button>
+          <button type="button" data-hold="right">▶</button>
+        </div>
+      </div>
+
+      <div class="sim-bar">
+        <div class="presets" role="group" aria-label="Mode">
+          <button type="button" data-mode="PARKED">Parked</button>
+          <button type="button" data-mode="TWO_WHEEL" class="active">Two wheel</button>
+          <button type="button" data-mode="LEFT_ONLY" title="Experimental">Left only</button>
+          <button type="button" data-mode="RIGHT_ONLY" title="Experimental">Right only</button>
+        </div>
+        <div class="presets" role="group" aria-label="Actions">
+          <button type="button" id="btnShove">Shove</button>
+          <button type="button" id="btnKill" aria-pressed="false">Kill motors</button>
+          <button type="button" id="btnReset">Reset</button>
+          <button type="button" id="btnPause" aria-pressed="false">Pause</button>
+        </div>
+        <label>Start at
+          <select id="spawn">
+            <option value="start">Middle of the floor</option>
+            <option value="stair">Facing the stair</option>
+            <option value="sills">Facing the thresholds</option>
+            <option value="ramp">Foot of the 1:12 ramp</option>
+            <option value="steep">Foot of the 12° ramp</option>
+            <option value="slick">Wet tile</option>
+          </select>
+        </label>
+        <label>Camera
+          <select id="camera">
+            <option value="chase">Chase</option>
+            <option value="orbit">Orbit (drag)</option>
+            <option value="side">Side</option>
+            <option value="front">Front</option>
+            <option value="top">Top</option>
+          </select>
+        </label>
+        <label>Time
+          <select id="timeScale">
+            <option value="1" selected>Real time</option>
+            <option value="0.5">Half</option>
+            <option value="0.25">Quarter</option>
+            <option value="0.1">Tenth</option>
+          </select>
+        </label>
+        <label>Top speed <output id="vmaxOut"></output>
+          <input id="vmax" type="range" min="0.2" max="2.5" step="0.1" value="1.0">
+        </label>
+      </div>
+
+      <p class="sim-keys"><b>Drive</b> W A S D or arrows (Shift for more) · <b>Height</b> Q / E · <b>Hip roll</b> Z / X · <b>Modes</b> 1 Parked, 2 Two wheel, 3 Left only, 4 Right only · <b>Space</b> shove · <b>R</b> reset · <b>K</b> kill motors · <b>C</b> camera · <b>P</b> pause · <b>Mouse wheel</b> zoom. A gamepad works: left stick drives, right stick sets height and hip roll, A shoves, B resets.</p>
+
+      <div class="sim-charts">
+        <div>
+          <h3>Wheel torque, last 10 s</h3>
+          <canvas id="chartWheel" class="chart" aria-label="Left and right wheel torque against their limit"></canvas>
+        </div>
+        <div>
+          <h3>Knee and hip roll torque, last 10 s</h3>
+          <canvas id="chartLeg" class="chart" aria-label="Knee and hip roll torque against their limits"></canvas>
+        </div>
+        <div>
+          <h3>Lean of the mass over the axle, last 10 s</h3>
+          <canvas id="chartLean" class="chart" aria-label="Lean of the centre of mass over the axle"></canvas>
+        </div>
+      </div>
+    </article>
+
+    <div class="views sim-lower">
+      <article class="card">
+        <h2>What the robot depends on</h2>
+        <p class="hint">Working assumptions, not decisions. Torque limits apply live. Mass, CoM and the skid rebuild the robot where it started.</p>
+        <div class="controls knobs">
+          <label>Wheel peak torque, each <output id="k_tauWheelOut"></output>
+            <input id="k_tauWheel" type="range" min="0.5" max="8" step="0.1" value="3">
+          </label>
+          <label>Wheel no-load speed (4S) <output id="k_wheelNoLoadOut"></output>
+            <input id="k_wheelNoLoad" type="range" min="15" max="80" step="1" value="40">
+          </label>
+          <label>Knee peak torque <output id="k_tauKneeOut"></output>
+            <input id="k_tauKnee" type="range" min="2" max="30" step="0.5" value="12">
+          </label>
+          <label>Hip swing peak torque <output id="k_tauHipOut"></output>
+            <input id="k_tauHip" type="range" min="2" max="30" step="0.5" value="12">
+          </label>
+          <label>Hip roll peak torque <output id="k_tauRollOut"></output>
+            <input id="k_tauRoll" type="range" min="2" max="30" step="0.5" value="15">
+          </label>
+          <label>Tire friction μ <output id="k_muOut"></output>
+            <input id="k_mu" type="range" min="0.3" max="1.3" step="0.05" value="0.7">
+          </label>
+          <label>Mass, × the 6 kg lumps <output id="k_massScaleOut"></output>
+            <input id="k_massScale" type="range" min="0.67" max="1.5" step="0.01" value="1">
+          </label>
+          <label>Body mass forward of the hips <output id="k_bodyComOut"></output>
+            <input id="k_bodyCom" type="range" min="-1" max="3" step="0.1" value="0">
+          </label>
+          <label class="check"><input id="k_skid" type="checkbox"> Rear parking skid (proposal)</label>
+          <div class="presets"><button type="button" id="knobReset">Back to the working assumptions</button></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>What this is and is not</h2>
+        <ul class="sim-notes">
+          <li><b>Physics.</b> Rapier rigid bodies at 2 kHz: body, two hip yokes, four carbon tubes, two wheels, Coulomb friction, real contacts with the stair, sills and crates.</li>
+          <li><b>Motors.</b> Joint servos close position at 2 kHz with a torque cap. The in-wheel motors lose torque linearly to the 4S no-load speed. PARKED shorts the wheel phases (a brake that needs speed to work).</li>
+          <li><b>Balance.</b> LQR on the lean of the mass over the axle, rebuilt as the legs change height, at 500 Hz. Roll levelling by leg length. It sees body attitude, joint angles and wheel speed; no sensor noise yet.</li>
+          <li><b>Tire.</b> Contact is a 6" sphere drawn as a tire. It rolls exactly and matches the stair profile. Sideways it rocks on a 3" radius instead of a ~0.6" crown, so one-wheel balance here is somewhat easier than on the real tire.</li>
+          <li><b>Not modelled.</b> Motor inertia through the gearbox, backlash, belt stretch, tube flex, battery sag, sensor noise and delay. No stair-climb controller yet: the stair is there to drive up to.</li>
+        </ul>
+        <p class="hint">Findings and how to rerun them: <code>docs/research/sim-sandbox.md</code>. Headless check: <code>node tools/living-drawings/sim-test.js</code>.</p>
+      </article>
+    </div>
+
+    <footer class="note">
+      Geometry and lump masses come from <code>kin.js</code>, the same model the drawings use (<code>docs/research/leg-geometry.md</code>). The 3D body is 8" long, 7" wide and 6" above the hips, the same drawing assumptions. The torque limits are classes, not parts. Needs a network connection the first time it opens: three.js and Rapier load from jsDelivr.
+    </footer>
+  </div>
+  <script src="kin.js"></script>
+  <script src="sim-core.js"></script>
+  <script src="sim-view.js"></script>
+</body>
+</html>

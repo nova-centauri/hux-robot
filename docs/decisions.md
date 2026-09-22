@@ -210,6 +210,10 @@ Steve set the Hux-bot role and a long-term north star. **Docs only. No lock lift
 - **Horizon:** identical digital twin + training dojo (ML/RL) so a policy trained in sim runs locally. Later domains: stairs, rubble, dirt, fall leaves, wet mud. **Phased:** V1 classical / reused balance + modes (R14 / R18) → later CAD/URDF twin lockstep (Stompy) → later dojo / RL for hard terrains. Do **not** replace R18 with an RL gate. Consistent with Tazer / Diablo / Stompy: LQR / PID before RL.
 - **Motion control:** high-bandwidth FOC / QDD / model-based loops where they matter (wheels, hip roll). Class only. No vendor lock.
 
+### 2026-09-22 — 3D sandbox in the living drawings
+
+Steve asked for a 3D view of the robot in the living drawings, three.js with simple controls, "almost like a video game" but with accurate physics and kinematics, as a first pass at fleshing out the design. Added [`tools/living-drawings/sim.html`](../tools/living-drawings/sim.html): Rapier rigid bodies at 2 kHz built from the same `kin.js` geometry and lumps, torque-limited joints, an LQR balance loop at 500 Hz, keyboard / gamepad / touch driving, and a course with the 9.5" × 9.5" stair, ramps, sills, a curb and wet tile. `npm test` in that folder checks it headless. Findings in [`research/sim-sandbox.md`](research/sim-sandbox.md): a **1" sill** crosses only near 1 m/s (6" wheel needs μ ≈ 1.1 to climb it on traction; knee saturates on the hit); **PARKED has no rest pose** (it rolls onto its back over the knee housings); one-wheel hold is not solved in the sandbox yet; one-wheel hip-roll holding torque ~9 N·m agrees with the 2D number. **Flags:** this is a design toy, not the digital twin and not a V1 job ([`software.md`](software.md)); the 3D robot is built only from the 2D numbers, so it is not CAD ahead of R23. The rear **parking skid** in the sandbox is a **proposal, off by default, not a decision**. Nothing locked. No spend.
+
 ---
 
 ## How to log the next merge

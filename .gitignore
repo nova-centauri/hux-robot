@@ -72,3 +72,6 @@ desktop.ini
 *.swp
 *.swo
 .vscode/
+
+# Node (tools/living-drawings headless checks)
+node_modules/
