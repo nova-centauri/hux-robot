@@ -15,6 +15,7 @@ This packet is the working study set. It does not replace [`../requirements.md`]
 | [diablo.md](diablo.md) | Diablo (DDTRobot) — commercial wheeled-leg; LQR + DD; steal split brain / height states; **do not buy** |
 | [leg-geometry.md](leg-geometry.md) | Leg math. Wheel settled at **6" OD** on a **9.5" × 9.5"** step. Walker wheel is a bench donor. |
 | [stair-climb-dynamics.md](stair-climb-dynamics.md) | What the living-drawings climb models and what it says: the ±6% throw window, land at the rear of the slot, body CoM 1–2" forward, knee ~10.6 N·m. |
+| [sim-sandbox.md](sim-sandbox.md) | What the 3D sandbox models and what it found: 1" sills cross only near 1 m/s, PARKED has no rest pose, one-wheel hip roll ~9 N·m. Not the twin. |
 | [study-plan.md](study-plan.md) | Phased checklist before hardware (Phases A–D; Phase E twin / dojo is a later horizon) |
 
 Decision log (not research, but the lock list): [`../decisions.md`](../decisions.md).

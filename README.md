@@ -36,7 +36,7 @@ Balance on two wheeled legs for teleop. Gate stair work behind one-leg balance (
 docs/         requirements, decisions, vision, research, mechanical, electronics, software, checklists
 NOTES.md      working notes and first milestones
 cad/          printable / CAD parts (empty — 2D before Blender)
-tools/living-drawings/   drawings (index.html), data flow (flow.html), software (software.html), hardware (hardware.html)
+tools/living-drawings/   drawings (index.html), 3D sandbox (sim.html), data flow (flow.html), software (software.html), hardware (hardware.html)
 firmware/     FC / embedded bring-up (empty)
 software/     companion compute — Pi cameras / pathfinding (empty)
 ```
@@ -53,6 +53,7 @@ software/     companion compute — Pi cameras / pathfinding (empty)
 - [Parts on hand](docs/parts-on-hand.md) — owned / ordered inventory + candidates (GIM8108-8 not ordered)
 - [First buy](docs/bom.md) — 6×1.25 tires, tubes, 16 mm carbon tube. Motors not on this list.
 - [Living drawings](tools/living-drawings/index.html) — side, top and front views of the settled leg, and the stair climb with its dynamics (momentum window, wheel catch, joint torques, sway). Play runs the climb in real time. Findings: [research/stair-climb-dynamics.md](docs/research/stair-climb-dynamics.md)
+- [3D sandbox](tools/living-drawings/sim.html) — drive the working model in 3D with rigid-body physics (Rapier + three.js): torque-limited joints, LQR balance, stair / ramps / sills / curb / wet tile. A design toy, not the digital twin. Findings: [research/sim-sandbox.md](docs/research/sim-sandbox.md)
 - [Data flow](tools/living-drawings/flow.html) — command, power, motion, modes, and what waits until later
 - [Software](tools/living-drawings/software.html) — F765-Wing firmware (no OS), Pi 5 on Raspberry Pi OS Lite, Nano stays CRSF. ArduPilot comes off. PID is not in the first image.
 - [Hardware](tools/living-drawings/hardware.html) — order now, on hand, shop, and the class estimates. Same numbers as [bom.md](docs/bom.md)

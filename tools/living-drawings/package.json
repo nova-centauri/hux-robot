@@ -1,0 +1,12 @@
+{
+  "name": "hux-living-drawings",
+  "private": true,
+  "description": "Hux living drawings and 3D sandbox. The pages need no build; this only pins the physics engine for the headless checks.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node kin.js && node sim-test.js"
+  },
+  "devDependencies": {
+    "@dimforge/rapier3d-compat": "0.20.0"
+  }
+}
