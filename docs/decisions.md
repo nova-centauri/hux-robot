@@ -23,6 +23,7 @@ These must stay true on `main`. Later rows in the log explain how we got here.
 | Shop | Mill / lathe / brake / bender / bandsaw / weld / solder / breadboards. Fab is welcome. |
 | Stepper I/O (if chosen) | **FC does not drive stepper coils.** Stepper drivers / Pi for pose. |
 | Research | Steal **Build Some Stuff (Serra)** + **Roadrunner** + **FrRonconi** + **XRobots** as research / inspiration. **Tazer**: learn from the mistakes (anti-patterns). **Stompy**: CAD/reality match + shared zero; **not** RL walking for V1. **Diablo**: split brain, DD/QDD class, LQR/PID before RL, height as states; **do not buy**; not 22 kg; no head/cargo V1. Do not vendor. |
+| Process / horizon | Repo is the plan SoT. Hux bot is **advisory / tracking / brainstorming / adversarial** — not a large-task executor. **Inventory does not drive design.** Prefer the correct actuator / wheel over the shelf part. Authorized spend stays the [`bom.md`](bom.md) order-now cart; Steve owns those breakout edits. **Digital twin + training dojo** is the long-term north star, **after** Phase V1 classical / reused balance + modes (R14 / R18). Not a V1 gate. |
 | Candidate (not ordered) | **GIM8108-8** noted for knee / swing. Not a lock. Not a buy. |
 
 ---
@@ -197,6 +198,17 @@ Overall width moves from **~10"** to **~14"** (R15). The head stays a narrower u
 ### 2026-09-22 — stair climb dynamics in the living drawings
 
 Steve asked for judgement calls on gravity, weight, CoM, momentum, inertia and motion in the stair animation, and for the tool to be improved. The climb in `tools/living-drawings/kin.js` now models the front wheel rolling back under the mass during the flight and catching the leftover after the crest, joint torques for both legs, the lateral sway and roll moment (with a front view), real-time playback, and design knobs that rebuild the step. Findings in [`research/stair-climb-dynamics.md`](research/stair-climb-dynamics.md): on the settled geometry the step-to gait is a **±6% precision throw** because the rear leg leaves the mass 2.7" behind the front contact; a **forward landing error of ½" makes the step impossible**, so aim at the rear of the slot; body CoM **1–2" ahead of the hip axes** is the cheapest fix and makes the step routine; the knee is a **~10.6 N·m** holding joint standing up over the front wheel, not the 4.4 N·m stance figure. **Nothing locked.** No spend. The lump masses are still a picture, not a weighed robot.
+
+### 2026-09-22 — Hux bot advisory + digital-twin horizon
+
+Steve set the Hux-bot role and a long-term north star. **Docs only. No lock lifted. No spend. No SKU. No BOM cart rewrite.**
+
+- **Role:** Hux bot is advisory / tracking / brainstorming / adversarial opinions. Not a large-task executor. The repo stays the plan SoT. Planning notes get updated; builds / CAD / firmware / spend wait for a specific Steve ask.
+- **Current state:** stance **~14"**, **6"** foot locked, BOM started, living-drawings + stair-climb-dynamics and Diablo / Stompy / Tazer research are on `main`. Plan language should talk about that machine, not the early ~10" / soft-5" era.
+- **Inventory ≠ design driver.** Parts on hand inform options. Prefer the correct actuators and wheels over the shelf. Zantle 5" stays a bench donor (already documented).
+- **Spend rails:** avoid wrong actuators / wheels; keep cheap. Authorized spend is whatever [`bom.md`](bom.md) already says. Do not expand the order-now cart. Steve owns those breakout edits.
+- **Horizon:** identical digital twin + training dojo (ML/RL) so a policy trained in sim runs locally. Later domains: stairs, rubble, dirt, fall leaves, wet mud. **Phased:** V1 classical / reused balance + modes (R14 / R18) → later CAD/URDF twin lockstep (Stompy) → later dojo / RL for hard terrains. Do **not** replace R18 with an RL gate. Consistent with Tazer / Diablo / Stompy: LQR / PID before RL.
+- **Motion control:** high-bandwidth FOC / QDD / model-based loops where they matter (wheels, hip roll). Class only. No vendor lock.
 
 ---
 

@@ -4,23 +4,33 @@ Working notes. Tick boxes only when the work is real.
 
 **Decisions (SoT log):** [`docs/decisions.md`](docs/decisions.md) — merge docs PRs promptly; keep `main` current; log each merge there.
 
+## How Hux bot helps
+
+Steve, 2026-09-22. **Advisory / tracking / brainstorming / adversarial opinions.** Not a large-task executor.
+
+This repo is the source of truth for plans. Hux bot keeps planning notes current. It does **not** drive CAD, firmware, builds, or spend unless Steve asks for something specific.
+
 ## First milestones
 
 - [x] **Create SoT** — this repo (`nova-centauri/hux-robot`) holds the scaffold + Steve's requirements.
-- [ ] **Research first** — study XRobots + Hattori + Steve's inspirations (Roadrunner, FrRonconi student balancer, Serra / Build Some Stuff, **Tazer mistakes**, **Stompy CAD/reality**) per [`docs/research/`](docs/research/). Phases A–C before any print. No vendoring. RobotX is GPL3; do not relicense Hux (MIT) without Steve. Steal Serra *packaging* (in-wheel BLDC+encoder, CoG-over-contact, serviceable prints, wheel-under-CoG) — not their files. Roadrunner is a lab RL demo; the student clip is closer vibe — neither is a Hux stack. Tazer is anti-patterns (wrong first motors, TPU tires, skinny power, LQR-too-early). Stompy is CAD/home-pose / sim lockstep — **not** an RL-walking requirement (R18).
+- [ ] **Research first** — study XRobots + Hattori + Steve's inspirations (Roadrunner, FrRonconi student balancer, Serra / Build Some Stuff, **Tazer mistakes**, **Stompy CAD/reality**, **Diablo**) per [`docs/research/`](docs/research/). Phases A–C before any print. No vendoring. RobotX is GPL3; do not relicense Hux (MIT) without Steve. Steal Serra *packaging* (in-wheel BLDC+encoder, CoG-over-contact, serviceable prints, wheel-under-CoG) — not their files. Roadrunner is a lab RL demo; the student clip is closer vibe — neither is a Hux stack. Tazer is anti-patterns (wrong first motors, TPU tires, skinny power, LQR-too-early). Stompy is CAD/home-pose / sim lockstep — **not** an RL-walking requirement (R18). Diablo: LQR/PID before RL, DD/QDD as a *class*; **do not buy**. Tazer / Stompy / Diablo notes and the living-drawings / stair-climb-dynamics work are already on `main`.
 - [ ] **2D layouts, then first wheel-leg** for a **9.5" × 9.5"** step (**Phase D**) — **carbon-tube** upper / lower spars + printed / machined end fittings, inside **~24" tall / ~14" wide**. Head inside, wheels and legs outside the head. Settled draw: **7.5" + 7.5"** tubes, **6" × ~1.25"** real rubber, hip over the axle ([`docs/research/leg-geometry.md`](docs/research/leg-geometry.md)). Size plant-side joints for **~2×** one-leg load. FC stays TBD; do not block the print on electronics. Do not start this to skip research. Do not buy tube, a tire, or a GIM8108 to fill a class. **No Blender before 2D** (R23).
 - [ ] **FC TBD** — still not locked. Candidates: F765 Wing / F722 Wing / F722 drone / Mamba F405. Record the bench choice in [`docs/electronics.md`](docs/electronics.md) when one actually blinks.
 - [ ] **Blink, then spin** — LED on the bench FC, then a restrained in-wheel brushless FOC (not on carpet).
 - [ ] **Manual modes** — `PARKED` → `TWO_WHEEL` → `LEFT_ONLY` → `RIGHT_ONLY` from TBS **before** any autonomy.
-- [ ] **Two-leg balance** teleop (TBS Nano RX + telem).
+- [ ] **Two-leg balance** teleop (TBS Nano RX + telem). Classical / reused control (R18). Not an RL gate.
 - [ ] **One-leg balance** — V1 **best-effort** CoG shift (hip roll + planted-wheel fore/aft). Gate before any stair cycle. May not work as hoped; still ship the joint and the modes. The same wheel loop is the stair **catch**: lean back an inch on the floor and let the wheel bring the base under, before any step ([`docs/research/stair-climb-dynamics.md`](docs/research/stair-climb-dynamics.md)).
 - [ ] **Open-loop step** toward a 9.5" riser fixture. Not before the four modes work.
 - [ ] **Cameras later** — one teleop stream, then Pi pathfinding. Not on the FC.
+- [ ] **Digital twin + dojo (horizon)** — identical CAD / URDF twin, then a training dojo (ML/RL) so a policy trained in sim can run locally. Domains later: stairs, rubble, dirt, fall leaves, wet mud. **After** modes and classical balance. **Not a V1 gate.** See [`docs/software.md`](docs/software.md).
 
 ## Constraints (do not “helpfully” violate)
 
 - Research before hardware. Packet: [`docs/research/`](docs/research/).
-- First buy is open: 6×1.25 tires, tubes, and 16 mm carbon tube only ([`docs/bom.md`](docs/bom.md)). No motors yet. 5" Zantle wheels already ordered — bench donor, not the foot ([`docs/parts-on-hand.md`](docs/parts-on-hand.md)). Wheel size is **settled at 6" OD**.
+- First buy is open: 6×1.25 tires, tubes, and 16 mm carbon tube only ([`docs/bom.md`](docs/bom.md)). No motors yet. Do **not** expand that order-now cart. 5" Zantle wheels already ordered — bench donor, not the foot ([`docs/parts-on-hand.md`](docs/parts-on-hand.md)). Wheel size is **settled at 6" OD**.
+- **Inventory does not drive design.** Parts on hand inform options. Prefer the correct actuator / wheel over the shelf part.
+- Want **high-bandwidth FOC / QDD / model-based** control where it matters (wheels, hip roll). No vendor lock.
+- Digital twin + training dojo is the **long-term horizon**, after modes and classical balance. Do not replace R18 with an RL gate.
 - Do not lock an FC in docs to make the repo look finished.
 - Do not lock knee / hip swing to steppers or servos. **Servo vs stepper+belt TBD** — both open, no lean. Size either for one-leg (~2×) load. **GIM8108-8** is a candidate, not an order.
 - **Hip roll is in V1** (dynamic FOC / QDD / fast servo), even if imperfect. Not a stepper. Not V2.
@@ -41,6 +51,6 @@ Working notes. Tick boxes only when the work is real.
 - Parts on hand: [`docs/parts-on-hand.md`](docs/parts-on-hand.md) (GIM8108-8 in Candidates) · shop tools [`docs/capabilities.md`](docs/capabilities.md)
 - Electronics: [`docs/electronics.md`](docs/electronics.md) · minimum [`docs/electronics-minimum.md`](docs/electronics-minimum.md)
 - Mechanical: [`docs/mechanical.md`](docs/mechanical.md) — carbon tubes, ~24" × ~14", in-wheel FOC, hip roll in V1, servo vs stepper TBD
-- Software: [`docs/software.md`](docs/software.md) — modes + one-leg loop + reuse-control
-- Vision: [`docs/vision.md`](docs/vision.md)
-- Inspiration: [Hattori STRIDE V2](https://www.alex-hattori.com/blog/wheeled-biped-v2) · Steve shares in [`docs/research/inspiration.md`](docs/research/inspiration.md) (Roadrunner + FrRonconi + Serra + Tazer + Stompy)
+- Software: [`docs/software.md`](docs/software.md) — modes + one-leg loop + reuse-control; twin / dojo is a later horizon
+- Vision: [`docs/vision.md`](docs/vision.md) — stairs + modes near; digital twin + RL dojo long
+- Inspiration: [Hattori STRIDE V2](https://www.alex-hattori.com/blog/wheeled-biped-v2) · Steve shares in [`docs/research/inspiration.md`](docs/research/inspiration.md) (Roadrunner + FrRonconi + Serra + Tazer + Stompy + Diablo)

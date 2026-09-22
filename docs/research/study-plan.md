@@ -1,6 +1,6 @@
 # Study plan (before hardware)
 
-Phased research checklist. Tick only when the work is real. **No spend** until Steve asks. **FC stays TBD.** Printable wheel-leg is **Phase D**, not Phase A.
+Phased research checklist. Tick only when the work is real. **No spend** until Steve asks. **FC stays TBD.** Printable wheel-leg is **Phase D**, not Phase A. **Phase E** (digital twin + dojo) is a **horizon** after D and after V1 modes / classical balance. Do not start E to skip print or R18.
 
 Track milestones in [`../../NOTES.md`](../../NOTES.md). Shortlist and links: [`xrobots.md`](xrobots.md). Steve inspirations (Roadrunner + FrRonconi student balancer + Serra / Build Some Stuff + Tazer + Stompy + Diablo): [`inspiration.md`](inspiration.md). Roadrunner detail: [`roadrunner.md`](roadrunner.md). Stompy CAD→sim→real: [`stompy-sim2real.md`](stompy-sim2real.md). Diablo wheeled-leg: [`diablo.md`](diablo.md). Actuator trade: [`actuators-legs.md`](actuators-legs.md). Leg math: [`leg-geometry.md`](leg-geometry.md). Cite/adapt rules: [`README.md`](README.md). Decision log: [`../decisions.md`](../decisions.md).
 
@@ -12,8 +12,9 @@ Track milestones in [`../../NOTES.md`](../../NOTES.md). Shortlist and links: [`x
 | Phase B 9.5" cycle sketch | Treating Stairs CAD as Hux geometry |
 | Phase C (adapt vs rewrite + license) | Vendoring any `XRobots/*` tree |
 | Phase D | Buying parts, locking an FC, opening Blender before 2D, or claiming Mechanical V1 started |
+| Phase D print + V1 modes / classical balance (R14 / R18) | Phase E twin / dojo / RL as if it were the next firmware job |
 
-Prefer parts already on hand. Upstream READMEs (especially SonicRobot) are **not** a Hux BOM.
+Inventory informs options; it does **not** drive design. Prefer the correct actuator / wheel over the shelf part. Upstream READMEs (especially SonicRobot) are **not** a Hux BOM. Authorized spend stays the [`../bom.md`](../bom.md) order-now cart.
 
 ---
 
@@ -108,6 +109,22 @@ Use [`../checklists/mechanical-v1.md`](../checklists/mechanical-v1.md), [`../mec
 
 ---
 
+## Horizon — Phase E: digital twin + dojo (after D, after V1 balance)
+
+**Goal:** an **identical digital twin**, then a training dojo. **Not a V1 gate.** Do not start this to skip A–D, the four modes, or classical / reused balance (R18).
+
+Steve, 2026-09-22. The cool long-term goal is a twin faithful enough that a policy trained in sim runs locally on the robot. Domains to eventually train: stairs, rubble, dirt, fall leaves, wet mud. That sits **after** Phase D print work and **after** standing / balancing with a reused simple loop.
+
+- [ ] Phase D actually done, or Steve explicitly opens twin work. **Do not** stand up a trainer to look busy.
+- [ ] Four manual modes work from RC (R14). Classical / reused balance is the V1 controller (R18). LQR / PID before RL — same order as Tazer / Diablo / Stompy.
+- [ ] When CAD exists: CAD → exported URDF (or equivalent) → firmware zeros stay the **same robot**. A linkage or wheel change is a full update (Stompy lesson: [`stompy-sim2real.md`](stompy-sim2real.md)). No Jetson / mjlab / Isaac lock.
+- [ ] Twin fidelity first — masses, inertias, wheel contact, hip-roll plant — before domain randomization.
+- [ ] Later: dojo / RL for hard terrains. Policy trained in sim, run locally. Not a Hux V1 stack in `firmware/` today.
+
+**Done when:** Steve asks to start twin work and the CAD / model / firmware zeros actually match. An empty `software/` folder is not a dojo.
+
+---
+
 ## Explicitly not this plan
 
 - Buying ODrives, Teensys, load cells, or a “better” FC because SonicRobot used them.
@@ -115,7 +132,7 @@ Use [`../checklists/mechanical-v1.md`](../checklists/mechanical-v1.md), [`../mec
 - Locking servo vs stepper+belt for knee / swing. Both stay open.
 - Cameras / pathfinding (later, on the Pi).
 - Closed-loop stair gait software.
-- Training an **RL walking policy** / buying a Jetson “because Stompy.” Hux V1 keeps **simple reused balance** (R18).
+- Training an **RL walking policy** / buying a Jetson “because Stompy.” Hux V1 keeps **simple reused balance** (R18). Phase E is a **horizon**, not a reason to skip that.
 - Buying Diablo (or M1502D / their Pi4 + motor board) “because wheeled-leg.” Not 22 kg. No head DoF / cargo for V1.
 - Relicensing by implication.
 - Opening Blender before 2D layouts (R23).
