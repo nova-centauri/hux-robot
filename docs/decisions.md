@@ -194,6 +194,10 @@ Overall width moves from **~10"** to **~14"** (R15). The head stays a narrower u
 
 [`bom.md`](bom.md) now has store links, line prices, and totals. **$89.41** is the authorized order. The working total of about **$1,140** includes class estimates for parts that are not chosen and not authorized.
 
+### 2026-09-22 — stair climb dynamics in the living drawings
+
+Steve asked for judgement calls on gravity, weight, CoM, momentum, inertia and motion in the stair animation, and for the tool to be improved. The climb in `tools/living-drawings/kin.js` now models the front wheel rolling back under the mass during the flight and catching the leftover after the crest, joint torques for both legs, the lateral sway and roll moment (with a front view), real-time playback, and design knobs that rebuild the step. Findings in [`research/stair-climb-dynamics.md`](research/stair-climb-dynamics.md): on the settled geometry the step-to gait is a **±6% precision throw** because the rear leg leaves the mass 2.7" behind the front contact; a **forward landing error of ½" makes the step impossible**, so aim at the rear of the slot; body CoM **1–2" ahead of the hip axes** is the cheapest fix and makes the step routine; the knee is a **~10.6 N·m** holding joint standing up over the front wheel, not the 4.4 N·m stance figure. **Nothing locked.** No spend. The lump masses are still a picture, not a weighed robot.
+
 ---
 
 ## How to log the next merge

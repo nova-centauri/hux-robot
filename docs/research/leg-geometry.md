@@ -55,7 +55,7 @@ upper tread _____________________________  9.5"
 ____________|__________________|__________  this tread
 ```
 
-On a code 10" going the same 6" tire has **±2"** of roll. On an 11" going, **±2.5"**. The landing tolerance is that same gap: the raised axle has to arrive within **±1.75"** of the center of the next 9.5" slot. An 8" tire would have demanded **±0.75"**, which is a precision place, not a pivot.
+On a code 10" going the same 6" tire has **±2"** of roll. On an 11" going, **±2.5"**. The landing tolerance is that same gap: the raised axle has to arrive within **±1.75"** of the center of the next 9.5" slot. The climb dynamics say to spend it asymmetrically: aim at the **rear** of the slot, because a forward landing error is what makes the step impossible ([`stair-climb-dynamics.md`](stair-climb-dynamics.md)). An 8" tire would have demanded **±0.75"**, which is a precision place, not a pivot.
 
 A 12" spoked kids wheel cannot enter the slot. Tire width stays **~1–1.25"**. Overall stance is **~14"**, and those tires sit outside the head.
 
@@ -80,7 +80,7 @@ Reach at that stance, swing axle one 9.5" going forward and 9.5" up: about **4.3
 
 If the body needs 8" above the hip instead of 6", each link loses an inch (6.5" + 6.5"). Do not grow the wheel to "use" that. The diameter is settled.
 
-The 7.5" lower tube cannot pass through the nosing. With both wheels down, the rear wheel can roll to the front of its slot and the hip can come forward until the rear leg is nearly straight. On this draw the center of mass is still about 2.7" behind the front contact there. Lifting the rear wheel and then standing up would tip the robot back down the stair. The living-drawings climb throws the mass instead. Over about 0.42 s the rear leg shoves the body forward while both wheels stay down. The rear wheel leaves with the mass still 2.7" behind the front contact and with about 0.78 kg·m²/s of forward angular momentum about that contact. The inertia of the 6 kg example about the contact is about 0.36 kg·m². Gravity takes about 0.77 kg·m²/s of that momentum before the mass reaches the contact, so the shove just crests. Only then does the body stand up and the trailing foot come up. Ends of one cycle are the start of the next. The mass is the 6 kg example split as a picture (body 4.0, hips 0.8, each knee 0.25, each wheel 0.35), not a weighed robot. The contact check uses a 0.7 friction cone. The steepest part of the shove sits on that cone.
+The 7.5" lower tube cannot pass through the nosing. With both wheels down, the rear wheel can roll to the front of its slot and the hip can come forward until the rear leg is nearly straight. On this draw the center of mass is still about **2.7"** behind the front contact there. Lifting the rear wheel and then standing up would tip the robot back down the stair. The living-drawings climb does two things about it: the rear leg shoves the body forward so the mass leaves the rear wheel with forward angular momentum about the front contact, and the front wheel rolls **back** in its slot under the mass while it is in the air. Whatever is left at the crest the front wheel absorbs in the forward room of the slot. On the settled geometry the shove has to land in a window about **0.1 kg·m²/s** wide (±6%), the front knee holds about **10.6 N·m** standing up over the front wheel, and a raised wheel that lands **½" forward** of slot center cannot be thrown over at all. Numbers, judgement calls and the recommended changes (land at the rear of the slot; body CoM 1–2" ahead of the hip axes; size the knee for ~10 N·m) are in [`stair-climb-dynamics.md`](stair-climb-dynamics.md). The mass is the 6 kg example split as a picture (body 4.0, hips 0.8, each knee 0.25, each wheel 0.35), not a weighed robot. The contact check uses a 0.7 friction cone.
 
 ## Assumptions behind the torque numbers
 
@@ -124,7 +124,7 @@ At **92%** on the **7.5" / 6" wheel** leg, knee poke `d ≈ 2.9"`. Torque `τ = 
 | **6 kg** | **4.4 N·m** | **2.2 N·m** | **2.2 N·m** |
 | 8 kg | 5.9 N·m | 2.9 N·m | 2.9 N·m |
 
-A deeper crouch (75% extension, 6 kg) is about **7.4 N·m** on one leg. Size the spring for the two-leg pose (~**2.2 N·m** at 6 kg). The actuator pays the other half on one leg, plus the landing. A linkage that keeps the knee on the weight line drives this toward zero. Prefer that in the 2D set. The roll moment does not shrink when the poke does.
+A deeper crouch (75% extension, 6 kg) is about **7.4 N·m** on one leg. Standing up over the front wheel on the stair, with the knee 6–7" behind the weight line, is about **10.6 N·m** on one leg ([`stair-climb-dynamics.md`](stair-climb-dynamics.md)); that, not the stance, sizes the knee actuator. Size the spring for the two-leg pose (~**2.2 N·m** at 6 kg). The actuator pays the other half on one leg, plus the landing. A linkage that keeps the knee on the weight line drives this toward zero. Prefer that in the 2D set. The roll moment does not shrink when the poke does.
 
 **Tubes.** Example only, not a SKU: 16 mm OD, 12 mm ID, long-fiber modulus ~100 GPa, 7.5" link, 0.30 kg at the end. First bending is on the order of **~90 Hz**. Keep it **above ~40 Hz**.
 

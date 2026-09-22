@@ -14,6 +14,7 @@ This packet is the working study set. It does not replace [`../requirements.md`]
 | [stompy-sim2real.md](stompy-sim2real.md) | Stompy week-build RL walker — CAD/reality match, shared zero; **not** RL walking for Hux V1 |
 | [diablo.md](diablo.md) | Diablo (DDTRobot) — commercial wheeled-leg; LQR + DD; steal split brain / height states; **do not buy** |
 | [leg-geometry.md](leg-geometry.md) | Leg math. Wheel settled at **6" OD** on a **9.5" × 9.5"** step. Walker wheel is a bench donor. |
+| [stair-climb-dynamics.md](stair-climb-dynamics.md) | What the living-drawings climb models and what it says: the ±6% throw window, land at the rear of the slot, body CoM 1–2" forward, knee ~10.6 N·m. |
 | [study-plan.md](study-plan.md) | Phased checklist before hardware (Phases A–D) |
 
 Decision log (not research, but the lock list): [`../decisions.md`](../decisions.md).

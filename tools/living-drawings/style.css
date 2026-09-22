@@ -156,3 +156,16 @@ footer.note { margin-top: 18px; color: var(--muted); font-size: 13px; line-heigh
   .page { padding: 16px 12px 40px; }
   .readout { grid-template-columns: 1fr; }
 }
+
+/* climb card additions */
+.pair-views { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; align-items: start; }
+.front-wrap h3 { margin: 2px 0 6px; font-size: 0.95rem; }
+.hint.small { font-size: 0.8rem; }
+.strip { width: 100%; height: auto; display: block; margin-top: 8px; background: var(--sheet); border: 1px solid var(--dim); }
+.strip.tall { margin-top: 4px; }
+.knobs-title { margin: 18px 0 4px; }
+.knobs { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 8px 14px; }
+.knobs .presets { grid-column: 1 / -1; }
+@media (max-width: 900px) {
+  .pair-views { grid-template-columns: 1fr; }
+}

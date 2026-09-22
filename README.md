@@ -36,7 +36,7 @@ Balance on two wheeled legs for teleop. Gate stair work behind one-leg balance (
 docs/         requirements, decisions, vision, research, mechanical, electronics, software, checklists
 NOTES.md      working notes and first milestones
 cad/          printable / CAD parts (empty — 2D before Blender)
-tools/living-drawings/   side and top views of the working model, plus the parts list
+tools/living-drawings/   side, top and front views of the working model, the stair-climb dynamics, and the parts list
 firmware/     FC / embedded bring-up (empty)
 software/     companion compute — Pi cameras / pathfinding (empty)
 ```
@@ -52,7 +52,7 @@ software/     companion compute — Pi cameras / pathfinding (empty)
 - [Minimum electronics](docs/electronics-minimum.md) — P0–P5 class list (no SKU, no new spend)
 - [Parts on hand](docs/parts-on-hand.md) — owned / ordered inventory + candidates (GIM8108-8 not ordered)
 - [First buy](docs/bom.md) — 6×1.25 tires, tubes, 16 mm carbon tube. Motors not on this list.
-- [Living drawings](tools/living-drawings/index.html) — side and top views of the settled leg, plus electronics flow and the parts list
+- [Living drawings](tools/living-drawings/index.html) — side, top and front views of the settled leg, the stair climb with its dynamics (momentum window, wheel catch, joint torques, sway), electronics flow and the parts list. Findings: [research/stair-climb-dynamics.md](docs/research/stair-climb-dynamics.md)
 - [Shop capabilities](docs/capabilities.md) — mill, lathe, bender, brake, bandsaw, solder, weld, breadboards (not parts)
 - [Software](docs/software.md) — blink → spin → four manual modes → cameras later
 - [Checklists](docs/checklists/) — prefer these over fake finished stacks

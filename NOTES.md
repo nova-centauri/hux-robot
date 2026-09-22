@@ -13,7 +13,7 @@ Working notes. Tick boxes only when the work is real.
 - [ ] **Blink, then spin** — LED on the bench FC, then a restrained in-wheel brushless FOC (not on carpet).
 - [ ] **Manual modes** — `PARKED` → `TWO_WHEEL` → `LEFT_ONLY` → `RIGHT_ONLY` from TBS **before** any autonomy.
 - [ ] **Two-leg balance** teleop (TBS Nano RX + telem).
-- [ ] **One-leg balance** — V1 **best-effort** CoG shift (hip roll + planted-wheel fore/aft). Gate before any stair cycle. May not work as hoped; still ship the joint and the modes.
+- [ ] **One-leg balance** — V1 **best-effort** CoG shift (hip roll + planted-wheel fore/aft). Gate before any stair cycle. May not work as hoped; still ship the joint and the modes. The same wheel loop is the stair **catch**: lean back an inch on the floor and let the wheel bring the base under, before any step ([`docs/research/stair-climb-dynamics.md`](docs/research/stair-climb-dynamics.md)).
 - [ ] **Open-loop step** toward a 9.5" riser fixture. Not before the four modes work.
 - [ ] **Cameras later** — one teleop stream, then Pi pathfinding. Not on the FC.
 
@@ -35,7 +35,7 @@ Working notes. Tick boxes only when the work is real.
 ## Pointers
 
 - Decisions: [`docs/decisions.md`](docs/decisions.md)
-- Research: [`docs/research/README.md`](docs/research/README.md) · shortlist [`docs/research/xrobots.md`](docs/research/xrobots.md) · inspirations [`docs/research/inspiration.md`](docs/research/inspiration.md) · Roadrunner [`docs/research/roadrunner.md`](docs/research/roadrunner.md) · Tazer [`docs/research/tazer-lessons.md`](docs/research/tazer-lessons.md) · Stompy [`docs/research/stompy-sim2real.md`](docs/research/stompy-sim2real.md) · actuators [`docs/research/actuators-legs.md`](docs/research/actuators-legs.md) · **leg geometry** [`docs/research/leg-geometry.md`](docs/research/leg-geometry.md) · plan [`docs/research/study-plan.md`](docs/research/study-plan.md)
+- Research: [`docs/research/README.md`](docs/research/README.md) · shortlist [`docs/research/xrobots.md`](docs/research/xrobots.md) · inspirations [`docs/research/inspiration.md`](docs/research/inspiration.md) · Roadrunner [`docs/research/roadrunner.md`](docs/research/roadrunner.md) · Tazer [`docs/research/tazer-lessons.md`](docs/research/tazer-lessons.md) · Stompy [`docs/research/stompy-sim2real.md`](docs/research/stompy-sim2real.md) · actuators [`docs/research/actuators-legs.md`](docs/research/actuators-legs.md) · **leg geometry** [`docs/research/leg-geometry.md`](docs/research/leg-geometry.md) · **stair dynamics** [`docs/research/stair-climb-dynamics.md`](docs/research/stair-climb-dynamics.md) (run `node tools/living-drawings/kin.js` for the self-test and summary) · plan [`docs/research/study-plan.md`](docs/research/study-plan.md)
 - XRobots: https://github.com/XRobots · RobotX (GPL3): https://github.com/XRobots/RobotX
 - Requirements: [`docs/requirements.md`](docs/requirements.md) — R10 electric-only · R11 4S + step-down · R12 servo vs stepper TBD · R13 **6" OD** locked (Zantle is a bench donor) · R14 modes · R16 hip roll in V1 · R24 mass soft · R34 carbon tubes · R35 ~24" · R36 ~2× plant
 - Parts on hand: [`docs/parts-on-hand.md`](docs/parts-on-hand.md) (GIM8108-8 in Candidates) · shop tools [`docs/capabilities.md`](docs/capabilities.md)
