@@ -12,10 +12,11 @@
       <div>
         <p class="kicker">Hux</p>
         <h1>Data flow</h1>
-        <p>How a stick command reaches a joint, and where the current goes. These are classes. No harness, and no board is chosen.</p>
+        <p>How a stick command reaches a joint, and where the current goes. These are classes. No harness. The bench computer is the F765-Wing. What runs on it is on the Software page.</p>
         <nav class="pages" aria-label="Pages">
           <a href="index.html">Drawings</a>
           <a href="flow.html" aria-current="page">Data flow</a>
+          <a href="software.html">Software</a>
           <a href="hardware.html">Hardware</a>
         </nav>
       </div>
@@ -35,7 +36,7 @@
           <div class="arrow" aria-hidden="true">→</div>
           <div class="node"><b>TBS Nano RX</b><span>On hand. Binds into the flight controller.</span></div>
           <div class="arrow" aria-hidden="true">→</div>
-          <div class="node"><b>Flight controller + IMU</b><span>Board not chosen. On the shelf: F765 Wing, F722 Wing, F722 drone, Mamba F405. Runs attitude, wheel torque, and the four modes.</span></div>
+          <div class="node"><b>F765-Wing + IMU</b><span>Bench board. Two gyros on the board, MPU6000 and ICM20602. New firmware, not ArduPilot. Attitude, wheel torque, and the four modes. <a href="software.html">Software</a>.</span></div>
         </div>
       </div>
     </section>
@@ -87,11 +88,10 @@
     <section class="stage">
       <h3>Later</h3>
       <div class="lanes">
-        <p class="hint">Not required to balance. Pathfinding comes after the four modes.</p>
+        <p class="hint">Not required to balance. The Pi listens. Pathfinding comes after the four modes. <a href="software.html">Software on each chip</a>.</p>
         <div class="branch">
-          <div class="node"><b>Pi</b><span>On hand. Owns the cameras, the face display, and the eye lights.</span></div>
-          <div class="arrow word">or</div>
-          <div class="node"><b>ESP32</b><span>On hand. Optional thin telemetry bridge if the Pi should not own the radio link.</span></div>
+          <div class="node"><b>Pi 5</b><span>On hand. Raspberry Pi OS Lite. One Python process reads the Wing's text stream. Owns the cameras, the face display, and the eye lights later.</span></div>
+          <div class="node"><b>ESP32</b><span>On hand. Unused. The Pi already has Wi-Fi.</span></div>
         </div>
         <div class="branch">
           <div class="node"><b>Cameras ×7</b><span>Two on the front for stereo. One each on the back, left, right, top, and bottom. Small modules. Not bought.</span></div>
@@ -103,7 +103,8 @@
 
     <footer class="note">
       Same plan as <a href="../../docs/electronics.md">docs/electronics.md</a> and <a href="../../docs/electronics-minimum.md">docs/electronics-minimum.md</a>.
-      The flight controller stays TBD until one of the boards on the shelf blinks.
+      Chip software is <a href="software.html">software.html</a>.
+      The F765-Wing is the bench board. It stays unlocked until it blinks and a wheel has spun.
     </footer>
   </div>
 </body>

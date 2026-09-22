@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hux software</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page">
+    <header class="mast">
+      <div>
+        <p class="kicker">Hux</p>
+        <h1>Software</h1>
+        <p>What runs on each chip. The F765-Wing gets a new small firmware and no operating system. The Pi 5 gets Raspberry Pi OS. ArduPilot comes off the Wing. The balance loop is not in either image yet.</p>
+        <nav class="pages" aria-label="Pages">
+          <a href="index.html">Drawings</a>
+          <a href="flow.html">Data flow</a>
+          <a href="software.html" aria-current="page">Software</a>
+          <a href="hardware.html">Hardware</a>
+        </nav>
+      </div>
+      <div class="stamp">
+        Plan 2026-09-22<br>
+        Bench in a few days<br>
+        Not flashed yet<br>
+        Not a lock
+      </div>
+    </header>
+
+    <section class="block">
+      <h2>On each chip</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Chip</th><th>Software</th><th>Job</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>F765-Wing</td>
+              <td>No OS. A 1 kHz timer and a main loop, built in PlatformIO with the STM32 Arduino core.</td>
+              <td>Read both gyros. Read the Nano. Keep the mode. Send a text stream to the Pi. The PID joins this same timer later.</td>
+            </tr>
+            <tr>
+              <td>Pi 5</td>
+              <td>Raspberry Pi OS Lite, 64-bit. Debian 13 Trixie, kernel 6.18.</td>
+              <td>One Python 3 process. It reads the stream and prints the mode, the attitude, and the sticks.</td>
+            </tr>
+            <tr>
+              <td>TBS Nano RX</td>
+              <td>TBS firmware, set to CRSF.</td>
+              <td>Sticks in, telemetry back. No Hux code. Channel 1 is CRSF TX, channel 2 is CRSF RX.</td>
+            </tr>
+            <tr>
+              <td>ESP32</td>
+              <td>Nothing.</td>
+              <td>Stays unused. The Pi already has Wi-Fi.</td>
+            </tr>
+            <tr>
+              <td>Wheel driver, later</td>
+              <td>SimpleFOC on that driver's own microcontroller.</td>
+              <td>The current loop. It takes a torque number from the Wing. It does not move onto the F765 or the Pi.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="stage">
+      <h3>Rates</h3>
+      <div class="lanes">
+        <div class="branch">
+          <div class="node"><b>1 kHz on the Wing</b><span>Gyro samples, and later the PID and the torque command. A hardware timer. The main loop parses CRSF, tracks the mode, and writes text.</span></div>
+          <div class="node"><b>10–50 Hz on the Pi</b><span>Read the text. Later, cameras and pathfinding send setpoints down. The Pi never sees raw gyro samples.</span></div>
+          <div class="node"><b>10–40 kHz on the driver</b><span>SimpleFOC, next to the windings, once a driver exists.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>What comes off the Wing</h2>
+      <p class="callout">ArduPilot is on the F765-Wing today and comes off. Its estimator and mixer assume a plane or a rover, and its arming rules will fight a balance loop. INAV and Betaflight are the same kind of program. Hux is MIT and ArduPilot is GPL-3, so the new image is not a fork. Keep the pin map: which pad is which UART, and that the two gyros are an MPU6000 and an ICM20602 on SPI. Write Hux's own startup.</p>
+    </section>
+
+    <section class="block">
+      <h2>First image, then the PID</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>When</th><th>On the Wing</th><th>On the Pi</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>First flash</td>
+              <td>Tilt the board, move a stick, write one text line out USB.</td>
+              <td>Open the serial port and print the line. Listen only. No torque commands.</td>
+            </tr>
+            <tr>
+              <td>After the balance study</td>
+              <td>The studied PID, a few more lines in that same 1 kHz timer. Not a second framework.</td>
+              <td>Still listening. Setpoints come later, after the four modes work from the stick.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="callout">The Pi does not get a real-time kernel, and it does not run ROS. Python is enough for the listener. The same process can grow a camera stream and pathfinding later. The Pi does not build or flash the Wing. That happens from the bench computer over USB, using the Wing's boot button.</p>
+    </section>
+
+    <section class="stage">
+      <h3>Links</h3>
+      <div class="lanes">
+        <div class="branch">
+          <div class="node"><b>Wing USB → Pi</b><span>The first cable. A terminal is the first display. One port, one program: the configurator and the Pi do not share it.</span></div>
+          <div class="arrow" aria-hidden="true">→</div>
+          <div class="node"><b>UART, later</b><span>Wing TX to Pi RX and the other way around. Common ground. 3.3 V. This is the permanent link after USB has already shown the numbers.</span></div>
+        </div>
+        <div class="branch">
+          <div class="node"><b>Nano → Wing</b><span>5 V and ground from the Wing's 5 V pad. Channel 1 to the Wing RX. Channel 2 to the Wing TX. A full UART, not the receive-only radio pad.</span></div>
+          <div class="node"><b>Pi power</b><span>The Pi 5 has its own 5 V, 5 A supply. The Wing's 5 V regulator feeds the board and the receiver. It does not feed the Pi.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Cameras</h2>
+      <p class="callout">C1 and C2 on the Wing are analog composite video into the OSD, then out the VTX pad. Both cameras have to be the same format. That path is a pilot picture later, with the horizon burned in. The stair cameras are CSI or USB on the Pi. They do not go through those pads, and they are not in this image.</p>
+    </section>
+
+    <section class="stage">
+      <h3>Modes</h3>
+      <div class="lanes">
+        <div class="modes">
+          <div class="mode-name">PARKED</div>
+          <div class="mode-name">TWO_WHEEL</div>
+          <div class="mode-name">LEFT_ONLY</div>
+          <div class="mode-name">RIGHT_ONLY</div>
+        </div>
+        <p class="hint">The first image tracks the name. It does not balance, lift a foot, or follow a path.</p>
+      </div>
+    </section>
+
+    <footer class="note">
+      Bench plan for the F765-Wing, the Pi 5, and the TBS Nano RX.
+      The mode story is <a href="../../docs/software.md">docs/software.md</a>.
+      The Wing stays the bench board, and it stays unlocked until it blinks and a wheel has spun.
+    </footer>
+  </div>
+</body>
+</html>

@@ -16,6 +16,7 @@
         <nav class="pages" aria-label="Pages">
           <a href="index.html">Drawings</a>
           <a href="flow.html">Data flow</a>
+          <a href="software.html">Software</a>
           <a href="hardware.html" aria-current="page">Hardware</a>
         </nav>
       </div>
@@ -72,11 +73,11 @@
             <tr><th>Qty</th><th>Part</th><th>State</th><th>Role</th></tr>
           </thead>
           <tbody>
-            <tr><td>1</td><td>Flight controller</td><td><span class="chip hand">On hand</span></td><td>F765 Wing, F722 Wing, F722 drone, or Mamba F405. Not locked.</td></tr>
-            <tr><td>1</td><td>IMU</td><td><span class="chip hand">On the FC</span></td><td>Already on whichever flight controller comes off the shelf.</td></tr>
-            <tr><td>1</td><td>TBS Nano RX</td><td><span class="chip settled">On hand</span></td><td>Pilot link. Binds into the flight controller.</td></tr>
-            <tr><td>1</td><td>Raspberry Pi</td><td><span class="chip later">On hand</span></td><td>Cameras, faces, and pathfinding later. Not required to balance.</td></tr>
-            <tr><td>0–1</td><td>ESP32</td><td><span class="chip later">On hand</span></td><td>Optional telemetry bridge if the Pi should not own the radio link.</td></tr>
+            <tr><td>1</td><td>F765-Wing</td><td><span class="chip bench">Bench</span></td><td>The bench flight controller. ArduPilot is on it now and comes off. Not locked until it blinks. <a href="software.html">Software</a>.</td></tr>
+            <tr><td>2</td><td>Gyros on the Wing</td><td><span class="chip hand">On the board</span></td><td>MPU6000 and ICM20602, on SPI. The balance loop reads these. The Pi does not.</td></tr>
+            <tr><td>1</td><td>TBS Nano RX</td><td><span class="chip settled">On hand</span></td><td>Pilot link. TBS firmware, CRSF, into the Wing. No Hux code.</td></tr>
+            <tr><td>1</td><td>Raspberry Pi 5</td><td><span class="chip later">On hand</span></td><td>Raspberry Pi OS Lite. Listens to the Wing. Cameras, faces, and pathfinding later. Not required to balance.</td></tr>
+            <tr><td>0–1</td><td>ESP32</td><td><span class="chip later">Unused</span></td><td>On hand. Nothing planned. The Pi already has Wi-Fi.</td></tr>
           </tbody>
         </table>
       </div>
