@@ -301,8 +301,25 @@
   const keys = new Set();
   const pad = new Set();
   let pendingMode = null;
-  let height = sim.s.hStance;
+  let height = sim.s.hRide;
   let shift = 0;
+  /* ride height: slider in % of the full leg, presets, and Q / E all move the same number */
+  const rideEl = document.getElementById("ride");
+  const rideOut = document.getElementById("rideOut");
+  const rideButtons = document.querySelectorAll("[data-ride]");
+  function syncRide() {
+    const f = height / (2 * sim.s.L);
+    rideEl.value = String(Math.round(f * 100));
+    rideOut.textContent = (height / IN).toFixed(1) + "\" hip to axle · " + Math.round(f * 100) + "%";
+    rideButtons.forEach(function (b) { b.classList.toggle("active", Math.abs(Number(b.dataset.ride) - f) < 0.02); });
+  }
+  function setRide(f) {
+    height = Math.max(sim.s.hMin, Math.min(sim.s.hMax, f * 2 * sim.s.L));
+    syncRide();
+  }
+  rideEl.addEventListener("input", function () { setRide(Number(rideEl.value) / 100); });
+  rideButtons.forEach(function (b) { b.addEventListener("click", function () { setRide(Number(b.dataset.ride)); }); });
+  syncRide();
   const vmax = document.getElementById("vmax");
   const vmaxOut = document.getElementById("vmaxOut");
   function syncVmax() { vmaxOut.textContent = Number(vmax.value).toFixed(1) + " m/s"; }
@@ -382,7 +399,8 @@
   function reset() {
     sim.opts.start = SPAWNS[spawnSel.value] || SPAWNS.start;
     sim.build(knobs);
-    height = sim.s.hStance;
+    height = sim.s.hRide;
+    syncRide();
     shift = 0;
     btnKill.setAttribute("aria-pressed", "false");
     trace.length = 0;
@@ -435,7 +453,10 @@
       if (g.h) hRate = g.h * 0.12;
       if (g.shift) shiftWant = g.shift * 0.45;
     }
-    height = Math.max(sim.s.hMin, Math.min(sim.s.hMax, height + hRate * dt));
+    if (hRate) {
+      height = Math.max(sim.s.hMin, Math.min(sim.s.hMax, height + hRate * dt));
+      syncRide();
+    }
     shift += Math.max(-0.6 * dt, Math.min(0.6 * dt, shiftWant - shift));
     const cmd = { v: v, yaw: yaw, height: height, shift: shift };
     if (pendingMode) cmd.mode = pendingMode;
@@ -451,8 +472,11 @@
     tauRoll: function (x) { return x.toFixed(1) + " N·m"; },
     mu: function (x) { return x.toFixed(2); },
     massScale: function (x) { return (6 * x).toFixed(1) + " kg lumps"; },
-    bodyCom: function (x) { return x.toFixed(1) + "\""; }
+    bodyCom: function (x) { return x.toFixed(1) + "\""; },
+    legHz: function (x) { return x.toFixed(1) + " Hz"; },
+    legZeta: function (x) { return x.toFixed(2); }
   };
+  const CHECKS = ["skid", "reflex", "legCatch", "oneLift"];
   const knobIds = Object.keys(KNOB_FMT);
   function readKnobs() {
     const k = Object.assign({}, knobs);
@@ -461,7 +485,7 @@
       k[id] = Number(el.value);
       document.getElementById("k_" + id + "Out").textContent = KNOB_FMT[id](k[id]);
     });
-    k.skid = document.getElementById("k_skid").checked;
+    CHECKS.forEach(function (id) { k[id] = document.getElementById("k_" + id).checked; });
     return k;
   }
   function applyKnobs() {
@@ -471,7 +495,8 @@
     if (rebuilt) {
       sim.opts.start = SPAWNS[spawnSel.value] || SPAWNS.start;
       sim.build(knobs);
-      height = sim.s.hStance;
+      height = sim.s.hRide;
+      syncRide();
       buildScenery();
       buildRobotMeshes();
       snapCamera = true;
@@ -482,10 +507,10 @@
     el.addEventListener("input", function () { readKnobs(); });
     el.addEventListener("change", applyKnobs);
   });
-  document.getElementById("k_skid").addEventListener("change", applyKnobs);
+  CHECKS.forEach(function (id) { document.getElementById("k_" + id).addEventListener("change", applyKnobs); });
   document.getElementById("knobReset").addEventListener("click", function () {
     knobIds.forEach(function (id) { document.getElementById("k_" + id).value = String(DEFAULT_KNOBS[id]); });
-    document.getElementById("k_skid").checked = !!DEFAULT_KNOBS.skid;
+    CHECKS.forEach(function (id) { document.getElementById("k_" + id).checked = !!DEFAULT_KNOBS[id]; });
     applyKnobs();
   });
   readKnobs();
@@ -550,8 +575,10 @@
     return "<div class=\"bar\"><span>" + name + "</span><span class=\"track\"><span class=\"fill " + cls + "\" style=\"left:" + left + "%;width:" + (f * 50) + "%\"></span><span class=\"zero\"></span></span><span>" + fmt(tau, 1) + "</span></div>";
   }
   const PHASE = {
-    sitting: "crouching", parked: "wheels braked", shift: "shifting mass over the wheel",
-    lift: "lifting the free wheel", hold: "on one wheel", lower: "putting the wheel down", unshift: "centring"
+    sitting: "crouching", parked: "wheels braked", shift: "standing tall, shifting mass over the wheel",
+    poise: "poised over one wheel", edge: "easing on to the wheel", unload: "letting the free leg go",
+    lift: "lifting the free wheel", hold: "on one wheel", lower: "putting the wheel down",
+    catch: "catch step", load: "loading the free wheel", unshift: "centring"
   };
   let rtf = 1;
   function drawHud() {
@@ -569,6 +596,8 @@
       row("Mass lean", deg(o.theta)) +
       row("Body pitch / roll", deg(o.pitch) + " / " + deg(o.roll)) +
       row("Hip to axle", fmt(o.h / IN, 1) + "\" · " + (100 * o.h / (2 * s.L)).toFixed(0) + "%") +
+      row("Leg travel L / R", fmt((o.legs[0].dWant - o.legs[0].d) / IN, 2) + " / " + fmt((o.legs[1].dWant - o.legs[1].d) / IN, 2) + "\"") +
+      row("Hops / catches", ((o.reflex[0] ? o.reflex[0].hits : 0) + (o.reflex[1] ? o.reflex[1].hits : 0)) + " / " + (o.caught || 0)) +
       row("Hip roll", deg(shift)) +
       row("Wheel load L / R", fL.toFixed(0) + " / " + fR.toFixed(0) + " N") +
       row("", (100 * fL / weight).toFixed(0) + "% / " + (100 * fR / weight).toFixed(0) + "% of " + s.totalKg.toFixed(1) + " kg") +
@@ -591,7 +620,9 @@
     if (o.fallen) msg = "Fallen. Press R (or Reset) to stand it back up.";
     else if (o.estop) msg = "Motors off. Press K to turn them back on.";
     else if (o.phase === "parked" && !sim.robot.skid) msg = "Parked: wheels braked, balance off. With no rest pose it tips back onto its knees and rolls over. Try the rear skid below.";
-    else if (o.mode === "LEFT_ONLY" || o.mode === "RIGHT_ONLY") msg = "Experimental. Shifting the mass over one wheel works. Holding one-wheel balance does not yet: the sideways controller is the open item.";
+    else if (o.mode === "LEFT_ONLY" || o.mode === "RIGHT_ONLY") msg = sim.s.knobs.oneLift ?
+      "Experimental lift on. The sideways balancer does not hold the free wheel off the floor yet; expect a catch step or a fall." :
+      "One wheel, poised: the mass is over the planted wheel and the other carries about 15%, like a kickstand. Taking it fully off the floor is the open item (experimental switch below).";
     banner.hidden = !msg;
     banner.textContent = msg;
     modeButtons.forEach(function (btn) {

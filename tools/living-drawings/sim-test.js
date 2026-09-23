@@ -98,13 +98,15 @@ function run(opts, plan) {
   found.freeRoll = { sphere: vBall.toFixed(3), cylinder: vCyl.toFixed(3) };
 
   /* Stand still. Contact force must add up to the weight (checks the (n+1)/n correction). */
-  const stand = run({}, [{ name: "settle", s: 1.5 }, { name: "stand", s: 2 }]);
+  /* Cross-check against leg-geometry.md at the drawings' 92% stance, not the ride height. */
+  const tall = { height: 2 * M.link * IN * M.stanceFraction };
+  const stand = run({}, [{ name: "settle", s: 1.5, cmd: tall }, { name: "stand", s: 2, cmd: tall }]);
   {
     const sim = stand.sim;
     let f = 0;
     const n = 1000;
     for (let i = 0; i < n; i++) {
-      const o = sim.step({});
+      const o = sim.step(tall);
       f += o.contacts[0].force + o.contacts[1].force;
     }
     const weight = sim.s.totalKg * 9.81;
@@ -117,6 +119,19 @@ function run(opts, plan) {
     const knee = (Math.abs(o.legs[0].knee.tau) + Math.abs(o.legs[1].knee.tau)) / 2;
     assert(knee > 1.4 && knee < 2.6, "stance knee torque " + knee.toFixed(2) + " (leg-geometry.md: ~2.2 two-leg at 6 kg)");
     found.stance = { kg: sim.s.totalKg.toFixed(2), kneeNm: knee.toFixed(2), hipHeightIn: ((t.y) / IN).toFixed(1) };
+  }
+
+  /* The default ride height (medium, 75%): lower hips, longer knee lever. */
+  const ride = run({}, [{ name: "settle", s: 1.5 }, { name: "stand", s: 2 }]);
+  {
+    const o = ride.sim.last;
+    const t = ride.sim.robot.trunk.translation();
+    assert(!o.fallen && Math.abs(o.theta) < 0.02, "does not stand at the ride height");
+    found.ride = {
+      pct: (100 * ride.sim.s.hRide / (2 * ride.sim.s.L)).toFixed(0),
+      hipHeightIn: (t.y / IN).toFixed(1),
+      kneeNm: ((Math.abs(o.legs[0].knee.tau) + Math.abs(o.legs[1].knee.tau)) / 2).toFixed(2)
+    };
   }
 
   /* Drive, turn, reverse, shove, crouch, stand tall. */
@@ -137,6 +152,8 @@ function run(opts, plan) {
   const seg = function (r, name) { return r.segments.filter(function (s) { return s.name === name; })[0]; };
   assert(Math.abs(seg(drive, "drive").o.speed - 1) < 0.1, "did not reach 1 m/s: " + seg(drive, "drive").o.speed);
   assert(Math.abs(seg(drive, "arc").o.yawRate - 1.5) < 0.2, "did not hold 1.5 rad/s turn: " + seg(drive, "arc").o.yawRate);
+  const hops = drive.sim.last.reflex.reduce(function (a, r) { return a + r.hits; }, 0);
+  assert(hops === 0, "impact reflex fired " + hops + " times on a flat floor");
   const arc = seg(drive, "arc").o.contacts;
   found.drive = {
     peakLeanDeg: (drive.peaks.theta * 57.3).toFixed(1),
@@ -155,9 +172,25 @@ function run(opts, plan) {
     const fell = r.fellAt !== null;
     return v.toFixed(2) + " m/s: " + (fell ? "falls" : x < -3.3 ? "crosses" : "stops at it") + ", peak knee " + r.peaks.knee.toFixed(1) + " N·m";
   }
+  /* Stumbles: the biggest shove it rides out, front and side. */
+  function maxShove(dir, from, to, step) {
+    let best = 0;
+    for (let J = from; J <= to + 1e-9; J += step) {
+      const r = run({}, [{ name: "settle", s: 1.5 }, { name: "after", s: 3, shove: { x: dir.x * J, y: 0, z: dir.z * J } }]);
+      if (r.fellAt !== null) break;
+      best = J;
+    }
+    return best;
+  }
+  const side = maxShove({ x: 0, z: 1 }, 3, 7, 0.5);
+  assert(side >= 4.5, "side shove recovery fell to " + side + " N·s (stumble catch)");
+  found.shoves = { forwardNs: maxShove({ x: 1, z: 0 }, 8, 14, 1), sideNs: side };
+
   const half = run({ start: { x: -1.2, yaw: Math.PI } }, [{ name: "settle", s: 1.5 }, { name: "go", s: 3, cmd: { v: 0.5 } }, { name: "stop", s: 1, cmd: {} }]);
   assert(half.fellAt === null && seg(half, "stop").x < -2.05, "did not cross the ½\" threshold at 0.5 m/s");
-  found.sills = { half: "crosses at 0.5 m/s", one: [sill(0.3), sill(0.5), sill(0.75), sill(1.0), sill(1.5)] };
+  const one = [sill(0.3), sill(0.5), sill(0.75), sill(1.0), sill(1.5)];
+  assert(one[1].indexOf("crosses") > 0 && one[2].indexOf("crosses") > 0, "1\" sill no longer crossed at 0.5 and 0.75 m/s: " + one.join("; "));
+  found.sills = { half: "crosses at 0.5 m/s", one: one };
 
   /* PARKED: without the skid it has no rest pose; with the proposed skid it rests and stands back up. */
   const parkBare = run({}, [{ name: "settle", s: 1.5 }, { name: "park", s: 3.5, cmd: { mode: "PARKED" } }]);
@@ -170,9 +203,45 @@ function run(opts, plan) {
     skid: "rests at " + (seg(parkSkid, "park").o.theta * 57.3).toFixed(0) + "° and stands back up"
   };
 
-  /* One wheel (experimental): report how long it holds. */
-  const one = run({}, [{ name: "settle", s: 1.5 }, { name: "left", s: 8, cmd: { mode: "LEFT_ONLY" } }]);
-  found.leftOnly = one.fellAt === null ? "held" : "fell " + (one.fellAt - 1.5).toFixed(1) + " s after the command";
+  /* One wheel: the planned poise must settle on either side and come back. Mode is an event. */
+  function poise(mode, knobs) {
+    const sim = new S.Sim(R, M, { knobs: knobs || {} });
+    const n = sim.s.knobs.rate;
+    for (let i = 0; i < 1.5 * n; i++) sim.step({});
+    let fell = false;
+    let at = null;
+    let lo = 1;
+    let hi = 0;
+    let rollTau = 0;
+    const fi = mode === "LEFT_ONLY" ? 1 : 0;
+    const w = sim.s.totalKg * 9.81;
+    for (let i = 0; i < 12 * n; i++) {
+      const o = sim.step(i === 0 ? { mode: mode } : i === 8 * n ? { mode: "TWO_WHEEL" } : {});
+      if (o.phase === "poise") {
+        if (at === null) at = i / n;
+        lo = Math.min(lo, o.contacts[fi].force / w);
+        hi = Math.max(hi, o.contacts[fi].force / w);
+        rollTau = Math.max(rollTau, Math.abs(o.legs[1 - fi].roll.tau));
+      }
+      if (o.fallen) { fell = true; break; }
+    }
+    return { sim: sim, fell: fell, at: at, lo: lo, hi: hi, rollTau: rollTau };
+  }
+  ["LEFT_ONLY", "RIGHT_ONLY"].forEach(function (m) {
+    const p = poise(m);
+    assert(!p.fell && p.at !== null, m + " did not settle into the poise");
+    assert(p.lo > 0.05 && p.hi < 0.3, m + " poise free-wheel load " + p.lo.toFixed(2) + "–" + p.hi.toFixed(2));
+    assert(p.sim.last.mode === "TWO_WHEEL" && !p.sim.ctrl.one, m + " did not come back to two wheels");
+    if (m === "LEFT_ONLY") {
+      found.oneWheel = {
+        poiseAfterS: p.at.toFixed(1),
+        freeWheelLoadPct: (100 * p.lo).toFixed(0) + "–" + (100 * p.hi).toFixed(0),
+        plantedHipRollNm: p.rollTau.toFixed(1)
+      };
+    }
+  });
+  const lift = poise("LEFT_ONLY", { oneLift: true });
+  found.oneWheel.experimentalLift = lift.fell ? "falls (sideways balancer does not hold the free wheel up yet)" : "survives, caught " + (lift.sim.last.caught || 0) + "×";
 
   console.log("sim ok", JSON.stringify(found, null, 2));
 })().catch(function (e) {
