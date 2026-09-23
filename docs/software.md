@@ -24,7 +24,7 @@ Automation (open-loop step scripts, pathfinding, later stair gait) **waits** unt
 
 | Mode | Enum (intent) | What it is | Wheels / legs | Electronics phase |
 | --- | --- | --- | --- | --- |
-| **Parked** | `PARKED` | Safe idle. No balance loop driving the wheels. Wheels held or disabled as appropriate. Default and lost-link state. | Neither wheel driven by the balance loop | **P2** (FC + RX from **P0**) |
+| **Parked** | `PARKED` | Supported idle, entered only after a verified rest support takes the load. Lost link first requests zero motion while retaining balance. | Neither wheel driven by the balance loop | **P2** (FC + RX from **P0**) |
 | **2-wheel balance** | `TWO_WHEEL` | Both wheels active for bipedal balance / teleop. Baseline stance. | Left + right planted and driven | **P2** |
 | **Left wheel only** | `LEFT_ONLY` | Balance / drive on the **left** planted wheel. Right leg free for a step cycle. | Left planted; right free | **P4** (after hip-roll class) |
 | **Right wheel only** | `RIGHT_ONLY` | Mirror of left. | Right planted; left free | **P4** |
@@ -34,7 +34,7 @@ Automation (open-loop step scripts, pathfinding, later stair gait) **waits** unt
 ### State machine (intent)
 
 ```
-                         lost RC / disarm / explicit Parked
+                         rest support verified / explicit supported Parked
                     ┌──────────────────────────────────────────┐
                     │                                          │
                     ▼                                          │
@@ -62,7 +62,7 @@ Automation (open-loop step scripts, pathfinding, later stair gait) **waits** unt
 
 Rules (intent, not firmware):
 
-- **Parked** is the default and the failsafe. Lost TBS link, disarm, or an explicit Parked switch dumps here from any mode.
+- **Controlled stop precedes parking.** Lost TBS link or a Parked request commands zero translation/yaw while retaining balance. Enter unpowered `PARKED` only after verifying a mechanically supported rest pose. The sandbox refuses parking when its proposed skid is absent. Disarm/emergency torque cut is a separate action that can cause a fall; it is not a balanced idle. The hardware support and lost-link watchdog remain to be implemented.
 - Enter **2-wheel** from Parked when the pilot arms / selects the stance mode.
 - Enter **left-only** or **right-only** from **2-wheel** (not by jumping Parked → one-wheel on the bench until 2-wheel is proven).
 - Return to **2-wheel** before flipping left ↔ right. Do not cross-switch through a one-wheel mode.
@@ -136,7 +136,7 @@ Tracked in [`../NOTES.md`](../NOTES.md).
 
 1. **Blink** — prove we can flash *something* on the bench FC. Electronics **P0**.
 2. **Spin** — restrained brushless wheel, not on carpet. **P1**.
-3. **Parked** — safe idle; telem says `PARKED`; wheels not driven by a balance loop. **P2**.
+3. **Parked** — supported idle; telem says `PARKED` only after support is confirmed; wheels not driven by a balance loop. **P2**.
 4. **2-wheel balance teleop** — TBS + telem reports `TWO_WHEEL`. **P2**.
 5. **Left-only, then right-only** — V1 **best-effort** CoG shift: hip roll (experimental dynamic actuator) **and** planted-wheel fore/aft, using an **existing** pattern (R18). **P4**. May not work as hoped. Still expose the modes. Gate before stairs.
 6. **Open-loop step** — toward a 9.5" riser fixture. No vision required. Not before the four modes work.

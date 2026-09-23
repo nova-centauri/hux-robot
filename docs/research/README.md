@@ -6,6 +6,8 @@ This packet is the working study set. It does not replace [`../requirements.md`]
 
 | Doc | What it is |
 | --- | --- |
+| [model-corrections.md](model-corrections.md) | Implemented geometry, contact, actuator, parking and reporting fixes; current regression results and remaining design work. |
+| [real-world-validation.md](real-world-validation.md) | 2026-09-23 audit: spatial reach inconsistency, CoM versus hip torque, actuator/contact limits, reproduced tests, and physical validation sequence. Read before using earlier sizing or stair claims. |
 | [xrobots.md](xrobots.md) | Curated XRobots shortlist, why each matters, study order |
 | [inspiration.md](inspiration.md) | Steve's shares — Roadrunner, FrRonconi student balancer, Serra / Build Some Stuff, Tazer, Stompy, Diablo; inspiration only |
 | [roadrunner.md](roadrunner.md) | RAI Institute Roadrunner — lab wheeled biped; watch alongside Hattori |
@@ -14,8 +16,8 @@ This packet is the working study set. It does not replace [`../requirements.md`]
 | [stompy-sim2real.md](stompy-sim2real.md) | Stompy week-build RL walker — CAD/reality match, shared zero; **not** RL walking for Hux V1 |
 | [diablo.md](diablo.md) | Diablo (DDTRobot) — commercial wheeled-leg; LQR + DD; steal split brain / height states; **do not buy** |
 | [leg-geometry.md](leg-geometry.md) | Leg math. Wheel settled at **6" OD** on a **9.5" × 9.5"** step. Walker wheel is a bench donor. |
-| [stair-climb-dynamics.md](stair-climb-dynamics.md) | What the living-drawings climb models and what it says: the ±6% throw window, land at the rear of the slot, body CoM 1–2" forward, knee ~10.6 N·m. |
-| [sim-sandbox.md](sim-sandbox.md) | What the 3D sandbox models and what it found: 1" sills cross only near 1 m/s, PARKED has no rest pose, one-wheel hip roll ~9 N·m. Not the twin. |
+| [stair-climb-dynamics.md](stair-climb-dynamics.md) | Corrected spatial feasibility, rejected stair candidate, and limits of the historical planar load estimates. |
+| [sim-sandbox.md](sim-sandbox.md) | Corrected tire/contact and drive models, supported parking guard, regression results, and remaining single-support failures. |
 | [study-plan.md](study-plan.md) | Phased checklist before hardware (Phases A–D; Phase E twin / dojo is a later horizon) |
 
 Decision log (not research, but the lock list): [`../decisions.md`](../decisions.md).

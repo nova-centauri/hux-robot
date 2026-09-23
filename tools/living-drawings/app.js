@@ -258,7 +258,7 @@
       ["Air under 1\" soffit", M.rise - M.soffit - M.wheelOd + "\"", "good"],
       ["Stair", foot.where, foot.kind],
       ["Center of mass", mass.com.x.toFixed(1) + "\" forward, " + mass.com.y.toFixed(1) + "\" up", ""],
-      ["Balance", mass.where + ", " + mass.moment.toFixed(1) + " N·m", mass.where.indexOf("Over") === 0 ? "good" : ""],
+      ["Balance", mass.where + ", " + mass.moment.toFixed(1) + " N·m", ""],
       ["Knee holds", mode.value === "planted" ? nm(Math.abs(tq.knee)) + " on one leg at " + M.exampleMassKg.toFixed(1) + " kg" : "no load in this view", Math.abs(tq.knee) > 7.5 ? "bad" : ""],
       ["Hip swing holds", mode.value === "planted" ? nm(Math.abs(tq.hip)) + " on one leg" : "no load in this view", ""],
       ["Motor bulk", "hub Ø2\" · knee 1.6×1.5 · swing 1.8×1.6 · roll Ø1.6", ""]
@@ -284,48 +284,35 @@
     line(top, X(half), Y(-6), X(half), Y(12), "#c8bfae", 1, "5 4");
     text(top, X(0), Y(12.4), M.envelopeWidth + "\" outside", "middle");
 
-    const track = M.track;
-    const left = -track / 2;
-    const right = track / 2;
-    const stance = K.planted(M.balanceTheta, M.balancePhi);
-    const leftPose = mode.value === "swing" && hipX
-      ? K.swing(K.ik(-hipX, M.wheelR - stanceHip).theta, K.ik(-hipX, M.wheelR - stanceHip).phi, hipX)
-      : (mode.value === "swing" ? stance : c.pose);
-    const rightPose = c.pose;
-    drawLegPlan(top, left, leftPose, X, Y, S, true);
-    drawLegPlan(top, right, rightPose, X, Y, S, false);
-
-    const hipH = K.planted(c.theta, c.phi).hip.y;
-    const shift = hipH * Math.sin(K.rad(num(roll)));
-    const bw = M.bodyWidth;
-    const bl = M.bodyLength;
-    const hipFwd = mode.value === "swing" ? hipX : c.pose.hip.x;
-    rect(top, X(shift - bw / 2), Y(hipFwd + bl / 2), bw * S, bl * S, "#d5e0ea", "#1f4e79");
-    drawFaceTop(top, shift, hipFwd, X, Y, S);
-    [-1, 1].forEach(function (sgn) {
-      circle(top, X(shift + sgn * (bw / 2 - 0.95)), Y(hipFwd + 1.1), (M.motorRollD / 2) * S, "#3e4c44", "#1b2430");
+    const q = { roll: K.rad(num(roll)), hip: K.rad(c.theta), knee: K.rad(c.phi) };
+    const legs = {};
+    const body = { x: c.pose.hip.x, y: c.pose.hip.y, z: 0 };
+    for (const [name, sign] of [["left", -1], ["right", 1]]) {
+      legs[name] = K.spatial.fk({ ...body, z: sign * M.hipLateral }, sign, q);
+    }
+    // Anchor the mean tire contact laterally; move the complete chain together.
+    const shift = -(legs.left.contact.z + legs.right.contact.z) / 2;
+    body.z += shift;
+    Object.values(legs).forEach(leg => ["hip", "knee", "ankle", "axle", "contact"].forEach(key => { leg[key].z += shift; }));
+    const space = K.spatial.measure({ body, legs, issues: [] }, K.P);
+    Object.values(legs).forEach(leg => {
+      const pts = [leg.hip, leg.knee, leg.ankle, leg.axle];
+      for (let i = 1; i < pts.length; i++) line(top, X(pts[i-1].z), Y(pts[i-1].x), X(pts[i].z), Y(pts[i].x), "#4d666a", 5);
+      pts.slice(0, 2).forEach(p => circle(top, X(p.z), Y(p.x), 5, "#556b68", "#263b3a"));
+      const width = M.wheelWidth * Math.abs(Math.cos(q.roll)) + 2 * M.wheelR * Math.abs(Math.sin(q.roll));
+      rect(top, X(leg.axle.z - width / 2), Y(leg.axle.x + M.wheelR), width * S, 2 * M.wheelR * S, "#26343d", "#162129");
+      cross(top, X(leg.contact.z), Y(leg.contact.x), "#9d2c2c");
     });
-    cross(top, X(shift), Y(hipFwd), "#9d2c2c");
-
-    dim(top, X(left), Y(-6.4), X(right), Y(-6.4), track.toFixed(2) + "\" track");
-
-    const toLeft = shift - left;
-    const toRight = right - shift;
-    const overLeft = Math.abs(toLeft) <= M.wheelWidth / 2;
-    const overRight = Math.abs(toRight) <= M.wheelWidth / 2;
-    let where = "Between the wheels";
-    if (overLeft) where = "Over the left wheel";
-    else if (overRight) where = "Over the right wheel";
-    const moment = K.rollMomentNm(Math.min(Math.abs(toLeft), Math.abs(toRight)));
-    const needRoll = K.deg(Math.asin(Math.min(1, (track / 2) / hipH)));
+    rect(top, X(body.z - M.bodyWidth / 2), Y(body.x + M.bodyLength / 2), M.bodyWidth * S, M.bodyLength * S, "#d5e0ea", "#1f4e79");
+    drawFaceTop(top, body.z, body.x, X, Y, S);
+    cross(top, X(space.com.z), Y(space.com.x), "#bd6e13");
     fillRead("topRead", [
-      ["CoG offset", (shift >= 0 ? "+" : "") + shift.toFixed(2) + "\"", ""],
-      ["Where the mass sits", where, overLeft || overRight ? "good" : ""],
-      ["Moment at nearer wheel", moment.toFixed(1) + " N·m", ""],
-      ["Roll to reach a wheel", needRoll.toFixed(0) + "° at this hip height", needRoll > 20 ? "bad" : ""],
-      ["Example mass", M.exampleMassKg.toFixed(1) + " kg", ""],
-      ["Roll angle", num(roll).toFixed(1) + "°", ""],
-      ["Hip height used", hipH.toFixed(1) + "\"", ""]
+      ["Whole-robot CoM, lateral", space.com.z.toFixed(2) + " in", ""],
+      ["Tipping moment, left / right contact", space.tippingNm.left.toFixed(2) + " / " + space.tippingNm.right.toFixed(2) + " N·m", ""],
+      ["Hip holding demand if opposite wheel lifted", Math.abs(space.rollHoldingNm.left).toFixed(2) + " / " + Math.abs(space.rollHoldingNm.right).toFixed(2) + " N·m", ""],
+      ["Hip roll / model mass", num(roll).toFixed(1) + "° / " + space.com.kg.toFixed(1) + " kg", ""],
+      ["Contact assumption", "Rigid rounded tires; roll study alone does not prove balance", ""],
+      ["Joint travel", Object.keys(q).some(key => q[key] < K.spatial.limits[key][0] || q[key] > K.spatial.limits[key][1]) ? "Outside working limits" : "Within working limits", ""]
     ]);
   }
 
@@ -364,6 +351,8 @@
       const rs = K.ik(num(rWheelX) - hipPt.x, num(rWheelY) - hipPt.y);
       left = K.atHip(ls.theta, ls.phi, hipPt);
       right = K.atHip(rs.theta, rs.phi, hipPt);
+      left.requestedAxle = { x: num(lWheelX), y: num(lWheelY) };
+      right.requestedAxle = { x: num(rWheelX), y: num(rWheelY) };
       leftTheta = ls.theta;
       leftPhi = ls.phi;
       rightTheta = rs.theta;
@@ -374,7 +363,7 @@
       left = K.atHip(leftTheta, leftPhi, hipPt);
       right = K.atHip(rightTheta, rightPhi, hipPt);
     }
-    return {
+    return K.projectFrame({
       phase: "",
       left: left,
       right: right,
@@ -389,7 +378,7 @@
       climbing: false,
       step: 0,
       latLeft: 0
-    };
+    });
   }
 
   function drawPair(frame) {
@@ -427,7 +416,7 @@
         if (pair[1]) circle(pairSvg, X(pair[0].contact.x), Y(pair[0].contact.y), 4, "#1d6b45", "#1d6b45");
       });
       /* Bracket from the mass line to the front contact while the mass is behind it. */
-      if (frame.dyn && frame.dyn.throwing && frame.dyn.behind > 0.15) {
+      if (!frame.spatial && frame.dyn && frame.dyn.throwing && frame.dyn.behind > 0.15) {
         const cx = lead.contact.x;
         const yb = Y(frame.com.y) + 44;
         line(pairSvg, X(frame.com.x), yb, X(cx), yb, "#9d2c2c", 1.2);
@@ -435,6 +424,12 @@
         line(pairSvg, X(cx), yb - 4, X(cx), yb + 4, "#9d2c2c", 1.2);
         text(pairSvg, (X(frame.com.x) + X(cx)) / 2, yb - 5, frame.dyn.behind.toFixed(1) + "\" behind", "middle");
       }
+    }
+    if (frame.spatial) {
+      [frame.left, frame.right].forEach(function (leg) {
+        cross(pairSvg, X(leg.target.x), Y(leg.target.y), "#9d2c2c");
+        if (leg.err > 0.02) line(pairSvg, X(leg.axle.x), Y(leg.axle.y), X(leg.target.x), Y(leg.target.y), "#9d2c2c", 1, "4 3");
+      });
     }
     drawOneLeg(pairSvg, frame.left, "#8aa0b5", 6, X, Y, S, "L");
     drawOneLeg(pairSvg, frame.right, "#1f4e79", 8, X, Y, S, "R");
@@ -445,14 +440,14 @@
     circle(pairSvg, X(head.x + 1.45), Y(head.y + 1.5), (M.motorRollD / 2) * S, "#3e4c44", "#1b2430");
     cross(pairSvg, X(head.x), Y(head.y), "#9d2c2c");
     drawGravity(pairSvg, frame.com, X, Y);
-    if (frame.dyn && frame.dyn.speed > 4) {
+    if (!frame.spatial && frame.dyn && frame.dyn.speed > 4) {
       const scale = 0.12;
       const x2 = frame.com.x + frame.dyn.vx * scale;
       const y2 = frame.com.y + frame.dyn.vy * scale;
       line(pairSvg, X(frame.com.x), Y(frame.com.y), X(x2), Y(y2), "#9d2c2c", 2.4);
     }
     /* Angular momentum glyph about the front contact while airborne on it. */
-    if (frame.climbing && frame.dyn && frame.dyn.throwing && frame.dyn.forwardL > 0.02) {
+    if (!frame.spatial && frame.climbing && frame.dyn && frame.dyn.throwing && frame.dyn.forwardL > 0.02) {
       const lead = frame.leadIsRight ? frame.right : frame.left;
       const r = 26 + 40 * Math.min(1, frame.dyn.forwardL);
       const cxp = X(lead.contact.x);
@@ -469,18 +464,19 @@
     const rs = K.axleStatus(right.axle);
     const ls = K.axleStatus(left.axle);
     const mass = K.comReport(left, right);
+    if (frame.spatial) mass.com = frame.com;
     const cells = [
       ["Phase", frame.climbing ? "Step " + frame.step + " · " + frame.phase : "Holding the controls", ""],
       ["Clock", frame.climbing ? frame.t.toFixed(2) + " s of " + frame.T.toFixed(2) + " s per step" : "—", ""],
       ["Center of mass", mass.com.x.toFixed(1) + "\" forward, " + mass.com.y.toFixed(1) + "\" up", ""],
       ["Balance", frame.dyn && frame.dyn.behind > 0.4 ? "Behind the front contact" : mass.where,
-        frame.dyn && frame.dyn.behind > 0.4 ? "" : (mass.where.indexOf("Over") === 0 ? "good" : "")],
+        frame.dyn && frame.dyn.behind > 0.4 ? "" : ("")],
       ["Moment about the near foot", mass.moment.toFixed(1) + " N·m at " + mass.com.kg.toFixed(1) + " kg", ""],
       ["Right foot", rs.where, rs.kind],
       ["Left foot", ls.where, ls.kind],
       ["Right knee", kneeWord(right), right.knee.x < right.hip.x + 1.5 ? "good" : ""],
       ["Left knee", kneeWord(left), left.knee.x < left.hip.x + 1.5 ? "good" : ""],
-      ["Stairs", frame.hit ? frame.hit + " hits a step" : "Clear", frame.hit ? "bad" : "good"]
+      ["Terrain projection", frame.hit ? frame.hit + " hits a step" : "No projected intersection; 3D clearance unverified", frame.hit ? "bad" : ""]
     ];
     if (frame.climbing) {
       const tq = frame.tq;
@@ -492,23 +488,23 @@
       const lk0 = frame.leadIsRight ? tq.aKnee0 : tq.bKnee0;
       const rh0 = frame.leadIsRight ? tq.bHip0 : tq.aHip0;
       const lh0 = frame.leadIsRight ? tq.aHip0 : tq.bHip0;
-      cells.push(["Right knee torque", nm(rk0) + " holding · " + nm(rk) + " with the motion", Math.abs(rk0) > 7.5 ? "bad" : ""]);
-      cells.push(["Left knee torque", nm(lk0) + " holding · " + nm(lk) + " with the motion", Math.abs(lk0) > 7.5 ? "bad" : ""]);
-      cells.push(["Right hip swing torque", nm(rh0) + " holding · " + nm(rh) + " with the motion", ""]);
-      cells.push(["Left hip swing torque", nm(lh0) + " holding · " + nm(lh) + " with the motion", ""]);
-      cells.push(["Wheel torque", nm(tq.wheel, 2) + (tq.wheel > K.P.wheelTau + 0.05 ? " — over the " + K.P.wheelTau + " N·m wheel" : ""), tq.wheel > K.P.wheelTau + 0.05 ? "bad" : ""]);
-      const latIn = -frame.latLeft * M.track / 2;
-      const latWord = Math.abs(frame.latLeft) > 0.97 ? (frame.latLeft > 0 ? "over the left wheel" : "over the right wheel") : (latIn >= 0 ? "+" : "") + latIn.toFixed(1) + "\" toward the right wheel";
-      cells.push(["Mass, sideways", latWord, Math.abs(frame.latLeft) > 0.97 ? "good" : ""]);
-      const rollTxt = frame.lateral.rollNm > 0.05
-        ? nm(frame.lateral.rollNm) + " " + frame.lateral.note
-        : (frame.lateral.rollIfLift > 0.05 ? "0 now · " + nm(frame.lateral.rollIfLift) + " if the trailing wheel lifted now" : "0 · " + frame.lateral.note);
-      cells.push(["Hip roll torque", rollTxt, frame.lateral.rollNm > 7.5 ? "bad" : ""]);
+      cells.push(["Reference right knee torque", nm(rk0) + " holding · " + nm(rk) + " with the motion", Math.abs(rk) > K.spatial.limits.tauKnee ? "bad" : ""]);
+      cells.push(["Reference left knee torque", nm(lk0) + " holding · " + nm(lk) + " with the motion", Math.abs(lk) > K.spatial.limits.tauKnee ? "bad" : ""]);
+      cells.push(["Reference right hip swing torque", nm(rh0) + " holding · " + nm(rh) + " with the motion", ""]);
+      cells.push(["Reference left hip swing torque", nm(lh0) + " holding · " + nm(lh) + " with the motion", ""]);
+      cells.push(["Reference wheel torque", nm(tq.wheel, 2) + (tq.wheel > K.P.wheelTau + 0.05 ? " — over the " + K.P.wheelTau + " N·m wheel" : ""), tq.wheel > K.P.wheelTau + 0.05 ? "bad" : ""]);
+      const space = frame.spatial;
+      cells.push(["Spatial geometry", space.valid ? "Targets reached; dynamics unverified" : space.issues.join("; "), space.valid ? "" : "bad"]);
+      cells.push(["Whole CoM, sideways", inches(space.com.z) + " from center", ""]);
+      cells.push(["Left hip roll, if right foot free", nm(space.rollHoldingNm.left), Math.abs(space.rollHoldingNm.left) > K.spatial.limits.tauRoll ? "bad" : ""]);
+      cells.push(["Right hip roll, if left foot free", nm(space.rollHoldingNm.right), Math.abs(space.rollHoldingNm.right) > K.spatial.limits.tauRoll ? "bad" : ""]);
+      cells.push(["Gravity moment about left / right contact", nm(space.tippingNm.left) + " / " + nm(space.tippingNm.right), ""]);
+      cells.push(["Load estimates", "Historical planar reference only; not loads for the corrected spatial pose", "bad"]);
       if (Math.abs(frame.base) > 0.03 || (frame.dyn && frame.dyn.throwing)) {
-        cells.push(["Front wheel in its slot", (frame.base >= 0 ? "+" : "") + frame.base.toFixed(2) + "\" from where it landed · " + C.roomBack.toFixed(2) + "\" back, " + C.roomFwd.toFixed(2) + "\" forward available", ""]);
+        cells.push(["Reference front-wheel travel", (frame.base >= 0 ? "+" : "") + frame.base.toFixed(2) + "\" from where it landed · " + C.roomBack.toFixed(2) + "\" back, " + C.roomFwd.toFixed(2) + "\" forward available", ""]);
       }
     }
-    if (frame.dyn) {
+    if (frame.dyn && !frame.spatial) {
       const d = frame.dyn;
       const gap = d.behind > 0.2
         ? d.behind.toFixed(1) + "\" behind the front contact"
@@ -522,10 +518,10 @@
         if (d.speed > 1) cells.push(["Center of mass speed", d.speed.toFixed(0) + " in/s at full speed", ""]);
         if (d.rearN !== null && d.rearN > 0) cells.push(["Rear contact", d.rearN.toFixed(0) + " N upward", ""]);
       }
-      if (d.note) cells.push(["Throw", d.note, d.ok ? "good" : "bad"]);
+      if (d.note) cells.push(["Planar reference", d.note, ""]);
     }
     if (frame.aErr > 0.15 || frame.bErr > 0.15) {
-      cells.push(["Reach", "A wheel is " + Math.max(frame.aErr, frame.bErr).toFixed(1) + "\" past the 15\" leg", "bad"]);
+      cells.push(["Reach", "Requested axle misses by " + Math.max(frame.aErr, frame.bErr).toFixed(1) + " in after joint/reach limits", "bad"]);
     }
     fillRead("pairRead", cells);
   }
@@ -546,24 +542,27 @@
     const half = M.track / 2;
     /* treads under each wheel */
     [fv.wheels.left, fv.wheels.right].forEach(function (w, i) {
-      const cy = (i === 0 ? frame.left : frame.right).contact.y;
+      const leg = i === 0 ? frame.left : frame.right;
+      const cy = K.groundY(leg.contact.x);
       line(frontSvg, X(w.lat - 4.75), Y(cy), X(w.lat + 4.75), Y(cy), "#8d8374", 1.5);
-      if (w.down) circle(frontSvg, X(w.lat), Y(cy), 4, "#1d6b45", "#1d6b45");
+      if (w.down && Math.abs(leg.contact.y - cy) < 0.02) circle(frontSvg, X(leg.contact.z), Y(cy), 4, "#1d6b45", "#1d6b45");
     });
-    /* legs: contact → hip */
-    function legLine(w, hipLat, color, width, contactY) {
-      line(frontSvg, X(w.lat), Y(contactY + M.wheelR), X(hipLat), Y(fv.hipY), color, width);
-    }
-    legLine(fv.wheels.left, fv.hips.left, "#8aa0b5", 5, frame.left.contact.y);
-    legLine(fv.wheels.right, fv.hips.right, "#1f4e79", 6, frame.right.contact.y);
-    /* wheels as tall rectangles */
-    [[fv.wheels.left, frame.left], [fv.wheels.right, frame.right]].forEach(function (pair) {
-      const w = pair[0];
-      const p = pair[1];
-      frontSvg.appendChild(svgEl("rect", {
-        x: X(w.lat - M.wheelWidth / 2), y: Y(p.axle.y + M.wheelR), width: M.wheelWidth * S, height: M.wheelOd * S, rx: 3,
-        fill: w.down ? "#f4f1ea" : "#e4ded2", stroke: "#22282f", "stroke-width": 2
-      }));
+    /* Front projection of the SAME knee, ankle and axle used in the side view. */
+    ["left", "right"].forEach(function (name, i) {
+      const leg = fv.spatial.legs[name];
+      const col = i ? "#1f4e79" : "#8aa0b5";
+      [ [leg.hip, leg.knee], [leg.knee, leg.ankle], [leg.ankle, leg.axle] ].forEach(function (edge) {
+        line(frontSvg, X(edge[0].z), Y(edge[0].y), X(edge[1].z), Y(edge[1].y), col, 5);
+      });
+      joint(frontSvg, X(leg.knee.z), Y(leg.knee.y));
+      const tire = svgEl("rect", {
+        x: X(leg.axle.z - M.wheelWidth / 2), y: Y(leg.axle.y + M.wheelR),
+        width: M.wheelWidth * S, height: M.wheelOd * S, rx: 5,
+        transform: "rotate(" + K.deg(leg.q.roll) + " " + X(leg.axle.z) + " " + Y(leg.axle.y) + ")",
+        fill: "#f4f1ea", stroke: "#22282f", "stroke-width": 2
+      });
+      frontSvg.appendChild(tire);
+      if (leg.target) cross(frontSvg, X(leg.target.z), Y(leg.target.y), "#9d2c2c");
     });
     /* body */
     rect(frontSvg, X(fv.bodyLat - M.bodyWidth / 2), Y(fv.hipY + M.bodyAboveHip), M.bodyWidth * S, M.bodyAboveHip * S, "#d5e0ea", "#1f4e79");
@@ -572,12 +571,12 @@
       joint(frontSvg, X(h), Y(fv.hipY));
     });
     /* CoM and its gravity line down to the tread under it */
-    const comY = frame.com.y;
-    const under = fv.bodyLat > 0 ? frame.right.contact.y : frame.left.contact.y;
-    line(frontSvg, X(fv.bodyLat), Y(comY), X(fv.bodyLat), Y(under), "#9d2c2c", 1.25, "4 3");
-    circle(frontSvg, X(fv.bodyLat), Y(comY), 5.5, "#9d2c2c", "#fbf8f1");
-    text(frontSvg, X(fv.bodyLat) + 8, Y(comY) - 8, "CoM", "start");
-    dim(frontSvg, X(-half), Y(y0 + 0.8), X(half), Y(y0 + 0.8), M.track.toFixed(2) + "\" track");
+    const comY = fv.spatial.com.y;
+    const under = K.groundY(frame.com.x);
+    line(frontSvg, X(fv.comLat), Y(comY), X(fv.comLat), Y(under), "#9d2c2c", 1.25, "4 3");
+    circle(frontSvg, X(fv.comLat), Y(comY), 5.5, "#9d2c2c", "#fbf8f1");
+    text(frontSvg, X(fv.comLat) + 8, Y(comY) - 8, "CoM", "start");
+    dim(frontSvg, X(-half), Y(y0 + 0.8), X(half), Y(y0 + 0.8), M.track.toFixed(2) + "\" requested track");
     text(frontSvg, X(fv.hips.left) - 6, Y(fv.hipY) - 10, fv.lean.left.toFixed(0) + "°", "end");
     text(frontSvg, X(fv.hips.right) + 6, Y(fv.hipY) - 10, fv.lean.right.toFixed(0) + "°", "start");
   }
@@ -669,7 +668,7 @@
     trace(leadIsRight ? "aKnee0" : "bKnee0", "#8aa0b5", 2);
     trace(leadIsRight ? "bKnee0" : "aKnee0", "#1f4e79", 2);
     trace(null, "#9d2c2c", 1.6, function (r) { return r.dyn && r.dyn.throwing ? Math.max(0, r.dyn.forwardL) * tqMax / 1.0 : 0; });
-    text(tracesSvg, W - 4, 12, "knee torque held: left (light), right (dark) · red: forward momentum, 1 kg·m²/s = full height", "end");
+    text(tracesSvg, W - 4, 12, "PLANAR REFERENCE ONLY · knee hold (blue) and momentum (red); invalid for corrected pose", "end");
     if (frame.climbing) {
       const x = frame.t / T * W;
       line(tracesSvg, x, 0, x, plotH, "#9d2c2c", 1.5);
@@ -712,7 +711,9 @@
 
   function drawOneLeg(svg, pose, color, width, X, Y, S, name) {
     tube(svg, X(pose.hip.x), Y(pose.hip.y), X(pose.knee.x), Y(pose.knee.y), color, width);
-    tube(svg, X(pose.knee.x), Y(pose.knee.y), X(pose.axle.x), Y(pose.axle.y), color, width);
+    const ankle = pose.ankle || pose.axle;
+    tube(svg, X(pose.knee.x), Y(pose.knee.y), X(ankle.x), Y(ankle.y), color, width);
+    if (pose.ankle) line(svg, X(ankle.x), Y(ankle.y), X(pose.axle.x), Y(pose.axle.y), color, 3);
     motorBox(svg, pose.knee.x, pose.knee.y, M.motorKnee.w, M.motorKnee.h, X, Y, S);
     wheel(svg, X(pose.axle.x), Y(pose.axle.y), M.wheelR * S, name === "L" ? "#e4ded2" : "#f4f1ea");
     circle(svg, X(pose.axle.x), Y(pose.axle.y), (M.motorWheelD / 2) * S, "#3e4c44", "#1b2430");
@@ -890,55 +891,17 @@
     document.getElementById("knobMuOut").textContent = Number(knobs.mu.value).toFixed(2);
   }
   function verdict() {
-    const C = K.climb();
-    const f = C.flown;
-    const have = -C.Llift;
-    const need = -C.LneedCatch;
-    const needB = -C.LneedBallistic;
-    const max = -C.Lmax;
-    const cells = [];
-    const gap = C.liftoffBehind - C.catchRoom;
-    cells.push(["Mass behind the front contact at liftoff", C.liftoffBehind.toFixed(2) + "\" · the front wheel can roll back " + C.catchRoom.toFixed(2) + "\" of it", gap <= 0 ? "good" : ""]);
-    cells.push(["Shove gives", have.toFixed(2) + " kg·m²/s forward in " + C.P.tPush.toFixed(2) + " s" + (C.pushForceBad.length ? " · " + C.pushForceBad.length + " of 64 instants exceed the μ=" + C.P.mu + " cone" : " · inside the friction cone"), C.pushForceBad.length ? "bad" : "good"]);
-    if (need >= 2.9) {
-      cells.push(["Crest", "Cannot crest with any shove: the path never carries the mass over the contact", "bad"]);
-    } else {
-      cells.push(["Least the crest needs", need.toFixed(2) + " with the wheel catch · " + needB.toFixed(2) + " ballistic", ""]);
-      cells.push(["Most the slot can absorb after the crest", max >= 2.9 ? "no limit found" : max.toFixed(2) + " · " + C.roomFwd.toFixed(2) + "\" of forward room", ""]);
-      const width = max - need;
-      const pct = have > 0 ? (width / have * 100) : 0;
-      const inside = have >= need && have <= max;
-      cells.push(["Window the shove must land in", need.toFixed(2) + " to " + max.toFixed(2) + " kg·m²/s · " + width.toFixed(2) + " wide, ±" + (pct / 2).toFixed(0) + "% of the shove", inside ? (pct > 25 ? "good" : "") : "bad"]);
-    }
-    let word;
-    let kind;
-    if (f.fail === "reversed" || f.fail === "short") {
-      word = "Falls back down the stair. Not enough forward momentum to reach the front contact" + (f.com ? " (stops " + (C.liftoffBehind - (f.com - (M.going + C.P.landErr - C.liftoffBehind))).toFixed(1) + "\" short)" : "") + ".";
-      kind = "bad";
-    } else if (f.fail === "overshoot") {
-      word = "Goes over the front. " + f.leftover.toFixed(2) + " kg·m²/s arrives at the crest and the front wheel runs out of forward room catching it.";
-      kind = "bad";
-    } else if (f.fail === "never settled") {
-      word = "Crests, but the front wheel cannot settle it inside the slot (" + f.leftover.toFixed(2) + " kg·m²/s left over).";
-      kind = "bad";
-    } else if (f.fail) {
-      word = "Fails: " + f.fail;
-      kind = "bad";
-    } else {
-      const width = max - need;
-      const pct = have > 0 ? (width / have * 100) : 0;
-      word = "Crests at " + f.crest.t.toFixed(2) + " s with " + f.leftover.toFixed(2) + " kg·m²/s left over; the front wheel rolls back " + (-f.sMin / INCH).toFixed(2) + "\" then forward to " + (f.sMax / INCH >= 0 ? "+" : "") + (f.sMax / INCH).toFixed(2) + "\" and settles in " + f.settleT.toFixed(2) + " s. " +
-        (pct < 15 ? "That is a precision throw: ±" + (pct / 2).toFixed(0) + "% of the shove impulse. Open-loop, it will not repeat." : pct < 30 ? "Tight but flyable with the wheel loop closing it." : "Comfortable. The wheel does most of the work.");
-      kind = pct < 15 ? "bad" : (pct < 30 ? "" : "good");
-    }
-    cells.push(["Verdict", word, kind]);
-    const pk = C.peaks;
-    cells.push(["Knee torque, holding", nm(pk.kneeStatic) + " peak at " + C.peakWhere.kneeStatic.phase.toLowerCase() + " · " + nm(Math.max(pk.aKnee, pk.bKnee)) + " with the drawn motion (rough)", pk.kneeStatic > 7.5 ? "bad" : ""]);
-    cells.push(["Hip swing torque, holding", nm(pk.hipStatic) + " peak at " + C.peakWhere.hipStatic.phase.toLowerCase() + " · " + nm(Math.max(pk.aHip, pk.bHip)) + " with the motion (rough)", ""]);
-    cells.push(["Wheel torque", nm(pk.wheel, 2) + " peak · " + C.aCap.toFixed(1) + " m/s² of base authority at " + C.P.wheelTau + " N·m", pk.wheel > C.P.wheelTau + 0.3 ? "bad" : ""]);
-    cells.push(["Hip roll", "Sway of " + M.track.toFixed(2) + "\" during the gather, both wheels down · " + K.rollMomentNm(M.track / 2).toFixed(1) + " N·m if a wheel unloads with the mass centered", ""]);
-    cells.push(["Cycle", C.T.toFixed(2) + " s per step · " + (60 / C.T).toFixed(0) + " steps a minute", ""]);
-    fillRead("verdict", cells);
+    const C = K.climb(), report = K.evaluateClimb();
+    fillRead("verdict", [
+      ["Stair candidate", report.status.toUpperCase() + " — " + report.issues.join("; "), "bad"],
+      ["Spatial target error", inches(report.maxTargetErrorIn, 2) + " maximum; " + report.unreachableFrames + " / " + report.sampledFrames + " frames fail geometry", "bad"],
+      ["Reference wheel demand / limit", nm(report.wheelPeak, 2) + " / " + nm(K.P.wheelTau), report.wheelPeak > K.P.wheelTau ? "bad" : ""],
+      ["Reference knee demand / limit", nm(report.kneePeak) + " / " + nm(K.spatial.limits.tauKnee), report.kneePeak > K.spatial.limits.tauKnee ? "bad" : ""],
+      ["Reference hip demand / limit", nm(report.hipPeak) + " / " + nm(K.spatial.limits.tauHip), report.hipPeak > K.spatial.limits.tauHip ? "bad" : ""],
+      ["Contact checks", C.pushForceBad.length + " rejected shove samples; " + report.contactFailures + " other reference force violations", ""],
+      ["Model limitation", report.note, ""],
+      ["Reference timing", C.T.toFixed(2) + " s; playback is a candidate inspection, not a successful climb", ""]
+    ]);
   }
   let knobTimer = 0;
   function onKnob() {

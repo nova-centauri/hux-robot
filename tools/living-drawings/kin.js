@@ -45,6 +45,9 @@
 
   /* Design knobs for the climb. Everything here can be changed from the page and the
      climb is rebuilt. Defaults are the working assumptions, not decisions. */
+  const Spatial = root.HuxSpatial || require("./spatial.js");
+  const spatial = Spatial.create(M);
+
   const P = {
     tPush: 0.44,      /* s, duration of the rear-leg shove with both wheels down */
     wheelTau: 3.0,    /* N·m, peak torque the front wheel can put on the tread */
@@ -337,14 +340,14 @@
     if (onTread(right)) feet.push({ name: "right", x: right.axle.x });
     const over = [];
     for (let i = 0; i < feet.length; i++) {
-      if (Math.abs(com.x - feet[i].x) <= M.wheelR) over.push(feet[i]);
+      if (Math.abs(com.x - feet[i].x) <= 0.02) over.push(feet[i]);
     }
-    let where = "Not over a foot";
+    let where = "Offset from contact line — active balance required";
     if (!feet.length) where = "Both feet are in the air";
     else if (over.length === 2 || (feet.length === 2 && Math.abs(feet[0].x - feet[1].x) < 1 && over.length >= 1)) {
-      where = "Over both feet";
+      where = "Aligned with both contact lines";
     } else if (over.length === 1) {
-      where = over[0].name === "left" ? "Over the left foot" : "Over the right foot";
+      where = over[0].name === "left" ? "Aligned with left contact line" : "Aligned with right contact line";
     }
     const pool = feet.length ? feet : [{ x: left.axle.x }, { x: right.axle.x }];
     let ref = pool[0];
@@ -512,6 +515,12 @@
   /* Feasible rear/front contact split for a known motion. Returns null when no
      friction cone works. Rear contact under the rear axle on the lower tread, front
      contact under the leading axle. */
+  function contactFeasible(fx, normal, mu, torqueLimit) {
+    return Number.isFinite(fx) && Number.isFinite(normal) && normal >= 0
+      && Math.abs(fx) <= mu * normal + 1e-9
+      && Math.abs(fx) * M.wheelR * INCH <= torqueLimit + 1e-9;
+  }
+
   function contactSplit(sol0, cx, cy, ax, ay, dLdt) {
     const m = sol0.com.kg;
     const rxr = (sol0.pA.axle.x - cx) * INCH;
@@ -529,9 +538,9 @@
       const Fx = (tauNeed - rxr * Fy) / Hm;
       const Fyf = FyTot - Fy;
       const Fxf = FxTot - Fx;
-      const rearOk = Fy <= 1.2 ? Math.abs(Fx) < 2.5 : Math.abs(Fx) <= mu * Fy + 0.8;
-      const frontOk = Fyf <= 1.2 ? Math.abs(Fxf) < 2.5 : Math.abs(Fxf) <= mu * Fyf + 0.8;
-      if (Fyf >= -1 && rearOk && frontOk) {
+      const rearOk = contactFeasible(Fx, Fy, mu, P.wheelTau);
+      const frontOk = contactFeasible(Fxf, Fyf, mu, P.wheelTau);
+      if (rearOk && frontOk) {
         const tr = Math.abs(Fx) * M.wheelR * INCH;
         const tf = Math.abs(Fxf) * M.wheelR * INCH;
         const score = Math.max(tr, tf);
@@ -1385,7 +1394,7 @@
     return lerp(a, b, u);
   }
 
-  function climbFrame(stepIndex, f) {
+  function referenceClimbFrame(stepIndex, f) {
     f = clamp(f, 0, 1);
     const rows = CLIMB.samples;
     let hi = rows.length - 1;
@@ -1495,35 +1504,76 @@
     };
   }
 
-  /* Front (coronal) view geometry for a frame. Lateral +y toward the right wheel, inches.
-     The body translates by the sway; each leg is a line from its contact to its hip. */
+  function climbFrame(stepIndex, f) {
+    return projectFrame(referenceClimbFrame(stepIndex, f));
+  }
+
+  function projectFrame(reference) {
+    const space = spatial.project(reference, P);
+    const frame = Object.assign({}, reference, {
+      reference: reference, spatial: space, left: space.legs.left, right: space.legs.right,
+      com: space.com, aErr: space.legs.left.err, bErr: space.legs.right.err,
+      leftTheta: deg(space.legs.left.q.hip), leftPhi: deg(space.legs.left.q.knee),
+      rightTheta: deg(space.legs.right.q.hip), rightPhi: deg(space.legs.right.q.knee)
+    });
+    frame.hit = poseHits(frame.left, frame.right);
+    if (frame.hit) space.issues.push(frame.hit + " intersects terrain in projection");
+    space.valid = space.issues.length === 0;
+    frame.leftDown = reference.leftDown && Math.abs(frame.left.contactError) < 0.02;
+    frame.rightDown = reference.rightDown && Math.abs(frame.right.contactError) < 0.02;
+    return frame;
+  }
+
   function frontView(frame) {
-    const half = M.track / 2;
-    const bodyLat = -frame.latLeft * half;
-    const hipL = bodyLat - M.hipLateral;
-    const hipR = bodyLat + M.hipLateral;
-    const hipY = frame.left.hip.y;
-    function lean(hipLat, contactLat, contactY) {
-      return deg(Math.atan2(hipLat - contactLat, hipY - contactY));
-    }
+    const space = frame.spatial || spatial.project(frame, P);
+    const l = space.legs.left, r = space.legs.right;
     return {
-      bodyLat: bodyLat,
-      hipY: hipY,
-      wheels: {
-        left: { lat: -half, y: frame.left.axle.y, down: frame.leftDown },
-        right: { lat: half, y: frame.right.axle.y, down: frame.rightDown }
-      },
-      hips: { left: hipL, right: hipR },
-      lean: {
-        left: lean(hipL, -half, frame.left.contact.y),
-        right: lean(hipR, half, frame.right.contact.y)
-      },
-      overLeft: Math.abs(bodyLat + half) <= M.wheelWidth / 2,
-      overRight: Math.abs(bodyLat - half) <= M.wheelWidth / 2
+      bodyLat: space.body.z, comLat: space.com.z, hipY: space.body.y,
+      wheels: { left: { lat: l.axle.z, y: l.axle.y, down: frame.leftDown },
+        right: { lat: r.axle.z, y: r.axle.y, down: frame.rightDown } },
+      hips: { left: l.hip.z, right: r.hip.z },
+      lean: { left: deg(l.q.roll), right: deg(r.q.roll) },
+      overLeft: Math.abs(space.com.z - l.contact.z) <= 0.02,
+      overRight: Math.abs(space.com.z - r.contact.z) <= 0.02,
+      spatial: space
     };
   }
 
+  function evaluateClimb() {
+    const issues = new Set();
+    let unreachableFrames = 0, maxTargetErrorIn = 0;
+    for (let i = 0; i <= 200; i++) {
+      const frame = climbFrame(0, i / 200);
+      if (!frame.spatial.valid) unreachableFrames++;
+      maxTargetErrorIn = Math.max(maxTargetErrorIn, frame.aErr, frame.bErr);
+    }
+    if (unreachableFrames) issues.add("Spatial reach, joint travel or terrain clearance fails");
+    let wheelPeak = 0, kneePeak = 0, hipPeak = 0, contactFailures = 0;
+    // Include phase seams: discontinuities are failures to fix, not loads to hide.
+    CLIMB.samples.forEach(row => {
+      wheelPeak = Math.max(wheelPeak, row.tq.wheel);
+      kneePeak = Math.max(kneePeak, Math.abs(row.tq.aKnee), Math.abs(row.tq.bKnee));
+      hipPeak = Math.max(hipPeak, Math.abs(row.tq.aHip), Math.abs(row.tq.bHip));
+      for (const F of [row.tq.FA, row.tq.FB]) {
+        if (F.y < -1e-8 || Math.abs(F.x) > P.mu * Math.max(0, F.y) + 1e-8) contactFailures++;
+      }
+    });
+    if (wheelPeak > P.wheelTau) issues.add("Reference wheel demand exceeds torque limit");
+    if (kneePeak > spatial.limits.tauKnee) issues.add("Reference knee demand exceeds torque limit");
+    if (hipPeak > spatial.limits.tauHip) issues.add("Reference hip demand exceeds torque limit");
+    if (contactFailures || CLIMB.pushForceBad.length) issues.add("Reference contact forces violate friction or unilateral contact");
+    if (CLIMB.flown.fail) issues.add("Reduced momentum model fails: " + CLIMB.flown.fail);
+    return { status: issues.size ? "rejected" : "unverified", issues: Array.from(issues),
+      unreachableFrames, sampledFrames: 201, maxTargetErrorIn, wheelPeak, kneePeak, hipPeak, contactFailures,
+      dynamicsValidated: false, note: "Spatial corrections invalidate the old planar load and momentum estimates. No validated stair controller or descent model." };
+  }
+
   const api = {
+    contactFeasible: contactFeasible,
+    spatial: spatial,
+    projectFrame: projectFrame,
+    referenceClimbFrame: referenceClimbFrame,
+    evaluateClimb: evaluateClimb,
     M: M,
     P: P,
     rad: rad,
@@ -1551,151 +1601,8 @@
 
   if (typeof window === "undefined" && process.env.HUX_KIN_TEST !== "0") {
     const b = planted(M.balanceTheta, M.balancePhi);
-    const expectHip = M.wheelR + 2 * M.link * M.stanceFraction;
-    if (Math.abs(b.axle.x) > 1e-6) throw new Error("balance axle x " + b.axle.x);
-    if (Math.abs(b.hip.y - expectHip) > 0.02) {
-      throw new Error("hip height " + b.hip.y);
-    }
-    if (Math.abs(b.poke - 2.94) > 0.08) throw new Error("poke " + b.poke);
-    if (b.knee.x >= b.hip.x) throw new Error("knee should be rear of the hip");
-    const sol = ik(M.going - 4, (M.rise + M.wheelR) - b.hip.y);
-    if (sol.err > 0.02) throw new Error("ik err " + sol.err);
-    if (sol.knee.x >= -0.3) throw new Error("reach knee should stay rear " + sol.knee.x);
-    const sw = swing(sol.theta, sol.phi, 4);
-    if (Math.abs(sw.axle.x - M.going) > 0.05 || Math.abs(sw.axle.y - (M.rise + M.wheelR)) > 0.05) {
-      throw new Error("reach " + sw.axle.x + "," + sw.axle.y);
-    }
-    if (sw.knee.x >= sw.hip.x) throw new Error("swing knee not rear");
-    const both = atHip(M.balanceTheta, M.balancePhi, { x: 1, y: 16 });
-    if (Math.abs(both.knee.x - (1 + b.knee.x)) > 0.02) throw new Error("atHip knee");
-    const report = comReport(b, b);
-    if (report.where !== "Over both feet") throw new Error("balance com " + report.where);
-    if (report.moment > 1.2) throw new Error("balance moment " + report.moment);
-    /* Jacobian check against the closed form in leg-geometry.md: knee holds m·g·poke. */
-    const tqBal = legTorques(M.balanceTheta, M.balancePhi, { x: 0, y: 6 * M.g }, { x: 0, y: 0 }, 0);
-    const expectKnee = 6 * M.g * b.poke * INCH;
-    if (Math.abs(Math.abs(tqBal.knee) - expectKnee) > 0.05) throw new Error("knee torque " + tqBal.knee + " vs " + expectKnee);
-    if (Math.abs(tqBal.hip) > 0.05) throw new Error("hip torque should be zero with the hip over the axle " + tqBal.hip);
-    let worst = "";
-    let maxKnee = 0;
-    for (let step = 0; step < 3; step++) {
-      let prev = null;
-      for (let i = 0; i <= 80; i++) {
-        const frame = climbFrame(step, i / 80);
-        if (frame.aErr > 0.08 || frame.bErr > 0.08 || frame.hit) {
-          const L = frame.left;
-          const R = frame.right;
-          worst = "step " + step + " f " + (i / 80).toFixed(3) + " " + frame.phase +
-            " err " + frame.aErr.toFixed(3) + "/" + frame.bErr.toFixed(3) + " hit " + frame.hit +
-            " hip " + L.hip.x.toFixed(1) + "," + L.hip.y.toFixed(1) +
-            " Lk " + L.knee.x.toFixed(1) + "," + L.knee.y.toFixed(1) +
-            " Rk " + R.knee.x.toFixed(1) + "," + R.knee.y.toFixed(1) +
-            " La " + L.axle.x.toFixed(1) + "," + L.axle.y.toFixed(1) +
-            " Ra " + R.axle.x.toFixed(1) + "," + R.axle.y.toFixed(1);
-          break;
-        }
-        const planted = frame.phase === "Balance on one foot" || frame.phase === "Stand on the next step";
-        if (planted && Math.abs(frame.com.x - frame.supportX) > 0.45) {
-          worst = "com drift " + frame.com.x.toFixed(2) + " vs " + frame.supportX.toFixed(2) + " at " + frame.phase;
-          break;
-        }
-        if (prev) {
-          const jumps = [
-            dist(prev.left.knee, frame.left.knee),
-            dist(prev.right.knee, frame.right.knee),
-            dist(prev.left.axle, frame.left.axle),
-            dist(prev.right.axle, frame.right.axle)
-          ];
-          for (let j = 0; j < jumps.length; j++) maxKnee = Math.max(maxKnee, jumps[j]);
-          if (jumps[0] > 6 || jumps[1] > 6) {
-            worst = "knee pop step " + step + " f " + (i / 80).toFixed(3) + " " + frame.phase +
-              " " + jumps[0].toFixed(2) + "/" + jumps[1].toFixed(2);
-            break;
-          }
-        }
-        prev = frame;
-      }
-      if (worst) break;
-    }
-    if (worst) throw new Error(worst);
-    const end0 = climbFrame(0, 1);
-    const start1 = climbFrame(1, 0);
-    if (Math.abs(end0.left.axle.x - start1.left.axle.x) > 0.15) throw new Error("cycle seam x");
-    if (Math.abs(end0.right.axle.x - start1.right.axle.x) > 0.15) throw new Error("cycle seam right");
-    if (Math.abs(end0.left.hip.y - start1.left.hip.y) > 0.2) throw new Error("cycle seam hip");
-    if (Math.abs(end0.left.knee.x - start1.left.knee.x) > 0.25) throw new Error("cycle seam knee");
-    if (Math.abs(end0.com.y - start1.com.y) > 0.4) throw new Error("cycle seam com");
-    if (Math.abs(end0.latLeft - start1.latLeft) > 1e-6) throw new Error("lateral seam " + end0.latLeft + " vs " + start1.latLeft);
-    if (end0.hit || start1.hit) throw new Error("seam hit");
-    const info = CLIMB;
-    if (info.flown.fail) {
-      throw new Error("throw " + info.flown.fail + " L " + info.Llift.toFixed(3) +
-        " z " + (info.flown.z || 0).toFixed(2) + " com " + (info.flown.com || 0).toFixed(2));
-    }
-    if (!(info.liftoffBehind > 1.2)) throw new Error("liftoff already over " + info.liftoffBehind.toFixed(2));
-    if (!(info.marginCatch > 0.02)) {
-      throw new Error("catch margin " + info.marginCatch.toFixed(3) + " have " + (-info.Llift).toFixed(3) + " need " + (-info.LneedCatch).toFixed(3));
-    }
-    if (!(info.headroom > 0.02)) {
-      throw new Error("front room " + info.headroom.toFixed(3) + " have " + (-info.Llift).toFixed(3) + " max " + (-info.Lmax).toFixed(3));
-    }
-    if (!(info.flown.settleT > 0 && info.flown.settleT < 1)) throw new Error("catch did not settle " + info.flown.settleT);
-    if (info.flown.sMin < -(info.roomBack * INCH) - 1e-6) throw new Error("front wheel left the slot backward " + info.flown.sMin / INCH);
-    if (info.flown.sMax > info.roomFwd * INCH + 1e-6) throw new Error("front wheel left the slot forward " + info.flown.sMax / INCH);
-    if (info.pushForceBad.length > 6) throw new Error("shove forces " + JSON.stringify(info.pushForceBad[0]) + " n " + info.pushForceBad.length);
-    let sawBehind = false;
-    let sawOver = false;
-    let stoodEarly = false;
-    let sawRollBack = false;
-    for (let i = 0; i <= 160; i++) {
-      const frame = climbFrame(0, i / 160);
-      const rear = frame.left;
-      const lead = frame.right;
-      if (frame.phase === "Throw the mass over the front wheel" && frame.dyn) {
-        if (frame.dyn.behind > 1 && rear.axle.y > M.wheelR + 0.8 && frame.dyn.margin > 0) sawBehind = true;
-        if (frame.base < -0.3) sawRollBack = true;
-        if (!(frame.dyn.margin > -0.02)) throw new Error("coast margin " + frame.dyn.margin + " at " + (i / 160).toFixed(3));
-      }
-      if (frame.phase === "Mass is over the front wheel" && frame.dyn && frame.dyn.behind < 0.15) sawOver = true;
-      if (frame.phase === "Stand up over the front wheel" && frame.dyn && frame.dyn.behind > 0.7) stoodEarly = true;
-      if (frame.phase === "Shove off the rear wheel") {
-        if (rear.axle.y > M.wheelR + 0.35) throw new Error("rear wheel left during the shove");
-        if (lead.contact.y < M.rise - 0.4) throw new Error("front wheel left the step");
-      }
-      if (!isFinite(frame.tq.aKnee) || !isFinite(frame.tq.bHip)) throw new Error("torque NaN at " + frame.phase);
-    }
-    if (!sawBehind) throw new Error("never threw while behind");
-    if (!sawOver) throw new Error("mass never crossed");
-    if (!sawRollBack) throw new Error("front wheel never rolled back under the mass");
-    if (stoodEarly) throw new Error("stood up while the mass was behind");
-    /* Turning the catch off must make the same shove marginal or worse. */
-    if (!(info.marginCatch > info.marginBallistic + 0.05)) throw new Error("catch did not help: " + info.marginCatch + " vs " + info.marginBallistic);
-    console.log("kin ok", {
-      maxStep: maxKnee.toFixed(2),
-      com: report.where,
-      balanceHip: b.hip.y.toFixed(2),
-      poke: b.poke.toFixed(2),
-      kneeBalanceNm: tqBal.knee.toFixed(2),
-      behind: info.liftoffBehind.toFixed(2),
-      momentum: (-info.Llift).toFixed(2),
-      needBallistic: (-info.LneedBallistic).toFixed(2),
-      needCatch: (-info.LneedCatch).toFixed(2),
-      marginCatch: info.marginCatch.toFixed(3),
-      maxL: (-info.Lmax).toFixed(2),
-      headroom: info.headroom.toFixed(3),
-      leftover: info.flown.leftover.toFixed(2),
-      settleT: info.flown.settleT.toFixed(2),
-      cone: info.pushForceBad.length,
-      crestT: info.flown.crest.t.toFixed(3),
-      slotBack: (-info.flown.sMin / INCH).toFixed(2),
-      slotFwd: (info.flown.sMax / INCH).toFixed(2),
-      cycleS: info.T.toFixed(2),
-      peaks: {
-        aHip: info.peaks.aHip.toFixed(1), aKnee: info.peaks.aKnee.toFixed(1),
-        bHip: info.peaks.bHip.toFixed(1), bKnee: info.peaks.bKnee.toFixed(1),
-        kneeStatic: info.peaks.kneeStatic.toFixed(1), wheel: info.peaks.wheel.toFixed(2), roll: info.peaks.roll.toFixed(1)
-      },
-      peakWhere: { aKnee: info.peakWhere.aKnee.phase, bKnee: info.peakWhere.bKnee.phase, aHip: info.peakWhere.aHip.phase, bHip: info.peakWhere.bHip.phase }
-    });
+    if (Math.abs(b.hip.y - 16.8) > 1e-8) throw new Error("stance geometry");
+    const report = evaluateClimb();
+    console.log("kinematics loaded; stair candidate " + report.status, report);
   }
 })(typeof window !== "undefined" ? window : globalThis);

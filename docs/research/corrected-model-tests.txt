@@ -1,0 +1,54 @@
+
+> test
+> node validation-test.js && node assumption-audit.js > /dev/null && node sim-test.js
+
+validation ok: 200 spatial FK/IK cases, 402 projection frames, mass invariance, strict contacts and rejected stair candidate
+sim ok {
+  "multibodyTorqueShare": "0.37",
+  "freeRoll": {
+    "tire": "0.515",
+    "sphere": "0.500",
+    "cylinder": "0.602"
+  },
+  "stance": {
+    "kg": "6.12",
+    "kneeNm": "1.85",
+    "hipHeightIn": "16.8"
+  },
+  "ride": {
+    "pct": "75",
+    "hipHeightIn": "14.3",
+    "kneeNm": "3.17"
+  },
+  "drive": {
+    "peakLeanDeg": "10.7",
+    "peakWheelNm": "1.39",
+    "peakKneeNm": "6.9",
+    "arcWheelLoadsN": "33/31",
+    "crouchKneeNm": "4.0"
+  },
+  "shoves": {
+    "forwardNs": 8,
+    "sideNs": 5
+  },
+  "sills": {
+    "half": "crosses at 0.5 m/s",
+    "one": [
+      "0.30 m/s: falls, peak knee 12.0 N·m",
+      "0.50 m/s: falls, peak knee 11.9 N·m",
+      "0.75 m/s: falls, peak knee 12.0 N·m",
+      "1.00 m/s: crosses, peak knee 12.0 N·m",
+      "1.50 m/s: falls, peak knee 12.0 N·m"
+    ]
+  },
+  "parked": {
+    "noSkid": "request refused; active balance retained",
+    "skid": "rests at -17° and stands back up"
+  },
+  "oneWheel": {
+    "poiseAfterS": "3.7",
+    "freeWheelLoadPct": "3–24",
+    "plantedHipRollNm": "6.6",
+    "experimentalLift": "falls (sideways balancer does not hold the free wheel up yet)"
+  }
+}

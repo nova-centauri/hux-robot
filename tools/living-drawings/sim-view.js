@@ -474,7 +474,10 @@
     massScale: function (x) { return (6 * x).toFixed(1) + " kg lumps"; },
     bodyCom: function (x) { return x.toFixed(1) + "\""; },
     legHz: function (x) { return x.toFixed(1) + " Hz"; },
-    legZeta: function (x) { return x.toFixed(2); }
+    legZeta: function (x) { return x.toFixed(2); },
+    sensorDelayMs: function (x) { return x.toFixed(0) + " ms"; },
+    torqueLagMs: function (x) { return x.toFixed(1) + " ms"; },
+    jointNoLoad: function (x) { return x.toFixed(0) + " rad/s"; }
   };
   const CHECKS = ["skid", "reflex", "legCatch", "oneLift"];
   const knobIds = Object.keys(KNOB_FMT);
@@ -576,8 +579,8 @@
   }
   const PHASE = {
     sitting: "crouching", parked: "wheels braked", shift: "standing tall, shifting mass over the wheel",
-    poise: "poised over one wheel", edge: "easing on to the wheel", unload: "letting the free leg go",
-    lift: "lifting the free wheel", hold: "on one wheel", lower: "putting the wheel down",
+    poise: "two-contact poise", edge: "easing on to the wheel", unload: "letting the free leg go",
+    lift: "lifting the free wheel", hold: "attempting single support", lower: "putting the wheel down",
     catch: "catch step", load: "loading the free wheel", unshift: "centring"
   };
   let rtf = 1;
@@ -601,7 +604,9 @@
       row("Hip roll", deg(shift)) +
       row("Wheel load L / R", fL.toFixed(0) + " / " + fR.toFixed(0) + " N") +
       row("", (100 * fL / weight).toFixed(0) + "% / " + (100 * fR / weight).toFixed(0) + "% of " + s.totalKg.toFixed(1) + " kg") +
-      row("Motor power", o.power.toFixed(0) + " W") +
+      row("Mechanical power magnitude", o.power.toFixed(0) + " W") +
+      row("Support", o.supportState + " · " + o.singleSupportSeconds.toFixed(2) + " s single") +
+      row("Sensor age", o.sensorAgeMs.toFixed(1) + " ms") +
       row("Sim", sim.t.toFixed(1) + " s" + (rtf < 0.95 ? " · " + rtf.toFixed(2) + "× real" : ""));
     hudRight.innerHTML =
       "<h4>Torque vs limit (N·m)</h4>" +
@@ -613,16 +618,16 @@
       bar("Hip R", o.legs[1].hip.tau, s.knobs.tauHip) +
       bar("Roll L", o.legs[0].roll.tau, s.knobs.tauRoll) +
       bar("Roll R", o.legs[1].roll.tau, s.knobs.tauRoll) +
-      "<h4>Wheel speed vs 4S no-load</h4>" +
+      "<h4>Wheel speed vs assumed no-load</h4>" +
       bar("Rim L", o.wheels[0].w, s.knobs.wheelNoLoad) +
       bar("Rim R", o.wheels[1].w, s.knobs.wheelNoLoad);
     let msg = "";
     if (o.fallen) msg = "Fallen. Press R (or Reset) to stand it back up.";
     else if (o.estop) msg = "Motors off. Press K to turn them back on.";
-    else if (o.phase === "parked" && !sim.robot.skid) msg = "Parked: wheels braked, balance off. With no rest pose it tips back onto its knees and rolls over. Try the rear skid below.";
-    else if (o.mode === "LEFT_ONLY" || o.mode === "RIGHT_ONLY") msg = sim.s.knobs.oneLift ?
-      "Experimental lift on. The sideways balancer does not hold the free wheel off the floor yet; expect a catch step or a fall." :
-      "One wheel, poised: the mass is over the planted wheel and the other carries about 15%, like a kickstand. Taking it fully off the floor is the open item (experimental switch below).";
+    else if (o.modeRejected) msg = o.modeRejected;
+    else if (o.requestedMode === "LEFT_ONLY" || o.requestedMode === "RIGHT_ONLY") msg =
+      o.singleSupportValidated ? "Single support held for the 1.55 s reference swing interval in this simulation; hardware unvalidated." :
+      "Requested " + o.requestedMode.replace("_", " ") + ". Actual support: " + o.supportState + ". Two-contact poise is not one-wheel balance.";
     banner.hidden = !msg;
     banner.textContent = msg;
     modeButtons.forEach(function (btn) {

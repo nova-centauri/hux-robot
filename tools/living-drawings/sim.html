@@ -21,7 +21,7 @@
       <div>
         <p class="kicker">Hux</p>
         <h1>3D sandbox</h1>
-        <p>Drive the working model around a course with real rigid-body physics. Same geometry and lump masses as the drawings. Every motor is a torque with a limit. The balance loop is an LQR that only sees what the robot could sense. First pass: a place to play and to find where the design breaks, not the digital twin.</p>
+        <p>Drive the working model around a course with real rigid-body physics. Same geometry and lump masses as the drawings. Every motor is a torque with a limit. The LQR balance loop uses delayed ideal state and simulator contact loads; a physical estimator remains unimplemented. First pass: a place to play and to find where the design breaks, not the digital twin.</p>
         <nav class="pages" aria-label="Pages">
           <a href="index.html">Drawings</a>
           <a href="sim.html" aria-current="page">3D sandbox</a>
@@ -31,7 +31,7 @@
         </nav>
       </div>
       <div class="stamp">
-        Model 2026-09-22<br>
+        Model 2026-09-23<br>
         6" × 1.25" wheel<br>
         7.5" + 7.5" tubes<br>
         24" tall · 14" wide
@@ -56,8 +56,8 @@
         <div class="presets" role="group" aria-label="Mode">
           <button type="button" data-mode="PARKED">Parked</button>
           <button type="button" data-mode="TWO_WHEEL" class="active">Two wheel</button>
-          <button type="button" data-mode="LEFT_ONLY" title="Experimental">Left only</button>
-          <button type="button" data-mode="RIGHT_ONLY" title="Experimental">Right only</button>
+          <button type="button" data-mode="LEFT_ONLY" title="Request a weight shift; actual support is shown in the HUD">Request left</button>
+          <button type="button" data-mode="RIGHT_ONLY" title="Request a weight shift; actual support is shown in the HUD">Request right</button>
         </div>
         <div class="presets" role="group" aria-label="Actions">
           <button type="button" id="btnShove">Shove</button>
@@ -131,7 +131,7 @@
           <label>Wheel peak torque, each <output id="k_tauWheelOut"></output>
             <input id="k_tauWheel" type="range" min="0.5" max="8" step="0.1" value="3">
           </label>
-          <label>Wheel no-load speed (4S) <output id="k_wheelNoLoadOut"></output>
+          <label>Wheel no-load speed (assumed) <output id="k_wheelNoLoadOut"></output>
             <input id="k_wheelNoLoad" type="range" min="15" max="80" step="1" value="40">
           </label>
           <label>Knee peak torque <output id="k_tauKneeOut"></output>
@@ -158,6 +158,15 @@
           <label>Leg spring damping <output id="k_legZetaOut"></output>
             <input id="k_legZeta" type="range" min="0.2" max="1.2" step="0.05" value="0.6">
           </label>
+          <label>Sensor delay (assumed) <output id="k_sensorDelayMsOut"></output>
+            <input id="k_sensorDelayMs" type="range" min="0" max="30" step="1" value="4">
+          </label>
+          <label>Drive response time (assumed) <output id="k_torqueLagMsOut"></output>
+            <input id="k_torqueLagMs" type="range" min="0" max="20" step="0.5" value="2">
+          </label>
+          <label>Joint no-load speed (assumed) <output id="k_jointNoLoadOut"></output>
+            <input id="k_jointNoLoad" type="range" min="5" max="40" step="1" value="20">
+          </label>
           <label class="check"><input id="k_reflex" type="checkbox" checked> Impact reflex and stall hop</label>
           <label class="check"><input id="k_legCatch" type="checkbox" checked> Stumble catch (legs and hip roll)</label>
           <label class="check"><input id="k_oneLift" type="checkbox"> One wheel: try to lift the free wheel (experimental, usually falls)</label>
@@ -170,13 +179,13 @@
         <h2>What this is and is not</h2>
         <ul class="sim-notes">
           <li><b>Physics.</b> Rapier rigid bodies at 2 kHz: body, two hip yokes, four carbon tubes, two wheels, Coulomb friction, real contacts with the stair, sills and crates.</li>
-          <li><b>Motors.</b> Every joint is a torque with a cap, updated at 2 kHz. The in-wheel motors lose torque linearly to the 4S no-load speed. PARKED shorts the wheel phases (a brake that needs speed to work).</li>
+          <li><b>Motors.</b> Every joint has torque-speed limits and a first-order response, updated at 2 kHz. Joint stops and nonadjacent self-collisions are enabled. The in-wheel motors lose torque linearly to the assumed no-load speed. Parking requires the support skid; without it the request stops motion while keeping balance active. Emergency motor-off remains separate.</li>
           <li><b>Suspension.</b> Each leg is a virtual spring-damper along the hip-to-axle line (3.5 Hz, 0.6 damping by default) with the leg angle held stiff. A real Hux can only do this with torque-controlled, backdrivable joints (FOC / QDD class) or real springs. A position servo or a stepper cannot.</li>
-          <li><b>Reflexes.</b> A leg that is hit hard at speed hops its wheel up for about a tenth of a second. A wheel stopped dead by an edge at walking pace hops too. When the mass runs away, the legs swing and the hip rolls step the wheels under it. Encoders and the IMU only.</li>
-          <li><b>One wheel.</b> LEFT / RIGHT ONLY is a planned sequence: stand tall, stiffen, shift the mass over the planted wheel until the other carries about 15%, hold, then centre. Taking the free wheel fully off the floor is the open item; it is behind the experimental switch.</li>
-          <li><b>Balance.</b> LQR on the lean of the mass over the axle, rebuilt as the legs change height, at 500 Hz. Roll levelling by leg length and leg force. It sees body attitude, joint angles and wheel speed; no sensor noise yet.</li>
-          <li><b>Tire.</b> Contact is a 6" sphere drawn as a tire. It rolls exactly and matches the stair profile. Sideways it rocks on a 3" radius instead of a ~0.6" crown, so one-wheel balance here is somewhat easier than on the real tire.</li>
-          <li><b>Not modelled.</b> Motor inertia through the gearbox, backlash, belt stretch, tube flex, battery sag, sensor noise and delay. No stair-climb controller yet: the stair is there to drive up to.</li>
+          <li><b>Reflexes.</b> A leg that is hit hard at speed hops its wheel up for about a tenth of a second. A wheel stopped dead by an edge at walking pace hops too. When the mass runs away, the legs swing and the hip rolls step the wheels under it. The current implementation uses ideal simulated state.</li>
+          <li><b>One wheel.</b> Left/right buttons request a planned sequence: stand tall, stiffen, shift the mass over the planted wheel until the other carries about 15%, hold, then centre. The HUD reports actual support, requiring both low free-wheel load and ground clearance before reporting single support. Full lift remains experimental.</li>
+          <li><b>Balance.</b> LQR on the lean of the mass over the axle, rebuilt as the legs change height, at 500 Hz. Roll levelling by leg length and leg force. It uses delayed ideal state and contact samples. A physical state and load estimator remains to be implemented.</li>
+          <li><b>Tire.</b> Contact uses a rounded convex tire with 6″ diameter and 1.25″ width. Numerical rolling error is measured separately. The crown is an assumption; pressure and carcass compliance remain unmeasured.</li>
+          <li><b>Not modelled.</b> Motor inertia through the gearbox, backlash, belt stretch, tube flex, battery sag, current limits, temperature and sensor noise. Delay and drive response are adjustable assumptions, not measured hardware. No stair-climb controller yet: the stair is there to drive up to.</li>
         </ul>
         <p class="hint">Findings and how to rerun them: <code>docs/research/sim-sandbox.md</code>. Headless check: <code>node tools/living-drawings/sim-test.js</code>.</p>
       </article>
@@ -186,6 +195,7 @@
       Geometry and lump masses come from <code>kin.js</code>, the same model the drawings use (<code>docs/research/leg-geometry.md</code>). The 3D body is 8" long, 7" wide and 6" above the hips, the same drawing assumptions. The torque limits are classes, not parts. Needs a network connection the first time it opens: three.js and Rapier load from jsDelivr.
     </footer>
   </div>
+  <script src="spatial.js"></script>
   <script src="kin.js"></script>
   <script src="sim-core.js"></script>
   <script src="sim-view.js"></script>

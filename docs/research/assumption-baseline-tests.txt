@@ -1,0 +1,88 @@
+
+> test
+> node kin.js && node sim-test.js
+
+kin ok {
+  maxStep: '4.28',
+  com: 'Over both feet',
+  balanceHip: '16.80',
+  poke: '2.94',
+  kneeBalanceNm: '-4.39',
+  behind: '2.71',
+  momentum: '0.74',
+  needBallistic: '0.77',
+  needCatch: '0.69',
+  marginCatch: '0.048',
+  maxL: '0.78',
+  headroom: '0.038',
+  leftover: '0.23',
+  settleT: '0.61',
+  cone: 0,
+  crestT: '0.293',
+  slotBack: '1.02',
+  slotFwd: '1.04',
+  cycleS: '5.64',
+  peaks: {
+    aHip: '6.7',
+    aKnee: '6.5',
+    bHip: '4.3',
+    bKnee: '19.1',
+    kneeStatic: '10.6',
+    wheel: '4.03',
+    roll: '0.0'
+  },
+  peakWhere: {
+    aKnee: 'Roll the rear wheel forward',
+    bKnee: 'Throw the mass over the front wheel',
+    aHip: 'Throw the mass over the front wheel',
+    bHip: 'Throw the mass over the front wheel'
+  }
+}
+sim ok {
+  "multibodyTorqueShare": "0.37",
+  "freeRoll": {
+    "sphere": "0.500",
+    "cylinder": "0.602"
+  },
+  "stance": {
+    "kg": "6.12",
+    "kneeNm": "1.84",
+    "hipHeightIn": "16.8"
+  },
+  "ride": {
+    "pct": "75",
+    "hipHeightIn": "14.3",
+    "kneeNm": "3.16"
+  },
+  "drive": {
+    "peakLeanDeg": "11.6",
+    "peakWheelNm": "2.02",
+    "peakKneeNm": "9.1",
+    "arcWheelLoadsN": "23/37",
+    "crouchKneeNm": "3.9"
+  },
+  "shoves": {
+    "forwardNs": 11,
+    "sideNs": 5.5
+  },
+  "sills": {
+    "half": "crosses at 0.5 m/s",
+    "one": [
+      "0.30 m/s: falls, peak knee 11.3 N·m",
+      "0.50 m/s: crosses, peak knee 10.8 N·m",
+      "0.75 m/s: crosses, peak knee 11.1 N·m",
+      "1.00 m/s: crosses, peak knee 12.0 N·m",
+      "1.50 m/s: falls, peak knee 12.0 N·m"
+    ]
+  },
+  "parked": {
+    "noSkid": "rolls over backward (body at 5.5\")",
+    "skid": "rests at -17° and stands back up"
+  },
+  "oneWheel": {
+    "poiseAfterS": "4.0",
+    "freeWheelLoadPct": "15–18",
+    "plantedHipRollNm": "3.3",
+    "experimentalLift": "falls (sideways balancer does not hold the free wheel up yet)"
+  }
+}

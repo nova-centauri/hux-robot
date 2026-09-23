@@ -1,5 +1,7 @@
 # Leg geometry — strength, give, and reaction speed
 
+**Review correction (2026-09-23):** [real-world validation](real-world-validation.md) confirms the basic planar math but identifies missing spatial reach/contact constraints. The arrest formula and ±6° slot angle are not proven catch envelopes; GIM8108 compatibility requires an exact variant; the ~90 Hz tube example uses a different wall thickness from the BOM. Read the audit before sizing hardware from this note.
+
 Steve **2026-09-21**: review the plan and the leg math. The ordered walker wheels are not a good enough foot. Real rubber, yes. A kids bike tire, no.
 
 Steve **2026-09-21**, follow-up: the wheel has to sit **comfortably on one step** so the robot can **pivot on it and place the raised wheel on the next step**. Settle the diameter now.
@@ -35,7 +37,7 @@ The planted wheel is an inverted pendulum **on a shelf**. While the body pivots 
 
 Rule used to settle: at the parked pose, **at least ~1.75" of rubber-to-nosing gap on each side** of a 9.5" going, and **at least ~2" of air** between the top of the tire and a 1" soffit under the next tread. The axle rise onto the next step is **9.5" for any diameter** — a bigger tire does not shorten the lift.
 
-| OD | Gap each side on a 9.5" going | Balance roll before rubber crosses a nosing | Lean that roll can catch at a ~17" hip | Air under a 1" soffit |
+| OD | Gap each side on a 9.5" going | Balance roll before rubber crosses a nosing | Position-only angle at a ~17" hip (not a catch bound) | Air under a 1" soffit |
 | --- | ---: | ---: | ---: | ---: |
 | 5" | 2.25" | ±2.25" | ±7.5° | 3.5" |
 | **6" (locked)** | **1.75"** | **±1.75"** | **±6°** | **2.5"** |
@@ -110,9 +112,9 @@ Overall width is **14"**. A **1.25"** tire flush with the outside puts the track
 | **6 kg** | **9.5 N·m** |
 | 8 kg | 12.7 N·m |
 
-Size **peak** roll torque to beat that full moment. Size **continuous** for an inch or two of leftover error, not for sitting at the full moment. Roll inertia is small because the body is narrow, so the shift is quick once the torque exists.
+The table is the **whole-robot tipping moment about a tire contact**, not hip actuator torque. Size each hip from its free-body gravity, inertia, contact forces and duty cycle. Even with whole-robot CoM above the contact, the body remains offset from the planted hip: the 4 kg body alone at 5.4 inches gives **5.38 N·m**. The neutral 6 kg lump model gives **8.16 N·m** at a planted hip if the opposite foot is unsupported; this hypothetical load case is not a balanced pose. Sway does not make joint torque zero.
 
-**GIM8108-8 yardstick** (published SteadyWin-class numbers, **not a buy**): about **7.5 N·m** nominal, **22 N·m** stall, **~380 g**. The **9.5 N·m** example at 6 kg is above that nominal rating and under the stall, so this class can make the shift and is tight if it has to hold the full moment. On **4S** the published output speed constant (~6.7 rpm/V) is only about **110 rpm** at 16.8 V. Hip roll does not need the 48 V top speed. Do not hang this mass on the axle. The wheel does not need 7.5 N·m.
+**GIM8108 remains a candidate, not a selected actuator.** The manufacturer lists multiple variants and voltage ranges. Do not transfer a nominal/stall torque, speed constant or controller voltage rating between variants. Exact motor, reduction and driver compatibility with 4S (including low battery and regeneration), continuous thermal load and output torque-speed curves must be verified. Stall torque is not a holding rating; see the sourced [validation audit](real-world-validation.md).
 
 ## Flexible — springs, not whippy tubes
 
@@ -124,23 +126,23 @@ At **92%** on the **7.5" / 6" wheel** leg, knee poke `d ≈ 2.9"`. Torque `τ = 
 | **6 kg** | **4.4 N·m** | **2.2 N·m** | **2.2 N·m** |
 | 8 kg | 5.9 N·m | 2.9 N·m | 2.9 N·m |
 
-A deeper crouch (75% extension, 6 kg) is about **7.4 N·m** on one leg. Standing up over the front wheel on the stair, with the knee 6–7" behind the weight line, is about **10.6 N·m** on one leg ([`stair-climb-dynamics.md`](stair-climb-dynamics.md)); that, not the stance, sizes the knee actuator. Size the spring for the two-leg pose (~**2.2 N·m** at 6 kg). The actuator pays the other half on one leg, plus the landing. A linkage that keeps the knee on the weight line drives this toward zero. Prefer that in the 2D set. The roll moment does not shrink when the poke does.
+A deeper crouch (75% extension, 6 kg) is about **7.4 N·m** on one leg. Standing up over the front wheel on the stair, with the knee 6–7" behind the weight line, is about **10.6 N·m** on one leg ([`stair-climb-dynamics.md`](stair-climb-dynamics.md)); the historical dynamic reference reaches **19.1 N·m**, above the sandbox’s 12 N·m cap. Neither number validates an actuator until the spatial gait is feasible. Size the spring for the two-leg pose (~**2.2 N·m** at 6 kg). The actuator pays the other half on one leg, plus the landing. A linkage that keeps the knee on the weight line drives this toward zero. Prefer that in the 2D set. The roll moment does not shrink when the poke does.
 
-**Tubes.** Example only, not a SKU: 16 mm OD, 12 mm ID, long-fiber modulus ~100 GPa, 7.5" link, 0.30 kg at the end. First bending is on the order of **~90 Hz**. Keep it **above ~40 Hz**.
+**Tubes.** Example only, not a SKU: 16 mm OD, 12 mm ID, long-fiber modulus ~100 GPa, 7.5" link, 0.30 kg at the end. This ideal cantilever estimate is about **90 Hz**; the BOM’s 1 mm wall (14 mm ID) gives about **70 Hz** under the same assumptions. Joint compliance, fittings, laminate layup and boundary conditions remain unmeasured. The 40 Hz figure is a proposed design target, not proof of control bandwidth.
 
 ## Quick — the wheel
 
-Arrest on one wheel, **6 kg**, 6" OD, estimated 0.30 kg tire:
+Historical acceleration-equilibrium estimate on one wheel, **6 kg**, 6" OD, estimated 0.30 kg tire; **not a fall-arrest test**:
 
-| Lean | Torque to stop the fall |
+| Lean | Approximate equilibrium torque |
 | --- | ---: |
 | 10° | 0.8 N·m |
 | 20° | 1.5 N·m |
 | 30° | 2.2 N·m |
 
-**Wheel target: about 3 N·m peak**, and about **1–2 N·m** for ordinary corrections. At 3 N·m the contact accelerates at about **6.7 m/s²** and a 30° lean is inside the motor. A bare **0.5 N·m** gimbal arrests about **6°** on this wheel — trim, not a catch. Small outrunner plus a reduction is the honest class. Not a hoverboard hub. Not a GIM8108 at the rim.
+**Wheel target remains 3 N·m peak as a working assumption.** The rejected planar stair path asks for **4.03 N·m**. A fully loaded wheel at 6 kg and μ = 0.7 has only **3.14 N·m** of ideal traction torque; a half-loaded wheel has **1.57 N·m**. Raising the motor limit alone does not create grip. Arrest also depends on angular velocity, available travel, voltage, tire compliance and latency. No 30° or 6° catch capability is established.
 
-On the stair itself the shelf, not the motor, caps the catch: about **±6°** before the tire crosses a nosing. Bigger catches belong on the floor, before the wheel is committed to the step.
+The ±1.75-inch geometric shelf margin corresponds to about ±6° of position-only lean at a 17-inch height. It is not a recoverable-state envelope: at nonzero speed the capture point can already lie outside the shelf.
 
 Useful axle speed is slow: about **60 rpm** at 0.5 m/s, **190 rpm** at 1.5 m/s, **380 rpm** at 3 m/s. kV match (R31) means that band on 4S.
 
@@ -159,7 +161,7 @@ Not Blender. One side view, one front view.
 1. The **9.5" × 9.5"** slot with the **6"** tire centered and the **1.75"** gaps drawn.
 2. **7.5" + 7.5"** tubes, **6"** above the hip, 24" tall and **14"** wide. Head about **7"** inside that. Tire **~1–1.25"**.
 3. Hip over the axle at 92% stance. Raised axle 9.5" up and 9.5" forward, inside the next slot (±1.75").
-4. Spring noted at ~**2.2 N·m** for a 6 kg two-leg stance. Hip roll ~**9.5 N·m** at 6 kg on the 12.75" track.
+4. Spring noted at ~**2.2 N·m** for a 6 kg two-leg stance. Global tipping moment ~**9.5 N·m** at 6 kg on the 12.75" track; size hip torque separately.
 5. Motor **at the wheel**, about **3 N·m peak**. Pose actuators high. Inside/outside belt runs only if that class is the one being sketched.
 
 ## What this note does not do

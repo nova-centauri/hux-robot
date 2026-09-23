@@ -2,9 +2,11 @@
 
 Early R&D for a **wheeled biped**: two legs that end in driven wheels.
 
-**North star:** climb and descend stairs by stepping one wheel at a time. Nominal residential riser is **~9.5"**.
+**North star:** climb and descend stairs by stepping one wheel at a time. Design riser target is **~9.5"**; actual stair geometry must be measured.
 
 This repo is the source of truth for Steve Barrett's Hux project. It is a docs-and-layout scaffold — not a finished robot.
+
+**Engineering review (2026-09-23):** [real-world validation audit](docs/research/real-world-validation.md) checks geometry, CoM, loads, contacts, and controls. The combined stair drawings exceed spatial reach, and true one-wheel balance remains unproven. Includes reproducible calculations and a bench-test sequence.
 
 **Research first.** Study James Bruton / [XRobots](https://github.com/XRobots), Hattori, and Steve's [inspirations](docs/research/inspiration.md) (Roadrunner, FrRonconi student balancer, Build Some Stuff / Serra, Tazer, Stompy) before hardware. Do not vendor upstream trees yet. RobotX is GPL3 — that conflicts with Hux's MIT if we adapt code; Steve decides, we do not relicense. Packet: [`docs/research/`](docs/research/).
 

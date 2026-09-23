@@ -12,7 +12,7 @@
       <div>
         <p class="kicker">Hux</p>
         <h1>Living drawings</h1>
-        <p>Side and top views of the working model, and the stair climb. Drag the joints, request a wheel position, or press Play. The stair is the settled 9.5 by 9.5 inch step.</p>
+        <p>Side and top views of the working model, and the stair climb. Drag the joints, request a wheel position, or press Play. The 9.5 by 9.5 inch stair is a design target, not a validated capability.</p>
         <nav class="pages" aria-label="Pages">
           <a href="index.html" aria-current="page">Drawings</a>
           <a href="sim.html">3D sandbox</a>
@@ -22,7 +22,7 @@
         </nav>
       </div>
       <div class="stamp">
-        Model 2026-09-22<br>
+        Model 2026-09-23<br>
         6" × 1.25" wheel<br>
         7.5" + 7.5" tubes<br>
         24" tall · 14" wide
@@ -73,7 +73,7 @@
 
       <article class="card">
         <h2>Top — stance and body</h2>
-        <p class="hint">Overall width is 14 inches. The head is the center box. Wheels and legs sit outside it. Track is 12.75 inches with a 1.25 inch tire. The knee folds rearward.</p>
+        <p class="hint">Neutral overall width is 14 inches; hip roll changes the swept envelope. The head is the center box. Wheels and legs sit outside it. Track is 12.75 inches with a 1.25 inch tire. The knee folds rearward.</p>
         <svg id="top" class="sheet" role="img" aria-label="Top view of Hux stance and body"></svg>
         <div class="controls">
           <label>Hip roll <output id="rollOut"></output>
@@ -86,13 +86,13 @@
 
     <article class="card pair-wrap">
       <h2>Side — both legs on the stair</h2>
-      <p class="hint">Same leg, drawn twice. The left leg is the far one and is lighter. Both hips sit on the head. Request either joint angles or wheel positions; the other follows. Play climbs the stair at real speed (or slower). The shin cannot put the center of mass over the front wheel while the rear wheel is still down, so the rear leg shoves the body forward and the rear wheel leaves with the mass still behind the front contact. Two things get it across: the forward angular momentum from the shove, and the front wheel rolling <em>back</em> in its slot under the mass (the green bracket is the slot, the red bar is how far the wheel has rolled from where it landed). Once the mass is over the contact the wheel absorbs what is left, the body walks forward and stands up, and the trailing foot comes up. Green dots are loaded contacts. The red dot is the center of mass, the red tick its velocity, the dashed arc its angular momentum about the front contact.</p>
+      <p class="hint">Inspect a candidate stair motion. Side and front views share one spatial chain with joint limits. Red crosses are requested wheel positions; dashed red lines show targets the mechanism cannot reach. CoM includes both legs. The verdict below rejects invalid geometry, forces and actuator demands. Playback does not establish a working gait.</p>
       <div class="pair-views">
         <svg id="pair" class="sheet" role="img" aria-label="Side view of both Hux legs on a stair"></svg>
         <div class="front-wrap">
           <h3>Front — sway and roll</h3>
           <svg id="front" class="sheet" role="img" aria-label="Front view of Hux on the stair, showing the lateral sway"></svg>
-          <p class="hint small">The mass sits over the planted wheel whenever the other wheel is off. The 12.75" sway from the trailing wheel to the leading wheel happens during the gather, with both wheels down, and never has to come back: the leading foot is next step's planted foot. Hip axes drawn 5.4" off the centerline (assumption). Numbers at the hips are leg lean from vertical.</p>
+          <p class="hint small">The actual spatial links and whole-robot CoM are projected here. Hip axes are 5.4″ from the body center. Hip holding torque is calculated separately from the gravity moment about the tire. Requested sway is not automatically achievable.</p>
         </div>
       </div>
       <div class="transport">
@@ -201,11 +201,12 @@
     </article>
 
     <footer class="note">
-      Numbers that are settled come from <code>docs/research/leg-geometry.md</code> and <code>docs/bom.md</code>. The climb dynamics are explained in <code>docs/research/stair-climb-dynamics.md</code>.
+      Design dimensions and working assumptions come from <code>docs/research/leg-geometry.md</code> and <code>docs/bom.md</code>. The climb dynamics are explained in <code>docs/research/stair-climb-dynamics.md</code>.
       The knee folds to the rear. The 6 inch body height above the hip is the working assumption. Body length on the drawing is 8 inches and is not a decision. Motor boxes are rough bulk, not a shopping list.
       Mass in the roll readout is the 6 kg example, not a weight target.
     </footer>
   </div>
+  <script src="spatial.js"></script>
   <script src="kin.js"></script>
   <script src="app.js"></script>
 </body>

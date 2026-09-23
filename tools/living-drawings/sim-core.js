@@ -1,23 +1,27 @@
 /* Hux 3D sandbox: the robot, the world, and the controller. Meters, kilograms, seconds, radians.
    Geometry and lump masses come from kin.js (HuxKin.M), so this robot is the same one the 2D
    drawings show. Physics is Rapier: rigid bodies, revolute joints, Coulomb friction, real contacts. Every actuator is a torque with a limit, applied equal and opposite
-   to the two bodies it joins. The controller only sees what the robot could sense (body attitude,
-   joint angles and rates, wheel speed) plus the lump-mass model it was built with.
+   to the two bodies it joins. The controller uses delayed ideal body/joint state and ground-truth contact loads.
+   A physical estimator, tire compliance, backlash and electrical/thermal models are absent.
    Nothing here is a decision. Knobs are working assumptions and can be changed from the page. */
 (function (root) {
   const IN = 0.0254;
   const G = 9.81;
+  const SHARED = (root.HuxSpatial || require("./spatial.js")).limits;
 
   /* Working assumptions for the actuators. Not parts. */
   const KNOBS = {
     massScale: 1,      /* multiplies every lump */
     bodyCom: 0,        /* in, body lump forward (+) of the hip axes */
     mu: 0.7,           /* tire to floor friction */
-    tauWheel: 3.0,     /* N·m peak per in-wheel motor (same as the stair-climb knob) */
-    wheelNoLoad: 40,   /* rad/s where the in-wheel motor runs out of voltage on 4S (~3 m/s) */
-    tauKnee: 12,       /* N·m peak; the stair climb says ~10.6 holding */
-    tauHip: 12,        /* N·m peak, hip swing */
-    tauRoll: 15,       /* N·m peak; GIM8108-class yardstick is 7.5 nominal / 22 stall */
+    tauWheel: SHARED.tauWheel,     /* N·m peak per in-wheel motor (same as the stair-climb knob) */
+    wheelNoLoad: 40,   /* rad/s assumed output no-load speed; no motor/4S match verified */
+    tauKnee: SHARED.tauKnee,       /* N·m peak; the stair climb says ~10.6 holding */
+    tauHip: SHARED.tauHip,        /* N·m peak, hip swing */
+    tauRoll: SHARED.tauRoll,       /* N·m peak; GIM8108-class yardstick is 7.5 nominal / 22 stall */
+    jointNoLoad: 20,   /* rad/s output, unmeasured torque-speed assumption */
+    torqueLagMs: 2,    /* first-order drive response, unmeasured assumption */
+    sensorDelayMs: 4,  /* outer-loop sample delay, unmeasured assumption */
     skid: false,       /* proposal: rear parking skid on the body centreline. Not in the docs. */
     ride: 0.75,        /* default ride height, hip to axle as a fraction of the full leg (medium) */
     legHz: 3.5,        /* Hz, virtual leg spring: bounce frequency of the body on its legs */
@@ -119,9 +123,9 @@
       0 = hanging straight down, positive swings the foot forward. */
   function legIk(s, dx, dy) {
     const d = clamp(Math.hypot(dx, dy), 0.2 * s.L, 2 * s.L * 0.999);
-    const th = Math.acos(d / (2 * s.L));
+    const th = clamp(Math.acos(d / (2 * s.L)), SHARED.knee[0] / 2, SHARED.knee[1] / 2);
     const beta = Math.atan2(dx, -dy);
-    return { qh: beta - th, qk: 2 * th };
+    return { qh: clamp(beta - th, -SHARED.hip[1], -SHARED.hip[0]), qk: 2 * th };
   }
 
   /** The same leg seen as a telescope: length d hip to axle, angle b from straight down in the
@@ -231,6 +235,21 @@
     return v(m * (b * b + c * c) / 12, m * (a * a + c * c) / 12, m * (a * a + b * b) / 12);
   }
 
+  function tireVertices(radius, width) {
+    const core = 0.001, crown = width / 2 - core, points = [];
+    for (const z of [-core, core]) for (let i = 0; i < 256; i++) {
+      const a = 2 * Math.PI * i / 256;
+      points.push((radius - crown) * Math.cos(a), (radius - crown) * Math.sin(a), z);
+    }
+    return { points: new Float32Array(points), crown: crown };
+  }
+  function tireCollider(R, radius, width) {
+    const mesh = tireVertices(radius, width);
+    const shape = R.ColliderDesc.roundConvexHull(mesh.points, mesh.crown);
+    if (!shape) throw new Error("Invalid tire hull");
+    return shape;
+  }
+
   /** Build Hux at (x, z), facing +X, legs straight, wheels on the floor.
       Every joint starts at zero (legs hanging straight) and the controller bends it into stance. */
   function buildRobot(R, world, s, start) {
@@ -242,7 +261,7 @@
     const hipY = s.R + h + (start.lift || 0);
     const base = v(x0, 0, z0);
     function W(p) { return add(base, qRot(qYaw, p)); }
-    const robotGroups = groups(GROUP_ROBOT, 0xffff & ~GROUP_ROBOT);
+    const robotGroups = groups(GROUP_ROBOT, 0xffff);
 
     function body(pos, rot, mass, com, inertia) {
       const q = qMul(qYaw, rot || { x: 0, y: 0, z: 0, w: 1 });
@@ -256,7 +275,8 @@
     }
     function collide(cd, rb, mu) {
       cd.setDensity(0).setCollisionGroups(robotGroups).setFriction(mu === undefined ? 0.5 : mu)
-        .setFrictionCombineRule(R.CoefficientCombineRule.Min);
+        .setFrictionCombineRule(R.CoefficientCombineRule.Min)
+        .setActiveHooks(R.ActiveHooks.FILTER_CONTACT_PAIRS);
       return world.createCollider(cd, rb);
     }
 
@@ -277,7 +297,7 @@
       const d = sub(skidB, skidA);
       const ang = Math.atan2(d.x, -d.y);
       skid = { a: skidA, b: skidB, r: 0.008 };
-      collide(R.ColliderDesc.capsule(len(d) / 2, 0.008).setTranslation(mid.x, mid.y, 0)
+      skid.collider = collide(R.ColliderDesc.capsule(len(d) / 2, 0.008).setTranslation(mid.x, mid.y, 0)
         .setRotation(qAxis(Z, ang)), trunk);
     }
 
@@ -312,12 +332,10 @@
       const iAx = s.jWheel * s.mWheel * s.R * s.R;
       const iTr = s.mWheel * (3 * s.R * s.R + s.wheelW * s.wheelW) / 12;
       const wheel = body(wheelPos, null, s.mWheel, v(0, 0, 0), v(iTr, iTr, iAx));
-      /* Contact shape is a 6" sphere, drawn as a tire. Rapier's cylinder and round-cylinder
-         colliders gain speed while free-rolling on a flat (0.50 → 0.62 m/s in 3 s, sim-test.js);
-         a sphere rolls exactly and has the same profile in the direction of travel, so step and
-         nosing contacts match. Sideways it rocks on a 3" radius instead of a ~0.6" tire crown,
-         which makes one-wheel balance somewhat easier here than on the real tire. */
-      const wheelCol = collide(R.ColliderDesc.ball(s.R), wheel, 1.0);
+      /* Rounded convex disk: actual 6 x 1.25 inch bounds. The 256-sided core
+         avoids the analytic cylinder's large artificial acceleration in Rapier 0.20.
+         Numerical rolling error is tested separately; tire compliance is still absent. */
+      const wheelCol = collide(tireCollider(R, s.R, s.wheelW), wheel, s.knobs.mu);
       wheelCol.setFriction(s.knobs.mu);
 
       /* Chain: body → yoke (roll, X) → upper (swing, Z) → lower (knee, Z) → wheel (Z).
@@ -328,6 +346,9 @@
       const jHip = world.createImpulseJoint(R.JointData.revolute(v(0, 0, 0), v(0, 0, 0), Z), yoke, upper, true);
       const jKnee = world.createImpulseJoint(R.JointData.revolute(v(0, -s.L, 0), v(0, 0, 0), Z), upper, lower, true);
       const jWheel = world.createImpulseJoint(R.JointData.revolute(v(0, -s.L, dz), v(0, 0, 0), Z), lower, wheel, true);
+      jRoll.setLimits(SHARED.roll[0], SHARED.roll[1]);
+      jHip.setLimits(-SHARED.hip[1], -SHARED.hip[0]);
+      jKnee.setLimits(0, SHARED.knee[1]); // zero allowed at startup; servo avoids straight
       [jRoll, jHip, jKnee, jWheel].forEach(function (j) { j.setContactsEnabled(false); });
 
       parts.push({ kind: "yoke", rb: yoke, side: side, ixx: 2e-4 });
@@ -345,15 +366,27 @@
         }
       });
     });
-    return { s: s, trunk: trunk, trunkCol: trunkCol, legs: legs, parts: parts, skid: skid };
+    // Connected joint housings overlap by construction. All other robot pairs collide.
+    const adjacency = new Set();
+    function exclude(a, b) { adjacency.add([a.handle, b.handle].sort((x, y) => x - y).join(":")); }
+    legs.forEach(l => { exclude(trunk, l.yoke); exclude(trunk, l.upper);
+      exclude(l.yoke, l.upper); exclude(l.upper, l.lower); exclude(l.lower, l.wheel); });
+    const hooks = {
+      filterContactPair: function (a, b, ba, bb) {
+        return adjacency.has([ba, bb].sort((x, y) => x - y).join(":")) ? null : R.SolverFlags.COMPUTE_IMPULSE;
+      }, filterIntersectionPair: function () { return true; }
+    };
+    return { R: R, hooks: hooks, s: s, trunk: trunk, trunkCol: trunkCol, legs: legs, parts: parts, skid: skid };
   }
 
   /* ---------- sensing ---------- */
-  function rot(rb) { const r = rb.rotation(); return { x: r.x, y: r.y, z: r.z, w: r.w }; }
-  function tr(rb) { const t = rb.translation(); return v(t.x, t.y, t.z); }
-  function lv(rb) { const t = rb.linvel(); return v(t.x, t.y, t.z); }
-  function av(rb) { const t = rb.angvel(); return v(t.x, t.y, t.z); }
-
+  let sensed = null;
+  function read(rb, key, get) { const p = sensed && sensed.get(rb.handle); return p ? p[key] : get(); }
+  function rot(rb) { return read(rb, "q", () => rb.rotation()); }
+  function tr(rb) { return read(rb, "p", () => rb.translation()); }
+  function lv(rb) { return read(rb, "v", () => rb.linvel()); }
+  function av(rb) { return read(rb, "w", () => rb.angvel()); }
+  function wc(rb) { return read(rb, "c", () => rb.worldCom()); }
   /** Joint angle about the parent's local axis, and the relative rate about it. */
   function jointState(j) {
     const qp = rot(j.parent);
@@ -500,6 +533,11 @@
     this.parkT = 0;
     this.rollI = 0;
     this.out = {};
+    this.yawI = 0;
+    this.sensorHistory = [];
+    this.singleSupportSeconds = 0;
+    this.modeRequest = "TWO_WHEEL";
+    this.modeRejected = "";
   };
 
   /** Everything above the wheels: mass, CoM, velocity, pitch inertia about the CoM. */
@@ -512,8 +550,8 @@
     r.parts.forEach(function (p) {
       if (p.kind === "wheel") return;
       const mi = p.rb.mass();
-      const wc = p.rb.worldCom();
-      const pc = v(wc.x, wc.y, wc.z);
+      const center = wc(p.rb);
+      const pc = v(center.x, center.y, center.z);
       list.push({ m: mi, p: pc, rb: p.rb });
       m += mi;
       c = add(c, mul(pc, mi));
@@ -534,6 +572,7 @@
   };
 
   Controller.prototype.contacts = function (world) {
+    if (this.sensedContacts) return this.sensedContacts;
     const out = [];
     /* rapier3d-compat 0.20 reports the normal impulse inflated by (n + 1) / n for n solver
        iterations (checked against the robot's weight at n = 1, 4, 8 in sim-test.js). */
@@ -543,10 +582,12 @@
       let n = 0;
       let impulse = 0;
       world.contactPairsWith(leg.wheelCol, function (other) {
-        world.contactPair(leg.wheelCol, other, function (manifold) {
+        if ((other.collisionGroups() >>> 16) & GROUP_ROBOT) return;
+        world.contactPair(leg.wheelCol, other, function (manifold, flipped) {
+          const up = Math.max(0, manifold.normal().y * (flipped ? 1 : -1));
           const k = manifold.numContacts();
           for (let i = 0; i < k; i++) {
-            impulse += manifold.contactImpulse(i);
+            impulse += manifold.contactImpulse(i) * up;
             n++;
           }
         });
@@ -566,9 +607,26 @@
     const k = this.s.knobs;
     const every = Math.max(1, Math.round(k.rate / k.balanceRate));
     /* a mode request is an event: take it on whatever tick it arrives */
-    if (cmd.mode && cmd.mode !== this.mode && MODES.indexOf(cmd.mode) >= 0) this.setMode(cmd.mode);
+    if (cmd.mode && cmd.mode !== this.modeRequest && MODES.indexOf(cmd.mode) >= 0) this.setMode(cmd.mode);
     this.tick = (this.tick || 0) + 1;
-    if (!this.plan || this.tick % every === 0) this.plan = this.balance(world, cmd, dt * every);
+    if (!this.plan || this.tick % every === 0) {
+      const now = this.tick * dt;
+      const snapshot = new Map();
+      this.robot.parts.forEach(p => {
+        const b = p.rb;
+        snapshot.set(b.handle, { q: { ...b.rotation() }, p: { ...b.translation() },
+          v: { ...b.linvel() }, w: { ...b.angvel() }, c: { ...b.worldCom() } });
+      });
+      this.sensorHistory.push({ t: now, state: snapshot, contacts: this.contacts(world) });
+      const target = now - k.sensorDelayMs / 1000;
+      while (this.sensorHistory.length > 1 && this.sensorHistory[1].t <= target) this.sensorHistory.shift();
+      const sample = this.sensorHistory[0];
+      sensed = sample.state;
+      this.sensedContacts = sample.contacts;
+      try { this.plan = this.balance(world, cmd, dt * every); }
+      finally { sensed = null; this.sensedContacts = null; }
+      this.out.sensorAgeMs = (now - sample.t) * 1000;
+    }
     return this.servo(this.plan, dt);
   };
 
@@ -642,7 +700,7 @@
 
     /* Drive reference: rate-limited speed, position hold, lean feed-forward. */
     const parked = this.mode === "PARKED";
-    const vCmd = parked || this.one ? 0 : clamp(cmd.v || 0, -2.5, 2.5);
+    const vCmd = parked || this.one || this.modeRequest === "PARKED" ? 0 : clamp(cmd.v || 0, -2.5, 2.5);
     const aMax = 1.2;
     const dv = clamp(vCmd - this.vRef, -aMax * dt, aMax * dt);
     const aRef = dv / dt;
@@ -671,8 +729,12 @@
 
     /* Yaw: differential torque. */
     const yawRate = dot(wb, up);
-    const yawCmd = parked || this.one ? 0 : clamp(cmd.yaw || 0, -3, 3);
-    const tauYaw = 0.35 * (yawCmd - yawRate);
+    const yawCmd = parked || this.one || this.modeRequest === "PARKED" ? 0 : clamp(cmd.yaw || 0, -3, 3);
+    const yawError = yawCmd - yawRate;
+    const yawRoom = Math.max(0, k.tauWheel - Math.abs(tau) / 2);
+    this.yawI = !parked && !this.one && yawRoom > 0.1
+      ? clamp((this.yawI || 0) + 0.6 * yawError * dt, -0.5, 0.5) : 0;
+    const tauYaw = clamp(0.35 * yawError + this.yawI, -yawRoom, yawRoom);
 
     /* Height: rate limited, default is the ride height. Roll levelling: leg length difference. */
     const hCmd = clamp(cmd.height || s.hRide, s.hMin, s.hMax);
@@ -793,8 +855,37 @@
       }
     }
 
-    o.mode = this.mode;
-    o.phase = this.one ? this.one.phase : (parked ? (wheelsOff ? "parked" : "sitting") : "");
+    const support = contacts.map(c => c.force > s.totalKg * G * 0.05);
+    const clear = r.legs.map(leg => {
+      const axisY = qRot(rot(leg.wheel), Z).y;
+      const crown = s.wheelW / 2 - 0.001;
+      const depth = (s.R - crown) * Math.sqrt(Math.max(0, 1 - axisY * axisY)) + 0.001 * Math.abs(axisY) + crown;
+      const hit = world.castRay(new r.R.Ray(tr(leg.wheel), v(0, -1, 0)), 2, true, undefined, groups(GROUP_WORLD, GROUP_WORLD));
+      return hit ? hit.timeOfImpact - depth : Infinity;
+    });
+    const leftOnly = support[0] && contacts[1].force < s.totalKg * G * 0.02 && clear[1] > 0.01;
+    const rightOnly = support[1] && contacts[0].force < s.totalKg * G * 0.02 && clear[0] > 0.01;
+    const single = this.one && (this.one.mode === "LEFT_ONLY" ? leftOnly : rightOnly);
+    this.singleSupportSeconds = single ? this.singleSupportSeconds + dt : 0;
+    o.requestedMode = this.modeRequest;
+    o.modeRejected = this.modeRejected;
+    o.supportState = leftOnly ? "LEFT_SUPPORT" : rightOnly ? "RIGHT_SUPPORT" : support.every(Boolean) ? "TWO_CONTACT" : "TRANSITION";
+    o.clearance = clear;
+    o.singleSupportSeconds = this.singleSupportSeconds;
+    o.singleSupportValidated = this.singleSupportSeconds >= 1.55;
+    let restImpulse = 0;
+    if (parked && r.skid) world.contactPairsWith(r.skid.collider, other => {
+      if ((other.collisionGroups() >>> 16) & GROUP_ROBOT) return;
+      world.contactPair(r.skid.collider, other, (manifold, flipped) => {
+        const upward = Math.max(0, manifold.normal().y * (flipped ? 1 : -1));
+        for (let i = 0; i < manifold.numContacts(); i++) restImpulse += upward * manifold.contactImpulse(i);
+      });
+    });
+    const restForce = restImpulse / (world.timestep * (world.numSolverIterations + 1) / world.numSolverIterations);
+    const resting = parked && wheelsOff && restForce > s.totalKg * G * 0.1 && len(lv(r.trunk)) < 0.1 && len(av(r.trunk)) < 0.2;
+    o.restSupportN = restForce;
+    o.mode = resting ? "PARKED" : leftOnly ? "LEFT_ONLY" : rightOnly ? "RIGHT_ONLY" : "TWO_WHEEL";
+    o.phase = this.one ? this.one.phase : (parked ? (resting ? "parked" : "sitting") : "");
     o.fallen = this.fallen;
     o.estop = this.estop;
     o.theta = theta;
@@ -904,10 +995,14 @@
       else if (plan.brakeLeg === i) tw[i] = -0.05 * w;
       else if (tw[i] * w > 0) cap = lim * clamp(1 - Math.abs(w) / k.wheelNoLoad, 0, 1);
       if (Math.abs(tw[i]) > cap + 1e-6) sat.wheel = true;
-      const t = clamp(tw[i], -cap, cap);
+      const asked = clamp(tw[i], -cap, cap);
+      const alpha = k.torqueLagMs > 0 ? 1 - Math.exp(-dt / (k.torqueLagMs / 1000)) : 1;
+      let t = clamp((leg.wheelTorque || 0) + alpha * (asked - (leg.wheelTorque || 0)), -cap, cap);
+      if (this.estop || this.fallen) t = 0;
+      leg.wheelTorque = t;
       applyJointTorque(leg.joints.wheel, -t, js.axisW);
       wheelOut.push({ tau: t, cap: cap, w: w, power: t * w });
-    });
+    }, this);
 
     /* Legs: a virtual spring-damper along the hip-to-axle line (the suspension), a stiff hold on
        the leg angle, mapped to hip and knee torque through the leg Jacobian. This needs
@@ -939,10 +1034,14 @@
       const row = { d: p.d, dd: p.dd, dWant: lp.h, F: F, b: p.b, bd: p.bd };
       ["roll", "hip", "knee"].forEach(function (name) {
         let t = cmdT[name];
-        const cap = caps[name];
+        const cap = caps[name] * (t * js[name].rate > 0 ? clamp(1 - Math.abs(js[name].rate) / k.jointNoLoad, 0, 1) : 1);
         if (Math.abs(t) > cap) sat[name] = true;
-        t = clamp(t, -cap, cap);
+        const alpha = k.torqueLagMs > 0 ? 1 - Math.exp(-dt / (k.torqueLagMs / 1000)) : 1;
+        leg.driveTorque = leg.driveTorque || {};
+        const old = leg.driveTorque[name] || 0;
+        t = clamp(old + alpha * (clamp(t, -cap, cap) - old), -cap, cap);
         if (limp) t = 0;
+        leg.driveTorque[name] = t;
         applyJointTorque(leg.joints[name], t, js[name].axisW);
         row[name] = { tau: t, cap: cap, q: js[name].q, want: want[name], power: t * js[name].rate };
       });
@@ -960,6 +1059,17 @@
   Controller.prototype.setMode = function (m) {
     const r = this.robot;
     if (this.fallen) return;
+    this.modeRequest = m;
+    this.modeRejected = "";
+    if (m === "PARKED" && !r.skid) {
+      this.modeRejected = "Parking requires a rest support. Stopping under active balance.";
+      this.vRef = 0;
+      return;
+    }
+    if ((m === "LEFT_ONLY" || m === "RIGHT_ONLY") && this.mode === "PARKED") {
+      this.modeRejected = "Return to two-wheel balance before requesting single support.";
+      return;
+    }
     if (m === "LEFT_ONLY" || m === "RIGHT_ONLY") {
       if (this.one) return;
       const planted = m === "LEFT_ONLY" ? r.legs[0] : r.legs[1];
@@ -992,20 +1102,20 @@
   Controller.prototype.lateralModel = function (st, right) {
     const s = this.s;
     const r = this.robot;
-    const wc = tr(st.planted.wheel);
+    const wheelCenter = tr(st.planted.wheel);
     const hip = tr(st.planted.yoke);
     function proj(p, o) { const d = sub(p, o); return { z: dot(d, right), y: d.y }; }
     const byRb = new Map();
     r.parts.forEach(function (p) { byRb.set(p.rb, p); });
     const link1 = [st.planted.wheel, st.planted.lower, st.planted.upper, st.planted.yoke];
     const link2 = [r.trunk, st.free.yoke, st.free.upper, st.free.lower, st.free.wheel];
-    const rh = proj(hip, wc);
+    const rh = proj(hip, wheelCenter);
     const M = [[0, 0], [0, 0]];
     const H = [[0, 0], [0, 0]];
     const gV = [0, 0];
     link1.forEach(function (rb) {
       const m = rb.mass();
-      const c = proj(v(rb.worldCom().x, rb.worldCom().y, rb.worldCom().z), wc);
+      const c = proj(wc(rb), wheelCenter);
       const jz = s.R + c.y;
       const jy = -c.z;
       M[0][0] += m * (jz * jz + jy * jy) + byRb.get(rb).ixx;
@@ -1014,7 +1124,7 @@
     });
     link2.forEach(function (rb) {
       const m = rb.mass();
-      const c = proj(v(rb.worldCom().x, rb.worldCom().y, rb.worldCom().z), hip);
+      const c = proj(wc(rb), hip);
       const I = byRb.get(rb).ixx;
       const j1 = [s.R + rh.y + c.y, -rh.z - c.z];
       const j2 = [c.y, -c.z];
@@ -1140,7 +1250,7 @@
       shiftToward(side * 0.01, 0.1);
       const ready = freeLoad < 1.5 * own && Math.abs(ev) < 0.02;
       st.hold = ready ? st.hold + dt : 0;
-      if (st.hold > 0.1 || st.t > 4) {
+      if (st.hold > 0.1) {
         st.phase = "unload";
         st.t = 0;
         st.tauHold = lo ? lo[iP].roll.tau : 0;
@@ -1148,6 +1258,9 @@
         st.e0 = e;
         st.eq = null;
         st.K = null;
+      } else if (st.t > 4) {
+        st.phase = "unshift"; st.t = 0; st.next = "TWO_WHEEL";
+        this.modeRejected = "Single-support request aborted: load transfer did not settle.";
       }
     } else if (st.phase === "unload") {
       carry(minJerk(st.t / ONE.unload));
@@ -1202,7 +1315,7 @@
          - once it is off the floor, hold the mass where it was at that moment. */
       st.fl = st.fl === undefined ? freeLoad : st.fl + (freeLoad - st.fl) * Math.min(1, dt / 0.05);
       const excess = clamp((st.fl - 0.7 * own) / weight, -0.1, 0.1);
-      const airborne = freeLoad < own && st.phase !== "unload";
+      const airborne = contacts[iF].n === 0 && freeLoad < 0.02 * mt * G && st.phase !== "unload";
       if (airborne && st.eAir === undefined) st.eAir = e;
       if (!airborne && st.phase !== "hold") st.eAir = undefined;
       let rate = 0;
@@ -1212,7 +1325,10 @@
       const q1ref = st.eq.q1 + st.trim;
       const x = [q1 - q1ref, q1d, q2 - st.eq.q2, q2d];
       let u = st.eq.u;
-      for (let i = 0; i < 4; i++) u -= st.K[i] * x[i];
+      if (!st.K) {
+        st.phase = "catch"; st.t = 0; st.caught = true;
+        this.modeRejected = "Single-support controller has no converged gains; returning the wheel.";
+      } else for (let i = 0; i < 4; i++) u -= st.K[i] * x[i];
       tauP = -u; /* joint torque on the yoke is minus the torque on the body */
     }
 
@@ -1309,9 +1425,13 @@
     world.numSolverIterations = 8;
     this.world = world;
     this.scenery = buildWorld(R, world, this.M);
+    if (this.opts.floorOnly) {
+      this.scenery.filter(o => o.kind !== "floor").forEach(o => world.removeRigidBody(o.body));
+      this.scenery = this.scenery.filter(o => o.kind === "floor");
+    }
     const at = this.opts.start || {};
     this.robot = buildRobot(R, world, this.s, { x: at.x || 0, z: at.z || 0, yaw: at.yaw || 0, lift: 0.001 });
-    world.step(); /* settles mass properties before the first control tick */
+    world.step(undefined, this.robot.hooks); /* settles mass properties before the first control tick */
     this.ctrl = new Controller(this.robot);
     this.t = 0;
     this.last = {};
@@ -1319,7 +1439,7 @@
 
   /** Actuator limits can change live; geometry and mass rebuild the robot. */
   Sim.prototype.setKnobs = function (knobs) {
-    const live = ["tauWheel", "wheelNoLoad", "tauKnee", "tauHip", "tauRoll", "ride", "legHz", "legZeta", "reflex", "legCatch", "oneLift"];
+    const live = ["tauWheel", "wheelNoLoad", "tauKnee", "tauHip", "tauRoll", "ride", "legHz", "legZeta", "reflex", "legCatch", "oneLift", "jointNoLoad", "torqueLagMs", "sensorDelayMs"];
     const s = this.s;
     let rebuild = false;
     Object.keys(knobs).forEach(function (key) {
@@ -1339,7 +1459,7 @@
     const dt = this.world.timestep;
     this.robot.parts.forEach(function (p) { p.rb.resetTorques(false); });
     this.last = this.ctrl.update(this.world, cmd || {}, dt);
-    this.world.step();
+    this.world.step(undefined, this.robot.hooks);
     this.t += dt;
     return this.last;
   };
@@ -1350,6 +1470,8 @@
   };
 
   const api = {
+    tireCollider: tireCollider,
+    tireVertices: tireVertices,
     KNOBS: KNOBS,
     RX: RX,
     LAT_TRIM: LAT_TRIM,

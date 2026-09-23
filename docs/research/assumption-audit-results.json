@@ -1,0 +1,255 @@
+{
+  "scope": "Analytical cross-checks of unmeasured design assumptions; not physical validation. Model failures are data, not process exit failures.",
+  "inputs": {
+    "massKg": 6,
+    "linkIn": 7.5,
+    "wheelOdIn": 6,
+    "trackIn": 12.75,
+    "riseIn": 9.5,
+    "goingIn": 9.5
+  },
+  "independentMath": {
+    "cases": 20,
+    "maxIkErrorIn": 3.79429987e-15,
+    "maxTorqueErrorNm": 5.15811394e-10
+  },
+  "geometry": {
+    "fullHeightIn": 24,
+    "stanceHipIn": 16.8,
+    "stanceKneeOffsetIn": 2.93938769,
+    "stanceComIn": {
+      "x": -0.244948974,
+      "y": 16.415,
+      "kg": 6
+    },
+    "directSwingReachIn": 10.4278473,
+    "unusedPlanarReachIn": 4.57215267,
+    "generousSpatialReachBoundIn": 15.975,
+    "maxDrawnSpatialReach": {
+      "requiredIn": 16.4421859,
+      "timeS": 3.288703,
+      "fraction": 0.583,
+      "phase": "Shove off the rear wheel",
+      "side": "left",
+      "dxIn": 5.71783052,
+      "dyIn": 13.5509923,
+      "dzIn": 7.35
+    },
+    "framesOutsideReach": 35,
+    "sampledFrames": 2001
+  },
+  "loads": {
+    "centerlineTippingMomentNm": 9.5309055,
+    "bodyOnlyHipRollMomentUprightNm": 5.3821584,
+    "oneLegPointLoadKneeNm": 4.39451393,
+    "twoLegPointLoadKneeNm": 2.19725697,
+    "stairKneeStaticNm": 10.5583963,
+    "stairKneeDynamicNm": 19.1238904,
+    "stairHipDynamicNm": 6.73614503,
+    "stairWheelNm": 4.02945755,
+    "wheelOverCapSamplesAwayFromSeams": 2,
+    "oneRiserPotentialEnergyJ": 14.202918,
+    "drop25mmStoppedOver5mmAverageNormalN": 353.16
+  },
+  "balance": {
+    "assumedComHeightM": 0.416941,
+    "pointPendulumOmega": 4.85061943,
+    "unstableModeDoublingSec": 0.142898694,
+    "captureVelocityWithCenteredComMps": 0.215610034,
+    "positionOnlyLeanAtSlotEdgeDeg": 6.08530703,
+    "frictionRequiredFor3NmAtFullWeight": 0.668876635,
+    "frictionRequiredFor3NmAtHalfWeight": 1.33775327,
+    "frictionTorqueNm": [
+      {
+        "mu": 0.15,
+        "oneWheel": 0.6727698,
+        "halfLoadWheel": 0.3363849
+      },
+      {
+        "mu": 0.3,
+        "oneWheel": 1.3455396,
+        "halfLoadWheel": 0.6727698
+      },
+      {
+        "mu": 0.5,
+        "oneWheel": 2.242566,
+        "halfLoadWheel": 1.121283
+      },
+      {
+        "mu": 0.7,
+        "oneWheel": 3.1395924,
+        "halfLoadWheel": 1.5697962
+      }
+    ],
+    "wheelRpm": [
+      {
+        "speedMps": 0.5,
+        "rpm": 62.6594264
+      },
+      {
+        "speedMps": 1.5,
+        "rpm": 187.978279
+      },
+      {
+        "speedMps": 3,
+        "rpm": 375.956558
+      }
+    ],
+    "sideSwayCubicPeakAccelerationMps2": 2.68941176,
+    "optimisticStaticLateralContactToleranceIn": 0.625
+  },
+  "joints": {
+    "aTh": {
+      "minDeg": 13.2128074,
+      "maxDeg": 109.1113,
+      "maxDegPerSec": 735.372954,
+      "awayFromSeamsDegPerSec": 536.115578
+    },
+    "aPh": {
+      "minDeg": 22.1938538,
+      "maxDeg": 145.72072,
+      "maxDegPerSec": 1177.88963,
+      "awayFromSeamsDegPerSec": 710.523501
+    },
+    "bTh": {
+      "minDeg": -31.3840709,
+      "maxDeg": 93.3080131,
+      "maxDegPerSec": 454.633041,
+      "awayFromSeamsDegPerSec": 454.633041
+    },
+    "bPh": {
+      "minDeg": 46.0881632,
+      "maxDeg": 162.359703,
+      "maxDegPerSec": 311.216769,
+      "awayFromSeamsDegPerSec": 311.216769
+    }
+  },
+  "tubes": [
+    {
+      "odMm": 16,
+      "idMm": 12,
+      "assumedEMpa": 100000,
+      "secondMomentM4": 2.19911486e-9,
+      "cantileverTipMassHz": 89.7638803,
+      "nominalBendingStressAt10NmMpa": 36.3782727
+    },
+    {
+      "odMm": 16,
+      "idMm": 14,
+      "assumedEMpa": 100000,
+      "secondMomentM4": 1.33124989e-9,
+      "cantileverTipMassHz": 69.8405183,
+      "nominalBendingStressAt10NmMpa": 60.0939018
+    }
+  ],
+  "sensitivity": [
+    {
+      "name": "baseline",
+      "reducedModelFailure": null,
+      "behindIn": 2.70860721,
+      "momentumWindow": 0.0856178105,
+      "kneeStaticNm": 10.5583963,
+      "kneeDynamicNm": 19.1238904,
+      "wheelNm": 4.02945755,
+      "pushConeFailures": 0
+    },
+    {
+      "name": "mass 4 kg",
+      "reducedModelFailure": null,
+      "behindIn": 2.70860721,
+      "momentumWindow": 0.0577747095,
+      "kneeStaticNm": 7.03905698,
+      "kneeDynamicNm": 12.8490689,
+      "wheelNm": 2.68224663,
+      "pushConeFailures": 0
+    },
+    {
+      "name": "mass 8 kg",
+      "reducedModelFailure": null,
+      "behindIn": 2.70860721,
+      "momentumWindow": 0.103357089,
+      "kneeStaticNm": 14.0775862,
+      "kneeDynamicNm": 24.2951244,
+      "wheelNm": 5.19167323,
+      "pushConeFailures": 0
+    },
+    {
+      "name": "mu 0.3",
+      "reducedModelFailure": null,
+      "behindIn": 2.70860721,
+      "momentumWindow": 0.0625542775,
+      "kneeStaticNm": 10.5586652,
+      "kneeDynamicNm": 15.9085227,
+      "wheelNm": 3.58558761,
+      "pushConeFailures": 0
+    },
+    {
+      "name": "mu 0.5",
+      "reducedModelFailure": null,
+      "behindIn": 2.70860721,
+      "momentumWindow": 0.0734875195,
+      "kneeStaticNm": 10.5580491,
+      "kneeDynamicNm": 18.1413418,
+      "wheelNm": 3.89767758,
+      "pushConeFailures": 0
+    },
+    {
+      "name": "body +1 inch, unchanged timing",
+      "reducedModelFailure": "overshoot",
+      "behindIn": 2.04194055,
+      "momentumWindow": 0.150082467,
+      "kneeStaticNm": 10.553654,
+      "kneeDynamicNm": 20.1184376,
+      "wheelNm": 3.35994301,
+      "pushConeFailures": 0
+    },
+    {
+      "name": "body +2 inches, unchanged timing",
+      "reducedModelFailure": "overshoot",
+      "behindIn": 1.37527388,
+      "momentumWindow": 0.157826388,
+      "kneeStaticNm": 10.5586839,
+      "kneeDynamicNm": 36.9650201,
+      "wheelNm": 6.75859742,
+      "pushConeFailures": 0
+    },
+    {
+      "name": "landing +0.5 inch",
+      "reducedModelFailure": "reversed",
+      "behindIn": 3.15381303,
+      "momentumWindow": 0.0544360473,
+      "kneeStaticNm": 10.5587129,
+      "kneeDynamicNm": 40.6150251,
+      "wheelNm": 10.5695327,
+      "pushConeFailures": 2
+    },
+    {
+      "name": "landing -0.75 inch",
+      "reducedModelFailure": "overshoot",
+      "behindIn": 2.03790428,
+      "momentumWindow": 0.239588985,
+      "kneeStaticNm": 10.5476003,
+      "kneeDynamicNm": 14.7639554,
+      "wheelNm": 3.18871993,
+      "pushConeFailures": 0
+    }
+  ],
+  "designChecks": [
+    {
+      "name": "Combined drawings inside generous spatial reach bound",
+      "pass": false
+    },
+    {
+      "name": "Reported stair wheel peak within 3 Nm target",
+      "pass": false
+    },
+    {
+      "name": "Reported stair knee peak within 12 Nm sandbox cap",
+      "pass": false
+    },
+    {
+      "name": "Drawn knee fold stays below sandbox 2.7 rad soft stop",
+      "pass": false
+    }
+  ]
+}
