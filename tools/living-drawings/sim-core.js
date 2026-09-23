@@ -19,6 +19,12 @@
     tauHip: 12,        /* N·m peak, hip swing */
     tauRoll: 15,       /* N·m peak; GIM8108-class yardstick is 7.5 nominal / 22 stall */
     skid: false,       /* proposal: rear parking skid on the body centreline. Not in the docs. */
+    ride: 0.75,        /* default ride height, hip to axle as a fraction of the full leg (medium) */
+    legHz: 3.5,        /* Hz, virtual leg spring: bounce frequency of the body on its legs */
+    legZeta: 0.6,      /* damping ratio of that spring */
+    reflex: true,      /* lift a leg that takes a sharp hit (impact reflex) */
+    legCatch: true,    /* swing the legs under a stumble (capture-point catch) */
+    oneLift: false,    /* experimental: from the one-wheel poise, try to lift the free wheel clear */
     rate: 2000,        /* Hz, physics and joint servo loops (servo drives close position at kHz) */
     balanceRate: 500   /* Hz, balance / drive loop on the flight controller */
   };
@@ -102,7 +108,8 @@
     };
     s.hMax = 2 * s.L * 0.98;
     s.hMin = 2 * s.L * 0.55;
-    s.hStance = 2 * s.L * M.stanceFraction;
+    s.hStance = 2 * s.L * M.stanceFraction; /* the drawings' 92% balance stance */
+    s.hRide = 2 * s.L * clamp(k.ride, 0.55, 0.98);
     s.totalKg = s.mBody + 2 * (s.mYoke + s.mKnee + 2 * s.mTube + s.mWheel);
     return s;
   }
@@ -115,6 +122,25 @@
     const th = Math.acos(d / (2 * s.L));
     const beta = Math.atan2(dx, -dy);
     return { qh: beta - th, qk: 2 * th };
+  }
+
+  /** The same leg seen as a telescope: length d hip to axle, angle b from straight down in the
+      yoke frame (+ foot forward), and their rates. The knee angle alone sets the length. */
+  function legPolar(s, qh, qk, rh, rk) {
+    const half = qk / 2;
+    return {
+      d: 2 * s.L * Math.cos(half),
+      dd: -s.L * Math.sin(half) * rk,
+      b: qh + half,
+      bd: rh + rk / 2,
+      lever: -s.L * Math.sin(half) /* ∂d/∂qk: knee torque per newton of leg force */
+    };
+  }
+
+  /** Smooth 0 → 1 over u in [0, 1] (minimum jerk). */
+  function minJerk(u) {
+    const x = clamp(u, 0, 1);
+    return x * x * x * (10 - 15 * x + 6 * x * x);
   }
 
   /* ---------- world ---------- */
@@ -440,11 +466,15 @@
   /* LQR weights: position 0.5 m, speed 0.7 m/s, lean 0.09 rad, lean rate 0.7 rad/s, torque 1 N·m. */
   const LQR_Q = [4, 2, 120, 2];
   const LQR_R = 1.0;
-  /* Sideways (one wheel): leg roll 0.07 rad, its rate 1 rad/s, body-to-leg 0.45 rad, rate 3 rad/s, torque 2.2 N·m. */
-  let LAT_Q = [200, 1, 5, 0.1];
-  let LAT_R = 0.2;
-  let KI_LAT = 4.0;
+  /* Sideways (one wheel): leg roll 0.1 rad, its rate 0.7 rad/s, body-to-leg 0.1 rad, its rate 0.7 rad/s,
+     torque 0.35 N·m. Swept 2026-09-23: the old weights (body-to-leg 0.45 rad, torque 2.2 N·m) let the
+     body roll off the leg and chattered the hip roll against its limit. */
+  let LAT_Q = [100, 2, 100, 2];
+  let LAT_R = 8;
+  /* trim rates: rad/s per unit of free-wheel load over weight, rad/s per metre of mass offset */
+  const LAT_TRIM = { load: 4, e: 6 };
   const MODES = ["PARKED", "TWO_WHEEL", "LEFT_ONLY", "RIGHT_ONLY"];
+  const ONE_WHEEL = ["unload", "lift", "hold", "lower", "catch"];
 
   function Controller(robot) {
     this.robot = robot;
@@ -545,6 +575,7 @@
   /** Flight-controller loop: attitude, CoM lean, LQR wheel torque, leg targets. */
   Controller.prototype.balance = function (world, cmd, dt) {
     const s = this.s;
+    const k = s.knobs;
     const r = this.robot;
     const o = this.out;
 
@@ -571,7 +602,7 @@
     const leftLeg = r.legs[0];
     const rightLeg = r.legs[1];
     let balanceOn = [leftLeg, rightLeg];
-    if (this.one && this.one.phase !== "shift" && this.one.phase !== "unshift") balanceOn = [this.one.planted];
+    if (this.one && ONE_WHEEL.indexOf(this.one.phase) >= 0) balanceOn = [this.one.planted];
 
     /* Axle point and velocity. */
     let a = v(0, 0, 0);
@@ -618,8 +649,15 @@
     this.vRef += dv;
     /* Stall guard: never ask for more than 0.35 m/s beyond what the wheels are doing, so a
        wheel stopped against a curb does not wind the lean up until the robot falls. */
-    if (vCmd > 0.05 && this.vRef > vFwd + 0.35) this.vRef = Math.max(0, vFwd + 0.35);
-    if (vCmd < -0.05 && this.vRef < vFwd - 0.35) this.vRef = Math.min(0, vFwd - 0.35);
+    let guard = false;
+    if (vCmd > 0.05 && this.vRef > vFwd + 0.35) { this.vRef = Math.max(0, vFwd + 0.35); guard = true; }
+    if (vCmd < -0.05 && this.vRef < vFwd - 0.35) { this.vRef = Math.min(0, vFwd - 0.35); guard = true; }
+    /* A stall is speed that collapsed after it had been tracking the reference. Pulling away
+       does not count: the wheels roll back first to tip the mass forward. */
+    const tracking = Math.abs(this.vRef) > 0.15 && vFwd * this.vRef > 0.6 * this.vRef * this.vRef;
+    this.sinceMoving = tracking ? 0 : (this.sinceMoving || 0) + dt;
+    const stalled = Math.abs(this.vRef) > 0.15 && Math.abs(vFwd) < 0.1 && this.sinceMoving < 0.3;
+    this.stallT = stalled || (guard && Math.abs(vFwd) < 0.1) ? (this.stallT || 0) + dt : 0;
     this.xRef += this.vRef * dt;
     const xErr = clamp(this.xs - this.xRef, -0.25, 0.25);
     this.xRef = this.xs - xErr;
@@ -636,33 +674,99 @@
     const yawCmd = parked || this.one ? 0 : clamp(cmd.yaw || 0, -3, 3);
     const tauYaw = 0.35 * (yawCmd - yawRate);
 
-    /* Height: rate limited. Roll levelling: leg length difference. */
-    const hCmd = clamp(cmd.height || s.hStance, s.hMin, s.hMax);
-    const hTarget = parked ? s.hMin : hCmd;
-    this.h += clamp(hTarget - this.h, -0.25 * dt, 0.25 * dt);
+    /* Height: rate limited, default is the ride height. Roll levelling: leg length difference. */
+    const hCmd = clamp(cmd.height || s.hRide, s.hMin, s.hMax);
+    /* one wheel is planned at the tall stance: longer legs reach further sideways per degree of
+       hip roll, so the mass gets over the planted tire without running out of roll */
+    const hTarget = parked ? s.hMin : this.one ? Math.max(hCmd, s.hStance) : hCmd;
+    const hRate = clamp(hTarget - this.h, -0.25 * dt, 0.25 * dt);
+    this.h += hRate;
     const rollRate = dot(wb, fwd);
     let dh = 0;
-    const levelling = !parked && (!this.one || this.one.phase === "shift" || this.one.phase === "unshift");
+    const levelling = !parked && (!this.one || ONE_WHEEL.indexOf(this.one.phase) < 0);
     if (levelling) {
       /* Integral only: one metre of leg difference tilts the body ~6 rad, so any real
-         proportional gain here fights the leg servos. ~0.2 s time constant. */
+         proportional gain here fights the leg springs. ~0.2 s time constant. */
       this.rollI = clamp(this.rollI + (0.8 * roll + 0.02 * rollRate) * dt, -0.06, 0.06);
-    } else {
+    } else if (!this.one) {
       this.rollI *= 0.99;
-    }
+    } /* on one wheel the levelling freezes: unwinding it would change both leg lengths at once */
     dh = this.rollI;
     const shift = clamp(cmd.shift || 0, -0.6, 0.6);
-    let legs = [{ h: this.h - dh, roll: shift }, { h: this.h + dh, roll: shift }];
     if (!this.one) this.shift = shift;
+
+    /* Suspension. Each leg is a spring-damper tuned for legHz with its share of the mass on it,
+       plus a gravity feed-forward from where the mass sits between the wheels, so it rides at
+       the commanded height instead of sagging. Active roll damping pushes harder on the side
+       that is going down. */
+    const zc = [dot(sub(um.c, tr(leftLeg.wheel)), right), dot(sub(um.c, tr(rightLeg.wheel)), right)];
+    const span = zc[0] - zc[1] || 1e-3;
+    const shareR = clamp(zc[0] / span, 0.05, 0.95);
+    const wn = 2 * Math.PI * k.legHz;
+    const legs = [0, 1].map(function (i) {
+      const sh = i === 1 ? shareR : 1 - shareR;
+      const ms = Math.max(0.5, um.m * 0.5);
+      const kk = ms * wn * wn;
+      return {
+        h: this.h + (i === 1 ? dh : -dh),
+        hd: hRate / dt,
+        ff: um.m * G * sh + (i === 1 ? 1 : -1) * 15 * rollRate,
+        k: kk,
+        c: 2 * k.legZeta * Math.sqrt(kk * ms),
+        beta: 0,
+        kb: 120,
+        cb: 1.5,
+        roll: shift
+      };
+    }, this);
+
+    /* Stumble catch: when the capture point (where the mass would come to rest over) runs
+       ahead of or behind the axle by more than the wheels can fix, swing both legs to put the
+       axles under it. Fast in, slow out, so the wheel loop has time to take over. */
+    const w0 = Math.sqrt(G / Math.max(0.1, l));
+    const xi = relF + dot(relV, fwd) / w0 - l * Math.sin(thRef);
+    let bWant = 0;
+    if (k.legCatch && !parked && !this.one && !this.fallen) {
+      const dead = 0.03;
+      const over = Math.abs(xi) > dead ? xi - Math.sign(xi) * dead : 0;
+      bWant = clamp(1.2 * over / Math.max(0.1, this.h), -0.4, 0.4);
+    }
+    const bRate = Math.abs(bWant) > Math.abs(this.catchB || 0) ? 12 : 1.2;
+    this.catchB = (this.catchB || 0) + clamp(bWant - (this.catchB || 0), -bRate * dt, bRate * dt);
+    legs.forEach(function (lg) { lg.beta = this.catchB; }, this);
+
+    /* Sideways, two wheels are a static base until the mass heads past a tire. Then both hip
+       rolls step the wheels out under it (+ hip roll moves the wheels left) and the leg on the
+       side it is falling toward pushes long, which rolls the body back. */
+    const mid = mul(add(tr(leftLeg.wheel), tr(rightLeg.wheel)), 0.5);
+    const zMid = dot(sub(um.c, mid), right);
+    const vz = dot(sub(um.cv, mul(add(lv(leftLeg.wheel), lv(rightLeg.wheel)), 0.5)), right);
+    const xiZ = zMid + vz / w0;
+    const halfT = s.wheelLat;
+    let gWant = 0;
+    if (k.legCatch && !parked && !this.one && !this.fallen) {
+      const edge = 0.35 * halfT;
+      const over = Math.abs(xiZ) > edge ? xiZ - Math.sign(xiZ) * edge : 0;
+      gWant = clamp(-6 * over, -0.45, 0.45);
+    }
+    const gRate = Math.abs(gWant) > Math.abs(this.catchG || 0) ? 6 : 0.8;
+    this.catchG = (this.catchG || 0) + clamp(gWant - (this.catchG || 0), -gRate * dt, gRate * dt);
+    if (this.catchG) {
+      const push = clamp(Math.abs(this.catchG) / 0.35, 0, 1) * 0.04;
+      const low = this.catchG < 0 ? 1 : 0; /* wheels going right: the mass is falling right */
+      legs.forEach(function (lg, i) {
+        lg.roll += this.catchG;
+        if (i === low) lg.h += push;
+      }, this);
+    }
+
+    /* Impact reflex and stall hop: a leg that is hit hard, or a wheel stopped dead by an edge,
+       hops its wheel up for a moment so it rides over instead of stopping. */
+    this.reflex(legs, dt);
 
     /* One-leg modes (experimental). */
     if (this.one) {
-      const res = this.oneLeg(um, fwd, right, dt, cmd, contacts);
-      legs = res.legs;
-      if (res.level) {
-        legs[0].h -= dh;
-        legs[1].h += dh;
-      }
+      const res = this.oneLeg(um, fwd, right, dt, cmd, contacts, legs);
       if (res.done) this.one = null;
     }
 
@@ -697,6 +801,7 @@
     o.thetaDot = thetaDot;
     o.pitch = pitch;
     o.roll = roll;
+    o.rollRate = rollRate;
     o.speed = vFwd;
     o.vRef = this.vRef;
     o.yawRate = yawRate;
@@ -709,14 +814,65 @@
     o.contacts = contacts;
     o.fwd = fwd;
     o.oneErr = this.one ? this.one.e : 0;
-    o.oneLift = this.one ? this.one.lift : 0;
+    o.oneLoad = this.one ? this.one.freeLoad : 0;
+    o.caught = this.caught || 0;
+    o.catchB = this.catchB || 0;
+    o.reflex = this.rx ? this.rx.map(function (x) { return { f: x.f || 0, hits: x.hits || 0, comp: x.comp || 0 }; }) : [];
     return {
       tw: tw,
       brake: parked && wheelsOff && !this.estop,
+      brakeLeg: this.one && this.one.brakeFree ? (this.one.planted === leftLeg ? 1 : 0) : -1,
       yawShare: nW === 2 && !wheelsOff ? tauYaw : 0,
       tauBal: tau,
       legs: legs
     };
+  };
+
+  /* Impact reflex timing, s, and how far it pulls the wheel up, m. */
+  const RX = { rise: 0.05, hold: 0.07, back: 0.3, cool: 0.6, lift: 0.045, trip: 0.35, stall: 0.02, pull: 15 };
+
+  /** Impact reflex and stall hop, on the balance loop. Sensing is encoders only.
+      Reflex: a loaded leg that shortens faster than it was told to (RX.trip m/s) took a hit.
+      That is only separable from normal driving at speed (~0.75 m/s and up on a 1" edge).
+      Stall hop: slower than that an edge just stops the wheel. Asked to go, wheels stopped for
+      RX.stall s: hop the loaded legs whose wheel is stopped, so the tire lands on top of the edge. */
+  Controller.prototype.reflex = function (legs, dt) {
+    const k = this.s.knobs;
+    const lo = this.out.legs;
+    if (!this.rx) this.rx = [{ t: 9, cool: 0 }, { t: 9, cool: 0 }];
+    const self = this;
+    legs.forEach(function (lg, i) {
+      const st = self.rx[i];
+      st.t += dt;
+      st.cool -= dt;
+      const comp = lo ? -(lo[i].dd - lg.hd) : 0;
+      st.comp = comp;
+      const loaded = lo && lo[i].F > 0.3 * self.s.totalKg * G * 0.5;
+      const wo = self.out.wheels;
+      const stuck = loaded && wo && Math.abs(wo[i].w * self.s.R) < 0.1 && (self.stallT || 0) > RX.stall;
+      const air = self.one && self.one.free === self.robot.legs[i] && self.one.phase !== "shift";
+      if (k.reflex && !air && !self.fallen && self.mode !== "PARKED" && st.cool <= 0 && ((loaded && comp > RX.trip && Math.abs(self.out.speed || 0) > 0.4) || stuck)) {
+        st.t = 0;
+        st.cool = RX.cool;
+        st.hits = (st.hits || 0) + 1;
+      }
+      let f = 0;
+      if (st.t < RX.rise) f = minJerk(st.t / RX.rise);
+      else if (st.t < RX.rise + RX.hold) f = 1;
+      else if (st.t < RX.rise + RX.hold + RX.back) f = 1 - minJerk((st.t - RX.rise - RX.hold) / RX.back);
+      st.f = f;
+      if (f > 0) {
+        /* A hop, not a flinch: a wheel wedged on an edge only comes up if the leg pulls it up
+           (negative leg force) for a few tens of ms, with the body briefly unsupported. Then the
+           spring comes back and catches the body. */
+        const pull = st.t < RX.rise + RX.hold ? 1 : f;
+        lg.h -= RX.lift * f;
+        lg.hd = 0;
+        lg.ff = lg.ff * (1 - pull) - RX.pull * pull;
+        lg.k = lg.k * (1 - pull) + 1500 * pull;
+        lg.c = lg.c * (1 - pull) + 25 * pull;
+      }
+    });
   };
 
   /** Servo-drive loop: joint PD and wheel torque limits, every physics tick. */
@@ -745,6 +901,7 @@
       let cap = lim;
       /* PARKED brake: phases shorted, torque proportional to speed, no balance. */
       if (plan.brake) tw[i] = -1.0 * w;
+      else if (plan.brakeLeg === i) tw[i] = -0.05 * w;
       else if (tw[i] * w > 0) cap = lim * clamp(1 - Math.abs(w) / k.wheelNoLoad, 0, 1);
       if (Math.abs(tw[i]) > cap + 1e-6) sat.wheel = true;
       const t = clamp(tw[i], -cap, cap);
@@ -752,26 +909,42 @@
       wheelOut.push({ tau: t, cap: cap, w: w, power: t * w });
     });
 
+    /* Legs: a virtual spring-damper along the hip-to-axle line (the suspension), a stiff hold on
+       the leg angle, mapped to hip and knee torque through the leg Jacobian. This needs
+       torque-controlled, backdrivable joints (FOC / QDD class) or real springs; a position servo
+       or a stepper cannot do it. Hip roll stays a stiff position hold unless balance takes it. */
     const legOut = [];
     const limp = this.estop;
-    const gains = { roll: [90, 1.5], hip: [120, 1.5], knee: [140, 1.5] };
     const caps = { roll: k.tauRoll, hip: k.tauHip, knee: k.tauKnee };
     r.legs.forEach(function (leg, i) {
       const lp = plan.legs[i];
-      const ikp = legIk(s, 0, -lp.h);
+      const jr = jointState(leg.joints.roll);
+      const jh = jointState(leg.joints.hip);
+      const jk = jointState(leg.joints.knee);
+      const p = legPolar(s, jh.q, jk.q, jh.rate, jk.rate);
+      const F = lp.ff + lp.k * (lp.h - p.d) - lp.c * (p.dd - (lp.hd || 0));
+      const Tb = lp.kb * ((lp.beta || 0) - p.b) - lp.cb * p.bd;
+      let tk = p.lever * F + Tb / 2;
+      /* soft stops: never through straight, never folded flat */
+      if (jk.q < 0.2) tk += 80 * (0.2 - jk.q) - 2 * jk.rate;
+      if (jk.q > 2.7) tk -= 80 * (jk.q - 2.7) + 2 * jk.rate;
+      const ikp = legIk(s, (lp.beta || 0) * lp.h, -lp.h);
+      const cmdT = {
+        roll: lp.rollTau !== undefined ? lp.rollTau : 90 * (lp.roll - jr.q) - 1.5 * jr.rate,
+        hip: Tb,
+        knee: tk
+      };
+      const js = { roll: jr, hip: jh, knee: jk };
       const want = { roll: lp.roll, hip: ikp.qh, knee: ikp.qk };
-      const row = {};
+      const row = { d: p.d, dd: p.dd, dWant: lp.h, F: F, b: p.b, bd: p.bd };
       ["roll", "hip", "knee"].forEach(function (name) {
-        const js = jointState(leg.joints[name]);
-        const g = gains[name];
-        let t = g[0] * (want[name] - js.q) - g[1] * js.rate;
-        if (name === "roll" && lp.rollTau !== undefined) t = lp.rollTau;
+        let t = cmdT[name];
         const cap = caps[name];
         if (Math.abs(t) > cap) sat[name] = true;
         t = clamp(t, -cap, cap);
         if (limp) t = 0;
-        applyJointTorque(leg.joints[name], t, js.axisW);
-        row[name] = { tau: t, cap: cap, q: js.q, want: want[name], power: t * js.rate };
+        applyJointTorque(leg.joints[name], t, js[name].axisW);
+        row[name] = { tau: t, cap: cap, q: js[name].q, want: want[name], power: t * js[name].rate };
       });
       legOut.push(row);
     });
@@ -791,13 +964,17 @@
       if (this.one) return;
       const planted = m === "LEFT_ONLY" ? r.legs[0] : r.legs[1];
       const free = m === "LEFT_ONLY" ? r.legs[1] : r.legs[0];
-      this.one = { phase: "shift", t: 0, planted: planted, free: free, gamma: this.shift || 0, lift: 0, mode: m, hold: 0, gI: 0 };
+      this.one = { phase: "shift", t: 0, planted: planted, free: free, gamma: this.shift || 0, mode: m, hold: 0 };
       this.mode = m;
       return;
     }
     if (this.one) {
       /* put the free wheel back down, then centre the body */
-      if (this.one.phase !== "lower" && this.one.phase !== "unshift") this.one.phase = "lower";
+      const ph = this.one.phase;
+      if (ph === "shift" || ph === "poise" || ph === "edge") this.one.phase = "unshift";
+      else if (ph === "unload") this.one.phase = "load";
+      else if (ph === "lift" || ph === "hold") this.one.phase = "lower";
+      if (ph !== this.one.phase) this.one.t = 0;
       this.one.next = m;
       return;
     }
@@ -867,60 +1044,149 @@
   };
 
   /**
-   * LEFT_ONLY / RIGHT_ONLY, best effort. Shift the mass over the planted wheel with both hip
-   * rolls (both wheels down, body kept level), lift the free wheel, then balance sideways on the
-   * planted tire through the planted hip roll with an LQR on the frontal-plane model. Pitch stays
-   * on the planted wheel. The tire is 1.25" wide; that is all the sideways foot Hux has.
+   * LEFT_ONLY / RIGHT_ONLY as a planned sequence rather than a switch. Every phase moves on
+   * minimum-jerk or rate-limited paths; nothing jumps.
+   *   shift   stand tall (92%), stiffen both legs, and let both hip rolls slide the wheels under
+   *           the body until the mass is over the planted wheel with ONE.keep of the weight left
+   *           on the free one
+   *   poise   hold there: a two-point stance that is statically stable, like a kickstand. A shove
+   *           that takes the free wheel out of its load band bails out to two wheels (fast unshift)
+   *   unshift both hip rolls come back to the pilot's setting, legs soften, ride height returns
+   * Experimental, behind knobs.oneLift (off): taking the free wheel off the floor.
+   *   edge    servo shift until the free wheel carries little more than its own leg
+   *   unload  hand the planted hip roll to the sideways LQR bumplessly, let the free leg go limp
+   *   lift    free wheel up on a minimum-jerk path to a clearance above the floor, braked
+   *   hold    one wheel
+   *   lower   minimum-jerk back down until the tire reports load
+   *   load    the free leg's spring ramps back in, the planted hip roll hands back to its servo
+   *   catch   if the mass runs away sideways, or the body rolls onto the free side, the free wheel
+   *           goes straight down (a catch step), then load and back to the poise
+   * The balancer does not hold the lift yet: the body rolls toward the free side as the leg
+   * comes up. Pitch rides on the planted wheel from unload to load. The tire is 1.25" wide; that
+   * is all the sideways foot Hux has.
    */
-  Controller.prototype.oneLeg = function (um, fwd, right, dt, cmd, contacts) {
+  const ONE = { keep: 0.15, unload: 0.8, lift: 0.6, lower: 0.6, load: 0.4, clear: 0.05, catchE: 0.035, catchRoll: 0.14 };
+  Controller.prototype.oneLeg = function (um, fwd, right, dt, cmd, contacts, legs) {
     const st = this.one;
     st.t += dt;
+    const s = this.s;
     const pc = tr(st.planted.wheel);
-    const e = dot(sub(um.c, pc), right);          /* + = mass right of the planted tire */
-    const ev = dot(sub(um.cv, lv(st.planted.wheel)), right);
-    const liftTarget = 0.06;
+    /* whole robot, wheels included: the free wheel alone moves the balance point ~17 mm */
+    const mw = s.mWheel;
+    const mt = um.m + 2 * mw;
+    const cAll = mul(add(add(mul(um.c, um.m), mul(pc, mw)), mul(tr(st.free.wheel), mw)), 1 / mt);
+    const vAll = mul(add(add(mul(um.cv, um.m), mul(lv(st.planted.wheel), mw)), mul(lv(st.free.wheel), mw)), 1 / mt);
+    const e = dot(sub(cAll, pc), right);          /* + = mass right of the planted tire */
+    const ev = dot(sub(vAll, lv(st.planted.wheel)), right);
     const leftPlanted = st.planted === this.robot.legs[0];
-    const freeLoad = contacts[leftPlanted ? 1 : 0].force;
-    let hF = this.h - st.lift;
-    let gP = st.gamma;
-    let gF = st.gamma;
-    let tauP;
+    const iP = leftPlanted ? 0 : 1;
+    const iF = 1 - iP;
+    const weight = um.m * G;
+    const freeLoad = contacts[iF].force;
+    /* a limp free leg still rests its own lower tube and wheel on the floor: that is "unloaded" */
+    const own = (s.mTube + s.mWheel) * G * 1.5;
+    const lo = this.out.legs;
+    const P = legs[iP];
+    const F = legs[iF];
     let done = false;
-    const lateral = st.phase === "lift" || st.phase === "hold" || st.phase === "lower";
+    /* the planted leg carries everything once the free one lets go */
+    function carry(u) {
+      const ff = F.ff * (1 - u);
+      P.ff += F.ff - ff;
+      F.ff = ff;
+      F.k *= 1 - u;
+      F.c *= 1 - 0.7 * u;
+    }
+    function airLeg(h) {
+      F.h = h;
+      F.hd = 0;
+      F.ff = 0;
+      F.k = 2500;
+      F.c = 30;
+    }
 
-    if (st.phase === "shift") {
-      /* + hip roll moves the wheels left under the body, so the body moves right */
-      st.gamma = clamp(st.gamma - 2.0 * e * dt - 0.3 * ev * dt, -0.6, 0.6);
-      gP = gF = st.gamma;
-      if (Math.abs(e) < 0.012 && Math.abs(ev) < 0.05) st.hold += dt; else st.hold = 0;
-      if (st.hold > 0.2) { st.phase = "lift"; st.t = 0; }
-    } else if (lateral) {
-      if (st.phase === "lift") {
-        st.lift = Math.min(liftTarget, st.lift + 0.1 * dt);
-        if (st.lift >= liftTarget) st.phase = "hold";
-      } else if (st.phase === "lower") {
-        st.lift = Math.max(-0.01, st.lift - 0.1 * dt);
-        if (st.lift <= 0.005 && freeLoad > 8) st.phase = "unshift";
+    /* + hip roll moves the wheels left under the body, so the body moves right. The poise
+       target keeps ONE.keep of the weight on the free wheel: e sits that fraction of the track
+       inboard of the planted tire. A model error of a centimetre is then a few percent of load,
+       not a fall. Rate limited. */
+    const side = leftPlanted ? 1 : -1; /* inboard is toward +right for a left plant */
+    const ePoise = side * ONE.keep * 2 * s.wheelLat;
+    function shiftToward(eGoal, rate) {
+      const dg = clamp(-3.0 * (e - eGoal) - 0.6 * ev, -rate, rate);
+      st.gamma = clamp(st.gamma + dg * dt, -0.6, 0.6);
+    }
+    if (st.phase === "shift" || st.phase === "poise") {
+      shiftToward(ePoise, 0.2);
+      const tall = Math.abs(this.h - Math.max(cmd.height || s.hRide, s.hStance)) < 0.005;
+      const settled = tall && Math.abs(e - ePoise) < 0.006 && Math.abs(ev) < 0.03;
+      st.hold = settled ? st.hold + dt : 0;
+      if (st.phase === "shift" && st.hold > 0.25) { st.phase = "poise"; st.t = 0; }
+      /* Bail out: shoved while poised, the free wheel goes light (mass heading out over the
+         planted tire) or takes most of the weight (heading in). Centre fast, both wheels down. */
+      const fl = freeLoad / weight;
+      st.off = st.phase === "poise" && (fl < 0.04 || fl > 0.45) ? (st.off || 0) + dt : 0;
+      if (st.off > 0.03) { st.phase = "unshift"; st.t = 0; st.fast = true; this.caught = (this.caught || 0) + 1; }
+      /* Experimental: from the poise, try to take the free wheel off the floor. Hand over to the
+         sideways balancer first, bumplessly: the pose now is its balance point and the servo's
+         torque its holding torque. (Solving for the balance point from the lump model was ~4°
+         off; that kick is what flung the free leg out.) */
+      if (st.phase === "poise" && s.knobs.oneLift && !st.caught && st.hold > 0.5) {
+        st.phase = "edge";
+        st.t = 0;
       }
-      hF = this.h - st.lift;
-      /* Sideways LQR through the planted hip roll, about a fixed balance point found at lift-off:
-         leg roll q1 (absolute, from the tire to the hip), body-to-leg q2, and the holding torque. */
+    } else if (st.phase === "edge") {
+      /* ease the mass on to the planted tire with the servo shift, both wheels still down,
+         until the free wheel carries little more than its own leg */
+      shiftToward(side * 0.01, 0.1);
+      const ready = freeLoad < 1.5 * own && Math.abs(ev) < 0.02;
+      st.hold = ready ? st.hold + dt : 0;
+      if (st.hold > 0.1 || st.t > 4) {
+        st.phase = "unload";
+        st.t = 0;
+        st.tauHold = lo ? lo[iP].roll.tau : 0;
+        st.roll0 = this.out.roll || 0;
+        st.e0 = e;
+        st.eq = null;
+        st.K = null;
+      }
+    } else if (st.phase === "unload") {
+      carry(minJerk(st.t / ONE.unload));
+      if (st.t >= ONE.unload && freeLoad < own) {
+        st.phase = "lift";
+        st.t = 0;
+        st.dFree = lo ? lo[iF].d : F.h;
+        st.eAir = undefined;
+      } else if (st.t > 2.0) {
+        st.phase = "load"; /* could not unload it: put the weight back and centre */
+        st.t = 0;
+      }
+    }
+
+    /* After a catch the balancer is what failed: the planted hip roll goes straight back to its
+       stiff hold and the robot rides down onto the free wheel as one piece. */
+    const oneWheel = !st.caught && (st.phase === "unload" || st.phase === "lift" || st.phase === "hold" ||
+      st.phase === "lower" || (st.phase === "load" && st.t < ONE.load));
+    let tauP;
+    if (oneWheel) {
+      /* Sideways LQR through the planted hip roll about the handover pose: leg roll q1 (tire to
+         hip), body-to-leg q2, and the holding torque. An integral on the mass offset trims it. */
       const planted = st.planted.joints.roll;
       const js = jointState(planted);
       const wcP = tr(st.planted.wheel);
       const hipP = tr(st.planted.yoke);
       const q1 = Math.atan2(dot(sub(hipP, wcP), right), hipP.y - wcP.y);
       const q2 = -js.q;
-      const q1d = dot(av(st.planted.upper), fwd);
+      /* rate of the same hip-over-tire angle, differenced and lightly filtered: the upper
+         tube's own spin mixes in leg swing and knee motion */
+      const q1raw = st.q1prev === undefined ? 0 : (q1 - st.q1prev) / dt;
+      st.q1prev = q1;
+      st.q1d = st.q1d === undefined ? 0 : st.q1d + (q1raw - st.q1d) * Math.min(1, dt / 0.006);
+      const q1d = st.q1d;
       const q2d = -js.rate;
       st.lqrAge = (st.lqrAge || 1) + dt;
-      if (!st.eq || st.lqrAge > 0.05) {
+      if (!st.eq) { st.eq = { q1: q1, q2: q2, u: -(st.tauHold || 0) }; st.eI = 0; }
+      if (!st.K || st.lqrAge > 0.05) {
         const mdl = this.lateralModel(st, right);
-        if (!st.eq) {
-          const d1 = -mdl.gV[0] / mdl.H[0][0];
-          st.eq = { q1: q1 + d1, q2: q2, u: mdl.gV[1] + mdl.H[1][0] * d1 };
-          st.eI = 0;
-        }
         const K = dlqr(mdl.Ac, mdl.Bc, 0.005, LAT_Q, LAT_R, st.P, st.K ? 3000 : 40000);
         /* keep the last good gains if the model went somewhere the solver cannot follow */
         if (K.every(isFinite) && (dlqr.converged || dlqr.delta < 1e-5)) {
@@ -929,33 +1195,101 @@
         }
         st.lqrAge = 0;
       }
-      /* integral on the mass offset trims the model: mass right of the tire → tip the leg left */
-      st.eI = clamp(st.eI + e * dt, -0.02, 0.02);
-      const q1ref = st.eq.q1 - KI_LAT * st.eI;
+      /* Where to balance. The lump model's balance point is a few mm off, so trim the leg-roll
+         target (+ tips the top right) from what the robot can measure:
+         - while the free wheel still carries more than its own leg, lean away from it in
+           proportion to that load (the one thing measured directly);
+         - once it is off the floor, hold the mass where it was at that moment. */
+      st.fl = st.fl === undefined ? freeLoad : st.fl + (freeLoad - st.fl) * Math.min(1, dt / 0.05);
+      const excess = clamp((st.fl - 0.7 * own) / weight, -0.1, 0.1);
+      const airborne = freeLoad < own && st.phase !== "unload";
+      if (airborne && st.eAir === undefined) st.eAir = e;
+      if (!airborne && st.phase !== "hold") st.eAir = undefined;
+      let rate = 0;
+      if (st.eAir !== undefined) rate = -LAT_TRIM.e * (e - st.eAir);
+      else if (st.t > 0.3 * ONE.unload || st.phase !== "unload") rate = -side * LAT_TRIM.load * excess;
+      st.trim = clamp((st.trim || 0) + rate * dt, -0.15, 0.15);
+      const q1ref = st.eq.q1 + st.trim;
       const x = [q1 - q1ref, q1d, q2 - st.eq.q2, q2d];
       let u = st.eq.u;
       for (let i = 0; i < 4; i++) u -= st.K[i] * x[i];
       tauP = -u; /* joint torque on the yoke is minus the torque on the body */
-      st.d1 = q1 - q1ref;
+    }
+
+    /* Free leg length that puts its wheel `clear` above the floor the planted tire is on, along
+       the leg's current line. A real robot gets the same from the planted leg's kinematics and
+       the IMU; a fixed retract in the body frame is eaten by the body rolling toward that side. */
+    const hipF = tr(st.free.yoke);
+    const legF = sub(tr(st.free.wheel), hipF);
+    const cosF = clamp(-legF.y / Math.max(0.05, len(legF)), 0.5, 1);
+    const floorY = tr(st.planted.wheel).y;
+    function dClear(clear) { return clamp((hipF.y - floorY - clear) / cosF, s.hMin * 0.8, s.hMax); }
+    if (st.phase === "lift" || st.phase === "hold") {
+      const up = st.phase === "lift" ? minJerk(st.t / ONE.lift) : 1;
+      airLeg(Math.min(st.dFree, dClear(ONE.clear * up)));
+      if (st.phase === "lift" && st.t >= ONE.lift) { st.phase = "hold"; st.t = 0; }
+      /* runaway sideways, or the body rolled onto the free wheel: catch */
+      const rollOff = (this.out.roll || 0) - st.roll0;
+      const bad = Math.abs(e - (st.eAir === undefined ? st.e0 : st.eAir)) > ONE.catchE || Math.abs(rollOff) > ONE.catchRoll || (st.phase === "hold" && freeLoad > own);
+      st.bad = bad ? (st.bad || 0) + dt : 0;
+      if (st.bad > 0.03) {
+        st.phase = "catch";
+        st.t = 0;
+        st.caught = true;
+        st.gammaP = jointState(st.planted.joints.roll).q; /* hold where it is, do not yank */
+        this.caught = (this.caught || 0) + 1;
+      }
+    } else if (st.phase === "lower") {
+      const up = 1 - minJerk(st.t / ONE.lower);
+      airLeg(dClear(ONE.clear * up - 0.015 * (1 - up)));
+      if (freeLoad > own || st.t > ONE.lower + 0.5) { st.phase = "load"; st.t = 0; }
+    } else if (st.phase === "catch") {
+      /* straight down, fast, a little past where the floor was */
+      airLeg(dClear(-0.03 * minJerk(st.t / 0.12)));
+      if (freeLoad > own || st.t > 0.4) { st.phase = "load"; st.t = 0; }
+    } else if (st.phase === "load") {
+      const u = minJerk(st.t / ONE.load);
+      carry(1 - u);
+      /* hand the planted hip roll back to its servo */
+      if (tauP !== undefined && lo) {
+        const js = jointState(st.planted.joints.roll);
+        const servo = 90 * (st.gamma - js.q) - 1.5 * js.rate;
+        tauP = (1 - u) * tauP + u * servo;
+      }
+      /* after a catch, fall back to the poise (known good) and do not retry the lift */
+      if (st.t >= ONE.load) { st.phase = st.caught && !st.next ? "shift" : "unshift"; st.t = 0; st.hold = 0; }
     } else if (st.phase === "unshift") {
       const target = clamp(cmd.shift || 0, -0.6, 0.6);
-      st.gamma += clamp(target - st.gamma, -0.4 * dt, 0.4 * dt);
-      gP = gF = st.gamma;
-      hF = this.h;
+      const r = st.fast ? 1.2 : 0.2;
+      st.gamma += clamp(target - st.gamma, -r * dt, r * dt);
       if (Math.abs(st.gamma - target) < 1e-3) {
         done = true;
         this.mode = st.next || "TWO_WHEEL";
         this.shift = target;
       }
     }
+
+    /* Standing still does not want suspension: both legs stiffen as the sequence starts and
+       soften again as it ends. Soft legs let the shift and the body levelling (two integrators)
+       ring through the springs, and the sideways model is a rigid leg. */
+    st.stiff = clamp((st.stiff || 0) + (st.phase === "unshift" ? -dt : dt) / 0.4, 0, 1);
+    const sf = minJerk(st.stiff);
+    P.k *= 1 + 3 * sf;
+    P.c *= 1 + sf;
+    if (F.k < 2000) { F.k *= 1 + 3 * sf; F.c *= 1 + sf; }
     st.e = e;
-    const planted = { h: this.h, roll: gP, rollTau: tauP };
-    const free = { h: hF, roll: gF };
-    return {
-      legs: leftPlanted ? [planted, free] : [free, planted],
-      level: !lateral,
-      done: done
-    };
+    st.freeLoad = freeLoad;
+    /* after a catch the planted hip roll eases back from where it was caught to the plan */
+    if (st.gammaP !== undefined) {
+      st.gammaP += clamp(st.gamma - st.gammaP, -0.3 * dt, 0.3 * dt);
+      if (Math.abs(st.gammaP - st.gamma) < 1e-3) st.gammaP = undefined;
+    }
+    P.roll = st.gammaP !== undefined ? st.gammaP : st.gamma;
+    F.roll = st.gamma;
+    if (tauP !== undefined) P.rollTau = tauP;
+    /* the lifted wheel stops spinning */
+    st.brakeFree = oneWheel && st.phase !== "load";
+    return { done: done };
   };
 
   /* ---------- the sandbox ---------- */
@@ -985,7 +1319,7 @@
 
   /** Actuator limits can change live; geometry and mass rebuild the robot. */
   Sim.prototype.setKnobs = function (knobs) {
-    const live = ["tauWheel", "wheelNoLoad", "tauKnee", "tauHip", "tauRoll"];
+    const live = ["tauWheel", "wheelNoLoad", "tauKnee", "tauHip", "tauRoll", "ride", "legHz", "legZeta", "reflex", "legCatch", "oneLift"];
     const s = this.s;
     let rebuild = false;
     Object.keys(knobs).forEach(function (key) {
@@ -1017,13 +1351,16 @@
 
   const api = {
     KNOBS: KNOBS,
+    RX: RX,
+    LAT_TRIM: LAT_TRIM,
+    ONE: ONE,
     MODES: MODES,
     IN: IN,
     spec: spec,
     legIk: legIk,
     lqrGains: lqrGains,
     dlqr: dlqr,
-    setLateralWeights: function (q, r, ki) { LAT_Q = q; LAT_R = r; if (ki !== undefined) KI_LAT = ki; },
+    setLateralWeights: function (q, r) { LAT_Q = q; LAT_R = r; },
     buildWorld: buildWorld,
     buildRobot: buildRobot,
     Controller: Controller,

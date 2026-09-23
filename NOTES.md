@@ -23,7 +23,7 @@ This repo is the source of truth for plans. Hux bot keeps planning notes current
 - [ ] **Open-loop step** toward a 9.5" riser fixture. Not before the four modes work.
 - [ ] **Cameras later** — one teleop stream, then Pi pathfinding. Not on the FC.
 - [ ] **Digital twin + dojo (horizon)** — identical CAD / URDF twin, then a training dojo (ML/RL) so a policy trained in sim can run locally. Domains later: stairs, rubble, dirt, fall leaves, wet mud. **After** modes and classical balance. **Not a V1 gate.** See [`docs/software.md`](docs/software.md). The living-drawings **3D sandbox** (Rapier, 2026-09-22) is a design toy built from the 2D numbers, not this twin.
-- [ ] **Open from the 3D sandbox** ([`docs/research/sim-sandbox.md`](docs/research/sim-sandbox.md)) — Steve's calls: (1) PARKED has no rest pose; skid / kickstand / sit pose? (2) 1" sills: measure the real ones; springs in the legs? Not blocking the first buy.
+- [ ] **Open from the 3D sandbox** ([`docs/research/sim-sandbox.md`](docs/research/sim-sandbox.md)) — Steve's calls: (1) PARKED has no rest pose; skid / kickstand / sit pose? (2) 1" sills: measure the real ones (the sandbox now hops 1" from 0.5–1.0 m/s with virtual leg springs). (3) Keep **75% ride** as the design driving stance, or only as the sandbox default? (4) Virtual suspension + impact hop need **torque-controlled, backdrivable** knee / hip swing (FOC / QDD) or real springs; does that settle servo vs stepper+belt? (5) Is static one-leg standing needed for stairs, or is dynamic single support enough? The sandbox poises on one wheel but does not hold the free wheel off the floor. Not blocking the first buy.
 
 ## Constraints (do not “helpfully” violate)
 

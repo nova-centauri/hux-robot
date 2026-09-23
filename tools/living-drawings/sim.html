@@ -92,12 +92,20 @@
             <option value="0.1">Tenth</option>
           </select>
         </label>
+        <div class="presets" role="group" aria-label="Ride height">
+          <button type="button" data-ride="0.62">Low</button>
+          <button type="button" data-ride="0.75" class="active">Medium</button>
+          <button type="button" data-ride="0.92">High</button>
+        </div>
+        <label>Ride height <output id="rideOut"></output>
+          <input id="ride" type="range" min="55" max="98" step="1" value="75">
+        </label>
         <label>Top speed <output id="vmaxOut"></output>
           <input id="vmax" type="range" min="0.2" max="2.5" step="0.1" value="1.0">
         </label>
       </div>
 
-      <p class="sim-keys"><b>Drive</b> W A S D or arrows (Shift for more) · <b>Height</b> Q / E · <b>Hip roll</b> Z / X · <b>Modes</b> 1 Parked, 2 Two wheel, 3 Left only, 4 Right only · <b>Space</b> shove · <b>R</b> reset · <b>K</b> kill motors · <b>C</b> camera · <b>P</b> pause · <b>Mouse wheel</b> zoom. A gamepad works: left stick drives, right stick sets height and hip roll, A shoves, B resets.</p>
+      <p class="sim-keys"><b>Drive</b> W A S D or arrows (Shift for more) · <b>Ride height</b> Q / E, the slider, or Low / Medium / High · <b>Hip roll</b> Z / X · <b>Modes</b> 1 Parked, 2 Two wheel, 3 Left only, 4 Right only · <b>Space</b> shove · <b>R</b> reset · <b>K</b> kill motors · <b>C</b> camera · <b>P</b> pause · <b>Mouse wheel</b> zoom. A gamepad works: left stick drives, right stick sets height and hip roll, A shoves, B resets.</p>
 
       <div class="sim-charts">
         <div>
@@ -144,6 +152,15 @@
           <label>Body mass forward of the hips <output id="k_bodyComOut"></output>
             <input id="k_bodyCom" type="range" min="-1" max="3" step="0.1" value="0">
           </label>
+          <label>Leg spring, bounce frequency <output id="k_legHzOut"></output>
+            <input id="k_legHz" type="range" min="1.5" max="8" step="0.1" value="3.5">
+          </label>
+          <label>Leg spring damping <output id="k_legZetaOut"></output>
+            <input id="k_legZeta" type="range" min="0.2" max="1.2" step="0.05" value="0.6">
+          </label>
+          <label class="check"><input id="k_reflex" type="checkbox" checked> Impact reflex and stall hop</label>
+          <label class="check"><input id="k_legCatch" type="checkbox" checked> Stumble catch (legs and hip roll)</label>
+          <label class="check"><input id="k_oneLift" type="checkbox"> One wheel: try to lift the free wheel (experimental, usually falls)</label>
           <label class="check"><input id="k_skid" type="checkbox"> Rear parking skid (proposal)</label>
           <div class="presets"><button type="button" id="knobReset">Back to the working assumptions</button></div>
         </div>
@@ -153,8 +170,11 @@
         <h2>What this is and is not</h2>
         <ul class="sim-notes">
           <li><b>Physics.</b> Rapier rigid bodies at 2 kHz: body, two hip yokes, four carbon tubes, two wheels, Coulomb friction, real contacts with the stair, sills and crates.</li>
-          <li><b>Motors.</b> Joint servos close position at 2 kHz with a torque cap. The in-wheel motors lose torque linearly to the 4S no-load speed. PARKED shorts the wheel phases (a brake that needs speed to work).</li>
-          <li><b>Balance.</b> LQR on the lean of the mass over the axle, rebuilt as the legs change height, at 500 Hz. Roll levelling by leg length. It sees body attitude, joint angles and wheel speed; no sensor noise yet.</li>
+          <li><b>Motors.</b> Every joint is a torque with a cap, updated at 2 kHz. The in-wheel motors lose torque linearly to the 4S no-load speed. PARKED shorts the wheel phases (a brake that needs speed to work).</li>
+          <li><b>Suspension.</b> Each leg is a virtual spring-damper along the hip-to-axle line (3.5 Hz, 0.6 damping by default) with the leg angle held stiff. A real Hux can only do this with torque-controlled, backdrivable joints (FOC / QDD class) or real springs. A position servo or a stepper cannot.</li>
+          <li><b>Reflexes.</b> A leg that is hit hard at speed hops its wheel up for about a tenth of a second. A wheel stopped dead by an edge at walking pace hops too. When the mass runs away, the legs swing and the hip rolls step the wheels under it. Encoders and the IMU only.</li>
+          <li><b>One wheel.</b> LEFT / RIGHT ONLY is a planned sequence: stand tall, stiffen, shift the mass over the planted wheel until the other carries about 15%, hold, then centre. Taking the free wheel fully off the floor is the open item; it is behind the experimental switch.</li>
+          <li><b>Balance.</b> LQR on the lean of the mass over the axle, rebuilt as the legs change height, at 500 Hz. Roll levelling by leg length and leg force. It sees body attitude, joint angles and wheel speed; no sensor noise yet.</li>
           <li><b>Tire.</b> Contact is a 6" sphere drawn as a tire. It rolls exactly and matches the stair profile. Sideways it rocks on a 3" radius instead of a ~0.6" crown, so one-wheel balance here is somewhat easier than on the real tire.</li>
           <li><b>Not modelled.</b> Motor inertia through the gearbox, backlash, belt stretch, tube flex, battery sag, sensor noise and delay. No stair-climb controller yet: the stair is there to drive up to.</li>
         </ul>
