@@ -9,12 +9,13 @@ This packet is the working study set. It does not replace [`../requirements.md`]
 | [model-corrections.md](model-corrections.md) | Implemented geometry, contact, actuator, parking and reporting fixes; current regression results and remaining design work. |
 | [real-world-validation.md](real-world-validation.md) | 2026-09-23 audit: spatial reach inconsistency, CoM versus hip torque, actuator/contact limits, reproduced tests, and physical validation sequence. Read before using earlier sizing or stair claims. |
 | [xrobots.md](xrobots.md) | Curated XRobots shortlist, why each matters, study order |
-| [inspiration.md](inspiration.md) | Steve's shares — Roadrunner, FrRonconi student balancer, Serra / Build Some Stuff, Tazer, Stompy, Diablo; inspiration only |
+| [inspiration.md](inspiration.md) | Steve's shares — Roadrunner, FrRonconi student balancer, Serra / Build Some Stuff, Tazer, Stompy, Diablo, SpdrBot; inspiration only |
 | [roadrunner.md](roadrunner.md) | RAI Institute Roadrunner — lab wheeled biped; watch alongside Hattori |
 | [actuators-legs.md](actuators-legs.md) | Axis-role trade; hip roll in V1; servo vs stepper TBD; GIM8108-8 candidate |
 | [tazer-lessons.md](tazer-lessons.md) | Tazer wheeled biped — learn from the mistakes (anti-patterns) |
 | [stompy-sim2real.md](stompy-sim2real.md) | Stompy week-build RL walker — CAD/reality match, shared zero; **not** RL walking for Hux V1 |
 | [diablo.md](diablo.md) | Diablo (DDTRobot) — commercial wheeled-leg; LQR + DD; steal split brain / height states; **do not buy** |
+| [spdrbot.md](spdrbot.md) | SpdrBot — Isaac Sim / Lab 4-leg spider; Fusion→URDF→USD; RL then hand gait; Phase E pipeline lessons, **not** a spider |
 | [leg-geometry.md](leg-geometry.md) | Leg math. Wheel settled at **6" OD** on a **9.5" × 9.5"** step. Walker wheel is a bench donor. |
 | [stair-climb-dynamics.md](stair-climb-dynamics.md) | Corrected spatial feasibility, rejected stair candidate, and limits of the historical planar load estimates. |
 | [sim-sandbox.md](sim-sandbox.md) | Corrected tire/contact and drive models, supported parking guard, regression results, and remaining single-support failures. |
@@ -24,7 +25,7 @@ Decision log (not research, but the lock list): [`../decisions.md`](../decisions
 
 Inspiration already in requirements: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori.com/blog/wheeled-biped-v2).
 
-Steve's shares (inspiration only; not a build source): [inspiration.md](inspiration.md) — [Roadrunner](roadrunner.md) (lab), the FrRonconi 3-month student two-leg/wheel balancer (closer Hux vibe), Serra / Build Some Stuff (steal packaging), [Tazer](tazer-lessons.md) (learn from the mistakes), [Stompy](stompy-sim2real.md) (CAD → sim → real; **not** an RL-walking requirement), and [Diablo](diablo.md) (commercial wheeled-leg; **do not buy**; keep R18).
+Steve's shares (inspiration only; not a build source): [inspiration.md](inspiration.md) — [Roadrunner](roadrunner.md) (lab), the FrRonconi 3-month student two-leg/wheel balancer (closer Hux vibe), Serra / Build Some Stuff (steal packaging), [Tazer](tazer-lessons.md) (learn from the mistakes), [Stompy](stompy-sim2real.md) (CAD → sim → real; **not** an RL-walking requirement), [Diablo](diablo.md) (commercial wheeled-leg; **do not buy**; keep R18), and [SpdrBot](spdrbot.md) (Isaac Sim / Lab pipeline for the Phase E horizon; **not** a spider; **not** Isaac before `TWO_WHEEL`).
 
 ## Stance
 
@@ -43,7 +44,7 @@ Respect each upstream license. XRobots repos are **not** one license. RobotX is 
 
 When a note, sketch, or later file is informed by upstream, record:
 
-- Project name and org (`XRobots/RobotX`, Hattori STRIDE V2, RAI Roadrunner, FrRonconi / student balancer, Build Some Stuff / Serra, Tazer, Stompy / Kayden Knapik, Diablo / Direct Drive Tech, …)
+- Project name and org (`XRobots/RobotX`, Hattori STRIDE V2, RAI Roadrunner, FrRonconi / student balancer, Build Some Stuff / Serra, Tazer, Stompy / Kayden Knapik, Diablo / Direct Drive Tech, SpdrBot / Indystry, …)
 - URL (repo, playlist, or post)
 - License as stated by the author **and** the `LICENSE` file if they disagree
 - What we took (idea, heuristic, control topology) versus what we did **not** copy
