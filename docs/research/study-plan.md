@@ -2,7 +2,7 @@
 
 Phased research checklist. Tick only when the work is real. **No spend** until Steve asks. **FC stays TBD.** Printable wheel-leg is **Phase D**, not Phase A. **Phase E** (digital twin + dojo) is a **horizon** after D and after V1 modes / classical balance. Do not start E to skip print or R18.
 
-Track milestones in [`../../NOTES.md`](../../NOTES.md). Shortlist and links: [`xrobots.md`](xrobots.md). Steve inspirations (Roadrunner + FrRonconi student balancer + Serra / Build Some Stuff + Tazer + Stompy + Diablo): [`inspiration.md`](inspiration.md). Roadrunner detail: [`roadrunner.md`](roadrunner.md). Stompy CAD→sim→real: [`stompy-sim2real.md`](stompy-sim2real.md). Diablo wheeled-leg: [`diablo.md`](diablo.md). Actuator trade: [`actuators-legs.md`](actuators-legs.md). Leg math: [`leg-geometry.md`](leg-geometry.md). Cite/adapt rules: [`README.md`](README.md). Decision log: [`../decisions.md`](../decisions.md).
+Track milestones in [`../../NOTES.md`](../../NOTES.md). Shortlist and links: [`xrobots.md`](xrobots.md). Steve inspirations (Roadrunner + FrRonconi student balancer + Serra / Build Some Stuff + Tazer + Stompy + Diablo + SpdrBot): [`inspiration.md`](inspiration.md). Roadrunner detail: [`roadrunner.md`](roadrunner.md). Stompy CAD→sim→real: [`stompy-sim2real.md`](stompy-sim2real.md). Diablo wheeled-leg: [`diablo.md`](diablo.md). SpdrBot Isaac pipeline (Phase E horizon): [`spdrbot.md`](spdrbot.md). Actuator trade: [`actuators-legs.md`](actuators-legs.md). Leg math: [`leg-geometry.md`](leg-geometry.md). Cite/adapt rules: [`README.md`](README.md). Decision log: [`../decisions.md`](../decisions.md).
 
 ## Gates
 
@@ -31,6 +31,7 @@ Inventory informs options; it does **not** drive design. Prefer the correct actu
 - [ ] Watch [Tazer — My Robot almost got me Kicked out of Uni](tazer-lessons.md). **Learn from the mistakes** (wrong first motors, TPU tires, skinny power / logic-PCB bus, CAN termination, LQR-too-early, no homing, carbon dust). Not a stack. Do not buy GIM8108 or 48 V because he did.
 - [ ] Watch [Stompy — I Trained a Robot in Simulation. Then I Made It Walk.](stompy-sim2real.md). Steal CAD/reality match: fixture / home pose, dual-encoder zero at the **CAD** pose, measure-vs-CAD, tether, default angles in CAD **and** firmware. Walking ≠ Hux. **Do not require RL walking for V1.** Keep reuse simple balance (R18). Sim later for geometry / stairs — **not** day-one wheel balance.
 - [ ] Watch [ETA Prime — Diablo](diablo.md) and skim [arXiv:2407.21500](https://ar5iv.labs.arxiv.org/html/2407.21500). Steal: split brain (Pi vs motor board), DD/QDD as a *class*, **LQR/PID before RL**, height as named states, aux contact later, payload vs posture. **Do not buy Diablo.** Not 22 kg. No head / cargo V1. Keep R18. Hardware **TBD**. Shop / SDK are a cite, not a cart.
+- [ ] Watch [SpdrBot — I Tried To Build a Robot Like Boston Dynamics With Isaac Sim](spdrbot.md). **Phase E horizon, not V1.** Steal: observation parity, Fusion flatten → URDF (`base_link`, no nests) → USD lockstep, reward-hacking, Sim-before-hardware, mid/zero, harness drop, friction socks. RL fell back to a **hand gait**. **Do not** become a spider, buy Indystry packs, stand up Isaac Lab before `TWO_WHEEL`, assume a policy drops onto the robot, or buy a 4090 for V1. Keep R18.
 
 **Extract (write notes here or in [`../../NOTES.md`](../../NOTES.md)):**
 
@@ -117,9 +118,9 @@ Steve, 2026-09-22. The cool long-term goal is a twin faithful enough that a poli
 
 - [ ] Phase D actually done, or Steve explicitly opens twin work. **Do not** stand up a trainer to look busy.
 - [ ] Four manual modes work from RC (R14). Classical / reused balance is the V1 controller (R18). LQR / PID before RL — same order as Tazer / Diablo / Stompy.
-- [ ] When CAD exists: CAD → exported URDF (or equivalent) → firmware zeros stay the **same robot**. A linkage or wheel change is a full update (Stompy lesson: [`stompy-sim2real.md`](stompy-sim2real.md)). No Jetson / mjlab / Isaac lock.
-- [ ] Twin fidelity first — masses, inertias, wheel contact, hip-roll plant — before domain randomization.
-- [ ] Later: dojo / RL for hard terrains. Policy trained in sim, run locally. Not a Hux V1 stack in `firmware/` today.
+- [ ] When CAD exists: CAD → exported URDF (or equivalent) → firmware zeros stay the **same robot**. A linkage or wheel change is a full update (Stompy lesson: [`stompy-sim2real.md`](stompy-sim2real.md)). SpdrBot adds flatten-CAD (`base_link`, no nested comps) → URDF → USD / trainer asset and a **trainer ≠ viewer ≠ robot** warning ([`spdrbot.md`](spdrbot.md)). No Jetson / mjlab / Isaac lock. **Do not** stand up Isaac Lab before `TWO_WHEEL`.
+- [ ] Twin fidelity first — masses, inertias, wheel contact, hip-roll plant — before domain randomization. Observations must match **real sensors** (SpdrBot: sim-only velocity trained a policy the Pico could not run). Watch reward-hacking (their dinosaur gait).
+- [ ] Later: dojo / RL for hard terrains. Policy trained in sim, run locally. Not a Hux V1 stack in `firmware/` today. Validate in the twin / viewer **before** hardware. Do not assume SKRL / Isaac Lab weights drop onto the FC.
 
 **Done when:** Steve asks to start twin work and the CAD / model / firmware zeros actually match. An empty `software/` folder is not a dojo.
 
@@ -132,7 +133,8 @@ Steve, 2026-09-22. The cool long-term goal is a twin faithful enough that a poli
 - Locking servo vs stepper+belt for knee / swing. Both stay open.
 - Cameras / pathfinding (later, on the Pi).
 - Closed-loop stair gait software.
-- Training an **RL walking policy** / buying a Jetson “because Stompy.” Hux V1 keeps **simple reused balance** (R18). Phase E is a **horizon**, not a reason to skip that.
+- Training an **RL walking policy** / buying a Jetson “because Stompy” / buying a **4090** or standing up **Isaac Lab** “because SpdrBot.” Hux V1 keeps **simple reused balance** (R18). Phase E is a **horizon**, not a reason to skip that.
 - Buying Diablo (or M1502D / their Pi4 + motor board) “because wheeled-leg.” Not 22 kg. No head DoF / cargo for V1.
+- Buying Indystry SpdrBot packs, printing a 12-servo spider, or treating Pico + hobby servos as a Hux stack.
 - Relicensing by implication.
 - Opening Blender before 2D layouts (R23).

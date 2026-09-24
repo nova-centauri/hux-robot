@@ -1,8 +1,8 @@
 # Steve's inspirations
 
-Steve clarified these shares are inspiration. **Watch and extract vibe / capability / packaging. Do not start build work.** No spend. Flight controller stays **TBD**. Nothing here is a Hux stack, BOM, or CAD source. Diablo is a **commercial** platform — still inspiration only; **do not buy it.**
+Steve clarified these shares are inspiration. **Watch and extract vibe / capability / packaging. Do not start build work.** No spend. Flight controller stays **TBD**. Nothing here is a Hux stack, BOM, or CAD source. Diablo is a **commercial** platform — still inspiration only; **do not buy it.** SpdrBot's Fusion / print pack is **paid** — still inspiration only; **do not buy it.**
 
-These sit **next to** the study set — they do not replace [XRobots](xrobots.md), Hattori, or [study-plan.md](study-plan.md) Phases A–D.
+These sit **next to** the study set — they do not replace [XRobots](xrobots.md), Hattori, or [study-plan.md](study-plan.md) Phases A–D. SpdrBot lessons land on the **Phase E** twin / dojo horizon, not on V1 modes.
 
 | # | What | Scale | Steal |
 | --- | --- | --- | --- |
@@ -12,6 +12,7 @@ These sit **next to** the study set — they do not replace [XRobots](xrobots.md
 | 4 | [Tazer — uni wheeled biped](tazer-lessons.md) | Maker, ~0.7 m carbon-tube legs, 6× GIM8108 | **Learn from the mistakes:** wrong first motors, TPU tires, skinny power, LQR-too-early, carbon dust. Not a Hux stack. |
 | 5 | [Stompy — Kayden Knapik](stompy-sim2real.md) | Maker, 6-DOF 3D-printed **walker** (week build, RL) | CAD pose = physical home; CAD→URDF→sim lockstep; resting geometry biases gait; tether. **Not** RL walking for Hux V1. |
 | 6 | [Diablo — Direct Drive Tech](diablo.md) | Commercial wheeled-leg (~22.9 kg); Pi4 + motor board | Split brain; DD/QDD class; LQR/PID before RL; height as states; aux contact later; payload vs height. **Do not buy.** Not 22 kg. No head/cargo V1. |
+| 7 | [SpdrBot — Indystry](spdrbot.md) | Maker, 4-leg **spider** (12 hobby servos); Isaac Sim + Isaac Lab; Pico on hardware | Fusion flatten → URDF (`base_link`, no nests) → USD → Lab RL → SKRL replay wall → **hand gait**. Observation parity; reward-hacking; mid/zero; power leads; friction socks. **Not** a spider. **Not** Isaac before `TWO_WHEEL`. |
 
 Packaging and loop geometry land in [`../mechanical.md`](../mechanical.md), [`../electronics.md`](../electronics.md), and [`../software.md`](../software.md).
 
@@ -174,6 +175,18 @@ Commercial **self-balancing wheeled-leg**: 6 DD joints (2 wheel, 2 crouch/height
 
 ---
 
+## 7. Indystry — SpdrBot (Isaac Sim / Lab pipeline)
+
+Full note: [spdrbot.md](spdrbot.md).
+
+Steve 2026-09-24: watch [I Tried To Build a Robot Like Boston Dynamics With Isaac Sim](https://www.youtube.com/watch?v=YDzHL2JSCHc) and the [Indystrycc/SpdrBot](https://github.com/Indystrycc/SpdrBot) tree.
+
+Maker-scale **4-leg spider** (12 hobby servos). Fusion → URDF → Isaac Sim USD → Isaac Lab RL; **SKRL would not replay in Sim**, so he **hand-tuned a gait** in Sim and put that on a **Pico**. Hardware is Pico + servos. Not wheeled.
+
+**Hux take:** steal the pipeline and the failure modes for the **Phase E** twin / dojo horizon (observation parity, CAD→URDF→USD lockstep, reward-hacking, validate-in-Sim, mid/zero, harness drop, friction hacks). **Do not** become a spider. **Do not** buy the indystry.cc pack. **Do not** stand up Isaac Lab before `TWO_WHEEL`. **Do not** assume RL drops onto the robot. **Do not** buy a 4090 for V1. Keep **R18**. Ties to [Stompy](stompy-sim2real.md) (CAD/reality) and [Diablo](diablo.md) (LQR/PID before RL).
+
+---
+
 ## Cite
 
 When a later note is informed by these shares, record:
@@ -184,17 +197,19 @@ When a later note is informed by these shares, record:
 - **Tazer** — [My Robot almost got me Kicked out of Uni](https://www.youtube.com/watch?v=gqnW9qBCHnM); lessons in [tazer-lessons.md](tazer-lessons.md)
 - **Stompy** — [I Trained a Robot in Simulation. Then I Made It Walk.](https://www.youtube.com/watch?v=gEjg179fvmc) (Kayden Knapik); lessons in [stompy-sim2real.md](stompy-sim2real.md)
 - **Diablo** — [ETA Prime review](https://www.youtube.com/watch?v=S5PoZ8aNwvs); [arXiv:2407.21500](https://ar5iv.labs.arxiv.org/html/2407.21500); shop / SDK in [diablo.md](diablo.md)
+- **SpdrBot** — [I Tried To Build a Robot Like Boston Dynamics With Isaac Sim](https://www.youtube.com/watch?v=YDzHL2JSCHc); [Indystrycc/SpdrBot](https://github.com/Indystrycc/SpdrBot); lessons in [spdrbot.md](spdrbot.md)
 
-What we **steal**: vibe (maker-scale first prototype); capability existence (two-leg/wheel balance; Roadrunner's stairs / one-wheel); packaging (in-wheel BLDC+encoder, CoG-over-contact as height changes, serviceable modular prints, wheel-under-CoG correction geometry); Tazer **anti-patterns** (wrong first motors, TPU tires, skinny power, LQR-too-early); Stompy **CAD/reality match** (fixture / home pose, measure-vs-CAD, tether, default angles in CAD+firmware, sim lockstep later); Diablo **split brain + DD/QDD class + LQR/PID before RL + height-as-state**. What we did **not** copy: geometry files, Gerbers, firmware, policy, 3S / Arduino / 48 V / Teensy / Jetson / Pi4-as-FC stacks, 40 kg servo SKU, GIM8108 / Robstride / M1502D buys, Diablo itself, or anyone's parts list. **Not** an RL-walking requirement for Hux V1.
+What we **steal**: vibe (maker-scale first prototype); capability existence (two-leg/wheel balance; Roadrunner's stairs / one-wheel); packaging (in-wheel BLDC+encoder, CoG-over-contact as height changes, serviceable modular prints, wheel-under-CoG correction geometry); Tazer **anti-patterns** (wrong first motors, TPU tires, skinny power, LQR-too-early); Stompy **CAD/reality match** (fixture / home pose, measure-vs-CAD, tether, default angles in CAD+firmware, sim lockstep later); Diablo **split brain + DD/QDD class + LQR/PID before RL + height-as-state**; SpdrBot **pipeline + failure modes** for the Phase E horizon (observation parity, CAD→URDF→USD, reward-hacking, Sim-before-hardware, mid/zero, harness drop, friction socks). What we did **not** copy: geometry files, Gerbers, firmware, policy, 3S / Arduino / 48 V / Teensy / Jetson / Pico / Pi4-as-FC stacks, 40 kg / 25 kg·cm servo SKUs, GIM8108 / Robstride / M1502D buys, Diablo itself, Indystry packs, a 4090, spider morphology, or anyone's parts list. **Not** an RL-walking requirement for Hux V1.
 
 ## Do not
 
 - Start a Hux build, print, or firmware branch from these clips
-- Spend, or treat student / RAI / Serra / Tazer / Stompy / Diablo actuators as a Hux spec
+- Spend, or treat student / RAI / Serra / Tazer / Stompy / Diablo / SpdrBot actuators as a Hux spec
 - **Buy Diablo** (or scale Hux to ~22 kg / 540 mm, or add head tilt / cargo / creep rollers to V1)
-- Lock an FC (Roadrunner's RL trainer, Stompy's Jetson + mjlab, Tazer's Teensy, Diablo's Pi4 + motor board, anyone's LQR in a thesis, or Serra's Nano 33 BLE)
+- **Buy Indystry SpdrBot packs**, print their spider, or stand up Isaac Lab / a 4090 before `TWO_WHEEL`
+- Lock an FC (Roadrunner's RL trainer, Stompy's Jetson + mjlab, Tazer's Teensy, Diablo's Pi4 + motor board, SpdrBot's Pico + servo board, anyone's LQR in a thesis, or Serra's Nano 33 BLE)
 - Require RL walking — or any learned gait — for Hux V1; keep reuse simple balance (R18)
-- Vendor SK8O / Ascento / Roadrunner / Printables / PCBWay / `DDTRobot/*` trees
+- Vendor SK8O / Ascento / Roadrunner / Printables / PCBWay / `DDTRobot/*` / `Indystrycc/SpdrBot` trees
 - Order the PCBWay board or shop the YouTube BOM
 - Lock steppers or servos — knee / hip swing stay **TBD** (both open, no lean)
 - Pretend a 3-month student demo or a two-wheel P-balancer skips Phases A–C / one-leg gate / 9.5" mapping
