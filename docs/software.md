@@ -164,7 +164,7 @@ V1 may / should stand and balance with classical / reused control **before** any
 
 - Closed-loop stair gait.
 - Stereo / depth for stairs.
-- Simulation (MuJoCo or otherwise) as a **V1** job. The twin / dojo is a **horizon**, not this folder today. The **pipeline is TBD** — do not lock Isaac / MuJoCo / mjlab, and do not stand up Isaac Lab or buy a 4090 before `TWO_WHEEL`. The living-drawings 3D sandbox ([`../tools/living-drawings/sim.html`](../tools/living-drawings/sim.html), [`research/sim-sandbox.md`](research/sim-sandbox.md)) is a design toy with a game-grade engine, not the twin; its LQR is a sandbox controller, not a Hux V1 controller (R18). Visual tires are still flat cylinders; collision is a rounded hull, not a motorcycle crown.
+- Simulation (MuJoCo or otherwise) as a **V1** job. The twin / dojo is a **horizon**, not this folder today. The **pipeline is TBD** — do not lock Isaac / MuJoCo / mjlab, and do not stand up Isaac Lab or buy a 4090 before `TWO_WHEEL`. The living-drawings 3D sandbox ([`../tools/living-drawings/sim.html`](../tools/living-drawings/sim.html), [`research/sim-sandbox.md`](research/sim-sandbox.md)) is a design toy with a game-grade engine, not the twin; its LQR is a sandbox controller, not a Hux V1 controller (R18). Tires are a shared round-crown profile with a carcass spring since 2026-09-25 (`tools/living-drawings/tire.js`); the stiffness is a guess until a tire is measured.
 - A requirements-complete autonomy stack.
 - A **novel Hux V1 balance controller** (R18). Study existing patterns; do not invent one to fill `firmware/`.
 - Firmware that implements the mode machine or the one-leg loop (FC is TBD; this page is the spec).

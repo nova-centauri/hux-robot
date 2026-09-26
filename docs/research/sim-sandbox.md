@@ -6,7 +6,7 @@ The sandbox is a design investigation, not firmware or hardware validation. Run 
 
 - Rapier 0.20.0, impulse revolute joints, 2 kHz physics/joint updates and 500 Hz outer balance loop.
 - Shared geometry and working joint/torque limits. Physical stops on roll, pitch and knee; zero knee angle is allowed for initial assembly, while the servo avoids straight-leg operation.
-- Rounded convex tire collision hull with **6-inch diameter × 1.25-inch width**, replacing the 6-inch sphere. Its 256-sided core limits the cylinder solver's artificial rolling acceleration. The free-roll regression permits less than 5% gain over 3 seconds; measured peak is 0.515 m/s from 0.500. This numerical error remains material for precision trajectories. **Half-fixed vs a real Hux tire:** the visual mesh is still `THREE.CylinderGeometry` in `sim-view.js` (flat ~90° shoulders). The Rapier hull in `sim-core.js` is a rounded convex, not a toroidal motorcycle crown, and there is no carcass compliance. A real rubber tire should keep a contact pad when tipped / cambered. A hard edge messes lean / one-leg physics. Twin honesty requires the crown; logged 2026-09-25 in [`../decisions.md`](../decisions.md).
+- **Tire (2026-09-25 fix).** One shared cross-section in `tire.js`: a 6 × 1.25" tread with a **full-round crown** (crown radius = half the width, the shape a scooter pneumatic takes on a narrow rim; `M.tireCrown` flattens it). The Rapier hull, the Three.js lathe mesh and the 2D projection (`spatial.js`) are all built from that one profile, so the flat-shoulder cylinder is gone and the contact point **walks around the crown** as the wheel cambers — measured in `sim-test.js` at 0/10/20/30° against the profile's prediction (9.4 / 19.5 / 29.0 mm at 10/20/30°), with the full load carried on the crown. Each wheel is now a **hub plus a tread ring on a carcass spring** (isotropic; `tireK` 40 kN/m and `tireZeta` 0.2 are knobs and guesses for a high-pressure 6×1.25, not measurements): the tire squishes 0.7 mm under half the weight and shifts sideways on the hub under side load, and the HUD reports the pad that deflection implies (0.84 × 0.38" at rest). Rapier still resolves the contact at points; the pad is an estimate, not a resolved patch. The ring's free-roll numerical error is unchanged (0.515 m/s from 0.500). Still absent: anisotropic (softer lateral) stiffness, rolling resistance, carcass hysteresis.
 - Self-contact between separate robot parts enabled. Direct joint neighbors and overlapping trunk/hip mount geometry are excluded. This is an approximate assembly, not a CAD interference check.
 - Delayed ideal outer-loop state/contact samples (4 ms default), first-order torque response (2 ms default), and joint output torque-speed roll-off (20 rad/s default). All are adjustable **unmeasured assumptions**. The inner servo still uses ideal current joint state.
 - Tire load reports upward normal impulse, ignoring robot self-contact. Contact load and ground-clearance rays are still simulator ground truth; a physical estimator is absent.
@@ -16,19 +16,19 @@ The sandbox is a design investigation, not firmware or hardware validation. Run 
 
 The mass is 6.12 kg: the 6.00 kg drawing lumps plus four 0.03 kg tubes. These are estimates, not measured mass properties. Tire compliance, backlash, electrical power, battery limits, temperature, contact estimator noise and hardware watchdog behavior remain unmodeled. Displayed motor power is mechanical `torque × speed`, not battery draw.
 
-## Corrected default results, 2026-09-23
+## Corrected default results, 2026-09-23 (tire rows re-run 2026-09-25)
 
 | Test | Observed result |
 | --- | --- |
 | Stationary 92% stance | 1.85 N·m per knee; 16.8-inch hip height; wheel loads sum to weight within 2%. |
 | Default 75% ride height | 3.17 N·m per knee; 14.3-inch hip height. |
-| Floor drive, turn, reverse, shoves and height changes | Completes; peak lean 10.7°, wheel torque 1.39 N·m, knee torque 6.9 N·m. |
-| Floor shove sweep | Recovers through tested 8 N·s forward and 5 N·s sideways; larger tested impulses fail. |
+| Floor drive, turn, reverse, shoves and height changes | Completes; peak lean 10.6°, wheel torque 1.45 N·m, knee torque 6.9 N·m. |
+| Floor shove sweep | Recovers through tested 10 N·s forward (8 before the compliant tire) and 5 N·s sideways; larger tested impulses fail. |
 | Half-inch threshold at 0.5 m/s | Crosses. |
-| One-inch threshold | Falls at 0.3, 0.5, 0.75 and 1.5 m/s; crosses at 1.0 m/s. Knee demand reaches the 12 N·m cap. |
+| One-inch threshold | Falls at 0.3, 0.75 and 1.5 m/s; crosses at 0.5 and 1.0 m/s (0.5 fell on the rigid tire). Knee demand reaches the 12 N·m cap. |
 | Park without skid | Refused, remains balancing. |
 | Park with proposed skid | Rests near −17° and stands back up. |
-| Left/right poise request | Enters and returns to two-wheel mode without falling. The sampled free-wheel load ranges 3–24% in the left trial, so this is not single support. |
+| Left/right poise request | Enters and returns to two-wheel mode without falling. The sampled free-wheel load ranges 11–31% in the left trial (planned 15%), so this is not single support. Before the 2026-09-25 contact fix it was 3–24%: the controller measured the mass offset from the **hub**, but a 6" crowned tire cambered 24° touches the floor about 25 mm from under its hub, so the poise sat on the bail-out threshold. With the compliant tire reading load cleanly the bail-out fired and the robot fell; pivoting the one-leg model on the crown contact (`contactOf` in `sim-core.js`) fixed it and cut the planted hip-roll peak from 6.6 to 4.3 N·m. |
 | Experimental full lift | Falls. |
 | 9.5-inch stairs / descent | No working controller; not passed. |
 

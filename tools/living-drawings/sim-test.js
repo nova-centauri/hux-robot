@@ -57,6 +57,49 @@ function rollCheck(shape) {
   return vmax;
 }
 
+/* A cambered crown must touch the floor on the crown, at the point the shared profile predicts,
+   and carry the full load there: no edge catch, no lost contact. */
+function camberCheck(gammaDeg) {
+  const world = new R.World({ x: 0, y: -9.81, z: 0 });
+  world.timestep = 0.0005;
+  const g = world.createRigidBody(R.RigidBodyDesc.fixed().setTranslation(0, -0.1, 0));
+  world.createCollider(R.ColliderDesc.cuboid(2, 0.1, 2), g);
+  const r = 3 * IN;
+  const gamma = gammaDeg * Math.PI / 180;
+  const q = { x: Math.sin(gamma / 2), y: 0, z: 0, w: Math.cos(gamma / 2) }; /* camber about +X: top leans toward +Z... */
+  const b = world.createRigidBody(R.RigidBodyDesc.dynamic().setTranslation(0, r + 0.002, 0).setRotation(q)
+    .setAdditionalMassProperties(3, { x: 0, y: 0, z: 0 }, { x: 0.01, y: 0.01, z: 0.0026 }, { x: 0, y: 0, z: 0, w: 1 }).enabledRotations(false, false, false).setCanSleep(false));
+  const col = world.createCollider(S.tireCollider(R, r, M.wheelWidth * IN).setDensity(0).setFriction(0.7), b);
+  for (let i = 0; i < 3000; i++) world.step();
+  let load = 0, px = 0, pz = 0, n = 0;
+  world.contactPairsWith(col, function (other) {
+    world.contactPair(col, other, function (manifold, flipped) {
+      const up = manifold.normal().y * (flipped ? 1 : -1);
+      for (let i = 0; i < manifold.numContacts(); i++) {
+        const p = flipped ? manifold.localContactPoint2(i) : manifold.localContactPoint1(i);
+        const wp = b.translation();
+        const rp = { x: p.x, y: p.y, z: p.z };
+        /* local → world (body rotation q) */
+        const qq = b.rotation();
+        const wq = rotate(qq, rp);
+        load += manifold.contactImpulse(i) * Math.abs(up);
+        px += wq.x; pz += wq.z; n++;
+      }
+    });
+  });
+  const dt = world.timestep * (world.numSolverIterations + 1) / world.numSolverIterations;
+  const t = b.translation();
+  world.free();
+  const axisY = Math.sin(gamma);
+  const sp = S.spec ? null : null;
+  return { load: load / dt, n: n, zContact: n ? pz / n : NaN, y: t.y, axisY: axisY };
+}
+function rotate(q, p) {
+  const x = q.x, y = q.y, z = q.z, w = q.w;
+  const ix = w * p.x + y * p.z - z * p.y, iy = w * p.y + z * p.x - x * p.z, iz = w * p.z + x * p.y - y * p.x, iw = -x * p.x - y * p.y - z * p.z;
+  return { x: ix * w + iw * -x + iy * -z - iz * -y, y: iy * w + iw * -y + iz * -x - ix * -z, z: iz * w + iw * -z + ix * -y - iy * -x };
+}
+
 /* ---------- robot runs ---------- */
 function run(opts, plan) {
   const sim = new S.Sim(R, M, opts || {});
@@ -93,13 +136,26 @@ function run(opts, plan) {
   mesh.points.forEach((n, i) => { bound[i % 3] = Math.max(bound[i % 3], Math.abs(n) + mesh.crown); });
   assert(Math.abs(2 * bound[0] / IN - 6) < 1e-5 && Math.abs(2 * bound[2] / IN - 1.25) < 1e-5, "tire bounds");
   let stopped = 0;
-  probe.world.impulseJoints.forEach(j => { if (j.limitsEnabled()) stopped++; });
+  probe.world.impulseJoints.forEach(j => { if (typeof j.limitsEnabled === "function" && j.limitsEnabled()) stopped++; });
   assert(stopped === 6, "both legs must have three physical joint stops");
   const robot = probe.robot, left = robot.legs[0];
   assert(robot.hooks.filterContactPair(0, 0, robot.trunk.handle, left.upper.handle) === null, "hip mounting overlap exclusion");
-  assert(robot.hooks.filterContactPair(0, 0, robot.trunk.handle, left.wheel.handle) === R.SolverFlags.COMPUTE_IMPULSE, "wheel/body self-contact must be enabled");
+  assert(robot.hooks.filterContactPair(0, 0, robot.trunk.handle, left.tread.handle) === R.SolverFlags.COMPUTE_IMPULSE, "tire/body self-contact must be enabled");
+  assert(robot.hooks.filterContactPair(0, 0, left.wheel.handle, left.tread.handle) === null, "hub/tread overlap exclusion");
   for (let i = 0; i < 4000; i++) probe.step({});
   assert(probe.last.sensorAgeMs >= 3.9 && probe.last.sensorAgeMs <= 6.1, "4 ms sample delay is not applied");
+  /* Carcass: each tread ring squishes by load / k at rest, and the pad estimate follows. */
+  {
+    const w = probe.s.totalKg * 9.81;
+    probe.last.tires.forEach(function (t, i) {
+      const expect = probe.last.contacts[i].force / probe.s.knobs.tireK;
+      assert(Math.abs(t.deflection - expect) < 0.25 * expect + 1e-4, "tire " + i + " deflection " + (t.deflection * 1000).toFixed(2) + " mm vs " + (expect * 1000).toFixed(2));
+      assert(t.padLength > 0.015 && t.padWidth > 0.006 && t.padWidth < probe.s.wheelW, "pad estimate " + JSON.stringify(t));
+    });
+    found.tireSquishMm = (probe.last.tires[0].deflection * 1000).toFixed(2);
+    found.padIn = (probe.last.tires[0].padLength / IN).toFixed(2) + " × " + (probe.last.tires[0].padWidth / IN).toFixed(2);
+    assert(Math.abs(probe.last.contacts[0].force + probe.last.contacts[1].force - w) < 0.05 * w, "wheel loads should sum to the weight with the tread rings in the chain");
+  }
   assert(probe.last.supportState === "TWO_CONTACT" && !probe.last.singleSupportValidated, "standing is not single support");
   probe.ctrl.estop = true;
   const killed = probe.step({ v: 1 });
@@ -118,6 +174,20 @@ function run(opts, plan) {
   assert(vBall < 0.505, "sphere wheel gained speed free-rolling: " + vBall.toFixed(3));
   const vTire = rollCheck("tire");
   assert(vTire >= 0.49 && vTire < 0.525, "tire gained more than 5% speed: " + vTire);
+  {
+    const tire = probe.s.tire;
+    const camber = [];
+    [0, 10, 20, 30].forEach(function (deg) {
+      const c = camberCheck(deg);
+      const sp = tire.supportFromAxisY(Math.sin(deg * Math.PI / 180));
+      assert(c.n >= 1 && Math.abs(c.load - 3 * 9.81) < 0.1 * 3 * 9.81, "cambered crown at " + deg + "° lost its load: " + JSON.stringify(c));
+      const err = Math.abs(Math.abs(c.zContact) - Math.abs(sp.z));
+      assert(err < 0.0025, "contact at " + deg + "° camber is " + (c.zContact * 1000).toFixed(1) + " mm sideways, profile says " + (sp.z * 1000).toFixed(1));
+      assert(Math.abs(c.y - sp.depth) < 0.004, "cambered wheel sits at " + (c.y * 1000).toFixed(1) + " mm, profile says " + (sp.depth * 1000).toFixed(1));
+      camber.push(deg + "°: " + (Math.abs(c.zContact) * 1000).toFixed(1) + " mm in from the centre plane");
+    });
+    found.crownContact = camber;
+  }
   found.freeRoll = { tire: vTire.toFixed(3), sphere: vBall.toFixed(3), cylinder: vCyl.toFixed(3) };
 
   /* Stand still. Contact force must add up to the weight (checks the (n+1)/n correction). */

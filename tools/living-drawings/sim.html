@@ -146,6 +146,12 @@
           <label>Tire friction μ <output id="k_muOut"></output>
             <input id="k_mu" type="range" min="0.3" max="1.3" step="0.05" value="0.7">
           </label>
+          <label>Tire carcass stiffness <output id="k_tireKOut"></output>
+            <input id="k_tireK" type="range" min="10000" max="120000" step="1000" value="40000">
+          </label>
+          <label>Tire damping ratio <output id="k_tireZetaOut"></output>
+            <input id="k_tireZeta" type="range" min="0.05" max="0.8" step="0.05" value="0.2">
+          </label>
           <label>Mass, × the 6 kg lumps <output id="k_massScaleOut"></output>
             <input id="k_massScale" type="range" min="0.67" max="1.5" step="0.01" value="1">
           </label>
@@ -184,7 +190,7 @@
           <li><b>Reflexes.</b> A leg that is hit hard at speed hops its wheel up for about a tenth of a second. A wheel stopped dead by an edge at walking pace hops too. When the mass runs away, the legs swing and the hip rolls step the wheels under it. The current implementation uses ideal simulated state.</li>
           <li><b>One wheel.</b> Left/right buttons request a planned sequence: stand tall, stiffen, shift the mass over the planted wheel until the other carries about 15%, hold, then centre. The HUD reports actual support, requiring both low free-wheel load and ground clearance before reporting single support. Full lift remains experimental.</li>
           <li><b>Balance.</b> LQR on the lean of the mass over the axle, rebuilt as the legs change height, at 500 Hz. Roll levelling by leg length and leg force. It uses delayed ideal state and contact samples. A physical state and load estimator remains to be implemented.</li>
-          <li><b>Tire.</b> Contact uses a rounded convex tire with 6″ diameter and 1.25″ width. Numerical rolling error is measured separately. The crown is an assumption; pressure and carcass compliance remain unmeasured.</li>
+          <li><b>Tire.</b> One shared profile (<code>tire.js</code>): a 6″ × 1.25″ tread with a full-round crown, the shape a scooter pneumatic takes on a narrow rim. The collision hull, the mesh and the 2D projection all come from it, so the contact point walks around the crown as the wheel cambers instead of catching an edge. Each tire is a tread ring on a carcass spring (stiffness and damping are knobs; 40 kN/m is a guess for a high-pressure 6×1.25, not a measurement), so the wheel squishes and shifts sideways on the hub and the HUD reports the pad that deflection implies. Rapier still resolves the contact at points; the pad is an estimate, not a resolved patch. The ring's rolling error is measured separately.</li>
           <li><b>Not modelled.</b> Motor inertia through the gearbox, backlash, belt stretch, tube flex, battery sag, current limits, temperature and sensor noise. Delay and drive response are adjustable assumptions, not measured hardware. No stair-climb controller yet: the stair is there to drive up to.</li>
         </ul>
         <p class="hint">Findings and how to rerun them: <code>docs/research/sim-sandbox.md</code>. Headless check: <code>node tools/living-drawings/sim-test.js</code>.</p>
@@ -195,6 +201,7 @@
       Geometry and lump masses come from <code>kin.js</code>, the same model the drawings use (<code>docs/research/leg-geometry.md</code>). The 3D body is 8" long, 7" wide and 6" above the hips, the same drawing assumptions. The torque limits are classes, not parts. Needs a network connection the first time it opens: three.js and Rapier load from jsDelivr.
     </footer>
   </div>
+  <script src="tire.js"></script>
   <script src="spatial.js"></script>
   <script src="kin.js"></script>
   <script src="sim-core.js"></script>

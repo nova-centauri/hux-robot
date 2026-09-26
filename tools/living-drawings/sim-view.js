@@ -246,10 +246,17 @@
       const dz = s.wheelLat - s.hipLat;
       add(l, new THREE.CylinderGeometry(0.006, 0.006, dz, 12), mat(C.hub), { x: 0, y: -s.L, z: side * dz / 2 }, alongZ);
       const w = byKind["wheel" + side].g;
-      /* Visual only: flat cylinder shoulders. Collision is sim-core tireCollider (rounded convex), not a motorcycle crown. */
-      add(w, new THREE.CylinderGeometry(s.R, s.R, s.wheelW, 48), mat(C.tire, { roughness: 0.95 }), null, alongZ);
+      const t = (byKind["tread" + side] || byKind["wheel" + side]).g;
+      /* Tire: the shared crown profile (tire.js), turned about the axle. It rides on the tread
+         ring, so the carcass compliance shows as the tire moving on the hub. Same profile as
+         the collision hull. */
+      const prof = s.tire.profile(40).map(function (p) { return new THREE.Vector2(p.r, p.u); });
+      const lathe = new THREE.LatheGeometry(prof, 64);
+      add(t, lathe, mat(C.tire, { roughness: 0.95, side: THREE.DoubleSide }), null, alongZ);
+      /* rim band inside the bead */
+      add(t, new THREE.CylinderGeometry(s.tire.bead, s.tire.bead, s.wheelW * 0.55, 48, 1, true), mat(C.hub, { metalness: 0.4, roughness: 0.5, side: THREE.DoubleSide }), null, alongZ);
       add(w, new THREE.CylinderGeometry(s.motorWheelD / 2, s.motorWheelD / 2, s.wheelW + 0.004, 32), mat(C.hub, { metalness: 0.3, roughness: 0.4 }), null, alongZ);
-      add(w, new THREE.BoxGeometry(s.R * 1.7, 0.008, s.wheelW + 0.008), mat(C.body), null);
+      add(w, new THREE.BoxGeometry(s.tire.bead * 1.9, 0.008, s.wheelW * 0.5), mat(C.body), null);
     });
 
     comMarker = add(robotGroup, new THREE.SphereGeometry(0.014, 16, 12), mat(C.com, { emissive: C.com, emissiveIntensity: 0.4 }), null);
@@ -285,11 +292,15 @@
     }
     const weight = sim.s.totalKg * 9.81;
     sim.robot.legs.forEach(function (leg, i) {
-      const t = leg.wheel.translation();
+      const t = leg.tread.translation();
       const f = o && o.contacts ? o.contacts[i].force : 0;
       const dot = contactDots[i];
       dot.visible = f > 3;
-      dot.position.set(t.x, t.y - sim.s.R + 0.002, t.z);
+      /* On the crown's lowest point, which walks sideways as the wheel cambers. */
+      const axis = leg.wheel.rotation();
+      const ax = new THREE.Vector3(0, 0, 1).applyQuaternion(new THREE.Quaternion(axis.x, axis.y, axis.z, axis.w));
+      const sp = sim.s.tire.supportFromAxisY(ax.y);
+      dot.position.set(t.x, t.y - sp.depth + 0.002, t.z + sp.z * Math.sign(ax.z || 1));
       const k = 0.5 + Math.min(1.5, f / (weight / 2));
       dot.scale.set(k, k, k);
     });
@@ -472,6 +483,8 @@
     tauHip: function (x) { return x.toFixed(1) + " N·m"; },
     tauRoll: function (x) { return x.toFixed(1) + " N·m"; },
     mu: function (x) { return x.toFixed(2); },
+    tireK: function (x) { return (x / 1000).toFixed(0) + " kN/m · " + (sim.s.totalKg * 9.81 / 2 / x * 1000).toFixed(2) + " mm at half the weight"; },
+    tireZeta: function (x) { return x.toFixed(2); },
     massScale: function (x) { return (6 * x).toFixed(1) + " kg lumps"; },
     bodyCom: function (x) { return x.toFixed(1) + "\""; },
     legHz: function (x) { return x.toFixed(1) + " Hz"; },
@@ -605,6 +618,8 @@
       row("Hip roll", deg(shift)) +
       row("Wheel load L / R", fL.toFixed(0) + " / " + fR.toFixed(0) + " N") +
       row("", (100 * fL / weight).toFixed(0) + "% / " + (100 * fR / weight).toFixed(0) + "% of " + s.totalKg.toFixed(1) + " kg") +
+      (o.tires ? row("Tire squish L / R", (o.tires[0].deflection * 1000).toFixed(1) + " / " + (o.tires[1].deflection * 1000).toFixed(1) + " mm · " + (o.tires[0].lateral * 1000).toFixed(1) + " / " + (o.tires[1].lateral * 1000).toFixed(1) + " mm sideways") +
+        row("Contact pad L / R", (o.tires[0].padLength / IN).toFixed(2) + "×" + (o.tires[0].padWidth / IN).toFixed(2) + "\" / " + (o.tires[1].padLength / IN).toFixed(2) + "×" + (o.tires[1].padWidth / IN).toFixed(2) + "\" · camber " + (o.tires[0].camber * 180 / Math.PI).toFixed(0) + "° / " + (o.tires[1].camber * 180 / Math.PI).toFixed(0) + "°") : "") +
       row("Mechanical power magnitude", o.power.toFixed(0) + " W") +
       row("Support", o.supportState + " · " + o.singleSupportSeconds.toFixed(2) + " s single") +
       row("Sensor age", o.sensorAgeMs.toFixed(1) + " ms") +

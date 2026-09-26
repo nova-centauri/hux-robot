@@ -10,15 +10,16 @@
   const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
   const distance = (a, b) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
   const wrap = a => Math.atan2(Math.sin(a), Math.cos(a));
+  const Tire = root.HuxTire || require("./tire.js");
   function create(M) {
     const offset = M.track / 2 - M.hipLateral;
-    // Rounded disk with a 2 mm axial core, matching the sandbox collision profile.
-    const coreHalf = 0.001 / 0.0254;
-    const crown = M.wheelWidth / 2 - coreHalf;
+    // Shared tire cross-section (tire.js): round crown by default. The sandbox collision hull
+    // and mesh come from the same profile, so 2D and 3D agree on where the rubber touches.
+    const tire = Tire.create({ R: M.wheelR, width: M.wheelWidth, crown: M.tireCrown, unit: "in" });
     function tireSupport(roll) {
-      const c = Math.cos(roll), s = Math.sin(roll), major = M.wheelR - crown;
-      return { y: -major * Math.abs(c) - coreHalf * Math.abs(s) - crown,
-        z: -major * Math.sign(c) * s + coreHalf * Math.sign(s) * c };
+      // Hip roll + leans the top of the leg toward +z; the contact walks the other way.
+      const sp = tire.support(roll);
+      return { y: -sp.depth, z: sp.z };
     }
     function fk(hip, side, q) {
       const c = Math.cos(q.roll), s = Math.sin(q.roll), L = M.link;
@@ -115,7 +116,7 @@
       result.valid = result.issues.length === 0;
       return result;
     }
-    return { fk, ik, project, measure, tireSupport, offset, coreHalf, crown, limits };
+    return { fk, ik, project, measure, tireSupport, tire, offset, crown: tire.crown, limits };
   }
   const api = { create, limits, distance };
   root.HuxSpatial = api;

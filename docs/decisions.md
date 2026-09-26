@@ -241,6 +241,10 @@ Steve asked to log the 2026-09-25 planning conversation while hardware and plann
 - **Tire crown.** Sandbox wheels look like a flat ~90° edge profile, not a motorcycle-round rubber crown. A real Hux tire should keep a rubber contact pad when tipped / cambered. A hard edge messes lean / one-leg physics. Real world may be better; the twin **must** match the crown. Sep 23 already moved sphere → rounded convex 6×1.25 hull; visual is still `THREE.CylinderGeometry` (flat shoulders) and collision is not a true torus. Half-fixed. Twin / sandbox honesty requirement.
 - **Website vs docs.** Living-drawings F765-Wing / Pi 5 pages are a concrete **bench plan** Steve wrote. Canonical docs still say **FC TBD** ([`electronics.md`](electronics.md), [`software.md`](software.md)). Keep website language from looking more locked than the plan.
 
+### 2026-09-25 — tire crown and contact pad fixed in the sandbox
+
+Steve: the tire profile / contact pad notes above "need to get fixed". Done in `tools/living-drawings/`: one shared cross-section (`tire.js`, full-round crown by default, `M.tireCrown` flattens it) now builds the Rapier hull, the Three.js lathe mesh and the 2D projection, so the flat-shoulder cylinder is gone and the contact walks the crown under camber (tested at 0–30°). Each wheel is a hub plus a **tread ring on a carcass spring** (`tireK` 40 kN/m, `tireZeta` 0.2 — guesses, knobs); the HUD shows squish and the implied pad. Side finding: the one-leg poise controller pivoted on the **hub**, but a cambered crown touches an inch away from under it — the poise was on its own bail-out threshold, and the compliant tire exposed it (fell). Pivoting on the crown contact (`contactOf`) fixed the poise (free-wheel load 11–31% vs 3–24%, planted hip roll 4.3 vs 6.6 N·m). Regression suite updated and passing. **No lock changed. No spend.** The tire stiffness is unmeasured; measure a real 6×1.25 before trusting the pad numbers. The twin-contract requirement (crown contact) is now met by the sandbox, which is still a design toy, not the twin. Findings: [`research/sim-sandbox.md`](research/sim-sandbox.md).
+
 ---
 
 ## How to log the next merge

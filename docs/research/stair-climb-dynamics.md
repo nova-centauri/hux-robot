@@ -38,7 +38,7 @@ No spatial stair controller or descent controller has been implemented. The sand
 
 Steve, 2026-09-25: he does **not** like the hip-pivot unload that puts the robot onto one foot. It seems to work poorly. **Do not lift hip roll from V1** (R16). Log the dislike and keep the rethink open.
 
-Bad feel may be the wrong stair trajectory, the two-contact poise, or sim contact (flat visual shoulders / no motorcycle crown — [`sim-sandbox.md`](sim-sandbox.md)), not proof the DOF is useless. Separate:
+Bad feel may be the wrong stair trajectory, the two-contact poise, or sim contact, not proof the DOF is useless. One concrete piece of it was found and fixed on 2026-09-25: the one-leg controller pivoted on the hub, and a crowned tire cambered 24° touches the floor an inch from under its hub, so the poise was sitting on its own bail-out threshold ([`sim-sandbox.md`](sim-sandbox.md)). Separate:
 
 1. Need some lateral CoG path to unload a wheel.
 2. Is hip roll the cheapest DOF for that path.

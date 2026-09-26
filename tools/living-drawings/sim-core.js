@@ -8,12 +8,16 @@
   const IN = 0.0254;
   const G = 9.81;
   const SHARED = (root.HuxSpatial || require("./spatial.js")).limits;
+  const Tire = root.HuxTire || require("./tire.js");
 
   /* Working assumptions for the actuators. Not parts. */
   const KNOBS = {
     massScale: 1,      /* multiplies every lump */
     bodyCom: 0,        /* in, body lump forward (+) of the hip axes */
     mu: 0.7,           /* tire to floor friction */
+    tireK: 40000,      /* N/m, carcass stiffness of a 6×1.25 high-pressure pneumatic. Unmeasured; 25–60 kN/m is the plausible band */
+    tireZeta: 0.2,     /* damping ratio of the tread ring on that stiffness. Pneumatics are lightly damped */
+    tireCompliance: true, /* false = the rigid crown hull on the hub, as before 2026-09-25 */
     tauWheel: SHARED.tauWheel,     /* N·m peak per in-wheel motor (same as the stair-climb knob) */
     wheelNoLoad: 40,   /* rad/s assumed output no-load speed; no motor/4S match verified */
     tauKnee: SHARED.tauKnee,       /* N·m peak; the stair climb says ~10.6 holding */
@@ -98,7 +102,12 @@
       mKnee: lump.knee * ms,
       mTube: 0.03 * ms,
       mWheel: lump.wheel * ms,
+      /* The 0.35 kg wheel lump split into the tread ring (tire + tube + rim band, what moves on
+         the carcass) and the hub (motor, bearings). A picture, not weighed parts. */
+      mTread: 0.20 * ms,
+      mHub: 0.15 * ms,
       jWheel: 0.65, /* J = 0.65 m R², same estimate as leg-geometry.md */
+      tire: Tire.create({ R: M.wheelR * IN, width: M.wheelWidth * IN, crown: (M.tireCrown || M.wheelWidth / 2) * IN }),
       motorKnee: { w: M.motorKnee.w * IN, h: M.motorKnee.h * IN, t: M.motorKnee.t * IN },
       motorSwing: { w: M.motorSwing.w * IN, h: M.motorSwing.h * IN, t: M.motorSwing.t * IN },
       motorRollD: M.motorRollD * IN,
@@ -235,18 +244,24 @@
     return v(m * (b * b + c * c) / 12, m * (a * a + c * c) / 12, m * (a * a + b * b) / 12);
   }
 
-  /* Rounded convex 6×1.25 hull (2026-09-23). Not a toroidal motorcycle crown; no carcass compliance.
-     Visual in sim-view.js is still CylinderGeometry (flat shoulders). See docs/research/sim-sandbox.md. */
-  function tireVertices(radius, width) {
-    const core = 0.001, crown = width / 2 - core, points = [];
-    for (const z of [-core, core]) for (let i = 0; i < 256; i++) {
-      const a = 2 * Math.PI * i / 256;
-      points.push((radius - crown) * Math.cos(a), (radius - crown) * Math.sin(a), z);
-    }
-    return { points: new Float32Array(points), crown: crown };
+  /* Collision hull from the shared tire profile (tire.js): core rings plus one rounding
+     radius. With the default full-round crown this is a torus-like rounded disk — the
+     contact point walks around the crown as the wheel cambers instead of catching an edge.
+     Carcass compliance is the tread ring's spring in buildRobot, not the hull. */
+  function tireVertices(radius, width, crown) {
+    const tire = Tire.create({ R: radius, width: width, crown: crown || width / 2 });
+    const hull = tire.hull(0.001);
+    const points = [];
+    hull.rings.forEach(function (ring) {
+      for (let i = 0; i < 256; i++) {
+        const a = 2 * Math.PI * i / 256;
+        points.push(ring.r * Math.cos(a), ring.r * Math.sin(a), ring.u);
+      }
+    });
+    return { points: new Float32Array(points), crown: hull.round, tire: tire };
   }
-  function tireCollider(R, radius, width) {
-    const mesh = tireVertices(radius, width);
+  function tireCollider(R, radius, width, crown) {
+    const mesh = tireVertices(radius, width, crown);
     const shape = R.ColliderDesc.roundConvexHull(mesh.points, mesh.crown);
     if (!shape) throw new Error("Invalid tire hull");
     return shape;
@@ -331,13 +346,38 @@
       const axle = add(knee, v(s.L * Math.sin(qLow), -s.L * Math.cos(qLow), 0));
       const dz = side * (s.wheelLat - s.hipLat);
       const wheelPos = add(axle, v(0, 0, dz));
-      const iAx = s.jWheel * s.mWheel * s.R * s.R;
-      const iTr = s.mWheel * (3 * s.R * s.R + s.wheelW * s.wheelW) / 12;
-      const wheel = body(wheelPos, null, s.mWheel, v(0, 0, 0), v(iTr, iTr, iAx));
-      /* Rounded convex disk: actual 6 x 1.25 inch bounds. The 256-sided core
-         avoids the analytic cylinder's large artificial acceleration in Rapier 0.20.
-         Numerical rolling error is tested separately; tire compliance is still absent. */
-      const wheelCol = collide(tireCollider(R, s.R, s.wheelW), wheel, s.knobs.mu);
+      const iAxAll = s.jWheel * s.mWheel * s.R * s.R;
+      const iTrAll = s.mWheel * (3 * s.R * s.R + s.wheelW * s.wheelW) / 12;
+      const compliant = s.knobs.tireCompliance !== false;
+      /* Hub: the in-wheel motor. Tread: tire, tube and rim band on the carcass spring.
+         Without compliance the hub carries the whole lump and the crown hull. */
+      const mHub = compliant ? s.mHub : s.mWheel;
+      const mTread = compliant ? s.mTread : 0;
+      const iAxTread = mTread * s.R * s.R;
+      const iAxHub = Math.max(1e-5, iAxAll - iAxTread);
+      const iTrTread = mTread * s.R * s.R / 2;
+      const iTrHub = Math.max(1e-5, iTrAll - iTrTread);
+      const wheel = body(wheelPos, null, mHub, v(0, 0, 0), v(iTrHub, iTrHub, iAxHub));
+      let tread = wheel;
+      let wheelCol;
+      let jTread = null;
+      let jSpring = null;
+      if (compliant) {
+        tread = body(wheelPos, null, mTread, v(0, 0, 0), v(iTrTread, iTrTread, iAxTread));
+        wheelCol = collide(tireCollider(R, s.R, s.wheelW, s.tire.crown), tread, s.knobs.mu);
+        /* Ring rides with the hub in rotation (torque transfers, torsionally stiff carcass)
+           and floats in translation on an isotropic spring: radial give makes the pad, lateral
+           give is the sidewall. Real tires are softer sideways than radially; one stiffness is
+           the honest first cut. Damping is set from the ring mass so the ring itself is calm. */
+        const lock = R.JointAxesMask.AngX | R.JointAxesMask.AngY | R.JointAxesMask.AngZ;
+        jTread = world.createImpulseJoint(R.JointData.generic(v(0, 0, 0), v(0, 0, 0), Z, lock), wheel, tread, true);
+        const c = 2 * s.knobs.tireZeta * Math.sqrt(s.knobs.tireK * mTread);
+        jSpring = world.createImpulseJoint(R.JointData.spring(0, s.knobs.tireK, c, v(0, 0, 0), v(0, 0, 0)), wheel, tread, true);
+        jTread.setContactsEnabled(false);
+        jSpring.setContactsEnabled(false);
+      } else {
+        wheelCol = collide(tireCollider(R, s.R, s.wheelW, s.tire.crown), wheel, s.knobs.mu);
+      }
       wheelCol.setFriction(s.knobs.mu);
 
       /* Chain: body → yoke (roll, X) → upper (swing, Z) → lower (knee, Z) → wheel (Z).
@@ -356,10 +396,12 @@
       parts.push({ kind: "yoke", rb: yoke, side: side, ixx: 2e-4 });
       parts.push({ kind: "upper", rb: upper, side: side, ixx: iPerpU });
       parts.push({ kind: "lower", rb: lower, side: side, ixx: iPerpL });
-      parts.push({ kind: "wheel", rb: wheel, side: side, ixx: iTr });
+      parts.push({ kind: "wheel", rb: wheel, side: side, ixx: iTrHub });
+      if (compliant) parts.push({ kind: "tread", rb: tread, side: side, ixx: iTrTread });
       legs.push({
         side: side,
-        yoke: yoke, upper: upper, lower: lower, wheel: wheel, wheelCol: wheelCol,
+        yoke: yoke, upper: upper, lower: lower, wheel: wheel, tread: tread, wheelCol: wheelCol,
+        compliant: compliant,
         joints: {
           roll: { parent: trunk, child: yoke, axis: X },
           hip: { parent: yoke, child: upper, axis: Z },
@@ -372,7 +414,8 @@
     const adjacency = new Set();
     function exclude(a, b) { adjacency.add([a.handle, b.handle].sort((x, y) => x - y).join(":")); }
     legs.forEach(l => { exclude(trunk, l.yoke); exclude(trunk, l.upper);
-      exclude(l.yoke, l.upper); exclude(l.upper, l.lower); exclude(l.lower, l.wheel); });
+      exclude(l.yoke, l.upper); exclude(l.upper, l.lower); exclude(l.lower, l.wheel);
+      if (l.tread !== l.wheel) { exclude(l.lower, l.tread); exclude(l.wheel, l.tread); } });
     const hooks = {
       filterContactPair: function (a, b, ba, bb) {
         return adjacency.has([ba, bb].sort((x, y) => x - y).join(":")) ? null : R.SolverFlags.COMPUTE_IMPULSE;
@@ -389,6 +432,17 @@
   function lv(rb) { return read(rb, "v", () => rb.linvel()); }
   function av(rb) { return read(rb, "w", () => rb.angvel()); }
   function wc(rb) { return read(rb, "c", () => rb.worldCom()); }
+  /** Where a crowned tire actually touches the floor: the tread ring's centre, down by the
+      profile's depth and sideways by its camber walk. A cambered wheel's contact is not under
+      its hub — at 24° of lean it is about an inch off — and the one-leg pivot has to be here. */
+  function contactOf(leg, tire) {
+    const a = qRot(rot(leg.wheel), Z);
+    const ah = Math.hypot(a.x, a.z);
+    const sp = tire.support(Math.asin(Math.min(1, Math.abs(a.y))));
+    const c = tr(leg.tread);
+    const lateral = ah > 1e-6 ? mul(v(a.x / ah, 0, a.z / ah), -sp.z * Math.sign(a.y || 1)) : v(0, 0, 0);
+    return v(c.x + lateral.x, c.y - sp.depth, c.z + lateral.z);
+  }
   /** Joint angle about the parent's local axis, and the relative rate about it. */
   function jointState(j) {
     const qp = rot(j.parent);
@@ -860,9 +914,8 @@
     const support = contacts.map(c => c.force > s.totalKg * G * 0.05);
     const clear = r.legs.map(leg => {
       const axisY = qRot(rot(leg.wheel), Z).y;
-      const crown = s.wheelW / 2 - 0.001;
-      const depth = (s.R - crown) * Math.sqrt(Math.max(0, 1 - axisY * axisY)) + 0.001 * Math.abs(axisY) + crown;
-      const hit = world.castRay(new r.R.Ray(tr(leg.wheel), v(0, -1, 0)), 2, true, undefined, groups(GROUP_WORLD, GROUP_WORLD));
+      const depth = s.tire.supportFromAxisY(axisY).depth;
+      const hit = world.castRay(new r.R.Ray(tr(leg.tread), v(0, -1, 0)), 2, true, undefined, groups(GROUP_WORLD, GROUP_WORLD));
       return hit ? hit.timeOfImpact - depth : Infinity;
     });
     const leftOnly = support[0] && contacts[1].force < s.totalKg * G * 0.02 && clear[1] > 0.01;
@@ -905,6 +958,19 @@
     o.kg = um.m + 2 * s.mWheel;
     o.K = this.K.slice();
     o.contacts = contacts;
+    /* Carcass state: tread ring offset from the hub (radial in the wheel plane, lateral along
+       the axle) and the pad that deflection implies. Estimates for the readouts, not a contact
+       patch the solver resolves — Rapier still touches the ground at points. */
+    o.tires = r.legs.map(function (leg, i) {
+      if (!leg.compliant) return { deflection: 0, lateral: 0, padLength: 0, padWidth: 0, camber: 0 };
+      const d = sub(tr(leg.tread), tr(leg.wheel));
+      const axis = qRot(rot(leg.wheel), Z);
+      const lateral = dot(d, axis);
+      const radial = len(sub(d, mul(axis, lateral)));
+      const camber = Math.asin(Math.max(-1, Math.min(1, axis.y)));
+      const pad = s.tire.pad(Math.max(0, contacts[i].force), s.knobs.tireK, camber);
+      return { deflection: radial, lateral: lateral, padLength: pad.length, padWidth: pad.width, camber: camber };
+    });
     o.fwd = fwd;
     o.oneErr = this.one ? this.one.e : 0;
     o.oneLoad = this.one ? this.one.freeLoad : 0;
@@ -1104,21 +1170,21 @@
   Controller.prototype.lateralModel = function (st, right) {
     const s = this.s;
     const r = this.robot;
-    const wheelCenter = tr(st.planted.wheel);
+    const pivot = contactOf(st.planted, s.tire); /* the crown's contact, not the hub */
     const hip = tr(st.planted.yoke);
     function proj(p, o) { const d = sub(p, o); return { z: dot(d, right), y: d.y }; }
     const byRb = new Map();
     r.parts.forEach(function (p) { byRb.set(p.rb, p); });
     const link1 = [st.planted.wheel, st.planted.lower, st.planted.upper, st.planted.yoke];
     const link2 = [r.trunk, st.free.yoke, st.free.upper, st.free.lower, st.free.wheel];
-    const rh = proj(hip, wheelCenter);
+    const rh = proj(hip, pivot);
     const M = [[0, 0], [0, 0]];
     const H = [[0, 0], [0, 0]];
     const gV = [0, 0];
     link1.forEach(function (rb) {
       const m = rb.mass();
-      const c = proj(wc(rb), wheelCenter);
-      const jz = s.R + c.y;
+      const c = proj(wc(rb), pivot);
+      const jz = c.y;
       const jy = -c.z;
       M[0][0] += m * (jz * jz + jy * jy) + byRb.get(rb).ixx;
       gV[0] += m * G * (-c.z);
@@ -1128,7 +1194,7 @@
       const m = rb.mass();
       const c = proj(wc(rb), hip);
       const I = byRb.get(rb).ixx;
-      const j1 = [s.R + rh.y + c.y, -rh.z - c.z];
+      const j1 = [rh.y + c.y, -rh.z - c.z];
       const j2 = [c.y, -c.z];
       M[0][0] += m * (j1[0] * j1[0] + j1[1] * j1[1]) + I;
       M[0][1] += m * (j1[0] * j2[0] + j1[1] * j2[1]) + I;
@@ -1182,13 +1248,13 @@
     const st = this.one;
     st.t += dt;
     const s = this.s;
-    const pc = tr(st.planted.wheel);
+    const pc = contactOf(st.planted, s.tire);   /* the crown's contact walks with camber */
     /* whole robot, wheels included: the free wheel alone moves the balance point ~17 mm */
     const mw = s.mWheel;
     const mt = um.m + 2 * mw;
-    const cAll = mul(add(add(mul(um.c, um.m), mul(pc, mw)), mul(tr(st.free.wheel), mw)), 1 / mt);
+    const cAll = mul(add(add(mul(um.c, um.m), mul(tr(st.planted.wheel), mw)), mul(tr(st.free.wheel), mw)), 1 / mt);
     const vAll = mul(add(add(mul(um.cv, um.m), mul(lv(st.planted.wheel), mw)), mul(lv(st.free.wheel), mw)), 1 / mt);
-    const e = dot(sub(cAll, pc), right);          /* + = mass right of the planted tire */
+    const e = dot(sub(cAll, pc), right);          /* + = mass right of the planted tire's contact */
     const ev = dot(sub(vAll, lv(st.planted.wheel)), right);
     const leftPlanted = st.planted === this.robot.legs[0];
     const iP = leftPlanted ? 0 : 1;
@@ -1287,7 +1353,7 @@
          hip), body-to-leg q2, and the holding torque. An integral on the mass offset trims it. */
       const planted = st.planted.joints.roll;
       const js = jointState(planted);
-      const wcP = tr(st.planted.wheel);
+      const wcP = contactOf(st.planted, s.tire);
       const hipP = tr(st.planted.yoke);
       const q1 = Math.atan2(dot(sub(hipP, wcP), right), hipP.y - wcP.y);
       const q2 = -js.q;

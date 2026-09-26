@@ -6,6 +6,9 @@
     asOf: "2026-09-22",
     wheelOd: 6,
     wheelWidth: 1.25,
+    /* Tread cross-section radius. width/2 is a full round (scooter / motorcycle profile), which is
+       what a 6×1.25 pneumatic on a narrow rim looks like. Larger = flatter dome. See tire.js. */
+    tireCrown: 0.625,
     link: 7.5,
     bodyAboveHip: 6,
     bodyLength: 8,

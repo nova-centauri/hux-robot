@@ -57,7 +57,7 @@ upper tread _____________________________  9.5"
 ____________|__________________|__________  this tread
 ```
 
-On a code 10" going the same 6" tire has **±2"** of roll. On an 11" going, **±2.5"**. The landing tolerance is that same gap: the raised axle has to arrive within **±1.75"** of the center of the next 9.5" slot. The climb dynamics say to spend it asymmetrically: aim at the **rear** of the slot, because a forward landing error is what makes the step impossible ([`stair-climb-dynamics.md`](stair-climb-dynamics.md)). An 8" tire would have demanded **±0.75"**, which is a precision place, not a pivot.
+On a code 10" going the same 6" tire has **±2"** of roll. On an 11" going, **±2.5"**. Those gaps are rubber-to-nosing at the tire's full width; the round crown actually touches on a pad about **0.4" wide** at rest, and as the wheel cambers the contact walks across the crown by about **(R − crown)·sin γ ≈ 0.4" per 10°** ([`stair-climb-dynamics.md`](stair-climb-dynamics.md), `tools/living-drawings/tire.js`). The landing tolerance is that same gap: the raised axle has to arrive within **±1.75"** of the center of the next 9.5" slot. The climb dynamics say to spend it asymmetrically: aim at the **rear** of the slot, because a forward landing error is what makes the step impossible ([`stair-climb-dynamics.md`](stair-climb-dynamics.md)). An 8" tire would have demanded **±0.75"**, which is a precision place, not a pivot.
 
 A 12" spoked kids wheel cannot enter the slot. Tire width stays **~1–1.25"**. Overall stance is **~14"**, and those tires sit outside the head.
 
