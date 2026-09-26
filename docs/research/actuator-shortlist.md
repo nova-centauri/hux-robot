@@ -9,7 +9,7 @@ Hux numbers used (settled geometry, 6 kg example, [`leg-geometry.md`](leg-geomet
 | Wheel (×2) | **~3 N·m** | ~1 N·m | Balance actuator: torque bandwidth and low reflected inertia matter more than torque. Encoder mandatory. Packaged at the hub inside / beside a 6 × 1.25" tire. |
 | Knee (×2) | ~12 N·m | **~10.6 N·m for ~1 s** standing up over the front wheel; 4.4 N·m at balance stance | The sizing joint. A spring can take the 2.2 N·m two-leg crouch, not the stand-up. |
 | Hip swing (×2) | ~4 N·m | ~3 N·m | Position + speed for the step cycle. |
-| Hip roll (×2) | **~9.5 N·m** if a wheel unloads with the mass centred | ~4.3 N·m planted poise (sandbox) | Backdrivable preferred; high-rate torque mode. |
+| Hip roll (×2) | **12–13 N·m** through a hop | **8.3 N·m continuous whenever a wheel is up** at the drawn 5.4" hip offset (5.4 N·m at 3.5", 3.1 at 2") — [`one-leg-stance.md`](one-leg-stance.md), same day | The cantilever of body + free leg about the planted hip axis. The 4.3 N·m "poise" was a two-contact stance. **This is now the sizing joint alongside the knee**, and the hip offset is the cheapest lever. |
 
 ## 1. The seven things that decide it
 
@@ -29,11 +29,11 @@ Prices are US retail seen today; specs from vendor tables. **Verify the minimum 
 
 | Actuator | Rated / peak | Ratio | Mass | Input V | Encoders | Protocol | Price | Hux fit |
 | --- | ---: | ---: | ---: | ---: | --- | --- | ---: | --- |
-| **RobStride 00** (CyberGear successor) | 5 / 14 N·m | 10:1 | 310 g | **24–60 V** | 2 | CAN 2.0, 1 Mbit, open docs + drivers | ~$160 | Knee (tight at 10.6 hold vs 5 rated — 2×), hip roll, hip swing. Not the wheel (10:1). |
+| **RobStride 00** (CyberGear successor) | 5 / 14 N·m | 10:1 | 310 g | **24–60 V** | 2 | CAN 2.0, 1 Mbit, open docs + drivers | ~$160 | Hip swing. Knee only at 2× rated on the hold. **Not hip roll at 5.4" hips** (8.3 N·m continuous > 5 rated). Not the wheel (10:1). |
 | **RobStride 01** | 7 / 17 N·m | 7.75:1 | 380 g | **24–48 V** | 1 | same | ~$150–170 | Knee with margin; single encoder = homing. |
-| **RobStride 02** | 7 / 17 N·m | 7.75:1 | 380 g | **24–60 V** | 2 | same | ~$180–200 | **Best knee**: 7 rated covers the 10.6 hold at 1.5×, dual encoder, 7.75:1 is a bit more backdrivable than 00. |
+| **RobStride 02** | 7 / 17 N·m | 7.75:1 | 380 g | **24–60 V** | 2 | same | ~$180–200 | **Best knee**: 7 rated covers the 10.6 hold at 1.5×, dual encoder. **Hip roll only if the hip offset comes in to ≤ 3.5"** (5.4 N·m hold, ~8 peak); at 5.4" the 8.3 N·m hold is above rated. |
 | **RobStride 05** | 1.8 / 5.5 N·m | 7.75:1 | **191 g** | **15–60 V** | 2 | same | ~$100 | **Wheel candidate**: 5.5 peak covers 3 N·m; lightest; low ratio; and it runs on 6S. Also honest for hip swing (3 N·m rated needed — marginal). |
-| RobStride 06 | 11 / 36 N·m | 9:1 | 621 g | 15–60 V | 2 | same | ~$170 | Over-torqued and heavy for Hux; only if the whole robot grows. |
+| RobStride 06 | 11 / 36 N·m | 9:1 | 621 g | 15–60 V | 2 | same | ~$170 | **Hip roll at the drawn 5.4" offset**: 11 rated covers the 8.3 hold, 36 peak covers 13. Costs +240 g per hip, high on the body. Overkill everywhere else. |
 | **CubeMars AK60-6 V3** | 3 / 9 N·m | 6:1 | 380 g | 24 V or 48 V class (min not on store page — manual) | 1 (21-bit) | MIT CAN 2.0, 1 Mbit | **$230–300** | Hip swing / hip roll class; too little rated torque for the knee hold; pricier than RobStride for less. |
 | MyActuator RMD-X6 V3 8:1 | 4.5 / 8 N·m | 8:1 | ~400 g | 24–48 V class | 1 | CAN 2.0 / RS485 | **~$420** | Out on price/torque. |
 | Xiaomi CyberGear | 4 / 12 N·m | 7.75:1 | 317 g | 16–28 V | 1 | CAN 2.0 | — | **EOL** at retailers. Was the 6S-friendly option; RobStride 00 replaced it at a higher voltage floor. |
@@ -74,14 +74,14 @@ Rough budget for Hux balancing and driving (no measurement yet): 8 actuators qui
 | Axis | First choice | Why | Alt |
 | --- | --- | --- | --- |
 | Knee ×2 | **RobStride 02** | 7 N·m rated covers the 10.6 N·m hold at 1.5×; dual encoder for a verified `PARKED` pose; 380 g | RobStride 00 (cheaper, lighter, 2× on the hold) |
-| Hip roll ×2 | **RobStride 00** | 14 N·m peak covers 9.5; 5 rated covers the 4.3 poise; 310 g; dual encoder | RS02 if the roll turns out to be the sizing axis |
+| Hip roll ×2 | **Depends on the hip offset — a 2D-layout decision.** At ≤ 3.5" hips: **RobStride 02** (7 rated vs 5.4 hold). At the drawn 5.4": **RobStride 06** (11 rated vs 8.3 hold, +240 g each). | The hold is ≈ 60 N × hip offset, continuous whenever a wheel is up ([`one-leg-stance.md`](one-leg-stance.md)). Bringing the roll axes inboard buys a lighter, cheaper joint and is the same lever that shrinks the one-leg roll angle. | RS00 is **out** for roll at any offset over ~2.5". |
 | Hip swing ×2 | **RobStride 00** | 3–4 N·m is inside rated; same part as roll = one spare covers both | RS05 if mass is tight (marginal at 3 N·m rated needed) |
 | Wheel ×2 | **RobStride 05** | 5.5 peak covers 3 N·m; lightest at 191 g; lowest ratio in the family; 15 V floor | Direct-drive gimbal + SimpleFOC only for the bench |
 | Bus | **8S**, 3 CAN buses on a Teensy 4.1: A = wheels + roll (4 nodes, the balance loop), B = knees + swing (4 nodes), C spare / bench | Eight classic-CAN nodes need two buses minimum at 1 kHz | — |
 
-Set of eight: 2× RS02 + 4× RS00 + 2× RS05 ≈ **~$1,200** and **~2.4 kg**. That is the actuator line in [`../bom.md`](../bom.md) as a **class estimate**, not an order. One protocol, one vendor, one spare policy.
+Set of eight, hips inboard (≤ 3.5"): 4× RS02 (knee + roll) + 2× RS00 (swing) + 2× RS05 (wheel) ≈ **~$1,250** and **~2.2 kg**. Hips as drawn (5.4"): 2× RS02 + 2× RS06 + 2× RS00 + 2× RS05 ≈ **~$1,250** and **~2.7 kg**. Either is the actuator line in [`../bom.md`](../bom.md) as a **class estimate**, not an order. One protocol, one vendor, one spare policy. **The hip offset decision should come first** — it is cheaper to move a bearing 2" on paper than to carry 480 g of extra actuator up high.
 
-**Before ordering:** download the RobStride 00 / 02 / 05 datasheets and confirm (a) the 24 V floor is a hard undervoltage trip, (b) backlash at the output, (c) the CAN protocol is the documented open one at 1 Mbit/s, (d) US stock and return terms. Buy **one RS00 first** and run it on the Teensy: torque mode, encoder readback, thermal at 5 N·m held for 10 s. Then the set.
+**Before ordering:** settle the hip roll offset in the 2D layout (NOTES open call 6). Then download the RobStride 00 / 02 / 05 (/ 06) datasheets and confirm (a) the 24 V floor is a hard undervoltage trip, (b) backlash at the output, (c) the CAN protocol is the documented open one at 1 Mbit/s, (d) US stock and return terms. Buy **one RS00 first** and run it on the Teensy: torque mode, encoder readback, thermal at 5 N·m held for 10 s. Then the set.
 
 **What this does not settle:** in-wheel packaging of an RS05 behind a 6 × 1.25" tire on a shop-turned hub (mechanical, [`../mechanical.md`](../mechanical.md)); whether springs still take the crouch (yes, cheap, keep them); the exact pack SKU.
 

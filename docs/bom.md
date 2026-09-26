@@ -42,7 +42,7 @@ No SKU is locked on these. The dollar is a midpoint so the total is not a blank.
 | Qty | What | Est. each | Line | Store / note |
 | --- | --- | ---: | ---: | --- |
 | 2 | Wheel actuator (in-wheel), about 3 N·m | $100 | $200 | Shortlist: **RobStride 05** (5.5 N·m peak, 191 g, 15–60 V) — [`research/actuator-shortlist.md`](research/actuator-shortlist.md). Driver and encoder are on the actuator; no separate lines. Do not buy before the hub drawing. |
-| 2 | Hip roll actuator | $160 | $320 | Shortlist: **RobStride 00** (14 N·m peak / 5 rated, 310 g, dual encoder) covers the **9.5 N·m** example. GIM8108-8 (~$85 bare, needs a driver) was the earlier yardstick. Not an order. |
+| 2 | Hip roll actuator | $160 | $320 | Shortlist: **RobStride 02** if the hip offset comes in to ≤ 3.5" (5.4 N·m hold), **RobStride 06** at the drawn 5.4" (8.3 N·m continuous hold, 12–13 peak — [`research/one-leg-stance.md`](research/one-leg-stance.md)). RS00 is out for roll. GIM8108-8 was the earlier yardstick. Not an order. |
 | 4 | Knee and hip-swing actuator | $170 | $680 | Shortlist: **2× RobStride 02** (knee) + **2× RobStride 00** (swing); hip roll also RS00. One RS00 first on the Teensy before the set. Servo / stepper+belt is the fallback. |
 | 7 | Cameras (2 front, plus back, sides, top, bottom) | $20 | $140 | No module picked. |
 | 1 | Small front display, about 2.2" × 1.0" | $20 | $20 | Preset faces. No panel picked. |
