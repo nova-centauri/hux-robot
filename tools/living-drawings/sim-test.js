@@ -336,7 +336,50 @@ function run(opts, plan) {
     }
   });
   const lift = poise("LEFT_ONLY", { oneLift: true });
-  found.oneWheel.experimentalLift = lift.fell ? "falls (sideways balancer does not hold the free wheel up yet)" : "survives, caught " + (lift.sim.last.caught || 0) + "×";
+  found.oneWheel.experimentalLift = lift.fell ? "falls (an acrobot with a few mm of capture region on this geometry; docs/research/one-leg-stance.md)" : "survives, caught " + (lift.sim.last.caught || 0) + "×";
+
+  /* Dynamic single support: from the poise, lift the free wheel for T with the hip rolls held
+     stiff, tip toward the free side, land, and come back to two wheels. The 0.2 s hop must
+     return; longer hops are reported (the flight is physics, the landing is controller work). */
+  function hop(T, keep) {
+    const sim = new S.Sim(R, M, { knobs: { oneHop: T, hopKeep: keep }, floorOnly: true });
+    const n = sim.s.knobs.rate;
+    for (let i = 0; i < 1.5 * n; i++) sim.step({});
+    let hopAt = null, fell = false, back = false, h = null, backAt = null;
+    for (let i = 0; i < 14 * n; i++) {
+      const t = i / n;
+      let cmd = i === 0 ? { mode: "LEFT_ONLY" } : {};
+      if (hopAt !== null && t > hopAt + T + 2.0 && !back) { cmd = { mode: "TWO_WHEEL" }; back = true; }
+      const o = sim.step(cmd);
+      if (o.phase === "hop") { if (hopAt === null) hopAt = t; h = o.hop; }
+      if (back && o.mode === "TWO_WHEEL" && !sim.ctrl.one && backAt === null) backAt = t;
+      if (o.fallen) { fell = true; break; }
+    }
+    return { T: T, keep: keep, fell: fell, hopped: hopAt !== null, tipDeg: h ? +h.tipDeg.toFixed(1) : null,
+      eEndMm: h ? +(h.eEnd * 1000).toFixed(0) : null, evEnd: h ? +h.ev.toFixed(2) : null, peakRollNm: h ? +h.peakTau.toFixed(1) : null, back: backAt !== null };
+  }
+  const hopRuns = [hop(0.2, 0.08), hop(0.3, 0.08), hop(0.3, 0.15)];
+  assert(hopRuns[0].hopped && !hopRuns[0].fell && hopRuns[0].back, "the 0.2 s hop from an 8% poise did not land and return to two wheels");
+  found.oneWheel.hops = hopRuns.map(function (x) {
+    return x.T + " s hop, " + (100 * x.keep) + "% on the free tire: " + (x.hopped ? "tips " + x.tipDeg + "°, lands " + x.eEndMm + " mm inboard at " + x.evEnd + " m/s, planted hip roll " + x.peakRollNm + " N·m, " + (x.fell ? "falls on the return" : x.back ? "returns to two wheels" : "does not return") : "no hop");
+  });
+
+  /* Frontal-plane closed form (frontal.js) must agree with the sandbox on the shift geometry:
+     the leg roll that puts the mass over one tire at the 92% stance, and the planted hip's
+     cantilever torque. Both are what the one-leg decisions rest on. */
+  const F = require("./frontal.js");
+  const fr = F.robot({ M: M });
+  const g92 = fr.balanceRoll(0);
+  assert(Math.abs(-g92 * 180 / Math.PI - 24.7) < 1.0, "frontal.js balance roll moved: " + (-g92 * 180 / Math.PI).toFixed(1) + "°");
+  const hold = fr.holdTorque([g92, -g92, 0]);
+  assert(hold > 7.5 && hold < 9.5, "frontal.js hold torque moved: " + hold.toFixed(2));
+  const resp = fr.response(0, [2], 0.010, undefined, true);
+  found.oneWheel.frontal = {
+    legRollDeg: (-g92 * 180 / Math.PI).toFixed(1),
+    plantedHipHoldNm: hold.toFixed(1),
+    bodySwingPer10mmDeg: (resp.peak.q2 * 180 / Math.PI).toFixed(0),
+    dynamicTorquePer10mmNm: resp.peak.u[0].toFixed(1)
+  };
 
   console.log("sim ok", JSON.stringify(found, null, 2));
 })().catch(function (e) {

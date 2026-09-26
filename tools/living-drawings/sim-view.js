@@ -491,7 +491,9 @@
     legZeta: function (x) { return x.toFixed(2); },
     sensorDelayMs: function (x) { return x.toFixed(0) + " ms"; },
     torqueLagMs: function (x) { return x.toFixed(1) + " ms"; },
-    jointNoLoad: function (x) { return x.toFixed(0) + " rad/s"; }
+    jointNoLoad: function (x) { return x.toFixed(0) + " rad/s"; },
+    oneHop: function (x) { return x > 0 ? x.toFixed(2) + " s" : "off"; },
+    hopKeep: function (x) { return (100 * x).toFixed(0) + " %"; }
   };
   const CHECKS = ["skid", "reflex", "legCatch", "oneLift"];
   const knobIds = Object.keys(KNOB_FMT);

@@ -175,7 +175,13 @@
           </label>
           <label class="check"><input id="k_reflex" type="checkbox" checked> Impact reflex and stall hop</label>
           <label class="check"><input id="k_legCatch" type="checkbox" checked> Stumble catch (legs and hip roll)</label>
-          <label class="check"><input id="k_oneLift" type="checkbox"> One wheel: try to lift the free wheel (experimental, usually falls)</label>
+          <label>One wheel: hop time, 0 = off <output id="k_oneHopOut"></output>
+            <input id="k_oneHop" type="range" min="0" max="0.8" step="0.05" value="0">
+          </label>
+          <label>One wheel: weight left on the free tire before the hop <output id="k_hopKeepOut"></output>
+            <input id="k_hopKeep" type="range" min="0.05" max="0.3" step="0.01" value="0.15">
+          </label>
+          <label class="check"><input id="k_oneLift" type="checkbox"> One wheel: try to balance on it (experimental, falls — see docs/research/one-leg-stance.md)</label>
           <label class="check"><input id="k_skid" type="checkbox"> Rear parking skid (proposal)</label>
           <div class="presets"><button type="button" id="knobReset">Back to the working assumptions</button></div>
         </div>
@@ -188,7 +194,7 @@
           <li><b>Motors.</b> Every joint has torque-speed limits and a first-order response, updated at 2 kHz. Joint stops and nonadjacent self-collisions are enabled. The in-wheel motors lose torque linearly to the assumed no-load speed. Parking requires the support skid; without it the request stops motion while keeping balance active. Emergency motor-off remains separate.</li>
           <li><b>Suspension.</b> Each leg is a virtual spring-damper along the hip-to-axle line (3.5 Hz, 0.6 damping by default) with the leg angle held stiff. A real Hux can only do this with torque-controlled, backdrivable joints (FOC / QDD class) or real springs. A position servo or a stepper cannot.</li>
           <li><b>Reflexes.</b> A leg that is hit hard at speed hops its wheel up for about a tenth of a second. A wheel stopped dead by an edge at walking pace hops too. When the mass runs away, the legs swing and the hip rolls step the wheels under it. The current implementation uses ideal simulated state.</li>
-          <li><b>One wheel.</b> Left/right buttons request a planned sequence: stand tall, stiffen, shift the mass over the planted wheel until the other carries about 15%, hold, then centre. The HUD reports actual support, requiring both low free-wheel load and ground clearance before reporting single support. Full lift remains experimental.</li>
+          <li><b>One wheel.</b> Left/right buttons request a planned sequence: stand tall, stiffen, shift the mass over the planted wheel until the other carries about 15%, hold, then centre. The HUD reports actual support, requiring both low free-wheel load and ground clearance before reporting single support. With a hop time set, the free wheel comes up for that long with the hip rolls held stiff (no one-wheel balance), the robot tips toward the free side, and the wheel goes back down: dynamic single support, what a stair step needs. The balanced one-wheel stand is an acrobot with a few millimetres of capture region on this geometry and stays experimental — <code>docs/research/one-leg-stance.md</code>.</li>
           <li><b>Balance.</b> LQR on the lean of the mass over the axle, rebuilt as the legs change height, at 500 Hz. Roll levelling by leg length and leg force. It uses delayed ideal state and contact samples. A physical state and load estimator remains to be implemented.</li>
           <li><b>Tire.</b> One shared profile (<code>tire.js</code>): a 6″ × 1.25″ tread with a full-round crown, the shape a scooter pneumatic takes on a narrow rim. The collision hull, the mesh and the 2D projection all come from it, so the contact point walks around the crown as the wheel cambers instead of catching an edge. Each tire is a tread ring on a carcass spring (stiffness and damping are knobs; 40 kN/m is a guess for a high-pressure 6×1.25, not a measurement), so the wheel squishes and shifts sideways on the hub and the HUD reports the pad that deflection implies. Rapier still resolves the contact at points; the pad is an estimate, not a resolved patch. The ring's rolling error is measured separately.</li>
           <li><b>Not modelled.</b> Motor inertia through the gearbox, backlash, belt stretch, tube flex, battery sag, current limits, temperature and sensor noise. Delay and drive response are adjustable assumptions, not measured hardware. No stair-climb controller yet: the stair is there to drive up to.</li>

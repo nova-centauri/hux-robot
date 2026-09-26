@@ -19,7 +19,9 @@ This packet is the working study set. It does not replace [`../requirements.md`]
 | [leg-geometry.md](leg-geometry.md) | Leg math. Wheel settled at **6" OD** on a **9.5" × 9.5"** step. Walker wheel is a bench donor. |
 | [stair-climb-dynamics.md](stair-climb-dynamics.md) | Corrected spatial feasibility, rejected stair candidate, and limits of the historical planar load estimates. |
 | [sim-sandbox.md](sim-sandbox.md) | Corrected tire/contact and drive models, supported parking guard, regression results, and remaining single-support failures. |
+| [one-leg-stance.md](one-leg-stance.md) | Frontal-plane mechanics of the hip-roll weight shift (24.7°, 8.3 N·m hold), why a static one-wheel stand is an acrobot with millimetres of capture region, and the dynamic single-support flight budget the stair needs (≤ 0.3 s). |
 | [compute-stack-review.md](compute-stack-review.md) | 2026-09-26 review of the F765-Wing / SimpleFOC / Pi 5 bench stack and the Jetson question — no CAN on the Wing, actuator bus picks the MCU, Jetson is a P5 perception buy, not V1 |
+| [actuator-shortlist.md](actuator-shortlist.md) | 2026-09-26 decision framework and candidates on Hux's own numbers — RobStride 00/02/05 shortlist, the 24 V floor that pushes the pack to 8S, CAN bus math, runtime vs pack size |
 | [study-plan.md](study-plan.md) | Phased checklist before hardware (Phases A–D; Phase E twin / dojo is a later horizon) |
 
 Decision log (not research, but the lock list): [`../decisions.md`](../decisions.md).

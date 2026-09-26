@@ -44,4 +44,6 @@ Bad feel may be the wrong stair trajectory, the two-contact poise, or sim contac
 2. Is hip roll the cheapest DOF for that path.
 3. Is the current stair path asking an infeasible throw — this candidate is already **rejected** above and in [`model-corrections.md`](model-corrections.md).
 
+Worked on 2026-09-26 in [`one-leg-stance.md`](one-leg-stance.md): (1) the lateral path is the parallelogram hip-roll shift, 24.7° at the 92% stance; (2) hip roll is the right DOF for the shift and the poise, and no DOF on this robot gives a static one-wheel *hold* (an acrobot with 2–3 mm of capture region); (3) the stair needs a short flight (≤ 0.3 s from a ±20 mm CoM estimate) from a known inboard margin, not a hold. The planted hip roll holds ~8.3 N·m whenever a wheel is up — the "0 if the sway is done first" above was the tipping moment, not the joint torque.
+
 Decision log: [`../decisions.md`](../decisions.md). Mechanical lock language is unchanged: [`../mechanical.md`](../mechanical.md).

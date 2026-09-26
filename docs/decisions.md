@@ -267,6 +267,18 @@ Steve then said **nothing is locked**, he owns the Pi 5 and F765 but need not us
 
 ---
 
+### 2026-09-26 — one-leg stance study: shift mechanics, hold torque, why the stand fails, hop budget
+
+Steve asked for more high-effort simulation on the physics and geometry of the one-leg movement: the one-leg stand needed much more work, the hip-roll weight-shift mechanics were unclear, and the one-leg action did not work in the sandbox. Findings in [`research/one-leg-stance.md`](research/one-leg-stance.md); closed form in `tools/living-drawings/frontal.js`, checked against the Rapier sandbox. Ran in parallel with the same-day stack decision above and is consistent with it (the hip-roll hold becomes a torque feed-forward the control core sends to a CAN QDD actuator's PD). **Docs and sandbox only. No lock changed. No spend.**
+
+- **Shift mechanics.** Both wheels down, the legs + body + floor are a parallelogram: both hip rolls turn the same angle. **24.7°** puts the mass over one crown contact at the 92% stance (29.5° at 75%); the axle spacer costs, the crown walk helps. 9.7° of the ±34° roll travel is left.
+- **Hold torque.** The planted hip roll carries the body + free leg cantilever whenever a wheel is up: **8.3 N·m continuous** at 5.4" hips (5.4 at 3.5", 3.1 at 2"), **12–13 N·m peak** through a hop. That is above a GIM8108-class nominal (7.5). The 2026-09-22 "0 if the sway is done first" was the tipping moment, not the joint torque.
+- **The static one-wheel stand is not a controller problem.** It is an acrobot (passive crown contact, two hip rolls as the only actuators) with the body CoM at hip-axis height, so rolling the body barely moves the mass: a 10 mm CoM error costs a 40° body swing on the planted hip (9° with both hips, but 52° of free-leg swing). **Capture region 2–3 mm.** The sandbox confirms it even with roll limits, torque and delay removed. Not a V1 capability on this geometry, whatever the firmware.
+- **Dynamic single support is what the stair needs**, and it works within a clock: from a ~8% poise, ≤ 0.3 s in the air with a ±20 mm CoM estimate (≤ 0.5 s with ±5 mm or a one-shot 10° hip swing, worth ~11 mm). The sandbox lands and returns a 0.2 s hop (asserted in `npm test`); longer hops land but the return is unfinished controller work.
+- **Sandbox fixes with hardware meaning:** hip-roll position hold needs integral / gravity feed-forward (a 90 N·m/rad hold sagged 4° = 40 mm of mass shift when the free wheel left); one stiff hip and one soft on the closed parallelogram; no leg-length levelling while the mass is off centre.
+
+**Flags for Steve (contradictions with what is on file, not changed here):** R17 frames one-leg balance as a full-loop *gate before any stair cycle*; the physics says the achievable gate is a timed hop, not a hold. R36's "~2×" plant-side sizing is right for the knee/swing but the hip roll needs the 8.3 N·m hold + 13 N·m peak number, not a ratio. The 14" width / 5.4" hip offset is what sets that hold; bringing the roll axes inboard is the cheapest lever and is a 2D-layout question (R23), not a decision made here.
+
 ## How to log the next merge
 
 When a docs PR merges, add a dated heading:

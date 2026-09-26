@@ -32,7 +32,12 @@
     legZeta: 0.6,      /* damping ratio of that spring */
     reflex: true,      /* lift a leg that takes a sharp hit (impact reflex) */
     legCatch: true,    /* swing the legs under a stumble (capture-point catch) */
-    oneLift: false,    /* experimental: from the one-wheel poise, try to lift the free wheel clear */
+    oneLift: false,    /* experimental: from the one-wheel poise, try to lift the free wheel clear and balance on it */
+    oneHop: 0,         /* s; > 0: from the poise, lift the free wheel for this long with the hip rolls held stiff
+                          (no one-wheel balance), let the robot tip toward the free side, and put the wheel back
+                          down. Dynamic single support: what a stair step needs, without a static one-wheel stand. */
+    hopKeep: 0.15,     /* fraction of the weight left on the free wheel at the moment it lifts (sets the inboard
+                          margin the tip starts from; 0.15 is the poise) */
     rate: 2000,        /* Hz, physics and joint servo loops (servo drives close position at kHz) */
     balanceRate: 500   /* Hz, balance / drive loop on the flight controller */
   };
@@ -563,7 +568,7 @@
   /* trim rates: rad/s per unit of free-wheel load over weight, rad/s per metre of mass offset */
   const LAT_TRIM = { load: 4, e: 6 };
   const MODES = ["PARKED", "TWO_WHEEL", "LEFT_ONLY", "RIGHT_ONLY"];
-  const ONE_WHEEL = ["unload", "lift", "hold", "lower", "catch"];
+  const ONE_WHEEL = ["unload", "lift", "hold", "lower", "catch", "hop"];
 
   function Controller(robot) {
     this.robot = robot;
@@ -801,7 +806,10 @@
     this.h += hRate;
     const rollRate = dot(wb, fwd);
     let dh = 0;
-    const levelling = !parked && (!this.one || ONE_WHEEL.indexOf(this.one.phase) < 0);
+    /* Levelling by leg length is a mass-mover near one wheel: 29 mm of leg difference is 5° of
+       body roll and 35 mm of CoM travel. After a landing the integrator wound up on the touchdown
+       roll and walked the mass out over the planted tire, so it stays frozen until the unshift. */
+    const levelling = !parked && (!this.one || (ONE_WHEEL.indexOf(this.one.phase) < 0 && !(this.one.hopped && this.one.phase !== "unshift")));
     if (levelling) {
       /* Integral only: one metre of leg difference tilts the body ~6 rad, so any real
          proportional gain here fights the leg springs. ~0.2 s time constant. */
@@ -975,6 +983,7 @@
     o.oneErr = this.one ? this.one.e : 0;
     o.oneLoad = this.one ? this.one.freeLoad : 0;
     o.caught = this.caught || 0;
+    o.hop = this.one && this.one.hop ? this.one.hop : null;
     o.catchB = this.catchB || 0;
     o.reflex = this.rx ? this.rx.map(function (x) { return { f: x.f || 0, hits: x.hits || 0, comp: x.comp || 0 }; }) : [];
     return {
@@ -1092,8 +1101,15 @@
       if (jk.q < 0.2) tk += 80 * (0.2 - jk.q) - 2 * jk.rate;
       if (jk.q > 2.7) tk -= 80 * (jk.q - 2.7) + 2 * jk.rate;
       const ikp = legIk(s, (lp.beta || 0) * lp.h, -lp.h);
+      /* Hip roll position hold. With a gravity load on the joint a pure P hold sags
+         (9 N·m of one-leg cantilever on 90 N·m/rad is 0.1 rad, 40 mm of mass shift): the
+         one-leg sequence asks for integral action (lp.rollKi) so the joint tracks its target
+         and the sag does not move the mass on its own. Any real position loop has this. */
+      if (lp.rollKi) leg.rollI = clamp((leg.rollI || 0) + lp.rollKi * (lp.roll - jr.q) * dt, -k.tauRoll, k.tauRoll);
+      else leg.rollI = (leg.rollI || 0) * (1 - dt / 0.5);
+      const kp = lp.rollKp || 90;
       const cmdT = {
-        roll: lp.rollTau !== undefined ? lp.rollTau : 90 * (lp.roll - jr.q) - 1.5 * jr.rate,
+        roll: lp.rollTau !== undefined ? lp.rollTau : kp * (lp.roll - jr.q) - 1.5 * jr.rate + leg.rollI + (lp.rollFf || 0),
         hip: Tb,
         knee: tk
       };
@@ -1239,11 +1255,18 @@
    *   load    the free leg's spring ramps back in, the planted hip roll hands back to its servo
    *   catch   if the mass runs away sideways, or the body rolls onto the free side, the free wheel
    *           goes straight down (a catch step), then load and back to the poise
-   * The balancer does not hold the lift yet: the body rolls toward the free side as the leg
-   * comes up. Pitch rides on the planted wheel from unload to load. The tire is 1.25" wide; that
+   * The balancer does not hold the lift, and docs/research/one-leg-stance.md says why: on this
+   * geometry the one-wheel stand is an acrobot with a few millimetres of capture region.
+   * Behind knobs.oneHop (seconds): dynamic single support instead of a stand.
+   *   hop     from the poise (knobs.hopKeep on the free wheel), the free wheel comes up with both
+   *           hip rolls held stiff and the cantilever fed forward, the robot tips toward the free
+   *           side at its own pace, and the wheel goes straight back down after oneHop seconds;
+   *           then load and back to the poise. What a stair step needs.
+   * Pitch rides on the planted wheel from unload to load. The tire is 1.25" wide; that
    * is all the sideways foot Hux has.
    */
-  const ONE = { keep: 0.15, unload: 0.8, lift: 0.6, lower: 0.6, load: 0.4, clear: 0.05, catchE: 0.035, catchRoll: 0.14 };
+  const ONE = { keep: 0.15, unload: 0.8, lift: 0.6, lower: 0.6, load: 0.4, clear: 0.05, catchE: 0.035, catchRoll: 0.14,
+    edgeE: 0.02, handLoad: 0.08, rollKi: 200, rateTau: 0.015, hopUp: 0.15, hopDown: 0.15, rollKp: 250, freeKp: 90, landC: 250 };
   Controller.prototype.oneLeg = function (um, fwd, right, dt, cmd, contacts, legs) {
     const st = this.one;
     st.t += dt;
@@ -1288,13 +1311,27 @@
        inboard of the planted tire. A model error of a centimetre is then a few percent of load,
        not a fall. Rate limited. */
     const side = leftPlanted ? 1 : -1; /* inboard is toward +right for a left plant */
-    const ePoise = side * ONE.keep * 2 * s.wheelLat;
+    const ePoise = side * (s.knobs.oneHop > 0 ? s.knobs.hopKeep : ONE.keep) * 2 * s.wheelLat;
     function shiftToward(eGoal, rate) {
       const dg = clamp(-3.0 * (e - eGoal) - 0.6 * ev, -rate, rate);
       st.gamma = clamp(st.gamma + dg * dt, -0.6, 0.6);
     }
+    /* The suspension's gravity feed-forward follows the measured mass position, which is right
+       for a level, centred stance but leaves the leg springs with no roll stiffness near one
+       wheel: as the mass drifts toward the planted tire the feed-forward follows it and the
+       springs never push back. After a landing, split the weight by the planned poise instead,
+       so the legs are passive springs (2 k D² of roll stiffness) until the shift servo has it. */
+    if (st.hopped && (st.phase === "load" || st.phase === "shift" || st.phase === "poise")) {
+      const tot = P.ff + F.ff;
+      const keep = s.knobs.hopKeep;
+      const uL = st.phase === "load" ? minJerk(st.t / ONE.load) : 1;
+      F.ff = tot * keep * uL + F.ff * (1 - uL);
+      P.ff = tot - F.ff;
+    }
     if (st.phase === "shift" || st.phase === "poise") {
-      shiftToward(ePoise, 0.2);
+      /* with a wheel in the air a hip roll change is the acrobot swing, not a shift: it moves
+         the mass the wrong way. Hold until both tires carry something. */
+      if (freeLoad > 0.03 * weight && contacts[iP].force > 0.03 * weight) shiftToward(ePoise, 0.2);
       const tall = Math.abs(this.h - Math.max(cmd.height || s.hRide, s.hStance)) < 0.005;
       const settled = tall && Math.abs(e - ePoise) < 0.006 && Math.abs(ev) < 0.03;
       st.hold = settled ? st.hold + dt : 0;
@@ -1312,11 +1349,26 @@
         st.phase = "edge";
         st.t = 0;
       }
+      /* Dynamic single support: no balancer at all. The hip rolls hold the pose they have, the
+         free wheel comes up fast, the robot tips toward the free side under its own inboard
+         margin, and the wheel goes back down after knobs.oneHop seconds. */
+      if (st.phase === "poise" && s.knobs.oneHop > 0 && !st.hopped && st.hold > 0.5) {
+        st.phase = "hop";
+        st.t = 0;
+        st.hopped = true;
+        st.e0 = e;
+        st.roll0 = this.out.roll || 0;
+        st.dFree = lo ? lo[iF].d : F.h;
+        st.hop = { peakTau: 0, tipDeg: 0, eEnd: 0, air: 0, ev: 0 };
+      }
     } else if (st.phase === "edge") {
       /* ease the mass on to the planted tire with the servo shift, both wheels still down,
-         until the free wheel carries little more than its own leg */
-      shiftToward(side * 0.01, 0.1);
-      const ready = freeLoad < 1.5 * own && Math.abs(ev) < 0.02;
+         until the free wheel carries only a few percent. Hand over while it still carries
+         something: with the free wheel unloaded there is no static stability left and the
+         servo shift cannot pull the mass back. The shift itself moves the mass at a few
+         cm/s, so the settle test is on the goal, not on the speed alone. */
+      shiftToward(side * ONE.edgeE, 0.08);
+      const ready = freeLoad < ONE.handLoad * weight && Math.abs(e - side * ONE.edgeE) < 0.008 && Math.abs(ev) < 0.03;
       st.hold = ready ? st.hold + dt : 0;
       if (st.hold > 0.1) {
         st.phase = "unload";
@@ -1357,13 +1409,19 @@
       const hipP = tr(st.planted.yoke);
       const q1 = Math.atan2(dot(sub(hipP, wcP), right), hipP.y - wcP.y);
       const q2 = -js.q;
-      /* rate of the same hip-over-tire angle, differenced and lightly filtered: the upper
-         tube's own spin mixes in leg swing and knee motion */
-      const q1raw = st.q1prev === undefined ? 0 : (q1 - st.q1prev) / dt;
-      st.q1prev = q1;
-      st.q1d = st.q1d === undefined ? 0 : st.q1d + (q1raw - st.q1d) * Math.min(1, dt / 0.006);
+      /* Rates the real robot would have: the leg's roll rate is the yoke's angular velocity
+         about the fore-aft axis (IMU rate minus the hip-roll encoder rate), the joint rate is
+         the encoder. Differencing the contact-derived angle instead put the tire carcass
+         mode (13 Hz on a 40 kN/m ring) and contact-point jumps straight into the loop and the
+         hip roll pumped the planted tire at that frequency. A 15 ms filter on both rates
+         costs 13° of phase at the unstable pole and gain-stabilises the tire mode. */
+      const q1raw = dot(av(st.planted.yoke), fwd);
+      const q2raw = -js.rate;
+      const fr = Math.min(1, dt / ONE.rateTau);
+      st.q1d = st.q1d === undefined ? q1raw : st.q1d + (q1raw - st.q1d) * fr;
+      st.q2d = st.q2d === undefined ? q2raw : st.q2d + (q2raw - st.q2d) * fr;
       const q1d = st.q1d;
-      const q2d = -js.rate;
+      const q2d = st.q2d;
       st.lqrAge = (st.lqrAge || 1) + dt;
       if (!st.eq) { st.eq = { q1: q1, q2: q2, u: -(st.tauHold || 0) }; st.eI = 0; }
       if (!st.K || st.lqrAge > 0.05) {
@@ -1392,11 +1450,13 @@
       st.trim = clamp((st.trim || 0) + rate * dt, -0.15, 0.15);
       const q1ref = st.eq.q1 + st.trim;
       const x = [q1 - q1ref, q1d, q2 - st.eq.q2, q2d];
+      st.x = x;
       let u = st.eq.u;
       if (!st.K) {
         st.phase = "catch"; st.t = 0; st.caught = true;
         this.modeRejected = "Single-support controller has no converged gains; returning the wheel.";
       } else for (let i = 0; i < 4; i++) u -= st.K[i] * x[i];
+      st.u = u;
       tauP = -u; /* joint torque on the yoke is minus the torque on the body */
     }
 
@@ -1408,7 +1468,28 @@
     const cosF = clamp(-legF.y / Math.max(0.05, len(legF)), 0.5, 1);
     const floorY = tr(st.planted.wheel).y;
     function dClear(clear) { return clamp((hipF.y - floorY - clear) / cosF, s.hMin * 0.8, s.hMax); }
-    if (st.phase === "lift" || st.phase === "hold") {
+    if (st.phase === "hop") {
+      /* wheel up in ONE.hopUp, held clear until knobs.oneHop, then straight down */
+      const T = s.knobs.oneHop;
+      const up = st.t < ONE.hopUp ? minJerk(st.t / ONE.hopUp) : st.t < T ? 1 : 1 - minJerk((st.t - T) / ONE.hopDown);
+      airLeg(Math.min(st.dFree, dClear(ONE.clear * up - 0.02 * Math.max(0, 1 - up) * (st.t > T ? 1 : 0))));
+      const airborne = contacts[iF].n === 0 && freeLoad < 0.02 * mt * G;
+      if (airborne) st.hop.air += dt;
+      /* the planted hip must carry the whole cantilever the moment the free wheel leaves:
+         feed the lump model's gravity moment forward instead of waiting for the servo to sag
+         into it (a 90 N·m/rad hold sags 4° under the 8 N·m step, which is a 30 mm mass shift) */
+      const mdl = this.lateralModel(st, right);
+      st.hopFf = -mdl.gV[1] * minJerk(st.t / ONE.hopUp);
+      P.rollFf = st.hopFf;
+      st.hop.peakTau = Math.max(st.hop.peakTau, Math.abs(lo ? lo[iP].roll.tau : 0));
+      st.hop.tipDeg = Math.max(st.hop.tipDeg, Math.abs(((this.out.roll || 0) - st.roll0) * 180 / Math.PI));
+      st.hop.eEnd = e; st.hop.ev = ev;
+      if (st.t > T + ONE.hopDown && (freeLoad > own || st.t > T + ONE.hopDown + 0.5)) {
+        /* back through the poise (its shift servo regulates the mass offset again; an
+           open-loop unshift from a landing drifts the mass outboard and tips it) */
+        st.phase = "load"; st.t = 0; st.caught = true;
+      }
+    } else if (st.phase === "lift" || st.phase === "hold") {
       const up = st.phase === "lift" ? minJerk(st.t / ONE.lift) : 1;
       airLeg(Math.min(st.dFree, dClear(ONE.clear * up)));
       if (st.phase === "lift" && st.t >= ONE.lift) { st.phase = "hold"; st.t = 0; }
@@ -1434,10 +1515,14 @@
     } else if (st.phase === "load") {
       const u = minJerk(st.t / ONE.load);
       carry(1 - u);
+      if (st.hopFf) P.rollFf = st.hopFf * (1 - u);
+      /* a landing leg is a damper first: the robot arrives rocking about the planted tire and
+         a stiff, lightly damped leg just rocks it back over that tire */
+      if (st.hopped) { F.c = Math.max(F.c, ONE.landC); P.c = Math.max(P.c, ONE.landC); }
       /* hand the planted hip roll back to its servo */
       if (tauP !== undefined && lo) {
         const js = jointState(st.planted.joints.roll);
-        const servo = 90 * (st.gamma - js.q) - 1.5 * js.rate;
+        const servo = (ONE.rollKp || 90) * (st.gamma - js.q) - 1.5 * js.rate + (st.planted.rollI || 0);
         tauP = (1 - u) * tauP + u * servo;
       }
       /* after a catch, fall back to the poise (known good) and do not retry the lift */
@@ -1470,9 +1555,17 @@
     }
     P.roll = st.gammaP !== undefined ? st.gammaP : st.gamma;
     F.roll = st.gamma;
+    /* Only the planted hip gets the stiff, integrating hold. Two integrating position servos
+       on a closed parallelogram (both wheels down) wind up against each other and the fight
+       walks the mass toward the planted tire. The free hip stays a soft P hold. */
+    P.rollKi = ONE.rollKi;
+    F.rollKi = 0;
+    P.rollKp = ONE.rollKp;
+    F.rollKp = ONE.freeKp;
+
     if (tauP !== undefined) P.rollTau = tauP;
     /* the lifted wheel stops spinning */
-    st.brakeFree = oneWheel && st.phase !== "load";
+    st.brakeFree = (oneWheel || st.phase === "hop") && st.phase !== "load";
     return { done: done };
   };
 
@@ -1507,7 +1600,7 @@
 
   /** Actuator limits can change live; geometry and mass rebuild the robot. */
   Sim.prototype.setKnobs = function (knobs) {
-    const live = ["tauWheel", "wheelNoLoad", "tauKnee", "tauHip", "tauRoll", "ride", "legHz", "legZeta", "reflex", "legCatch", "oneLift", "jointNoLoad", "torqueLagMs", "sensorDelayMs"];
+    const live = ["tauWheel", "wheelNoLoad", "tauKnee", "tauHip", "tauRoll", "ride", "legHz", "legZeta", "reflex", "legCatch", "oneLift", "oneHop", "hopKeep", "jointNoLoad", "torqueLagMs", "sensorDelayMs"];
     const s = this.s;
     let rebuild = false;
     Object.keys(knobs).forEach(function (key) {
