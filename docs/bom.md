@@ -4,9 +4,9 @@ Started **2026-09-21**. Prices are page prices or class estimates from that day.
 
 The BOM is **need-driven**: the project buys what the design needs. Inventory ([`parts-on-hand.md`](parts-on-hand.md)) is a reference, not a design driver. Steve owns edits to the order-now breakout.
 
-**To order now: $89.41.** That is the only authorized spend.
+**To order now: $89.41 + the CAN MCU kit (~$55) + one pack (on hold — voltage under decision, see below).** That is the only authorized spend. MCU and pack added 2026-09-26.
 
-**Working total if the later estimates are bought as written: about $1,120.** The actuator block is most of that, and it is not chosen.
+**Working total if the later estimates are bought as written: about $1,600.** Eight real QDD actuators moved it; that is the cost of the CAN decision and it is the honest number. The actuator block is most of that, and it is not chosen.
 
 Inventory of what is already here: [`parts-on-hand.md`](parts-on-hand.md).
 
@@ -17,7 +17,12 @@ Inventory of what is already here: [`parts-on-hand.md`](parts-on-hand.md).
 | 3 | 6×1.25 ribbed pneumatic tire, 85 PSI, 3.75" bead | $11.00 | $33.00 | [Scooterworks 154-18](https://www.scooterworks.com/products/universal-parts-6x1-25-tire-154-18). If that page is out: [DIY Mobility 6×1¼ rib](https://diymobilityparts.com/collections/pneumatic-wheelchair-tires) at about $12. |
 | 3 | 6×1.25 inner tube, bent Schrader stem | $7.95 | $23.85 | [ElectricScooterParts TUB-6X1.25](https://electricscooterparts.com/tubes.html) |
 | 2 | Carbon tube, 16×14 mm, 1 m | $16.28 | $32.56 | [Windcatcher 16×14×1000](https://windcatcherrc.com/product/carbon-fiber-tube-16mm-x-14mm-x-1000mm/). A 16×12 or 16×13 stick is the stiffer wall if the price is close. |
-| | **Total to order now** | | **$89.41** | Shipping extra. |
+| 1 | **Teensy 4.1** | ~$32 | $32 | **CAN real-time MCU (Steve 2026-09-26: "add the CAN MCU").** 600 MHz, **3× CAN 2.0 / FD**, built-in microSD (blackbox), plenty of UARTs. [PJRC](https://www.pjrc.com/store/teensy41.html). Chosen over an H743-WING because eight classic-CAN nodes need two buses minimum ([`research/actuator-shortlist.md`](research/actuator-shortlist.md) §1.4). |
+| 1 | ICM-42688-P IMU breakout (SPI) | ~$12 | $12 | The Teensy has no IMU. One 6-axis on the balance board; the Wing's MPU6000 stays on the bench. Adafruit / SparkFun class. |
+| 3 | CAN transceiver breakout, 3.3 V (SN65HVD230 / TJA1051-class) | ~$3–4 | ~$10 | One per Teensy CAN port. Add a 120 Ω terminator at each bus end. |
+| 1 | **XT90-S anti-spark connector pair** | ~$5 | $5 | **Steve 2026-09-26: "add the anti spark."** On the harness side; the pack keeps a plain XT90. |
+| 1 | **Pack — ON HOLD** | ~$60–90 | — | Steve's first pick was a 6S 5200 mAh 60C ("somewhat randomly"; a smaller one is fine; wants reasonable runtime). Then the actuator check found the RobStride 00/01/02 floor is **24 V** — below a 6S pack for most of its discharge. **Recommendation: one 8S 2700–3300 mAh 50–60C, XT90** (~80–98 Wh, 1–2 h at 40–80 W, ~½–¾ kg). Buy after Steve confirms 8S + the shortlist. [`research/actuator-shortlist.md`](research/actuator-shortlist.md) §3–4. |
+| | **Total to order now** | | **~$150 + pack** | $89.41 tires/tubes/tube + ~$59 MCU kit + anti-spark; pack ~$60–90 once the voltage is confirmed. Shipping extra. |
 
 ## Already here — $0 more
 
@@ -28,7 +33,7 @@ Inventory of what is already here: [`parts-on-hand.md`](parts-on-hand.md).
 | TBS Nano RX | On hand. |
 | Raspberry Pi, ESP32 | On hand. Face, cameras, and telemetry later. |
 
-Look through the drone pile for a **6S** before buying the pack line below (6S superseded 4S on 2026-09-26).
+Pack decided 2026-09-26 (order-now table). 6S superseded 4S the same day.
 
 ## Later — class estimates, not a cart
 
@@ -36,16 +41,14 @@ No SKU is locked on these. The dollar is a midpoint so the total is not a blank.
 
 | Qty | What | Est. each | Line | Store / note |
 | --- | --- | ---: | ---: | --- |
-| 1 | 6S LiPo, small pack | $40 | $40 | No pack picked. Skip if a 6S drone pack is already on the shelf. Two in parallel later if capacity wants it. |
-| 2 | In-wheel brushless + encoder, about 3 N·m | $65 | $130 | No motor picked. Do not buy before the hub drawing. |
-| 2 | Wheel FOC driver | $40 | $80 | No driver picked. |
-| 2 | Hip roll actuator | $100 | $200 | Yardstick only: [GIM8108-8, seen near $85](https://aifitlab.com/products/steadywin-gim8108-8-planetary-reducer-servo-motor). Nominal 7.5 N·m is tight for the **9.5 N·m** example at 6 kg on the 14" stance. Not an order. 24–48 V class; honest on 6S (2026-09-26). |
-| 4 | Knee and hip-swing actuator | $100 | $400 | Same class estimate if they are small QDD units. A stepper-plus-belt set would be less. Class is still open. |
+| 2 | Wheel actuator (in-wheel), about 3 N·m | $100 | $200 | Shortlist: **RobStride 05** (5.5 N·m peak, 191 g, 15–60 V) — [`research/actuator-shortlist.md`](research/actuator-shortlist.md). Driver and encoder are on the actuator; no separate lines. Do not buy before the hub drawing. |
+| 2 | Hip roll actuator | $160 | $320 | Shortlist: **RobStride 00** (14 N·m peak / 5 rated, 310 g, dual encoder) covers the **9.5 N·m** example. GIM8108-8 (~$85 bare, needs a driver) was the earlier yardstick. Not an order. |
+| 4 | Knee and hip-swing actuator | $170 | $680 | Shortlist: **2× RobStride 02** (knee) + **2× RobStride 00** (swing); hip roll also RS00. One RS00 first on the Teensy before the set. Servo / stepper+belt is the fallback. |
 | 7 | Cameras (2 front, plus back, sides, top, bottom) | $20 | $140 | No module picked. |
 | 1 | Small front display, about 2.2" × 1.0" | $20 | $20 | Preset faces. No panel picked. |
 | 2 | RGB into the eye sockets | $10 | $20 | The lit socket is the eye. No LED picked. |
 | 1 | Step-down and distribution | $20 | $20 | Logic and pose off the motor rail. No board picked. |
-| | **Later estimate** | | **$1,050** | |
+| | **Later estimate** | | **~$1,400** | Actuator block ~$1,200 for eight RobStride units. |
 
 Hubs, fasteners, wire, and bearings are shop stock. They are not in the total.
 

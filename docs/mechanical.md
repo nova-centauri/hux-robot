@@ -72,7 +72,7 @@ Sketch lines (fill when something is weighed — empty TBD is correct):
 | Hip swing + knee actuators | TBD | Servo vs stepper+belt **TBD** (R12). Size for ~2× plant (R36). |
 | Hip-roll actuators | TBD | Dynamic class **in V1** (R16 / R27). |
 | Structure (carbon tubes + end fittings) | TBD | Do not spend mass on a printed spar. |
-| 6S pack (1–2) | TBD | Class only (R11). |
+| Pack (8S 2700–3300 mAh recommended; on hold) | ~500–700 g | R11, 2026-09-26. Low and central; add to the body lump. |
 | Companion slot | TBD | Head carries a slot sized for an Orin Nano dev kit (~100 × 79 × 21 mm + fan) with a 12–19 V feed and airflow; the Pi 5 occupies it in V1 (R22). |
 | CAN real-time MCU + TBS Nano RX | TBD | Teensy 4.1 / H743-WING class, picked with the actuators (2026-09-26). F765 is bench only. |
 | Raspberry Pi + camera(s) | TBD | Companion. Not on the FC. |

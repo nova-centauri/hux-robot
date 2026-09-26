@@ -30,13 +30,13 @@
     </header>
 
     <div class="totals">
-      <div><span>Order now</span><strong>$89.41</strong>Tires, tubes, carbon tube. Shipping extra.</div>
-      <div><span>Later, class estimate</span><strong>~$1,050</strong>Actuators are most of it, and none are chosen.</div>
-      <div><span>Working total</span><strong>~$1,140</strong>Order now plus the estimates. A wrong actuator guess moves this.</div>
+      <div><span>Order now</span><strong>~$150</strong>Tires, tubes, carbon tube, Teensy 4.1 CAN kit, XT90-S. Pack on hold. Shipping extra.</div>
+      <div><span>Later, class estimate</span><strong>~$1,400</strong>Actuators are most of it; shortlisted, none ordered.</div>
+      <div><span>Working total</span><strong>~$1,600</strong>Order now plus the estimates. Eight RobStride units are ~$1,200 of it.</div>
     </div>
 
     <section class="block">
-      <h2>Order now — $89.41</h2>
+      <h2>Order now — $89.41 + Teensy 4.1 CAN kit (~$55) + anti-spark</h2>
       <div class="table-wrap">
         <table>
           <thead>
@@ -60,6 +60,18 @@
               <td>Carbon tube, 16 mm OD, 12–14 mm ID, 1 m</td>
               <td>$32.56</td>
               <td>Upper and lower spars. <a href="https://windcatcherrc.com/product/carbon-fiber-tube-16mm-x-14mm-x-1000mm/">Windcatcher 16×14×1000</a>.</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Teensy 4.1 + ICM-42688-P IMU + 3× CAN transceivers</td>
+              <td>~$55</td>
+              <td>The CAN real-time MCU. Three CAN buses, microSD blackbox. Added 2026-09-26. <a href="../../docs/research/actuator-shortlist.md">Why three buses</a>.</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>XT90-S anti-spark pair</td>
+              <td>~$5</td>
+              <td>Harness side. The pack keeps a plain XT90.</td>
             </tr>
           </tbody>
         </table>
@@ -101,18 +113,16 @@
     </section>
 
     <section class="block">
-      <h2>Actuators — ~$810, class estimate</h2>
+      <h2>Actuators — ~$1,200, shortlisted, not ordered</h2>
       <div class="table-wrap">
         <table>
           <thead>
             <tr><th>Qty</th><th>Part</th><th>Est.</th><th>Role</th></tr>
           </thead>
           <tbody>
-            <tr><td>2</td><td>In-wheel brushless + encoder</td><td>~$130</td><td>About 3 N·m peak. No store link until a motor is chosen.</td></tr>
-            <tr><td>2</td><td>Wheel encoder</td><td>in motor</td><td>Counted with the wheel motor. Not a second line.</td></tr>
-            <tr><td>2</td><td>Wheel FOC driver</td><td>~$80</td><td>No driver picked.</td></tr>
-            <tr><td>2</td><td>Hip roll actuator</td><td>~$200</td><td>About 9.5 N·m at 6 kg on the 14" stance. Not a stepper.</td></tr>
-            <tr><td>4</td><td>Knee and hip-swing actuator</td><td>~$400</td><td>Class estimate if they are small geared motors. A belt-and-stepper set would be less. Servo versus stepper is still open.</td></tr>
+            <tr><td>2</td><td>Wheel actuator — RobStride 05 shortlisted</td><td>~$200</td><td>5.5 N·m peak, 191 g, driver and encoder on board. Not ordered.</td></tr>
+                                    <tr><td>2</td><td>Hip roll — RobStride 00 shortlisted</td><td>~$320</td><td>14 N·m peak covers the 9.5 N·m example. Not ordered.</td></tr>
+            <tr><td>4</td><td>Knee (RobStride 02) and hip swing (RobStride 00)</td><td>~$680</td><td>CAN QDD working class on an 8S bus. Servo / stepper+belt is the fallback. Not ordered.</td></tr>
           </tbody>
         </table>
       </div>
@@ -126,7 +136,7 @@
             <tr><th>Qty</th><th>Part</th><th>Est.</th><th>Role</th></tr>
           </thead>
           <tbody>
-            <tr><td>1–2</td><td>6S LiPo</td><td>~$40</td><td>6S since 2026-09-26. One pack or two in parallel. Skip if a 6S drone pack is already on the shelf.</td></tr>
+            <tr><td>1</td><td>Pack, XT90 (6S 5200 first pick; 8S 2700–3300 recommended)</td><td>~$60–90</td><td>On hold 2026-09-26 pending the actuator voltage floor. XT90-S anti-spark on the harness.</td></tr>
             <tr><td>1</td><td>Step-down and distribution</td><td>~$20</td><td>Logic and pose off the motor rail. No board picked.</td></tr>
           </tbody>
         </table>

@@ -11,13 +11,13 @@ Parent plan (classes, P0–P5, not a BOM): [`electronics-minimum.md`](electronic
 | Piece | Choice | Notes |
 | --- | --- | --- |
 | Powertrain | **Electric-only** | No ICE, no hybrid. Whole robot. |
-| Battery class | **6S** — LiPo preferred; high-drain Li-ion 21700 acceptable | **~22.2 V nominal / 25.2 V full**, cutoff ~19.8 V. One large pack **or two in parallel** (matched voltage before paralleling, a fuse per pack). Capacity / C / connector **TBD**. No pack SKU. |
+| Battery | **ON HOLD between 6S and 8S** (2026-09-26, later) | Steve's first pick was a 6S 5200 mAh 60C. The actuator check found the RobStride 00/01/02 floor is **24 V**, below 6S for most of the discharge. **Recommendation: 8S 2700–3300 mAh** (33.6 / 29.6 / 26.4 V) — every candidate runs through the whole pack. **XT90 on the pack, XT90-S anti-spark on the harness** (Steve: "add the anti spark"). Regulators must accept 36 V. [`research/actuator-shortlist.md`](research/actuator-shortlist.md). |
 | Rails | **Regulated step-down** from 6S | **5 V** (MCU, RX, Pi 5 at 5 A), **12–19 V** (companion slot — a Jetson kit takes 9–19 V; 6S full is 25.2 V, so it is *not* direct), pose rail only if the fallback servo class is used. SKUs **TBD**. |
 | Actuator bus | **CAN** | One or two buses. Classic vs FD, and the protocol (MIT mini-cheetah style, Robstride, CubeMars, ODrive…) follow the actuator choice. |
 | Wheels | **In-wheel brushless FOC** + encoder, on CAN | Motor at the rim (R6 / R30). ~3 N·m peak at the 6" wheel. Exact models TBD. |
 | Knee / hip swing | **CAN QDD / FOC working class**; servo or stepper+belt is the **fallback** | Size for one-leg (~2×) load (R36). ~10 N·m holding at the knee standing up over the front wheel ([`research/stair-climb-dynamics.md`](research/stair-climb-dynamics.md)). **GIM8108-8** stays a candidate; on 6S it is honest, on 4S it was not. |
 | Hip roll | **In V1.** CAN QDD / FOC | Not a stepper. Experimental — may not work. Still wire the axis and the modes. SKU TBD. |
-| Real-time MCU | **CAN-capable** — Teensy 4.1-class or H743-WING-class | Runs the control core at 1 kHz, IMU, CRSF, watchdog, torque cut, blackbox. **Picked with the actuators.** Not bought. |
+| Real-time MCU | **Teensy 4.1** + ICM-42688-P breakout + 3× CAN transceivers (Steve 2026-09-26: "add the CAN MCU") | 3× CAN, built-in microSD for blackbox, 600 MHz. Eight classic-CAN nodes need ≥2 buses at 1 kHz, which rules out a one-CAN Wing board. In [`bom.md`](bom.md) order-now. |
 | Bench board | **F765-Wing** (on hand) | P0–P1 only: blink, CRSF, one SimpleFOC wheel over UART. No CAN. Nothing written for it is expected to survive. |
 | RC RX | **TBS Nano RX** | CRSF into a full UART on the MCU. |
 | Companion | **Pi 5** now, in containers | Cameras, telemetry, ROS 2. **Jetson (Orin Nano Super kit class) at P5** for perception. Head has a slot sized for it with a 12–19 V feed. |
@@ -41,10 +41,13 @@ Why: CAN QDD / FOC actuators are specified at 24–48 V. At 14.8 V they give up 
 
 | Item | Intent | Status |
 | --- | --- | --- |
-| Chemistry / cell count | **6S**. LiPo preferred (C-rating for balance spikes). High-drain Li-ion 21700 (Molicel P45B-class) acceptable for energy density if the pack's continuous / peak current is proven. | Class lean. Not a locked SKU. |
+| Pack | **On hold: 6S 5200 (first pick) vs 8S 2700–3300 (recommended after the actuator voltage check).** One pack either way. | See [`research/actuator-shortlist.md`](research/actuator-shortlist.md) §3–4. If 8S: 33.6 V full, 26.4 V cutoff; every 5 V / 12–19 V regulator must be rated ≥36 V in. |
 | Nominal / full / cutoff | **~22.2 V / 25.2 V / ~19.8 V** | Use when thinking about actuator, regulator and companion ranges. Check every actuator's **max** against 25.2 V, not 22.2. |
-| One pack vs two | Either. Two in parallel: same cell count and chemistry, matched to within ~0.1 V before connecting, a **fuse per pack**, a parallel harness, one BMS / balance plan. | Steve's call per build. |
-| Capacity (mAh) / C-rating | TBD | No spend. Do not guess a pack into a BOM. |
+| One pack vs two | **One.** If a second is ever added in parallel: same cell count, chemistry and age, matched to within ~0.1 V before connecting, a fuse per pack. | Decided 2026-09-26. |
+| Capacity / C | Runtime target "reasonable" (Steve). Budget 40–80 W typical → **80–100 Wh gives 1–2 h**; 5200 mAh 6S (115 Wh) was more than needed. 50–60C. | Measure real draw at P2 and log it. |
+| Connector | **XT90** on the pack. **XT90-S** (anti-spark) on the harness side, or a precharge resistor / soft-start on the distribution board. | A bare XT90 into FOC bulk capacitance arcs at 25 V and pits the contacts. |
+| Mass / volume | ~720–800 g, ~155 × 48 × 50 mm | ~12% of the 6 kg example. Add it to the body lump when the layout is next touched; it sits low and central by default. |
+| Charger | 6S balance charger | Bench tool, not BOM. Check the drone bench first. |
 | Motor bus | **6S direct** via a real distribution board / harness | High-draw FOC. Not through the MCU or any logic PCB. |
 | 5 V rail | MCU, RX, **Pi 5 (5 V / 5 A, USB-PD-class connector)** | A 25 W buck, not a servo BEC. |
 | 12–19 V rail | Companion slot (Jetson kit 9–19 V), any 12 V accessories | Only populated when a Jetson is fitted. |

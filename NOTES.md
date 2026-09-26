@@ -29,7 +29,7 @@ This repo is the source of truth for plans. Hux bot keeps planning notes current
 ## Constraints (do not “helpfully” violate)
 
 - Research before hardware. Packet: [`docs/research/`](docs/research/).
-- First buy is open: 6×1.25 tires, tubes, and 16 mm carbon tube only ([`docs/bom.md`](docs/bom.md)). No motors yet. Do **not** expand that order-now cart. 5" Zantle wheels already ordered — bench donor, not the foot ([`docs/parts-on-hand.md`](docs/parts-on-hand.md)). Wheel size is **settled at 6" OD**.
+- First buy is open: 6×1.25 tires, tubes, 16 mm carbon tube, the **Teensy 4.1 CAN MCU kit + XT90-S anti-spark** (2026-09-26), and one pack (**on hold 6S vs 8S** — see [`docs/research/actuator-shortlist.md`](docs/research/actuator-shortlist.md)) ([`docs/bom.md`](docs/bom.md)). No motors yet. Do **not** expand that order-now cart. 5" Zantle wheels already ordered — bench donor, not the foot ([`docs/parts-on-hand.md`](docs/parts-on-hand.md)). Wheel size is **settled at 6" OD**.
 - **Inventory does not drive design.** Parts on hand inform options. Prefer the correct actuator / wheel over the shelf part.
 - Want **high-bandwidth FOC / QDD / model-based** control where it matters (wheels, hip roll). No vendor lock.
 - Digital twin + training dojo is the **long-term horizon**, after modes and classical balance. Do not replace R18 with an RL gate.

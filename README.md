@@ -23,7 +23,7 @@ This repo is the source of truth for Steve Barrett's Hux project. It is a docs-a
 | Power | **6S** (superseded 4S 2026-09-26), one pack or two in parallel, step-down rails |
 | Mechanical V1 | First wheel-leg is **Phase D** (after study + 2D). Not started. **~24" × ~14"**, carbon-tube spars. Head inside, wheels outside. |
 | Modes | `PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY` before autonomy |
-| Spend | First buy is tires, tubes, and carbon tube ([`docs/bom.md`](docs/bom.md)). 5" walker wheels already ordered as a bench donor. Wheel size **settled at 6" OD**. Motors not authorized. |
+| Spend | First buy is tires, tubes, carbon tube, the Teensy 4.1 CAN MCU kit, XT90-S anti-spark, and one pack (on hold 6S vs 8S) ([`docs/bom.md`](docs/bom.md)). 5" walker wheels already ordered as a bench donor. Wheel size **settled at 6" OD**. Motors not authorized. |
 | Parts on hand | Inventory in [`docs/parts-on-hand.md`](docs/parts-on-hand.md) — owned ≠ reserved |
 | Shop / fab | Tools (not parts) in [`docs/capabilities.md`](docs/capabilities.md) — mill, lathe, weld; fab welcome |
 
@@ -54,7 +54,7 @@ software/     companion compute — Pi cameras / pathfinding (empty)
 - [Electronics](docs/electronics.md) — 6S + step-down, CAN actuator bus, CAN real-time MCU (F765 is bench only), TBS Nano RX, in-wheel FOC, 8 CAN nodes
 - [Minimum electronics](docs/electronics-minimum.md) — P0–P5 class list (no SKU, no new spend)
 - [Parts on hand](docs/parts-on-hand.md) — owned / ordered inventory + candidates (GIM8108-8 not ordered)
-- [First buy](docs/bom.md) — 6×1.25 tires, tubes, 16 mm carbon tube. Motors not on this list.
+- [First buy](docs/bom.md) — 6×1.25 tires, tubes, 16 mm carbon tube, Teensy 4.1 CAN kit, anti-spark, one pack (voltage pending). Actuators shortlisted, not on this list: [actuator shortlist](docs/research/actuator-shortlist.md).
 - [Living drawings](tools/living-drawings/index.html) — side, top and front views of the settled leg, and the stair climb with its dynamics (momentum window, wheel catch, joint torques, sway). Play runs the climb in real time. Findings: [research/stair-climb-dynamics.md](docs/research/stair-climb-dynamics.md)
 - [3D sandbox](tools/living-drawings/sim.html) — drive the working model in 3D with rigid-body physics (Rapier + three.js): torque-limited joints, LQR balance, ride height (medium by default), spring legs with an impact hop, stumble catch, a planned one-wheel poise, stair / ramps / sills / curb / wet tile. A design toy, not the digital twin. Findings: [research/sim-sandbox.md](docs/research/sim-sandbox.md)
 - [Data flow](tools/living-drawings/flow.html) — command, power, motion, modes, and what waits until later
