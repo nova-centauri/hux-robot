@@ -42,7 +42,7 @@ for (const th of [-30, 0, 23, 60, 95]) {
 assert.ok(maxIkErrorIn < 1e-8);
 assert.ok(maxTorqueErrorNm < 1e-6);
 near(stance.hip.y, 16.8);
-near(com.kg, 6);
+near(com.kg, M.exampleMassKg); /* 7.75 kg with the locked actuator set; was 6 */
 
 // Combine the coordinates shown in the side and front drawings. Triangle inequality
 // gives a generous necessary reach bound, even allowing the axle spacer to point any way.
@@ -95,7 +95,7 @@ const wheelOverCap = climb.samples.filter(s => !s.seam && s.tq.wheel > baseline.
 const sensitivity = [];
 // One parameter at a time. Never carry a changed parameter into the next case.
 for (const [name, delta] of [
-  ["baseline", {}], ["mass 4 kg", { massScale: 4 / 6 }], ["mass 8 kg", { massScale: 8 / 6 }],
+  ["baseline", {}], ["mass 6 kg (the 2026-09-22 picture)", { massScale: 6 / M.exampleMassKg }], ["mass 9 kg", { massScale: 9 / M.exampleMassKg }],
   ["mu 0.3", { mu: 0.3 }], ["mu 0.5", { mu: 0.5 }],
   ["body +1 inch, unchanged timing", { bodyCom: 1 }], ["body +2 inches, unchanged timing", { bodyCom: 2 }],
   ["landing +0.5 inch", { landErr: 0.5 }], ["landing -0.75 inch", { landErr: -0.75 }]

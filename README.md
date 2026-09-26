@@ -20,6 +20,7 @@ This repo is the source of truth for Steve Barrett's Hux project. It is a docs-a
 | Requirements | Draft captured in [`docs/requirements.md`](docs/requirements.md) |
 | Decisions | Dated log in [`docs/decisions.md`](docs/decisions.md) |
 | Compute | **Four layers** (2026-09-26): CAN actuators → portable control core → CAN real-time MCU (Teensy 4.1 / H743-class, not bought) → ROS 2 companion (Pi 5 now, Jetson at P5). F765-Wing is a bench board. |
+| Actuators | **Temporary lock (2026-09-26):** 4× RobStride 02, 2× RS00, 2× RS05 — `tools/living-drawings/actuators.js` feeds every model. Not ordered. Mass picture now **7.75 kg**; hip roll axes must come in to **≤ 3"**. |
 | Power | **8S** (decided 2026-09-26: 4S → 6S → 8S once the actuator voltage floor was checked), one 3300 mAh pack, XT90 / XT90-S, step-down rails |
 | Mechanical V1 | First wheel-leg is **Phase D** (after study + 2D). Not started. **~24" × ~14"**, carbon-tube spars. Head inside, wheels outside. |
 | Modes | `PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY` before autonomy |

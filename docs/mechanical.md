@@ -73,6 +73,8 @@ Sketch lines (fill when something is weighed — empty TBD is correct):
 | Hip-roll actuators | TBD | Dynamic class **in V1** (R16 / R27). |
 | Structure (carbon tubes + end fittings) | TBD | Do not spend mass on a printed spar. |
 | 8S 3300 mAh 50–60C LiPo | ~700 g, ~150 × 50 × 60 mm | R11, 2026-09-26. Low and central; add to the body lump. |
+| Hip roll axis lateral offset | **≤ 3" from the centreline — requirement (2026-09-26)** | The one-wheel hold with the locked actuator masses: 10.7 N·m at the drawn 5.4", 6.0 at 3". RS02 is rated 7. The head is 7" wide; the RS02 roll housing is 3.1" square — the roll actuators end up at or inside the head's faces. 2D-layout task. |
+| Actuator envelopes | RS02 78.5 × 78.5 × 45.5 mm (knee, roll); RS00 57 × 57 × 51 (swing); RS05 46 × 46 × 44 (wheel) | From `actuators.js`; drawn in the living drawings. The RS05 is wider than the 1.25" tire — hub drawing needed. |
 | Companion slot | TBD | Head carries a slot sized for an Orin Nano dev kit (~100 × 79 × 21 mm + fan) with a 12–19 V feed and airflow; the Pi 5 occupies it in V1 (R22). |
 | CAN real-time MCU + TBS Nano RX | TBD | Teensy 4.1 / H743-WING class, picked with the actuators (2026-09-26). F765 is bench only. |
 | Raspberry Pi + camera(s) | TBD | Companion. Not on the FC. |

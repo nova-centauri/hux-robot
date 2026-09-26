@@ -129,7 +129,10 @@
     const d = 2 * L * (opts.extension || M.stanceFraction);
     const d3 = (opts.freeLen !== undefined ? opts.freeLen * IN : d);
     const comUp = (opts.comUp !== undefined ? opts.comUp : 0.45 * M.bodyAboveHip) * IN;
-    const lump = { body: 4.0 * ms, yoke: 0.4 * ms, knee: 0.25 * ms, tube: 0.03 * ms, wheel: 0.35 * ms };
+    /* lumps from kin.js (the locked actuator set, actuators.js): body 4.35, each hip yoke 0.75,
+       knee 0.46, wheel 0.49 — 7.75 kg. Falls back to the 2026-09-22 6 kg picture if kin.js has no mass. */
+    const mm = M.mass || { body: 4.0, hips: 0.8, knee: 0.25, wheel: 0.35 };
+    const lump = { body: mm.body * ms, yoke: (mm.hips / 2) * ms, knee: mm.knee * ms, tube: 0.03 * ms, wheel: mm.wheel * ms };
     /* Each mass as a function of q = [q1, q2, q3]. Frame: contact at the origin, +z right
        (inboard for a left plant), +y up. rot(p, a) rotates p by a about the fore-aft axis
        (+ tips the top to the right). */
@@ -213,7 +216,7 @@
       const Mm = zeros(n, n);
       base.forEach((e, i) => { for (let a = 0; a < n; a++) for (let b = 0; b < n; b++) Mm[a][b] += e.m * (Jz[i][a] * Jz[i][b] + Jy[i][a] * Jy[i][b]); });
       /* a little own inertia for the trunk (box) so the body is not a point */
-      const Ibody = 4.0 * (opts.massScale || 1) * (Math.pow(M.bodyWidth * IN, 2) + Math.pow(M.bodyAboveHip * IN, 2)) / 12;
+      const Ibody = lump.body * (Math.pow(M.bodyWidth * IN, 2) + Math.pow(M.bodyAboveHip * IN, 2)) / 12;
       for (let a = 0; a < 2; a++) for (let b = 0; b < 2; b++) Mm[a][b] += Ibody;
       /* gravity torque g(q) = ∂V/∂q, V = Σ m g y */
       function gvec(qq) {

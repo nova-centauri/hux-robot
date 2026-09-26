@@ -3,9 +3,14 @@
    IK returns an achievable pose AND its target residual; it never stretches links. */
 (function (root) {
   "use strict";
+  /* Torque limits are the locked actuator set's PEAK numbers (actuators.js, 2026-09-26).
+     Rated (continuous) numbers live there too; the models report both. */
+  const ACT = root.HuxActuators || require("./actuators.js");
   const limits = {
     roll: [-0.6, 0.6], hip: [-40 * Math.PI / 180, 170 * Math.PI / 180],
-    knee: [0.2, 2.7], tauWheel: 3, tauHip: 12, tauKnee: 12, tauRoll: 15
+    knee: [0.2, 2.7],
+    tauWheel: ACT.peak.wheel, tauHip: ACT.peak.hip, tauKnee: ACT.peak.knee, tauRoll: ACT.peak.roll,
+    ratedWheel: ACT.rated.wheel, ratedHip: ACT.rated.hip, ratedKnee: ACT.rated.knee, ratedRoll: ACT.rated.roll
   };
   const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
   const distance = (a, b) => Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);

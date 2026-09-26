@@ -152,7 +152,7 @@
           <label>Tire damping ratio <output id="k_tireZetaOut"></output>
             <input id="k_tireZeta" type="range" min="0.05" max="0.8" step="0.05" value="0.2">
           </label>
-          <label>Mass, × the 6 kg lumps <output id="k_massScaleOut"></output>
+          <label>Mass, × the 7.75 kg lumps <output id="k_massScaleOut"></output>
             <input id="k_massScale" type="range" min="0.67" max="1.5" step="0.01" value="1">
           </label>
           <label>Body mass forward of the hips <output id="k_bodyComOut"></output>
@@ -207,6 +207,7 @@
       Geometry and lump masses come from <code>kin.js</code>, the same model the drawings use (<code>docs/research/leg-geometry.md</code>). The 3D body is 8" long, 7" wide and 6" above the hips, the same drawing assumptions. The torque limits are classes, not parts. Needs a network connection the first time it opens: three.js and Rapier load from jsDelivr.
     </footer>
   </div>
+  <script src="actuators.js"></script>
   <script src="tire.js"></script>
   <script src="spatial.js"></script>
   <script src="kin.js"></script>

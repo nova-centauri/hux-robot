@@ -29,7 +29,7 @@ near(S.tireSupport(0.4).z, -S.tireSupport(-0.4).z);
 const reference = K.referenceClimbFrame(0, 0);
 reference.latLeft = 0;
 const a = K.projectFrame(reference);
-near(a.com.kg, 6);
+near(a.com.kg, M.exampleMassKg); /* 7.75 kg with the locked actuator set (actuators.js); was 6 */
 near(a.com.z, 0);
 assert.ok(Math.abs(a.spatial.rollHoldingNm.left) > 5);
 assert.ok(Math.abs(a.spatial.rollHoldingNm.left - a.spatial.tippingNm.left) > 0.5);

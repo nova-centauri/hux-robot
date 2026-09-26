@@ -71,6 +71,8 @@ Rough budget for Hux balancing and driving (no measurement yet): 8 actuators qui
 
 ## 5. A shortlist that closes
 
+**Update, same day, after the set was applied to the models** (`actuators.js`; temporary lock): with the real leg masses the planted hip roll hold is **10.7 N·m at the drawn 5.4" hips, 7.0 at 3.5", 6.0 at 3.0"** (the 8.3 / 5.4 figures below were computed with the 6 kg picture). So the hip-offset target moves from ≤ 3.5" to **≤ 3"**, and RS06 at 5.4" is no longer a fallback (it would sit at its own 11 N·m rating). The knee stand-up hold is **13.6 N·m** (1.9× RS02 rated, under its 17 peak): knee gravity springs are back in the plan. In the sandbox the **hop peak on the planted hip roll reaches the RS02 cap (17 N·m)** at the drawn hips. Rows below are left as written for the record.
+
 | Axis | First choice | Why | Alt |
 | --- | --- | --- | --- |
 | Knee ×2 | **RobStride 02** | 7 N·m rated covers the 10.6 N·m hold at 1.5×; dual encoder for a verified `PARKED` pose; 380 g | RobStride 00 (cheaper, lighter, 2× on the hold) |

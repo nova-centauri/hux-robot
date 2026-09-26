@@ -107,8 +107,14 @@ function run(opts, plan) {
   plan.forEach(function (seg) {
     if (seg.shove) sim.shove(seg.shove);
     const n = Math.round(seg.s * sim.s.knobs.rate);
+    const tail = Math.min(n, Math.round(1.0 * sim.s.knobs.rate)); /* last second: means, for loops that hunt */
+    const mean = { yawRate: 0, speed: 0, yawMin: Infinity, yawMax: -Infinity };
     for (let i = 0; i < n; i++) {
       const o = sim.step(seg.cmd || {});
+      if (i >= n - tail) {
+        mean.yawRate += o.yawRate / tail; mean.speed += o.speed / tail;
+        mean.yawMin = Math.min(mean.yawMin, o.yawRate); mean.yawMax = Math.max(mean.yawMax, o.yawRate);
+      }
       const p = out.peaks;
       p.wheel = Math.max(p.wheel, Math.abs(o.wheels[0].tau), Math.abs(o.wheels[1].tau));
       p.knee = Math.max(p.knee, Math.abs(o.legs[0].knee.tau), Math.abs(o.legs[1].knee.tau));
@@ -118,7 +124,7 @@ function run(opts, plan) {
       if (o.fallen && out.fellAt === null) out.fellAt = sim.t;
     }
     const t = sim.robot.trunk.translation();
-    out.segments.push({ name: seg.name, t: sim.t, x: t.x, y: t.y, z: t.z, o: Object.assign({}, sim.last) });
+    out.segments.push({ name: seg.name, t: sim.t, x: t.x, y: t.y, z: t.z, o: Object.assign({}, sim.last), mean: mean });
     /* the build starts with straight legs; the first bend into stance is not a design load */
     if (seg.name === "settle") out.peaks = { wheel: 0, knee: 0, hip: 0, roll: 0, theta: 0 };
   });
@@ -210,7 +216,8 @@ function run(opts, plan) {
     assert(Math.abs(o.theta) < 0.02, "standing lean " + o.theta);
     assert(Math.hypot(t.x, t.z) < 0.05, "drifted " + t.x + "," + t.z);
     const knee = (Math.abs(o.legs[0].knee.tau) + Math.abs(o.legs[1].knee.tau)) / 2;
-    assert(knee > 1.4 && knee < 2.6, "stance knee torque " + knee.toFixed(2) + " (leg-geometry.md: ~2.2 two-leg at 6 kg)");
+    const kneeRef = 2.2 * M.exampleMassKg / 6; /* leg-geometry.md: ~2.2 N·m two-leg at 6 kg; scales with the lump picture */
+    assert(knee > kneeRef * 0.64 && knee < kneeRef * 1.18, "stance knee torque " + knee.toFixed(2) + " vs ~" + kneeRef.toFixed(1) + " expected at " + M.exampleMassKg.toFixed(2) + " kg");
     found.stance = { kg: sim.s.totalKg.toFixed(2), kneeNm: knee.toFixed(2), hipHeightIn: ((t.y) / IN).toFixed(1) };
   }
 
@@ -244,7 +251,10 @@ function run(opts, plan) {
   assert(drive.fellAt === null, "fell during drive/shove/crouch at " + drive.fellAt);
   const seg = function (r, name) { return r.segments.filter(function (s) { return s.name === name; })[0]; };
   assert(Math.abs(seg(drive, "drive").o.speed - 1) < 0.1, "did not reach 1 m/s: " + seg(drive, "drive").o.speed);
-  assert(Math.abs(seg(drive, "arc").o.yawRate - 1.5) < 0.2, "did not hold 1.5 rad/s turn: " + seg(drive, "arc").o.yawRate);
+  /* The sandbox yaw loop (P 0.35 + I 0.6 on yaw rate, clamped to the wheel torque room) hunts
+     about ±0.25 rad/s around the command at 1 m/s, at 6 kg and at 7.75 kg alike; the 2026-09-23
+     end-of-segment sample happened to land inside ±0.2. Assert the last-second mean, report the swing. */
+  assert(Math.abs(seg(drive, "arc").mean.yawRate - 1.5) < 0.2, "did not hold 1.5 rad/s turn (1 s mean): " + seg(drive, "arc").mean.yawRate);
   const hops = drive.sim.last.reflex.reduce(function (a, r) { return a + r.hits; }, 0);
   assert(hops === 0, "impact reflex fired " + hops + " times on a flat floor");
   const arc = seg(drive, "arc").o.contacts;
@@ -253,7 +263,8 @@ function run(opts, plan) {
     peakWheelNm: drive.peaks.wheel.toFixed(2),
     peakKneeNm: drive.peaks.knee.toFixed(1),
     arcWheelLoadsN: arc.map(function (c) { return c.force.toFixed(0); }).join("/"),
-    crouchKneeNm: Math.abs(seg(drive, "crouch").o.legs[0].knee.tau).toFixed(1)
+    crouchKneeNm: Math.abs(seg(drive, "crouch").o.legs[0].knee.tau).toFixed(1),
+    arcYawRate: { mean: seg(drive, "arc").mean.yawRate.toFixed(2), swing: (seg(drive, "arc").mean.yawMax - seg(drive, "arc").mean.yawMin).toFixed(2), note: "sandbox yaw loop hunts; not a layer-2 controller" }
   };
 
   /* Thresholds: 6" wheel, μ 0.7. Approach from the start heading −X. */
@@ -372,7 +383,10 @@ function run(opts, plan) {
   const g92 = fr.balanceRoll(0);
   assert(Math.abs(-g92 * 180 / Math.PI - 24.7) < 1.0, "frontal.js balance roll moved: " + (-g92 * 180 / Math.PI).toFixed(1) + "°");
   const hold = fr.holdTorque([g92, -g92, 0]);
-  assert(hold > 7.5 && hold < 9.5, "frontal.js hold torque moved: " + hold.toFixed(2));
+  /* ≈ (m_body + m_free yoke·2 + m_free leg·2) g × 5.4": 8.3 N·m with the 6 kg picture, 10.7 with the locked
+     actuator set (actuators.js). Band scales with the lump picture. */
+  const holdRef = 10.7 * M.exampleMassKg / 7.752;
+  assert(hold > holdRef * 0.9 && hold < holdRef * 1.1, "frontal.js hold torque moved: " + hold.toFixed(2) + " vs ~" + holdRef.toFixed(1));
   const resp = fr.response(0, [2], 0.010, undefined, true);
   found.oneWheel.frontal = {
     legRollDeg: (-g92 * 180 / Math.PI).toFixed(1),

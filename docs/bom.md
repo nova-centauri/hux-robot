@@ -41,9 +41,9 @@ No SKU is locked on these. The dollar is a midpoint so the total is not a blank.
 
 | Qty | What | Est. each | Line | Store / note |
 | --- | --- | ---: | ---: | --- |
-| 2 | Wheel actuator (in-wheel), about 3 N·m | $100 | $200 | Shortlist: **RobStride 05** (5.5 N·m peak, 191 g, 15–60 V) — [`research/actuator-shortlist.md`](research/actuator-shortlist.md). Driver and encoder are on the actuator; no separate lines. Do not buy before the hub drawing. |
-| 2 | Hip roll actuator | $160 | $320 | Shortlist: **RobStride 02** if the hip offset comes in to ≤ 3.5" (5.4 N·m hold), **RobStride 06** at the drawn 5.4" (8.3 N·m continuous hold, 12–13 peak — [`research/one-leg-stance.md`](research/one-leg-stance.md)). RS00 is out for roll. GIM8108-8 was the earlier yardstick. Not an order. |
-| 4 | Knee and hip-swing actuator | $170 | $680 | Shortlist: **2× RobStride 02** (knee) + **2× RobStride 00** (swing); hip roll also RS00. One RS00 first on the Teensy before the set. Servo / stepper+belt is the fallback. |
+| 2 | Wheel actuator (in-wheel), about 3 N·m | $100 | $200 | **Temporary lock 2026-09-26: 2× RobStride 05** (5.5 N·m peak, 191 g, 46 × 46 × 44 mm). Driver and encoder are on the actuator. The 44 mm housing is wider than the 31.75 mm tire — hub drawing before any order. |
+| 2 | Hip roll actuator | $160 | $320 | **Temporary lock 2026-09-26: 2× RobStride 02** — and the hip roll axes must come in to **≤ 3"** (hold 6.0 N·m vs 7 rated with the real masses; 10.7 N·m at the drawn 5.4", which nothing in the family holds at rating). Not an order. |
+| 4 | Knee and hip-swing actuator | $170 | $680 | **Temporary lock 2026-09-26:** knees **2× RobStride 02**, swing **2× RobStride 00**. One RS02 first on the Teensy before the set. Servo / stepper+belt is the fallback. |
 | 7 | Cameras (2 front, plus back, sides, top, bottom) | $20 | $140 | No module picked. |
 | 1 | Small front display, about 2.2" × 1.0" | $20 | $20 | Preset faces. No panel picked. |
 | 2 | RGB into the eye sockets | $10 | $20 | The lit socket is the eye. No LED picked. |

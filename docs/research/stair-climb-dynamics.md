@@ -47,3 +47,15 @@ Bad feel may be the wrong stair trajectory, the two-contact poise, or sim contac
 Worked on 2026-09-26 in [`one-leg-stance.md`](one-leg-stance.md): (1) the lateral path is the parallelogram hip-roll shift, 24.7° at the 92% stance; (2) hip roll is the right DOF for the shift and the poise, and no DOF on this robot gives a static one-wheel *hold* (an acrobot with 2–3 mm of capture region); (3) the stair needs a short flight (≤ 0.3 s from a ±20 mm CoM estimate) from a known inboard margin, not a hold. The planted hip roll holds ~8.3 N·m whenever a wheel is up — the "0 if the sway is done first" above was the tipping moment, not the joint torque.
 
 Decision log: [`../decisions.md`](../decisions.md). Mechanical lock language is unchanged: [`../mechanical.md`](../mechanical.md).
+
+## 2026-09-26 — with the locked actuator masses
+
+`actuators.js` (temporary lock) puts 1.9 kg of actuator in the legs and hips and takes the picture to 7.75 kg. Re-running the 2D climb solver on the settled geometry:
+
+| Body CoM ahead of the hip axes | Liftoff momentum | Least to crest (with catch) | Most the slot absorbs | Result |
+| ---: | ---: | ---: | ---: | --- |
+| 0 | 0.90 kg·m²/s | 1.03 | 1.15 | **does not crest** ("reversed") — the rear-leg shove cannot throw the heavier legs |
+| +1" | 0.90 | 0.79 | 0.94 | crests; margin 0.11, window 0.15 |
+| +1.5" | 0.90 | 0.68 | 0.83 | crests; margin 0.22 |
+
+Static holds on the drawn path: **knee 13.6 N·m** standing up over the front wheel (was 10.6), hip swing 4.0. Drawn-path dynamic peaks (rough, the hand-drawn path has velocity kinks): knee 20–23, hip swing 11–12, wheel 4–6 N·m — against RS02 17 / RS00 14 / RS05 5.5 peak. The candidate stays **rejected** on spatial reach (`model-corrections.md`); the mass result is a second, independent reason, and it says the same thing the 2026-09-22 note said before it was retired as a decision: **the body mass has to sit ahead of the hip axes** for a step-to gait on this geometry.

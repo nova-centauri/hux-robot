@@ -9,6 +9,7 @@
   const G = 9.81;
   const SHARED = (root.HuxSpatial || require("./spatial.js")).limits;
   const Tire = root.HuxTire || require("./tire.js");
+  const ACT = root.HuxActuators || require("./actuators.js");
 
   /* Working assumptions for the actuators. Not parts. */
   const KNOBS = {
@@ -18,12 +19,18 @@
     tireK: 40000,      /* N/m, carcass stiffness of a 6×1.25 high-pressure pneumatic. Unmeasured; 25–60 kN/m is the plausible band */
     tireZeta: 0.2,     /* damping ratio of the tread ring on that stiffness. Pneumatics are lightly damped */
     tireCompliance: true, /* false = the rigid crown hull on the hub, as before 2026-09-25 */
-    tauWheel: SHARED.tauWheel,     /* N·m peak per in-wheel motor (same as the stair-climb knob) */
-    wheelNoLoad: 40,   /* rad/s assumed output no-load speed; no motor/8S match verified */
-    tauKnee: SHARED.tauKnee,       /* N·m peak; the stair climb says ~10.6 holding */
-    tauHip: SHARED.tauHip,        /* N·m peak, hip swing */
-    tauRoll: SHARED.tauRoll,       /* N·m peak; GIM8108-class yardstick is 7.5 nominal / 22 stall */
-    jointNoLoad: 20,   /* rad/s output, unmeasured torque-speed assumption */
+    /* Actuator caps and torque-speed lines are the locked set's vendor numbers on the 8S bus
+       (actuators.js, 2026-09-26): RS05 wheels 5.5 N·m peak / 1.7 rated / 31 rad/s no-load;
+       RS02 knee + roll 17 / 7 / 26.5; RS00 hip swing 14 / 5 / 20. Peak is the cap; rated is
+       reported next to every torque so a hold above it shows. Nothing measured yet. */
+    tauWheel: SHARED.tauWheel,     /* N·m peak per in-wheel actuator */
+    wheelNoLoad: ACT.noLoad.wheel, /* rad/s output no-load at 29.6 V */
+    tauKnee: SHARED.tauKnee,       /* N·m peak; the stair climb says ~10.6 holding at 6 kg, more now */
+    tauHip: SHARED.tauHip,         /* N·m peak, hip swing */
+    tauRoll: SHARED.tauRoll,       /* N·m peak, hip roll (same part as the knee) */
+    jointNoLoad: ACT.noLoad.knee,  /* rad/s output, used where a joint has no entry in noLoadOf */
+    noLoadOf: { roll: ACT.noLoad.roll, hip: ACT.noLoad.hip, knee: ACT.noLoad.knee },
+    ratedOf: { wheel: ACT.rated.wheel, roll: ACT.rated.roll, hip: ACT.rated.hip, knee: ACT.rated.knee },
     torqueLagMs: 2,    /* first-order drive response, unmeasured assumption */
     sensorDelayMs: 4,  /* outer-loop sample delay, unmeasured assumption */
     skid: false,       /* proposal: rear parking skid on the body centreline. Not in the docs. */
@@ -38,7 +45,11 @@
                           down. Dynamic single support: what a stair step needs, without a static one-wheel stand. */
     hopKeep: 0.15,     /* fraction of the weight left on the free wheel at the moment it lifts (sets the inboard
                           margin the tip starts from; 0.15 is the poise) */
-    rate: 2000,        /* Hz, physics and joint servo loops (servo drives close position at kHz) */
+    rate: 3000,        /* Hz, physics and joint servo loops (servo drives close position at kHz). 2 kHz until
+                          2026-09-26: with the locked actuator set's heavier hub (RS05, 0.29 kg) on the 0.2 kg
+                          tread ring, the ring/hub/ground stack chattered at 2 kHz (contact-force bursts of
+                          +45% over the weight, none of it physical); 3 kHz resolves it, 16 solver iterations
+                          only halved it. A solver artefact, not a tire finding. */
     balanceRate: 500   /* Hz, balance / drive loop on the flight controller */
   };
 
@@ -85,9 +96,11 @@
   function spec(M, knobs) {
     const k = Object.assign({}, KNOBS, knobs || {});
     const ms = k.massScale;
-    /* kin.js lumps: body 4.0, both hip actuators 0.8, each knee 0.25, each wheel 0.35.
-       The sandbox adds the two carbon tubes per leg (~30 g each, 16 mm OD) the 2D lumps leave out. */
-    const lump = { body: 4.0, hips: 0.8, knee: 0.25, wheel: 0.35 };
+    /* kin.js lumps come from the locked actuator set (actuators.js): body 4.35, both hips 1.50,
+       each knee 0.46, each wheel 0.49 — 7.75 kg. The sandbox adds the two carbon tubes per leg
+       (~30 g each, 16 mm OD) the 2D lumps leave out. */
+    const lump = (M.mass && M.mass.body) ? { body: M.mass.body, hips: M.mass.hips, knee: M.mass.knee, wheel: M.mass.wheel }
+      : { body: ACT.lumps.body, hips: ACT.lumps.hips, knee: ACT.lumps.knee, wheel: ACT.lumps.wheel };
     const s = {
       knobs: k,
       L: M.link * IN,
@@ -107,10 +120,10 @@
       mKnee: lump.knee * ms,
       mTube: 0.03 * ms,
       mWheel: lump.wheel * ms,
-      /* The 0.35 kg wheel lump split into the tread ring (tire + tube + rim band, what moves on
-         the carcass) and the hub (motor, bearings). A picture, not weighed parts. */
-      mTread: 0.20 * ms,
-      mHub: 0.15 * ms,
+      /* The wheel lump split into the tread ring (tire + tube + rim band, what moves on the
+         carcass) and the hub (RS05 + bearings + axle). A picture, not weighed parts. */
+      mTread: ACT.lumps.wheelTread * ms,
+      mHub: (lump.wheel - ACT.lumps.wheelTread) * ms,
       jWheel: 0.65, /* J = 0.65 m R², same estimate as leg-geometry.md */
       tire: Tire.create({ R: M.wheelR * IN, width: M.wheelWidth * IN, crown: (M.tireCrown || M.wheelWidth / 2) * IN }),
       motorKnee: { w: M.motorKnee.w * IN, h: M.motorKnee.h * IN, t: M.motorKnee.t * IN },
@@ -809,7 +822,11 @@
     /* Levelling by leg length is a mass-mover near one wheel: 29 mm of leg difference is 5° of
        body roll and 35 mm of CoM travel. After a landing the integrator wound up on the touchdown
        roll and walked the mass out over the planted tire, so it stays frozen until the unshift. */
-    const levelling = !parked && (!this.one || (ONE_WHEEL.indexOf(this.one.phase) < 0 && !(this.one.hopped && this.one.phase !== "unshift")));
+    /* 2026-09-26: with the locked actuator masses the levelling integrator and the shift servo
+       fell into a 2 Hz limit cycle during the shift itself (free-wheel load 3 ↔ 21 N, knees ±1°,
+       mass ±5 mm), so the poise never settled. Level with the parallelogram, not the legs, for
+       the whole one-leg sequence: equal leg lengths keep the body level by geometry. */
+    const levelling = !parked && !this.one;
     if (levelling) {
       /* Integral only: one metre of leg difference tilts the body ~6 rad, so any real
          proportional gain here fights the leg springs. ~0.2 s time constant. */
@@ -1078,7 +1095,7 @@
       if (this.estop || this.fallen) t = 0;
       leg.wheelTorque = t;
       applyJointTorque(leg.joints.wheel, -t, js.axisW);
-      wheelOut.push({ tau: t, cap: cap, w: w, power: t * w });
+      wheelOut.push({ tau: t, cap: cap, rated: (k.ratedOf && k.ratedOf.wheel) || null, w: w, power: t * w });
     }, this);
 
     /* Legs: a virtual spring-damper along the hip-to-axle line (the suspension), a stiff hold on
@@ -1118,7 +1135,8 @@
       const row = { d: p.d, dd: p.dd, dWant: lp.h, F: F, b: p.b, bd: p.bd };
       ["roll", "hip", "knee"].forEach(function (name) {
         let t = cmdT[name];
-        const cap = caps[name] * (t * js[name].rate > 0 ? clamp(1 - Math.abs(js[name].rate) / k.jointNoLoad, 0, 1) : 1);
+        const nl = (k.noLoadOf && k.noLoadOf[name]) || k.jointNoLoad;
+        const cap = caps[name] * (t * js[name].rate > 0 ? clamp(1 - Math.abs(js[name].rate) / nl, 0, 1) : 1);
         if (Math.abs(t) > cap) sat[name] = true;
         const alpha = k.torqueLagMs > 0 ? 1 - Math.exp(-dt / (k.torqueLagMs / 1000)) : 1;
         leg.driveTorque = leg.driveTorque || {};
@@ -1127,7 +1145,7 @@
         if (limp) t = 0;
         leg.driveTorque[name] = t;
         applyJointTorque(leg.joints[name], t, js[name].axisW);
-        row[name] = { tau: t, cap: cap, q: js[name].q, want: want[name], power: t * js[name].rate };
+        row[name] = { tau: t, cap: cap, rated: (k.ratedOf && k.ratedOf[name]) || null, q: js[name].q, want: want[name], power: t * js[name].rate };
       });
       legOut.push(row);
     });
@@ -1331,7 +1349,17 @@
     if (st.phase === "shift" || st.phase === "poise") {
       /* with a wheel in the air a hip roll change is the acrobot swing, not a shift: it moves
          the mass the wrong way. Hold until both tires carry something. */
-      if (freeLoad > 0.03 * weight && contacts[iP].force > 0.03 * weight) shiftToward(ePoise, 0.2);
+      /* after a landing the robot is still rocking on the planted tire; re-poise gently or the
+         shift servo walks the mass over the tire (seen at 7.75 kg: 0.2 rad/s fell, 0.08 returns) */
+      if (freeLoad > 0.03 * weight && contacts[iP].force > 0.03 * weight) shiftToward(ePoise, st.hopped ? 0.08 : 0.2);
+      /* Gravity feed-forward on the planted hip for the whole shift / poise, not only in the air:
+         the lump model's cantilever, scaled by the share of the weight the free wheel is not
+         carrying. With the locked actuator masses (2026-09-26) the cantilever is 10.7 N·m at the
+         drawn hips and the P+I hold alone sagged 1–3° into it after a landing, which walked the
+         mass over the planted tire before the shift servo could act. A real controller has the
+         same model and the same feed-forward (one-leg-stance.md, §5). */
+      const mdlS = this.lateralModel(st, right);
+      P.rollFf = -mdlS.gV[1] * (1 - clamp(freeLoad / weight, 0, 1));
       const tall = Math.abs(this.h - Math.max(cmd.height || s.hRide, s.hStance)) < 0.005;
       const settled = tall && Math.abs(e - ePoise) < 0.006 && Math.abs(ev) < 0.03;
       st.hold = settled ? st.hold + dt : 0;
@@ -1515,7 +1543,10 @@
     } else if (st.phase === "load") {
       const u = minJerk(st.t / ONE.load);
       carry(1 - u);
-      if (st.hopFf) P.rollFf = st.hopFf * (1 - u);
+      if (st.hopFf) {
+        const mdlL = this.lateralModel(st, right);
+        P.rollFf = st.hopFf * (1 - u) + u * (-mdlL.gV[1] * (1 - clamp(freeLoad / weight, 0, 1)));
+      }
       /* a landing leg is a damper first: the robot arrives rocking about the planted tire and
          a stiff, lightly damped leg just rocks it back over that tire */
       if (st.hopped) { F.c = Math.max(F.c, ONE.landC); P.c = Math.max(P.c, ONE.landC); }

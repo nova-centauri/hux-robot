@@ -19,12 +19,14 @@
     going: 9.5,
     soffit: 1,
     stanceFraction: 0.92,
-    exampleMassKg: 6,
+    exampleMassKg: 6, /* overwritten below from the actuator set's lumps */
     g: 9.81,
     /* Lateral distance from the body centerline to each hip roll axis. Drawing assumption:
        the head is ~7" wide and the legs sit just outside it. */
     hipLateral: 5.4,
-    /* Rough envelopes so the views show bulk. Not parts, not a buy. */
+    /* Motor envelopes come from the locked actuator set (actuators.js, 2026-09-26): RS02 at the
+       knee and hip roll (3.1" square × 1.8"), RS00 hip swing (2.2" × 2.0"), RS05 wheel (1.8" × 1.7").
+       Filled in below. */
     motorWheelD: 2.0,
     motorWheelW: 1.1,
     motorKnee: { w: 1.6, h: 1.5, t: 1.15 },
@@ -38,6 +40,14 @@
     cam: 0.45,
     stereoGap: 2.6
   };
+  const ACT = root.HuxActuators || require("./actuators.js");
+  M.actuators = ACT;
+  M.motorKnee = { w: ACT.envIn.knee.w, h: ACT.envIn.knee.h, t: ACT.envIn.knee.t };
+  M.motorSwing = { w: ACT.envIn.swing.w, h: ACT.envIn.swing.h, t: ACT.envIn.swing.t };
+  M.motorRollD = ACT.envIn.rollD;
+  M.motorRollL = ACT.envIn.rollL;
+  M.motorWheelD = ACT.envIn.wheelD;
+  M.motorWheelW = ACT.envIn.wheelW;
   M.wheelR = M.wheelOd / 2;
   M.track = M.envelopeWidth - M.wheelWidth;
   M.slotRoom = M.going / 2 - M.wheelR; /* rubber-to-nosing gap each side of a centered tire: 1.75" */
@@ -53,10 +63,10 @@
 
   const P = {
     tPush: 0.44,      /* s, duration of the rear-leg shove with both wheels down */
-    wheelTau: 3.0,    /* N·m, peak torque the front wheel can put on the tread */
+    wheelTau: ACT.peak.wheel, /* N·m, peak torque the front wheel can put on the tread (RS05: 5.5; the 2026-09-22 study used 3.0) */
     catchRoom: 1.0,   /* in, how far the front wheel may roll back in its slot during the catch */
     landErr: 0,       /* in, where the front wheel actually lands relative to slot center (+ = forward) */
-    massScale: 1,     /* multiplies the 6 kg lump picture */
+    massScale: 1,     /* multiplies the lump picture (7.75 kg with the locked actuator set; was 6 kg) */
     bodyCom: 0,       /* in, body lump forward (+) of the hip axis. 0 = pack centered on the hips */
     mu: 0.7           /* tire-to-tread friction used for every cone check */
   };
@@ -170,17 +180,20 @@
     return M.exampleMassKg * M.g * Math.abs(offsetIn) * 0.0254;
   }
 
-  /* Lumped mass, kilograms. Estimate so the picture has a weight, not a measured robot.
-     Body 4.0 at mid-body, both hip actuators 0.8 at the hip, each knee 0.25, each wheel 0.35.
-     Total 6.0 kg, the example used everywhere else. massScale multiplies all of it. */
-  const MASS0 = { body: 4.0, hips: 0.8, knee: 0.25, wheel: 0.35 };
-  M.mass = { body: 4.0, hips: 0.8, knee: 0.25, wheel: 0.35 };
+  /* Lumped mass, kilograms, from the locked actuator set (actuators.js): body 4.35 (8S 3300 pack
+     inside), both hips 1.50 (RS02 roll + RS00 swing each side), each knee 0.46 (RS02), each wheel
+     0.49 (RS05 + tire/tube/rim/hub). Total 7.75 kg — up from the 6.0 kg picture of 2026-09-22,
+     which is why every torque below is ~29% higher than the earlier notes. Still an estimate,
+     not a weighed robot. massScale multiplies all of it. */
+  const MASS0 = { body: ACT.lumps.body, hips: ACT.lumps.hips, knee: ACT.lumps.knee, wheel: ACT.lumps.wheel };
+  M.mass = { body: MASS0.body, hips: MASS0.hips, knee: MASS0.knee, wheel: MASS0.wheel };
+  M.exampleMassKg = ACT.lumps.total;
   function setMass(scale) {
     M.mass.body = MASS0.body * scale;
     M.mass.hips = MASS0.hips * scale;
     M.mass.knee = MASS0.knee * scale;
     M.mass.wheel = MASS0.wheel * scale;
-    M.exampleMassKg = 6 * scale;
+    M.exampleMassKg = ACT.lumps.total * scale;
   }
 
   function comOf(left, right) {
