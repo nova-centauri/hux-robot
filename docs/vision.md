@@ -31,7 +31,7 @@ Open-loop step onto a 9.5" fixture comes before a closed-loop stair gait. Camera
 
 | Role | Where | Notes |
 | --- | --- | --- |
-| IMU, attitude, wheel FOC, manual modes | Flight controller | **FC is TBD.** Hip roll if PWM/CAN. Do not block mechanical work. **Not** a stepper-coil host. |
+| IMU, estimator, modes, balance loop at 1 kHz | CAN real-time MCU running the portable control core | Teensy 4.1 / H743-WING class, picked with the actuators (2026-09-26). F765 is bench only. Do not block mechanical work. **Not** a stepper-coil host. |
 | Pose joints (knee / hip swing) | Servo bus **or** stepper drivers / Pi | **Class TBD.** If steppers: FC does not drive coils. |
 | Cameras, pathfinding inference | Raspberry Pi | Not on the FC. |
 | Wi‑Fi telemetry | Pi first | Reports active mode. ESP32 only if we want a thin bridge off the Pi. |
@@ -67,7 +67,7 @@ Inspiration: [I built a self-balancing robot from scratch](https://www.youtube.c
 - **Serviceable modular prints** — threaded inserts; independently removable parts.
 - **Wheel-under-CoG** correction: rotate the planted wheel back under the mass. Their loop is a simple P; Hux still studies XRobots PID.
 
-Their stack is 3S + Arduino + 40 kg-class servos and **no stair / one-leg plant**. Hux prefers **4S + step-down**, FC / Pi, and sizes plant-side joints for **~2×** one-wheel load. Knee / hip swing class is **servo vs stepper+belt TBD** — both open, no lean.
+Their stack is 3S + Arduino + 40 kg-class servos and **no stair / one-leg plant**. Hux prefers **6S + step-down**, a CAN real-time MCU + Linux companion, and sizes plant-side joints for **~2×** one-wheel load. Knee / hip swing class is **CAN QDD** (servo / stepper fallback) — both open, no lean.
 
 ## Envelope (locked enough to write down)
 
@@ -81,7 +81,7 @@ Their stack is 3S + Arduino + 40 kg-class servos and **no stair / one-leg plant*
 
 - Flight controller choice (candidates only; see requirements).
 - Exact wheel BLDC / ESC / encoder models.
-- Knee / hip swing: **servo vs stepper+belt TBD** (both open, no lean). GIM8108-8 is a candidate, not an order.
+- Knee / hip swing: **CAN QDD** working class on 6S; servo / stepper+belt fallback. GIM8108-8 is a candidate, not an order.
 - BEC / regulator SKU and pack capacity.
 - Tube OD / wall, belt pitch, hip-roll SKU.
 - Full body CAD, second-leg copy, and stair gait software.

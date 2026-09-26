@@ -1,6 +1,6 @@
 # Minimum electronics (V1)
 
-**Status:** planning note. **Docs only.** **FC: TBD.** **No new spend.** No locked SKUs.
+**Status:** planning note, revised 2026-09-26 for **6S + CAN + a CAN-capable real-time MCU** ([`decisions.md`](decisions.md)). **Docs only.** **No new spend** beyond [`bom.md`](bom.md). No locked SKUs. The F765-Wing is a **P0–P1 bench board** (no CAN), not the robot's MCU.
 
 This is the **smallest electronics set** that can meet Hux V1 goals: four **manual** modes first, then pose joints, then hip-roll experiments. Classes and on-hand parts only. Every pack, driver, and motor model stays **TBD** until Steve asks to buy or a real part is on the bench.
 
@@ -12,32 +12,32 @@ Parent: [`electronics.md`](electronics.md). Modes: [`software.md`](software.md).
 
 | Goal | Minimum electronics implication |
 | --- | --- |
-| Manual modes **before** autonomy: `PARKED`, `TWO_WHEEL`, `LEFT_ONLY`, `RIGHT_ONLY` | FC + IMU + RC in + wheel torque. Hip roll later for one-wheel modes. Spec: [`software.md`](software.md). |
+| Manual modes **before** autonomy: `PARKED`, `TWO_WHEEL`, `LEFT_ONLY`, `RIGHT_ONLY` | RT MCU + IMU + RC in + wheel torque over CAN. Hip roll later for one-wheel modes. Spec: [`software.md`](software.md). |
 | 2× **in-wheel** brushless **FOC** | 2 FOC ESC / driver channels + 2 BLDC + encoders. Not steppers. |
-| 2× knee + 2× hip-swing **pose** joints | **Servo vs stepper+belt TBD.** If steppers: 4 drivers + 4 steppers; reduction required. If servos: 4 servo channels on the regulated rail. **GIM8108-8** is a candidate (not ordered). |
+| 2× knee + 2× hip-swing **pose** joints | **CAN QDD working class** — 4 more CAN nodes. Fallback: servo channels on a regulated rail, or steppers behind a CAN / step-dir driver board. **GIM8108-8** is a candidate (not ordered). |
 | 2× hip-roll **dynamic** (FOC / QDD / fast servo) **in V1** | 2 actuators + their drivers (PWM / CAN / FOC — **TBD**). Not steppers. Not deferred to V2. |
-| **TBS Nano RX** | Bind into the FC (or a dedicated link into the FC). On hand. |
-| Wi‑Fi telem | FC ↔ Pi **or** ESP32 bridge. Pi can wait until after 2-wheel works. |
-| **4S LiPo** class + **step-down** | Nominal ~14.8 V / full ~16.8 V. Pose / logic on regulated 5 / 6 / 7.4 V. Pack SKU, capacity, C **TBD**. |
-| **FC TBD** | On-hand wing / drone pile only. Do not lock. |
+| **TBS Nano RX** | CRSF into a UART on the RT MCU. On hand. |
+| Wi‑Fi telem | MCU ↔ Pi over a framed serial / USB link. Pi is listen-only until `TWO_WHEEL` holds. |
+| **6S** class + **step-down** | ~22.2 V nominal / 25.2 V full. Actuators on the pack; 5 V rail for MCU / RX / Pi; 12–19 V rail for a P5 companion slot. One pack or two in parallel. Pack SKU, capacity, C **TBD**. |
+| **RT MCU with CAN** | Teensy 4.1-class or H743-WING-class, picked with the actuators. F765-Wing is bench only. |
 | Pi + cameras **later** | Not required for first balance (P0–P4). |
-| Stepper coils **not** on the FC | **If** steppers are chosen: driver board(s) between a stepper brain and the four steppers. |
+| Stepper coils **not** on the MCU | Only if the **fallback** stepper class is used for knee / swing: a driver board on CAN / step-dir between the MCU and the motors. |
 
 ## Minimum system block diagram (text)
 
 Not a harness. Not a PCB. Rails and links are **classes**.
 
 ```
-4S LiPo (class, pack TBD)
+6S pack (class, pack TBD; one or two in parallel)
         │
         ▼
 power distribution / BEC rails
         │
-        ├──► wheel FOC (4S, high draw)
+        ├──► CAN actuators (6S direct, high draw)
         ├──► hip-roll dynamic (PWM / CAN / FOC — TBD)
         ├──► step-down ──► 5V / 6V / 7.4V pose + logic
         │
-        ├──► FC (TBD) ── IMU, RC in, balance loops, modes
+        ├──► RT MCU (CAN) ── IMU, RC in, control core, modes, watchdog
         │         ▲
         │         └── TBS Nano RX
         │
@@ -50,15 +50,15 @@ power distribution / BEC rails
         │         └──► 4× pose joints (servo *or* stepper+reduction)
         │                   (L/R knee, L/R hip swing)
         │
-        └──► telem: FC ↔ Pi   or   FC ↔ ESP32 bridge
+        └──► telem: MCU ↔ Pi (framed serial / USB)
                     (Pi / cameras can wait until after TWO_WHEEL)
 ```
 
 Rules for this box:
 
-- The **FC does not drive stepper coils** if that class is chosen. Step/dir (or a bus the driver already speaks) is the interface. GPIO-toggling phases from a flight-stack mixer is out.
+- The **MCU does not drive stepper coils** if the fallback class is chosen. A driver board on CAN / step-dir is the interface.
 - Hip roll stays on the **balance** side of the split (with the wheels), even if the first loop is ugly. Do not park roll on leftover stepper channels.
-- **FC: TBD.** Prefer a Wing board *when* we lock. Candidates on hand: F765 Wing, F722 Wing, F722 drone FC, Mamba F405.
+- **RT MCU must have CAN.** F765 Wing / F722 Wing / F722 drone / Mamba F405 are bench boards; none has CAN.
 - This is eight axes: 2 FOC wheels + 4 pose + 2 dynamic roll. Not eight identical motors.
 
 ## Phased minimum (buy / assemble order — classes only)
@@ -67,19 +67,19 @@ Rules for this box:
 
 ### P0 — Bench
 
-**FC + USB/power + TBS Nano bind + LED blink.**
+**Bench board (F765-Wing is fine) + USB/power + TBS Nano bind + LED blink.**
 
 - Pick a *bench* board from the on-hand pile. Still not a lock.
 - USB or a safe bench rail. Nothing spinning.
 - Flash *something*. Blink an LED.
-- Bind **TBS Nano RX** (or prove it talks to the FC).
-- Record the surviving blink in [`electronics.md`](electronics.md) only after it is real. The line stays **FC: TBD** until then.
+- Bind **TBS Nano RX** and print CRSF channels.
+- Also in P0: the **layer-2 skeleton** builds and passes its tests on the host ([`software.md`](software.md)). No board needed for that.
 
 ### P1 — Wheel spin
 
-**+ 4S + 1 then 2 FOC wheel channels (restrained).**
+**+ 6S + 1 then 2 wheel actuators (restrained).**
 
-- 4S LiPo *class* on the bench (pack TBD; do not buy a “better” pack to start).
+- 6S pack *class* on the bench (pack TBD). Check every actuator's max against 25.2 V.
 - One FOC wheel channel first, then the second. Robot **tied down**, not on carpet.
 - Encoders on the wheel motors if the driver class needs them — class yes, SKU **TBD**.
 - Still no balance loop required. Prop-off equivalent.
@@ -89,7 +89,7 @@ Rules for this box:
 **Both wheels + IMU loop + `PARKED` / `TWO_WHEEL` modes.**
 
 - Both FOC wheels live.
-- FC IMU / attitude into a wheel-torque (or wheel-speed) balance loop. Stack **TBD** with the FC.
+- **CAN MCU first image**: IMU at 1 kHz, both wheels on CAN, blackbox to SD, live params, hardware torque cut proven. Then the reused PID cascade (R18) in the control core.
 - Pilot selects **`PARKED`** (safe idle / failsafe) and **`TWO_WHEEL`** from TBS (likely aux / flight-modes style). Channel map **TBD**.
 - Telem may be a USB / serial laptop at this phase. Wi‑Fi can wait.
 - Do not start `LEFT_ONLY` / `RIGHT_ONLY` on the bench until `TWO_WHEEL` holds.
@@ -100,8 +100,9 @@ Mode spec: [`software.md`](software.md).
 
 **Knee + hip swing. Still teleop.** Class **TBD**.
 
-- **If steppers:** stepper brain is **Pi early or a dedicated MCU** — **TBD** which. Not the FC coil-driving. 4× stepper **drivers** (TMC-class / multi-axis *class*) between the brain and the motors. Knee is not a bare stepper; swing belt (if used) **is** that joint's reduction.
-- **If servos:** 4 channels on the **regulated** rail (R11). Bus TBD. Do not run them on raw 4S.
+- **Working class:** 4× CAN QDD on the same bus layout as the wheels. Position / torque mode from the MCU.
+- **Fallback stepper:** a CAN / step-dir driver board between the MCU and the motors; the MCU never drives coils. Knee is not a bare stepper; swing belt (if used) **is** that joint's reduction.
+- **Fallback servo:** 4 channels on a **regulated** pose rail (R11). Not raw pack.
 - Pose is teleop / hold. No autonomy. Balance is still two-wheel.
 - Size either class for one-leg (~2×) load (R36). **GIM8108-8** is a candidate, not an order.
 
@@ -110,14 +111,14 @@ Mode spec: [`software.md`](software.md).
 **2× dynamic roll actuators into `LEFT_ONLY` / `RIGHT_ONLY` experiments.**
 
 - 2 hip-roll actuators + drivers. Class: FOC BLDC / small QDD / fast bus servo. **Not a stepper. In V1.** Experimental — may not work as hoped. Still wire the axes.
-- Interface **TBD**: PWM / CAN / FOC. Prefer something the FC can command honestly. If not PWM/CAN-friendly, treat like the wheels (external FOC / servo bus). Still not a stepper.
+- Interface: **CAN**, same as the wheels. Not a stepper.
 - One-leg modes: **`LEFT_ONLY`**, **`RIGHT_ONLY`**. Gate before any stair cycle. Mode change does not lift or plant.
 
 ### P5 — Pi / cameras / Wi‑Fi telem polish
 
 **Pathfinding later.**
 
-- Raspberry Pi for cameras + later pathfinding inference. **Not on the FC.**
+- Pi 5 (in containers) for cameras + later perception. **Not on the MCU.** Jetson decision lives here, not earlier.
 - Wi‑Fi telem: Pi first; ESP32 only as a thin bridge if the Pi should stay busy. Telem reports the active mode.
 - One teleop stream before stereo / depth. Pathfinding **motion** waits on the four manual modes.
 - Not required for first balance. Do not block P0–P4 on a Pi image.
@@ -128,23 +129,24 @@ No shopping links. No invented SKU. **On-hand?** is “known in the pile today,�
 
 | Function | Class | Qty | Notes | Phase | On-hand? |
 | --- | --- | --- | --- | --- | --- |
-| Battery | **4S LiPo** (RC car / boat pack class) | 1 | Nominal ~14.8 V / full ~16.8 V. Capacity, C, connector **TBD**. No pack SKU. | P1 | **TBD** (class lean; pack unknown) |
-| Power distribution / BEC | PDB **or** regulated rails, **5 V / 6 V / 7.4 V** step-down (other rails **TBD**) | 1 set | Box only. Feed FC, RX, drivers, brain as each phase needs. Wheel FOC stays on 4S. | P0 (USB / bench OK) → P1 (4S rails) | **TBD** |
-| Flight controller | Wing / drone FC **class** | 1 | **FC: TBD.** Prefer Wing *when* we lock. Do not treat a blink as a lock. | P0 | **Yes — candidates:** F765 Wing, F722 Wing, F722 drone FC, Mamba F405 |
-| RC receiver | **TBS Nano RX** | 1 | Bind to the FC (or a dedicated link into the FC). | P0 | **Yes** |
-| Wheel drivers | **FOC ESC / BLDC driver** class | 2 | One channel in P1, then both. Current / voltage range follows 4S. SKU **TBD**. | P1 | **TBD** |
+| Battery | **6S** LiPo (or high-drain Li-ion 21700) | 1–2 | ~22.2 V nominal / 25.2 V full. One pack or two in parallel, fused. Capacity, C, connector **TBD**. No pack SKU. | P1 | **TBD** (check the drone pile for 6S) |
+| Power distribution + torque cut | PDB / harness with a hardware kill; **5 V** buck (MCU, RX), **5 V / 5 A** buck (Pi), **12–19 V** buck (P5 companion slot) | 1 set | Box only. Actuators stay on the pack. | P0 (USB / bench OK) → P1 (pack rails) | **TBD** |
+| Bench board | F765-Wing (or any on-hand FC) | 1 | **P0–P1 only.** Blink, CRSF, one SimpleFOC wheel over UART. No CAN. | P0–P1 | **Yes** — F765 Wing, F722 Wing, F722 drone FC, Mamba F405 |
+| Real-time MCU | **CAN-capable** — Teensy 4.1-class (3× CAN FD) or H743-WING-class (1× CAN) | 1 | Runs the control core at 1 kHz. Picked with the actuators. ~$30–70. | P2 | **No** — not bought |
+| RC receiver | **TBS Nano RX** | 1 | CRSF into a UART on the bench board, then the MCU. | P0 | **Yes** |
+| Wheel actuators' drivers | On the actuator (CAN QDD / FOC) or a CAN-capable SimpleFOC board | 2 | One in P1, then both. 6S range. SKU **TBD**. | P1 | **TBD** |
 | Wheel motors | **In-wheel BLDC + encoder** class | 2 | Brushless FOC (not steppers). Exact models **TBD**. About **3 N·m peak** at the settled 6" wheel — not a SKU. 5" Zantle is a bench donor, not the foot. | P1 | **TBD** (motors unknown). [`research/leg-geometry.md`](research/leg-geometry.md). |
-| Pose brain | **Pi** *or* dedicated MCU *or* servo bus | 1 | **TBD** with the class. FC does **not** bit-bang stepper coils. | P3 | Pi: **yes** (companion pile). Dedicated MCU: **TBD** |
+| Pose brain | The same RT MCU, over CAN | — | No separate pose brain in the working plan. Fallback classes add a driver board, never MCU coil-driving. | P3 | — |
 | Pose drivers | TMC-class / multi-axis **or** servo channels | 4 ch | Between brain and pose joints. No driver SKU. | P3 | **TBD** |
 | Knee + hip-swing motors | **Servo *or* stepper + reduction** | 4 | Class **TBD**. Size for ~2× plant. **GIM8108-8** candidate (not ordered). | P3 | **TBD** |
 | Hip-roll actuators | **Dynamic** FOC BLDC / small QDD / fast bus servo | 2 | **In V1.** Not a stepper. Experimental. SKU **TBD**. | P4 | **TBD** |
-| Hip-roll drivers | PWM / CAN / FOC **as TBD** | 2 | Honest link into the FC if possible; else external FOC / servo bus like the wheels. | P4 | **TBD** |
+| Hip-roll drivers | On the actuator, CAN | 2 | Same bus as the wheels. | P4 | **TBD** |
 | Wiring / interconnect | Servo / step-dir / power / XT-class leads | 1 set | Classes only. Connector and gauge **TBD**. No finished harness drawing. | P0–P4 as needed | **TBD** (shop wire unknown) |
 | Companion compute | **Raspberry Pi** | 0–1 | Cameras + pathfinding later. Optional until P5. May be the P3 pose brain. | P5 (optional P3) | **Yes** |
 | Telem bridge (optional) | **ESP32** | 0–1 | Thin Wi‑Fi / telem if the Pi should not own that link. | P5 (or earlier if no Pi yet) | **Yes** |
 | Cameras | USB / CSI camera **class** | 0–n | Teleop stream first. Not required for first balance. | P5 | **TBD** |
 
-USB cable, a bench LED if the FC has no pad, and a **restraint** (tied-down stand — not carpet) are assumed bench tools, not a Hux BOM.
+USB cable, a bench LED if the board has no pad, and a **restraint** (tied-down stand — not carpet) are assumed bench tools, not a Hux BOM.
 
 ## Manual modes vs phases
 
@@ -152,7 +154,7 @@ Full state machine: [`software.md`](software.md). Electronics only **enables** t
 
 | Mode | Enum (intent) | What the electronics must already do | Phase |
 | --- | --- | --- | --- |
-| **Parked** | `PARKED` | FC up, RX live, wheels not driven by the balance loop (held or disabled). Default + failsafe. | P2 (blink / bind from P0) |
+| **Parked** | `PARKED` | MCU up, RX live, wheels not driven by the balance loop (held or disabled). Default + failsafe. | P2 (blink / bind from P0) |
 | **2-wheel balance** | `TWO_WHEEL` | Both FOC wheels + IMU loop. Bipedal teleop. | P2 |
 | **Left wheel only** | `LEFT_ONLY` | Left planted / driven; right free. Hip roll in the experiment. | P4 |
 | **Right wheel only** | `RIGHT_ONLY` | Mirror. | P4 |
@@ -161,23 +163,23 @@ Pilot selects via **TBS Nano** (likely aux / flight-modes). Wi‑Fi telem report
 
 ## Explicit non-goals for minimum
 
-- **No autonomy compute required for P0–P4.** Pi + cameras + pathfinding are P5 (or later). First balance is FC + wheels + IMU.
+- **No autonomy compute required for P0–P4.** Pi + cameras + pathfinding are P5 (or later). First balance is MCU + wheels + IMU.
 - **No invented custom PCBs** unless COTS driver / PDB / BEC *classes* fail on the bench. Do not draw a Hux board to look finished.
-- **No new spend until Steve asks.** Prefer on-hand. Do not buy a “better” FC, ESC, Pi, LiPo, stepper, servo, FOC board, or encoder for this note.
+- **No new spend until Steve asks.** Prefer on-hand. Do not buy actuators, the CAN MCU, a pack, a Pi, a Jetson, or an encoder for this note; Steve authorizes cart lines in [`bom.md`](bom.md).
 - **No locked SKUs.** Class + qty + phase only. Mark **TBD** instead of guessing a cart.
-- **Do not lock the FC.** Candidates stay a pile. Blink does not rename the repo around one board.
+- **Do not build robot firmware on the F765-Wing.** Blink does not promote a bench board.
 - **Do not lock servo vs stepper+belt.** Document both paths.
-- **Do not drive stepper coils from the FC.** Do not host four steppers in drone firmware because a Wing board has spare pins.
+- **Do not drive stepper coils from the MCU.** Do not bridge UART→CAN on a torque axis to keep an old board.
 - **Do not write a finished harness, PDB layout, or BEC shopping list.** Rails are a box in the diagram.
-- **Do not feed motor current through the FC or a logic PCB** (Tazer anti-pattern). Dedicated power distribution *class* only.
+- **Do not feed motor current through the MCU or a logic PCB** (Tazer anti-pattern). Dedicated power distribution *class* only.
 - **Do not treat this table as a BOM.** It is a phased class list.
 
 ## What to record when something is real
 
 When a part is actually on the bench, write it in [`electronics.md`](electronics.md), [`parts-on-hand.md`](parts-on-hand.md), and [`../NOTES.md`](../NOTES.md):
 
-- Which bench FC blinked (still not a lock until Steve says so)
-- 4S pack: cell count, resting voltage, connector, what it feeds
+- Which bench board blinked, and which CAN MCU ran `TWO_WHEEL`
+- 6S pack: chemistry, cell count, resting voltage, connector, one or two packs, what it feeds
 - Which FOC channel spun, restrained
 - Which pose class (servo vs stepper) and which brain actually issued commands
 - Hip-roll interface that talked (PWM / CAN / FOC)

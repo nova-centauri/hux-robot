@@ -14,8 +14,8 @@ Phased class list (not a BOM): [`../electronics-minimum.md`](../electronics-mini
 After P0–P1 (not this pass until the rows above are real):
 
 - [ ] **P2** — `PARKED` + `TWO_WHEEL` on both wheels + IMU. Modes: [`../software.md`](../software.md).
-- [ ] **P3** — pose joints (knee + hip swing). **Servo vs stepper+belt TBD.** If steppers: driver bank + 4 motors; FC does **not** drive coils. If servos: regulated rail, not raw 4S.
+- [ ] **P3** — pose joints (knee + hip swing) on **CAN QDD**. Fallback: servos on a regulated rail, or steppers behind a driver board; the MCU does **not** drive coils.
 - [ ] **P4** — 2× hip-roll dynamic actuators into `LEFT_ONLY` / `RIGHT_ONLY`.
 - [ ] **P5** — Wi‑Fi telemetry from the Pi (ESP32 bridge only if needed). Cameras / pathfinding later. Telem reports the active mode.
 
-Do not write a fake harness, PDB, or battery architecture here. Class-level rails only: [`../electronics-minimum.md`](../electronics-minimum.md). **4S + step-down** is the power rule — no BEC SKU.
+Do not write a fake harness, PDB, or battery architecture here. Class-level rails only: [`../electronics-minimum.md`](../electronics-minimum.md). **6S + step-down** is the power rule (2026-09-26) — no regulator SKU.

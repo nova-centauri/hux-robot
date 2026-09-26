@@ -12,7 +12,7 @@
       <div>
         <p class="kicker">Hux</p>
         <h1>Software</h1>
-        <p>Bench plan for the chips on the table today — not an FC lock. Canonical docs still say flight controller TBD. On this bench the F765-Wing would get a new small firmware and no operating system; the Pi 5 would get Raspberry Pi OS. ArduPilot would come off the Wing. The balance loop is not in either image yet.</p>
+        <p><b>Bench-learning plan, superseded 2026-09-26.</b> This page describes what the F765-Wing and the Pi 5 on the table would run for P0–P1: blink, CRSF, one wheel, a listener. The F765-Wing has no CAN bus, so it is not the robot's controller; the robot's stack is four layers — CAN actuators, a portable control core, a CAN real-time MCU, and a ROS 2 companion — in <a href="../../docs/software.md">docs/software.md</a>. What survives from this page is what lands in the control core; the Pi 5 does carry forward, in containers.</p>
         <nav class="pages" aria-label="Pages">
           <a href="index.html">Drawings</a>
           <a href="sim.html">3D sandbox</a>
@@ -23,9 +23,9 @@
       </div>
       <div class="stamp">
         Bench plan 2026-09-25<br>
+        Superseded 2026-09-26<br>
         F765 / Pi 5 on hand<br>
-        Not flashed yet<br>
-        FC still TBD
+        F765 has no CAN
       </div>
     </header>
 
@@ -141,10 +141,9 @@
     </section>
 
     <footer class="note">
-      Bench plan for the F765-Wing, the Pi 5, and the TBS Nano RX — not a lock.
-      Canonical docs still say FC TBD: <a href="../../docs/electronics.md">docs/electronics.md</a>,
-      <a href="../../docs/software.md">docs/software.md</a>.
-      The Wing stays the bench board until it blinks and a wheel has spun.
+      Bench-learning plan for the F765-Wing, the Pi 5, and the TBS Nano RX (P0–P1). Superseded as the robot's stack on 2026-09-26 by the four layers in
+      <a href="../../docs/software.md">docs/software.md</a> and <a href="../../docs/electronics.md">docs/electronics.md</a>.
+      The Wing goes back in the pile once it has blinked and a wheel has spun.
     </footer>
   </div>
 </body>

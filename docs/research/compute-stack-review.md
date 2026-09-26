@@ -81,6 +81,12 @@ Decisions 2026-09-25 flagged that the living-drawings pages look more locked tha
 4. `bom.md` class estimates: the companion line stays $0 (Pi on hand); note the Jetson decision point is P5 and the board of record for that estimate is the Orin Nano Super dev kit at $399 (post-2026-07-22 pricing), not an Orin NX.
 5. `study-plan.md` Phase E: "buy a Jetson because Stompy" stays a don't; add "perception, not policy, is the Jetson job."
 
+## Postscript — same day
+
+Steve's reply: nothing is locked; the Pi 5 and F765 are on hand but need not be used; a stepping stone is fine if the logic carries, otherwise start on the better board; he wants a real project. He approved **4S → 6S** (one large pack or two in parallel; LiPo or similar).
+
+Outcome, logged in [`../decisions.md`](../decisions.md) (2026-09-26): the Jetson does not replace the F765, it replaces the Pi — and the Pi carries forward for free if the companion runs in containers with no Pi-specific libraries. The rewrite risk was all on the F765 side, so the F765 is now a P0–P1 bench board and the robot gets a **CAN real-time MCU** picked with the actuators. The **control core becomes a portable C++ library** that links into the MCU, the companion and the twin — that is the carry-forward guarantee. **ROS 2 on the companion**; the "no ROS" line is withdrawn there. **Power is 6S**, which puts CAN QDD actuators in their working band and makes the actuator bus the plan rather than a class. The Jetson stays a P5 perception buy; the head gets a slot for it, and at 6S it needs a 12–19 V rail rather than pack-direct. Canonical pages updated: `software.md`, `electronics.md`, `electronics-minimum.md`, `requirements.md`, `bom.md`, `parts-on-hand.md`, `mechanical.md`, `NOTES.md`, `README.md`, and the living-drawings Software / Data flow / Hardware pages.
+
 ## Sources
 
 - Matek F765-WING specification — http://www.mateksys.com/?portfolio=f765-wing (7 UARTs, 12 PWM, microSD SDIO, no CAN, 5 V 2 A BEC)

@@ -12,7 +12,7 @@
       <div>
         <p class="kicker">Hux</p>
         <h1>Data flow</h1>
-        <p>How a stick command reaches a joint, and where the current goes. These are classes. No harness. The board on the bench today is an F765-Wing — a bench plan, not an FC lock. What we would run on it is on the Software page.</p>
+        <p>How a stick command reaches a joint, and where the current goes. These are classes. No harness. The board on the bench today is an F765-Wing, a P0–P1 bench board with no CAN; the robot's controller is a CAN real-time MCU (2026-09-26). The four software layers are in <a href="../../docs/software.md">docs/software.md</a>.</p>
         <nav class="pages" aria-label="Pages">
           <a href="index.html">Drawings</a>
           <a href="sim.html">3D sandbox</a>
@@ -46,9 +46,9 @@
       <h3>Power</h3>
       <div class="lanes">
         <div class="branch">
-          <div class="node"><b>4S pack</b><span>Class is locked. Look through the drone pile before buying one. About 14.8 V nominal, 16.8 V full.</span></div>
+          <div class="node"><b>6S pack</b><span>Class decided 2026-09-26 (was 4S). One pack or two in parallel, fused. About 22.2 V nominal, 25.2 V full. Look through the drone pile before buying one.</span></div>
           <div class="arrow" aria-hidden="true">→</div>
-          <div class="node"><b>Power split</b><span>Wheel and roll current stay on the pack. Do not route motor current through the flight controller.</span></div>
+          <div class="node"><b>Power split + torque cut</b><span>Actuator current stays on the pack, behind a hardware kill. Do not route motor current through the MCU.</span></div>
           <div class="arrow" aria-hidden="true">→</div>
           <div class="node"><b>Step-down rail</b><span>5 / 6 / 7.4 V for the controller, the receiver, and the pose joints.</span></div>
         </div>
@@ -105,7 +105,7 @@
     <footer class="note">
       Same plan as <a href="../../docs/electronics.md">docs/electronics.md</a> and <a href="../../docs/electronics-minimum.md">docs/electronics-minimum.md</a>.
       Chip software is <a href="software.html">software.html</a>.
-      The F765-Wing is the bench board, not an FC lock. Canonical docs still say FC TBD.
+      The F765-Wing is a P0–P1 bench board (no CAN). The robot's MCU is a CAN-capable board picked with the actuators — <a href="../../docs/decisions.md">docs/decisions.md</a>, 2026-09-26.
     </footer>
   </div>
 </body>

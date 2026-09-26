@@ -28,7 +28,7 @@ Inventory of what is already here: [`parts-on-hand.md`](parts-on-hand.md).
 | TBS Nano RX | On hand. |
 | Raspberry Pi, ESP32 | On hand. Face, cameras, and telemetry later. |
 
-Look through the drone pile for a **4S** before buying the pack line below.
+Look through the drone pile for a **6S** before buying the pack line below (6S superseded 4S on 2026-09-26).
 
 ## Later — class estimates, not a cart
 
@@ -36,10 +36,10 @@ No SKU is locked on these. The dollar is a midpoint so the total is not a blank.
 
 | Qty | What | Est. each | Line | Store / note |
 | --- | --- | ---: | ---: | --- |
-| 1 | 4S LiPo, small pack | $40 | $40 | No pack picked. Skip if a drone pack is already on the shelf. |
+| 1 | 6S LiPo, small pack | $40 | $40 | No pack picked. Skip if a 6S drone pack is already on the shelf. Two in parallel later if capacity wants it. |
 | 2 | In-wheel brushless + encoder, about 3 N·m | $65 | $130 | No motor picked. Do not buy before the hub drawing. |
 | 2 | Wheel FOC driver | $40 | $80 | No driver picked. |
-| 2 | Hip roll actuator | $100 | $200 | Yardstick only: [GIM8108-8, seen near $85](https://aifitlab.com/products/steadywin-gim8108-8-planetary-reducer-servo-motor). Nominal 7.5 N·m is tight for the **9.5 N·m** example at 6 kg on the 14" stance. Not an order. 48 V class, Hux is 4S. |
+| 2 | Hip roll actuator | $100 | $200 | Yardstick only: [GIM8108-8, seen near $85](https://aifitlab.com/products/steadywin-gim8108-8-planetary-reducer-servo-motor). Nominal 7.5 N·m is tight for the **9.5 N·m** example at 6 kg on the 14" stance. Not an order. 24–48 V class; honest on 6S (2026-09-26). |
 | 4 | Knee and hip-swing actuator | $100 | $400 | Same class estimate if they are small QDD units. A stepper-plus-belt set would be less. Class is still open. |
 | 7 | Cameras (2 front, plus back, sides, top, bottom) | $20 | $140 | No module picked. |
 | 1 | Small front display, about 2.2" × 1.0" | $20 | $20 | Preset faces. No panel picked. |

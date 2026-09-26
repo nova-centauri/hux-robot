@@ -19,7 +19,7 @@
     tireZeta: 0.2,     /* damping ratio of the tread ring on that stiffness. Pneumatics are lightly damped */
     tireCompliance: true, /* false = the rigid crown hull on the hub, as before 2026-09-25 */
     tauWheel: SHARED.tauWheel,     /* N·m peak per in-wheel motor (same as the stair-climb knob) */
-    wheelNoLoad: 40,   /* rad/s assumed output no-load speed; no motor/4S match verified */
+    wheelNoLoad: 40,   /* rad/s assumed output no-load speed; no motor/6S match verified */
     tauKnee: SHARED.tauKnee,       /* N·m peak; the stair climb says ~10.6 holding */
     tauHip: SHARED.tauHip,        /* N·m peak, hip swing */
     tauRoll: SHARED.tauRoll,       /* N·m peak; GIM8108-class yardstick is 7.5 nominal / 22 stall */
@@ -1056,7 +1056,7 @@
     r.legs.forEach(function (leg, i) {
       const js = jointState(leg.joints.wheel);
       const w = -js.rate; /* forward rolling is −Z */
-      /* In-wheel motor torque-speed line: full torque at stall, none at the 4S no-load speed. */
+      /* In-wheel motor torque-speed line: full torque at stall, none at the 6S no-load speed. */
       let cap = lim;
       /* PARKED brake: phases shorted, torque proportional to speed, no balance. */
       if (plan.brake) tw[i] = -1.0 * w;

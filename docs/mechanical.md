@@ -22,7 +22,7 @@ V1 target is **one wheel-leg** — printed / machined **fittings** on **carbon-t
 - **Size plant-side joints for one-wheel standing load** (~2× two-wheel stance, R36).
 - Extra DOF is desirable later (stairs / fall recovery); do not invent a 6-DOF stack on paper.
 - Overall width is **~14"** (R15). The head is inside. Wheels and legs are outside the head.
-- Entire robot is **electric**. Battery class is 4S LiPo — see [`electronics.md`](electronics.md).
+- Entire robot is **electric**. Battery class is **6S** (one pack or two in parallel) — see [`electronics.md`](electronics.md).
 
 ## Scale + structure (Steve 2026-09-21)
 
@@ -72,8 +72,9 @@ Sketch lines (fill when something is weighed — empty TBD is correct):
 | Hip swing + knee actuators | TBD | Servo vs stepper+belt **TBD** (R12). Size for ~2× plant (R36). |
 | Hip-roll actuators | TBD | Dynamic class **in V1** (R16 / R27). |
 | Structure (carbon tubes + end fittings) | TBD | Do not spend mass on a printed spar. |
-| 4S pack | TBD | Class only (R11). |
-| FC + TBS Nano RX | TBD | **FC is TBD.** |
+| 6S pack (1–2) | TBD | Class only (R11). |
+| Companion slot | TBD | Head carries a slot sized for an Orin Nano dev kit (~100 × 79 × 21 mm + fan) with a 12–19 V feed and airflow; the Pi 5 occupies it in V1 (R22). |
+| CAN real-time MCU + TBS Nano RX | TBD | Teensy 4.1 / H743-WING class, picked with the actuators (2026-09-26). F765 is bench only. |
 | Raspberry Pi + camera(s) | TBD | Companion. Not on the FC. |
 | Fasteners, wire, springs, margin | TBD | Leave slack. |
 | **V1 total** | **soft** | Historical preference 4–5 lb / under 6 lb. Not a gate. |
@@ -138,7 +139,7 @@ The in-wheel BLDC hub is a **natural lathe / mill part** ([`capabilities.md`](ca
 
 ### kV match is a sizing goal (R31)
 
-Aim to match motor kV to (1) the **4S** bus, (2) **wheel diameter**, (3) **balance bandwidth** (R25). This is a **goal**, not a picked kV. Do not invent a number or a “close enough” SKU.
+Aim to match motor kV to (1) the **6S** bus, (2) **wheel diameter**, (3) **balance bandwidth** (R25). This is a **goal**, not a picked kV. Do not invent a number or a “close enough” SKU.
 
 ### Wheel drive class (R25)
 
@@ -171,14 +172,16 @@ Hip roll **alone** does not balance. The planted wheel still has to drive forwar
 
 Actuator class: **dynamic** FOC BLDC / small QDD / fast bus servo (R27). **Not a stepper.**
 
-## Leg actuators — servo vs stepper+belt TBD
+## Leg actuators — CAN QDD working class; servo vs stepper+belt is the fallback
+
+*Revised 2026-09-26: on 6S the working class for knee / hip swing is a CAN QDD actuator (GIM8108-class). The servo / stepper trade below is kept as the fallback and for the packaging lessons (mount high, belts to pivots).*
 
 Steve 2026-09-20 follow-up. **Do not lock either class** for knee and hip swing (R12). A earlier packet locked stepper+belt — **that lock is lifted.** Do not write a servo lean into the baseline either.
 
 | Joint | Status | Notes |
 | --- | --- | --- |
 | **Wheels** | In-wheel brushless FOC (R6 / R30) | Locked *class*. SKU TBD. |
-| **Knee / hip swing** | **Servo vs stepper+belt TBD** | Both open. Size **either** for one-leg plant load (R36). **GIM8108-8** is a candidate (not ordered). Serra's 40 kg-class servos are a data point, not a Hux SKU. |
+| **Knee / hip swing** | **CAN QDD working class**; servo / stepper+belt fallback | 2026-09-26. Size **either** for one-leg plant load (R36). **GIM8108-8** is a candidate (not ordered). Serra's 40 kg-class servos are a data point, not a Hux SKU. |
 | **Hip roll** | **In V1.** Dynamic FOC / QDD / fast servo | **Not a stepper.** Size for ~2× plant-side load (R36). Experimental. |
 
 If **steppers** are later chosen:
@@ -249,7 +252,7 @@ Use this instead of a fake finished BOM. Canonical box list: [`checklists/mechan
 - [ ] Customs have **draft**, wire **ports**, **service** access (R20–R22).
 - [ ] Linkage layout + spring stub. Jointed motion keeps CoG over wheel contact as height changes.
 - [ ] Plant-side joints sized for **one-wheel standing load (~2×)** (R36).
-- [ ] Leg actuator class on the sketch: **servo vs stepper+belt TBD** (both open). Hip roll **in V1** (dynamic). No SKU.
+- [ ] Leg actuator class on the sketch: **CAN QDD** working class; servo / stepper+belt fallback. Hip roll **in V1** (dynamic). No SKU.
 - [ ] Wheel hub / coaxial BLDC — motor **at the rim** (R30). kV match is a **goal** (R31). Lathe / mill welcome.
 - [ ] Print and/or machine + fit the first leg. No second copy until the first one articulates.
 - [ ] Clearance check: raised wheel can reach the next 9.5" tread **with margin**, without self-collision.

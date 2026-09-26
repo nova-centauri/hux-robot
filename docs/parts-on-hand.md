@@ -28,13 +28,13 @@ On-hand pile from project notes. **On hand (Steve)** means owned today, not “o
 
 | Item | Qty | Status | Specs/link | Hux use | Notes |
 | --- | --- | --- | --- | --- | --- |
-| F722 Wing | TBD | on hand (Steve) | Wing FC class. No SKU lock. | FC candidate | **FC stays TBD.** Prefer a Wing board *when* we lock. Reserved: **TBD**. |
-| F765 Wing | TBD | on hand (Steve) | Wing FC class. No SKU lock. | FC candidate | Same pile. Not selected. Reserved: **TBD**. |
-| F722 drone FC | TBD | on hand (Steve) | Drone FC class. No SKU lock. | FC candidate | Same pile. Not selected. Reserved: **TBD**. |
-| Mamba F405 | TBD | on hand (Steve) | F405-class drone FC. No SKU lock. | FC candidate | Same pile. Not selected. Reserved: **TBD**. |
+| F722 Wing | TBD | on hand (Steve) | Wing FC class. No CAN. | Bench board (P0–P1) | Not the robot's MCU — no CAN (2026-09-26). Reserved: **TBD**. |
+| F765 Wing | TBD | on hand (Steve) | STM32F765, MPU6000 + ICM20602, 7 UARTs, microSD, **no CAN**. | **Bench board (P0–P1):** blink, CRSF, one SimpleFOC wheel over UART. | Not the robot's MCU (2026-09-26). ArduPilot on it today. Reserved: **TBD**. |
+| F722 drone FC | TBD | on hand (Steve) | Drone FC class. No CAN. | Bench spare | Not the robot's MCU. Reserved: **TBD**. |
+| Mamba F405 | TBD | on hand (Steve) | F405-class drone FC. No CAN. | Bench spare | Not the robot's MCU. Reserved: **TBD**. |
 | TBS Nano RX | TBD | on hand (Steve) | Crossfire Nano RX. | RC in — bind to the FC (or a dedicated link into the FC). Locked enough to write down. | Reserved: **TBD**. |
 | ESP32 | TBD | on hand (Steve) | Dev-board class. Module TBD. | Optional thin Wi‑Fi / telem bridge if the Pi should not own that link. | Reserved: **TBD**. |
-| Raspberry Pi | TBD | on hand (Steve) | Companion compute. Board / RAM TBD. | Cameras + pathfinding inference. Not on the FC. Possible later pose / stepper brain. | Reserved: **TBD**. |
+| Raspberry Pi 5 | 1 | on hand (Steve) | Companion compute. RAM TBD. | V1 companion: ROS 2 in containers, telemetry, cameras. Swappable for a Jetson at P5. Not a pose brain. | Reserved: **TBD**. |
 
 ## Actuators
 
@@ -42,7 +42,7 @@ On-hand pile from project notes. **On hand (Steve)** means owned today, not “o
 | --- | --- | --- | --- | --- | --- |
 | Wheel BLDC / in-wheel hub motor | — | none yet | — | Custom hub. First spin can use the 5" **donor** rubber. The foot is the settled **6"** real-rubber wheel. FOC + encoder *class* when one exists. Target about **3 N·m peak** — not a SKU. | The Zantle order is **wheels / caster forks**, not motors. OK to hack the rubber off the walker hub. |
 | Wheel FOC driver / ESC | — | none yet | — | Per-wheel FOC channel. | — |
-| Knee / hip-swing actuator | — | none yet | — | Pose joints. Class **servo vs stepper+belt TBD**. | See Candidates. |
+| Knee / hip-swing actuator | — | none yet | — | Pose joints. **CAN QDD** working class on 6S; servo / stepper+belt fallback. | See Candidates. |
 | Hip-roll actuator | — | none yet | — | Dynamic roll **in V1**. | — |
 
 ## Candidates (not owned / not ordered)
@@ -51,6 +51,8 @@ Research pointers only. **Not a buy list. No spend.** Do not treat a row here as
 
 | Item | Qty | Status | Specs/link | Hux use | Notes |
 | --- | --- | --- | --- | --- | --- |
+| **Teensy 4.1** or **Matek H743-WING** class | — | **Not ordered.** Candidate only. | CAN-capable real-time MCU (~$30–70). Teensy: 3× CAN FD, external IMU needed. H743-WING: 1× CAN, dual IMU, SD. | Runs the control core at 1 kHz from P2. **Picked with the actuators.** | 2026-09-26. The on-hand FCs have no CAN. |
+| **Jetson Orin Nano Super dev kit** | — | **Not ordered.** P5 candidate. | $399 (post-2026-07-22 pricing). 67 TOPS, 8 GB, 7–25 W, 9–19 V in. | Companion at P5 for stereo depth / multi-camera head, if the Pi 5 cannot hold the rate. | Not a V1 buy. [`research/compute-stack-review.md`](research/compute-stack-review.md). |
 | **GIM8108-8** | — | **Not ordered.** Candidate only. | GIM8108-class integrated BLDC + reduction (8:1 class). Exact vendor page TBD when we research, not shop. | **Knee / hip swing** candidate (R12). Size whichever class we pick for ~2× plant load (R36). | Steve 2026-09-21: noted as a candidate. Tazer later ran 6× GIM8108 on a ~2 ft carbon-tube wheeled biped — **data point, not a buy** ([`research/tazer-lessons.md`](research/tazer-lessons.md)). Aligns with servo vs stepper+belt remaining **TBD**. No SKU lock. |
 
 ## Other

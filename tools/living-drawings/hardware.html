@@ -74,7 +74,7 @@
             <tr><th>Qty</th><th>Part</th><th>State</th><th>Role</th></tr>
           </thead>
           <tbody>
-            <tr><td>1</td><td>F765-Wing</td><td><span class="chip bench">Bench</span></td><td>The board on the bench. ArduPilot is on it now and comes off. Bench plan, not a lock — canonical docs still say FC TBD. <a href="software.html">Software</a>.</td></tr>
+            <tr><td>1</td><td>F765-Wing</td><td><span class="chip bench">Bench</span></td><td>P0–P1 bench board: blink, CRSF, one wheel. <b>No CAN</b>, so not the robot's controller (2026-09-26). The robot's MCU is a CAN board (Teensy 4.1 / H743-WING class, ~$30–70), picked with the actuators, not bought. <a href="software.html">Software</a>.</td></tr>
             <tr><td>2</td><td>Gyros on the Wing</td><td><span class="chip hand">On the board</span></td><td>MPU6000 and ICM20602, on SPI. The balance loop reads these. The Pi does not.</td></tr>
             <tr><td>1</td><td>TBS Nano RX</td><td><span class="chip settled">On hand</span></td><td>Pilot link. TBS firmware, CRSF, into the Wing. No Hux code.</td></tr>
             <tr><td>1</td><td>Raspberry Pi 5</td><td><span class="chip later">On hand</span></td><td>Raspberry Pi OS Lite. Listens to the Wing. Cameras, faces, and pathfinding later. Not required to balance.</td></tr>
@@ -97,7 +97,7 @@
           </tbody>
         </table>
       </div>
-      <p class="callout">GIM8108-8 is a yardstick, seen near $85. It is not an order and it is not in the total. Nominal 7.5 N·m is tight for the 9.5 N·m roll example at 6 kg on the 14 inch stance, and it is a 48 V class part. Hux is 4S.</p>
+      <p class="callout">GIM8108-8 is a yardstick, seen near $85. It is not an order and it is not in the total. Nominal 7.5 N·m is tight for the 9.5 N·m roll example at 6 kg on the 14 inch stance, and it is a 24–48 V class part — honest on 6S (2026-09-26), which is one reason the pack class moved.</p>
     </section>
 
     <section class="block">
@@ -126,7 +126,7 @@
             <tr><th>Qty</th><th>Part</th><th>Est.</th><th>Role</th></tr>
           </thead>
           <tbody>
-            <tr><td>1</td><td>4S LiPo</td><td>~$40</td><td>Skip this if a drone pack is already on the shelf.</td></tr>
+            <tr><td>1–2</td><td>6S LiPo</td><td>~$40</td><td>6S since 2026-09-26. One pack or two in parallel. Skip if a 6S drone pack is already on the shelf.</td></tr>
             <tr><td>1</td><td>Step-down and distribution</td><td>~$20</td><td>Logic and pose off the motor rail. No board picked.</td></tr>
           </tbody>
         </table>

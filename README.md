@@ -19,7 +19,8 @@ This repo is the source of truth for Steve Barrett's Hux project. It is a docs-a
 | Research | Packet in [`docs/research/`](docs/research/) — study before build |
 | Requirements | Draft captured in [`docs/requirements.md`](docs/requirements.md) |
 | Decisions | Dated log in [`docs/decisions.md`](docs/decisions.md) |
-| Flight controller | **TBD** — candidates listed, not locked |
+| Compute | **Four layers** (2026-09-26): CAN actuators → portable control core → CAN real-time MCU (Teensy 4.1 / H743-class, not bought) → ROS 2 companion (Pi 5 now, Jetson at P5). F765-Wing is a bench board. |
+| Power | **6S** (superseded 4S 2026-09-26), one pack or two in parallel, step-down rails |
 | Mechanical V1 | First wheel-leg is **Phase D** (after study + 2D). Not started. **~24" × ~14"**, carbon-tube spars. Head inside, wheels outside. |
 | Modes | `PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY` before autonomy |
 | Spend | First buy is tires, tubes, and carbon tube ([`docs/bom.md`](docs/bom.md)). 5" walker wheels already ordered as a bench donor. Wheel size **settled at 6" OD**. Motors not authorized. |
@@ -50,17 +51,17 @@ software/     companion compute — Pi cameras / pathfinding (empty)
 - [Requirements](docs/requirements.md) — hard / soft requirements, candidate hardware, no-spend rule
 - [Vision](docs/vision.md) — stair gait, split-brain intent, lessons to steal
 - [Mechanical](docs/mechanical.md) — carbon-tube spars, ~24" × ~14", in-wheel FOC, hip roll in V1, servo vs stepper TBD, ~2× plant load. Leg math: [research/leg-geometry.md](docs/research/leg-geometry.md)
-- [Electronics](docs/electronics.md) — FC TBD, 4S + step-down, TBS Nano RX, in-wheel FOC, 8-axis I/O
+- [Electronics](docs/electronics.md) — 6S + step-down, CAN actuator bus, CAN real-time MCU (F765 is bench only), TBS Nano RX, in-wheel FOC, 8 CAN nodes
 - [Minimum electronics](docs/electronics-minimum.md) — P0–P5 class list (no SKU, no new spend)
 - [Parts on hand](docs/parts-on-hand.md) — owned / ordered inventory + candidates (GIM8108-8 not ordered)
 - [First buy](docs/bom.md) — 6×1.25 tires, tubes, 16 mm carbon tube. Motors not on this list.
 - [Living drawings](tools/living-drawings/index.html) — side, top and front views of the settled leg, and the stair climb with its dynamics (momentum window, wheel catch, joint torques, sway). Play runs the climb in real time. Findings: [research/stair-climb-dynamics.md](docs/research/stair-climb-dynamics.md)
 - [3D sandbox](tools/living-drawings/sim.html) — drive the working model in 3D with rigid-body physics (Rapier + three.js): torque-limited joints, LQR balance, ride height (medium by default), spring legs with an impact hop, stumble catch, a planned one-wheel poise, stair / ramps / sills / curb / wet tile. A design toy, not the digital twin. Findings: [research/sim-sandbox.md](docs/research/sim-sandbox.md)
 - [Data flow](tools/living-drawings/flow.html) — command, power, motion, modes, and what waits until later
-- [Software](tools/living-drawings/software.html) — F765-Wing firmware (no OS), Pi 5 on Raspberry Pi OS Lite, Nano stays CRSF. ArduPilot comes off. PID is not in the first image.
+- [Software](tools/living-drawings/software.html) — the 2026-09-25 **bench-learning** plan for the F765-Wing + Pi 5 (P0–P1). Superseded as the robot's stack by [docs/software.md](docs/software.md).
 - [Hardware](tools/living-drawings/hardware.html) — order now, on hand, shop, and the class estimates. Same numbers as [bom.md](docs/bom.md)
 - [Shop capabilities](docs/capabilities.md) — mill, lathe, bender, brake, bandsaw, solder, weld, breadboards (not parts)
-- [Software](docs/software.md) — blink → spin → four manual modes → cameras later
+- [Software](docs/software.md) — four layers (CAN actuators, portable control core, CAN RT MCU, ROS 2 companion); layer-2 skeleton → blink → spin → four manual modes → cameras → perception
 - [Checklists](docs/checklists/) — prefer these over fake finished stacks
 
 ## Inspiration

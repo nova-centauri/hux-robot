@@ -1,6 +1,6 @@
 # Checklist: first wheel-leg
 
-**Status:** not started. FC is TBD and must not block this.
+**Status:** not started. The MCU is picked with the actuators and must not block this.
 
 Target: one side only — **carbon-tube spars** + printed / machined **end fittings**, linkage + spring stub, stroke / clearance toward a **~9.5"** riser, inside **~24" tall / ~14" wide**.
 
@@ -18,7 +18,7 @@ Target: one side only — **carbon-tube spars** + printed / machined **end fitti
 - [ ] Pose actuators **above the knee** (mass high / hip region) (R32). If belts: to both pivots; **one inside, one outside** (R33). Integrated toothed pulley where draft-friendly; COTS fallback is fine.
 - [ ] Linkage layout + spring stub (gravity assist). Jointed motion keeps CoG over wheel contact as height changes.
 - [ ] Plant-side joints (knee / hip swing / hip roll) sized for **one-wheel standing load (~2×)** (R36).
-- [ ] Actuator class on the sketch: knee / swing **servo vs stepper+belt TBD** (both open). **GIM8108-8** is a candidate, not an order. Hip roll **in V1** (dynamic). No SKU.
+- [ ] Actuator class on the sketch: knee / swing **CAN QDD** working class (servo / stepper+belt fallback). **GIM8108-8** is a candidate, not an order. Hip roll **in V1** (dynamic). No SKU.
 - [ ] Hip-roll axis in V1. Placement TBD — do not drop CoG with a heavy roll pack if avoidable.
 - [ ] First print / machine + fit.
 - [ ] Raised wheel can reach a 9.5" tread **with margin**, without self-collision. Belts (if any) do not rub.

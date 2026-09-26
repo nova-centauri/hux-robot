@@ -1,72 +1,72 @@
 # Electronics
 
-**Status:** TBD. No wiring diagram, no locked FC, no spend.
+**Status:** architecture decided 2026-09-26 ([`decisions.md`](decisions.md)). No wiring diagram, no actuator SKU, no new spend beyond [`bom.md`](bom.md).
 
-**4S + regulated step-down** is a class rule, not a pack / BEC lock. **Servo vs stepper+belt TBD** for knee / hip swing. **Hip roll is in V1.** **FC stays TBD.**
+**6S + regulated step-down** is the power class (superseded 4S on 2026-09-26). **Actuator bus is CAN.** **Hip roll is in V1.** **The real-time MCU must have CAN — the F765-Wing does not, so it is a bench board.**
 
-Parent plan (classes, P0–P5, not a BOM): [`electronics-minimum.md`](electronics-minimum.md). Inventory: [`parts-on-hand.md`](parts-on-hand.md). Decisions: [`decisions.md`](decisions.md). Actuator trade: [`research/actuators-legs.md`](research/actuators-legs.md).
+Parent plan (classes, P0–P5, not a BOM): [`electronics-minimum.md`](electronics-minimum.md). Inventory: [`parts-on-hand.md`](parts-on-hand.md). Software layers: [`software.md`](software.md). Actuator trade: [`research/actuators-legs.md`](research/actuators-legs.md). Review behind this page: [`research/compute-stack-review.md`](research/compute-stack-review.md).
 
 ## Locked enough to write down
 
 | Piece | Choice | Notes |
 | --- | --- | --- |
 | Powertrain | **Electric-only** | No ICE, no hybrid. Whole robot. |
-| Battery class | **4S LiPo** (RC car / boat packs) | Nominal **~14.8 V** / full **~16.8 V**. Capacity and C-rating **TBD**. No pack SKU. |
-| Pose / logic rails | **Controlled step-down** from 4S | BEC / regulator *class* to **5 V / 6 V / 7.4 V** as the actuator needs. SKU **TBD**. |
-| RC RX | **TBS Nano RX** | Bind to the FC (or a dedicated link into the FC). |
-| Wheels | **In-wheel brushless FOC** + encoder | Motor at the rim (R6 / R30). Exact models TBD. Reaction-speed / torque-bandwidth class (R25). |
-| Knee / hip swing | **Servo vs stepper+belt TBD** | Both open. Size either for one-leg (~2×) load (R36). **GIM8108-8** is a candidate — not ordered. No SKU. No lean. |
-| Hip roll | **In V1.** **Dynamic** FOC BLDC / small QDD / fast servo | Not a stepper. Experimental — may not work. Still wire the axis and the modes. SKU TBD. |
-| Companion | **Raspberry Pi** | Cameras + pathfinding inference. Not on the FC. Possible stepper brain if that class is chosen. |
+| Battery class | **6S** — LiPo preferred; high-drain Li-ion 21700 acceptable | **~22.2 V nominal / 25.2 V full**, cutoff ~19.8 V. One large pack **or two in parallel** (matched voltage before paralleling, a fuse per pack). Capacity / C / connector **TBD**. No pack SKU. |
+| Rails | **Regulated step-down** from 6S | **5 V** (MCU, RX, Pi 5 at 5 A), **12–19 V** (companion slot — a Jetson kit takes 9–19 V; 6S full is 25.2 V, so it is *not* direct), pose rail only if the fallback servo class is used. SKUs **TBD**. |
+| Actuator bus | **CAN** | One or two buses. Classic vs FD, and the protocol (MIT mini-cheetah style, Robstride, CubeMars, ODrive…) follow the actuator choice. |
+| Wheels | **In-wheel brushless FOC** + encoder, on CAN | Motor at the rim (R6 / R30). ~3 N·m peak at the 6" wheel. Exact models TBD. |
+| Knee / hip swing | **CAN QDD / FOC working class**; servo or stepper+belt is the **fallback** | Size for one-leg (~2×) load (R36). ~10 N·m holding at the knee standing up over the front wheel ([`research/stair-climb-dynamics.md`](research/stair-climb-dynamics.md)). **GIM8108-8** stays a candidate; on 6S it is honest, on 4S it was not. |
+| Hip roll | **In V1.** CAN QDD / FOC | Not a stepper. Experimental — may not work. Still wire the axis and the modes. SKU TBD. |
+| Real-time MCU | **CAN-capable** — Teensy 4.1-class or H743-WING-class | Runs the control core at 1 kHz, IMU, CRSF, watchdog, torque cut, blackbox. **Picked with the actuators.** Not bought. |
+| Bench board | **F765-Wing** (on hand) | P0–P1 only: blink, CRSF, one SimpleFOC wheel over UART. No CAN. Nothing written for it is expected to survive. |
+| RC RX | **TBS Nano RX** | CRSF into a full UART on the MCU. |
+| Companion | **Pi 5** now, in containers | Cameras, telemetry, ROS 2. **Jetson (Orin Nano Super kit class) at P5** for perception. Head has a slot sized for it with a 12–19 V feed. |
 | Wi‑Fi telem | **Pi first** | ESP32 only as an optional thin telemetry bridge. |
 
-## Flight controller — TBD
+## Real-time MCU — CAN decides it
 
-**Do not lock an FC in this repo.** Steve 2026-09-20: leave it TBD. Prefer a Wing board *when* we lock. Mechanical work is not blocked.
+The 2026-09-25 bench plan put the F765-Wing at the centre. The F765-Wing has **7 UARTs, 12 PWM, a microSD slot and no CAN**. Every torque-mode actuator on the candidate list speaks CAN. A UART→CAN bridge on the highest-bandwidth axis in the machine is a hack, and per-axis UARTs to four torque actuators is a wiring mess with jitter. So:
 
-Candidates already on hand:
+- **F765-Wing = P0–P1 bench board.** Blink, bind the Nano, learn CRSF, spin one SimpleFOC wheel over UART or PWM. Then it goes back in the pile.
+- **P2+ MCU must have CAN.** Two honest classes: **Teensy 4.1** (600 MHz, **3× CAN FD**, mature FlexCAN library, needs an external IMU breakout and a 5 V BEC) or **Matek H743-WING-class** (480 MHz, dual IMU, **1× CAN**, SD, BECs, CRSF-ready, same lineage Steve already knows). One CAN bus is enough for eight actuators at 1 kHz on classic CAN only if the protocol is lean; two buses or CAN FD are the safe answer. **Pick the MCU with the actuators, not before.**
+- The MCU does **not** drive stepper coils, ever. If the fallback stepper class is used for knee / swing, its drivers hang off CAN or step/dir from a driver board, not from the MCU's GPIO.
 
-- F765 Wing
-- F722 Wing
-- F722 drone FC
-- Mamba F405
+Record the board that actually runs `TWO_WHEEL` here, in [`parts-on-hand.md`](parts-on-hand.md), and in [`../NOTES.md`](../NOTES.md).
 
-When one is actually on the bench and blinking, record it here, in [`parts-on-hand.md`](parts-on-hand.md), and in [`../NOTES.md`](../NOTES.md). Until then the line is **FC: TBD**.
+## Battery — 6S; step down for logic and companion (R11, revised 2026-09-26)
 
-## Battery — 4S preferred; step down for pose / logic (R11)
+Steve 2026-09-26: **4S → 6S**. Large pack or two in parallel. LiPo or similar.
 
-Steve 2026-09-20 follow-up. **4S LiPo stays the preferred pack class.** Serra's machine is 3S + Arduino — do not follow that bus. 4S holds voltage better under current spikes than 3S.
-
-Wheel FOC on a two-wheel (and later one-wheel) balancer is a **high-draw** load. Pose actuators (servo *or* stepper) and logic must not share that sag.
-
-**Rule:** 4S pack → **controlled step-down** (BEC / regulator *class*) for **5 V / 6 V / 7.4 V** servo or logic rails. Do not feed a 5–7.4 V servo bus from raw 4S. Do not hang pose actuators on the same unregulated tap as the wheel ESCs.
-
-**Power bus (Tazer anti-pattern):** FOC stalls are high-current. Plan **dedicated power distribution** (PDB / harness *class*), not skinny traces and **not** the FC or a logic PCB as the motor bus. Tazer's 6-axis machine nearly blew a board used as a power plane. Hux 4S is lighter than his ~48 V stack and still needs a real bus. No PDB SKU. See [`research/tazer-lessons.md`](research/tazer-lessons.md).
+Why: CAN QDD / FOC actuators are specified at 24–48 V. At 14.8 V they give up a large share of speed and torque headroom; at 22.2 V nominal they are in their working band. 6S also halves the current for the same wheel power, which is kinder to the bus and the FOC stalls (Tazer anti-pattern).
 
 | Item | Intent | Status |
 | --- | --- | --- |
-| Chemistry / cell count | 4S LiPo (preferred) | Class lean. Not a locked SKU. |
-| Nominal / full | **~14.8 V** / **~16.8 V** | Use when thinking about ESC / servo / BEC *ranges*. |
+| Chemistry / cell count | **6S**. LiPo preferred (C-rating for balance spikes). High-drain Li-ion 21700 (Molicel P45B-class) acceptable for energy density if the pack's continuous / peak current is proven. | Class lean. Not a locked SKU. |
+| Nominal / full / cutoff | **~22.2 V / 25.2 V / ~19.8 V** | Use when thinking about actuator, regulator and companion ranges. Check every actuator's **max** against 25.2 V, not 22.2. |
+| One pack vs two | Either. Two in parallel: same cell count and chemistry, matched to within ~0.1 V before connecting, a **fuse per pack**, a parallel harness, one BMS / balance plan. | Steve's call per build. |
 | Capacity (mAh) / C-rating | TBD | No spend. Do not guess a pack into a BOM. |
-| Wheel bus | 4S (via ESC) | High-draw FOC. Encoder on the wheel axis. |
-| Pose / logic rails | **Step down** to 5 V / 6 V / 7.4 V | Separate enough that a wheel current spike does not brown out a planted knee / hip. |
-| BEC / regulator / PDB | **Class only** | Box on the sketch. **No SKU.** |
+| Motor bus | **6S direct** via a real distribution board / harness | High-draw FOC. Not through the MCU or any logic PCB. |
+| 5 V rail | MCU, RX, **Pi 5 (5 V / 5 A, USB-PD-class connector)** | A 25 W buck, not a servo BEC. |
+| 12–19 V rail | Companion slot (Jetson kit 9–19 V), any 12 V accessories | Only populated when a Jetson is fitted. |
+| Pose rail | Only if the fallback servo class is chosen | 6 / 7.4 V class. Not raw pack. |
+| Regulators / PDB | **Class only** | Box on the sketch. **No SKU.** |
+
+**Power bus (Tazer anti-pattern):** FOC stalls are high-current. Plan **dedicated power distribution** (PDB / harness *class*) with a **hardware torque cut** on it — a contactor / MOSFET kill independent of the MCU. Not skinny traces, not the MCU or a logic PCB as the motor plane. See [`research/tazer-lessons.md`](research/tazer-lessons.md).
 
 Power rail sketch (not a harness):
 
 ```
-4S LiPo (class, TBD pack)
+6S pack (or 2× in parallel, fused)
         │
         ▼
-   power bus TBD
-        ├── wheel FOC / BLDC + encoder  (high draw; 4S)
-        ├── hip-roll dynamic (PWM / CAN / FOC — TBD)
-        ├── step-down (BEC/reg class, TBD) ──► 5V / 6V / 7.4V pose + logic
-        │         └── knee / hip swing (servo *or* stepper — class TBD)
-        └── FC (TBD) + RX + Pi  (via the regulated rail or a second tap — TBD)
+   distribution + hardware torque cut
+        ├── CAN actuators: 2× wheel, 2× hip roll, 4× knee / swing   (6S direct)
+        ├── 5 V buck  ──► RT MCU + IMU, TBS Nano RX
+        ├── 5 V / 5 A buck ──► Pi 5 (USB-PD-class)
+        └── 12–19 V buck ──► companion slot (Jetson, P5) — unpopulated in V1
 ```
 
-When a real pack is on the bench, record cell count, measured resting voltage, connector, and who it actually feeds. Until then: **4S preferred, step-down for pose / logic, no BEC SKU.**
+When a real pack is on the bench, record cell count, chemistry, measured resting voltage, connector, and who it feeds.
 
 ## Wheel drive class (R25) — no SKU
 
@@ -75,109 +75,82 @@ The wheel motor is a **balance actuator**. Hux has to catch a tip on one skinny 
 | Criterion | Intent | Status |
 | --- | --- | --- |
 | What we optimize | **Reaction speed / torque bandwidth** for inverted-pendulum balance | Not max continuous power |
-| Wheel | **6" OD × ~1–1.25"** real rubber, torsionally stiff. Size locked, not a buy. | 5" Zantle is a **bench donor**, not the foot. [`research/leg-geometry.md`](research/leg-geometry.md). |
+| Wheel | **6" OD × ~1–1.25"** real rubber, torsionally stiff. Size locked, not a buy. | 5" Zantle is a **bench donor**, not the foot. |
 | Placement | **In-wheel** (hub / coaxial) | R30 |
-| Bus | **4S** (~14.8 V nom / ~16.8 V full) | Class lean (R11). Not a pack lock. |
-| Mass | Two wheel motors + drivers must **leave room** for pose joints, structure, pack, FC, Pi | Mass budget **soft** (R24). |
-| Control | **Reuse** an existing FOC / torque-mode stack (R18) | SimpleFOC / gimbal-class patterns. Do not invent Hux drive electronics. |
-| FC | Still **TBD** | This class does not pick the FC. |
+| Bus | **6S**, **CAN** | The wheel actuator's own FOC + encoder; torque mode; encoder counts back on the bus for the estimator. |
+| Mass | Two wheel motors must **leave room** for pose joints, structure, pack, MCU, companion | Mass budget **soft** (R24). |
+| Control | **Reuse** an existing FOC / torque-mode stack (R18) | SimpleFOC on the bench; a CAN actuator's own firmware on the robot. Do not invent Hux drive electronics. |
 
 ### Candidate classes (not buys)
 
 | Class | Why it is on the list | Still TBD / not a lock |
 | --- | --- | --- |
-| **Lightweight:** gimbal BLDC **~2208–4108** + FOC driver + magnetic encoder | Fast torque, low mass. Scale reference: [StackForce mini](https://wiki.seeedstudio.com/stackforce_mini_wheeled_legged_robot/) ~**540 g** / **2208**. *Scale* only — **not a kit lock**. | Bare ~0.5 N·m arrests about 6° on the 6" / 6 kg example. Honest here **with reduction**, or on a much lighter machine. Stator, ratio, kV, FOC board, encoder all TBD. |
-| **Mid:** small outrunner + planetary / cycloidal | Honest band for about **3 N·m peak** at the 6" contact. Still not a hoverboard hub. | Ratio, backlash, reflected inertia, packaging at the wheel |
-| **Avoid as a default:** large ODrive **63xx** / hoverboard hub motors | SonicRobot-class hardware. Fine to *study* for IMU → PID → torque. Heavy for a maker Hux. Mass is soft now — still do not shop the SonicRobot README. | Do not treat upstream parts lists as a Hux BOM |
-
-Prefer **reusing** a FOC / torque-mode stack that already exists ([SimpleFOC](https://simplefoc.com/) and gimbal-class patterns) over designing a Hux inverter (R18). **TBD which stack we adopt.**
+| **Small CAN QDD / FOC actuator at the hub** (GIM-class outrunner + driver, ODrive-S1-class driver + gimbal motor, integrated hub actuators) | 3 N·m peak, torque mode, encoder, CAN — the honest answer on 6S. | Stator, ratio (if any), kV, encoder, packaging inside a 6" rim. Kelton Serra's in-wheel packaging is the picture. |
+| **Lightweight:** gimbal BLDC ~2208–4108 + SimpleFOC board + magnetic encoder | Bench spin and the first `TWO_WHEEL` if actuators are late. | Bare ~0.5 N·m arrests about 6°; honest only with reduction. Needs a CAN-capable SimpleFOC board to stay on the bus. |
+| **Avoid as a default:** large ODrive **63xx** / hoverboard hubs | SonicRobot-class hardware. Study for IMU → PID → torque. Heavy for a maker Hux. | Do not treat upstream parts lists as a Hux BOM. |
 
 ## Leg drive classes
 
-**Knee / hip swing: servo vs stepper+belt TBD** (R12). Both are open options. Size **whichever we pick** for one-leg standing load (~2×; R36). Wheels stay brushless FOC. Hip roll stays dynamic **in V1**.
+**Working class for every joint is a CAN QDD / FOC actuator** (2026-09-26). Servo or stepper+belt remains the documented **fallback** for knee / hip swing only. Size every plant-side joint for one-leg standing load (~2×; R36). Hip roll is dynamic **in V1**.
 
-| Joint | Working intent | Electronics implication |
-| --- | --- | --- |
-| **Wheels** | In-wheel brushless **FOC** (R6) | 2 FOC channels + encoders. Not steppers. |
-| **Knee / hip swing** | **Servo vs stepper+belt TBD** | If steppers: 4 drivers + 4 motors; reduction required; **FC does not drive coils**. If servos: 4 servo channels on the regulated rail. **GIM8108-8** is a candidate (not ordered). |
-| **Hip roll** | **In V1.** Dynamic FOC / small QDD / fast bus servo | **Not a stepper. Not V2.** Torque-mode / high-rate current loop. Ideally backdrivable. Include the driver channel even if the first loop is ugly. |
+| Joint | Working class | Fallback | Electronics implication |
+| --- | --- | --- | --- |
+| **Wheels** | In-wheel FOC on CAN | — | 2 CAN nodes. Not steppers. |
+| **Knee / hip swing** | CAN QDD (GIM8108-class ~8:1) | Servo on a regulated rail, or stepper + belt behind a CAN / step-dir driver board | 4 CAN nodes. ~10 N·m knee holding. Springs still recommended for the two-leg crouch (R7). |
+| **Hip roll** | CAN QDD / FOC, backdrivable | none — **not a stepper** | 2 CAN nodes. Torque-mode / high-rate current loop. |
 
-Do not put a stepper on hip roll to “match” the knees. Missed steps, resonance, and belt stretch / backlash hurt the CoG loop that pairs with wheel fore-aft.
+Do not put a stepper on hip roll to “match” the knees. Missed steps, resonance, and belt stretch / backlash hurt the CoG loop that pairs with wheel fore-aft. If the fallback stepper class is ever used on knee / swing: closed-loop drivers, short low-backlash belts, mounted high (R32), and a written acceptance of lower bandwidth.
 
-**All-stepper is not the baseline** (R28). If later forced onto *roll*: closed-loop drivers, short low-backlash belts, and a written acceptance of **lower one-leg bandwidth**.
+### Hold current, heat
 
-### Hold current, heat, 4S
+A stepper sits at holding current to keep a pose; four of them is continuous draw and heat even standing still. QDD / torque-mode can hold with less waste if springs take gravity (R7). One more reason the fallback is the fallback.
 
-A stepper often sits at **holding current** to keep a pose. Four pose joints is continuous draw and heat, even when Hux is standing still. That is **4S drain** — capacity / C still **TBD**. FOC / torque-mode can hold with less waste if springs take gravity (R7). Another reason roll should not be an open-loop stepper.
-
-Do not invent a PDB / BEC / driver BOM. Do not recommend spend.
-
-## Actuator I/O architecture (R29)
-
-Count the axes before we pretend a Wing board can host everything.
+## Actuator I/O architecture (R29, revised)
 
 | Count | Axis | Drive class |
 | --- | --- | --- |
-| 2 | Wheels (L / R) | Brushless FOC |
-| 4 | L/R **knee** + L/R **hip swing** | Servo **or** stepper + reduction — **TBD** |
-| 2 | Hip **roll** (L / R) | Dynamic FOC BLDC / small QDD / fast bus servo. **In V1.** Experimental. |
-| **8** | **V1 total** | Not eight identical motors. |
+| 2 | Wheels (L / R) | CAN FOC, torque mode |
+| 4 | L/R **knee** + L/R **hip swing** | CAN QDD, position / torque (fallback: servo or stepper behind a driver) |
+| 2 | Hip **roll** (L / R) | CAN QDD / FOC, torque mode. **In V1.** |
+| **8** | **V1 total** | **Eight CAN nodes** in the working plan. Not eight identical motors. |
 
-### If steppers are chosen for pose
+Eight nodes at 1 kHz: classic CAN at 1 Mbit/s is ~50–60% loaded with a lean protocol and has no headroom for encoder telemetry; **two buses or CAN FD** is the safe layout. This is the concrete reason the MCU follows the actuators.
 
-**The FC does not drive stepper coils.** Coil current belongs on **stepper driver board(s)** — **TMC-class** or other **multi-axis** driver *class* — sitting between a host (Pi **or** a dedicated stepper controller) and the four steppers. Step/dir (or a bus the driver already speaks) is the interface. GPIO-toggling phases from a flight controller is out.
+**Anti-pattern:** a Wing FC can spare pins; drone firmware is a poor host for anything on this page. Spare UARTs are for the RX and the companion link, not for becoming an actuator bus.
 
-| Host | Owns | Why |
-| --- | --- | --- |
-| **FC** (TBD) | IMU + attitude + **wheel FOC**. **Hip roll** too *if* the link is honest (**PWM / CAN** / equivalent). TBS Nano RX. | Balance loop and fast torque live here. |
-| **Pi** *or* a **dedicated stepper controller** | The **four steppers**, via driver board(s), **step/dir** | Position / pose on knee + swing. Not a 1 kHz CoG loop. |
-
-**Anti-pattern:** a Wing FC can spare pins; **drone firmware is a poor stepper host**. Do not bit-bang coils or fake steppers from a flight-stack mixer for V1. Spare pins are for RX, telem, and maybe roll PWM/CAN — not for becoming a CNC controller.
-
-### If servos are chosen for pose
-
-Servos sit on the **regulated** 5 / 6 / 7.4 V rail (R11). Still not raw 4S. FC or a servo bus adapter may command them; do not invent the bus here. Hip roll still stays on the **balance** side of the split.
-
-## Split-brain sketch (intent)
+## Four-layer sketch (intent)
 
 ```
-TBS Nano RX ──► FC (TBD) ──► wheel FOC (2× in-wheel BLDC + encoder)
-                    │            └──► hip roll (2× dynamic) if PWM/CAN
-                    │
-                    └── IMU / attitude / manual modes (PARKED / TWO_WHEEL / LEFT_ONLY / RIGHT_ONLY)
-
-Pi ── cameras, pathfinding, Wi‑Fi telem (reports active mode)
-  └── *if steppers:* ──► TMC-class / multi-axis driver(s) ──► 4× steppers step/dir
-                         (L/R knee, L/R hip swing)
-
-ESP32 (optional) ── thin Wi‑Fi/telem bridge if we keep the Pi busy
-4S pack ──► wheel ESCs
-         └──► step-down ──► pose / logic rails
+TBS Nano RX ──CRSF──► RT MCU (CAN, 1 kHz)  ──CAN A──► 2× wheel + 2× hip roll
+                       │  IMU · control core       └CAN B──► 4× knee / hip swing
+                       │  watchdog · torque cut · SD blackbox
+                       └──framed serial/USB──► companion (Pi 5 → Jetson at P5)
+                                                 ROS 2 · params · MCAP · cameras · Wi‑Fi telem
+6S pack ──► distribution + hardware kill ──► actuators (direct)
+                                          └──► 5 V (MCU, RX, Pi) · 12–19 V (companion slot)
 ```
 
-This is a box diagram, not a harness. No SKU. **8 axes.** FC does **not** drive stepper coils.
+Box diagram, not a harness. No SKU. Layers: [`software.md`](software.md).
 
 ## Bring-up order (no carpet)
 
 See [`checklists/electronics-bringup.md`](checklists/electronics-bringup.md) and the P0–P5 plan in [`electronics-minimum.md`](electronics-minimum.md).
 
-1. Pick an FC from the on-hand pile when ready — still not a lock until it survives blink (**P0**).
-2. Blink an LED. Bind TBS Nano.
-3. Restrained FOC wheel spin (tied down, not on carpet) (**P1**).
-4. `PARKED` / `TWO_WHEEL` (**P2**).
-5. Pose joints (**P3**) — servo *or* stepper path.
-6. Hip roll + `LEFT_ONLY` / `RIGHT_ONLY` (**P4**).
-7. Wi‑Fi telem / Pi / cameras (**P5**).
+1. F765 bench: blink, bind TBS Nano, print CRSF (**P0**).
+2. One restrained wheel: SimpleFOC over UART on the F765, or the first CAN actuator when it arrives (**P1**).
+3. CAN MCU first image: IMU, both wheels on CAN, blackbox, live params, torque cut proven. `PARKED` / `TWO_WHEEL` (**P2**).
+4. Pose joints on CAN (**P3**).
+5. Hip roll + `LEFT_ONLY` / `RIGHT_ONLY` (**P4**).
+6. Companion cameras / Wi‑Fi telem / perception; Jetson decision (**P5**).
 
 ## Do not
 
-- Do not buy a “better” FC, ESC, BEC, servo, stepper, Pi, LiPo, FOC board, or encoder for this scaffold.
-- Do not recommend spend. Do not paste shopping links as “buy this.”
-- Do not invent a finished PDB / BEC SKU or a pack size.
-- Do not feed motor current through the FC or a delicate logic PCB (Tazer).
-- Do not run pose actuators on raw 4S, or on the same unregulated tap as wheel FOC.
-- Do not lock servo vs stepper+belt.
-- Do not treat any FC candidate or actuator *SKU* as selected. Hip-roll *class* (dynamic, in V1) is locked.
-- Do not put steppers on the wheels or on hip roll to make the BOM uniform.
-- Do not omit the hip-roll driver channel from V1 “until V2.”
-- Do not drive stepper **coils** from the FC. Do not host four steppers in drone firmware just because a Wing board has spare pins.
+- Do not buy actuators, the CAN MCU, a pack, a regulator, a Jetson or an encoder for this page. Steve authorizes cart lines in [`bom.md`](bom.md).
+- Do not build robot firmware on the F765-Wing. Bench only.
+- Do not invent a finished PDB / regulator SKU or a pack size.
+- Do not feed motor current through the MCU or a logic PCB (Tazer).
+- Do not run anything on raw pack voltage except the actuators and the distribution board.
+- Do not check an actuator against 22.2 V and forget 25.2 V full.
+- Do not put steppers on the wheels or on hip roll. Do not treat the fallback as the plan.
+- Do not omit the hip-roll nodes from V1 “until V2.”
+- Do not bridge UART→CAN on a torque axis to keep an old board.
