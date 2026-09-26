@@ -297,6 +297,10 @@ Steve: "Put a temporary decision lock on all of those motors. We're going to pro
 
 **Not changed:** 8S; CAN; the four layers; R14 / R18; hip roll in V1; 6" wheel; 9.5" step; twin pipeline TBD. **Pushed to `origin/main`** at Steve's request.
 
+### 2026-09-26 — exploratory concept art on a media page
+
+Steve asked for starting visuals before accurate models, then for those pieces on the HTML site. `art/` holds concept renders and four image-to-mesh studies (whole robot, leg, wheel, torso). [`tools/living-drawings/media.html`](../tools/living-drawings/media.html) shows them. **Nothing locked.** Not to scale, not CAD, and not a pass through the 2D-before-Blender gate. The drawings and the sandbox are unchanged.
+
 
 ## How to log the next merge
 

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hux media</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="page">
+    <header class="mast">
+      <div>
+        <p class="kicker">Hux</p>
+        <h1>Media</h1>
+        <p>Look studies made before any accurate model. Carbon-tube legs, actuators at the hips, disc-hub wheels. These pictures are not the living drawings, and the meshes are not CAD.</p>
+        <nav class="pages" aria-label="Pages">
+          <a href="index.html">Drawings</a>
+          <a href="sim.html">3D sandbox</a>
+          <a href="flow.html">Data flow</a>
+          <a href="software.html">Software</a>
+          <a href="hardware.html">Hardware</a>
+          <a href="media.html" aria-current="page">Media</a>
+        </nav>
+      </div>
+      <div class="stamp">
+        Concepts 2026-09-26<br>
+        6" × 1.25" wheel<br>
+        7.5" + 7.5" tubes<br>
+        24" tall · 14" wide
+      </div>
+    </header>
+
+    <p class="callout">Nothing here is to scale, and nothing here is locked. The paper envelope is still about 24 in tall and 14 in wide, with 6 in wheels. In these shots the battery sits high, the wheel motor often sits beside the tire, and hip roll and hip swing are one lump. Small print on the battery and tires is gibberish.</p>
+
+    <section class="block">
+      <h2>Whole robot</h2>
+      <div class="gallery">
+        <figure>
+          <a href="../../art/concepts/hux-standing.jpg"><img src="../../art/concepts/hux-standing.jpg" alt="Studio three-quarter of Hux with carbon-tube legs, aluminum knee linkages, and black hip actuators"></a>
+          <figcaption><strong>Standing</strong>Style anchor. Aluminum linkage plates at the knees, black cubes at the hips.</figcaption>
+        </figure>
+        <figure>
+          <a href="../../art/concepts/hux-knee-actuators.jpg"><img src="../../art/concepts/hux-knee-actuators.jpg" alt="Same robot with black cubic actuators at the knees"></a>
+          <figcaption><strong>Knee actuators</strong>The linkage plates replaced by black cubes, same family as the hips.</figcaption>
+        </figure>
+        <figure>
+          <a href="../../art/concepts/hux-straight-leg.jpg"><img src="../../art/concepts/hux-straight-leg.jpg" alt="Earlier sketch of Hux with one straight spar per leg and no knee"></a>
+          <figcaption><strong>Straight leg</strong>Earlier sketch. One spar per leg, finned hip motors, no knee.</figcaption>
+        </figure>
+        <figure>
+          <a href="../../art/concepts/hux-side.jpg"><img src="../../art/concepts/hux-side.jpg" alt="Side view of Hux, both wheels still visible"></a>
+          <figcaption><strong>Side</strong>Slightly off a true elevation, so both wheels still show.</figcaption>
+        </figure>
+        <figure>
+          <a href="../../art/concepts/hux-workshop.jpg"><img src="../../art/concepts/hux-workshop.jpg" alt="Hux standing in a workshop with wooden stairs behind it"></a>
+          <figcaption><strong>Workshop</strong>The standing robot in a shop, stairs behind it.</figcaption>
+        </figure>
+        <figure>
+          <a href="../../art/concepts/hux-stairs.jpg"><img src="../../art/concepts/hux-stairs.jpg" alt="Hux on a wooden staircase with one wheel on a higher tread"></a>
+          <figcaption><strong>Stairs</strong>One wheel on a higher tread.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Parts</h2>
+      <div class="gallery">
+        <figure>
+          <a href="../../art/concepts/wheel.jpg"><img src="../../art/concepts/wheel.jpg" alt="Isolated wheel with a spokeless aluminum hub and a motor beside it"></a>
+          <figcaption><strong>Wheel</strong>Spokeless disc hub. In this sketch the motor sits beside the tire.</figcaption>
+        </figure>
+        <figure>
+          <a href="../../art/concepts/leg.jpg"><img src="../../art/concepts/leg.jpg" alt="One Hux leg of paired carbon tubes, an aluminum knee, and a disc wheel"></a>
+          <figcaption><strong>Leg</strong>Paired carbon tubes, linkage knee, cube at the hip, disc wheel.</figcaption>
+        </figure>
+        <figure>
+          <a href="../../art/concepts/torso.jpg"><img src="../../art/concepts/torso.jpg" alt="Hux torso with a battery box, a camera, and two black hip cubes"></a>
+          <figcaption><strong>Torso</strong>Hip beam, two side cubes, battery, camera. Legs removed.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Rough meshes</h2>
+      <p class="hint">Image-to-mesh studies of the standing robot, the leg, the wheel, and the torso. One shell each, about a million triangles. Fasteners melt together. Pick one to load it — the files are 45 to 74 MB. Drag to orbit.</p>
+      <div class="presets" role="group" aria-label="Meshes">
+        <button type="button" data-mesh="../../art/models/hux.glb" data-poster="../../art/concepts/hux-standing.jpg" data-label="Whole robot, 74 MB" aria-pressed="false">Whole robot</button>
+        <button type="button" data-mesh="../../art/models/leg.glb" data-poster="../../art/concepts/leg.jpg" data-label="Leg, 47 MB" aria-pressed="false">Leg</button>
+        <button type="button" data-mesh="../../art/models/wheel.glb" data-poster="../../art/concepts/wheel.jpg" data-label="Wheel, 52 MB" aria-pressed="false">Wheel</button>
+        <button type="button" data-mesh="../../art/models/torso.glb" data-poster="../../art/concepts/torso.jpg" data-label="Torso, 45 MB" aria-pressed="false">Torso</button>
+      </div>
+      <p id="mesh-status" class="hint">Nothing loaded yet. The frame below is the standing study, until a mesh replaces it.</p>
+      <div class="mesh-stage">
+        <img id="mesh-poster" src="../../art/concepts/hux-standing.jpg" alt="Standing study, shown until a mesh is loaded">
+        <canvas id="mesh-canvas"></canvas>
+      </div>
+    </section>
+
+    <footer class="note">
+      Files live in <a href="../../art/">art/</a>.
+      Notes on what each file is, and where the pictures drift from the mechanical notes, are in <a href="../../art/README.md">art/README.md</a>.
+      The measured drawings are <a href="index.html">the living drawings</a>.
+    </footer>
+  </div>
+  <script type="module">
+    import * as THREE from "three";
+    import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
+    const canvas = document.querySelector("#mesh-canvas");
+    const poster = document.querySelector("#mesh-poster");
+    const stage = document.querySelector(".mesh-stage");
+    const status = document.querySelector("#mesh-status");
+    const buttons = document.querySelectorAll("[data-mesh]");
+    let renderer = null;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+      renderer.setPixelRatio(1);
+      renderer.setClearColor(0xe6e1d6);
+    } catch (err) {
+      renderer = null;
+    }
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(35, 1, 0.01, 100);
+    const controls = new OrbitControls(camera, canvas);
+    controls.enableDamping = true;
+    scene.add(new THREE.AmbientLight(0xffffff, 0.75));
+    const key = new THREE.DirectionalLight(0xffffff, 1.6);
+    key.position.set(2, 3, 4);
+    scene.add(key);
+    const loader = new GLTFLoader();
+    let shown = null;
+    let ticket = 0;
+    let looping = false;
+
+    function resize() {
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight;
+      if (!renderer || !width || !height) return;
+      renderer.setSize(width, height, false);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    }
+    function frame() {
+      if (!looping) return;
+      requestAnimationFrame(frame);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    function fit(object) {
+      const box = new THREE.Box3().setFromObject(object);
+      const size = box.getSize(new THREE.Vector3());
+      const center = box.getCenter(new THREE.Vector3());
+      object.position.sub(center);
+      const span = Math.max(size.x, size.y, size.z) || 1;
+      camera.position.set(span * 0.9, span * 0.55, span * 1.35);
+      camera.near = span / 100;
+      camera.far = span * 20;
+      camera.updateProjectionMatrix();
+      controls.target.set(0, 0, 0);
+      controls.update();
+    }
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const mine = ++ticket;
+        buttons.forEach((other) => other.setAttribute("aria-pressed", other === btn ? "true" : "false"));
+        poster.hidden = false;
+        poster.src = btn.dataset.poster;
+        poster.alt = btn.dataset.label;
+        stage.scrollIntoView({block: "nearest"});
+        if (!renderer) {
+          status.textContent = "This browser has no WebGL, so " + btn.dataset.label + " stays a still.";
+          return;
+        }
+        status.textContent = "Loading " + btn.dataset.label + ".";
+        loader.load(btn.dataset.mesh, (gltf) => {
+          if (mine !== ticket) return;
+          if (shown) scene.remove(shown);
+          shown = gltf.scene;
+          scene.add(shown);
+          resize();
+          fit(shown);
+          poster.hidden = true;
+          status.textContent = "Showing " + btn.dataset.label + ". Drag to orbit.";
+          if (!looping) {
+            looping = true;
+            frame();
+          }
+        }, undefined, () => {
+          if (mine !== ticket) return;
+          status.textContent = "That mesh did not load. The still stays up.";
+        });
+      });
+    });
+    window.addEventListener("resize", resize);
+  </script>
+</body>
+</html>

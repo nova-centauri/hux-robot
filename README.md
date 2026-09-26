@@ -40,7 +40,8 @@ Balance on two wheeled legs for teleop. Gate stair work behind one-leg balance (
 docs/         requirements, decisions, vision, research, mechanical, electronics, software, checklists
 NOTES.md      working notes and first milestones
 cad/          printable / CAD parts (empty — 2D before Blender)
-tools/living-drawings/   drawings (index.html), 3D sandbox (sim.html), data flow (flow.html), software (software.html), hardware (hardware.html)
+tools/living-drawings/   drawings (index.html), 3D sandbox (sim.html), data flow (flow.html), software (software.html), hardware (hardware.html), media (media.html)
+art/          exploratory concept renders and rough meshes — not CAD
 firmware/     FC / embedded bring-up (empty)
 software/     companion compute — Pi cameras / pathfinding (empty)
 ```
@@ -61,6 +62,7 @@ software/     companion compute — Pi cameras / pathfinding (empty)
 - [Data flow](tools/living-drawings/flow.html) — command, power, motion, modes, and what waits until later
 - [Software](tools/living-drawings/software.html) — the 2026-09-25 **bench-learning** plan for the F765-Wing + Pi 5 (P0–P1). Superseded as the robot's stack by [docs/software.md](docs/software.md).
 - [Hardware](tools/living-drawings/hardware.html) — order now, on hand, shop, and the class estimates. Same numbers as [bom.md](docs/bom.md)
+- [Media](tools/living-drawings/media.html) — exploratory concept renders and rough meshes in [art/](art/). Look studies only. Not the drawings, not CAD.
 - [Shop capabilities](docs/capabilities.md) — mill, lathe, bender, brake, bandsaw, solder, weld, breadboards (not parts)
 - [Software](docs/software.md) — four layers (CAN actuators, portable control core, CAN RT MCU, ROS 2 companion); layer-2 skeleton → blink → spin → four manual modes → cameras → perception
 - [Checklists](docs/checklists/) — prefer these over fake finished stacks
