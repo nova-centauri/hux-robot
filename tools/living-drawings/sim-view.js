@@ -246,6 +246,7 @@
       const dz = s.wheelLat - s.hipLat;
       add(l, new THREE.CylinderGeometry(0.006, 0.006, dz, 12), mat(C.hub), { x: 0, y: -s.L, z: side * dz / 2 }, alongZ);
       const w = byKind["wheel" + side].g;
+      /* Visual only: flat cylinder shoulders. Collision is sim-core tireCollider (rounded convex), not a motorcycle crown. */
       add(w, new THREE.CylinderGeometry(s.R, s.R, s.wheelW, 48), mat(C.tire, { roughness: 0.95 }), null, alongZ);
       add(w, new THREE.CylinderGeometry(s.motorWheelD / 2, s.motorWheelD / 2, s.wheelW + 0.004, 32), mat(C.hub, { metalness: 0.3, roughness: 0.4 }), null, alongZ);
       add(w, new THREE.BoxGeometry(s.R * 1.7, 0.008, s.wheelW + 0.008), mat(C.body), null);

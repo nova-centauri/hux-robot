@@ -150,8 +150,8 @@ Steve, 2026-09-22. Three phases. Do **not** invert them. R14 and R18 stay.
 | Phase | What | Not |
 | --- | --- | --- |
 | **V1 — classical balance + modes** | Blink → spin → `PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY` from TBS. Reuse an existing simple balance pattern (R18). High-bandwidth FOC / QDD / model-based **class** on wheels and hip roll. Open-loop 9.5" fixture after the four modes work. | An RL gate. A novel Hux V1 controller. A sim trainer before the robot stands. |
-| **Later — CAD / URDF twin lockstep** | When CAD exists: CAD, exported model, and firmware zeros stay the **same robot** (Stompy lesson). Geometry edits flow through all three. | A day-one wheel-balance task. A Jetson / mjlab / Isaac lock. |
-| **Horizon — sim dojo / RL** | Identical digital twin + domain-randomized dojo so a policy trained in sim can run locally. Later terrains: stairs, rubble, dirt, fall leaves, wet mud. | A replacement for R18. A V1 blocker. A reason to skip modes. |
+| **Later — CAD / URDF twin lockstep** | When CAD exists: CAD, exported model, and firmware zeros stay the **same robot** (Stompy lesson). Geometry edits flow through all three. **Lock the contract first** (CAD→URDF/USD or MJCF, observation parity, motorcycle-crown tire contact, firmware zeros, stack willingness). Pipeline (Isaac / MuJoCo / mjlab / other) stays **TBD** — 2026-09-25. | A day-one wheel-balance task. A Jetson / mjlab / Isaac lock. Standing up a dojo before `TWO_WHEEL`. |
+| **Horizon — sim dojo / RL** | Identical digital twin + domain-randomized dojo so a policy trained in sim can run locally. Later terrains: stairs, rubble, dirt, fall leaves, wet mud. | A replacement for R18. A V1 blocker. A reason to skip modes. Buying a 4090 or locking Isaac Lab. |
 
 V1 may / should stand and balance with classical / reused control **before** any of the later two. The twin and the dojo are the cool long-term goal, not the next firmware folder.
 
@@ -164,7 +164,7 @@ V1 may / should stand and balance with classical / reused control **before** any
 
 - Closed-loop stair gait.
 - Stereo / depth for stairs.
-- Simulation (MuJoCo or otherwise) as a **V1** job. The twin / dojo is a **horizon**, not this folder today. The living-drawings 3D sandbox ([`../tools/living-drawings/sim.html`](../tools/living-drawings/sim.html), [`research/sim-sandbox.md`](research/sim-sandbox.md)) is a design toy with a game-grade engine, not the twin; its LQR is a sandbox controller, not a Hux V1 controller (R18).
+- Simulation (MuJoCo or otherwise) as a **V1** job. The twin / dojo is a **horizon**, not this folder today. The **pipeline is TBD** — do not lock Isaac / MuJoCo / mjlab, and do not stand up Isaac Lab or buy a 4090 before `TWO_WHEEL`. The living-drawings 3D sandbox ([`../tools/living-drawings/sim.html`](../tools/living-drawings/sim.html), [`research/sim-sandbox.md`](research/sim-sandbox.md)) is a design toy with a game-grade engine, not the twin; its LQR is a sandbox controller, not a Hux V1 controller (R18). Visual tires are still flat cylinders; collision is a rounded hull, not a motorcycle crown.
 - A requirements-complete autonomy stack.
 - A **novel Hux V1 balance controller** (R18). Study existing patterns; do not invent one to fill `firmware/`.
 - Firmware that implements the mode machine or the one-leg loop (FC is TBD; this page is the spec).

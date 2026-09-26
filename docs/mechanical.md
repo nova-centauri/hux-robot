@@ -167,7 +167,7 @@ This is **not** the same joint as hip swing (pitch / lift the leg for a step) or
 
 Hip roll **alone** does not balance. The planted wheel still has to drive forward / back to keep the contact under the CoG (R17). Spec: [`software.md`](software.md).
 
-**In V1.** Experimental — may not work as hoped. Still include the joint mechanically and in the modes. Do not fake a CoG shift in firmware if the joint is unplugged, and do not unplug it to wait for V2. Placement **TBD**. Do not drop CoG with heavy roll actuators if avoidable.
+**In V1.** Experimental — may not work as hoped. Still include the joint mechanically and in the modes. Do not fake a CoG shift in firmware if the joint is unplugged, and do not unplug it to wait for V2. Placement **TBD**. Do not drop CoG with heavy roll actuators if avoidable. Steve 2026-09-25 dislikes the hip-pivot unload onto one foot; that is an **open rethink**, not a lift of this lock. See [`research/stair-climb-dynamics.md`](research/stair-climb-dynamics.md) and [`decisions.md`](decisions.md).
 
 Actuator class: **dynamic** FOC BLDC / small QDD / fast bus servo (R27). **Not a stepper.**
 

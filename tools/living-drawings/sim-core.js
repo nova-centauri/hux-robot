@@ -235,6 +235,8 @@
     return v(m * (b * b + c * c) / 12, m * (a * a + c * c) / 12, m * (a * a + b * b) / 12);
   }
 
+  /* Rounded convex 6×1.25 hull (2026-09-23). Not a toroidal motorcycle crown; no carcass compliance.
+     Visual in sim-view.js is still CylinderGeometry (flat shoulders). See docs/research/sim-sandbox.md. */
   function tireVertices(radius, width) {
     const core = 0.001, crown = width / 2 - core, points = [];
     for (const z of [-core, core]) for (let i = 0; i < 256; i++) {
