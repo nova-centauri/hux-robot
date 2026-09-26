@@ -42,7 +42,7 @@ On-hand pile from project notes. **On hand (Steve)** means owned today, not “o
 | --- | --- | --- | --- | --- | --- |
 | Wheel BLDC / in-wheel hub motor | — | none yet | — | Custom hub. First spin can use the 5" **donor** rubber. The foot is the settled **6"** real-rubber wheel. FOC + encoder *class* when one exists. Target about **3 N·m peak** — not a SKU. | The Zantle order is **wheels / caster forks**, not motors. OK to hack the rubber off the walker hub. |
 | Wheel FOC driver / ESC | — | none yet | — | Per-wheel FOC channel. | — |
-| Knee / hip-swing actuator | — | none yet | — | Pose joints. **CAN QDD** working class on 6S; servo / stepper+belt fallback. | See Candidates. |
+| Knee / hip-swing actuator | — | none yet | — | Pose joints. **CAN QDD** working class on 8S; servo / stepper+belt fallback. | See Candidates. |
 | Hip-roll actuator | — | none yet | — | Dynamic roll **in V1**. | — |
 
 ## Candidates (not owned / not ordered)
@@ -52,7 +52,7 @@ Research pointers only. **Not a buy list. No spend.** Do not treat a row here as
 | Item | Qty | Status | Specs/link | Hux use | Notes |
 | --- | --- | --- | --- | --- | --- |
 | **Teensy 4.1** + ICM-42688-P + 3× CAN transceivers | 1 kit | **Authorized 2026-09-26, not yet ordered** ([`bom.md`](bom.md)). | 600 MHz, 3× CAN, microSD. ~$55 kit. | CAN real-time MCU from P2. | Steve: "add the CAN MCU to the project." Move to Electronics when it arrives. |
-| **RobStride 00 / 02 / 05** | — | **Not ordered.** Shortlist. | RS00 5/14 N·m 310 g; RS02 7/17 N·m 380 g; RS05 1.8/5.5 N·m 191 g. 24 V floor on 00/02 → 8S. ~$100–200 each. | Knees RS02, swing RS00, wheels RS05; roll RS02 (hips ≤ 3.5") or RS06 (hips at 5.4"). | [`research/actuator-shortlist.md`](research/actuator-shortlist.md). One RS00 first. |
+| **RobStride 00 / 02 / 05** | — | **Not ordered.** Shortlist. | RS00 5/14 N·m 310 g; RS02 7/17 N·m 380 g; RS05 1.8/5.5 N·m 191 g; RS06 11/36 N·m 621 g. 24 V floor on 00/02 → 8S (confirmed). ~$100–200 each. | Knees RS02, swing RS00, wheels RS05; roll RS02 (hips ≤ 3.5") or RS06 (hips at 5.4"). | [`research/actuator-shortlist.md`](research/actuator-shortlist.md). One RS00 first. |
 | **Jetson Orin Nano Super dev kit** | — | **Not ordered.** P5 candidate. | $399 (post-2026-07-22 pricing). 67 TOPS, 8 GB, 7–25 W, 9–19 V in. | Companion at P5 for stereo depth / multi-camera head, if the Pi 5 cannot hold the rate. | Not a V1 buy. [`research/compute-stack-review.md`](research/compute-stack-review.md). |
 | **GIM8108-8** | — | **Not ordered.** Candidate only. | GIM8108-class integrated BLDC + reduction (8:1 class). Exact vendor page TBD when we research, not shop. | **Knee / hip swing** candidate (R12). Size whichever class we pick for ~2× plant load (R36). | Steve 2026-09-21: noted as a candidate. Tazer later ran 6× GIM8108 on a ~2 ft carbon-tube wheeled biped — **data point, not a buy** ([`research/tazer-lessons.md`](research/tazer-lessons.md)). Aligns with servo vs stepper+belt remaining **TBD**. No SKU lock. |
 

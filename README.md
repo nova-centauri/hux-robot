@@ -20,10 +20,10 @@ This repo is the source of truth for Steve Barrett's Hux project. It is a docs-a
 | Requirements | Draft captured in [`docs/requirements.md`](docs/requirements.md) |
 | Decisions | Dated log in [`docs/decisions.md`](docs/decisions.md) |
 | Compute | **Four layers** (2026-09-26): CAN actuators → portable control core → CAN real-time MCU (Teensy 4.1 / H743-class, not bought) → ROS 2 companion (Pi 5 now, Jetson at P5). F765-Wing is a bench board. |
-| Power | **6S** (superseded 4S 2026-09-26), one pack or two in parallel, step-down rails |
+| Power | **8S** (decided 2026-09-26: 4S → 6S → 8S once the actuator voltage floor was checked), one 3300 mAh pack, XT90 / XT90-S, step-down rails |
 | Mechanical V1 | First wheel-leg is **Phase D** (after study + 2D). Not started. **~24" × ~14"**, carbon-tube spars. Head inside, wheels outside. |
 | Modes | `PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY` before autonomy |
-| Spend | First buy is tires, tubes, carbon tube, the Teensy 4.1 CAN MCU kit, XT90-S anti-spark, and one pack (on hold 6S vs 8S) ([`docs/bom.md`](docs/bom.md)). 5" walker wheels already ordered as a bench donor. Wheel size **settled at 6" OD**. Motors not authorized. |
+| Spend | First buy is tires, tubes, carbon tube, the Teensy 4.1 CAN MCU kit, XT90-S anti-spark, and one 8S 3300 mAh pack ([`docs/bom.md`](docs/bom.md)). 5" walker wheels already ordered as a bench donor. Wheel size **settled at 6" OD**. Motors not authorized. |
 | Parts on hand | Inventory in [`docs/parts-on-hand.md`](docs/parts-on-hand.md) — owned ≠ reserved |
 | Shop / fab | Tools (not parts) in [`docs/capabilities.md`](docs/capabilities.md) — mill, lathe, weld; fab welcome |
 
@@ -51,7 +51,7 @@ software/     companion compute — Pi cameras / pathfinding (empty)
 - [Requirements](docs/requirements.md) — hard / soft requirements, candidate hardware, no-spend rule
 - [Vision](docs/vision.md) — stair gait, split-brain intent, lessons to steal
 - [Mechanical](docs/mechanical.md) — carbon-tube spars, ~24" × ~14", in-wheel FOC, hip roll in V1, servo vs stepper TBD, ~2× plant load. Leg math: [research/leg-geometry.md](docs/research/leg-geometry.md)
-- [Electronics](docs/electronics.md) — 6S + step-down, CAN actuator bus, CAN real-time MCU (F765 is bench only), TBS Nano RX, in-wheel FOC, 8 CAN nodes
+- [Electronics](docs/electronics.md) — 8S + step-down, CAN actuator bus, CAN real-time MCU (F765 is bench only), TBS Nano RX, in-wheel FOC, 8 CAN nodes
 - [Minimum electronics](docs/electronics-minimum.md) — P0–P5 class list (no SKU, no new spend)
 - [Parts on hand](docs/parts-on-hand.md) — owned / ordered inventory + candidates (GIM8108-8 not ordered)
 - [First buy](docs/bom.md) — 6×1.25 tires, tubes, 16 mm carbon tube, Teensy 4.1 CAN kit, anti-spark, one pack (voltage pending). Actuators shortlisted, not on this list: [actuator shortlist](docs/research/actuator-shortlist.md).

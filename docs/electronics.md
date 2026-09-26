@@ -2,7 +2,7 @@
 
 **Status:** architecture decided 2026-09-26 ([`decisions.md`](decisions.md)). No wiring diagram, no actuator SKU, no new spend beyond [`bom.md`](bom.md).
 
-**6S + regulated step-down** is the power class (superseded 4S on 2026-09-26). **Actuator bus is CAN.** **Hip roll is in V1.** **The real-time MCU must have CAN — the F765-Wing does not, so it is a bench board.**
+**8S + regulated step-down** is the power class (2026-09-26: 4S → 6S → 8S, set by the actuators' 24 V floor). **Actuator bus is CAN.** **Hip roll is in V1.** **The real-time MCU must have CAN — the F765-Wing does not, so it is a bench board.**
 
 Parent plan (classes, P0–P5, not a BOM): [`electronics-minimum.md`](electronics-minimum.md). Inventory: [`parts-on-hand.md`](parts-on-hand.md). Software layers: [`software.md`](software.md). Actuator trade: [`research/actuators-legs.md`](research/actuators-legs.md). Review behind this page: [`research/compute-stack-review.md`](research/compute-stack-review.md).
 
@@ -11,11 +11,11 @@ Parent plan (classes, P0–P5, not a BOM): [`electronics-minimum.md`](electronic
 | Piece | Choice | Notes |
 | --- | --- | --- |
 | Powertrain | **Electric-only** | No ICE, no hybrid. Whole robot. |
-| Battery | **ON HOLD between 6S and 8S** (2026-09-26, later) | Steve's first pick was a 6S 5200 mAh 60C. The actuator check found the RobStride 00/01/02 floor is **24 V**, below 6S for most of the discharge. **Recommendation: 8S 2700–3300 mAh** (33.6 / 29.6 / 26.4 V) — every candidate runs through the whole pack. **XT90 on the pack, XT90-S anti-spark on the harness** (Steve: "add the anti spark"). Regulators must accept 36 V. [`research/actuator-shortlist.md`](research/actuator-shortlist.md). |
-| Rails | **Regulated step-down** from 6S | **5 V** (MCU, RX, Pi 5 at 5 A), **12–19 V** (companion slot — a Jetson kit takes 9–19 V; 6S full is 25.2 V, so it is *not* direct), pose rail only if the fallback servo class is used. SKUs **TBD**. |
+| Battery | **One 8S 3300 mAh 50–60C LiPo, XT90** (pack) + **XT90-S anti-spark** (harness) — Steve 2026-09-26 | **33.6 V full / 29.6 V nominal / 26.4 V cutoff** (3.3 V/cell). ~98 Wh, ~700 g. Every shortlisted actuator (RobStride 24–60 V) runs through the whole discharge. Steve's first pick was 6S 5200; the RobStride 00/01/02 floor is 24 V, so 8S. [`research/actuator-shortlist.md`](research/actuator-shortlist.md) §3–4. |
+| Rails | **Regulated step-down** from 8S, every regulator rated **≥36 V in** | **5 V** (MCU, RX, Pi 5 at 5 A), **12–19 V** (companion slot — a Jetson kit takes 9–19 V), pose rail only if the fallback servo class is used. SKUs **TBD**. |
 | Actuator bus | **CAN** | One or two buses. Classic vs FD, and the protocol (MIT mini-cheetah style, Robstride, CubeMars, ODrive…) follow the actuator choice. |
 | Wheels | **In-wheel brushless FOC** + encoder, on CAN | Motor at the rim (R6 / R30). ~3 N·m peak at the 6" wheel. Exact models TBD. |
-| Knee / hip swing | **CAN QDD / FOC working class**; servo or stepper+belt is the **fallback** | Size for one-leg (~2×) load (R36). ~10 N·m holding at the knee standing up over the front wheel ([`research/stair-climb-dynamics.md`](research/stair-climb-dynamics.md)). **GIM8108-8** stays a candidate; on 6S it is honest, on 4S it was not. |
+| Knee / hip swing | **CAN QDD / FOC working class**; servo or stepper+belt is the **fallback** | Size for one-leg (~2×) load (R36). ~10 N·m holding at the knee standing up over the front wheel ([`research/stair-climb-dynamics.md`](research/stair-climb-dynamics.md)). **RobStride 02** shortlisted (7 / 17 N·m); GIM8108-8 was the earlier yardstick. |
 | Hip roll | **In V1.** CAN QDD / FOC | Not a stepper. Experimental — may not work. Still wire the axis and the modes. SKU TBD. |
 | Real-time MCU | **Teensy 4.1** + ICM-42688-P breakout + 3× CAN transceivers (Steve 2026-09-26: "add the CAN MCU") | 3× CAN, built-in microSD for blackbox, 600 MHz. Eight classic-CAN nodes need ≥2 buses at 1 kHz, which rules out a one-CAN Wing board. In [`bom.md`](bom.md) order-now. |
 | Bench board | **F765-Wing** (on hand) | P0–P1 only: blink, CRSF, one SimpleFOC wheel over UART. No CAN. Nothing written for it is expected to survive. |
@@ -33,22 +33,22 @@ The 2026-09-25 bench plan put the F765-Wing at the centre. The F765-Wing has **7
 
 Record the board that actually runs `TWO_WHEEL` here, in [`parts-on-hand.md`](parts-on-hand.md), and in [`../NOTES.md`](../NOTES.md).
 
-## Battery — 6S; step down for logic and companion (R11, revised 2026-09-26)
+## Battery — 8S; step down for logic and companion (R11, revised 2026-09-26)
 
-Steve 2026-09-26: **4S → 6S**. Large pack or two in parallel. LiPo or similar.
+Steve 2026-09-26: **4S → 6S** ("large pack or two in parallel, LiPo or similar"), then a 6S 5200 pick, then — after the actuator voltage check — **"8S yes."** One pack.
 
-Why: CAN QDD / FOC actuators are specified at 24–48 V. At 14.8 V they give up a large share of speed and torque headroom; at 22.2 V nominal they are in their working band. 6S also halves the current for the same wheel power, which is kinder to the bus and the FOC stalls (Tazer anti-pattern).
+Why: the shortlisted CAN QDD actuators (RobStride 00/01/02) specify **24–60 V**. 4S never reached it; 6S is under it for most of the discharge (19.8 V cutoff); 8S is above it at cutoff (26.4 V) with the 48 V ceiling far away. 8S also halves the current of 4S for the same power, which is kinder to the bus and the FOC stalls (Tazer anti-pattern).
 
 | Item | Intent | Status |
 | --- | --- | --- |
-| Pack | **On hold: 6S 5200 (first pick) vs 8S 2700–3300 (recommended after the actuator voltage check).** One pack either way. | See [`research/actuator-shortlist.md`](research/actuator-shortlist.md) §3–4. If 8S: 33.6 V full, 26.4 V cutoff; every 5 V / 12–19 V regulator must be rated ≥36 V in. |
-| Nominal / full / cutoff | **~22.2 V / 25.2 V / ~19.8 V** | Use when thinking about actuator, regulator and companion ranges. Check every actuator's **max** against 25.2 V, not 22.2. |
+| Pack | **One 8S 3300 mAh 50–60C LiPo, XT90.** | **Decided 2026-09-26.** Brand / store is Steve's cart line in [`bom.md`](bom.md). 2700 mAh is the smaller alternative if 3300 will not package. |
+| Full / nominal / cutoff | **33.6 V / 29.6 V / 26.4 V** | Check every actuator's **max** against 33.6 V and **min** against 26.4 V. Every regulator ≥36 V in. |
 | One pack vs two | **One.** If a second is ever added in parallel: same cell count, chemistry and age, matched to within ~0.1 V before connecting, a fuse per pack. | Decided 2026-09-26. |
-| Capacity / C | Runtime target "reasonable" (Steve). Budget 40–80 W typical → **80–100 Wh gives 1–2 h**; 5200 mAh 6S (115 Wh) was more than needed. 50–60C. | Measure real draw at P2 and log it. |
+| Capacity / C | **3300 mAh / 50–60C → ~98 Wh.** Budget 40–80 W typical → **1–2 h**. | Measure real draw at P2 and log it; re-size then. |
 | Connector | **XT90** on the pack. **XT90-S** (anti-spark) on the harness side, or a precharge resistor / soft-start on the distribution board. | A bare XT90 into FOC bulk capacitance arcs at 25 V and pits the contacts. |
 | Mass / volume | ~720–800 g, ~155 × 48 × 50 mm | ~12% of the 6 kg example. Add it to the body lump when the layout is next touched; it sits low and central by default. |
-| Charger | 6S balance charger | Bench tool, not BOM. Check the drone bench first. |
-| Motor bus | **6S direct** via a real distribution board / harness | High-draw FOC. Not through the MCU or any logic PCB. |
+| Charger | 8S-capable balance charger | Bench tool, not BOM. Many hobby chargers stop at 6S — check before the pack arrives. |
+| Motor bus | **8S direct** via a real distribution board / harness | High-draw FOC. Not through the MCU or any logic PCB. |
 | 5 V rail | MCU, RX, **Pi 5 (5 V / 5 A, USB-PD-class connector)** | A 25 W buck, not a servo BEC. |
 | 12–19 V rail | Companion slot (Jetson kit 9–19 V), any 12 V accessories | Only populated when a Jetson is fitted. |
 | Pose rail | Only if the fallback servo class is chosen | 6 / 7.4 V class. Not raw pack. |
@@ -59,11 +59,11 @@ Why: CAN QDD / FOC actuators are specified at 24–48 V. At 14.8 V they give up 
 Power rail sketch (not a harness):
 
 ```
-6S pack (or 2× in parallel, fused)
+8S 3300 mAh LiPo — XT90 ─► XT90-S (anti-spark) ─► fuse
         │
         ▼
    distribution + hardware torque cut
-        ├── CAN actuators: 2× wheel, 2× hip roll, 4× knee / swing   (6S direct)
+        ├── CAN actuators: 2× wheel, 2× hip roll, 4× knee / swing   (8S direct)
         ├── 5 V buck  ──► RT MCU + IMU, TBS Nano RX
         ├── 5 V / 5 A buck ──► Pi 5 (USB-PD-class)
         └── 12–19 V buck ──► companion slot (Jetson, P5) — unpopulated in V1
@@ -80,7 +80,7 @@ The wheel motor is a **balance actuator**. Hux has to catch a tip on one skinny 
 | What we optimize | **Reaction speed / torque bandwidth** for inverted-pendulum balance | Not max continuous power |
 | Wheel | **6" OD × ~1–1.25"** real rubber, torsionally stiff. Size locked, not a buy. | 5" Zantle is a **bench donor**, not the foot. |
 | Placement | **In-wheel** (hub / coaxial) | R30 |
-| Bus | **6S**, **CAN** | The wheel actuator's own FOC + encoder; torque mode; encoder counts back on the bus for the estimator. |
+| Bus | **8S**, **CAN** | The wheel actuator's own FOC + encoder; torque mode; encoder counts back on the bus for the estimator. |
 | Mass | Two wheel motors must **leave room** for pose joints, structure, pack, MCU, companion | Mass budget **soft** (R24). |
 | Control | **Reuse** an existing FOC / torque-mode stack (R18) | SimpleFOC on the bench; a CAN actuator's own firmware on the robot. Do not invent Hux drive electronics. |
 
@@ -88,7 +88,7 @@ The wheel motor is a **balance actuator**. Hux has to catch a tip on one skinny 
 
 | Class | Why it is on the list | Still TBD / not a lock |
 | --- | --- | --- |
-| **Small CAN QDD / FOC actuator at the hub** (GIM-class outrunner + driver, ODrive-S1-class driver + gimbal motor, integrated hub actuators) | 3 N·m peak, torque mode, encoder, CAN — the honest answer on 6S. | Stator, ratio (if any), kV, encoder, packaging inside a 6" rim. Kelton Serra's in-wheel packaging is the picture. |
+| **Small CAN QDD / FOC actuator at the hub** (GIM-class outrunner + driver, ODrive-S1-class driver + gimbal motor, integrated hub actuators) | 3 N·m peak, torque mode, encoder, CAN — the honest answer on 8S. RobStride 05 shortlisted. | Stator, ratio (if any), kV, encoder, packaging inside a 6" rim. Kelton Serra's in-wheel packaging is the picture. |
 | **Lightweight:** gimbal BLDC ~2208–4108 + SimpleFOC board + magnetic encoder | Bench spin and the first `TWO_WHEEL` if actuators are late. | Bare ~0.5 N·m arrests about 6°; honest only with reduction. Needs a CAN-capable SimpleFOC board to stay on the bus. |
 | **Avoid as a default:** large ODrive **63xx** / hoverboard hubs | SonicRobot-class hardware. Study for IMU → PID → torque. Heavy for a maker Hux. | Do not treat upstream parts lists as a Hux BOM. |
 
@@ -129,7 +129,7 @@ TBS Nano RX ──CRSF──► RT MCU (CAN, 1 kHz)  ──CAN A──► 2× wh
                        │  watchdog · torque cut · SD blackbox
                        └──framed serial/USB──► companion (Pi 5 → Jetson at P5)
                                                  ROS 2 · params · MCAP · cameras · Wi‑Fi telem
-6S pack ──► distribution + hardware kill ──► actuators (direct)
+8S pack ──► XT90-S ──► distribution + hardware kill ──► actuators (direct)
                                           └──► 5 V (MCU, RX, Pi) · 12–19 V (companion slot)
 ```
 
@@ -153,7 +153,7 @@ See [`checklists/electronics-bringup.md`](checklists/electronics-bringup.md) and
 - Do not invent a finished PDB / regulator SKU or a pack size.
 - Do not feed motor current through the MCU or a logic PCB (Tazer).
 - Do not run anything on raw pack voltage except the actuators and the distribution board.
-- Do not check an actuator against 22.2 V and forget 25.2 V full.
+- Do not check an actuator against 29.6 V and forget 33.6 V full — or 26.4 V at cutoff against its floor.
 - Do not put steppers on the wheels or on hip roll. Do not treat the fallback as the plan.
 - Do not omit the hip-roll nodes from V1 “until V2.”
 - Do not bridge UART→CAN on a torque axis to keep an old board.

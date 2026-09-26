@@ -52,7 +52,7 @@ Options:
 | 7S | 29.4 / 25.9 / 23.1 V | RS00/01/02 until the last ~15% of the pack | Odd cell count; few packs; still dips under 24 V |
 | **8S** | **33.6 / 29.6 / 26.4 V** | **Every candidate above**, through the whole discharge (RS01's 48 V ceiling is far away) | Common drone size; regulators must take 36 V; same energy at ~75% of the current of 6S |
 
-**Recommendation: 8S.** Then the pack follows the runtime, not the voltage.
+**Recommendation: 8S.** Then the pack follows the runtime, not the voltage. **Steve, same day: "8S yes."**
 
 ## 4. Runtime and pack size
 
@@ -67,21 +67,23 @@ Rough budget for Hux balancing and driving (no measurement yet): 8 actuators qui
 | 8S 2700 mAh | 80 Wh | ~560 g | 1.0–2.0 h |
 | 8S 2200 mAh | 65 Wh | ~470 g | 0.8–1.6 h |
 
-**Recommendation: one 8S 2700–3300 mAh, 50–60C, XT90 on the pack, XT90-S anti-spark on the harness.** 45+ minutes with margin, ~½–¾ kg, common drone SKU. Measure real draw at P2 and re-size; a second pack is a later parallel add if wanted.
+**Decided: one 8S 3300 mAh, 50–60C, XT90 on the pack, XT90-S anti-spark on the harness** (in [`../bom.md`](../bom.md)). 1–2 h at the budget, ~700 g, common drone SKU. Measure real draw at P2 and re-size; 2700 mAh if it will not package.
 
 ## 5. A shortlist that closes
 
 | Axis | First choice | Why | Alt |
 | --- | --- | --- | --- |
 | Knee ×2 | **RobStride 02** | 7 N·m rated covers the 10.6 N·m hold at 1.5×; dual encoder for a verified `PARKED` pose; 380 g | RobStride 00 (cheaper, lighter, 2× on the hold) |
-| Hip roll ×2 | **Depends on the hip offset — a 2D-layout decision.** At ≤ 3.5" hips: **RobStride 02** (7 rated vs 5.4 hold). At the drawn 5.4": **RobStride 06** (11 rated vs 8.3 hold, +240 g each). | The hold is ≈ 60 N × hip offset, continuous whenever a wheel is up ([`one-leg-stance.md`](one-leg-stance.md)). Bringing the roll axes inboard buys a lighter, cheaper joint and is the same lever that shrinks the one-leg roll angle. | RS00 is **out** for roll at any offset over ~2.5". |
+| Hip roll ×2 | **RobStride 02, with the hip roll axes at ≤ 3.5" from the centreline** (recommended). Hold 5.4 N·m vs 7 rated; hop peak ~8.5 vs 17; shift 17° with 17° of roll travel left. | The hold is ≈ 60 N × hip offset, continuous whenever a wheel is up ([`one-leg-stance.md`](one-leg-stance.md)). 3.5" is the head's half-width, so the roll actuators sit at the head's outer faces — a packaging question for the 2D layout, not a physics one. Same part as the knee: one spare covers four joints. | If the layout cannot get under ~4" (6.2 N·m hold): **RobStride 06** (11 rated, +240 g each, high on the body). RS00 is **out** for roll at any offset over ~2.5". |
 | Hip swing ×2 | **RobStride 00** | 3–4 N·m is inside rated; same part as roll = one spare covers both | RS05 if mass is tight (marginal at 3 N·m rated needed) |
 | Wheel ×2 | **RobStride 05** | 5.5 peak covers 3 N·m; lightest at 191 g; lowest ratio in the family; 15 V floor | Direct-drive gimbal + SimpleFOC only for the bench |
 | Bus | **8S**, 3 CAN buses on a Teensy 4.1: A = wheels + roll (4 nodes, the balance loop), B = knees + swing (4 nodes), C spare / bench | Eight classic-CAN nodes need two buses minimum at 1 kHz | — |
 
 Set of eight, hips inboard (≤ 3.5"): 4× RS02 (knee + roll) + 2× RS00 (swing) + 2× RS05 (wheel) ≈ **~$1,250** and **~2.2 kg**. Hips as drawn (5.4"): 2× RS02 + 2× RS06 + 2× RS00 + 2× RS05 ≈ **~$1,250** and **~2.7 kg**. Either is the actuator line in [`../bom.md`](../bom.md) as a **class estimate**, not an order. One protocol, one vendor, one spare policy. **The hip offset decision should come first** — it is cheaper to move a bearing 2" on paper than to carry 480 g of extra actuator up high.
 
-**Before ordering:** settle the hip roll offset in the 2D layout (NOTES open call 6). Then download the RobStride 00 / 02 / 05 (/ 06) datasheets and confirm (a) the 24 V floor is a hard undervoltage trip, (b) backlash at the output, (c) the CAN protocol is the documented open one at 1 Mbit/s, (d) US stock and return terms. Buy **one RS00 first** and run it on the Teensy: torque mode, encoder readback, thermal at 5 N·m held for 10 s. Then the set.
+**Recommendation to Steve (2026-09-26): 4× RS02 + 2× RS00 + 2× RS05, hips at ≤ 3.5".** Four of one part (knee + roll) means one spare and one set of gains covers half the robot; RS02's dual encoder gives an absolute pose on the four joints that matter for `PARKED`; RS05 is the only part in the family light and low-ratio enough for a balance wheel. ~$1,250, ~2.2 kg. **Buy one RS02 first** — it is the part that has to hold both the 10.6 N·m knee stand-up and the 5.4 N·m roll cantilever, so it is the one to put on the Teensy, hold at 7 N·m for 30 s with a thermocouple on the case, and read the encoder back at 1 kHz before the other seven are ordered.
+
+**Before ordering:** settle the hip roll offset in the 2D layout (NOTES open call 6; target ≤ 3.5"). Then download the RobStride 02 / 00 / 05 datasheets and confirm (a) the 24 V floor is a hard undervoltage trip, (b) backlash at the output, (c) the CAN protocol is the documented open one at 1 Mbit/s, (d) US stock and return terms. Buy **one RS00 first** and run it on the Teensy: torque mode, encoder readback, thermal at 5 N·m held for 10 s. Then the set.
 
 **What this does not settle:** in-wheel packaging of an RS05 behind a 6 × 1.25" tire on a shop-turned hub (mechanical, [`../mechanical.md`](../mechanical.md)); whether springs still take the crouch (yes, cheap, keep them); the exact pack SKU.
 

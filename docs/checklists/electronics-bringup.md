@@ -18,4 +18,4 @@ After P0–P1 (not this pass until the rows above are real):
 - [ ] **P4** — 2× hip-roll dynamic actuators into `LEFT_ONLY` / `RIGHT_ONLY`.
 - [ ] **P5** — Wi‑Fi telemetry from the Pi (ESP32 bridge only if needed). Cameras / pathfinding later. Telem reports the active mode.
 
-Do not write a fake harness, PDB, or battery architecture here. Class-level rails only: [`../electronics-minimum.md`](../electronics-minimum.md). **6S + step-down** is the power rule (2026-09-26) — no regulator SKU.
+Do not write a fake harness, PDB, or battery architecture here. Class-level rails only: [`../electronics-minimum.md`](../electronics-minimum.md). **8S + step-down** is the power rule (2026-09-26) — no regulator SKU.

@@ -1,6 +1,6 @@
 # Minimum electronics (V1)
 
-**Status:** planning note, revised 2026-09-26 for **6S + CAN + a CAN-capable real-time MCU** ([`decisions.md`](decisions.md)). **Docs only.** **No new spend** beyond [`bom.md`](bom.md). No locked SKUs. The F765-Wing is a **P0–P1 bench board** (no CAN), not the robot's MCU.
+**Status:** planning note, revised 2026-09-26 for **8S + CAN + a CAN-capable real-time MCU** ([`decisions.md`](decisions.md)). **Docs only.** **No new spend** beyond [`bom.md`](bom.md). No locked SKUs. The F765-Wing is a **P0–P1 bench board** (no CAN), not the robot's MCU.
 
 This is the **smallest electronics set** that can meet Hux V1 goals: four **manual** modes first, then pose joints, then hip-roll experiments. Classes and on-hand parts only. Every pack, driver, and motor model stays **TBD** until Steve asks to buy or a real part is on the bench.
 
@@ -18,7 +18,7 @@ Parent: [`electronics.md`](electronics.md). Modes: [`software.md`](software.md).
 | 2× hip-roll **dynamic** (FOC / QDD / fast servo) **in V1** | 2 actuators + their drivers (PWM / CAN / FOC — **TBD**). Not steppers. Not deferred to V2. |
 | **TBS Nano RX** | CRSF into a UART on the RT MCU. On hand. |
 | Wi‑Fi telem | MCU ↔ Pi over a framed serial / USB link. Pi is listen-only until `TWO_WHEEL` holds. |
-| **6S** class + **step-down** | ~22.2 V nominal / 25.2 V full. Actuators on the pack; 5 V rail for MCU / RX / Pi; 12–19 V rail for a P5 companion slot. One pack or two in parallel. Pack SKU, capacity, C **TBD**. |
+| **8S** + **step-down** | 33.6 V full / 29.6 V nominal / 26.4 V cutoff. One 8S 3300 mAh 50–60C LiPo, XT90, XT90-S on the harness. Actuators on the pack; 5 V rail for MCU / RX / Pi; 12–19 V rail for a P5 companion slot; regulators rated ≥36 V in. |
 | **RT MCU with CAN** | Teensy 4.1-class or H743-WING-class, picked with the actuators. F765-Wing is bench only. |
 | Pi + cameras **later** | Not required for first balance (P0–P4). |
 | Stepper coils **not** on the MCU | Only if the **fallback** stepper class is used for knee / swing: a driver board on CAN / step-dir between the MCU and the motors. |
@@ -28,12 +28,12 @@ Parent: [`electronics.md`](electronics.md). Modes: [`software.md`](software.md).
 Not a harness. Not a PCB. Rails and links are **classes**.
 
 ```
-6S pack (class, pack TBD; one or two in parallel)
+8S 3300 mAh LiPo (XT90 → XT90-S)
         │
         ▼
 power distribution / BEC rails
         │
-        ├──► CAN actuators (6S direct, high draw)
+        ├──► CAN actuators (8S direct, high draw)
         ├──► hip-roll dynamic (PWM / CAN / FOC — TBD)
         ├──► step-down ──► 5V / 6V / 7.4V pose + logic
         │
@@ -77,9 +77,9 @@ Rules for this box:
 
 ### P1 — Wheel spin
 
-**+ 6S + 1 then 2 wheel actuators (restrained).**
+**+ 8S + 1 then 2 wheel actuators (restrained).**
 
-- 6S pack *class* on the bench (pack TBD). Check every actuator's max against 25.2 V.
+- 8S pack on the bench. Check every actuator's max against 33.6 V and its min against 26.4 V.
 - One FOC wheel channel first, then the second. Robot **tied down**, not on carpet.
 - Encoders on the wheel motors if the driver class needs them — class yes, SKU **TBD**.
 - Still no balance loop required. Prop-off equivalent.
@@ -129,12 +129,12 @@ No shopping links. No invented SKU. **On-hand?** is “known in the pile today,�
 
 | Function | Class | Qty | Notes | Phase | On-hand? |
 | --- | --- | --- | --- | --- | --- |
-| Battery | **6S** LiPo (or high-drain Li-ion 21700) | 1–2 | ~22.2 V nominal / 25.2 V full. One pack or two in parallel, fused. Capacity, C, connector **TBD**. No pack SKU. | P1 | **TBD** (check the drone pile for 6S) |
+| Battery | **8S 3300 mAh 50–60C LiPo, XT90** | 1 | 33.6 / 29.6 / 26.4 V. XT90-S on the harness. Fused. Brand TBD. | P1 | **Authorized 2026-09-26, not ordered** |
 | Power distribution + torque cut | PDB / harness with a hardware kill; **5 V** buck (MCU, RX), **5 V / 5 A** buck (Pi), **12–19 V** buck (P5 companion slot) | 1 set | Box only. Actuators stay on the pack. | P0 (USB / bench OK) → P1 (pack rails) | **TBD** |
 | Bench board | F765-Wing (or any on-hand FC) | 1 | **P0–P1 only.** Blink, CRSF, one SimpleFOC wheel over UART. No CAN. | P0–P1 | **Yes** — F765 Wing, F722 Wing, F722 drone FC, Mamba F405 |
 | Real-time MCU | **CAN-capable** — Teensy 4.1-class (3× CAN FD) or H743-WING-class (1× CAN) | 1 | Runs the control core at 1 kHz. Picked with the actuators. ~$30–70. | P2 | **No** — not bought |
 | RC receiver | **TBS Nano RX** | 1 | CRSF into a UART on the bench board, then the MCU. | P0 | **Yes** |
-| Wheel actuators' drivers | On the actuator (CAN QDD / FOC) or a CAN-capable SimpleFOC board | 2 | One in P1, then both. 6S range. SKU **TBD**. | P1 | **TBD** |
+| Wheel actuators' drivers | On the actuator (CAN QDD / FOC) or a CAN-capable SimpleFOC board | 2 | One in P1, then both. 8S range (RS05 shortlisted). SKU **TBD**. | P1 | **TBD** |
 | Wheel motors | **In-wheel BLDC + encoder** class | 2 | Brushless FOC (not steppers). Exact models **TBD**. About **3 N·m peak** at the settled 6" wheel — not a SKU. 5" Zantle is a bench donor, not the foot. | P1 | **TBD** (motors unknown). [`research/leg-geometry.md`](research/leg-geometry.md). |
 | Pose brain | The same RT MCU, over CAN | — | No separate pose brain in the working plan. Fallback classes add a driver board, never MCU coil-driving. | P3 | — |
 | Pose drivers | TMC-class / multi-axis **or** servo channels | 4 ch | Between brain and pose joints. No driver SKU. | P3 | **TBD** |
@@ -179,7 +179,7 @@ Pilot selects via **TBS Nano** (likely aux / flight-modes). Wi‑Fi telem report
 When a part is actually on the bench, write it in [`electronics.md`](electronics.md), [`parts-on-hand.md`](parts-on-hand.md), and [`../NOTES.md`](../NOTES.md):
 
 - Which bench board blinked, and which CAN MCU ran `TWO_WHEEL`
-- 6S pack: chemistry, cell count, resting voltage, connector, one or two packs, what it feeds
+- 8S pack: brand, measured resting voltage, connector, what it feeds
 - Which FOC channel spun, restrained
 - Which pose class (servo vs stepper) and which brain actually issued commands
 - Hip-roll interface that talked (PWM / CAN / FOC)

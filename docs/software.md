@@ -10,7 +10,7 @@ The pattern Diablo, Mini-Cheetah, Unitree and Stompy converge on. Hux adopts the
 
 | Layer | What runs there | Rate | Hux choice |
 | --- | --- | --- | --- |
-| **1. Actuators** | FOC current loop and joint PD **on the actuator**. Takes torque / position / velocity setpoints over **CAN**. | 10–40 kHz FOC, 1 kHz setpoints | CAN QDD / FOC actuators on **6S**. Wheels, hip roll, knee, hip swing. SKUs TBD ([`electronics.md`](electronics.md)). |
+| **1. Actuators** | FOC current loop and joint PD **on the actuator**. Takes torque / position / velocity setpoints over **CAN**. | 10–40 kHz FOC, 1 kHz setpoints | CAN QDD / FOC actuators on **8S**. Wheels, hip roll, knee, hip swing. SKUs TBD ([`electronics.md`](electronics.md)). |
 | **2. Control core** | Estimator (IMU + wheel odometry), mode machine, balance controller, one-leg loop, safety limits. **Plain C++ library, no hardware calls, unit-tested.** | — | `firmware/hux_control/` (name TBD). The **same source** links into layer 3, layer 4 and the digital twin. |
 | **3. Real-time MCU** | Runs layer 2 at **1 kHz**: reads the IMU, parses CRSF, is CAN master, holds the mode, enforces the hardware watchdog and torque cut, logs blackbox. | 1 kHz | **MCU with CAN** — Teensy 4.1-class or H743-WING-class, picked with the actuators. **Not the F765-Wing** (no CAN; P0–P1 bench only). |
 | **4. Linux companion** | **ROS 2.** Teleop, telemetry, live parameters, MCAP logging, cameras, face, later perception and the trained policy. Talks to layer 3 over a framed binary serial / USB link. | 50–500 Hz | **Pi 5 now**, in containers, no Pi-specific libraries. **Jetson (Orin Nano Super kit class) at P5** for stereo depth and a multi-camera head. Same containers. |
@@ -143,7 +143,7 @@ Stompy is a week-build **RL walker** — CAD/reality match, not a Hux V1 stack. 
 
 If a pointer is copyleft (RobotX, SonicRobot), keep Hux MIT unless Steve decides. Watching and rewriting from understanding is the default.
 
-**Motion control (class, not a vendor):** wheels and hip roll want **high-bandwidth FOC / QDD / model-based** loops. That is the plant we want, not a SKU. Knee / hip swing: **CAN QDD is the working class** on 6S; servo or stepper+belt is the fallback (2026-09-26).
+**Motion control (class, not a vendor):** wheels and hip roll want **high-bandwidth FOC / QDD / model-based** loops. That is the plant we want, not a SKU. Knee / hip swing: **CAN QDD is the working class** on 8S; servo or stepper+belt is the fallback (2026-09-26).
 
 ## First software, in order
 
@@ -168,7 +168,7 @@ Steve, 2026-09-22. Three phases. Do **not** invert them. R14 and R18 stay.
 
 | Phase | What | Not |
 | --- | --- | --- |
-| **V1 — classical balance + modes** | Layer-2 skeleton → blink → spin → `PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY` from TBS on the **CAN MCU**. Reuse an existing simple balance pattern (R18). CAN QDD / FOC actuators on 6S. Open-loop 9.5" fixture after the four modes work. | An RL gate. A novel Hux V1 controller. A sim trainer before the robot stands. Firmware that only runs on the F765. |
+| **V1 — classical balance + modes** | Layer-2 skeleton → blink → spin → `PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY` from TBS on the **CAN MCU**. Reuse an existing simple balance pattern (R18). CAN QDD / FOC actuators on 8S. Open-loop 9.5" fixture after the four modes work. | An RL gate. A novel Hux V1 controller. A sim trainer before the robot stands. Firmware that only runs on the F765. |
 | **Later — CAD / URDF twin lockstep** | When CAD exists: CAD, exported model, and firmware zeros stay the **same robot** (Stompy lesson). Geometry edits flow through all three. **Lock the contract first** (CAD→URDF/USD or MJCF, observation parity, motorcycle-crown tire contact, firmware zeros, stack willingness). **Layer 2 is the controller in the twin** — no re-implementation. Pipeline (Isaac / MuJoCo / mjlab / other) stays **TBD** — 2026-09-25. | A day-one wheel-balance task. A mjlab / Isaac lock. Standing up a dojo before `TWO_WHEEL`. |
 | **Horizon — sim dojo / RL** | Identical digital twin + domain-randomized dojo so a policy trained in sim runs on the companion (a small MLP needs no GPU; the Jetson is for perception). Later terrains: stairs, rubble, dirt, fall leaves, wet mud. | A replacement for R18. A V1 blocker. A reason to skip modes. Buying a 4090 or locking Isaac Lab. |
 

@@ -4,9 +4,9 @@ Started **2026-09-21**. Prices are page prices or class estimates from that day.
 
 The BOM is **need-driven**: the project buys what the design needs. Inventory ([`parts-on-hand.md`](parts-on-hand.md)) is a reference, not a design driver. Steve owns edits to the order-now breakout.
 
-**To order now: $89.41 + the CAN MCU kit (~$55) + one pack (on hold — voltage under decision, see below).** That is the only authorized spend. MCU and pack added 2026-09-26.
+**To order now: $89.41 + the CAN MCU kit (~$55) + anti-spark + one 8S 3300 mAh pack (~$70–90).** That is the only authorized spend. MCU, anti-spark and pack added 2026-09-26; **8S confirmed by Steve the same day.**
 
-**Working total if the later estimates are bought as written: about $1,600.** Eight real QDD actuators moved it; that is the cost of the CAN decision and it is the honest number. The actuator block is most of that, and it is not chosen.
+**Working total if the later estimates are bought as written: about $1,640.** Eight real QDD actuators moved it; that is the cost of the CAN decision and it is the honest number. The actuator block is most of that, and it is not chosen.
 
 Inventory of what is already here: [`parts-on-hand.md`](parts-on-hand.md).
 
@@ -21,8 +21,8 @@ Inventory of what is already here: [`parts-on-hand.md`](parts-on-hand.md).
 | 1 | ICM-42688-P IMU breakout (SPI) | ~$12 | $12 | The Teensy has no IMU. One 6-axis on the balance board; the Wing's MPU6000 stays on the bench. Adafruit / SparkFun class. |
 | 3 | CAN transceiver breakout, 3.3 V (SN65HVD230 / TJA1051-class) | ~$3–4 | ~$10 | One per Teensy CAN port. Add a 120 Ω terminator at each bus end. |
 | 1 | **XT90-S anti-spark connector pair** | ~$5 | $5 | **Steve 2026-09-26: "add the anti spark."** On the harness side; the pack keeps a plain XT90. |
-| 1 | **Pack — ON HOLD** | ~$60–90 | — | Steve's first pick was a 6S 5200 mAh 60C ("somewhat randomly"; a smaller one is fine; wants reasonable runtime). Then the actuator check found the RobStride 00/01/02 floor is **24 V** — below a 6S pack for most of its discharge. **Recommendation: one 8S 2700–3300 mAh 50–60C, XT90** (~80–98 Wh, 1–2 h at 40–80 W, ~½–¾ kg). Buy after Steve confirms 8S + the shortlist. [`research/actuator-shortlist.md`](research/actuator-shortlist.md) §3–4. |
-| | **Total to order now** | | **~$150 + pack** | $89.41 tires/tubes/tube + ~$59 MCU kit + anti-spark; pack ~$60–90 once the voltage is confirmed. Shipping extra. |
+| 1 | **8S 3300 mAh 50–60C LiPo, XT90** | ~$70–90 | ~$80 | **Steve 2026-09-26: 8S yes.** One pack (~98 Wh, 1–2 h at 40–80 W, ~700 g, ~150 × 50 × 60 mm). Brand / store his pick (HRB / Ovonic / Zeee / Tattu class). 33.6 V full, 29.6 V nominal, **alarm / cutoff 26.4 V** (3.3 V/cell). Needs an 8S-capable balance charger — check the drone bench. Why 8S: the RobStride 00/01/02 input floor is 24 V ([`research/actuator-shortlist.md`](research/actuator-shortlist.md) §3). 2700 mAh is the smaller alternative if the 3300 will not package. |
+| | **Total to order now** | | **~$230** | $89.41 tires/tubes/tube + ~$59 MCU kit + anti-spark + ~$80 pack. Shipping extra. |
 
 ## Already here — $0 more
 
@@ -33,7 +33,7 @@ Inventory of what is already here: [`parts-on-hand.md`](parts-on-hand.md).
 | TBS Nano RX | On hand. |
 | Raspberry Pi, ESP32 | On hand. Face, cameras, and telemetry later. |
 
-Pack decided 2026-09-26 (order-now table). 6S superseded 4S the same day.
+Pack in the order-now table. 4S → 6S → 8S all on 2026-09-26; 8S is the one that survived the actuator voltage check.
 
 ## Later — class estimates, not a cart
 
@@ -47,8 +47,8 @@ No SKU is locked on these. The dollar is a midpoint so the total is not a blank.
 | 7 | Cameras (2 front, plus back, sides, top, bottom) | $20 | $140 | No module picked. |
 | 1 | Small front display, about 2.2" × 1.0" | $20 | $20 | Preset faces. No panel picked. |
 | 2 | RGB into the eye sockets | $10 | $20 | The lit socket is the eye. No LED picked. |
-| 1 | Step-down and distribution | $20 | $20 | Logic and pose off the motor rail. No board picked. |
-| | **Later estimate** | | **~$1,400** | Actuator block ~$1,200 for eight RobStride units. |
+| 1 | Step-down and distribution | $30 | $30 | 5 V and 12–19 V bucks rated ≥36 V in, a hardware kill, fuse. No board picked. |
+| | **Later estimate** | | **~$1,410** | Actuator block ~$1,200 for eight RobStride units. |
 
 Hubs, fasteners, wire, and bearings are shop stock. They are not in the total.
 

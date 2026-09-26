@@ -22,7 +22,7 @@ Inspiration: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori
 | R8 | Local compute for **pathfinding inference** | Needs cameras; not on the FC |
 | R9 | Cameras | At least one stream for teleop; stereo / depth later for stairs |
 | R10 | **Electric-only** powertrain | Entire robot is electric. No ICE, no hybrid. |
-| R11 | Battery: **6S** class (LiPo preferred; high-drain Li-ion acceptable) + **regulated step-down** | **~22.2 V nominal / 25.2 V full.** Pack on hold 6S vs **8S** (recommended — RobStride 24 V floor); XT90-S on the harness. [`research/actuator-shortlist.md`](research/actuator-shortlist.md). Actuators on the pack; **5 V** rail for MCU / RX / Pi, **12–19 V** rail for the companion slot. Superseded 4S on 2026-09-26. No pack / regulator SKU. |
+| R11 | Battery: **8S LiPo** + **regulated step-down** | **33.6 V full / 29.6 V nominal / 26.4 V cutoff.** One 8S 3300 mAh 50–60C, XT90; XT90-S on the harness. Set by the RobStride 24 V floor (2026-09-26). Regulators ≥36 V in. [`research/actuator-shortlist.md`](research/actuator-shortlist.md). Actuators on the pack; **5 V** rail for MCU / RX / Pi, **12–19 V** rail for the companion slot. Superseded 4S on 2026-09-26. No pack / regulator SKU. |
 | R12 | Knee + hip swing: **CAN QDD / FOC working class** (2026-09-26); servo vs stepper+belt is the **fallback** | No SKU. Size whichever we pick for one-leg plant load (R36). Powerful / fast / reliable still required. **GIM8108-8** is a *candidate* for these axes — not ordered, not locked. See [`research/actuators-legs.md`](research/actuators-legs.md). |
 | R13 | Wheels: **6" OD**, **~1–1.25" wide**, real rubber, torsionally stiff | **Locked.** A measured OD of **5.75–6.25"** still counts. Whole tire sits in the 9.5" going with ~±1.75" of roll. 5" Zantle is a bench donor, not the foot. Not a buy. No spokes. [`research/leg-geometry.md`](research/leg-geometry.md). |
 | R14 | Four **manual** modes before autonomy | **`PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY`**. Spec: [`software.md`](software.md). Gate before open-loop step, pathfinding motion, stair scripts. |
@@ -35,12 +35,12 @@ Inspiration: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori
 | R21 | **Wire openings and ports** through links / body | Cable paths are designed in, not drilled later. |
 | R22 | **Serviceable V1** | Access to fasteners, batteries, FC, actuators. Replaceable modules over sealed mono-bodies. |
 | R23 | **Several 2D sketch layouts** before any Blender / 3D CAD | Hard process gate. |
-| R25 | Wheel motors sized for **reaction speed / torque bandwidth** | Balance actuator, not max continuous power. 6S bus, CAN. Two wheel motors + drivers must leave room for pose joints, structure, pack, FC, Pi. |
+| R25 | Wheel motors sized for **reaction speed / torque bandwidth** | Balance actuator, not max continuous power. 8S bus, CAN. Two wheel motors + drivers must leave room for pose joints, structure, pack, FC, Pi. |
 | R26 | Leg actuators **by axis role** | Jobs differ. Do not force one type on roll, swing, and knee. Trade: [`research/actuators-legs.md`](research/actuators-legs.md). |
 | R27 | Hip-roll actuator = **dynamic** FOC BLDC / **small** QDD / fast bus servo | Working V1 class. High-rate torque; ideally backdrivable. Pairs with planted-wheel fore/aft (R17). |
 | R29 | **I/O:** up to **8 axes**; **FC does not drive stepper coils** | If pose joints are steppers: 2 wheel BLDC + 4 steppers + 2 hip-roll dynamic. Driver board(s) between host and steppers. Preferred: FC = IMU + wheel FOC (+ roll if PWM/CAN); **Pi or dedicated stepper controller** = pose step/dir. Drone firmware as stepper host is a V1 anti-pattern. If servos are chosen instead, still 8 axes — different drivers. Spec: [`electronics.md`](electronics.md). |
 | R30 | Wheel **BLDC at the wheel** | Hub / coaxial at the rim. Not remote-driven from the hip. |
-| R31 | **kV match** is a sizing goal | 6S + wheel diameter + balance bandwidth. TBD — no invented number. |
+| R31 | **kV match** is a sizing goal | 8S + wheel diameter + balance bandwidth. TBD — no invented number. |
 | R32 | Pose-actuator mass **high** | If steppers: mount **above the knee**; belts to the pivots. Do not hang pose motors at the shin or wheel. |
 | R33 | If belts: **one inside, one outside**; integrate pulley where possible | Clearance / service / no rub. Face assignment TBD on the 2D set. Draft-friendly printed tooth form (R20) or COTS pulley fallback. |
 | R34 | Primary **upper + lower leg spars** are **carbon fiber tubes** | COTS (R19). Printed / machined **fittings at the ends** only (hubs, belt mounts, joint flanges). Do not print or mill the spar. Tube OD / wall TBD. |
@@ -57,7 +57,7 @@ Inspiration: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori
 ## Soft / architecture intent
 
 - Four layers (2026-09-26): CAN actuators with their own FOC / PD → portable control core (C++ library) → CAN real-time MCU at 1 kHz (IMU, CRSF, watchdog) → ROS 2 Linux companion (Pi 5 now, Jetson at P5). ESP32 optional Wi‑Fi / telemetry bridge. [`software.md`](software.md).
-- Entire robot is **electric**. **6S** (LiPo preferred; 2026-09-26); pack capacity / C and the power bus stay **TBD**. Pose / logic on **regulated** rails. Do not invent a stack.
+- Entire robot is **electric**. **8S** one 3300 mAh LiPo (2026-09-26); the distribution board stays **TBD**. Pose / logic on **regulated** rails. Do not invent a stack.
 - **Knee + hip swing undecided** (Steve 2026-09-20 follow-up). Document both servo and stepper+belt. Do not prefer one in the baseline. Size either for R36. **GIM8108-8** is a candidate, not an order.
 - **Hip roll ships in V1** even if the first actuator is imperfect. One-leg CoG shift is a **best-effort** goal.
 - V1 scale: **~24" tall at full extension** (R35), **~14" wide** (R15). The head is inside that width. Leg geometry still owns the **~9.5"** step (R3) with margin.
@@ -79,7 +79,7 @@ Inventory (owned / ordered, reserved TBD): [`parts-on-hand.md`](parts-on-hand.md
 - RX: TBS Nano RX
 - Wheels: **6" OD** locked. 5" Zantle **bench donor** ordered (not a BLDC hub, not the foot). [`research/leg-geometry.md`](research/leg-geometry.md).
 - Motors: in-wheel brushless FOC (exact models TBD)
-- Battery: **6S** *class*. No pack SKU. Capacity / C **TBD**.
+- Battery: **8S 3300 mAh 50–60C LiPo, XT90.** Brand TBD.
 - Knee / hip swing: **CAN QDD** working class; servo / stepper+belt fallback. GIM8108-8 candidate (not ordered).
 - Hip roll: dynamic class (R27). SKU TBD.
 - Structure: carbon-tube spars **class** (R34). No tube SKU.
@@ -87,9 +87,9 @@ Inventory (owned / ordered, reserved TBD): [`parts-on-hand.md`](parts-on-hand.md
 ## Recommended default (proposal)
 
 - **Real-time MCU:** **CAN-capable** (Teensy 4.1-class or H743-WING-class), picked with the actuators (2026-09-26). The on-hand FCs are bench boards for P0–P1; none has CAN. Architecture: [`software.md`](software.md).
-- **Battery:** **6S class** + **controlled step-down** to 5 V and 12–19 V rails. One pack or two in parallel. Capacity / C / pack / regulator SKU **TBD**.
+- **Battery:** **8S 3300 mAh LiPo** + **controlled step-down** to 5 V and 12–19 V rails (≥36 V-in regulators). One pack. Regulator SKU **TBD**.
 - **Wheels:** in-wheel brushless FOC. **6" OD × ~1–1.25"** real rubber, torsionally stiff. Locked size, not a buy. Zantle 5" is a bench donor. Geometry: [`research/leg-geometry.md`](research/leg-geometry.md).
-- **Knee / hip swing:** **CAN QDD** working class on 6S; servo / stepper+belt fallback. Size for one-leg (~2×) load. GIM8108-8 is a candidate only.
+- **Knee / hip swing:** **CAN QDD** working class on 8S; servo / stepper+belt fallback. Size for one-leg (~2×) load. GIM8108-8 is a candidate only.
 - **Hip roll:** **in V1**, dynamic class, experimental / best-effort CoG shift.
 - **Companion:** Pi 5 in containers on ROS 2 now; Jetson (Orin Nano Super kit class) at P5 for perception. Not a pose brain — pose joints are on CAN.
 - **Wi‑Fi:** Pi first; ESP32 if we want a thin telemetry bridge off the Pi.
