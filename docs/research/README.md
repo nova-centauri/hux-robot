@@ -19,6 +19,7 @@ This packet is the working study set. It does not replace [`../requirements.md`]
 | [leg-geometry.md](leg-geometry.md) | Leg math. Wheel settled at **6" OD** on a **9.5" × 9.5"** step. Walker wheel is a bench donor. |
 | [stair-climb-dynamics.md](stair-climb-dynamics.md) | Corrected spatial feasibility, rejected stair candidate, and limits of the historical planar load estimates. |
 | [sim-sandbox.md](sim-sandbox.md) | Corrected tire/contact and drive models, supported parking guard, regression results, and remaining single-support failures. |
+| [compute-stack-review.md](compute-stack-review.md) | 2026-09-26 review of the F765-Wing / SimpleFOC / Pi 5 bench stack and the Jetson question — no CAN on the Wing, actuator bus picks the MCU, Jetson is a P5 perception buy, not V1 |
 | [study-plan.md](study-plan.md) | Phased checklist before hardware (Phases A–D; Phase E twin / dojo is a later horizon) |
 
 Decision log (not research, but the lock list): [`../decisions.md`](../decisions.md).
