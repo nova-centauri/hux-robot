@@ -21,7 +21,7 @@ Open-loop step onto a 9.5" fixture comes before a closed-loop stair gait. Camera
 
 **Near-term:** stand upright, the four **manual** modes, then a **9.5"** stair cycle. Classical / reused balance first (R18) — not an RL gate. The envelope on `main` is already **~24" × ~14"**, **6" foot**, carbon-tube spars; living drawings and [`research/stair-climb-dynamics.md`](research/stair-climb-dynamics.md) are the current draw, not the old ~10" / soft-5" era.
 
-**Long-term north star:** an **identical digital twin** plus a **training dojo** (ML/RL) so a policy trained in sim can run locally on the robot. Eventually train stairs, rubble, dirt, fall leaves, wet mud. That is a **horizon**, not a V1 blocker. Phasing: [`software.md`](software.md).
+**Long-term north star:** an **identical digital twin** plus a **training dojo** (ML/RL) so a policy trained in sim can run locally on the robot. Eventually train stairs, rubble, dirt, fall leaves, wet mud. That is a **horizon**, not a V1 blocker. The **pipeline** (Isaac / MuJoCo / mjlab / other) is **TBD** — lock the contract first; do not stand up a dojo before `TWO_WHEEL`. The living-drawings 3D sandbox framed capabilities; it is a design toy, not the twin. Phasing: [`software.md`](software.md). Decision log: [`decisions.md`](decisions.md) (2026-09-25).
 
 **Inventory does not drive design.** [`parts-on-hand.md`](parts-on-hand.md) informs options. The project needs what it needs — prefer the correct actuators and wheels over the shelf. The Zantle 5" is a bench donor, already documented.
 

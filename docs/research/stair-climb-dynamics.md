@@ -33,3 +33,15 @@ A replacement gait must solve both legs together, with body translation/orientat
 Before stair trials, demonstrate repeated entry, hold and exit from true single support on a tether. Require the free tire to be clear and unloaded; the current two-contact poise does not pass that gate. Test tread landings and capture from measured position **and velocity** errors. Descent needs its own trajectory, impact and regeneration analysis; ascent does not validate it.
 
 No spatial stair controller or descent controller has been implemented. The sandbox continues to expose experimental behaviors, and reports observed support separately from requested mode.
+
+## Hip-roll rethink (open — R16 still IN V1)
+
+Steve, 2026-09-25: he does **not** like the hip-pivot unload that puts the robot onto one foot. It seems to work poorly. **Do not lift hip roll from V1** (R16). Log the dislike and keep the rethink open.
+
+Bad feel may be the wrong stair trajectory, the two-contact poise, or sim contact (flat visual shoulders / no motorcycle crown — [`sim-sandbox.md`](sim-sandbox.md)), not proof the DOF is useless. Separate:
+
+1. Need some lateral CoG path to unload a wheel.
+2. Is hip roll the cheapest DOF for that path.
+3. Is the current stair path asking an infeasible throw — this candidate is already **rejected** above and in [`model-corrections.md`](model-corrections.md).
+
+Decision log: [`../decisions.md`](../decisions.md). Mechanical lock language is unchanged: [`../mechanical.md`](../mechanical.md).
