@@ -1,5 +1,7 @@
 # Leg geometry — strength, give, and reaction speed
 
+> **Status 2026-09-27:** the 6" wheel, 9.5" × 9.5" step and 7.5" + 7.5" leg still hold. Superseded here: 6 kg (now **7.75 kg**), 4S (now **8S**), servo-vs-stepper TBD (now CAN QDD, RobStride temporary lock), GIM8108 (earlier yardstick), "FC TBD" (Teensy 4.1), 3 N·m wheel target (RS05 **5.5 N·m** peak), ~10.6 N·m knee (**12.4**, 6.4 with the Sheet 2 spring), ~2.2 N·m spring (**3.05 N·m/rad + 0.38 preload**), 16 mm tube example (**16 × 14** Windcatcher in the cart). The first 2D sheets exist (Sheet 1, Sheet 2). Body CoM +1" ahead of the roll axes and a rear-of-slot landing aim are Sheet 1 layout choices.
+
 **Review correction (2026-09-23):** [real-world validation](real-world-validation.md) confirms the basic planar math but identifies missing spatial reach/contact constraints. The arrest formula and ±6° slot angle are not proven catch envelopes; GIM8108 compatibility requires an exact variant; the ~90 Hz tube example uses a different wall thickness from the BOM. Read the audit before sizing hardware from this note.
 
 Steve **2026-09-21**: review the plan and the leg math. The ordered walker wheels are not a good enough foot. Real rubber, yes. A kids bike tire, no.
@@ -26,9 +28,9 @@ A deeper real stair is spare room. It is not a reason to grow the wheel. Reopen 
 
 - North star stays lift → one-leg balance → plant (R3). Modes stay `PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY` before any autonomy (R14).
 - **In-wheel brushless FOC** (R6 / R30). **Hip roll in V1**, dynamic class, not a stepper (R16 / R27).
-- Knee and hip swing stay **servo vs stepper+belt TBD** (R12). **GIM8108-8** stays a candidate, not an order.
+- Knee and hip swing stay **servo vs stepper+belt TBD** (R12). **GIM8108-8** stays a candidate, not an order. *(Superseded 2026-09-26: CAN QDD, RS02 knee / RS00 swing, temporary lock.)*
 - **Carbon-tube** spars, fittings at the ends (R34). Envelope **~24" × ~14"** (R35 / R15). Head inside, wheels and legs outside the head. **2D before Blender** (R23).
-- Mass stays **soft** (R24). **4S + step-down** (R11). Plant-side joints sized for one wheel (R36).
+- Mass stays **soft** (R24). **4S + step-down** (R11) *(superseded 2026-09-26: 8S)*. Plant-side joints sized for one wheel (R36).
 - Linkages + springs (R7). Shop can turn a hub ([`../capabilities.md`](../capabilities.md)).
 
 ## Why 6"
@@ -140,11 +142,11 @@ Historical acceleration-equilibrium estimate on one wheel, **6 kg**, 6" OD, esti
 | 20° | 1.5 N·m |
 | 30° | 2.2 N·m |
 
-**Wheel target remains 3 N·m peak as a working assumption.** The rejected planar stair path asks for **4.03 N·m**. A fully loaded wheel at 6 kg and μ = 0.7 has only **3.14 N·m** of ideal traction torque; a half-loaded wheel has **1.57 N·m**. Raising the motor limit alone does not create grip. Arrest also depends on angular velocity, available travel, voltage, tire compliance and latency. No 30° or 6° catch capability is established.
+**Wheel target remains 3 N·m peak as a working assumption.** *(Superseded 2026-09-26: RS05, 5.5 N·m peak; traction limits below still apply.)* The rejected planar stair path asks for **4.03 N·m**. A fully loaded wheel at 6 kg and μ = 0.7 has only **3.14 N·m** of ideal traction torque; a half-loaded wheel has **1.57 N·m**. Raising the motor limit alone does not create grip. Arrest also depends on angular velocity, available travel, voltage, tire compliance and latency. No 30° or 6° catch capability is established.
 
 The ±1.75-inch geometric shelf margin corresponds to about ±6° of position-only lean at a 17-inch height. It is not a recoverable-state envelope: at nonzero speed the capture point can already lie outside the shelf.
 
-Useful axle speed is slow: about **60 rpm** at 0.5 m/s, **190 rpm** at 1.5 m/s, **380 rpm** at 3 m/s. kV match (R31) means that band on 4S.
+Useful axle speed is slow: about **60 rpm** at 0.5 m/s, **190 rpm** at 1.5 m/s, **380 rpm** at 3 m/s. kV match (R31) means that band on 4S. *(Now 8S: RS05 gives 188 rpm at 1.5 m/s, 296 rpm no-load.)*
 
 Fall time at the 92% stance is about **145 ms** to double a small lean. A soft carcass that lets the encoder move before the ground does will eat that. High pressure or a firm elastomer: radial give for the nosing, torsional stiffness for the loop.
 
@@ -155,6 +157,8 @@ The 5" Zantle is slightly quicker and a worse foot. Hard caster rubber, a fork, 
 Balance wheels scrub. A soft black carcass marks hard floors and sinks into carpet, and that softness is delay in the wheel loop. Deal with it later as compound and pressure at this **same 6" × ~1.25"**. Do not pick a knobby. Do not reopen the diameter for the floor.
 
 ## What the first 2D sheet should show
+
+*(Done 2026-09-27: Sheet 1 and Sheet 2 on the site. Items 4–5 used 6 kg and 3 N·m; the sheets carry the current numbers.)*
 
 Not Blender. One side view, one front view.
 

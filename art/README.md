@@ -32,7 +32,8 @@ Rough textured meshes generated from the isolated shots. Each file is a single m
 ## Where the pictures drift from the mechanical notes
 
 - Nothing here is to scale. The paper envelope is about 24 in tall and 14 in wide, with 6 in wheels.
-- The battery is drawn high on the torso. The mass sketch wants it low and central.
-- Several shots put the wheel motor beside the tire. The intent is a motor in the hub.
+- The battery is drawn high on the torso. Sheet 1 puts the 8S pack low, on the body floor, and forward (body CoM +1" ahead of the roll axes).
+- Several shots put the wheel motor beside the tire. The intent is the RS05 in the hub, flush with the tire's outboard face (Sheet 2).
+- Several shots show aluminum knee linkages. V1 puts the knee RS02 **at the knee** (R39); `hux-knee-actuators.jpg` is the closer picture. The hip-driven linkage is V2 backlog.
 - Hip roll and hip swing are not drawn as two separate joints.
 - Small print on the battery, tire sidewalls, and plates is gibberish. Ignore it.

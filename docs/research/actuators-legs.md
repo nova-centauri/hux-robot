@@ -1,10 +1,12 @@
 # Leg actuators — axis roles + V1 intent
 
+> **Status 2026-09-27:** superseded on class and parts. Knee / hip swing are **CAN QDD** (RobStride 02 knee, 00 swing, temporary lock 2026-09-26); servo / stepper+belt is the **fallback**, not a peer. Hip roll = RS02, wheel = RS05. Bus is **8S**, not 4S. RT MCU is **Teensy 4.1**, not "FC TBD". GIM8108-8 was the earlier yardstick. The axis-role reasoning (why roll is not a stepper, DOF map) still holds. Current: [`../decisions.md`](../decisions.md).
+
 Steve **2026-09-20** (axis jobs + I/O) and follow-up (servo vs stepper TBD), plus **2026-09-21** (GIM8108-class candidate, soft mass). **No spend. No locked SKU. FC stays TBD.**
 
 This note does not pick a part. It does not replace [`../requirements.md`](../requirements.md) or [`../mechanical.md`](../mechanical.md). Decision log: [`../decisions.md`](../decisions.md).
 
-## Working V1 intent (latest wins)
+## Working V1 intent (as of 2026-09-21; superseded 2026-09-26 — see status)
 
 Architecture is locked where the table says so. Parts are not. Mass stays **soft**.
 
@@ -88,7 +90,7 @@ Wheels: stay **FOC BLDC**. Do not put a stepper on the rim to “match the legs.
 
 No SKU. No shopping links. Prefer parts already on hand when a class is later filled.
 
-## Recommendation — current working intent
+## Recommendation — working intent as of 2026-09-21 (superseded 2026-09-26 — see status)
 
 1. **Knee + hip swing = servo vs stepper+belt TBD.** Both open, no lean. Size either for one-leg (~2×) load. GIM8108-8 is a candidate only.
 2. **Hip roll is in V1.** Dynamic class: FOC BLDC / **small** QDD / fast bus servo. **Not a stepper. Not V2.** Experimental — it may not work as hoped. Still include the joint mechanically and in `LEFT_ONLY` / `RIGHT_ONLY`. One-leg CoG shift is a **V1 goal (best-effort)**, paired with planted-wheel fore/aft.

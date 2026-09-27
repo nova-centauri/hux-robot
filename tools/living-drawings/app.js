@@ -259,9 +259,9 @@
       ["Stair", foot.where, foot.kind],
       ["Center of mass", mass.com.x.toFixed(1) + "\" forward, " + mass.com.y.toFixed(1) + "\" up", ""],
       ["Balance", mass.where + ", " + mass.moment.toFixed(1) + " N·m", ""],
-      ["Knee holds", mode.value === "planted" ? nm(Math.abs(tq.knee)) + " on one leg at " + M.exampleMassKg.toFixed(1) + " kg" : "no load in this view", Math.abs(tq.knee) > 7.5 ? "bad" : ""],
+      ["Knee holds", mode.value === "planted" ? nm(Math.abs(tq.knee)) + " on one leg at " + M.exampleMassKg.toFixed(1) + " kg" : "no load in this view", Math.abs(tq.knee) > M.actuators.rated.knee ? "bad" : ""],
       ["Hip swing holds", mode.value === "planted" ? nm(Math.abs(tq.hip)) + " on one leg" : "no load in this view", ""],
-      ["Motor bulk", "hub Ø2\" · knee 1.6×1.5 · swing 1.8×1.6 · roll Ø1.6", ""]
+      ["Motor bulk", "RS05 hub " + M.motorWheelD.toFixed(1) + "\" sq · RS02 knee " + M.motorKnee.w.toFixed(1) + "\" sq · RS00 swing " + M.motorSwing.w.toFixed(1) + "\" sq · RS02 roll " + M.motorRollD.toFixed(1) + "\" sq", ""]
     ];
     if (c.wheel && c.err > 0.15) cells.push(["Reach", "That wheel is " + c.err.toFixed(1) + "\" past the leg", "bad"]);
     fillRead("sideRead", cells);
@@ -314,7 +314,7 @@
     fillRead("topRead", [
       ["Whole-robot CoM, lateral", space.com.z.toFixed(2) + " in", ""],
       ["Tipping moment, left / right contact", space.tippingNm.left.toFixed(2) + " / " + space.tippingNm.right.toFixed(2) + " N·m", ""],
-      ["Hip holding demand if opposite wheel lifted", Math.abs(space.rollHoldingNm.left).toFixed(2) + " / " + Math.abs(space.rollHoldingNm.right).toFixed(2) + " N·m", ""],
+      ["Hip holding demand if opposite wheel lifted", Math.abs(space.rollHoldingNm.left).toFixed(2) + " / " + Math.abs(space.rollHoldingNm.right).toFixed(2) + " N·m at this roll (the frontal model's 6.3 N·m is at the ~24° shifted pose)", ""],
       ["Hip roll / model mass", num(roll).toFixed(1) + "° / " + space.com.kg.toFixed(1) + " kg", ""],
       ["Contact assumption", "Rigid rounded tires; roll study alone does not prove balance", ""],
       ["Joint travel", Object.keys(q).some(key => q[key] < K.spatial.limits[key][0] || q[key] > K.spatial.limits[key][1]) ? "Outside working limits" : "Within working limits", ""]
@@ -892,7 +892,7 @@
     document.getElementById("knobRoomOut").textContent = Number(knobs.catchRoom.value).toFixed(2) + "\"";
     document.getElementById("knobLandOut").textContent = (Number(knobs.landErr.value) >= 0 ? "+" : "") + Number(knobs.landErr.value).toFixed(2) + "\"";
     document.getElementById("knobComOut").textContent = (Number(knobs.bodyCom.value) >= 0 ? "+" : "") + Number(knobs.bodyCom.value).toFixed(1) + "\"";
-    document.getElementById("knobMassOut").textContent = (6 * Number(knobs.massScale.value)).toFixed(1) + " kg";
+    document.getElementById("knobMassOut").textContent = (M.actuators.lumps.total * Number(knobs.massScale.value)).toFixed(1) + " kg";
     document.getElementById("knobMuOut").textContent = Number(knobs.mu.value).toFixed(2);
   }
   function verdict() {
@@ -918,18 +918,15 @@
       draw();
     }, 60);
   }
+  /* the model's defaults (kin.js P: the RS05 peak on the wheel, the spec body CoM), kept for Reset */
+  const knobDefaults = {};
   Object.keys(knobs).forEach(function (k) {
+    knobDefaults[k] = K.P[k];
     knobs[k].value = String(K.P[k]);
     knobs[k].addEventListener("input", onKnob);
   });
   document.getElementById("knobReset").addEventListener("click", function () {
-    knobs.tPush.value = "0.44";
-    knobs.wheelTau.value = "3";
-    knobs.catchRoom.value = "1";
-    knobs.landErr.value = "0";
-    knobs.bodyCom.value = String(M.spec.layout.bodyComForwardIn);
-    knobs.massScale.value = "1";
-    knobs.mu.value = "0.7";
+    Object.keys(knobs).forEach(function (k) { knobs[k].value = String(knobDefaults[k]); });
     onKnob();
   });
   writeKnobOuts();

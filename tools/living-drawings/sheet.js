@@ -38,6 +38,10 @@
   const holdStance = hold(M.balanceTheta, M.balancePhi);
   const holdCrouch = hold(M.deepTheta, M.deepPhi);
   const holdStand = hold(standIk.theta, standIk.phi);
+  /* the knee gravity spring, fitted once in kin.js (Sheet 2 draws it) */
+  const SPRING = K.kneeSpring();
+  const standMotor = Math.max(0, Math.abs(holdStand.knee) - SPRING.torque(standIk.phi));
+  const springText = fmt(SPRING.kEff, 2) + " N·m/rad + " + fmt(SPRING.T0, 2) + " N·m preload";
 
   /* lateral stations, inches from the centreline */
   const Z = {
@@ -48,7 +52,9 @@
     swingIn: L.legPlaneIn, swingOut: L.legPlaneIn + ENV.swing.t,       /* hip swing RS00 outboard of it */
     axle: M.track / 2,
     tireIn: M.track / 2 - M.wheelWidth / 2, tireOut: M.track / 2 + M.wheelWidth / 2,
-    hubIn: M.track / 2 - ENV.wheelW / 2, hubOut: M.track / 2 + ENV.wheelW / 2,
+    /* RS05 flush with the tire's outboard face when Sheet 2's hub is in force, else centred */
+    hubIn: SPEC.sheet2.hub.flushOutboard ? M.track / 2 + M.wheelWidth / 2 - ENV.wheelW : M.track / 2 - ENV.wheelW / 2,
+    hubOut: SPEC.sheet2.hub.flushOutboard ? M.track / 2 + M.wheelWidth / 2 : M.track / 2 + ENV.wheelW / 2,
     head: M.bodyWidth / 2, env: M.envelopeWidth / 2,
     pack: L.packIn.w / 2
   };
@@ -133,9 +139,9 @@
       ["Raised leg", "θ " + fmt(raisedIk.theta) + "°, knee bend " + fmt(raisedIk.phi) + "°, reach " + inch(raised.reach) + " (" + inch(15 - raised.reach) + " spare)", raisedIk.err < 0.05 ? "good" : "bad"],
       ["Landing", inch(landX) + " forward, " + inch(landY - R) + " up — " + inch(G - landX, 2) + " rear of slot centre", "good"],
       ["Raised knee", "forward and down at tread height; the shin passes " + inch(shinClear, 2) + " over the nosing (tube axis)", shinClear > 0.6 ? "good" : "bad"],
-      ["Knee holds, one leg at 92%", nm(Math.abs(holdStance.knee)) + " (spring covers ~" + nm(SPEC.knee.springNm) + " of the two-leg crouch)", ""],
+      ["Knee holds, one leg at 92%", nm(Math.abs(holdStance.knee)) + " (the knee spring carries " + nm(SPRING.torque(M.balancePhi)) + " of it, the two-leg share)", ""],
       ["Knee holds, 75% crouch", nm(Math.abs(holdCrouch.knee)), ""],
-      ["Knee holds, standing up on the shelf", nm(Math.abs(holdStand.knee)) + " vs RS02 " + ACT.rated.knee + " rated / " + ACT.peak.knee + " peak", Math.abs(holdStand.knee) > ACT.peak.knee ? "bad" : ""],
+      ["Knee holds, standing up on the shelf", nm(Math.abs(holdStand.knee)) + " (" + nm(standMotor) + " at the motor with the spring) vs RS02 " + ACT.rated.knee + " rated / " + ACT.peak.knee + " peak", Math.abs(holdStand.knee) > ACT.peak.knee ? "bad" : ""],
       ["Hip swing holds, one leg at 92%", nm(Math.abs(holdStance.hip)) + " vs RS00 " + ACT.rated.hip + " rated", ""],
       ["Lump picture", fmt(M.exampleMassKg, 2) + " kg, body " + fmt(M.mass.body, 2) + " with the pack " + inch(L.bodyComForwardIn) + " ahead of the hips", ""],
       ["Soffit", inch(H - M.soffit - M.wheelOd) + " of air under a 1\" soffit with a 6\" tire", "good"]
@@ -178,11 +184,11 @@
       /* axle spacer, tire, in-wheel RS05 */
       line(svg, F.X(z), F.Y(R), F.X(sg * Z.axle), F.Y(R), "#1b2430", 4);
       rect(svg, F.X(sg * Z.axle - M.wheelWidth / 2), F.Y(2 * R), M.wheelWidth * D.S, 2 * R * D.S, "#f4f1ea", "#22282f");
-      box(svg, F, sg * Z.axle, R, ENV.wheelW, ENV.wheelD, "#3e4c44", hubProud > 0 ? "#9d2c2c" : "#1b2430");
+      box(svg, F, sg * (Z.hubIn + Z.hubOut) / 2, R, ENV.wheelW, ENV.wheelD, "#3e4c44", hubProud > 0 ? "#9d2c2c" : "#1b2430");
       joint(svg, F.X(z), F.Y(hip.y)); joint(svg, F.X(z), F.Y(kneeY));
     });
     /* dimensions */
-    dimH(svg, F.X(-Z.axle), F.X(Z.axle), F.Y(-1.4), inch(M.track) + " track", false);
+    dimH(svg, F.X(-Z.axle), F.X(Z.axle), F.Y(-1.4), inch(M.track, 2) + " track", false);
     dimH(svg, F.X(-Z.env), F.X(Z.env), F.Y(-2.4), inch(M.envelopeWidth) + " overall", false);
     dimH(svg, F.X(0), F.X(Z.rollAxis), F.Y(bandTop + 0.5), inch(Z.rollAxis, 2) + " roll axis");
     dimH(svg, F.X(0), F.X(-Z.leg), F.Y(bandTop + 1.4), inch(Z.leg, 2) + " leg plane");
@@ -201,19 +207,24 @@
     const FR = window.HuxFrontal, fr = FR.robot({ M: M });
     const g92 = fr.balanceRoll(0), rollDeg = -g92 * 180 / Math.PI;
     const rollHold = fr.holdTorque([g92, -g92, 0]);
-    const levelIn = 2 * (Z.axle - Z.rollAxis) * Math.sin(-g92);
+    /* parallelogram: each axle moves (spacer · sin γ) vertically with equal legs; a leg-length
+       change Δ moves it Δ · cos γ (the leg plane is rolled), so the legs differ by 2 · spacer · tan γ —
+       the same term sim-core.js feeds forward */
+    const levelIn = 2 * (Z.axle - Z.rollAxis) * Math.tan(-g92);
     fill("r2", [
       ["Hip roll axes", inch(Z.rollAxis) + " from the centreline (requirement ≤ 3\", 2026-09-26)", Z.rollAxis <= 3 ? "good" : "bad"],
       ["Hip band", inch(2 * Z.rollOut) + " wide: two RS02 roll housings (" + inch(ENV.rollD) + " sq) flanking the " + inch(L.packIn.w) + " pack", ""],
       ["Head", inch(M.bodyWidth) + " wide above the band; the housings sit " + inch(rollProud, 2) + " proud of its faces", ""],
-      ["Leg plane", inch(Z.leg) + " out — " + inch(Z.leg - Z.rollOut, 2) + " clear of the roll housing", Z.leg > Z.rollOut ? "good" : "bad"],
-      ["Knee RS02", "inboard of the leg plane, " + inch(Z.kneeIn) + "–" + inch(Z.kneeOut) + " — clears the tire (" + inch(Z.tireIn) + " in) at every fold", ""],
-      ["Hip swing RS00", "outboard, " + inch(Z.swingIn) + "–" + inch(Z.swingOut, 2) + " — " + inch(Z.env - Z.swingOut, 2) + " inside the 14\" envelope", Z.swingOut <= Z.env ? "good" : "bad"],
+      ["Leg plane", inch(Z.leg, 2) + " out — " + inch(Z.leg - Z.rollOut, 2) + " clear of the roll housing", Z.leg > Z.rollOut ? "good" : "bad"],
+      ["Knee RS02", "inboard of the leg plane, " + inch(Z.kneeIn, 2) + "–" + inch(Z.kneeOut, 2) + " — clears the tire (" + inch(Z.tireIn) + " in) at every fold", ""],
+      ["Hip swing RS00", "outboard, " + inch(Z.swingIn, 2) + "–" + inch(Z.swingOut, 2) + " — " + inch(Z.env - Z.swingOut, 2) + " inside the 14\" envelope", Z.swingOut <= Z.env ? "good" : "bad"],
       ["Axle spacer", inch(spacer, 2) + " from the leg plane to the wheel centre", ""],
-      ["RS05 hub", inch(ENV.wheelW, 2) + " long in a " + inch(M.wheelWidth) + " tire — " + inch(hubProud, 2) + " proud each face, " + inch(Z.hubOut - Z.env, 2) + " past the envelope", "bad"],
+      hubProud > 0
+        ? ["RS05 hub", inch(ENV.wheelW, 2) + " long in a " + inch(M.wheelWidth, 2) + " tire — " + inch(hubProud, 2) + " proud each face, " + inch(Z.hubOut - Z.env, 2) + " past the envelope", "bad"]
+        : ["RS05 hub", inch(ENV.wheelW, 2) + " long in a " + inch(M.wheelWidth, 2) + " tire — flush with its outboard face, " + inch(Z.tireIn - Z.hubIn, 2) + " into the spacer inboard (Sheet 2 hub)", Z.hubOut <= Z.env ? "good" : "bad"],
       ["Roll hold, one wheel up", nm(rollHold) + " at " + inch(Z.rollAxis) + " axes vs RS02 " + ACT.rated.roll + " rated (frontal model)", rollHold <= ACT.rated.roll ? "good" : "bad"],
       ["Shift", fmt(rollDeg) + "° of parallelogram roll puts the mass over one crown contact at 92%", ""],
-      ["Levelling cost", "with the wheel planes " + inch(Z.axle - Z.rollAxis, 2) + " outboard of the roll axes, that roll needs " + inch(levelIn, 2) + " of leg-length difference to keep the body level (was 0.8\" at 5.4\" axes) — the legs take it up by plan", levelIn > 2 ? "open" : ""]
+      ["Levelling cost", "with the wheel planes " + inch(Z.axle - Z.rollAxis, 3) + " outboard of the roll axes, that roll needs " + inch(levelIn, 2) + " of leg-length difference (2 × spacer × tan γ) to keep the body level (was 0.9\" at the old 5.4\" axes) — the legs take it up by plan", levelIn > 2 ? "open" : ""]
     ]);
   }
 
@@ -238,7 +249,7 @@
       text(svg, F.X(sg * (Z.leg - ENV.knee.t / 2)), F.Y(stance.knee.x - 0.9) + 4, "RS02 knee", "middle", 9, "#4d5b55");
       line(svg, F.X(z), F.Y(stance.axle.x), F.X(sg * Z.axle), F.Y(stance.axle.x), "#1b2430", 4);   /* axle spacer */
       svg.appendChild(el("rect", { x: F.X(sg * Z.axle - M.wheelWidth / 2), y: F.Y(stance.axle.x + R), width: M.wheelWidth * D.S, height: 2 * R * D.S, rx: 3, fill: "#f4f1ea", stroke: "#22282f", "stroke-width": 2 }));
-      rect(svg, F.X(sg * Z.axle - ENV.wheelW / 2), F.Y(stance.axle.x + ENV.wheelD / 2), ENV.wheelW * D.S, ENV.wheelD * D.S, "none", hubProud > 0 ? "#9d2c2c" : "#1b2430", "4 3");
+      rect(svg, F.X(sg * (Z.hubIn + Z.hubOut) / 2 - ENV.wheelW / 2), F.Y(stance.axle.x + ENV.wheelD / 2), ENV.wheelW * D.S, ENV.wheelD * D.S, "none", hubProud > 0 ? "#9d2c2c" : "#1b2430", "4 3");
       joint(svg, F.X(z), F.Y(stance.knee.x));
     });
     /* head outline, hip band, pack, yokes and the RS00s on top */
@@ -259,7 +270,7 @@
     });
     /* dimensions */
     dimH(svg, F.X(-Z.env), F.X(Z.env), F.Y(-7.6), inch(M.envelopeWidth) + " overall", false);
-    dimH(svg, F.X(-Z.axle), F.X(Z.axle), F.Y(-6.7), inch(M.track) + " track", false);
+    dimH(svg, F.X(-Z.axle), F.X(Z.axle), F.Y(-6.7), inch(M.track, 2) + " track", false);
     dimH(svg, F.X(0), F.X(Z.rollAxis), F.Y(hip.x + 2.6), inch(Z.rollAxis, 2) + " roll axis");
     dimH(svg, F.X(0), F.X(-Z.leg), F.Y(hip.x + 3.3), inch(Z.leg, 2) + " leg plane");
     dimH(svg, F.X(-Z.head), F.X(Z.head), F.Y(hip.x + M.bodyLength / 2 + 0.6), inch(M.bodyWidth) + " × " + inch(M.bodyLength) + " head");
@@ -327,7 +338,7 @@
       ["Hip swing used", fmt(hipMin, 0) + "° to " + fmt(hipMax, 0) + "° (limits " + fmt(K.deg(K.spatial.limits.hip[0]), 0) + "° to " + fmt(K.deg(K.spatial.limits.hip[1]), 0) + "°)", ""],
       ["Shove reach", inch(shove.reach) + " of 15\" — the pose no five-bar in the envelope reaches (knee-linkage.md)", shoveIk.err < 0.05 ? "good" : "bad"],
       ["Raised wheel", inch(raised.reach) + " of 15\" used; " + inch(15 - raised.reach) + " spare at the rear-of-slot target", ""],
-      ["Knee spring", "~" + nm(SPEC.knee.springNm) + " sized for the two-leg crouch; the actuator pays the rest on one leg (R7, R39)", ""],
+      ["Knee spring", springText + " (Sheet 2): the two-leg load at 92% (" + nm(SPRING.two92) + ") and 75% (" + nm(SPRING.two75) + "); the actuator pays the rest on one leg (R7, R39)", ""],
       ["Knee actuator", "RS02 at the knee for V1; hip-driven linkage is V2 (R39)", "good"]
     ]);
   }
@@ -342,9 +353,9 @@
       ["Finish line (" + SPEC.finishLine.id + ")", SPEC.finishLine.text + "; a flight is " + SPEC.finishLine.flight, "good"],
       ["Speed (" + SPEC.speed.id + ")", fmt(SPEC.speed.topMs) + " m/s top, " + fmt(SPEC.speed.cruiseMs) + " cruise — " + fmt(wheel.rpm, 0) + " rpm at the " + inch(M.wheelOd, 0) + " wheel, " + nm(wheel.availNm) + " of catch left (" + nm(wheelCut.availNm) + " at cutoff)", wheel.availNm >= SPEC.speed.reserveNm ? "good" : "bad"],
       ["Speed with " + nm(SPEC.speed.reserveNm) + " in hand", fmt(vRes, 2) + " m/s nominal, " + fmt(vResCut, 2) + " at cutoff — the RS05 on 8S sets the ceiling, not the legs", ""],
-      ["Knee (" + SPEC.knee.id + ")", "RS02 at the " + SPEC.knee.actuatorAt + ", spring " + nm(SPEC.knee.springNm) + ", linkage " + SPEC.knee.linkage + ", five-bar: no", "good"],
+      ["Knee (" + SPEC.knee.id + ")", "RS02 at the " + SPEC.knee.actuatorAt + ", gravity spring " + springText + ", linkage " + SPEC.knee.linkage + ", five-bar: no", "good"],
       ["Terrain (" + SPEC.terrain.id + ")", "flat + " + inch(SPEC.terrain.sillIn, 0) + " sills + " + SPEC.terrain.slopeDeg + "° slopes; rough ground " + SPEC.terrain.rough, "good"],
-      ["Actuators", ACT.count + " RobStride (" + ACT.lockedOn + "): 4× RS02, 2× RS00, 2× RS05 — " + fmt(ACT.massKg, 2) + " kg", ""],
+      ["Actuators", ACT.count + " RobStride, temporary lock " + ACT.lockedOn.slice(0, 10) + ": 4× RS02, 2× RS00, 2× RS05 — " + fmt(ACT.massKg, 2) + " kg", ""],
       ["Reference", SPEC.reference.name + ": " + SPEC.reference.massKg + " kg, " + SPEC.reference.strokeMm + " mm stroke, " + SPEC.reference.poseMotorsPerLeg + " pose motors per leg — scale and packaging only", ""],
       ["Drawn from", "kin.js · actuators.js · spec.js — as of " + SPEC.asOf, ""]
     ]);
@@ -352,5 +363,5 @@
 
 
   drawTitle(); drawSide(); drawFront(); drawPlan(); drawStroke();
-  window.HuxSheet = { hip, stance, raised, raisedIk, shoveIk, standIk, Z, holdStance, holdStand, hubProud, rollProud, spacer };
+  window.HuxSheet = { hip, stance, raised, raisedIk, shoveIk, standIk, Z, holdStance, holdStand, standMotor, spring: SPRING, hubProud, rollProud, spacer };
 })();

@@ -1,6 +1,6 @@
 # Research first
 
-Hux is still early R&D. **Study before we build.** Watch, read, extract control and stair heuristics, then decide what to adapt versus rewrite. Do not vendor James Bruton / [XRobots](https://github.com/XRobots) trees into this repo yet. Do not spend. Flight controller stays **TBD**.
+Hux is still early R&D. **Study before we build.** Watch, read, extract control and stair heuristics, then decide what to adapt versus rewrite. Do not vendor James Bruton / [XRobots](https://github.com/XRobots) trees into this repo yet. Do not spend beyond the [`../bom.md`](../bom.md) order-now cart. (The RT MCU was picked outside this packet on 2026-09-26: Teensy 4.1.)
 
 This packet is the working study set. It does not replace [`../requirements.md`](../requirements.md) or [`../vision.md`](../vision.md).
 
@@ -11,7 +11,7 @@ This packet is the working study set. It does not replace [`../requirements.md`]
 | [xrobots.md](xrobots.md) | Curated XRobots shortlist, why each matters, study order |
 | [inspiration.md](inspiration.md) | Steve's shares — Roadrunner, FrRonconi student balancer, Serra / Build Some Stuff, Tazer, Stompy, Diablo, SpdrBot; inspiration only |
 | [roadrunner.md](roadrunner.md) | RAI Institute Roadrunner — lab wheeled biped; watch alongside Hattori |
-| [actuators-legs.md](actuators-legs.md) | Axis-role trade; hip roll in V1; servo vs stepper TBD; GIM8108-8 candidate |
+| [actuators-legs.md](actuators-legs.md) | Axis-role trade; hip roll in V1 (2026-09-20/21). Its servo-vs-stepper and GIM8108 lines are superseded by the 2026-09-26 CAN QDD / RobStride temporary lock |
 | [tazer-lessons.md](tazer-lessons.md) | Tazer wheeled biped — learn from the mistakes (anti-patterns) |
 | [stompy-sim2real.md](stompy-sim2real.md) | Stompy week-build RL walker — CAD/reality match, shared zero; **not** RL walking for Hux V1 |
 | [diablo.md](diablo.md) | Diablo (DDTRobot) — commercial wheeled-leg; LQR + DD; steal split brain / height states; **do not buy** |
@@ -19,10 +19,10 @@ This packet is the working study set. It does not replace [`../requirements.md`]
 | [leg-geometry.md](leg-geometry.md) | Leg math. Wheel settled at **6" OD** on a **9.5" × 9.5"** step. Walker wheel is a bench donor. |
 | [stair-climb-dynamics.md](stair-climb-dynamics.md) | Corrected spatial feasibility, rejected stair candidate, and limits of the historical planar load estimates. |
 | [sim-sandbox.md](sim-sandbox.md) | Corrected tire/contact and drive models, supported parking guard, regression results, and remaining single-support failures. |
-| [one-leg-stance.md](one-leg-stance.md) | Frontal-plane mechanics of the hip-roll weight shift (24.7°, 8.3 N·m hold), why a static one-wheel stand is an acrobot with millimetres of capture region, and the dynamic single-support flight budget the stair needs (≤ 0.3 s). |
+| [one-leg-stance.md](one-leg-stance.md) | Frontal-plane mechanics of the hip-roll weight shift (24.7°, 8.3 N·m hold at 6 kg / 5.4" hips; the 2026-09-27 addendum has the current 24.2° / 6.3 N·m at 3.0" roll axes, 7.75 kg), why a static one-wheel stand is an acrobot with millimetres of capture region, and the dynamic single-support flight budget the stair needs (≤ 0.3 s). |
 | [compute-stack-review.md](compute-stack-review.md) | 2026-09-26 review of the F765-Wing / SimpleFOC / Pi 5 bench stack and the Jetson question — no CAN on the Wing, actuator bus picks the MCU, Jetson is a P5 perception buy, not V1 |
-| [actuator-shortlist.md](actuator-shortlist.md) | 2026-09-26 decision framework and candidates on Hux's own numbers — RobStride 00/02/05 shortlist, the 24 V floor that pushes the pack to 8S, CAN bus math, runtime vs pack size |
-| [knee-linkage.md](knee-linkage.md) | 2026-09-26 — knee actuator at the joint vs at the hip through a linkage vs no knee (four-bar / five-bar legs à la StepByStep, Ascento, T-REX); planar check on the settled draw; keep 2 DoF per leg, no five-bar, draw the hip-driven knee on the 2D sheet |
+| [actuator-shortlist.md](actuator-shortlist.md) | 2026-09-26 decision framework and candidates on Hux's own numbers — RobStride 00/02/05 shortlist, the 24 V floor that pushes the pack to 8S, CAN bus math, runtime vs pack size; the set became the temporary lock the same day |
+| [knee-linkage.md](knee-linkage.md) | 2026-09-26 — knee actuator at the joint vs at the hip through a linkage vs no knee (four-bar / five-bar legs à la StepByStep, Ascento, T-REX); planar check on the settled draw; keep 2 DoF per leg, no five-bar. Decided 2026-09-27 (R39): knee RS02 at the knee for V1; hip-driven linkage is V2 |
 | [study-plan.md](study-plan.md) | Phased checklist before hardware (Phases A–D; Phase E twin / dojo is a later horizon) |
 
 Decision log (not research, but the lock list): [`../decisions.md`](../decisions.md).

@@ -12,7 +12,7 @@
       <div>
         <p class="kicker">Hux</p>
         <h1>Data flow</h1>
-        <p>How a stick command reaches a joint, and where the current goes. These are classes. No harness. The board on the bench today is an F765-Wing, a P0–P1 bench board with no CAN; the robot's controller is a CAN real-time MCU (2026-09-26). The four software layers are in <a href="../../docs/software.md">docs/software.md</a>.</p>
+        <p>How a stick command reaches a joint, and where the current goes. These are classes. No harness. The board on the bench today is an F765-Wing, a P0–P1 bench board with no CAN; the robot's controller is a Teensy 4.1 real-time MCU with an ICM-42688-P IMU and three CAN transceivers (2026-09-26). The four software layers are in <a href="../../docs/software.md">docs/software.md</a>.</p>
         <nav class="pages" aria-label="Pages">
           <a href="index.html">Drawings</a>
           <a href="sheet.html">Sheet 1</a>
@@ -38,9 +38,9 @@
         <div class="branch">
           <div class="node"><b>Pilot stick</b><span>Crossfire radio. Not a Hux board.</span></div>
           <div class="arrow" aria-hidden="true">→</div>
-          <div class="node"><b>TBS Nano RX</b><span>On hand. Binds into the flight controller.</span></div>
+          <div class="node"><b>TBS Nano RX</b><span>On hand. CRSF into the Teensy.</span></div>
           <div class="arrow" aria-hidden="true">→</div>
-          <div class="node"><b>F765-Wing + IMU</b><span>Bench board. Two gyros on the board, MPU6000 and ICM20602. New firmware, not ArduPilot. Attitude, wheel torque, and the four modes. <a href="software.html">Software</a>.</span></div>
+          <div class="node"><b>Teensy 4.1 + ICM-42688-P</b><span>The real-time MCU. Runs the portable control core at 1 kHz: attitude, balance, the four modes, a hardware watchdog. Two classic CAN 1 Mbit buses out: A = two wheels + two hip roll, B = two knees + two hip swing. The F765-Wing is the P0–P1 bench board only (no CAN); <a href="software.html">its bench plan</a>.</span></div>
         </div>
       </div>
     </section>
@@ -53,7 +53,7 @@
           <div class="arrow" aria-hidden="true">→</div>
           <div class="node"><b>Power split + torque cut</b><span>Actuator current stays on the pack, behind a hardware kill. Do not route motor current through the MCU.</span></div>
           <div class="arrow" aria-hidden="true">→</div>
-          <div class="node"><b>Step-down rail</b><span>5 / 6 / 7.4 V for the controller, the receiver, and the pose joints.</span></div>
+          <div class="node"><b>Step-down rail</b><span>Bucks rated ≥36 V in. 5 V for the Teensy, the receiver and the Pi 5 (5 A); 12–19 V for the companion slot. No servo pose rail unless the servo fallback comes back.</span></div>
         </div>
       </div>
     </section>
@@ -61,17 +61,17 @@
     <section class="stage">
       <h3>Motion</h3>
       <div class="lanes">
-        <p class="hint">Three branches leave the flight controller in parallel. Wheel current stays on the pack.</p>
+        <p class="hint">Three branches leave the Teensy on its two CAN buses. Every actuator runs its own FOC. Actuator current stays on the pack.</p>
         <div class="branch">
-          <div class="node"><b>Wheel FOC ×2</b><span>Torque mode. About 3 N·m peak at the 6 inch wheel, roughly 60–380 rpm. Drivers not chosen.</span></div>
+          <div class="node"><b>Wheel FOC ×2</b><span>RobStride 05, driver and encoder on the actuator, torque mode on bus A. 5.5 N·m peak, 1.7 rated. 1.5 m/s top (188 rpm at the 6" wheel), 1.0 cruise (R38). Temporary lock, not ordered.</span></div>
           <div class="arrow" aria-hidden="true">→</div>
-          <div class="node"><b>In-wheel motors ×2</b><span>Brushless, encoder on each, motor at the hub. The hub is turned on the lathe. Not ordered.</span></div>
+          <div class="node"><b>In-wheel motors ×2</b><span>The RS05 sits in the wheel, flush with the tire's outboard face, stator on the axle fitting inboard, disc web to a turned rim (<a href="sheet2.html">Sheet 2</a>). Not ordered.</span></div>
         </div>
         <div class="branch">
-          <div class="node"><b>Hip roll ×2</b><span>In V1. Dynamic class, not a stepper. With the locked set's masses the planted hip holds about 10.7 N·m at the drawn 5.4" hips and 6 N·m at 3" when the other wheel lifts — the axes must come in. Driver path is PWM, CAN, or its own FOC.</span></div>
+          <div class="node"><b>Hip roll ×2</b><span>In V1. RobStride 02 on bus A, not a stepper. With the other wheel up the planted hip holds about 6.3 N·m at the Sheet 1 roll axes (3.0"), vs 7 rated; it was 10.7 at the old 5.4". Temporary lock, not ordered.</span></div>
         </div>
         <div class="branch">
-          <div class="node"><b>Knee and hip swing ×4</b><span>Servo, or stepper plus a belt. Still open. A spring holds about 2.2 N·m of the two-leg crouch so the motor is free to move. If they are steppers, the flight controller does not drive the coils.</span></div>
+          <div class="node"><b>Knee and hip swing ×4</b><span>RobStride 02 at the knee (R39), RobStride 00 at the hip swing, bus B. Temporary lock, not ordered. A knee gravity spring (<a href="sheet2.html">Sheet 2</a>) carries the two-leg stance — 2.8 N·m at 92%, 4.8 at 75% — so the motor is free to move. Servo or stepper+belt is the fallback only; steppers would sit behind their own drivers, never on the MCU's pins.</span></div>
         </div>
       </div>
     </section>
@@ -94,7 +94,7 @@
       <div class="lanes">
         <p class="hint">Not required to balance. The Pi listens. Pathfinding comes after the four modes. <a href="software.html">Software on each chip</a>.</p>
         <div class="branch">
-          <div class="node"><b>Pi 5</b><span>On hand. Raspberry Pi OS Lite. One Python process reads the Wing's text stream. Owns the cameras, the face display, and the eye lights later.</span></div>
+          <div class="node"><b>Pi 5</b><span>On hand. The companion: ROS 2 in containers, listening to the Teensy. Owns teleop, logging, the cameras, the face display, and the eye lights later. A Jetson (Orin Nano Super class) is the P5 bolt-in.</span></div>
           <div class="node"><b>ESP32</b><span>On hand. Unused. The Pi already has Wi-Fi.</span></div>
         </div>
         <div class="branch">
@@ -108,7 +108,7 @@
     <footer class="note">
       Same plan as <a href="../../docs/electronics.md">docs/electronics.md</a> and <a href="../../docs/electronics-minimum.md">docs/electronics-minimum.md</a>.
       Chip software is <a href="software.html">software.html</a>.
-      The F765-Wing is a P0–P1 bench board (no CAN). The robot's MCU is a CAN-capable board picked with the actuators — <a href="../../docs/decisions.md">docs/decisions.md</a>, 2026-09-26.
+      The F765-Wing is a P0–P1 bench board (no CAN). The robot's MCU is the Teensy 4.1 — <a href="../../docs/decisions.md">docs/decisions.md</a>, 2026-09-26.
     </footer>
   </div>
 </body>

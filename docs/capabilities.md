@@ -25,7 +25,7 @@ Hardware fab is **intentional and welcome**. Hux is allowed to be milled, turned
 ## How this sits next to structure rules
 
 - **Customs may be machined, bent, or welded** as well as 3D printed. Do not treat “printable” as the only legal custom.
-- The **in-wheel BLDC hub** (donor Zantle rubber + custom hub) is a **natural lathe / mill part**. That is the intended first shop job, not a stretch goal.
+- The **in-wheel hub** is a **natural lathe / mill part**. That is the intended first shop job, not a stretch goal. Since Sheet 2 (2026-09-27) it is a turned rim for the 6 × 1.25 tire (3.75" bead) with a disc web to the RS05 flange, plus the machined fittings F1 / F5 / F6. The Zantle 5" rubber is bench-donor practice, not the foot.
 - Still **prefer COTS structure** (carbon rod / tube, metal stock, fasteners) where it fits. Do not mill a spar that a tube already is (R19 / R34).
 - **Carbon-fiber dust is not a toy.** Respirator and wet cut when the bandsaw hits tube. See [`research/tazer-lessons.md`](research/tazer-lessons.md).
 - **Draft-friendly print still for plastics** — joints, clamps, brackets, fairings. Print is welcome; it is not the only shop.

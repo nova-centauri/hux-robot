@@ -1,5 +1,7 @@
 # Actuator shortlist — what decides it, and what the 2026 numbers say
 
+> **Status 2026-09-27:** the recommended set is the **temporary lock** (`actuators.js`, not ordered). The 6 kg / 5.4" numbers below are superseded: 7.75 kg picture, roll axes at **3.0"** (Sheet 1), roll hold **6.3 N·m** (not 6.0), knee stand-up hold **12.4 N·m** (not 13.6 / 10.6), **6.4** with the Sheet 2 spring. RS05 rated is **1.7 N·m** in `actuators.js`. First buy is **one RS02** on the Teensy. Current: [`../decisions.md`](../decisions.md).
+
 **2026-09-26.** Steve: "I am not sure about the actuator shortlist. I think it's a good time to decide. What should I consider?" This note is the decision framework plus the candidates checked against Hux's own numbers. **No SKU locked here. No spend.** Steve owns the cart line.
 
 Hux numbers used (settled geometry, 6 kg example, [`leg-geometry.md`](leg-geometry.md), [`stair-climb-dynamics.md`](stair-climb-dynamics.md), [`sim-sandbox.md`](sim-sandbox.md)):
@@ -85,7 +87,7 @@ Set of eight, hips inboard (≤ 3.5"): 4× RS02 (knee + roll) + 2× RS00 (swing)
 
 **Recommendation to Steve (2026-09-26): 4× RS02 + 2× RS00 + 2× RS05, hips at ≤ 3.5".** Four of one part (knee + roll) means one spare and one set of gains covers half the robot; RS02's dual encoder gives an absolute pose on the four joints that matter for `PARKED`; RS05 is the only part in the family light and low-ratio enough for a balance wheel. ~$1,250, ~2.2 kg. **Buy one RS02 first** — it is the part that has to hold both the 10.6 N·m knee stand-up and the 5.4 N·m roll cantilever, so it is the one to put on the Teensy, hold at 7 N·m for 30 s with a thermocouple on the case, and read the encoder back at 1 kHz before the other seven are ordered.
 
-**Before ordering:** settle the hip roll offset in the 2D layout (NOTES open call 6; target ≤ 3.5"). Then download the RobStride 02 / 00 / 05 datasheets and confirm (a) the 24 V floor is a hard undervoltage trip, (b) backlash at the output, (c) the CAN protocol is the documented open one at 1 Mbit/s, (d) US stock and return terms. Buy **one RS00 first** and run it on the Teensy: torque mode, encoder readback, thermal at 5 N·m held for 10 s. Then the set.
+**Before ordering:** settle the hip roll offset in the 2D layout (NOTES open call 6; target ≤ 3.5"). Then download the RobStride 02 / 00 / 05 datasheets and confirm (a) the 24 V floor is a hard undervoltage trip, (b) backlash at the output, (c) the CAN protocol is the documented open one at 1 Mbit/s, (d) US stock and return terms. Buy **one RS00 first** and run it on the Teensy: torque mode, encoder readback, thermal at 5 N·m held for 10 s. Then the set. *(Superseded 2026-09-26: the first buy is one RS02, per the recommendation above and `decisions.md`.)*
 
 **What this does not settle:** in-wheel packaging of an RS05 behind a 6 × 1.25" tire on a shop-turned hub (mechanical, [`../mechanical.md`](../mechanical.md)); whether springs still take the crouch (yes, cheap, keep them); the exact pack SKU.
 

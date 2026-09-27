@@ -130,8 +130,8 @@
     const d3 = (opts.freeLen !== undefined ? opts.freeLen * IN : d);
     const comUp = (opts.comUp !== undefined ? opts.comUp : 0.45 * M.bodyAboveHip) * IN;
     /* lumps from kin.js (the locked actuator set, actuators.js): body 4.35, each hip yoke 0.75,
-       knee 0.46, wheel 0.49 — 7.75 kg. Falls back to the 2026-09-22 6 kg picture if kin.js has no mass. */
-    const mm = M.mass || { body: 4.0, hips: 0.8, knee: 0.25, wheel: 0.35 };
+       knee 0.46, wheel 0.49 — 7.75 kg. Falls back to actuators.js directly if M carries no mass. */
+    const mm = M.mass || (root.HuxActuators || require("./actuators.js")).lumps;
     const lump = { body: mm.body * ms, yoke: (mm.hips / 2) * ms, knee: mm.knee * ms, tube: 0.03 * ms, wheel: mm.wheel * ms };
     /* Each mass as a function of q = [q1, q2, q3]. Frame: contact at the origin, +z right
        (inboard for a left plant), +y up. rot(p, a) rotates p by a about the fore-aft axis
@@ -337,7 +337,7 @@
     row("hips at 3.5\", both hips", { inputs: [2, 3], opts: { hipLateral: 3.5 } });
     row("hips 3.5\" + CoM 5\" + tuck, both hips", { inputs: [2, 3], opts: { hipLateral: 3.5, comUp: 5, freeLen: 7 } });
     row("75% ride height, locked", { lock: true, opts: { extension: 0.75 } });
-    row("mass ×1.5 (9 kg), locked", { lock: true, opts: { massScale: 1.5 } });
+    row("mass ×1.5 (" + (1.5 * M.exampleMassKg).toFixed(1) + " kg), locked", { lock: true, opts: { massScale: 1.5 } });
     console.log("\nStatic shift geometry (body level, free leg hanging), as drawn:");
     const r0 = robot({ M: M });
     [0.75, 0.85, 0.92].forEach(ext => {

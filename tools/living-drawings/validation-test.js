@@ -79,4 +79,13 @@ assert.ok(SPEC.wheelAtSpeed(SPEC.speed.cruiseMs, M.wheelOd, M.actuators.bus.vCut
 assert.ok(M.hipLateral <= 3.0 + 1e-9 && M.hipLateral === SPEC.layout.hipRollAxisIn, "hip roll axes must come from the spec and sit at <= 3\"");
 assert.ok(M.legPlane > M.hipLateral + M.actuators.envIn.rollD / 2, "the leg plane must clear the roll housing");
 near(K.P.bodyCom, SPEC.layout.bodyComForwardIn);
+// One knee spring fit (kin.js kneeSpring, drawn on Sheet 2, printed on Sheet 1): it passes through the
+// two-leg gravity knee torque at the 92% stance and the 75% crouch, on the spec's pulley.
+const spring = K.kneeSpring();
+const twoLeg = (th, ph) => Math.abs(K.legTorques(th, ph, { x: 0, y: M.exampleMassKg * M.g / 2 }, { x: 0, y: 0 }, 0).knee);
+near(spring.torque(M.balancePhi), twoLeg(M.balanceTheta, M.balancePhi));
+near(spring.torque(M.deepPhi), twoLeg(M.deepTheta, M.deepPhi));
+near(spring.pulleyIn, SPEC.sheet2.spring.pulleyIn);
+assert.ok(spring.kEff > 0 && spring.T0 >= 0, "knee spring fit must have a positive rate and a non-negative preload");
+assert.equal(SPEC.knee.springNm, undefined, "the knee spring is fitted in kin.js, not a fixed number in spec.js");
 console.log(`validation ok: ${cases} spatial FK/IK cases, 402 projection frames, mass invariance, strict contacts and rejected stair candidate`);

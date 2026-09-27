@@ -36,8 +36,8 @@
 
     <div class="totals">
       <div><span>Order now</span><strong>~$230</strong>Tires, tubes, carbon tube, Teensy 4.1 CAN kit, XT90-S, 8S 3300 mAh pack. Shipping extra.</div>
-      <div><span>Later, class estimate</span><strong>~$1,400</strong>Actuators are most of it; shortlisted, none ordered.</div>
-      <div><span>Working total</span><strong>~$1,640</strong>Order now plus the estimates. Eight RobStride units are ~$1,200 of it.</div>
+      <div><span>Later, class estimate</span><strong>~$1,350</strong>Actuators are most of it; a temporary lock, none ordered.</div>
+      <div><span>Working total</span><strong>~$1,580</strong>Order now plus the estimates. Eight RobStride units are $1,120 of it.</div>
     </div>
 
     <section class="block">
@@ -69,8 +69,8 @@
             <tr>
               <td>1</td>
               <td>Teensy 4.1 + ICM-42688-P IMU + 3× CAN transceivers</td>
-              <td>~$55</td>
-              <td>The CAN real-time MCU. Three CAN buses, microSD blackbox. Added 2026-09-26. <a href="../../docs/research/actuator-shortlist.md">Why three buses</a>.</td>
+              <td>~$54</td>
+              <td>The real-time MCU, picked 2026-09-26. Three CAN ports; the robot uses two classic CAN 1 Mbit buses (A: wheels + hip roll, B: knees + hip swing). microSD blackbox. <a href="../../docs/research/actuator-shortlist.md">Why two buses</a>.</td>
             </tr>
             <tr>
               <td>1</td>
@@ -91,10 +91,10 @@
             <tr><th>Qty</th><th>Part</th><th>State</th><th>Role</th></tr>
           </thead>
           <tbody>
-            <tr><td>1</td><td>F765-Wing</td><td><span class="chip bench">Bench</span></td><td>P0–P1 bench board: blink, CRSF, one wheel. <b>No CAN</b>, so not the robot's controller (2026-09-26). The robot's MCU is a CAN board (Teensy 4.1 / H743-WING class, ~$30–70), picked with the actuators, not bought. <a href="software.html">Software</a>.</td></tr>
-            <tr><td>2</td><td>Gyros on the Wing</td><td><span class="chip hand">On the board</span></td><td>MPU6000 and ICM20602, on SPI. The balance loop reads these. The Pi does not.</td></tr>
-            <tr><td>1</td><td>TBS Nano RX</td><td><span class="chip settled">On hand</span></td><td>Pilot link. TBS firmware, CRSF, into the Wing. No Hux code.</td></tr>
-            <tr><td>1</td><td>Raspberry Pi 5</td><td><span class="chip later">On hand</span></td><td>Raspberry Pi OS Lite. Listens to the Wing. Cameras, faces, and pathfinding later. Not required to balance.</td></tr>
+            <tr><td>1</td><td>F765-Wing</td><td><span class="chip bench">Bench</span></td><td>P0–P1 bench board: blink, CRSF, one wheel. <b>No CAN</b>, so not the robot's controller (2026-09-26). The robot's MCU is the Teensy 4.1, in the order-now list. <a href="software.html">Software</a>.</td></tr>
+            <tr><td>2</td><td>Gyros on the Wing</td><td><span class="chip hand">On the board</span></td><td>MPU6000 and ICM20602, on SPI. Bench only. The robot's balance loop reads the ICM-42688-P on the Teensy.</td></tr>
+            <tr><td>1</td><td>TBS Nano RX</td><td><span class="chip settled">On hand</span></td><td>Pilot link. TBS firmware, CRSF, into the Teensy (into the Wing on the bench). No Hux code.</td></tr>
+            <tr><td>1</td><td>Raspberry Pi 5</td><td><span class="chip later">On hand</span></td><td>The companion: ROS 2 in containers. Listens to the Teensy. Cameras, faces, and pathfinding later. Not required to balance. A Jetson (Orin Nano Super class) is the P5 bolt-in, not a V1 buy.</td></tr>
             <tr><td>0–1</td><td>ESP32</td><td><span class="chip later">Unused</span></td><td>On hand. Nothing planned. The Pi already has Wi-Fi.</td></tr>
           </tbody>
         </table>
@@ -114,20 +114,21 @@
           </tbody>
         </table>
       </div>
-      <p class="callout">GIM8108-8 is a yardstick, seen near $85. It is not an order and it is not in the total. Nominal 7.5 N·m is tight for the 9.5 N·m roll example at 6 kg on the 14 inch stance, and it is a 24–48 V class part. Superseded by the RobStride shortlist on 8S (2026-09-26).</p>
+      <p class="callout">GIM8108-8 is a yardstick, seen near $85. It is not an order and it is not in the total. Nominal 7.5 N·m is tight for the 9.5 N·m roll example at 6 kg on the 14 inch stance, and it is a 24–48 V class part. Superseded by the RobStride temporary lock on 8S (2026-09-26).</p>
     </section>
 
     <section class="block">
-      <h2>Actuators — ~$1,200, shortlisted, not ordered</h2>
+      <h2>Actuators — $1,120 (+ ~$20 knee springs), temporary lock, not ordered</h2>
       <div class="table-wrap">
         <table>
           <thead>
             <tr><th>Qty</th><th>Part</th><th>Est.</th><th>Role</th></tr>
           </thead>
           <tbody>
-            <tr><td>2</td><td>Wheel actuator — RobStride 05 shortlisted</td><td>~$200</td><td>5.5 N·m peak, 191 g, driver and encoder on board. Sets the pace: <b>1.5 m/s top, 1.0 cruise</b> (R38) with ~2 N·m of catch left at 1.5 on the 6" wheel. Its 44 mm housing is 0.24" proud of the 1.25" tire on each face — hub drawing before any order. Not ordered.</td></tr>
-            <tr><td>2</td><td>Hip roll — RobStride 02, roll axes at 3.0" (Sheet 1)</td><td>~$340</td><td>6.3 N·m hold whenever a wheel is up at the 3.0" axes (frontal model), vs 7 rated; ~11 at the old 5.4". The shift then needs 2.8" of leg-length difference to stay level — a controls term. Not ordered.</td></tr>
-            <tr><td>4</td><td>Knee (RobStride 02) and hip swing (RobStride 00)</td><td>~$680</td><td>CAN QDD working class on an 8S bus. Servo / stepper+belt is the fallback. Not ordered.</td></tr>
+            <tr><td>2</td><td>Wheel actuator — RobStride 05</td><td>$220</td><td>1.7 rated / 5.5 N·m peak, 191 g, driver and encoder on board. Sets the pace: <b>1.5 m/s top, 1.0 cruise</b> (R38) with ~2 N·m of catch left at 1.5 on the 6" wheel. In the wheel, flush with the tire's outboard face, stator on the axle fitting inboard (<a href="sheet2.html">Sheet 2</a>); nothing proud of the 14" envelope. Output bearing rating under the cantilevered rim still to confirm. Not ordered.</td></tr>
+            <tr><td>2</td><td>Hip roll — RobStride 02, roll axes at 3.0" (Sheet 1)</td><td>$290</td><td>6.3 N·m hold whenever a wheel is up at the 3.0" axes (frontal model), vs 7 rated; 10.7 at the old 5.4". The shift then needs 3.0" of leg-length difference to stay level (the axles end up 2.8" apart) — a controls term. Not ordered.</td></tr>
+            <tr><td>4</td><td>Knee (RobStride 02) and hip swing (RobStride 00)</td><td>$610</td><td>CAN QDD working class on an 8S bus. RS02 at the knee with a gravity spring (R39, Sheet 2); RS00 at the hip swing. Servo / stepper+belt is the fallback. Not ordered. First buy is one RS02 on the Teensy.</td></tr>
+            <tr><td>2</td><td>Knee spring + cable + pulley</td><td>~$20</td><td>Sheet 2: extension spring ~3.0 kN/m (17 lbf/in), 12 N preload, 3.4" travel, on a Ø2.5" knee pulley; takes the stand-up hold from 12.4 to 6.4 N·m at the RS02. No part picked.</td></tr>
           </tbody>
         </table>
       </div>
@@ -142,7 +143,7 @@
           </thead>
           <tbody>
             <tr><td>1</td><td>8S 3300 mAh 50–60C LiPo, XT90</td><td>~$80</td><td>Decided 2026-09-26, in the order-now list. XT90-S anti-spark on the harness. About 700 g. Needs an 8S-capable charger.</td></tr>
-            <tr><td>1</td><td>Step-down and distribution</td><td>~$20</td><td>Logic and pose off the motor rail. No board picked.</td></tr>
+            <tr><td>1</td><td>Step-down and distribution</td><td>~$30</td><td>Bucks rated ≥36 V in: a 5 V rail (Teensy, RX, Pi 5 at 5 A) and a 12–19 V companion rail. No servo pose rail unless the servo fallback comes back. No board picked.</td></tr>
           </tbody>
         </table>
       </div>
@@ -169,7 +170,7 @@
       Same figures as <a href="../../docs/bom.md">docs/bom.md</a>.
       Inventory of what is already here is <a href="../../docs/parts-on-hand.md">docs/parts-on-hand.md</a>.
       Hubs, fasteners, wire, and bearings are shop stock and are not in the total.
-      Shipping, tax, and a wrong actuator guess move the $1,140. The $89.41 does not.
+      Shipping, tax, and a wrong actuator guess move the working total. The order-now lines do not.
     </footer>
   </div>
 </body>

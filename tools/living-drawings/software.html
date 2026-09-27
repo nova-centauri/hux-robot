@@ -12,8 +12,8 @@
       <div>
         <p class="kicker">Hux</p>
         <h1>Software</h1>
-        <p><b>Bench-learning plan, superseded 2026-09-26.</b> This page describes what the F765-Wing and the Pi 5 on the table would run for P0–P1: blink, CRSF, one wheel, a listener. The F765-Wing has no CAN bus, so it is not the robot's controller; the robot's stack is four layers — CAN actuators, a portable control core, a CAN real-time MCU, and a ROS 2 companion — in <a href="../../docs/software.md">docs/software.md</a>. What survives from this page is what lands in the control core; the Pi 5 does carry forward, in containers.</p>
-        <p class="callout"><b>V1 scope, 2026-09-27:</b> done means <b>one 9.5" step, 9 of 10 from a standstill</b> (R37); the <code>TWO_WHEEL</code> speed command clamps at <b>1.5 m/s</b>, cruise 1.0 (R38); V1 terrain is flat + 1" sills + ~20° slopes (R40). The one-leg shift is roll plus a planned leg-length difference (2.8" at the Sheet 1 roll axes) — the sandbox's feed-forward, to be carried into the control core. Detail: <a href="../../docs/software.md">docs/software.md</a>.</p>
+        <p><b>Bench-learning plan, superseded 2026-09-26.</b> This page describes what the F765-Wing and the Pi 5 on the table would run for P0–P1: blink, CRSF, one wheel, a listener. The F765-Wing has no CAN bus, so it is not the robot's controller; the robot's stack is four layers — CAN actuators, a portable control core, a CAN real-time MCU (Teensy 4.1, picked 2026-09-26), and a ROS 2 companion — in <a href="../../docs/software.md">docs/software.md</a>. What survives from this page is what lands in the control core; the Pi 5 does carry forward, in containers.</p>
+        <p class="callout"><b>V1 scope, 2026-09-27:</b> done means <b>one 9.5" step, 9 of 10 from a standstill</b> (R37); the <code>TWO_WHEEL</code> speed command clamps at <b>1.5 m/s</b>, cruise 1.0 (R38); V1 terrain is flat + 1" sills + ~20° slopes (R40). The one-leg shift is roll plus a planned leg-length difference (3.0" at the Sheet 1 roll axes: 2 × spacer × tan γ) — the sandbox's feed-forward, to be carried into the control core. Detail: <a href="../../docs/software.md">docs/software.md</a>.</p>
         <nav class="pages" aria-label="Pages">
           <a href="index.html">Drawings</a>
           <a href="sheet.html">Sheet 1</a>
@@ -108,7 +108,7 @@
           </tbody>
         </table>
       </div>
-      <p class="callout">The Pi does not get a real-time kernel, and it does not run ROS. Python is enough for the listener. The same process can grow a camera stream and pathfinding later. The Pi does not build or flash the Wing. That happens from the bench computer over USB, using the Wing's boot button.</p>
+      <p class="callout">Bench plan only: on the robot the Pi 5 runs ROS 2 in containers (docs/software.md). For P0–P1 the Pi does not get a real-time kernel, and it does not run ROS. Python is enough for the listener. The same process can grow a camera stream and pathfinding later. The Pi does not build or flash the Wing. That happens from the bench computer over USB, using the Wing's boot button.</p>
     </section>
 
     <section class="stage">

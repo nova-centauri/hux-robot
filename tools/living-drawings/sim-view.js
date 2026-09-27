@@ -442,6 +442,10 @@
   syncRide();
   const vmax = document.getElementById("vmax");
   const vmaxOut = document.getElementById("vmaxOut");
+  /* top speed: default and cap from spec.js (R38); sim-core.js clamps the command there too */
+  const SPEC = window.HuxSpec;
+  vmax.max = String(SPEC.speed.topMs);
+  vmax.value = String(SPEC.speed.topMs);
   function syncVmax() { vmaxOut.textContent = Number(vmax.value).toFixed(1) + " m/s"; }
   vmax.addEventListener("input", syncVmax);
   syncVmax();
@@ -561,7 +565,7 @@
     const left = keys.has("KeyA") || keys.has("ArrowLeft") || pad.has("left");
     const right = keys.has("KeyD") || keys.has("ArrowRight") || pad.has("right");
     const boost = keys.has("ShiftLeft") || keys.has("ShiftRight") ? 1.5 : 1;
-    const vm = Number(vmax.value) * boost;
+    const vm = Math.min(SPEC.speed.topMs, Number(vmax.value) * boost);
     let v = ((up ? 1 : 0) - (down ? 1 : 0)) * vm;
     let yaw = ((left ? 1 : 0) - (right ? 1 : 0)) * 1.6;
     let hRate = ((keys.has("KeyE") ? 1 : 0) - (keys.has("KeyQ") ? 1 : 0)) * 0.12;
@@ -593,7 +597,7 @@
     mu: function (x) { return x.toFixed(2); },
     tireK: function (x) { return (x / 1000).toFixed(0) + " kN/m · " + (sim.s.totalKg * 9.81 / 2 / x * 1000).toFixed(2) + " mm at half the weight"; },
     tireZeta: function (x) { return x.toFixed(2); },
-    massScale: function (x) { return (6 * x).toFixed(1) + " kg lumps"; },
+    massScale: function (x) { return (M.actuators.lumps.total * x).toFixed(1) + " kg lumps"; },
     bodyCom: function (x) { return x.toFixed(1) + "\""; },
     legHz: function (x) { return x.toFixed(1) + " Hz"; },
     legZeta: function (x) { return x.toFixed(2); },
@@ -635,11 +639,17 @@
     el.addEventListener("change", applyKnobs);
   });
   CHECKS.forEach(function (id) { document.getElementById("k_" + id).addEventListener("change", applyKnobs); });
-  document.getElementById("knobReset").addEventListener("click", function () {
+  /* the inputs start at the model's defaults (sim-core KNOBS: actuators.js caps; body CoM 0, not yet the spec's +1"),
+     not at whatever the page's value attributes say, so the first knob change cannot revert them */
+  function writeDefaultKnobs() {
     knobIds.forEach(function (id) { document.getElementById("k_" + id).value = String(DEFAULT_KNOBS[id]); });
     CHECKS.forEach(function (id) { document.getElementById("k_" + id).checked = !!DEFAULT_KNOBS[id]; });
+  }
+  document.getElementById("knobReset").addEventListener("click", function () {
+    writeDefaultKnobs();
     applyKnobs();
   });
+  writeDefaultKnobs();
   readKnobs();
 
   /* ---------- camera ---------- */

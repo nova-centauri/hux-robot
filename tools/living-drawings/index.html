@@ -12,11 +12,12 @@
       <div>
         <p class="kicker">Hux</p>
         <h1>Living drawings</h1>
-        <p>Side and top views of the working model, and the stair climb. Drag the joints, request a wheel position, or press Play. The 9.5 by 9.5 inch stair is a design target, not a validated capability; the V1 finish line is one step, 9 of 10 (R37). The layout the model is drawn to is <a href="sheet.html">Sheet 1</a>
+        <p>Side and top views of the working model, and a candidate stair climb. Drag the joints, request a wheel position, or press Play. The 9.5 by 9.5 inch stair is a design target, not a validated capability; the V1 finish line is one step, 9 of 10 (R37). The layout the model is drawn to is <a href="sheet.html">Sheet 1</a> and
           <a href="sheet2.html">Sheet 2</a>; its roll axes (3.0"), leg plane and body-CoM offset (+1") come from <code>spec.js</code>.</p>
         <nav class="pages" aria-label="Pages">
           <a href="index.html" aria-current="page">Drawings</a>
           <a href="sheet.html">Sheet 1</a>
+          <a href="sheet2.html">Sheet 2</a>
           <a href="sim.html">3D sandbox</a>
           <a href="flow.html">Data flow</a>
           <a href="software.html">Software</a>
@@ -95,7 +96,7 @@
         <div class="front-wrap">
           <h3>Front — sway and roll</h3>
           <svg id="front" class="sheet" role="img" aria-label="Front view of Hux on the stair, showing the lateral sway"></svg>
-          <p class="hint small">The actual spatial links and whole-robot CoM are projected here. Hip axes are 5.4″ from the body center. Hip holding torque is calculated separately from the gravity moment about the tire. Requested sway is not automatically achievable.</p>
+          <p class="hint small">The actual spatial links and whole-robot CoM are projected here. Hip roll axes are 3.0″ from the body center (<code>spec.js</code>, Sheet 1). Hip holding torque is calculated separately from the gravity moment about the tire. Requested sway is not automatically achievable.</p>
         </div>
       </div>
       <div class="transport">
@@ -151,7 +152,7 @@
           <select id="pairDrive">
             <option value="joints">Joint angles</option>
             <option value="wheels">Wheel positions</option>
-            <option value="climb">Climb the stairs</option>
+            <option value="climb">Stair candidate (rejected)</option>
           </select>
         </label>
         <div id="wheelDrive" hidden>
@@ -181,7 +182,7 @@
           <input id="knobPush" type="range" min="0.30" max="1.20" step="0.01" value="0.44">
         </label>
         <label>Wheel torque <output id="knobTauOut"></output>
-          <input id="knobTau" type="range" min="0.3" max="6" step="0.1" value="3">
+          <input id="knobTau" type="range" min="0.3" max="6" step="0.1" value="5.5">
         </label>
         <label>Front wheel may roll back <output id="knobRoomOut"></output>
           <input id="knobRoom" type="range" min="0" max="1.75" step="0.05" value="1">

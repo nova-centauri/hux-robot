@@ -1,9 +1,11 @@
 /* Hux working model. Inches and degrees for geometry, SI for forces and momentum.
    Source: docs/research/leg-geometry.md and docs/research/stair-climb-dynamics.md
-   Body length, body width, and the lateral hip offset are drawing assumptions. They are not settled. */
+   Body length and body width are drawing assumptions, not settled. The hip roll axes, the leg
+   plane and the body CoM offset come from spec.js (Sheet 1, 2026-09-27); the lumps and motor
+   envelopes from actuators.js. */
 (function (root) {
   const M = {
-    asOf: "2026-09-22",
+    asOf: null, /* spec.js asOf, filled in below */
     wheelOd: 6,
     wheelWidth: 1.25,
     /* Tread cross-section radius. width/2 is a full round (scooter / motorcycle profile), which is
@@ -19,23 +21,24 @@
     going: 9.5,
     soffit: 1,
     stanceFraction: 0.92,
-    exampleMassKg: 6, /* overwritten below from the actuator set's lumps */
+    exampleMassKg: null, /* the actuator set's lump total (7.75 kg), filled in below */
     g: 9.81,
     /* Lateral distance from the body centerline to each hip roll axis. Was a 5.4" drawing
        assumption (legs just outside the 7" head); since 2026-09-26 a requirement (≤ 3" for the
        RS02 roll hold) and since 2026-09-27 the Sheet 1 layout number, read from spec.js below.
-       The model puts the leg plane on the roll axis; the sheet draws the tubes at M.legPlane. */
-    hipLateral: 5.4,
-    legPlane: 5.4,
+       The model puts the leg plane on the roll axis; the sheet draws the tubes at M.legPlane.
+       Both filled in below from spec.layout (3.0" and 4.75"). */
+    hipLateral: null,
+    legPlane: null,
     /* Motor envelopes come from the locked actuator set (actuators.js, 2026-09-26): RS02 at the
        knee and hip roll (3.1" square × 1.8"), RS00 hip swing (2.2" × 2.0"), RS05 wheel (1.8" × 1.7").
        Filled in below. */
-    motorWheelD: 2.0,
-    motorWheelW: 1.1,
-    motorKnee: { w: 1.6, h: 1.5, t: 1.15 },
-    motorSwing: { w: 1.8, h: 1.6, t: 1.4 },
-    motorRollD: 1.6,
-    motorRollL: 1.5,
+    motorWheelD: null,
+    motorWheelW: null,
+    motorKnee: null,
+    motorSwing: null,
+    motorRollD: null,
+    motorRollL: null,
     displayW: 2.2,
     displayH: 1.0,
     eyeD: 0.7,
@@ -47,6 +50,7 @@
   M.actuators = ACT;
   const SPEC = root.HuxSpec || require("./spec.js");
   M.spec = SPEC;
+  M.asOf = SPEC.asOf;
   M.hipLateral = SPEC.layout.hipRollAxisIn;
   M.legPlane = SPEC.layout.legPlaneIn;
   M.motorKnee = { w: ACT.envIn.knee.w, h: ACT.envIn.knee.h, t: ACT.envIn.knee.t };
@@ -416,7 +420,8 @@
      leaves the rear wheel with forward angular momentum about the front contact. And
      the front wheel, which is a driven wheel on a shelf, rolls BACK under the mass while
      it is in the air. Rolling the contact back is worth exactly its distance in
-     "behind", and at 3 N·m it is a stronger righting effect than gravity's pull-back.
+     "behind", and at the wheel's torque (P.wheelTau: the RS05's 5.5 N·m peak; the
+     2026-09-22 study had 3 N·m) it is a stronger righting effect than gravity's pull-back.
      Only after the mass is over the front contact does the body stand up.
 
      A is the trailing foot. B leads. Right leads on even steps.
@@ -598,6 +603,31 @@
       - (J.knee.dth.x * Fknee.x + J.knee.dth.y * Fknee.y) + shinCouple;
     const knee = -(J.axle.dph.x * Faxle.x + J.axle.dph.y * Faxle.y) - shinCouple;
     return { hip: hip, knee: knee };
+  }
+
+  /* Knee gravity spring (Sheet 2, R39): an extension spring along the upper link pulling a cable
+     over a pulley of radius spec.sheet2.spring.pulleyIn on the knee arm, so torque = F · Rp and the
+     cable pays out Rp · φ: linear in the bend. Fitted through the two-leg gravity knee torque (half
+     the lump picture on each knee, point load at the axle) at the 92% stance and the 75% crouch.
+     The one fit Sheet 1 and Sheet 2 both print; it follows the lumps, the stance and the pulley.
+     (The fixed "~2.2 N·m" of the 6 kg picture is retired.) */
+  function kneeSpring() {
+    const W2 = M.exampleMassKg * M.g / 2;
+    const two = function (th, ph) { return Math.abs(legTorques(th, ph, { x: 0, y: W2 }, { x: 0, y: 0 }, 0).knee); };
+    const two92 = two(M.balanceTheta, M.balancePhi);
+    const two75 = two(M.deepTheta, M.deepPhi);
+    const phi92 = rad(M.balancePhi), phi75 = rad(M.deepPhi);
+    const kEff = (two75 - two92) / (phi75 - phi92);             /* N·m per rad of bend */
+    const T0 = Math.max(0, two92 - kEff * phi92);               /* N·m preload at the straight leg */
+    const pulleyIn = SPEC.sheet2.spring.pulleyIn;
+    const RpM = pulleyIn * INCH;
+    const kSpring = kEff / (RpM * RpM);                         /* N/m, the extension spring */
+    const preloadN = T0 / RpM;
+    return {
+      two92: two92, two75: two75, kEff: kEff, T0: T0, pulleyIn: pulleyIn, kSpring: kSpring, preloadN: preloadN,
+      torque: function (phiDeg) { return kEff * rad(phiDeg) + T0; },
+      force: function (phiDeg) { return kSpring * RpM * rad(phiDeg) + preloadN; }
+    };
   }
 
   function buildClimb() {
@@ -1613,6 +1643,7 @@
     frontView: frontView,
     rebuild: rebuild,
     legTorques: legTorques,
+    kneeSpring: kneeSpring,
     climb: function () { return CLIMB; },
     groundY: groundY,
     poseHits: poseHits,

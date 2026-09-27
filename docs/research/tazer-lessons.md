@@ -1,5 +1,7 @@
 # Tazer — learn from the mistakes
 
+> **Status 2026-09-27:** the Hux-side lines below predate the 2026-09-26 locks. Now: RT MCU **Teensy 4.1** (not "FC TBD") — picked for its CAN count, not because Tazer used one; **8S** (not 4S); the RobStride set under a temporary lock replaces GIM8108-8 as the knee / swing candidate (servo / stepper+belt is the fallback). Current intent: [`../decisions.md`](../decisions.md).
+
 Steve 2026-09-21: watch [My Robot almost got me Kicked out of Uni](https://www.youtube.com/watch?v=gqnW9qBCHnM) (Tazer) and **learn a lot from this guy's mistakes**. Inspiration + anti-patterns. **Not a Hux stack, BOM, or CAD source.** No spend. FC stays **TBD**.
 
 This sits next to [inspiration.md](inspiration.md). It does not replace [XRobots](xrobots.md), Hattori, Serra, or [study-plan.md](study-plan.md) Phases A–D.

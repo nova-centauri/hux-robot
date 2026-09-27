@@ -1,5 +1,7 @@
 # RAI Institute — Roadrunner
 
+> **Status 2026-09-27:** the Hux-side lines below predate the 2026-09-26 locks. Now: RT MCU **Teensy 4.1** (not "FC TBD"). Current intent: [`../decisions.md`](../decisions.md).
+
 Steve shared this as research inspiration (one of [two X shares](inspiration.md)). **Watch and extract heuristics. Do not start build work from it.**
 
 Roadrunner is a **lab prototype** with a learned (RL) policy stack. Hux's path stays [XRobots](xrobots.md) + Hattori + a **TBD** flight controller. There is no public CAD or firmware to vendor. No spend.

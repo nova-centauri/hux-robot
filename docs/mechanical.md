@@ -1,20 +1,19 @@
 # Mechanical
 
-**Status:** TBD. No CAD, no printed or machined customs, no locked geometry.
+**Status (2026-09-27):** 2D stage. **Sheet 1 (layout) and Sheet 2 (make-up) are drawn** on the site; both are proposals until Steve agrees them. No CAD, no parts made. Geometry is the settled draw (6" wheel, 7.5" + 7.5" links, 9.5" × 9.5" step) plus the Sheet 1 layout.
 
-V1 target is **one wheel-leg** — printed / machined **fittings** on **carbon-tube spars** — with a linkage + spring stub, sized toward a **~9.5"** step. Envelope: up to **~24" tall at full extension**, **~14" wide**. The head sits inside that width. Wheels and legs are outside the head. Do not wait on the flight controller. **Do not open Blender until several 2D sketch layouts exist** (R23).
+V1 target is **one wheel-leg** — printed / machined **fittings** on **carbon-tube spars** — with the knee pulley spring (Sheet 2), sized toward a **~9.5"** step. Envelope: up to **~24" tall at full extension**, **~14" wide**. The head sits inside that width. Wheels and legs are outside the head. Do not wait on electronics. **Do not open Blender until several 2D sketch layouts exist** (R23).
 
 **Parts on hand:** [`parts-on-hand.md`](parts-on-hand.md). A **5"** walker-wheel pair is already ordered — **bench donor only**, not the foot. Wheel diameter is **settled at 6" OD**: [`research/leg-geometry.md`](research/leg-geometry.md).
 
-**Shop / fab:** [`capabilities.md`](capabilities.md). End fittings (hubs, belt mounts, joint flanges) are a natural print / mill / lathe job. **Do not mill a spar that a carbon tube already is** (R19 / R34).
+**Shop / fab:** [`capabilities.md`](capabilities.md). End fittings (F1–F7 on Sheet 2: hip and knee flanges, the knee arm and pulley, the axle fitting, the hub) are a natural print / mill / lathe job. **Do not mill a spar that a carbon tube already is** (R19 / R34).
 
 **Decisions:** [`decisions.md`](decisions.md). Actuator trade: [`research/actuators-legs.md`](research/actuators-legs.md).
 
 ## Intent
 
 - Two legs, each ending in a **brushless FOC driven wheel** whose motor sits **at the wheel** (hub / coaxial at the rim) — not remote-driven from the hip (R6 / R30).
-- Legs via **strong linkages + springs** (gravity compensation / energy return).
-- Prefer linkage over *pure* serial belts for V1 simplicity. A belt, if present, is **reduction / run** — not “belts instead of a linkage.” Longer spars still mean **longer belt runs** if a belt is the reducer.
+- Legs via **springs** for gravity compensation (R7): V1 is a serial leg with the knee spring on a pulley (Sheet 2). No belts in the working plan; the belt rules below apply only to the stepper / servo fallback.
 - Design stroke and clearance around a ~9.5" residential riser (up and down). The **~24"** full-extension envelope has to **reach that riser with margin**.
 - **Jointed legs should keep CoG over wheel contact as height changes** (Serra packaging).
 - **Knee actuator at the knee joint** for V1 with a gravity spring; hip-driven linkage is a V2 refinement; **no five-bar / parallel leg** (R39, 2026-09-27; [`research/knee-linkage.md`](research/knee-linkage.md)).
@@ -37,11 +36,11 @@ Docs only. Envelope and structure bias — not locked CAD, not a SKU list, **no 
 
 Printed or machined **fittings at the ends** only:
 
-- Hubs
-- Belt mounts / pulley faces
-- Joint flanges (hip, knee, wheel)
+- Hubs (the RS05 web and rim, F6)
+- The knee arm with its spring pulley
+- Joint flanges (hip, knee, axle)
 
-Do not print a carbon-tube-shaped spar. Do not turn a tube on the lathe to “make a nicer spar.” Cut COTS tube to length (bandsaw is enough); the shop owns the **ends**. **Wet-cut + respirator** — carbon dust (Tazer; [`capabilities.md`](capabilities.md)). Tube diameter / wall **TBD**. No carbon-tube SKU.
+Do not print a carbon-tube-shaped spar. Do not turn a tube on the lathe to “make a nicer spar.” Cut COTS tube to length (bandsaw is enough); the shop owns the **ends**. **Wet-cut + respirator** — carbon dust (Tazer; [`capabilities.md`](capabilities.md)). **16 × 14 mm** for both links (Windcatcher 16×14×1000, 2 in the order-now cart). Sheet 2: cuts ~191 / 196 mm, 40 mm bonded + cross-pinned sockets, knee bending 75 MPa at the 12.4 N·m stand-up, 102 MPa at the RS02's 17 peak — the bonded socket, not the tube, is the limit.
 
 ### Height envelope — ~24" at full extension (R35)
 
@@ -71,28 +70,28 @@ Sketch lines (fill when something is weighed — empty TBD is correct):
 
 | Bucket | Mass (TBD) | Notes |
 | --- | --- | --- |
-| Two wheel motors + drivers + encoders | TBD | Reaction-speed / torque-bandwidth class (R25). In-wheel. |
-| Hip swing + knee actuators | TBD | Servo vs stepper+belt **TBD** (R12). Size for ~2× plant (R36). |
-| Hip-roll actuators | TBD | Dynamic class **in V1** (R16 / R27). |
+| Two wheel actuators (RS05, driver + encoder on board) | vendor 2 × 0.19 kg | Temporary lock. In-wheel (R25 / R30). |
+| Hip swing + knee actuators (2× RS00, 2× RS02) | vendor 2 × 0.31 + 2 × 0.39 kg | Temporary lock (R12). Knee stand-up 12.4 N·m, 6.4 at the motor with the spring. |
+| Hip-roll actuators (2× RS02) | vendor 2 × 0.39 kg | Temporary lock, **in V1** (R16 / R27). |
 | Structure (carbon tubes + end fittings) | TBD | Do not spend mass on a printed spar. |
 | 8S 3300 mAh 50–60C LiPo | ~700 g, ~150 × 50 × 60 mm | R11, 2026-09-26. Low and central; add to the body lump. |
-| Hip roll axis lateral offset | **3.0" from the centreline — drawn on Sheet 1 (2026-09-27); ≤ 3" was the 2026-09-26 requirement** | The one-wheel hold with the locked actuator masses: 10.7 N·m at the drawn 5.4", 6.0 at 3". RS02 is rated 7. The head is 7" wide; the RS02 roll housing is 3.1" square — the roll actuators end up at or inside the head's faces. 2D-layout task. |
-| Actuator envelopes | RS02 78.5 × 78.5 × 45.5 mm (knee, roll); RS00 57 × 57 × 51 (swing); RS05 46 × 46 × 44 (wheel) | From `actuators.js`; drawn in the living drawings. The RS05 is wider than the 1.25" tire — hub drawing needed. |
+| Hip roll axis lateral offset | **3.0" from the centreline — drawn on Sheet 1 (2026-09-27); ≤ 3" was the 2026-09-26 requirement** | The one-wheel hold with the locked actuator masses: 10.7 N·m at the drawn 5.4", 6.0 at 3". RS02 is rated 7. Model hold at 3.0": **6.3 N·m** (`frontal.js`, Sheet 1 geometry). The roll housings sit in a **9.1"** hip band — one wider lower shell under the 7" head (Sheet 2). |
+| Actuator envelopes | RS02 78.5 × 78.5 × 45.5 mm (knee, roll); RS00 57 × 57 × 51 (swing); RS05 46 × 46 × 44 (wheel) | From `actuators.js`; drawn in the living drawings. The RS05 (44 mm) is wider than the 1.25" tire: Sheet 2 sets its outboard face flush with the tire and lets it reach 0.48" into the spacer. Open: its output-bearing rating under the cantilevered rim. |
 | Companion slot | TBD | Head carries a slot sized for an Orin Nano dev kit (~100 × 79 × 21 mm + fan) with a 12–19 V feed and airflow; the Pi 5 occupies it in V1 (R22). |
-| CAN real-time MCU + TBS Nano RX | TBD | Teensy 4.1 / H743-WING class, picked with the actuators (2026-09-26). F765 is bench only. |
-| Raspberry Pi + camera(s) | TBD | Companion. Not on the FC. |
+| CAN real-time MCU + TBS Nano RX | TBD | **Teensy 4.1** + IMU + 3 CAN transceivers (2026-09-26), in the hip band above the pack (Sheet 2). F765 is bench only. |
+| Raspberry Pi 5 + camera(s) | TBD | Companion, in the head slot. |
 | Fasteners, wire, springs, margin | TBD | Leave slack. |
-| **V1 total** | **soft** | Historical preference 4–5 lb / under 6 lb. Not a gate. |
+| **V1 total** | **soft** — model picture **7.75 kg** | Lumps in `actuators.js`: body 4.35 (8S pack inside), hips 1.50, knee 0.46 each, wheel 0.49 each. Historical preference 4–5 lb / under 6 lb. Not a gate. |
 
 ### Implications of the taller tubes
 
 | What changes | Why it matters |
 | --- | --- |
-| **Belt runs get longer** | Knee / hip-swing reducers (if belts) span more tube. Plan tension, idlers, and service along the spar. Wires must not occupy the belt path (R21). |
-| **Actuators sit at the joints** | Servo / stepper / **GIM8108-class** *candidate* at **hip and knee**, with **tube between**. The spar is empty length, not a motor house. Class is **not locked** (R12). No SKU. |
-| **CoG sits higher** | Helps: inverted-pendulum fall is slower (`ω ≈ √(g/h)`). At the working stance that doubling time is about **145 ms**. Hurts: more inertia and a longer disturbance arm. Static moment about the planted wheel is `m g d` (height drops out): ~**9.5 N·m** at 6 kg if the CoG is still on the **12.75"** track's centerline. |
+| **Wires run inside the tubes** | No belts in the working plan, so the tube bore is the wire path: ports in F2 / F3 / F5, service loops at the knee and hip (Sheet 2, R21). |
+| **Actuators sit at the joints** | RS00 at the hip, RS02 at the knee, **tube between** (R39). The spar is empty length, not a motor house. |
+| **CoG sits higher** | Helps: inverted-pendulum fall is slower (`ω ≈ √(g/h)`). At the working stance that doubling time is about **145 ms**. Hurts: more inertia and a longer disturbance arm. Static moment about the planted wheel is `m g d` (height drops out): ~**12.3 N·m** at the 7.75 kg picture (9.5 at the old 6 kg) if the CoG is still on the **12.75"** track's centerline. |
 
-Do not hang joint mass in the middle of a tube to “use the length.” Do not invent a GIM8108 buy to fill the class.
+Do not hang joint mass in the middle of a tube to “use the length.”
 
 ## Design rules (Steve 2026-09-20)
 
@@ -116,7 +115,7 @@ Cable paths go **through** links and the body, not taped to the outside after th
 
 ### 4. Serviceability (R22)
 
-Access to fasteners, batteries, FC (bay — board still TBD), and actuators as **replaceable modules**. Steal Serra's habit: threaded inserts, independently removable parts, inside access. A sealed mono-leg that hides a belt or a pack is out of intent.
+Access to fasteners, the pack, the MCU (Teensy 4.1, in the hip band), and actuators as **replaceable modules**. Steal Serra's habit: threaded inserts, independently removable parts, inside access. A sealed mono-leg that hides a belt or a pack is out of intent.
 
 ### 5. Process — several 2D sketch layouts before Blender (R23)
 
@@ -124,13 +123,13 @@ Access to fasteners, batteries, FC (bay — board still TBD), and actuators as *
 
 ## Wheels — 6" OD, in-wheel drive
 
-Steve 2026-09-21: settle the wheel so it fits comfortably on one step. The robot pivots on the planted wheel and sets the raised wheel on the next step. Full math: [`research/leg-geometry.md`](research/leg-geometry.md). **Size is locked. Not a buy.**
+Steve 2026-09-21: settle the wheel so it fits comfortably on one step. The robot pivots on the planted wheel and sets the raised wheel on the next step. Full math: [`research/leg-geometry.md`](research/leg-geometry.md). **Size is locked.** The 6×1.25 pneumatic tires and tubes are in the order-now cart.
 
 - **6" overall diameter** (a real tire at **5.75–6.25"** still counts). Width **~1–1.25"**. Real rubber, torsionally stiff (high pressure or a firm elastomer). Radial give for a nosing. Not carcass twist between the encoder and the ground.
 - Design step is **9.5" rise × 9.5" going**, nosing to nosing. The whole tire sits between the nosings with about **±1.75"** of roll (~±6° of lean at a 17" hip) and about **2.5"** of air under a 1" soffit. That is the pivot-and-place margin.
 - **No spokes.** A turned hub with the rubber on it. A 12" kids wheel is wider than the slot.
 - **5" Zantle** stays a disposable **bench donor**. Do not cut the 7.5" tubes to suit it. [`parts-on-hand.md`](parts-on-hand.md).
-- Drive is **in-wheel brushless FOC** (R6 / R30). Motor / ESC / encoder models TBD. No wheel-motor SKU.
+- Drive is **in-wheel brushless FOC** (R6 / R30): **RobStride 05**, temporary lock. Sheet 2 hub: the RS05's outboard face flush with the tire, stator on the axle fitting F5 inboard, a disc web from the output flange to a turned 3.75"-bead rim. Open: the output-bearing rating under the cantilevered rim (38 / 76 / ~230 N static / one-leg / landing).
 
 The rim still does **not** own the step height. The axle rises 9.5" whatever the diameter. The going owns how large a tire can sit there and still roll.
 
@@ -144,19 +143,19 @@ The in-wheel BLDC hub is a **natural lathe / mill part** ([`capabilities.md`](ca
 
 ### kV match is a sizing goal (R31)
 
-Aim to match motor kV to (1) the **8S** bus, (2) **wheel diameter**, (3) **balance bandwidth** (R25). This is a **goal**, not a picked kV. Do not invent a number or a “close enough” SKU.
+Answered by the RS05 lock: on the 8S bus at the 6" wheel it runs 296 rpm no-load (nominal), 188 rpm at the 1.5 m/s top speed with 2.0 N·m still in hand (R38, `spec.js`). Revisit only if the wheel actuator changes.
 
 ### Wheel drive class (R25)
 
 The wheel motor is a **balance actuator**. Catch a tip on one skinny rim — torque-bandwidth / reaction speed, not max continuous watts.
 
-Candidate *classes* (not buys) — see [`electronics.md`](electronics.md):
+**Temporary lock: RobStride 05** (1.7 rated / 5.5 peak N·m, 7.75:1). The class survey that led there, kept for reference — see [`electronics.md`](electronics.md):
 
 - Lightweight: gimbal BLDC ~2208–4108 + FOC + magnetic encoder, **with reduction**. Bare ~0.5 N·m is trim on the 6" wheel, not a catch. [StackForce mini](https://wiki.seeedstudio.com/stackforce_mini_wheeled_legged_robot/) (~540 g / 2208) is a **scale** reference, not a kit lock.
 - Mid: small outrunner + planetary / cycloidal. This is the honest band for about **3 N·m** peak at the 6" contact.
 - Avoid for Hux: large ODrive 63xx / hoverboard hubs (SonicRobot class — steal loops, not iron).
 
-Wheel torque target (one planted wheel, ~6 kg example, **6" OD**): about **0.8 / 1.5 / 2.2 N·m** to stop a **10° / 20° / 30°** fall, so about **3 N·m peak**. On the step itself the shelf caps the catch at about **±6°** before the tire crosses a nosing. Formula: [`research/leg-geometry.md`](research/leg-geometry.md). The old **~0.8 N·m** line was a 2 kg machine. Do not hang a GIM8108-class actuator on the axle. Axle speed for balance is roughly **60–380 rpm**. Recompute when a robot is weighed.
+Wheel torque (one planted wheel, **6" OD**, lean-equilibrium estimate m·g·R·sin θ): about **1.0 / 2.0 / 2.9 N·m** at **10° / 20° / 30°** on the 7.75 kg picture (0.8 / 1.5 / 2.2 at the old 6 kg). The RS05's 5.5 N·m peak is above the traction limit (~4.1 N·m fully loaded at μ 0.7), so the catch is grip-limited before it is torque-limited. **At the 1.5 m/s top speed the RS05 has 2.0 N·m left — about a 20° lean's worth** (1.6 near cutoff); that is what R38's reserve buys. On the step the shelf caps the catch at about **±6°** before the tire crosses a nosing. Formula: [`research/leg-geometry.md`](research/leg-geometry.md). Recompute when a robot is weighed.
 
 ## Hip roll axis (CoG shift) — IN V1
 
@@ -173,32 +172,32 @@ This is **not** the same joint as hip swing (pitch / lift the leg for a step) or
 
 Hip roll **alone** does not balance. The planted wheel still has to drive forward / back to keep the contact under the CoG (R17). Spec: [`software.md`](software.md).
 
-**In V1.** Experimental — may not work as hoped. Still include the joint mechanically and in the modes. Do not fake a CoG shift in firmware if the joint is unplugged, and do not unplug it to wait for V2. Placement **TBD**. Do not drop CoG with heavy roll actuators if avoidable. Steve 2026-09-25 dislikes the hip-pivot unload onto one foot; that is an **open rethink**, not a lift of this lock. See [`research/stair-climb-dynamics.md`](research/stair-climb-dynamics.md) and [`decisions.md`](decisions.md).
+**In V1.** Experimental — may not work as hoped. Still include the joint mechanically and in the modes. Do not fake a CoG shift in firmware if the joint is unplugged, and do not unplug it to wait for V2. Placement: **roll axes 3.0" from the centreline** in a 9.1" hip band (Sheet 1 / Sheet 2); RS02, temporary lock; one-wheel hold 6.3 N·m vs 7 rated. Steve 2026-09-25 dislikes the hip-pivot unload onto one foot; that is an **open rethink**, not a lift of this lock. See [`research/stair-climb-dynamics.md`](research/stair-climb-dynamics.md) and [`decisions.md`](decisions.md).
 
 Actuator class: **dynamic** FOC BLDC / small QDD / fast bus servo (R27). **Not a stepper.**
 
 ## Leg actuators — CAN QDD working class; servo vs stepper+belt is the fallback
 
-*Revised 2026-09-26: on 8S the working class for knee / hip swing is a CAN QDD actuator (GIM8108-class). The servo / stepper trade below is kept as the fallback and for the packaging lessons (mount high, belts to pivots).*
+*Revised 2026-09-26: on 8S the working class for every joint is a CAN QDD actuator, **temporarily locked to the RobStride set** (`tools/living-drawings/actuators.js`). 2026-09-27: the knee RS02 sits **at the knee** (R39). The servo / stepper trade below is kept as the fallback and for its packaging lessons.*
 
-Steve 2026-09-20 follow-up. **Do not lock either class** for knee and hip swing (R12). A earlier packet locked stepper+belt — **that lock is lifted.** Do not write a servo lean into the baseline either.
+History: Steve's 2026-09-20 follow-up said not to lock either class for knee and hip swing (R12), and lifted an earlier stepper+belt lock. The 2026-09-26 CAN decision and actuator lock superseded that.
 
 | Joint | Status | Notes |
 | --- | --- | --- |
-| **Wheels** | In-wheel brushless FOC (R6 / R30) | Locked *class*. SKU TBD. |
-| **Knee / hip swing** | **CAN QDD working class**; servo / stepper+belt fallback | 2026-09-26. Size **either** for one-leg plant load (R36). **GIM8108-8** is a candidate (not ordered). Serra's 40 kg-class servos are a data point, not a Hux SKU. |
-| **Hip roll** | **In V1.** Dynamic FOC / QDD / fast servo | **Not a stepper.** Size for ~2× plant-side load (R36). Experimental. |
+| **Wheels** | In-wheel brushless FOC (R6 / R30) | **RS05**, temporary lock; flush in the hub (Sheet 2). |
+| **Knee / hip swing** | **CAN QDD working class**; servo / stepper+belt fallback | **RS02 knee (at the knee, with the pulley spring), RS00 hip swing**, temporary lock. Knee stand-up 12.4 N·m → 6.4 at the motor with the spring (RS02 7 rated / 17 peak). GIM8108-8 was the earlier yardstick. |
+| **Hip roll** | **In V1.** Dynamic FOC / QDD / fast servo | **RS02**, temporary lock. **Not a stepper.** Sized by the one-wheel cantilever: 6.3 N·m at the 3.0" axes. Experimental. |
 
 If **steppers** are later chosen:
 
 - Knee is **not** a bare stepper — belt / gear reduction is required.
 - Hip-swing **belt is the reduction** for that joint — not a second actuator.
 - Mount **above the knee** (mass high) (R32). **One belt inside, one outside** (R33).
-- **FC does not drive stepper coils** (R29).
+- **The MCU does not drive stepper coils** (R29).
 
 If **servos** are later chosen: still size for R36; still keep mass high if the packaging allows; still serviceable modules.
 
-R7 still stands. A servo or a stepper+belt can drive a linkage; springs still assist gravity.
+R7 still stands on any class: springs assist gravity.
 
 ## Design rule — one-wheel standing load (~2×) (R36)
 
@@ -208,11 +207,11 @@ When Hux stands on **one** wheeled leg (R2; stair plant), the plant-side knee, h
 
 - “Holds fine on two wheels” is not a pass.
 - Dynamic spike (push, step commit, missed plant) is at least this bad, not better.
-- ~2× is a **design rule of thumb** until we weigh a real Hux and measure a plant. Do not invent a torque SKU from it.
+- ~2× is a **design rule of thumb** until we weigh a real Hux and measure a plant. The hip roll does not follow it — its load is the body + free-leg cantilever (6.3 N·m at 3.0").
 
-Write the rule on the first wheel-leg sketch (Phase D).
+Sheets 1 and 2 carry the one-leg numbers (knee 5.7 N·m at 92 %, 12.4 at the stand-up; roll 6.3).
 
-## Layout (if belts)
+## Layout (if belts — fallback only)
 
 Applies when pose joints use belts (stepper+belt path, or a servo+belt reducer). IDs **R30–R33**.
 
@@ -251,23 +250,22 @@ Do not vendor their STLs, Fusion, or Gerbers. Do not buy their 40 kg servos or 3
 Use this instead of a fake finished BOM. Canonical box list: [`checklists/mechanical-v1.md`](checklists/mechanical-v1.md). Tick in [`NOTES.md`](../NOTES.md) when something is real.
 
 - [ ] Measure a real ~9.5" riser / fixture (riser, tread, nosing).
-- [ ] **Several 2D sketch layouts** (side / front / top + linkage) show **motor-at-wheel**, **~24" / ~14"** envelope, and **inside/outside belt runs** if belts. **No Blender until this is real** (R23).
+- [ ] **Several 2D sketch layouts** (side / front / top + linkage) show **motor-at-wheel** and the **~24" / ~14"** envelope. **No Blender until this is real** (R23). *Sheet 1 + Sheet 2 drawn 2026-09-27 — tick when Steve agrees them.*
 - [ ] Sketch the settled **6"** wheel inside the **9.5" × 9.5"** slot, with **7.5" + 7.5"** tubes and **~6"** above the hip ([`research/leg-geometry.md`](research/leg-geometry.md)).
 - [ ] **COTS carbon tubes** for upper + lower main lengths. Printed / machined **end fittings** only. Do not print the spar (R34 / R19).
 - [ ] Customs have **draft**, wire **ports**, **service** access (R20–R22).
-- [ ] Linkage layout + spring stub. Jointed motion keeps CoG over wheel contact as height changes.
+- [ ] Knee spring (Sheet 2: pulley + extension spring, 3.05 N·m/rad + 0.38 preload) — part picked and bench-checked (open call 15). Jointed motion keeps CoG over wheel contact as height changes.
 - [ ] Plant-side joints sized for **one-wheel standing load (~2×)** (R36).
-- [ ] Leg actuator class on the sketch: **CAN QDD** working class; servo / stepper+belt fallback. Hip roll **in V1** (dynamic). No SKU.
-- [ ] Wheel hub / coaxial BLDC — motor **at the rim** (R30). kV match is a **goal** (R31). Lathe / mill welcome.
+- [ ] Actuators on the sketch: RS02 knee + roll, RS00 swing, RS05 wheel (temporary lock). Hip roll **in V1**. One RS02 validated on the bench before the set is bought.
+- [ ] Wheel hub — RS05 **at the rim** (R30), flush outboard, turned 3.75"-bead rim (Sheet 2). Output-bearing rating confirmed (open call 14). Lathe / mill welcome.
 - [ ] Print and/or machine + fit the first leg. No second copy until the first one articulates.
-- [ ] Clearance check: raised wheel can reach the next 9.5" tread **with margin**, without self-collision.
+- [ ] Clearance check: raised wheel can reach the next 9.5" tread **with margin**, without self-collision. *A feasible one-step trajectory on the Sheet 1 geometry is still open (NOTES open call 16).*
 
 ## Out of scope for V1
 
 - Full stair gait hardware (two finished legs + body).
-- **New** spend on actuators, carbon tube, or wheels. The 5" pair is **already ordered** — bench donor only. The 6" size is not an order.
-- Locking an FC mount *model* before the FC is chosen (the **bay** still gets designed).
-- Locking servo vs stepper+belt, a tube OD / wall, GIM8108 SKU, or belt pitch.
+- Spend beyond the [`bom.md`](bom.md) order-now cart (tires, tubes, carbon tube, Teensy kit, XT90-S, pack). Actuators wait for one validated RS02. The 5" pair is **already ordered** — bench donor only.
+- Belts, and a belt pitch — none in the working plan.
 - Printing or machining a spar that COTS carbon tube already is.
 - Treating 4–5 lb / under 6 lb as a hard mass gate.
 - Remote wheel drive from the hip.

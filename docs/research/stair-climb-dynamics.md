@@ -1,5 +1,7 @@
 # Stair candidate — corrected feasibility status
 
+> **Status 2026-09-27:** still rejected. `kin.js` at the Sheet 1 numbers (3.0" roll axes, body CoM +1"): 192/201 frames unreachable, reference wheel 6.4 N·m > RS05 5.5 peak, knee 23 > RS02 17, hip swing 11.8. No validated stair trajectory exists for the **V1 finish line (R37): one 9.5" step, 9 of 10 from a standstill**. Knee static hold is now **12.4 N·m** (6.4 with the Sheet 2 spring).
+
 The 9.5-inch rise × 9.5-inch going remains a design target. **The current candidate is rejected.** The earlier planar momentum window did not establish a working stair gait. See the [sourced audit](real-world-validation.md) and [correction record](model-corrections.md).
 
 ## Geometry and balance
@@ -24,7 +26,7 @@ The original sagittal path, timing, Jacobian loads and reduced momentum simulati
 
 Contact feasibility requires nonnegative normal force, `abs(F_tangent) <= μ F_normal`, and available wheel torque. At zero normal force, there is no tangential traction. All reference phases and seams are inspected; the verdict cannot turn green merely because the reduced momentum calculation crests.
 
-Previous recommendations to put the pack 1–2 inches forward, aim toward the rear of the tread, or accept a ±6% throw window are **unvalidated sensitivity studies**. Do not fix the mass layout or buy motors from those results. Increasing torque or friction cannot repair an unreachable mechanism pose.
+Previous recommendations to put the pack 1–2 inches forward, aim toward the rear of the tread, or accept a ±6% throw window are **unvalidated sensitivity studies**. Do not fix the mass layout or buy motors from those results. *(2026-09-27: Sheet 1 adopts body CoM +1" ahead of the roll axes and a rear-of-slot landing aim as layout choices; they are still not a validated gait.)* Increasing torque or friction cannot repair an unreachable mechanism pose.
 
 ## Required next design result
 
@@ -58,4 +60,4 @@ Decision log: [`../decisions.md`](../decisions.md). Mechanical lock language is 
 | +1" | 0.90 | 0.79 | 0.94 | crests; margin 0.11, window 0.15 |
 | +1.5" | 0.90 | 0.68 | 0.83 | crests; margin 0.22 |
 
-Static holds on the drawn path: **knee 13.6 N·m** standing up over the front wheel (was 10.6), hip swing 4.0. Drawn-path dynamic peaks (rough, the hand-drawn path has velocity kinks): knee 20–23, hip swing 11–12, wheel 4–6 N·m — against RS02 17 / RS00 14 / RS05 5.5 peak. The candidate stays **rejected** on spatial reach (`model-corrections.md`); the mass result is a second, independent reason, and it says the same thing the 2026-09-22 note said before it was retired as a decision: **the body mass has to sit ahead of the hip axes** for a step-to gait on this geometry.
+Static holds on the drawn path: **knee 13.6 N·m** standing up over the front wheel (was 10.6), hip swing 4.0. *(2026-09-27: Sheet 1's stand-up pose, full weight at the hip, gives 12.4 N·m — a different calculation from this drawn-path hold; 6.4 at the motor with the Sheet 2 spring.)* Drawn-path dynamic peaks (rough, the hand-drawn path has velocity kinks): knee 20–23, hip swing 11–12, wheel 4–6 N·m — against RS02 17 / RS00 14 / RS05 5.5 peak. The candidate stays **rejected** on spatial reach (`model-corrections.md`); the mass result is a second, independent reason, and it says the same thing the 2026-09-22 note said before it was retired as a decision: **the body mass has to sit ahead of the hip axes** for a step-to gait on this geometry.

@@ -42,19 +42,14 @@
      past ~2·atan(offset/anchor) of fold (its line crosses the knee axis and the torque reverses),
      so the tendon wraps a pulley: torque = F · Rp, cable pay-out = Rp · φ, and with a linear
      spring the torque is linear in the bend. Fitted to the two-leg gravity torque at the 92% and
-     75% stances. Zero preload would leave the straight leg free; the fit decides. ---------- */
-  const Rp = S2.spring.pulleyIn;                                            /* in */
+     75% stances. Zero preload would leave the straight leg free; the fit decides. The fit lives in
+     kin.js (kneeSpring) so Sheet 1 prints the same numbers. ---------- */
+  const SPRING = K.kneeSpring();
+  const Rp = SPRING.pulleyIn;                                               /* in, spec.sheet2.spring */
   const a = 1.5; /* drawing only: where the knee detail cuts its links */
-  const RpM = Rp * IN;
-  const two92 = Math.abs(hold(M.balanceTheta, M.balancePhi, 0.5).knee);
-  const two75 = Math.abs(hold(M.deepTheta, M.deepPhi, 0.5).knee);
-  const phi92 = M.balancePhi * Math.PI / 180, phi75 = M.deepPhi * Math.PI / 180;
-  const kEff = (two75 - two92) / (phi75 - phi92);                           /* N·m per rad of bend */
-  const T0 = Math.max(0, two92 - kEff * phi92);                              /* preload torque at the straight leg */
-  const kSpring = kEff / (RpM * RpM);                                        /* N/m */
-  const preloadN = T0 / RpM;
-  const springTorque = phiDeg => kEff * phiDeg * Math.PI / 180 + T0;
-  const springForce = phiDeg => kSpring * RpM * phiDeg * Math.PI / 180 + preloadN;
+  const { two92, two75, kEff, T0, kSpring, preloadN } = SPRING;
+  const springTorque = SPRING.torque;
+  const springForce = SPRING.force;
   const phiStop = K.deg(K.spatial.limits.knee[1]);
   const travelIn = Rp * K.spatial.limits.knee[1];
   const poses = [
@@ -193,7 +188,7 @@
     svg.appendChild(el("path", { d: pz, fill: "none", stroke: "#8a5a12", "stroke-width": 1.8 }));
     circle(svg, F.X(-Rp), F.Y(0), 3, "#8a5a12", "#8a5a12");
     line(svg, F.X(0), F.Y(0), F.X(-Rp), F.Y(0), "#8a5a12", 0.8, "3 3");
-    note(svg, F.X(-5.8), F.Y(-2.4), "pulley Rp " + inch(Rp) + " on the knee arm;", "#8a5a12");
+    note(svg, F.X(-5.8), F.Y(-2.4), "pulley Rp " + inch(Rp, 2) + " on the knee arm;", "#8a5a12");
     note(svg, F.X(-5.8), F.Y(-3.0), "the cable pays out Rp · φ", "#8a5a12");
     note(svg, F.X(-5.8), F.Y(-3.6), "spring on F2 / F3, rear of the upper tube", "#8a5a12");
     text(svg, F.X(-6.3), F.Y(5.1), "KNEE — 92% stance, bend " + fmt(phi, 0) + "°, rear to the left", "start", 12);
@@ -229,7 +224,7 @@
     text(svg2, G.X(cx0), G.Y(cy0 + ch + 0.35), "Knee torque (N·m) vs knee bend, symmetric stance", "start", 11, "#1b2430");
     fill("u2", [
       ["Spring sized at", S2.spring.sizedAt + ": " + nm(two92) + " at " + fmt(M.balancePhi, 0) + "° and " + nm(two75) + " at " + fmt(M.deepPhi, 0) + "° (half the " + fmt(M.exampleMassKg, 2) + " kg on each knee)", ""],
-      ["Result", "torque = " + fmt(kEff, 2) + " N·m/rad × bend + " + nm(T0) + " preload; pulley Ø" + inch(2 * Rp) + " on the knee arm → extension spring " + fmt(kSpring / 1000, 2) + " kN/m (" + fmt(kSpring * IN, 1) + " N/in, " + fmt(kSpring * IN / 4.448, 1) + " lbf/in), preload " + fmt(preloadN, 0) + " N, travel " + inch(travelIn) + " to the " + fmt(phiStop, 0) + "° stop, " + fmt(springForce(phiStop), 0) + " N there", kEff > 0 ? "good" : "bad"],
+      ["Result", "torque = " + fmt(kEff, 2) + " N·m/rad × bend + " + fmt(T0, 2) + " N·m preload; pulley Ø" + inch(2 * Rp) + " on the knee arm → extension spring " + fmt(kSpring / 1000, 2) + " kN/m (" + fmt(kSpring * IN, 1) + " N/in, " + fmt(kSpring * IN / 4.448, 1) + " lbf/in), preload " + fmt(preloadN, 0) + " N, travel " + inch(travelIn) + " to the " + fmt(phiStop, 0) + "° stop, " + fmt(springForce(phiStop), 0) + " N there", kEff > 0 ? "good" : "bad"],
       ...poses.map(q => [q.n, "bend " + fmt(q.ph, 0) + "°: spring " + nm(q.spring) + " · gravity one-leg " + nm(q.grav1) + " · motor " + nm(q.motorOne) + " · cable " + fmt(q.force, 0) + " N" + (q.swing ? " (no ground load: the motor holds the spring)" : ""), q.motorOne <= ACT.rated.knee ? "good" : (q.motorOne <= ACT.peak.knee ? "" : "bad")]),
       ["Why a pulley", "two anchors across the joint stop working past ~2·atan(offset / anchor) of fold — the spring line crosses the knee axis and the torque reverses; a cable over a knee pulley keeps a constant lever through the whole 0–" + fmt(phiStop, 0) + "°", ""],
       ["Alternatives", "a torsion spring coaxial on the knee arm's boss (same curve, no cable), or a gas spring for a flatter curve; all sized on the bench", ""]
@@ -275,10 +270,10 @@
     /* axle centreline */
     centreline(svg, F.X(3.0), F.Y(cy), F.X(8.6), F.Y(cy));
     /* dims */
-    dimH(svg, F.X(H.tireIn), F.X(H.tireOut), F.Y(-0.25), inch(tw) + " tire", false);
+    dimH(svg, F.X(H.tireIn), F.X(H.tireOut), F.Y(-0.25), inch(tw, 2) + " tire", false);
     dimH(svg, F.X(H.rs05In), F.X(H.rs05Out), F.Y(cy - ENV.wheelD / 2 - 0.45), inch(ENV.wheelW, 2) + " RS05, flush outboard", false);
     dimH(svg, F.X(H.leg), F.X(H.mount), F.Y(cy + 3.35), inch(H.mount - H.leg, 2) + " leg plane → stator");
-    dimV(svg, F.X(8.35), F.Y(cy - beadR), F.Y(cy + beadR), inch(H.bead) + " bead", true);
+    dimV(svg, F.X(8.35), F.Y(cy - beadR), F.Y(cy + beadR), inch(H.bead, 2) + " bead", true);
     dimV(svg, F.X(3.3), F.Y(0), F.Y(2 * R), inch(M.wheelOd, 0) + " OD");
     note(svg, F.X(3.0), F.Y(6.55), "HUB — section on the axle, one wheel, looking forward");
     fill("u3", [
@@ -332,7 +327,7 @@
     fill("u4", [
       ["Shell", "lower band " + inch(bandW) + " wide × " + inch(bandH) + " tall (the roll housings' square) × ~" + inch(S2.band.lengthIn) + " long, chamfered up to the " + inch(M.bodyWidth) + " head. One printed shell in two halves; the roll flanges are its side faces.", ""],
       ["Why not pods", "the band is 3.1\" tall by 3\" long: at that size two pods and a bridge weigh more than one wider shell and leave the pack unsupported; the band also gives the pack a floor and the Teensy a ceiling", ""],
-      ["Inside the band", "pack between the roll housings (" + inch(L1.packIn.w) + " × " + inch(L1.packIn.h) + " × " + inch(L1.packIn.l) + ", " + inch(L1.bodyComForwardIn) + " forward), XT90-D.S and the step-down on the band floor; Teensy + IMU above, at the hip axis height + " + inch(top + 1.6 - hip.y), ""],
+      ["Inside the band", "pack between the roll housings (" + inch(L1.packIn.w) + " × " + inch(L1.packIn.h) + " × " + inch(L1.packIn.l) + ", " + inch(L1.bodyComForwardIn) + " forward), XT90-S and the step-down on the band floor; Teensy + IMU above, at the hip axis height + " + inch(top + 1.6 - hip.y), ""],
       ["Wire entry", "each leg's bundle (RS05 + knee RS02 + swing RS00 + roll RS02 = 4 actuators, 2 CAN buses + power) enters the band's lower front face beside the roll housing with a loop for the ±" + fmt(K.deg(K.spatial.limits.roll[1]), 0) + "° roll; nothing passes through an actuator", "good"],
       ["Width check", "band " + inch(bandW) + " + yokes + RS00s: outer faces at ±" + inch(L1.legPlaneIn + ENV.swing.t, 2) + " inside the " + inch(M.envelopeWidth) + " envelope", L1.legPlaneIn + ENV.swing.t <= M.envelopeWidth / 2 ? "good" : "bad"]
     ]);

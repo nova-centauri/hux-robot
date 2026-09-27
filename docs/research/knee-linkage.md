@@ -2,7 +2,7 @@
 
 Steve **2026-09-26**: "I wonder if we should get rid of the knee actuator and use a compound linkage … same effect. That is what stepbysteprobotics did and AgileX does not appear to have a knee actuator. Consider it while we're early."
 
-**Status: decided 2026-09-27 (R39) — knee RS02 at the knee for V1, spring in scope, hip-driven linkage parked as V2, no five-bar.** Below is the trade as it was worked. Nothing here lifts the temporary actuator lock (`decisions.md`, 2026-09-26). Written before the first 2D sheet, which is where this gets settled (R23).
+**Status: decided 2026-09-27 (R39) — knee RS02 at the knee for V1, spring in scope, hip-driven linkage parked as V2, no five-bar.** Below is the trade as it was worked. Nothing here lifts the temporary actuator lock (`decisions.md`, 2026-09-26). Written before the first 2D sheet, which is where this gets settled (R23). Sheet 1 drew knee RS02 at the knee, inboard of the tube plane; Sheet 2 put the RS05 flush with the tire's outboard face and sized the knee spring (**3.05 N·m/rad + 0.38 N·m preload**, not ~2.2 N·m); the stand-up hold is now **12.4 N·m**, **6.4** at the motor with that spring (Sheet 1's stand-up pose with the full weight at the hip; the 13.6 below was the static hold along the drawn, rejected climb path — a different calculation, not an update).
 
 ## The two references
 
@@ -73,4 +73,4 @@ So T-REX has the knee-equivalent actuator; it lives at the hip and drives a **fi
 
 **Orin Nano:** confirms the P5 perception slot in the head (`mechanical.md`); changes nothing about V1 (Pi 5 in the slot, balance on the CAN MCU). T-REX runs SLAM on it, not balance.
 
-**Position unchanged:** serial hip swing + knee, knee RS02 at the hip through a linkage as the layout to draw first if the T-REX look is the target.
+**Position unchanged:** serial hip swing + knee, knee RS02 at the hip through a linkage as the layout to draw first if the T-REX look is the target. *(Superseded 2026-09-27, R39: knee RS02 at the knee for V1; the hip-driven linkage is V2 backlog.)*

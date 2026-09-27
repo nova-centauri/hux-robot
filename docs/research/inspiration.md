@@ -1,5 +1,7 @@
 # Steve's inspirations
 
+> **Status 2026-09-27:** the Hux-side lines below predate the 2026-09-26 locks. Now: RT MCU **Teensy 4.1** (not "FC TBD"), **8S** (not 4S), knee / hip swing on **CAN QDD** with the RobStride set under a temporary lock (not "servo vs stepper+belt TBD"; that is the fallback; GIM8108-8 was the earlier yardstick). Current intent: [`../decisions.md`](../decisions.md).
+
 Steve clarified these shares are inspiration. **Watch and extract vibe / capability / packaging. Do not start build work.** No spend. Flight controller stays **TBD**. Nothing here is a Hux stack, BOM, or CAD source. Diablo is a **commercial** platform — still inspiration only; **do not buy it.** SpdrBot's Fusion / print pack is **paid** — still inspiration only; **do not buy it.**
 
 These sit **next to** the study set — they do not replace [XRobots](xrobots.md), Hattori, or [study-plan.md](study-plan.md) Phases A–D. SpdrBot lessons land on the **Phase E** twin / dojo horizon, not on V1 modes.

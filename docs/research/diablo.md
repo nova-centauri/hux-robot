@@ -1,5 +1,7 @@
 # Direct Drive Tech — Diablo (wheeled-leg)
 
+> **Status 2026-09-27:** the Hux-side lines below predate the 2026-09-26 locks. Now: RT MCU **Teensy 4.1** (not "FC TBD"), knee / hip swing on **CAN QDD** with the RobStride set under a temporary lock (servo / stepper+belt is the fallback). Current intent: [`../decisions.md`](../decisions.md).
+
 Steve 2026-09-21: more research — watch [ETA Prime's Diablo review](https://www.youtube.com/watch?v=S5PoZ8aNwvs) and cite the paper [DIABLO: A 6-DoF Wheeled Bipedal Robot Composed Entirely of Direct-Drive Joints](https://ar5iv.labs.arxiv.org/html/2407.21500) (arXiv:2407.21500). Shop / SDK only as a brief cite.
 
 Diablo is a **commercial self-balancing wheeled-leg** platform (Direct Drive Tech / DDTRobot). Inspiration + control / packaging lessons. **Not a Hux stack, BOM, or buy.** No spend. FC stays **TBD**. Keep **reuse simple balance** (R18).

@@ -1,13 +1,15 @@
 /* Hux V1 spec — the decisions of 2026-09-27 as numbers (docs/decisions.md, docs/requirements.md
    R37–R40), plus the layout numbers the first 2D sheet is drawn to. One table, read by kin.js
-   (hip roll axis, body CoM offset, leg plane), sheet.js (the drawing and its title block),
-   sim.html / sim-view.js (top-speed default and cap) and validation-test.js (wheel torque
+   (hip roll axis, body CoM offset, leg plane, the knee spring's pulley), sheet.js / sheet2.js
+   (the drawings and their title blocks), sim-core.js (the speed-command cap; its body CoM
+   stays at 0 until the one-wheel sequence is re-tuned — NOTES open call 17), sim-view.js (the top-speed slider) and validation-test.js (wheel torque
    margin at the top speed). Change a decision here and the pages follow. Inches for geometry,
    SI for speeds and torques. */
 (function (root) {
   "use strict";
   const ACT = root.HuxActuators || require("./actuators.js");
   const IN = 0.0254;
+  const ROLL_AXIS_IN = 3.0; /* spec.layout.hipRollAxisIn; named here because the hip band is sized from it */
 
   const spec = {
     asOf: "2026-09-27",
@@ -25,23 +27,27 @@
        `reserveNm` of catch torque in hand at the top speed (see wheelAtSpeed below). */
     speed: { id: "R38", topMs: 1.5, cruiseMs: 1.0, reserveNm: 2.0 },
 
-    /* R39 — the knee. RS02 at the knee joint for V1, gravity spring in scope (~2.2 N·m at the
-       two-leg stance), the hip-driven linkage parked as a V2 refinement, no five-bar leg
-       (docs/research/knee-linkage.md, tools/living-drawings/studies/fivebar-check.py). */
-    knee: { id: "R39", actuatorAt: "knee", spring: true, springNm: 2.2, linkage: "V2", fiveBar: false },
+    /* R39 — the knee. RS02 at the knee joint for V1, gravity spring in scope, the hip-driven
+       linkage parked as a V2 refinement, no five-bar leg (docs/research/knee-linkage.md,
+       tools/living-drawings/studies/fivebar-check.py). The spring's rate and preload are not a
+       number here: kin.js kneeSpring() fits them to the two-leg gravity torque at 92% and 75%
+       on the sheet2.spring pulley (3.05 N·m/rad + 0.38 N·m at 7.75 kg). The old fixed
+       "~2.2 N·m" was the 6 kg picture. */
+    knee: { id: "R39", actuatorAt: "knee", spring: true, linkage: "V2", fiveBar: false },
 
     /* R40 — what V1 controls have to handle. Rough ground is V3 / Phase E. */
     terrain: { id: "R40", sillIn: 1.0, slopeDeg: 20, rough: "V3 / Phase E" },
 
     /* Layout numbers for Sheet 1 (2026-09-27). The roll-axis offset is the 2026-09-26 requirement
-       (planted hip roll hold 6.0 N·m at 3.0" vs RS02 rated 7). The body CoM offset is the
+       (≤ 3" so the planted hip roll hold stays under the RS02's 7 rated: 6.3 N·m at 3.0" with
+       Sheet 1's geometry, frontal.js; the 6.0 of 2026-09-26 predates it). The body CoM offset is the
        stair-dynamics finding that restores the throw window with the real leg masses. The leg
        plane is where the tubes run: outboard of the roll actuator's housing, inboard of the tire. */
     layout: {
-      hipRollAxisIn: 3.0,      /* lateral, from the body centreline, each side */
+      hipRollAxisIn: ROLL_AXIS_IN, /* lateral, from the body centreline, each side */
       legPlaneIn: 4.75,        /* lateral, the tube / joint plane, each side */
       bodyComForwardIn: 1.0,   /* body lump ahead of the hip roll axes */
-      hipBandWidthIn: 2 * (3.0 + ACT.envIn.rollD / 2), /* two RS02 roll housings flanking the pack */
+      hipBandWidthIn: 2 * (ROLL_AXIS_IN + ACT.envIn.rollD / 2), /* two RS02 roll housings flanking the pack */
       packIn: { l: 150 / 25.4, w: 50 / 25.4, h: 60 / 25.4 }, /* 8S 3300 mAh, docs/electronics.md */
       landing: "rear of the next slot; a forward landing error is the failure mode"
     },
@@ -54,7 +60,7 @@
       reachMm: { hip: 35, knee: 45, axle: 30 },
       spring: { where: "extension spring along the upper link, cable over a pulley on the knee arm", pulleyIn: 1.25, sizedAt: "two-leg stance (92% and 75%)" },
       hub: { beadIn: 3.75, flushOutboard: true, webMm: 3, stator: "RS05 stator to the axle fitting, inboard; output flange outboard, disc web to the rim" },
-      band: { widthIn: 2 * (3.0 + ACT.envIn.rollD / 2), heightIn: ACT.envIn.rollD, lengthIn: ACT.envIn.rollL + 1.2 },
+      band: { widthIn: 2 * (ROLL_AXIS_IN + ACT.envIn.rollD / 2), heightIn: ACT.envIn.rollD, lengthIn: ACT.envIn.rollL + 1.2 },
       wires: { rs05: 4, rs02: 4, bundleMm: 6, route: "inside the tubes; ports in every fitting; service loops at the knee and the hip" }
     },
 

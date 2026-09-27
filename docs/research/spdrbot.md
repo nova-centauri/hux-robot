@@ -1,5 +1,7 @@
 # SpdrBot — Isaac Sim / Isaac Lab (pipeline, not a spider)
 
+> **Status 2026-09-27:** the Hux-side lines below predate the 2026-09-26 locks. Now: RT MCU **Teensy 4.1** (not "FC TBD"), **8S** + step-down (not 4S). Current intent: [`../decisions.md`](../decisions.md).
+
 Steve 2026-09-24: more research — watch [I Tried To Build a Robot Like Boston Dynamics With Isaac Sim](https://www.youtube.com/watch?v=YDzHL2JSCHc) and cite [Indystrycc/SpdrBot](https://github.com/Indystrycc/SpdrBot). Fusion → URDF → USD; Isaac Lab RL; then a **hand-tuned gait** after the SKRL → Isaac Sim wall.
 
 SpdrBot is a **4-leg spider** (12 hobby servos). Hux is a **wheeled biped**. Morphology does **not** transfer. The steal is the **CAD → sim → validate → hardware** pipeline, and the ways that pipeline failed. **Not a Hux stack, BOM, or CAD source.** No spend. FC stays **TBD**. Keep **reuse simple balance** (R18). Phase E (twin / dojo) stays a **horizon**.

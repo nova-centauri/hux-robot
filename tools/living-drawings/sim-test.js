@@ -8,9 +8,15 @@ require("./kin.js");
 const S = require("./sim-core.js");
 const R = require("@dimforge/rapier3d-compat");
 const M = globalThis.HuxKin.M;
+const SPEC = globalThis.HuxSpec;
 const IN = S.IN;
 
 function assert(ok, msg) { if (!ok) throw new Error(msg); }
+
+/* The sandbox reads the same decisions as the drawings (spec.js, actuators.js). */
+/* Known gap: the sandbox body CoM default stays 0 (its one-wheel tuning); the spec says +1" (sim-core.js KNOBS). */
+assert(M.hipLateral === SPEC.layout.hipRollAxisIn, "sandbox hip roll axes are not spec.layout.hipRollAxisIn");
+assert(S.KNOBS.tauWheel === M.actuators.peak.wheel && S.KNOBS.tauKnee === M.actuators.peak.knee, "sandbox torque caps are not the actuator lock");
 
 /* ---------- engine checks ---------- */
 
@@ -91,7 +97,6 @@ function camberCheck(gammaDeg) {
   const t = b.translation();
   world.free();
   const axisY = Math.sin(gamma);
-  const sp = S.spec ? null : null;
   return { load: load / dt, n: n, zContact: n ? pz / n : NaN, y: t.y, axisY: axisY };
 }
 function rotate(q, p) {
@@ -134,6 +139,10 @@ function run(opts, plan) {
 (async function main() {
   await R.init();
   const found = {};
+  found.specGaps = {
+    bodyComIn: S.KNOBS.bodyCom + " default vs spec +" + SPEC.layout.bodyComForwardIn + " (one-wheel tuning; open)",
+    kneeSpring: "not modelled: the sandbox knees carry full gravity"
+  };
 
   // Physical bounds, joint stops, collision exclusions and delayed sensing.
   const probe = new S.Sim(R, M, { floorOnly: true });
@@ -216,7 +225,7 @@ function run(opts, plan) {
     assert(Math.abs(o.theta) < 0.02, "standing lean " + o.theta);
     assert(Math.hypot(t.x, t.z) < 0.05, "drifted " + t.x + "," + t.z);
     const knee = (Math.abs(o.legs[0].knee.tau) + Math.abs(o.legs[1].knee.tau)) / 2;
-    const kneeRef = 2.2 * M.exampleMassKg / 6; /* leg-geometry.md: ~2.2 N·m two-leg at 6 kg; scales with the lump picture */
+    const kneeRef = globalThis.HuxKin.kneeSpring().two92; /* kin.js two-leg gravity at 92% (2.8 N·m at 7.75 kg; leg-geometry.md had ~2.2 at 6 kg) */
     assert(knee > kneeRef * 0.64 && knee < kneeRef * 1.18, "stance knee torque " + knee.toFixed(2) + " vs ~" + kneeRef.toFixed(1) + " expected at " + M.exampleMassKg.toFixed(2) + " kg");
     found.stance = { kg: sim.s.totalKg.toFixed(2), kneeNm: knee.toFixed(2), hipHeightIn: ((t.y) / IN).toFixed(1) };
   }
@@ -292,7 +301,7 @@ function run(opts, plan) {
 
   const half = run({ start: { x: -1.2, yaw: Math.PI } }, [{ name: "settle", s: 1.5 }, { name: "go", s: 3, cmd: { v: 0.5 } }, { name: "stop", s: 1, cmd: {} }]);
   assert(half.fellAt === null && seg(half, "stop").x < -2.05, "did not cross the ½\" threshold at 0.5 m/s");
-  const one = [sill(0.3), sill(0.5), sill(0.75), sill(1.0), sill(1.5)];
+  const one = [sill(0.3), sill(0.5), sill(0.75), sill(SPEC.speed.cruiseMs), sill(SPEC.speed.topMs)];
   // Capability trial: the narrower tire and finite drive response invalidate the old sphere result.
   // Keep every speed and outcome in the report; crossing is not a controller invariant.
   found.sills = { half: "crosses at 0.5 m/s", one: one };
@@ -381,11 +390,11 @@ function run(opts, plan) {
   const F = require("./frontal.js");
   const fr = F.robot({ M: M });
   const g92 = fr.balanceRoll(0);
-  assert(Math.abs(-g92 * 180 / Math.PI - 24.7) < 1.0, "frontal.js balance roll moved: " + (-g92 * 180 / Math.PI).toFixed(1) + "°");
+  assert(Math.abs(-g92 * 180 / Math.PI - 24.2) < 1.0, "frontal.js balance roll moved: " + (-g92 * 180 / Math.PI).toFixed(1) + "°");
   const hold = fr.holdTorque([g92, -g92, 0]);
-  /* ≈ (m_body + m_free yoke·2 + m_free leg·2) g × 5.4": 8.3 N·m with the 6 kg picture, 10.7 with the locked
-     actuator set (actuators.js). Band scales with the lump picture. */
-  const holdRef = 10.7 * (M.exampleMassKg / 7.752) * (M.hipLateral / 5.4); /* ≈ 60 N × hip offset: 5.9 at the Sheet 1 axes (3.0", 2026-09-27) */
+  /* frontal.js at 7.75 kg: 4.5 N·m at 2", 6.3 at the Sheet 1 axes (3.0", spec.js), 10.7 at the old 5.4" —
+     ≈ 0.8 + 1.84 N·m per inch of hip offset. Band scales with the lump picture and follows the spec. */
+  const holdRef = (0.78 + 1.84 * M.hipLateral) * (M.exampleMassKg / 7.752);
   assert(hold > holdRef * 0.9 && hold < holdRef * 1.1, "frontal.js hold torque moved: " + hold.toFixed(2) + " vs ~" + holdRef.toFixed(1));
   const resp = fr.response(0, [2], 0.010, undefined, true);
   found.oneWheel.frontal = {

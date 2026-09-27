@@ -1,5 +1,7 @@
 # Model corrections — 2026-09-23
 
+> **Status 2026-09-27:** dated record. Caps and bus in the lists below are the 2026-09-23 ones (6 kg, 12 / 3 N·m knee / wheel caps, 4S). Now: 7.75 kg, RobStride caps from `actuators.js` (knee 17, wheel 5.5 peak), **8S**. The stair candidate is still rejected (`kin.js`: 192/201 frames unreachable). See [`sim-sandbox.md`](sim-sandbox.md) 2026-09-26 / 09-27 sections.
+
 Implemented after the [real-world audit](real-world-validation.md). These changes correct the software model and remove unsupported engineering claims. They do **not** complete a physical robot or a working stair gait.
 
 ## Implemented

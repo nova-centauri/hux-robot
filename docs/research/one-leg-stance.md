@@ -2,6 +2,8 @@
 
 Written **2026-09-26**. Steve: the one-leg stand needs much more work, the mechanics of the hip roll weight shift are unclear, and the one-leg action does not work in the simulation. This note works the frontal plane from first principles with the lumps and geometry in `kin.js` (6 kg picture, 7.5" + 7.5" tubes, 6 × 1.25" round-crown tire, hips 5.4" off the centreline, 12.75" track), checks it against the Rapier sandbox, and says what the numbers mean for the plan. Nothing here is a decision.
 
+> **Status 2026-09-27:** the numbers in §1–§5 are the 6 kg / 5.4" picture. With the locked actuators (7.75 kg) and Sheet 1's **3.0"** roll axes the shift is **24.2°** and the planted hip holds **6.3 N·m** (RS02 7 rated), plus a required geometric levelling feed-forward — see the 2026-09-27 addendum. The physics conclusions (acrobot, ≤ 0.3 s single support) stand. GIM8108 references are the earlier yardstick.
+
 Tools: `tools/living-drawings/frontal.js` (closed form; `node frontal.js` prints the tables), `sim-core.js` (sandbox; `npm test` in that folder prints the one-wheel findings, including the hop rows below).
 
 ## 1. How the hip rolls shift the weight

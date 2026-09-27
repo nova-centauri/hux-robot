@@ -1,5 +1,7 @@
 # Compute and software-stack review — 2026-09-26
 
+> **Status 2026-09-27:** acted on (postscript). RT MCU = **Teensy 4.1** (picked 2026-09-26), bus = **8S**, companion = Pi 5 on ROS 2 in containers, Jetson Orin Nano Super class at P5. The 4S figures in the body (Pi buck off 4S, Jetson on 4S direct) are superseded; at 8S the Jetson slot needs the 12–19 V rail.
+
 Steve asked for a review of the software stack that will run on the hardware, and whether a "high-power NVIDIA single-board computer, about $400–600" fits Hux. **Docs only. No lock changed. No spend.** This is the advisory read (decisions 2026-09-22: advisory / adversarial), not a plan rewrite.
 
 Reviewed: [`../software.md`](../software.md), [`../electronics.md`](../electronics.md), [`../electronics-minimum.md`](../electronics-minimum.md), [`../parts-on-hand.md`](../parts-on-hand.md), the living-drawings **Software / Data flow / Hardware** pages (the 2026-09-25 F765-Wing + Pi 5 bench plan), and the Matek F765-WING spec sheet.

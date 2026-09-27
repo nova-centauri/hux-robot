@@ -1,5 +1,7 @@
 # Stompy — CAD → sim → real
 
+> **Status 2026-09-27:** the Hux-side lines below predate the 2026-09-26 locks. Now: RT MCU **Teensy 4.1** (not "FC TBD"), **8S** + step-down (not 4S), knee / hip swing on **CAN QDD** — the RobStride set under a temporary lock, RS02 among them (not "servo vs stepper+belt TBD"; that is the fallback). Current intent: [`../decisions.md`](../decisions.md).
+
 Steve 2026-09-21: analyze [I Trained a Robot in Simulation. Then I Made It Walk.](https://www.youtube.com/watch?v=gEjg179fvmc) (Kayden Knapik — **Stompy**). Especially **simulations and matching CAD to reality**.
 
 Stompy is a **week-build RL walking biped**. Hux is a **wheeled** biped. Walking challenges differ. **Still learn** the CAD / home-pose / geometry lessons. **Do not require RL walking for Hux V1.** Keep **reuse simple balance control** (R18).

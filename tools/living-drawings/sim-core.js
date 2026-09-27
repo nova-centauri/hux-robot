@@ -10,11 +10,15 @@
   const SHARED = (root.HuxSpatial || require("./spatial.js")).limits;
   const Tire = root.HuxTire || require("./tire.js");
   const ACT = root.HuxActuators || require("./actuators.js");
+  const SPEC = root.HuxSpec || require("./spec.js");
 
   /* Working assumptions for the actuators. Not parts. */
   const KNOBS = {
     massScale: 1,      /* multiplies every lump */
-    bodyCom: 0,        /* in, body lump forward (+) of the hip axes */
+    bodyCom: 0,        /* in, body lump forward (+) of the hip axes. NOT yet spec.layout.bodyComForwardIn (+1",
+                          Sheet 1): the sandbox's one-wheel sequence is tuned at 0, and at +1" the 0.2 s hop from
+                          the 8% poise no longer returns to two wheels (sim-test.js, 2026-09-27). Open: re-tune,
+                          then default this to the spec. The knob reaches +1" from the page. */
     mu: 0.7,           /* tire to floor friction */
     tireK: 40000,      /* N/m, carcass stiffness of a 6×1.25 high-pressure pneumatic. Unmeasured; 25–60 kN/m is the plausible band */
     tireZeta: 0.2,     /* damping ratio of the tread ring on that stiffness. Pneumatics are lightly damped */
@@ -25,7 +29,8 @@
        reported next to every torque so a hold above it shows. Nothing measured yet. */
     tauWheel: SHARED.tauWheel,     /* N·m peak per in-wheel actuator */
     wheelNoLoad: ACT.noLoad.wheel, /* rad/s output no-load at 29.6 V */
-    tauKnee: SHARED.tauKnee,       /* N·m peak; the stair climb says ~10.6 holding at 6 kg, more now */
+    tauKnee: SHARED.tauKnee,       /* N·m peak; Sheet 1's stand-up hold is 12.4 at 7.75 kg (6.4 with the Sheet 2
+                                      spring, which the sandbox does not model: its knees carry full gravity) */
     tauHip: SHARED.tauHip,         /* N·m peak, hip swing */
     tauRoll: SHARED.tauRoll,       /* N·m peak, hip roll (same part as the knee) */
     jointNoLoad: ACT.noLoad.knee,  /* rad/s output, used where a joint has no entry in noLoadOf */
@@ -774,7 +779,9 @@
 
     /* Drive reference: rate-limited speed, position hold, lean feed-forward. */
     const parked = this.mode === "PARKED";
-    const vCmd = parked || this.one || this.modeRequest === "PARKED" ? 0 : clamp(cmd.v || 0, -2.5, 2.5);
+    /* the speed command is capped at the R38 top speed (spec.js): 1.5 m/s keeps 2 N·m of catch */
+    const vTop = SPEC.speed.topMs;
+    const vCmd = parked || this.one || this.modeRequest === "PARKED" ? 0 : clamp(cmd.v || 0, -vTop, vTop);
     const aMax = 1.2;
     const dv = clamp(vCmd - this.vRef, -aMax * dt, aMax * dt);
     const aRef = dv / dt;
@@ -839,9 +846,10 @@
     /* Geometric levelling for the parallelogram roll (2026-09-27, Sheet 1). The wheel plane sits
        (wheelLat - hipLat) outboard of the roll axis, so a roll of γ with both wheels down lifts
        one axle and drops the other by that spacer × sin γ: equal leg lengths only keep the body
-       level when the spacer is small. At the 5.4" hips it was 0.975" (a 4° tilt at 30°); at the
-       3.0" roll axes of Sheet 1 it is 3.375" (13° the wrong way), so the legs take it up by
-       plan: the leg on the side the body moves toward shortens, the other lengthens. This is a
+       level when the spacer is small. At the 5.4" hips the spacer was 0.975" (a 4° tilt at 30°);
+       at the 3.0" roll axes of Sheet 1 it is 3.375" (13° the wrong way). The legs lie in the
+       rolled plane, so a length change Δ moves an axle Δ · cos γ: each leg takes spacer × tan γ,
+       2 × spacer × tan γ between them (3.0" at the 24° shift). The legs take it up by plan: the leg on the side the body moves toward shortens, the other lengthens. This is a
        feed-forward from the commanded roll, not an integrator, so it cannot fight the shift servo. */
     const rollCmd = this.one ? this.one.gamma : this.shift;
     const spacerLevel = (s.wheelLat - s.hipLat) * Math.tan(rollCmd);
@@ -1363,8 +1371,8 @@
       if (freeLoad > 0.03 * weight && contacts[iP].force > 0.03 * weight) shiftToward(ePoise, st.hopped ? 0.08 : 0.2);
       /* Gravity feed-forward on the planted hip for the whole shift / poise, not only in the air:
          the lump model's cantilever, scaled by the share of the weight the free wheel is not
-         carrying. With the locked actuator masses (2026-09-26) the cantilever is 10.7 N·m at the
-         drawn hips and the P+I hold alone sagged 1–3° into it after a landing, which walked the
+         carrying. With the locked actuator masses (2026-09-26) the cantilever was 10.7 N·m at the
+         then-drawn 5.4" hips (6.3 at Sheet 1's 3.0" axes) and the P+I hold alone sagged 1–3° into it after a landing, which walked the
          mass over the planted tire before the shift servo could act. A real controller has the
          same model and the same feed-forward (one-leg-stance.md, §5). */
       const mdlS = this.lateralModel(st, right);

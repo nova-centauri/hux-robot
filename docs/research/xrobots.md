@@ -51,7 +51,7 @@ Also cite Hattori (already in [`../requirements.md`](../requirements.md)): [STRI
 
 **Extract:** cascaded loops (angle inner, position/velocity outer); IMU calibration habit; what ODrive is asked to do versus what the MCU integrates.
 
-**Hux note:** TallBalancer is MIT, so later adaptation is license-easier than RobotX — still Phase C, still cite. Do not treat ODrive as a Hux buy. FC stays TBD; this is a pattern source, not a stack lock.
+**Hux note:** TallBalancer is MIT, so later adaptation is license-easier than RobotX — still Phase C, still cite. Do not treat ODrive as a Hux buy. FC stays TBD *(superseded 2026-09-26: RT MCU is Teensy 4.1)*; this is a pattern source, not a stack lock.
 
 ### 3. XRobots/SonicRobot — closest electronics lessons (brushless + balance)
 

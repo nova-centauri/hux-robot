@@ -140,19 +140,20 @@ const report = {
     unstableModeDoublingSec: Math.log(2) * Math.sqrt(h / M.g),
     captureVelocityWithCenteredComMps: Math.sqrt(M.g / h) * slot,
     positionOnlyLeanAtSlotEdgeDeg: Math.atan(slot / h) * 180 / Math.PI,
-    frictionRequiredFor3NmAtFullWeight: 3 / (weight * R),
-    frictionRequiredFor3NmAtHalfWeight: 3 / (weight * R / 2),
+    wheelPeakNm: baseline.wheelTau,
+    frictionRequiredForWheelPeakAtFullWeight: baseline.wheelTau / (weight * R),
+    frictionRequiredForWheelPeakAtHalfWeight: baseline.wheelTau / (weight * R / 2),
     frictionTorqueNm: [0.15, 0.3, 0.5, 0.7].map(mu => ({ mu, oneWheel: mu * weight * R, halfLoadWheel: mu * weight * R / 2 })),
-    wheelRpm: [0.5, 1.5, 3].map(speed => ({ speedMps: speed, rpm: speed / (2 * Math.PI * R) * 60 })),
+    wheelRpm: [0.5, M.spec.speed.cruiseMs, M.spec.speed.topMs].map(speed => ({ speedMps: speed, rpm: speed / (2 * Math.PI * R) * 60 })),
     sideSwayCubicPeakAccelerationMps2: 6 * M.track * IN / 0.85 ** 2,
     optimisticStaticLateralContactToleranceIn: M.wheelWidth / 2 },
   joints, tubes: tube, sensitivity,
   correctedModel: K.evaluateClimb(),
   designChecks: [
     { name: "Combined drawings inside generous spatial reach bound", pass: maxReach.requiredIn <= generousReachBound },
-    { name: "Reported stair wheel peak within 3 Nm target", pass: climb.peaks.wheel <= 3 },
-    { name: "Reported stair knee peak within 12 Nm sandbox cap", pass: Math.max(climb.peaks.aKnee, climb.peaks.bKnee) <= 12 },
-    { name: "Drawn knee fold stays below sandbox 2.7 rad soft stop", pass: Math.max(joints.aPh.maxDeg, joints.bPh.maxDeg) <= 2.7 * 180 / Math.PI }
+    { name: "Reported stair wheel peak within the wheel actuator's peak (" + baseline.wheelTau + " Nm)", pass: climb.peaks.wheel <= baseline.wheelTau },
+    { name: "Reported stair knee peak within the knee actuator's peak (" + K.spatial.limits.tauKnee + " Nm)", pass: Math.max(climb.peaks.aKnee, climb.peaks.bKnee) <= K.spatial.limits.tauKnee },
+    { name: "Drawn knee fold stays below the " + K.spatial.limits.knee[1] + " rad knee stop", pass: Math.max(joints.aPh.maxDeg, joints.bPh.maxDeg) <= K.spatial.limits.knee[1] * 180 / Math.PI }
   ]
 };
 console.log(JSON.stringify(report, (key, value) => typeof value === "number" ? round(value) : value, 2));

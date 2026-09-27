@@ -19,10 +19,10 @@ This repo is the source of truth for Steve Barrett's Hux project. It is a docs-a
 | Research | Packet in [`docs/research/`](docs/research/) — study before build |
 | Requirements | Draft captured in [`docs/requirements.md`](docs/requirements.md) |
 | Decisions | Dated log in [`docs/decisions.md`](docs/decisions.md) |
-| Compute | **Four layers** (2026-09-26): CAN actuators → portable control core → CAN real-time MCU (Teensy 4.1 / H743-class, not bought) → ROS 2 companion (Pi 5 now, Jetson at P5). F765-Wing is a bench board. |
-| Actuators | **Temporary lock (2026-09-26):** 4× RobStride 02, 2× RS00, 2× RS05 — `tools/living-drawings/actuators.js` feeds every model. Not ordered. Mass picture now **7.75 kg**; hip roll axes must come in to **≤ 3"**. |
+| Compute | **Four layers** (2026-09-26): CAN actuators → portable control core → CAN real-time MCU (**Teensy 4.1**, in the order-now cart) → ROS 2 companion (Pi 5 now, Jetson at P5). F765-Wing is a bench board. |
+| Actuators | **Temporary lock (2026-09-26):** 4× RobStride 02, 2× RS00, 2× RS05 — `tools/living-drawings/actuators.js` feeds every model. Not ordered. Mass picture **7.75 kg**; hip roll axes at **3.0"** on Sheet 1 (one-wheel hold 6.3 N·m vs RS02's 7 rated). |
 | Power | **8S** (decided 2026-09-26: 4S → 6S → 8S once the actuator voltage floor was checked), one 3300 mAh pack, XT90 / XT90-S, step-down rails |
-| Mechanical V1 | First wheel-leg is **Phase D** (after study + 2D). Not started. **~24" × ~14"**, carbon-tube spars. Head inside, wheels outside. |
+| Mechanical V1 | **Sheet 1 (layout) and Sheet 2 (make-up) drawn 2026-09-27**; the leg and hip band go to CAD once Steve agrees both. No part made yet. **~24" × ~14"**, 16 × 14 carbon-tube spars, RS02 at the knee with a pulley spring, RS05 flush in the hub. Head inside, wheels outside. |
 | Modes | `PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY` before autonomy |
 | Spend | First buy is tires, tubes, carbon tube, the Teensy 4.1 CAN MCU kit, XT90-S anti-spark, and one 8S 3300 mAh pack ([`docs/bom.md`](docs/bom.md)). 5" walker wheels already ordered as a bench donor. Wheel size **settled at 6" OD**. Motors not authorized. |
 | Parts on hand | Inventory in [`docs/parts-on-hand.md`](docs/parts-on-hand.md) — owned ≠ reserved |
@@ -32,7 +32,7 @@ First milestones live in [`NOTES.md`](NOTES.md).
 
 ## How it is supposed to work
 
-Balance on two wheeled legs for teleop. Gate stair work behind one-leg balance (hip roll **in V1** + planted-wheel fore/aft). Then: lift one wheeled leg → balance on the planted wheel → place the raised wheel on the next tread (~9.5") → plant → repeat.
+Balance on two wheeled legs for teleop. Gate stair work behind one-leg work (hip roll **in V1** + planted-wheel fore/aft). Then: shift the mass over one wheel → lift the other for a short, timed single support (a *static* one-wheel stand is not available on this geometry — [`one-leg-stance.md`](docs/research/one-leg-stance.md)) → place the raised wheel at the rear of the next tread's slot (~9.5") → shove and catch → plant. V1 is one such step; a flight repeats it (V2).
 
 ## Repo layout
 
@@ -40,10 +40,10 @@ Balance on two wheeled legs for teleop. Gate stair work behind one-leg balance (
 docs/         requirements, decisions, vision, research, mechanical, electronics, software, checklists
 NOTES.md      working notes and first milestones
 cad/          printable / CAD parts (empty — 2D before Blender)
-tools/living-drawings/   drawings (index.html), 3D sandbox (sim.html), data flow (flow.html), software (software.html), hardware (hardware.html), media (media.html)
+tools/living-drawings/   the source of truth: drawings (index.html), Sheet 1 (sheet.html), Sheet 2 (sheet2.html), 3D sandbox (sim.html), data flow (flow.html), software (software.html), hardware (hardware.html), media (media.html); spec.js + actuators.js hold the numbers
 art/          exploratory concept renders and rough meshes — not CAD
-firmware/     FC / embedded bring-up (empty)
-software/     companion compute — Pi cameras / pathfinding (empty)
+firmware/     layer 2 control core + Teensy 4.1 firmware (empty)
+software/     layer 4 ROS 2 companion — Pi 5 now, Jetson at P5 (empty)
 ```
 
 ## Docs
@@ -52,14 +52,14 @@ software/     companion compute — Pi cameras / pathfinding (empty)
 - [Research](docs/research/) — research-first stance, XRobots shortlist, inspiration shares, actuator trade, study plan (Phases A–D)
 - [Requirements](docs/requirements.md) — hard / soft requirements, candidate hardware, no-spend rule
 - [Vision](docs/vision.md) — stair gait, split-brain intent, lessons to steal
-- [Mechanical](docs/mechanical.md) — carbon-tube spars, ~24" × ~14", in-wheel FOC, hip roll in V1, servo vs stepper TBD, ~2× plant load. Leg math: [research/leg-geometry.md](docs/research/leg-geometry.md)
+- [Mechanical](docs/mechanical.md) — carbon-tube spars, ~24" × ~14", Sheet 1 / Sheet 2 summary, RS02 knee at the knee + spring, RS05 hub, hip roll in V1 at 3.0". Leg math: [research/leg-geometry.md](docs/research/leg-geometry.md)
 - [Electronics](docs/electronics.md) — 8S + step-down, CAN actuator bus, CAN real-time MCU (F765 is bench only), TBS Nano RX, in-wheel FOC, 8 CAN nodes
 - [Minimum electronics](docs/electronics-minimum.md) — P0–P5 class list (no SKU, no new spend)
-- [Parts on hand](docs/parts-on-hand.md) — owned / ordered inventory + candidates (GIM8108-8 not ordered)
-- [First buy](docs/bom.md) — 6×1.25 tires, tubes, 16 mm carbon tube, Teensy 4.1 CAN kit, anti-spark, one pack (voltage pending). Actuators shortlisted, not on this list: [actuator shortlist](docs/research/actuator-shortlist.md).
+- [Parts on hand](docs/parts-on-hand.md) — owned / ordered inventory + candidates (the RobStride set is a temporary lock, not ordered)
+- [First buy](docs/bom.md) — 6×1.25 tires, tubes, 16 × 14 carbon tube, Teensy 4.1 CAN kit, XT90-S anti-spark, one 8S 3300 mAh pack. Actuators are temporarily locked, not on the order list: [actuator shortlist](docs/research/actuator-shortlist.md).
 - [Sheet 1 — V1 layout](tools/living-drawings/sheet.html) — the first 2D sheet (R23): side, front, plan and stroke at the settled geometry, drawn from the model files; roll axes, hip band, leg plane, actuator placement, the pack, the landing target; what it settles and what Sheet 2 owns
 - [Sheet 2 — tubes, fittings, spring, hub, wires](tools/living-drawings/sheet2.html) — what the leg is made of: carbon tube cuts and loads, fittings F1–F7, the knee pulley-spring and its torque curve, the hub section with the RS05 flush to the tire, the hip-band shell, the wire path
-- [Living drawings](tools/living-drawings/index.html) — side, top and front views of the settled leg, and the stair climb with its dynamics (momentum window, wheel catch, joint torques, sway). Play runs the climb in real time. Findings: [research/stair-climb-dynamics.md](docs/research/stair-climb-dynamics.md)
+- [Living drawings](tools/living-drawings/index.html) — side, top and front views of the settled leg, and a **candidate** stair climb with its dynamics (momentum window, wheel catch, joint torques, sway) — rejected by the spatial model; no validated V1 step yet (NOTES open call 16). Play runs the climb in real time. Findings: [research/stair-climb-dynamics.md](docs/research/stair-climb-dynamics.md)
 - [3D sandbox](tools/living-drawings/sim.html) — drive the working model in 3D with rigid-body physics (Rapier + three.js): torque-limited joints, LQR balance, ride height (medium by default), spring legs with an impact hop, stumble catch, a planned one-wheel poise, stair / ramps / sills / curb / wet tile. A design toy, not the digital twin. Findings: [research/sim-sandbox.md](docs/research/sim-sandbox.md)
 - [Data flow](tools/living-drawings/flow.html) — command, power, motion, modes, and what waits until later
 - [Software](tools/living-drawings/software.html) — the 2026-09-25 **bench-learning** plan for the F765-Wing + Pi 5 (P0–P1). Superseded as the robot's stack by [docs/software.md](docs/software.md).

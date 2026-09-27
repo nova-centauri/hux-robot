@@ -121,7 +121,7 @@ The **GIM8108-8 name does not establish 4S compatibility**. The manufacturer's c
 
 The sandbox's active suspension requires **torque-controlled, sufficiently backdrivable joints**. A conventional position servo or open-loop stepper does not reproduce this interface. Real compliance is an alternative, with its own sensing and torque curve. Current-controlled FOC needs appropriate current sensing and rotor feedback; ordinary drone throttle control is not equivalent. [SimpleFOC current control](https://docs.simplefoc.com/foc_current)
 
-The **2.2 N·m spring** offsets the two-leg stance at one angle only. Specify `τ_spring(q)`, preload, travel, stored energy, hysteresis, and unloading behavior. A spring stores impact energy; damping or regeneration must remove it. It may also resist folding the free leg.
+The **2.2 N·m spring** *(superseded 2026-09-27: Sheet 2 fits 3.05 N·m/rad + 0.38 N·m preload on a pulley, i.e. `τ_spring(q)` is now specified; hysteresis, stored energy and unloading still are not)* offsets the two-leg stance at one angle only. Specify `τ_spring(q)`, preload, travel, stored energy, hysteresis, and unloading behavior. A spring stores impact energy; damping or regeneration must remove it. It may also resist folding the free leg.
 
 The earlier **~90 Hz** tube estimate checks out for a simplified **16×12 mm** cantilever, 190.5 mm long, with assumed 100 GPa modulus and 0.30 kg tip mass. The BOM's **16×14 mm** tube is closer to **70 Hz** under those assumptions. Neither proves assembled resonance. Joint compliance, layup, fittings, and attached inertia matter. At nominal 10 N·m bending, corresponding beam stresses are ~36 and ~60 MPa: demands, **not composite allowables**. Test clamp crushing, pullout, torsion, fitting retention, bearings, and fatigue with actual stock.
 
@@ -153,7 +153,7 @@ Proposed experiments, not completed hardware work or purchase authorization:
 | --- | --- | --- |
 | 1 | Measure stairs and component inventory | Rise/going/nosing/overhang variations, surface; component masses, CoMs, envelopes and travel. Weigh at multiple supported orientations to estimate assembled CoM. |
 | 2 | Unify spatial geometry | Every pose respects reach, joint limits, self/terrain clearance, tire contact and cable travel. Find a feasible transfer or explicitly revise gait/envelope. |
-| 3 | Characterize restrained wheel and joint | Torque-speed-current-temperature data at full/low 4S; backlash/compliance, loaded encoders, latency, braking and faults. |
+| 3 | Characterize restrained wheel and joint | Torque-speed-current-temperature data at full/low pack voltage (8S now: 33.6 / 26.4 V; 4S when written); backlash/compliance, loaded encoders, latency, braking and faults. |
 | 4 | Load an assembled leg | Pose loads, spring curve, deflection, fitting retention and assembled resonance. Establish allowable loads from actual materials/tests. |
 | 5 | Two-wheel balance with a catch rig | Repeatable starts, stops, height changes, turns, disturbances, lost-link response, supported parking; log saturation and slip across voltage/mass/surface conditions. |
 | 6 | True single support, both sides | Free wheel clear and unloaded for planned swing duration plus margin; stable lateral recovery and controlled return. Log load, clearance, CoM estimate and torque. |
