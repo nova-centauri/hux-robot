@@ -13,7 +13,7 @@ Inspiration: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori
 | ID | Requirement | Notes |
 | --- | --- | --- |
 | R1 | Balance on **two** wheeled legs | Baseline stance / teleop |
-| R2 | Balance on **one** wheeled leg | Gate before stair cycle. **Open (2026-09-26 study, Steve's call):** a *static* one-wheel stand is not available on this geometry (acrobot, 2–3 mm capture region); what the stair needs is a timed single support — poise at ~8 %, free wheel up ≤ 0.3 s, land. [`research/one-leg-stance.md`](research/one-leg-stance.md). |
+| R2 | Balance on **one** wheeled leg | Gate before stair cycle. **Steve 2026-09-27: wants a static one-leg stand if possible — it matters for stairs later.** **Open (2026-09-26 study):** a *static* one-wheel stand is not available on this geometry (acrobot, 2–3 mm capture region); what the stair needs is a timed single support — poise at ~8 %, free wheel up ≤ 0.3 s, land. [`research/one-leg-stance.md`](research/one-leg-stance.md). A real stand needs a design change — reaction wheel, higher body CoM, or a measured tire patch (NOTES open call 21). |
 | R3 | Step **up or down a 9.5" × 9.5" step** | Rise **and** going, nosing to nosing. Stroke owns the rise. The going is what the wheel has to sit in. [`research/leg-geometry.md`](research/leg-geometry.md). |
 | R4 | Wi‑Fi telemetry | Companion or bridge |
 | R5 | RC control via **TBS Nano RX** | CRSF into a full UART on the real-time MCU (**Teensy 4.1**). The on-hand FCs are P0–P1 bench boards. |

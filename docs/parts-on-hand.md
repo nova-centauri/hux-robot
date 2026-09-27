@@ -1,6 +1,6 @@
 # Parts on hand
 
-**Status:** inventory started 2026-09-20. What to buy is [`bom.md`](bom.md). This page stays the owned / ordered list. Authorized order-now cart ([`bom.md`](bom.md)): 3× 6×1.25 tire, 3× tube, 2× 16×14 carbon tube (2026-09-21), plus the Teensy 4.1 kit, XT90-S and one 8S 3300 pack (2026-09-26). Actuators are **not** authorized. Move a line here when it is ordered or arrives.
+**Status:** inventory started 2026-09-20. What to buy is [`bom.md`](bom.md). This page stays the owned / ordered list. Authorized order-now cart ([`bom.md`](bom.md)): 3× 6×1.25 tire, 3× tube, 2× 16×14 carbon tube (2026-09-21), plus the Teensy 4.1 kit, XT90-S and one 8S 3300 pack (2026-09-26). Actuators are **not** authorized. **Nothing on the order-now cart is ordered yet** (Steve, 2026-09-27). Move a line here when it is ordered or arrives. The Pi 5 and F765-Wing are on hand; the design does not have to use them.
 
 This page records what Steve already **owns** or has **already ordered**, plus a short **candidates** list that is explicitly **not owned / not ordered**. Owned ≠ reserved for Hux. If a row does not say reserved, treat reservation as **TBD**.
 

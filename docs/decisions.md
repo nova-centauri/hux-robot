@@ -21,6 +21,7 @@ These must stay true on `main`. Later rows in the log explain how we got here.
 | Wheels | **6" OD locked** (a real tire at **5.75–6.25"** still counts). Width **~1–1.25"**. Real rubber, torsionally stiff. **In-wheel drive: RS05** (temporary lock) with its outboard face **flush with the tire**, stator on the axle fitting, disc web to a turned **3.75"-bead** rim (Sheet 2, 2026-09-27). The 6×1.25 pneumatic tires are in the order-now cart. Zantle 5" is a bench donor, not the foot. No spokes. |
 | Knee + hip swing | **CAN QDD / FOC is the working class** on 8S (2026-09-26), temporarily locked to **RS02 knee / RS00 swing** (row below); servo or stepper+belt is the **fallback**. Size for the one-leg plant load: the knee holds **12.4 N·m** standing up over the front wheel on the 7.75 kg picture, **6.4 N·m at the motor with the Sheet 2 spring** (RS02: 7 rated / 17 peak). |
 | Hip roll | **IN V1** (dynamic FOC / QDD / fast servo), even if imperfect. Not a stepper. Not V2. Temporarily locked to **RS02**; roll axes **3.0"** from the centreline (Sheet 1) — one-wheel hold **6.3 N·m** vs 7 rated. |
+| **One-leg stand** (2026-09-27) | **Wanted if achievable** (Steve: "important to go up stairs in the future"). Not reachable by control on the current geometry (acrobot, 2–3 mm capture region); needs a sized design lever — reaction wheel, higher body CoM, tire patch — before CAD commits the hip band. |
 | Structure / envelope | **Carbon fiber tubes** for upper / lower leg spars — **16 × 14 mm** for both links (in the order-now cart; Sheet 2). **~24"** full extension. **~14"** outside width. Head inside, wheels and legs outside the head. Mass budget **soft / blown** (model picture 7.75 kg). |
 | Fabrication | **COTS** structure, **draft-friendly** customs, **wire ports**, **serviceability**, **2D before Blender**. Sheet 1 (layout) and Sheet 2 (make-up) are drawn; the leg and hip band go to CAD once Steve agrees both. |
 | Shop | Mill / lathe / brake / bender / bandsaw / weld / solder / breadboards. Fab is welcome. |
@@ -355,6 +356,13 @@ Steve: "Perform a high effort pass on the entire plan to make sure current desig
 - **Sandbox:** the speed command clamps at the R38 1.5 m/s (was ±2.5) and the top-speed slider reads `spec.js`; the page's knob defaults (3 N·m wheel, 12 / 12 / 15 N·m joints) were overwriting the actuator caps on the first knob touch — the knobs now start from the model. Mass readouts showed 6 kg; now 7.75.
 
 **Found, not fixable by editing — open calls for Steve (NOTES 16–20):** (16) **no validated V1 step exists** — the only modelled step (`kin.js` reference candidate) is rejected: 192/201 frames out of reach, knee 23 N·m vs 17 peak, wheel 6.4 vs 5.5; (17) the sandbox body CoM is 0", not +1" — at +1" the 0.2 s hop no longer returns; (18) the sandbox has no knee spring; (19) the models hang the legs on the roll axis, not Sheet 1's 4.75" plane (~0.2 N·m optimistic on roll hold); (20) which order-now lines are actually bought. Carried, still Steve's: R2 / R17 one-leg gate wording (static stand vs timed single support), whether study Phases A–C still gate CAD and the print, whether descent is V1 or V2 (R3 says up or down; R37 names one step up).
+
+### 2026-09-27 — one-leg stand wanted; nothing bought yet
+
+Steve, after the audit: "I have not bought anything in the buy list. The Pi 5 and the F765 are in stock in my junk drawer but that doesn't mean we need to use them. I do want to have it stand on one leg if possible. That seems important to go up stairs in the future."
+
+- **Order status:** nothing on the order-now cart is ordered. The Pi 5 and F765-Wing are on hand and optional (the F765 was already bench-only; the Pi 5 stays the V1 companion by choice, not because it is owned).
+- **One-leg stand (R2) is a wanted capability, not dropped.** The 2026-09-26 study stands: on the current geometry a static one-wheel stand is an acrobot (2–3 mm capture region), so no controller makes it one. Getting it needs a design lever — a body reaction wheel, a higher body CoM, and / or a real tire patch — sized before CAD commits the hip band (NOTES open call 21). Sheets 1–2 put the pack low on the hip-band floor, which is the placement that makes the acrobot weakest; that is now a tension to resolve, not a settled choice. **No lock changed.**
 
 When a docs PR merges, add a dated heading:
 
