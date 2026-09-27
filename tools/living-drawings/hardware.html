@@ -15,6 +15,8 @@
         <p>What we would buy, what is already here, and what is only a class estimate. Order now is the only authorized spend. Nothing below with an estimate is a chosen part.</p>
         <nav class="pages" aria-label="Pages">
           <a href="index.html">Drawings</a>
+          <a href="sheet.html">Sheet 1</a>
+          <a href="sheet2.html">Sheet 2</a>
           <a href="sim.html">3D sandbox</a>
           <a href="flow.html">Data flow</a>
           <a href="software.html">Software</a>
@@ -23,12 +25,14 @@
         </nav>
       </div>
       <div class="stamp">
-        Model 2026-09-22<br>
+        Model 2026-09-27<br>
         6" × 1.25" wheel<br>
         7.5" + 7.5" tubes<br>
         24" tall · 14" wide
       </div>
     </header>
+
+    <p class="callout"><b>V1 direction, 2026-09-27</b> (R37–R40, <a href="../../docs/decisions.md">decisions.md</a>): the finish line is one 9.5" step, 9 of 10 attempts from a standstill; flat-ground pace 1.5 m/s top / 1.0 cruise; knee RS02 at the knee with a gravity spring; V1 terrain is flat + 1" sills + ~20° slopes. Nothing on this page changes for it — the same eight actuators, pack and MCU. Layout: <a href="sheet.html">Sheet 1</a>.</p>
 
     <div class="totals">
       <div><span>Order now</span><strong>~$230</strong>Tires, tubes, carbon tube, Teensy 4.1 CAN kit, XT90-S, 8S 3300 mAh pack. Shipping extra.</div>
@@ -121,8 +125,8 @@
             <tr><th>Qty</th><th>Part</th><th>Est.</th><th>Role</th></tr>
           </thead>
           <tbody>
-            <tr><td>2</td><td>Wheel actuator — RobStride 05 shortlisted</td><td>~$200</td><td>5.5 N·m peak, 191 g, driver and encoder on board. Not ordered.</td></tr>
-                                    <tr><td>2</td><td>Hip roll — RobStride 02 (hips ≤ 3.5") or 06 (hips at 5.4")</td><td>~$340–380</td><td>8.3 N·m continuous hold whenever a wheel is up, 12–13 peak. Hip offset decides the part. Not ordered.</td></tr>
+            <tr><td>2</td><td>Wheel actuator — RobStride 05 shortlisted</td><td>~$200</td><td>5.5 N·m peak, 191 g, driver and encoder on board. Sets the pace: <b>1.5 m/s top, 1.0 cruise</b> (R38) with ~2 N·m of catch left at 1.5 on the 6" wheel. Its 44 mm housing is 0.24" proud of the 1.25" tire on each face — hub drawing before any order. Not ordered.</td></tr>
+            <tr><td>2</td><td>Hip roll — RobStride 02, roll axes at 3.0" (Sheet 1)</td><td>~$340</td><td>6.3 N·m hold whenever a wheel is up at the 3.0" axes (frontal model), vs 7 rated; ~11 at the old 5.4". The shift then needs 2.8" of leg-length difference to stay level — a controls term. Not ordered.</td></tr>
             <tr><td>4</td><td>Knee (RobStride 02) and hip swing (RobStride 00)</td><td>~$680</td><td>CAN QDD working class on an 8S bus. Servo / stepper+belt is the fallback. Not ordered.</td></tr>
           </tbody>
         </table>

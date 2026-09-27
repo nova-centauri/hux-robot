@@ -157,7 +157,7 @@ Tracked in [`../NOTES.md`](../NOTES.md). Bring-up list: [`checklists/software-br
 5. **`TWO_WHEEL` balance teleop** — the studied PID cascade (R18) in layer 2, tuned from blackbox + live params, TBS in, telem reports `TWO_WHEEL`. **P2**.
 6. **Pose joints from the stick** — knee + hip swing on CAN, position mode, teleop hold. **P3**.
 7. **`LEFT_ONLY`, then `RIGHT_ONLY`** — hip roll + planted-wheel fore/aft, best-effort. **P4**. May not work as hoped; still expose the modes. Gate before stairs.
-8. **Open-loop step** toward a 9.5" riser fixture. Not before the four modes work.
+8. **Open-loop step** toward a 9.5" riser fixture. Not before the four modes work. **V1 finish line (R37, 2026-09-27): one 9.5" step, 9 of 10 attempts, from a standstill on the lower tread.** A flight is V2 on the same hardware.
 9. **Camera stream** — one teleop stream through the companion. **P5**.
 10. **Perception** — stereo depth and nosing detection; this is where the companion becomes a Jetson if the Pi 5 cannot hold the rate. **P5**.
 11. **Twin** — layer 2 compiled into the simulator, same parameters, same estimator inputs. Pipeline TBD ([`decisions.md`](decisions.md)); the contract comes first.
@@ -168,7 +168,7 @@ Steve, 2026-09-22. Three phases. Do **not** invert them. R14 and R18 stay.
 
 | Phase | What | Not |
 | --- | --- | --- |
-| **V1 — classical balance + modes** | Layer-2 skeleton → blink → spin → `PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY` from TBS on the **CAN MCU**. Reuse an existing simple balance pattern (R18). CAN QDD / FOC actuators on 8S. Open-loop 9.5" fixture after the four modes work. | An RL gate. A novel Hux V1 controller. A sim trainer before the robot stands. Firmware that only runs on the F765. |
+| **V1 — classical balance + modes** | Layer-2 skeleton → blink → spin → `PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY` from TBS on the **CAN MCU**. Reuse an existing simple balance pattern (R18). CAN QDD / FOC actuators on 8S. Open-loop 9.5" fixture after the four modes work. **Done means R37: one step, 9/10.** Flat-ground scope: **1.5 m/s top / 1.0 cruise** (R38, the `TWO_WHEEL` speed command clamps there), **flat + 1" sills + ~20° slopes** (R40). | An RL gate. A novel Hux V1 controller. A sim trainer before the robot stands. Firmware that only runs on the F765. |
 | **Later — CAD / URDF twin lockstep** | When CAD exists: CAD, exported model, and firmware zeros stay the **same robot** (Stompy lesson). Geometry edits flow through all three. **Lock the contract first** (CAD→URDF/USD or MJCF, observation parity, motorcycle-crown tire contact, firmware zeros, stack willingness). **Layer 2 is the controller in the twin** — no re-implementation. Pipeline (Isaac / MuJoCo / mjlab / other) stays **TBD** — 2026-09-25. | A day-one wheel-balance task. A mjlab / Isaac lock. Standing up a dojo before `TWO_WHEEL`. |
 | **Horizon — sim dojo / RL** | Identical digital twin + domain-randomized dojo so a policy trained in sim runs on the companion (a small MLP needs no GPU; the Jetson is for perception). Later terrains: stairs, rubble, dirt, fall leaves, wet mud. | A replacement for R18. A V1 blocker. A reason to skip modes. Buying a 4090 or locking Isaac Lab. |
 
@@ -188,3 +188,9 @@ V1 may / should stand and balance with classical / reused control **before** any
 - A **novel Hux V1 balance controller** (R18). Study existing patterns; do not invent one to fill layer 2.
 - micro-ROS on the MCU. Optional later; the framed protocol comes first.
 - Any code that only runs on the F765-Wing.
+
+## Control-core requirements from Sheet 1 (2026-09-27)
+
+- **Speed clamp.** The `TWO_WHEEL` speed command clamps at **1.5 m/s** (R38); cruise is 1.0. The locked RS05 on 8S has ~2 N·m of catch torque left at 1.5 m/s on the 6" wheel (1.6 near cutoff) — the ceiling is the wheel actuator's torque-speed line, not the legs. `tools/living-drawings/spec.js` holds the numbers.
+- **Geometric levelling in the one-leg shift.** With the roll axes at 3.0" the wheel planes sit **3.375" outboard** of them, so the ~24° parallelogram roll lifts one axle and drops the other by **2.8"**. Equal leg lengths no longer keep the body level (they did within 0.8" at the old 5.4" axes). The shift is therefore **roll + a leg-length difference of 2 × spacer × sin γ**, fed forward from the commanded roll — not an integrator, which fought the shift servo (`one-leg-stance.md` §5). The sandbox does this since 2026-09-27 and settles the poise at ~20° roll at the 75% ride; the portable core needs the same term.
+- **Terrain scope for V1 controls:** flat floor, 1" sills at cruise, ~20° slopes (R40). Rough ground is Phase E.

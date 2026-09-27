@@ -122,7 +122,7 @@
     const M = opts.M;
     const ms = opts.massScale || 1;
     const hipLat = (opts.hipLateral !== undefined ? opts.hipLateral : M.hipLateral) * IN;
-    const spacer = (M.track / 2 - M.hipLateral) * IN;   /* the axle's outboard offset from the leg plane */
+    const spacer = M.track / 2 * IN - hipLat;           /* the axle's outboard offset from the roll axis (leg plane + yoke) */
     const R = M.wheelR * IN;
     const rc = (M.tireCrown || M.wheelWidth / 2) * IN;
     const L = M.link * IN;

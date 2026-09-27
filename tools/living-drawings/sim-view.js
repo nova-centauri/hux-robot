@@ -12,6 +12,7 @@
   let OrbitControls;
   let CSS2DRenderer;
   let CSS2DObject;
+  let GLTFLoader;
   let RAPIER;
   try {
     THREE = await import("three");
@@ -19,6 +20,7 @@
     const css2d = await import("three/addons/renderers/CSS2DRenderer.js");
     CSS2DRenderer = css2d.CSS2DRenderer;
     CSS2DObject = css2d.CSS2DObject;
+    GLTFLoader = (await import("three/addons/loaders/GLTFLoader.js")).GLTFLoader;
     RAPIER = (await import("https://cdn.jsdelivr.net/npm/@dimforge/rapier3d-compat@0.20.0/dist/rapier.mjs")).default;
     await RAPIER.init();
   } catch (err) {
@@ -83,6 +85,76 @@
 
   function mat(color, opts) {
     return new THREE.MeshStandardMaterial(Object.assign({ color: color, roughness: 0.75, metalness: 0.05 }, opts || {}));
+  }
+
+  /* ---------- vendor models ----------
+     Real part geometry for the locked actuator set and the CAN MCU, converted from the vendors'
+     STEP files (sources and the full-resolution files: cad/vendor/README.md). These are the
+     light sandbox copies in models/; fasteners are dropped and the tessellation is coarse.
+     Every model's motor axis is +Z. `out` is the model-frame direction of the output flange.
+     `size` is the vendor envelope in metres, checked against actuators.js at load time: a
+     mismatch is reported in the HUD rather than hidden. The primitives below stay as the
+     fallback — a page opened straight from the file cannot fetch the .glb files. */
+  const VENDOR = {
+    rs02: { file: "models/rs02.glb", out: [0, 0, 1], size: [0.0785, 0.0785, 0.0454], label: "RobStride 02" },
+    rs00: { file: "models/rs00.glb", out: [0, 0, -1], size: [0.057, 0.057, 0.0514], label: "RobStride 00" },
+    rs05: { file: "models/rs05.glb", out: [0, 0, 1], size: [0.046, 0.046, 0.047], label: "RobStride 05" },
+    teensy41: { file: "models/teensy41.glb", out: [0, 0, 1], size: [0.0666, 0.0178, 0.0053], label: "Teensy 4.1" }
+  };
+  const vendorGeo = {};      /* key -> { geometry, center } once loaded */
+  let vendorStatus = "";     /* one line for the HUD */
+  const vendorMat = {
+    motor: mat(0x262a30, { roughness: 0.42, metalness: 0.55, flatShading: true }),
+    board: mat(0x1e5f3a, { roughness: 0.6, metalness: 0.15, flatShading: true }),
+    pack: mat(0x2a2d33, { roughness: 0.7, metalness: 0.1 })
+  };
+  function loadVendorModels() {
+    if (!GLTFLoader) return Promise.resolve();
+    const loader = new GLTFLoader();
+    const keys = Object.keys(VENDOR);
+    return Promise.all(keys.map(function (key) {
+      const v = VENDOR[key];
+      return new Promise(function (resolve) {
+        loader.load(v.file, function (gltf) {
+          /* One mesh per file (the converter merges the solids). Take the first geometry. */
+          let geo = null;
+          gltf.scene.traverse(function (o) { if (!geo && o.isMesh) geo = o.geometry; });
+          if (!geo) { resolve({ key: key, err: "no mesh" }); return; }
+          geo.computeBoundingBox();
+          const bb = geo.boundingBox;
+          const size = new THREE.Vector3().subVectors(bb.max, bb.min);
+          const bad = ["x", "y", "z"].filter(function (a, i) { return Math.abs(size[a] - v.size[i]) > 0.0015; });
+          vendorGeo[key] = { geometry: geo, center: bb.getCenter(new THREE.Vector3()), size: size };
+          resolve({ key: key, err: bad.length ? "envelope " + size.toArray().map(function (x) { return (x * 1000).toFixed(1); }).join("×") + " mm, expected " + v.size.map(function (x) { return (x * 1000).toFixed(1); }).join("×") : null });
+        }, undefined, function () { resolve({ key: key, err: "not loaded" }); });
+      });
+    })).then(function (results) {
+      const ok = results.filter(function (r) { return !r.err; }).map(function (r) { return VENDOR[r.key].label; });
+      const failed = results.filter(function (r) { return r.err; }).map(function (r) { return VENDOR[r.key].label + " (" + r.err + ")"; });
+      vendorStatus = ok.length ? "Vendor geometry: " + ok.join(", ") : "Vendor geometry: none (envelope boxes)";
+      if (failed.length) vendorStatus += " · missing: " + failed.join(", ");
+    });
+  }
+  /* Place a vendor model in `parent`: housing centred on `pos`, output flange pointing along
+     `outDir` (parent frame). The extra `roll` turns the part about its own axis. Returns the
+     group, or null when the model is not available (the caller keeps its primitive). */
+  function vendorPart(parent, key, pos, outDir, material, roll) {
+    const g = vendorGeo[key];
+    if (!g) return null;
+    const v = VENDOR[key];
+    const grp = new THREE.Group();
+    const modelOut = new THREE.Vector3(v.out[0], v.out[1], v.out[2]);
+    grp.quaternion.setFromUnitVectors(modelOut, new THREE.Vector3(outDir.x, outDir.y, outDir.z).normalize());
+    if (roll) grp.quaternion.multiply(new THREE.Quaternion().setFromAxisAngle(modelOut, roll));
+    grp.position.set(pos.x, pos.y, pos.z);
+    const m = new THREE.Mesh(g.geometry, material || vendorMat.motor);
+    m.position.copy(g.center).negate();
+    m.castShadow = true;
+    m.receiveShadow = true;
+    m.userData.vendor = true;
+    grp.add(m);
+    parent.add(grp);
+    return grp;
   }
 
   function gridTexture() {
@@ -187,7 +259,7 @@
   function buildRobotMeshes() {
     if (robotGroup) {
       scene.remove(robotGroup);
-      robotGroup.traverse(function (o) { if (o.geometry) o.geometry.dispose(); });
+      robotGroup.traverse(function (o) { if (o.geometry && !o.userData.vendor) o.geometry.dispose(); });
     }
     robotGroup = new THREE.Group();
     robotMeshes = [];
@@ -204,7 +276,19 @@
     /* body / head */
     const b = byKind.body.g;
     const bodyH = s.bodyUp + s.bodyDown;
-    add(b, new THREE.BoxGeometry(s.bodyLen, bodyH, s.bodyWid), mat(C.body, { roughness: 0.55 }), { x: 0, y: (s.bodyUp - s.bodyDown) / 2, z: 0 });
+    /* The body shell goes see-through once the interior parts exist, so the pack and the MCU
+       show where the mass sketch wants them (docs/mechanical.md: pack low and central). */
+    const interior = !!vendorGeo.teensy41;
+    add(b, new THREE.BoxGeometry(s.bodyLen, bodyH, s.bodyWid), mat(C.body, interior ? { roughness: 0.55, transparent: true, opacity: 0.42, depthWrite: false } : { roughness: 0.55 }), { x: 0, y: (s.bodyUp - s.bodyDown) / 2, z: 0 });
+    if (interior) {
+      /* 8S 3300 mAh pack, the BOM's ~150 × 50 × 60 mm class; no SKU, so a box. Long axis
+         forward, standing on the body floor. */
+      const pack = { l: 0.150, w: 0.050, h: 0.060 };
+      const packM = add(b, new THREE.BoxGeometry(pack.l, pack.h, pack.w), vendorMat.pack, { x: 0, y: -s.bodyDown + pack.h / 2 + 0.004, z: 0 });
+      packM.userData.vendor = false;
+      /* Teensy 4.1 flat above the pack, USB end forward. */
+      vendorPart(b, "teensy41", { x: -0.012, y: -s.bodyDown + pack.h + 0.022, z: 0 }, { x: 0, y: 1, z: 0 }, vendorMat.board);
+    }
     /* Face and cameras placed as in the 2D drawings (app.js drawFaceSide / drawFaceTop). */
     const front = s.bodyLen / 2;
     const mid = s.bodyUp * 0.55;
@@ -220,9 +304,11 @@
       add(b, new THREE.CylinderGeometry(s.eyeD * 0.28, s.eyeD * 0.28, 0.004, 24), mat(0xe8f7ff, { emissive: C.eye, emissiveIntensity: 0.5 }), { x: front + 0.002, y: ey, z: ez }, alongX);
       camera3(front + 0.28 * IN, mid - 2.15 * IN, k * M.stereoGap * IN / 2);
       camera3(-1.0 * IN, 3.4 * IN, k * (s.bodyWid / 2 + 0.15 * IN));
-      /* hip roll motors, on the roll axis, behind the swing motor */
-      add(b, new THREE.CylinderGeometry(s.motorRollD / 2, s.motorRollD / 2, s.motorRollL, 24), mat(C.motor),
-        { x: -(s.motorSwing.w / 2 + s.motorRollL / 2), y: 0, z: k * s.hipLat }, alongX);
+      /* hip roll motors, on the roll axis, behind the swing motor; the RS02 flange faces the yoke */
+      const rollPos = { x: -(s.motorSwing.w / 2 + s.motorRollL / 2), y: 0, z: k * s.hipLat };
+      if (!vendorPart(b, "rs02", rollPos, { x: 1, y: 0, z: 0 }, vendorMat.motor)) {
+        add(b, new THREE.CylinderGeometry(s.motorRollD / 2, s.motorRollD / 2, s.motorRollL, 24), mat(C.motor), rollPos, alongX);
+      }
     });
     camera3(1.5 * IN, s.bodyUp + 0.28 * IN, 0);
     camera3(-front - 0.28 * IN, 4.2 * IN, 0);
@@ -236,15 +322,26 @@
     }
 
     [-1, 1].forEach(function (side) {
+      /* Output flanges face outboard, toward the leg plane and the wheel. The collider is still
+         the envelope box from actuators.js; the vendor mesh is drawn inside it. */
+      const outboard = { x: 0, y: 0, z: side };
       const y = byKind["yoke" + side].g;
-      add(y, new THREE.BoxGeometry(s.motorSwing.w, s.motorSwing.h, s.motorSwing.t), mat(C.motor), { x: 0, y: 0, z: 0 });
+      if (!vendorPart(y, "rs00", { x: 0, y: 0, z: 0 }, outboard)) {
+        add(y, new THREE.BoxGeometry(s.motorSwing.w, s.motorSwing.h, s.motorSwing.t), mat(C.motor), { x: 0, y: 0, z: 0 });
+      }
       const u = byKind["upper" + side].g;
       add(u, new THREE.CylinderGeometry(s.tubeR, s.tubeR, s.L, 16), mat(C.tube, { roughness: 0.35, metalness: 0.2 }), { x: 0, y: -s.L / 2, z: 0 });
-      add(u, new THREE.BoxGeometry(s.motorKnee.w, s.motorKnee.h, s.motorKnee.t), mat(C.motor), { x: 0, y: -s.L, z: 0 });
+      if (!vendorPart(u, "rs02", { x: 0, y: -s.L, z: 0 }, outboard)) {
+        add(u, new THREE.BoxGeometry(s.motorKnee.w, s.motorKnee.h, s.motorKnee.t), mat(C.motor), { x: 0, y: -s.L, z: 0 });
+      }
       const l = byKind["lower" + side].g;
       add(l, new THREE.CylinderGeometry(s.tubeR, s.tubeR, s.L, 16), mat(C.tube, { roughness: 0.35, metalness: 0.2 }), { x: 0, y: -s.L / 2, z: 0 });
       const dz = s.wheelLat - s.hipLat;
       add(l, new THREE.CylinderGeometry(0.006, 0.006, dz, 12), mat(C.hub), { x: 0, y: -s.L, z: side * dz / 2 }, alongZ);
+      /* In-wheel RS05: the stator is the lower leg's, on the axle, flange outboard into the rim.
+         It does not turn with the wheel, so it lives on the lower-leg body. 44 mm wide against a
+         31.75 mm tire — the overlap into the axle spacer is real and still needs the hub drawing. */
+      const hubMotor = vendorPart(l, "rs05", { x: 0, y: -s.L, z: side * dz }, outboard);
       const w = byKind["wheel" + side].g;
       const t = (byKind["tread" + side] || byKind["wheel" + side]).g;
       /* Tire: the shared crown profile (tire.js), turned about the axle. It rides on the tread
@@ -255,8 +352,16 @@
       add(t, lathe, mat(C.tire, { roughness: 0.95, side: THREE.DoubleSide }), null, alongZ);
       /* rim band inside the bead */
       add(t, new THREE.CylinderGeometry(s.tire.bead, s.tire.bead, s.wheelW * 0.55, 48, 1, true), mat(C.hub, { metalness: 0.4, roughness: 0.5, side: THREE.DoubleSide }), null, alongZ);
-      add(w, new THREE.CylinderGeometry(s.motorWheelD / 2, s.motorWheelD / 2, s.wheelW + 0.004, 32), mat(C.hub, { metalness: 0.3, roughness: 0.4 }), null, alongZ);
-      add(w, new THREE.BoxGeometry(s.tire.bead * 1.9, 0.008, s.wheelW * 0.5), mat(C.body), null);
+      if (!hubMotor) add(w, new THREE.CylinderGeometry(s.motorWheelD / 2, s.motorWheelD / 2, s.wheelW + 0.004, 32), mat(C.hub, { metalness: 0.3, roughness: 0.4 }), null, alongZ);
+      if (hubMotor) {
+        /* Disc web from the RS05 flange out to the bead (the concept art's spokeless hub), on the
+           outboard face, with a bar on it so the wheel is seen turning. A picture, not a hub design. */
+        const zWeb = side * (VENDOR.rs05.size[2] / 2 + 0.002);
+        add(w, new THREE.CylinderGeometry(s.tire.bead, s.tire.bead, 0.004, 48), mat(C.hub, { metalness: 0.4, roughness: 0.45 }), { x: 0, y: 0, z: zWeb }, alongZ);
+        add(w, new THREE.BoxGeometry(s.tire.bead * 1.9, 0.008, 0.005), mat(C.body), { x: 0, y: 0, z: zWeb + side * 0.0045 });
+      } else {
+        add(w, new THREE.BoxGeometry(s.tire.bead * 1.9, 0.008, s.wheelW * 0.5), mat(C.body), null);
+      }
     });
 
     comMarker = add(robotGroup, new THREE.SphereGeometry(0.014, 16, 12), mat(C.com, { emissive: C.com, emissiveIntensity: 0.4 }), null);
@@ -308,6 +413,9 @@
 
   buildScenery();
   buildRobotMeshes();
+  /* Swap the envelope primitives for the vendor geometry once it arrives (served over http;
+     from file:// the fetch fails and the primitives stay). */
+  loadVendorModels().then(function () { buildRobotMeshes(); });
 
   /* ---------- input ---------- */
   const keys = new Set();
@@ -625,7 +733,8 @@
       row("Mechanical power magnitude", o.power.toFixed(0) + " W") +
       row("Support", o.supportState + " · " + o.singleSupportSeconds.toFixed(2) + " s single") +
       row("Sensor age", o.sensorAgeMs.toFixed(1) + " ms") +
-      row("Sim", sim.t.toFixed(1) + " s" + (rtf < 0.95 ? " · " + rtf.toFixed(2) + "× real" : ""));
+      row("Sim", sim.t.toFixed(1) + " s" + (rtf < 0.95 ? " · " + rtf.toFixed(2) + "× real" : "")) +
+      (vendorStatus ? row("Parts", vendorStatus) : "");
     hudRight.innerHTML =
       "<h4>Torque vs limit (N·m)</h4>" +
       bar("Wheel L", o.wheels[0].tau, s.knobs.tauWheel) +

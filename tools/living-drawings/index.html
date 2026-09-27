@@ -12,9 +12,11 @@
       <div>
         <p class="kicker">Hux</p>
         <h1>Living drawings</h1>
-        <p>Side and top views of the working model, and the stair climb. Drag the joints, request a wheel position, or press Play. The 9.5 by 9.5 inch stair is a design target, not a validated capability.</p>
+        <p>Side and top views of the working model, and the stair climb. Drag the joints, request a wheel position, or press Play. The 9.5 by 9.5 inch stair is a design target, not a validated capability; the V1 finish line is one step, 9 of 10 (R37). The layout the model is drawn to is <a href="sheet.html">Sheet 1</a>
+          <a href="sheet2.html">Sheet 2</a>; its roll axes (3.0"), leg plane and body-CoM offset (+1") come from <code>spec.js</code>.</p>
         <nav class="pages" aria-label="Pages">
           <a href="index.html" aria-current="page">Drawings</a>
+          <a href="sheet.html">Sheet 1</a>
           <a href="sim.html">3D sandbox</a>
           <a href="flow.html">Data flow</a>
           <a href="software.html">Software</a>
@@ -23,7 +25,7 @@
         </nav>
       </div>
       <div class="stamp">
-        Model 2026-09-23<br>
+        Model 2026-09-27<br>
         6" × 1.25" wheel<br>
         7.5" + 7.5" tubes<br>
         24" tall · 14" wide
@@ -188,7 +190,7 @@
           <input id="knobLand" type="range" min="-1.0" max="0.75" step="0.05" value="0">
         </label>
         <label>Body mass forward of the hips <output id="knobComOut"></output>
-          <input id="knobCom" type="range" min="-1" max="3" step="0.1" value="0">
+          <input id="knobCom" type="range" min="-1" max="3" step="0.1" value="1">
         </label>
         <label>Example mass <output id="knobMassOut"></output>
           <input id="knobMass" type="range" min="0.67" max="1.5" step="0.01" value="1">
@@ -208,6 +210,7 @@
     </footer>
   </div>
   <script src="actuators.js"></script>
+  <script src="spec.js"></script>
   <script src="tire.js"></script>
   <script src="spatial.js"></script>
   <script src="kin.js"></script>

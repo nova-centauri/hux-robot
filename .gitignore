@@ -75,3 +75,6 @@ desktop.ini
 
 # Node (tools/living-drawings headless checks)
 node_modules/
+
+# Cowork session scratch (bundles, patches, screenshots)
+Claude outputs/

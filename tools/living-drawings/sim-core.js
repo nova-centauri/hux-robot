@@ -834,9 +834,18 @@
     } else if (!this.one) {
       this.rollI *= 0.99;
     } /* on one wheel the levelling freezes: unwinding it would change both leg lengths at once */
-    dh = this.rollI;
     const shift = clamp(cmd.shift || 0, -0.6, 0.6);
     if (!this.one) this.shift = shift;
+    /* Geometric levelling for the parallelogram roll (2026-09-27, Sheet 1). The wheel plane sits
+       (wheelLat - hipLat) outboard of the roll axis, so a roll of γ with both wheels down lifts
+       one axle and drops the other by that spacer × sin γ: equal leg lengths only keep the body
+       level when the spacer is small. At the 5.4" hips it was 0.975" (a 4° tilt at 30°); at the
+       3.0" roll axes of Sheet 1 it is 3.375" (13° the wrong way), so the legs take it up by
+       plan: the leg on the side the body moves toward shortens, the other lengthens. This is a
+       feed-forward from the commanded roll, not an integrator, so it cannot fight the shift servo. */
+    const rollCmd = this.one ? this.one.gamma : this.shift;
+    const spacerLevel = (s.wheelLat - s.hipLat) * Math.tan(rollCmd);
+    dh = this.rollI - spacerLevel;
 
     /* Suspension. Each leg is a spring-damper tuned for legHz with its share of the mass on it,
        plus a gravity feed-forward from where the mass sits between the wheels, so it rides at

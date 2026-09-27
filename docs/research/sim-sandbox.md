@@ -56,3 +56,19 @@ Steve, 2026-09-25: the 3D sandbox taught a lot and framed capabilities / expecta
 - **1" sill regressed:** crosses only at 1.0 m/s (0.5 and 0.75 m/s fall; 2026-09-23 crossed from 0.5 to 1.0). Heavier robot, the same hop reflex; RS05 peak 5.5 N·m is not the limit (peak wheel torque in the runs is ~1.7 N·m) — it is the leg spring / hop timing tuned for 6 kg. Not re-tuned today.
 - **Yaw loop hunts** ±0.4 rad/s about a 1.5 rad/s command at 1 m/s (at 6 kg too — the old test sampled a lucky phase). The test now asserts the last-second mean; the swing is reported. Sandbox controller, not layer 2.
 - Still not modelled: reflected rotor inertia through the 7.75:1 / 10:1 reductions (not published), backlash, actuator thermal limits (rated is reported, not enforced).
+
+## 2026-09-26 — vendor geometry in the sandbox
+
+The envelope boxes and cylinders for the actuators are now the vendors' own shapes when the page is served over http (`tools/living-drawings/models/*.glb`, light copies of the STEP files in [`../../cad/vendor/`](../../cad/vendor/README.md)). Opened straight from the file the fetch fails and the primitives stay, so nothing depends on it. What changed in the picture, and only the picture — colliders, masses and joints are untouched:
+
+- **RS02** on each hip-roll axis (flange toward the yoke) and at each knee (flange outboard); **RS00** in each yoke (flange outboard); **RS05** on each axle as the lower leg's stator, flange outboard, with a disc web from the flange to the bead so the wheel is seen turning. The RS05 is 44 mm wide against the 31.75 mm tire, and the drawing now shows that overlap instead of a hub disc — the hub drawing is still owed.
+- The body shell goes see-through with the **8S pack** (BOM class box, 150 × 50 × 60 mm, on the body floor) and the **Teensy 4.1** above it, so the mass sketch's "pack low and central" is visible. Neither position is a decision.
+- Each loaded envelope is checked against `actuators.js` at load time and the HUD's *Parts* row says which models are drawn; a mismatch prints there.
+
+## 2026-09-27 — the V1 spec wired in; roll axes at 3.0"; geometric levelling
+
+New `tools/living-drawings/spec.js` holds the 2026-09-27 decisions as numbers (R37 finish line, R38 speeds, R39 knee, R40 terrain, the Sheet 1 layout numbers, the T-REX reference) with `wheelAtSpeed()` / `speedWithReserve()` on the RS05 torque-speed line. `kin.js` reads the hip roll axis (**3.0"**, was the 5.4" drawing assumption), the leg plane (4.75", drawings only) and the body CoM offset (**+1"**) from it; `sim.html`'s top-speed slider defaults to 1.5 m/s and names the spec. The 2D stair candidate at these numbers: still rejected on spatial reach, but the momentum model no longer reverses and the hip demand is inside its limit (4 issues, was 6).
+
+**What broke, and what it means:** at 3.0" the one-leg poise did not settle — the roll servo ran to its 0.6 rad stop with 25 % of the weight still on the free wheel. Cause: the wheel planes are 3.375" outboard of the roll axes, so the parallelogram roll lifts one axle and drops the other by 2.8" and the frozen levelling left the body tilted against the shift ([`one-leg-stance.md`](one-leg-stance.md), addendum). Fix: a **geometric levelling feed-forward** in the height controller — leg-length difference = spacer × tan(commanded roll) — for the whole one-leg sequence. The poise now settles at ~20° roll at the 75% ride (LEFT_ONLY and RIGHT_ONLY), returns to two wheels, and the frontal-model hold assertion scales with the hip offset (≈ 60 N × offset). `npm test` passes.
+
+**Sill result at these numbers (not re-tuned):** the 1" threshold now crosses only at 0.5 m/s (0.3, 0.75, 1.0, 1.5 fall); before this pass it crossed only at 1.0. The leg-spring / hop timing is still the 6 kg tuning; R40 puts 1" sills at cruise in V1 scope, so this is an open controls item, not a geometry verdict.

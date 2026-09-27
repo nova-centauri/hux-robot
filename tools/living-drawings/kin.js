@@ -21,9 +21,12 @@
     stanceFraction: 0.92,
     exampleMassKg: 6, /* overwritten below from the actuator set's lumps */
     g: 9.81,
-    /* Lateral distance from the body centerline to each hip roll axis. Drawing assumption:
-       the head is ~7" wide and the legs sit just outside it. */
+    /* Lateral distance from the body centerline to each hip roll axis. Was a 5.4" drawing
+       assumption (legs just outside the 7" head); since 2026-09-26 a requirement (≤ 3" for the
+       RS02 roll hold) and since 2026-09-27 the Sheet 1 layout number, read from spec.js below.
+       The model puts the leg plane on the roll axis; the sheet draws the tubes at M.legPlane. */
     hipLateral: 5.4,
+    legPlane: 5.4,
     /* Motor envelopes come from the locked actuator set (actuators.js, 2026-09-26): RS02 at the
        knee and hip roll (3.1" square × 1.8"), RS00 hip swing (2.2" × 2.0"), RS05 wheel (1.8" × 1.7").
        Filled in below. */
@@ -42,6 +45,10 @@
   };
   const ACT = root.HuxActuators || require("./actuators.js");
   M.actuators = ACT;
+  const SPEC = root.HuxSpec || require("./spec.js");
+  M.spec = SPEC;
+  M.hipLateral = SPEC.layout.hipRollAxisIn;
+  M.legPlane = SPEC.layout.legPlaneIn;
   M.motorKnee = { w: ACT.envIn.knee.w, h: ACT.envIn.knee.h, t: ACT.envIn.knee.t };
   M.motorSwing = { w: ACT.envIn.swing.w, h: ACT.envIn.swing.h, t: ACT.envIn.swing.t };
   M.motorRollD = ACT.envIn.rollD;
@@ -67,7 +74,7 @@
     catchRoom: 1.0,   /* in, how far the front wheel may roll back in its slot during the catch */
     landErr: 0,       /* in, where the front wheel actually lands relative to slot center (+ = forward) */
     massScale: 1,     /* multiplies the lump picture (7.75 kg with the locked actuator set; was 6 kg) */
-    bodyCom: 0,       /* in, body lump forward (+) of the hip axis. 0 = pack centered on the hips */
+    bodyCom: SPEC.layout.bodyComForwardIn, /* in, body lump forward (+) of the hip axis; Sheet 1 puts the pack 1" ahead (2026-09-27) */
     mu: 0.7           /* tire-to-tread friction used for every cone check */
   };
 

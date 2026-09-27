@@ -78,6 +78,7 @@ The wheel motor is a **balance actuator**. Hux has to catch a tip on one skinny 
 | Criterion | Intent | Status |
 | --- | --- | --- |
 | What we optimize | **Reaction speed / torque bandwidth** for inverted-pendulum balance | Not max continuous power |
+| Speed (R38, 2026-09-27) | **1.5 m/s top, 1.0 cruise.** RS05 no-load on 8S ≈ 296 rpm nominal / 264 at cutoff = 2.4 / 2.1 m/s at the 6" wheel with nothing left; 1.5 m/s is 188 rpm with ~2.0 N·m of catch in hand (1.6 at cutoff). | 2 m/s would need another wheel actuator or ratio; not wanted. `tools/living-drawings/spec.js`. |
 | Wheel | **6" OD × ~1–1.25"** real rubber, torsionally stiff. Size locked, not a buy. | 5" Zantle is a **bench donor**, not the foot. |
 | Placement | **In-wheel** (hub / coaxial) | R30 |
 | Bus | **8S**, **CAN** | The wheel actuator's own FOC + encoder; torque mode; encoder counts back on the bus for the estimator. |

@@ -10,6 +10,8 @@ The BOM is **need-driven**: the project buys what the design needs. Inventory ([
 
 Inventory of what is already here: [`parts-on-hand.md`](parts-on-hand.md).
 
+3D models of the bought parts (RobStride 00 / 02 / 05, Teensy 4.1 — vendor STEP files, full and sandbox meshes, orientation notes): [`../cad/vendor/`](../cad/vendor/README.md). Tire, pack, connector and breakout boards have no vendor model yet; the sandbox draws those from the BOM's dimensions.
+
 ## Order now — $89.41
 
 | Qty | What | Unit | Line | Store |

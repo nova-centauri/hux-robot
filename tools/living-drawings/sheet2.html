@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hux — Sheet 2, tubes and fittings</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page">
+    <header class="mast">
+      <div>
+        <p class="kicker">Hux</p>
+        <h1>Sheet 2 — tubes, fittings, spring, hub, wires</h1>
+        <p>The second 2D sheet (R23), on top of Sheet 1's layout: what the leg is made of. Carbon tube cuts and their loads, the five fittings, an extension spring at the knee sized so the RS02 holds the stand-up inside its rating, the wheel hub with the RS05 flush to the tire, the hip-band shell, and the wire path from the axle into the body. Proposals, drawn to the parts already on the order-now list — nothing here adds a buy. Readouts are computed.</p>
+        <nav class="pages" aria-label="Pages">
+          <a href="index.html">Drawings</a>
+          <a href="sheet.html">Sheet 1</a>
+          <a href="sheet2.html" aria-current="page">Sheet 2</a>
+          <a href="sim.html">3D sandbox</a>
+          <a href="flow.html">Data flow</a>
+          <a href="software.html">Software</a>
+          <a href="hardware.html">Hardware</a>
+          <a href="media.html">Media</a>
+        </nav>
+      </div>
+      <div class="stamp">
+        Sheet 2 · rev 2026-09-27<br>
+        16 × 14 mm carbon tube<br>
+        6 × 1.25 tire, 3.75" bead<br>
+        RobStride 00 / 02 / 05
+      </div>
+    </header>
+
+    <section class="block">
+      <h2>Title block</h2>
+      <div class="readout" id="u0"></div>
+    </section>
+
+    <div class="views">
+      <article class="card">
+        <h2>1 · Leg — tubes, fittings, spring, wire path</h2>
+        <p class="hint">One leg at the 92% stance. Blue is exposed carbon tube; tan blocks are the fittings with their 40 mm sockets over the tube ends; the brown zig-zag is the knee spring behind the joint; the red dashed line is the wire bundle, inside both tubes with a port and a service loop at each joint.</p>
+        <svg id="t1" class="sheet" role="img" aria-label="Leg assembly with tubes, fittings, spring and wires"></svg>
+        <div class="readout" id="u1"></div>
+      </article>
+
+      <article class="card">
+        <h2>2 · Knee — spring geometry and the torque it buys</h2>
+        <p class="hint">The knee in its own frame at the 92% bend, rear side to the left, with the spring anchors. The chart is knee torque against knee bend for a symmetric stance: gravity on one leg and on two, what the spring gives, and what is left for the motor on one leg. The spring is fitted to the two-leg gravity curve at the 92% and 75% stances.</p>
+        <svg id="t2" class="sheet" role="img" aria-label="Knee spring geometry"></svg>
+        <svg id="t2b" class="sheet strip" role="img" aria-label="Knee torque against knee bend"></svg>
+        <div class="readout" id="u2"></div>
+      </article>
+
+      <article class="card">
+        <h2>3 · Hub — section on the axle</h2>
+        <p class="hint">One wheel, cut through the axle, looking forward. The RS05 sits inside the 3.75" bead with its outboard face flush with the tire; a disc web takes the rim off its output flange; the stator bolts to the axle fitting on the inboard side. This is the fix for Sheet 1's "0.24" proud" flag.</p>
+        <svg id="t3" class="sheet" role="img" aria-label="Wheel hub section"></svg>
+        <div class="readout" id="u3"></div>
+      </article>
+
+      <article class="card">
+        <h2>4 · Hip band — shell section and wire entry</h2>
+        <p class="hint">Front section through the hip axes. The lower shell is as wide as the two roll housings; the head narrows above it. The yokes hang outside the shell on the roll flanges, so the roll travel needs no slot. The wire loops enter the band's lower front face beside each roll housing.</p>
+        <svg id="t4" class="sheet" role="img" aria-label="Hip band shell section"></svg>
+        <div class="readout" id="u4"></div>
+      </article>
+    </div>
+
+    <section class="block">
+      <h2>Fittings</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Part</th><th>Holds</th><th>Process</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>F1</td><td>Hip yoke ×2</td><td>RS02 roll flange → hip pivot at the leg plane; RS00 stator outboard</td><td>Mill, 6061</td><td>The roll flange bolt circle from the RS02 STEP. Carries the whole one-leg load path; not printed.</td></tr>
+            <tr><td>F2</td><td>Upper tube fitting, hip end ×2</td><td>RS00 output flange → 40 mm tube socket; cable port</td><td>Print, inserts</td><td>Bonded socket, one cross pin. The RS00 output is the hip swing.</td></tr>
+            <tr><td>F3</td><td>Upper tube fitting, knee end ×2</td><td>Tube socket → RS02 stator mount; spring anchor; cable port</td><td>Print, inserts</td><td>Stator side of the knee. Anchor 1.5" up the link, 0.55" to the rear.</td></tr>
+            <tr><td>F4</td><td>Knee output arm ×2</td><td>RS02 output flange → around the housing → lower tube socket at the leg plane; spring anchor</td><td>Print, inserts (machine if it flexes)</td><td>The arm bridges the 1.8" between the flange face and the leg plane; it sees the full 12–17 N·m.</td></tr>
+            <tr><td>F5</td><td>Axle fitting ×2</td><td>Lower tube socket → RS05 stator face; cable port at the axle</td><td>Mill, 6061</td><td>Spans the 0.20" from the tube's outer wall to the stator face; the RS05 lead enters here.</td></tr>
+            <tr><td>F6</td><td>Rim + web ×2</td><td>3.75" bead × 1.25" wide; 3 mm disc web to the RS05 output flange</td><td>Lathe, 6061</td><td>Cantilevered on the RS05 output bearing — rating to confirm (open).</td></tr>
+            <tr><td>F7</td><td>Hip band shell ×1</td><td>Pack, XT90-S, step-down, Teensy + IMU; the roll housings are its side faces</td><td>Print, two halves</td><td>9.1" × 3.1" × ~3.0" band, chamfered to the 7" head. Service access from below (R22).</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>What this sheet settles, and what it opens</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Item</th><th>On the sheet</th><th>State</th></tr></thead>
+          <tbody>
+            <tr><td>Tube</td><td>16 × 14 mm carbon for both links (the BOM tube). Cuts and loads in view 1. The bonded socket is the limit, not the tube.</td><td><span class="chip settled">Proposed</span></td></tr>
+            <tr><td>Knee spring</td><td>Extension spring behind the knee, fitted to the two-leg gravity curve. Takes the stand-up hold from ~12 N·m to under the RS02's 7 rated; costs the swing leg ~6 N·m to hold its knee bent.</td><td><span class="chip settled">Proposed</span></td></tr>
+            <tr><td>RS05 hub</td><td>Flush outboard, stator inboard on F5: nothing proud, inside the envelope. Closes Sheet 1's open call (10).</td><td><span class="chip settled">Proposed</span></td></tr>
+            <tr><td>Head at the band</td><td>One wider lower shell, not pods. Closes Sheet 1's open call (11).</td><td><span class="chip settled">Proposed</span></td></tr>
+            <tr><td>Wire ports (R21)</td><td>Bundles inside the tubes, ports in F2 / F3 / F5, service loops at the knee and hip, entry into the band beside the roll housings. No belts, so no belt-run rule applies.</td><td><span class="chip settled">Proposed</span></td></tr>
+            <tr><td>RS05 output bearing</td><td>The rim is cantilevered on it; the radial / moment rating is not published in the spec table.</td><td><span class="chip open">Manual / bench</span></td></tr>
+            <tr><td>Bolt patterns</td><td>Every fitting's bolt circle comes from the vendor STEP files in cad/vendor; not drawn here.</td><td><span class="chip open">Sheet 3 / CAD</span></td></tr>
+            <tr><td>Spring part</td><td>A rate and a free length, not a SKU. Size on the bench against the real knee; the fit here assumes a linear spring with zero preload at the straight leg.</td><td><span class="chip later">Bench</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="note">
+      Geometry and torques from <code>kin.js</code>, housings from <code>actuators.js</code>, layout and the Sheet 2 numbers from <code>spec.js</code>; the same files the <a href="sheet.html">first sheet</a>, the <a href="index.html">working drawings</a> and the <a href="sim.html">sandbox</a> read. With Sheet 1 and Sheet 2 agreed, the 2D-before-Blender gate (R23) is met for the leg and the hip band; the head's styling can go to Blender.
+    </footer>
+  </div>
+  <script src="actuators.js"></script>
+  <script src="spec.js"></script>
+  <script src="tire.js"></script>
+  <script src="spatial.js"></script>
+  <script src="kin.js"></script>
+  <script src="sheet-draw.js"></script>
+  <script src="sheet2.js"></script>
+</body>
+</html>

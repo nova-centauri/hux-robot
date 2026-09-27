@@ -13,8 +13,11 @@
         <p class="kicker">Hux</p>
         <h1>Software</h1>
         <p><b>Bench-learning plan, superseded 2026-09-26.</b> This page describes what the F765-Wing and the Pi 5 on the table would run for P0–P1: blink, CRSF, one wheel, a listener. The F765-Wing has no CAN bus, so it is not the robot's controller; the robot's stack is four layers — CAN actuators, a portable control core, a CAN real-time MCU, and a ROS 2 companion — in <a href="../../docs/software.md">docs/software.md</a>. What survives from this page is what lands in the control core; the Pi 5 does carry forward, in containers.</p>
+        <p class="callout"><b>V1 scope, 2026-09-27:</b> done means <b>one 9.5" step, 9 of 10 from a standstill</b> (R37); the <code>TWO_WHEEL</code> speed command clamps at <b>1.5 m/s</b>, cruise 1.0 (R38); V1 terrain is flat + 1" sills + ~20° slopes (R40). The one-leg shift is roll plus a planned leg-length difference (2.8" at the Sheet 1 roll axes) — the sandbox's feed-forward, to be carried into the control core. Detail: <a href="../../docs/software.md">docs/software.md</a>.</p>
         <nav class="pages" aria-label="Pages">
           <a href="index.html">Drawings</a>
+          <a href="sheet.html">Sheet 1</a>
+          <a href="sheet2.html">Sheet 2</a>
           <a href="sim.html">3D sandbox</a>
           <a href="flow.html">Data flow</a>
           <a href="software.html" aria-current="page">Software</a>

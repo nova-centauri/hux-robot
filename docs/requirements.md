@@ -46,6 +46,10 @@ Inspiration: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori
 | R34 | Primary **upper + lower leg spars** are **carbon fiber tubes** | COTS (R19). Printed / machined **fittings at the ends** only (hubs, belt mounts, joint flanges). Do not print or mill the spar. Tube OD / wall TBD. |
 | R35 | V1 envelope up to **~24" tall at full extension** | Still must reach a **~9.5"** riser **with margin** (R3). Width is **~14"** (R15). |
 | R36 | **One-wheel standing load** ≈ **2×** two-wheel stance | Plant-side knee, hip swing, and hip roll see roughly all the weight on one leg path. **Size for that case**, not average two-wheel load. Rule of thumb until we weigh a real Hux. |
+| R37 | **V1 finish line: one 9.5" step, 9 of 10 attempts, from a standstill on the lower tread** | 2026-09-27. A full flight is V2 on the same hardware. North star (stairs) unchanged. Supersedes nothing; names the pass mark for R3. |
+| R38 | **Flat-ground top speed 1.5 m/s, cruise 1.0 m/s** | 2026-09-27. Locked RS05 on 8S at the 6" wheel with ~2 N·m of catch torque in reserve (~1.3 m/s near cutoff). Not 2 m/s. |
+| R39 | **Knee actuator at the knee in V1; knee gravity spring in scope; no parallel / five-bar leg** | 2026-09-27. Hip-driven knee linkage is a V2 refinement. [`research/knee-linkage.md`](research/knee-linkage.md). |
+| R40 | **V1 terrain: flat + 1" sills + ~20° slopes** | 2026-09-27. Rough outdoor ground is V3 / Phase E (controls + perception), not a leg change. |
 
 ## Soft requirements
 
@@ -107,6 +111,6 @@ Tracked in [`../NOTES.md`](../NOTES.md). Summary:
 3. Blink LED → restrained wheel spin once an FC is on the bench (not on carpet).
 4. Manual modes: **`PARKED` → `TWO_WHEEL`** (TBS + telem).
 5. **`LEFT_ONLY` / `RIGHT_ONLY`** — V1 best-effort CoG shift via hip roll + planted-wheel fore/aft.
-6. Open-loop step-up toward 9.5" riser fixture. Not before the four modes work.
+6. Open-loop step-up toward 9.5" riser fixture. Not before the four modes work. **V1 finish line: one step, 9/10 (R37).**
 7. Camera stream → local pathfinding later.
 8. Lock FC into [`electronics.md`](electronics.md) when ready.

@@ -70,4 +70,13 @@ assert.equal(verdict.status, "rejected");
 assert.equal(verdict.dynamicsValidated, false);
 assert.ok(verdict.maxTargetErrorIn > 1 && verdict.unreachableFrames > 0);
 assert.ok(verdict.kneePeak > S.limits.tauKnee);
+// The V1 spec (spec.js, 2026-09-27): the wheel actuator keeps its catch reserve at the top speed,
+// the roll axes are inside the 2026-09-26 requirement, and the model reads its layout from the spec.
+const SPEC = globalThis.HuxSpec;
+const atTop = SPEC.wheelAtSpeed(SPEC.speed.topMs, M.wheelOd);
+assert.ok(atTop.availNm >= SPEC.speed.reserveNm - 0.05, `only ${atTop.availNm.toFixed(2)} N·m left at ${SPEC.speed.topMs} m/s`);
+assert.ok(SPEC.wheelAtSpeed(SPEC.speed.cruiseMs, M.wheelOd, M.actuators.bus.vCutoff).availNm > SPEC.speed.reserveNm, "cruise must keep the reserve at cutoff");
+assert.ok(M.hipLateral <= 3.0 + 1e-9 && M.hipLateral === SPEC.layout.hipRollAxisIn, "hip roll axes must come from the spec and sit at <= 3\"");
+assert.ok(M.legPlane > M.hipLateral + M.actuators.envIn.rollD / 2, "the leg plane must clear the roll housing");
+near(K.P.bodyCom, SPEC.layout.bodyComForwardIn);
 console.log(`validation ok: ${cases} spatial FK/IK cases, 402 projection frames, mass invariance, strict contacts and rejected stair candidate`);

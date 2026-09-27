@@ -385,7 +385,7 @@ function run(opts, plan) {
   const hold = fr.holdTorque([g92, -g92, 0]);
   /* ≈ (m_body + m_free yoke·2 + m_free leg·2) g × 5.4": 8.3 N·m with the 6 kg picture, 10.7 with the locked
      actuator set (actuators.js). Band scales with the lump picture. */
-  const holdRef = 10.7 * M.exampleMassKg / 7.752;
+  const holdRef = 10.7 * (M.exampleMassKg / 7.752) * (M.hipLateral / 5.4); /* ≈ 60 N × hip offset: 5.9 at the Sheet 1 axes (3.0", 2026-09-27) */
   assert(hold > holdRef * 0.9 && hold < holdRef * 1.1, "frontal.js hold torque moved: " + hold.toFixed(2) + " vs ~" + holdRef.toFixed(1));
   const resp = fr.response(0, [2], 0.010, undefined, true);
   found.oneWheel.frontal = {

@@ -11,7 +11,8 @@ Track milestones in [`../../NOTES.md`](../../NOTES.md). Shortlist and links: [`x
 | Phase A notes (loops + remotes) | Phase B stair mapping as “done” |
 | Phase B 9.5" cycle sketch | Treating Stairs CAD as Hux geometry |
 | Phase C (adapt vs rewrite + license) | Vendoring any `XRobots/*` tree |
-| Phase D | Buying parts, locking an FC, opening Blender before 2D, or claiming Mechanical V1 started |
+| Phase D | Buying parts, locking an FC, opening Blender before **Sheet 2** (Sheet 1 exists, 2026-09-27), or claiming Mechanical V1 started |
+| V1 done (R37: one 9.5" step, 9/10 from a standstill) | Calling V1 finished, or starting a flight of stairs as a V1 item |
 | Phase D print + V1 modes / classical balance (R14 / R18) | Phase E twin / dojo / RL as if it were the next firmware job |
 
 Inventory informs options; it does **not** drive design. Prefer the correct actuator / wheel over the shelf part. Upstream READMEs (especially SonicRobot) are **not** a Hux BOM. Authorized spend stays the [`../bom.md`](../bom.md) order-now cart.

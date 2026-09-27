@@ -2,7 +2,7 @@
 
 Early R&D for a **wheeled biped**: two legs that end in driven wheels.
 
-**North star:** climb and descend stairs by stepping one wheel at a time. Design riser target is **~9.5"**; actual stair geometry must be measured.
+**North star:** climb and descend stairs by stepping one wheel at a time. Design riser target is **~9.5"**; actual stair geometry must be measured. **V1 finish line (2026-09-27, R37): one 9.5" step, 9 of 10 attempts, from a standstill.** Pace is a brisk walk (1.5 m/s top, 1.0 cruise); V1 terrain is flat + 1" sills + ~20° slopes. Direction and reasoning: [docs/decisions.md](docs/decisions.md).
 
 This repo is the source of truth for Steve Barrett's Hux project. It is a docs-and-layout scaffold — not a finished robot.
 
@@ -57,6 +57,8 @@ software/     companion compute — Pi cameras / pathfinding (empty)
 - [Minimum electronics](docs/electronics-minimum.md) — P0–P5 class list (no SKU, no new spend)
 - [Parts on hand](docs/parts-on-hand.md) — owned / ordered inventory + candidates (GIM8108-8 not ordered)
 - [First buy](docs/bom.md) — 6×1.25 tires, tubes, 16 mm carbon tube, Teensy 4.1 CAN kit, anti-spark, one pack (voltage pending). Actuators shortlisted, not on this list: [actuator shortlist](docs/research/actuator-shortlist.md).
+- [Sheet 1 — V1 layout](tools/living-drawings/sheet.html) — the first 2D sheet (R23): side, front, plan and stroke at the settled geometry, drawn from the model files; roll axes, hip band, leg plane, actuator placement, the pack, the landing target; what it settles and what Sheet 2 owns
+- [Sheet 2 — tubes, fittings, spring, hub, wires](tools/living-drawings/sheet2.html) — what the leg is made of: carbon tube cuts and loads, fittings F1–F7, the knee pulley-spring and its torque curve, the hub section with the RS05 flush to the tire, the hip-band shell, the wire path
 - [Living drawings](tools/living-drawings/index.html) — side, top and front views of the settled leg, and the stair climb with its dynamics (momentum window, wheel catch, joint torques, sway). Play runs the climb in real time. Findings: [research/stair-climb-dynamics.md](docs/research/stair-climb-dynamics.md)
 - [3D sandbox](tools/living-drawings/sim.html) — drive the working model in 3D with rigid-body physics (Rapier + three.js): torque-limited joints, LQR balance, ride height (medium by default), spring legs with an impact hop, stumble catch, a planned one-wheel poise, stair / ramps / sills / curb / wet tile. A design toy, not the digital twin. Findings: [research/sim-sandbox.md](docs/research/sim-sandbox.md)
 - [Data flow](tools/living-drawings/flow.html) — command, power, motion, modes, and what waits until later

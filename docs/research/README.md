@@ -22,6 +22,7 @@ This packet is the working study set. It does not replace [`../requirements.md`]
 | [one-leg-stance.md](one-leg-stance.md) | Frontal-plane mechanics of the hip-roll weight shift (24.7°, 8.3 N·m hold), why a static one-wheel stand is an acrobot with millimetres of capture region, and the dynamic single-support flight budget the stair needs (≤ 0.3 s). |
 | [compute-stack-review.md](compute-stack-review.md) | 2026-09-26 review of the F765-Wing / SimpleFOC / Pi 5 bench stack and the Jetson question — no CAN on the Wing, actuator bus picks the MCU, Jetson is a P5 perception buy, not V1 |
 | [actuator-shortlist.md](actuator-shortlist.md) | 2026-09-26 decision framework and candidates on Hux's own numbers — RobStride 00/02/05 shortlist, the 24 V floor that pushes the pack to 8S, CAN bus math, runtime vs pack size |
+| [knee-linkage.md](knee-linkage.md) | 2026-09-26 — knee actuator at the joint vs at the hip through a linkage vs no knee (four-bar / five-bar legs à la StepByStep, Ascento, T-REX); planar check on the settled draw; keep 2 DoF per leg, no five-bar, draw the hip-driven knee on the 2D sheet |
 | [study-plan.md](study-plan.md) | Phased checklist before hardware (Phases A–D; Phase E twin / dojo is a later horizon) |
 
 Decision log (not research, but the lock list): [`../decisions.md`](../decisions.md).

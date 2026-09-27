@@ -21,9 +21,11 @@
       <div>
         <p class="kicker">Hux</p>
         <h1>3D sandbox</h1>
-        <p>Drive the working model around a course with real rigid-body physics. Same geometry and lump masses as the drawings. Every motor is a torque with a limit. The LQR balance loop uses delayed ideal state and simulator contact loads; a physical estimator remains unimplemented. First pass: a place to play and to find where the design breaks, not the digital twin.</p>
+        <p>Drive the working model around a course with real rigid-body physics. Same geometry and lump masses as the drawings; the actuators and the MCU are drawn from the vendors' STEP files when the page is served (envelope boxes otherwise). Every motor is a torque with a limit. The LQR balance loop uses delayed ideal state and simulator contact loads; a physical estimator remains unimplemented. First pass: a place to play and to find where the design breaks, not the digital twin.</p>
         <nav class="pages" aria-label="Pages">
           <a href="index.html">Drawings</a>
+          <a href="sheet.html">Sheet 1</a>
+          <a href="sheet2.html">Sheet 2</a>
           <a href="sim.html" aria-current="page">3D sandbox</a>
           <a href="flow.html">Data flow</a>
           <a href="software.html">Software</a>
@@ -32,7 +34,7 @@
         </nav>
       </div>
       <div class="stamp">
-        Model 2026-09-23<br>
+        Model 2026-09-27<br>
         6" × 1.25" wheel<br>
         7.5" + 7.5" tubes<br>
         24" tall · 14" wide
@@ -101,8 +103,8 @@
         <label>Ride height <output id="rideOut"></output>
           <input id="ride" type="range" min="55" max="98" step="1" value="75">
         </label>
-        <label>Top speed <output id="vmaxOut"></output>
-          <input id="vmax" type="range" min="0.2" max="2.5" step="0.1" value="1.0">
+        <label>Top speed <output id="vmaxOut"></output> <small>(spec R38: 1.5 top, 1.0 cruise; 2 N·m of catch left at 1.5)</small>
+          <input id="vmax" type="range" min="0.2" max="2.5" step="0.1" value="1.5">
         </label>
       </div>
 
@@ -209,6 +211,7 @@
     </footer>
   </div>
   <script src="actuators.js"></script>
+  <script src="spec.js"></script>
   <script src="tire.js"></script>
   <script src="spatial.js"></script>
   <script src="kin.js"></script>

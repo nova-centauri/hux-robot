@@ -295,10 +295,15 @@
     body.z += shift;
     Object.values(legs).forEach(leg => ["hip", "knee", "ankle", "axle", "contact"].forEach(key => { leg[key].z += shift; }));
     const space = K.spatial.measure({ body, legs, issues: [] }, K.P);
-    Object.values(legs).forEach(leg => {
-      const pts = [leg.hip, leg.knee, leg.ankle, leg.axle];
-      for (let i = 1; i < pts.length; i++) line(top, X(pts[i-1].z), Y(pts[i-1].x), X(pts[i].z), Y(pts[i].x), "#4d666a", 5);
-      pts.slice(0, 2).forEach(p => circle(top, X(p.z), Y(p.x), 5, "#556b68", "#263b3a"));
+    Object.entries(legs).forEach(([name, leg]) => {
+      /* the model hangs the leg on the roll axis; the tubes actually run at the leg plane
+         (Sheet 1: yoke from the roll flange out to M.legPlane), so draw them there */
+      const sign = name === "left" ? -1 : 1;
+      const yoke = sign * (M.legPlane - M.hipLateral) * Math.cos(q.roll);
+      const out = p => ({ x: p.x, z: p.z + yoke });
+      const pts = [leg.hip, out(leg.hip), out(leg.knee), out(leg.ankle), leg.axle];
+      for (let i = 1; i < pts.length; i++) line(top, X(pts[i-1].z), Y(pts[i-1].x), X(pts[i].z), Y(pts[i].x), i === 1 ? "#1b2430" : "#4d666a", i === 1 ? 4 : 5);
+      [pts[1], pts[2]].forEach(p => circle(top, X(p.z), Y(p.x), 5, "#556b68", "#263b3a"));
       const width = M.wheelWidth * Math.abs(Math.cos(q.roll)) + 2 * M.wheelR * Math.abs(Math.sin(q.roll));
       rect(top, X(leg.axle.z - width / 2), Y(leg.axle.x + M.wheelR), width * S, 2 * M.wheelR * S, "#26343d", "#162129");
       cross(top, X(leg.contact.z), Y(leg.contact.x), "#9d2c2c");
@@ -922,7 +927,7 @@
     knobs.wheelTau.value = "3";
     knobs.catchRoom.value = "1";
     knobs.landErr.value = "0";
-    knobs.bodyCom.value = "0";
+    knobs.bodyCom.value = String(M.spec.layout.bodyComForwardIn);
     knobs.massScale.value = "1";
     knobs.mu.value = "0.7";
     onKnob();

@@ -177,6 +177,7 @@ input[type="range"] { width: 100%; accent-color: var(--tube); }
 .readout strong { display: block; font-weight: 650; color: var(--ink); }
 .readout .bad { border-left-color: var(--red); }
 .readout .good { border-left-color: var(--ok); }
+.readout .open { border-left-color: var(--open); }
 
 section.block { margin-top: 22px; }
 section.block h2 {

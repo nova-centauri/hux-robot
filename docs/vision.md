@@ -2,7 +2,7 @@
 
 **Status:** early R&D. Nothing here is a finished design.
 
-Hux is a wheeled biped: two legs that end in driven wheels. The near-term north star is stairs — climb and descend a nominal **~9.5"** residential riser — not a polished indoor rover. The long-term twin / dojo sits after that; it does not replace stairs.
+Hux is a wheeled biped: two legs that end in driven wheels. The near-term north star is stairs — climb and descend a nominal **~9.5"** residential riser — not a polished indoor rover. **V1 finish line (2026-09-27): one 9.5" step, 9 of 10 from a standstill; a full flight is V2 on the same hardware.** Flat-ground pace is a brisk walk (1.5 m/s top, 1.0 cruise), not a jog; V1 terrain is flat + 1" sills + ~20° slopes. AgileX T-REX 2.0 is the scale / packaging reference, not the leg reference ([`decisions.md`](decisions.md)). The long-term twin / dojo sits after that; it does not replace stairs.
 
 Decision log: [`decisions.md`](decisions.md).
 
