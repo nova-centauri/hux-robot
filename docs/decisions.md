@@ -376,6 +376,12 @@ No old BLDC-at-rim, CAN, 8S, carbon-spar, large-head, four manual modes or onboa
 
 **Publication:** Steve subsequently requested “push to main,” authorizing this V1-PROOF planning/model revision to be committed and pushed directly to `main`. Seven active model checks and generated-output consistency checks pass. Pre-existing untracked vendor CAD and downloaded mesh folders are outside this revision.
 
+### 2026-09-28 — V1-PROOF 3D sandbox
+
+User asked for V1-PROOF in the same 3D sandbox as before, to play with it and understand its movement and size. Added [`proof-sandbox.html`](../tools/living-drawings/proof-sandbox.html): the browser loads the study's own `tools/v1-proof/sim.js` (now also loadable as a browser script; plant and controller unchanged), so the driving feel is the controller that produced the 388/391 evidence, not a look-alike. The course lanes are the physical protocol's fixtures plus the 20 mm challenge threshold; shoves are the protocol's 0.8 / 0.4 N·s pulses and the 4 N·s failure case. Size references: floor grid in 10 cm squares, 12 oz can, US Letter sheet and the parked STAIR-V1 envelope (610 × 356 mm). The old `sim.html` stays as the parked stair sandbox.
+
+The full study was rerun after the wrapper change: every pass/fail is identical and numbers match the saved results to 2 × 10⁻¹³; only the `sim.js` hash changed. **Flags:** the leg-height slider is a quasi-static preview (CoM and trim moved at 10°/s; no servo dynamics or reaction), and the fixtures have ramp kinks the study's tilted floor did not. The sandbox draws the body at a live pitch trim of about ±10° at the 15°/45° leg extremes. That tilt makes the body corner about 317 mm high at the tall pose, versus 306 mm upright. The motor/link packaging near the axle is drawn schematically. No hardware, purchases or new evidence.
+
 ### 2026-09-28 — V1-PROOF mobility and hardware baseline
 
 User requested additional simulations, reliable movement in all directions and in-place rotation, push/uneven-surface tolerance, hardware decisions and a sound progression to later versions. Added an independent four-axis-proof simulation with the legs pinned, contact physics, actuator/sensor uncertainty, quantitative maneuver gates, saved failures and timestep checks. Added a hardware decision record and measured acceptance protocol; selected the smaller DRV8874 driver and protected 9 V servo branch. Budget changes from $940 to $900 including unchanged $225 reserves. No hardware tests, purchases, commit, merge or deployment are claimed by this entry.
