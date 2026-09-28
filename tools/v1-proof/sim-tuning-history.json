@@ -1,0 +1,893 @@
+{
+  "study": "Initial fixed controller before position-gain revision",
+  "q_weights": [
+    4,
+    3,
+    120,
+    2
+  ],
+  "r_weight": 3,
+  "seed": 9282026,
+  "inputHashes": {
+    "model.json": "821ed1e408493dbb73c4fc445f854d802e8bff2be45a4123ec1081d814c35c4e",
+    "sim.js": "050297f4cbcf5167434d73a47170bb4e7e80fad2298ae9f4a508bced5a8297ba",
+    "run_sim.js": "9ae21f3584eec785642a054c29ad5baf73a07ce56e3e263d5762b6bfabd02952"
+  },
+  "summary": {
+    "passed": 139,
+    "total": 391,
+    "groups": [
+      {
+        "id": "balance-60s",
+        "passed": 7,
+        "total": 17,
+        "worstPathErrorM": 3.045987643852382,
+        "worstHeadingErrorDeg": 1.3769797631271667,
+        "worstPitchDeg": 2.062651805440061,
+        "worstCurrentA": 0.8181651619899277,
+        "failureReasons": [
+          "endpoint error",
+          "catch travel >0.35 m"
+        ]
+      },
+      {
+        "id": "forward-2m",
+        "passed": 5,
+        "total": 17,
+        "worstPathErrorM": 1.014258726810674,
+        "worstHeadingErrorDeg": 0.3825273192952231,
+        "worstPitchDeg": 4.17888812730767,
+        "worstCurrentA": 0.8181651619899277,
+        "failureReasons": [
+          "endpoint error"
+        ]
+      },
+      {
+        "id": "left-90",
+        "passed": 5,
+        "total": 17,
+        "worstPathErrorM": 0.565603565300226,
+        "worstHeadingErrorDeg": 3.924976773335133,
+        "worstPitchDeg": 3.5495793629040726,
+        "worstCurrentA": 0.8181651619899277,
+        "failureReasons": [
+          "endpoint error",
+          "did not settle for final 1 s"
+        ]
+      },
+      {
+        "id": "pivot-left-360",
+        "passed": 8,
+        "total": 17,
+        "worstPathErrorM": 0.4206222359314232,
+        "worstHeadingErrorDeg": 4.442106100681258,
+        "worstPitchDeg": 2.062651805440061,
+        "worstCurrentA": 1.0354456524690046,
+        "failureReasons": [
+          "endpoint error"
+        ]
+      },
+      {
+        "id": "fore-positive-0.2s",
+        "passed": 6,
+        "total": 17,
+        "worstPathErrorM": 0.8764609470343547,
+        "worstHeadingErrorDeg": 0.2945833955729357,
+        "worstPitchDeg": 5.594460364841508,
+        "worstCurrentA": 0.8181651619899277,
+        "failureReasons": [
+          "endpoint error",
+          "catch travel >0.35 m"
+        ]
+      },
+      {
+        "id": "fore-positive-0.05s",
+        "passed": 6,
+        "total": 17,
+        "worstPathErrorM": 0.874209784366012,
+        "worstHeadingErrorDeg": 0.2045746125934838,
+        "worstPitchDeg": 5.705502129632076,
+        "worstCurrentA": 1.324268595848294,
+        "failureReasons": [
+          "endpoint error",
+          "catch travel >0.35 m"
+        ]
+      },
+      {
+        "id": "side-positive-0.2s",
+        "passed": 7,
+        "total": 17,
+        "worstPathErrorM": 0.6817432882534895,
+        "worstHeadingErrorDeg": 0.23057536519561345,
+        "worstPitchDeg": 2.062651805440061,
+        "worstCurrentA": 0.8181651619899277,
+        "failureReasons": [
+          "endpoint error",
+          "catch travel >0.35 m"
+        ]
+      },
+      {
+        "id": "side-positive-0.05s",
+        "passed": 7,
+        "total": 17,
+        "worstPathErrorM": 0.6805887688190247,
+        "worstHeadingErrorDeg": 0.2109513721412068,
+        "worstPitchDeg": 2.062651805440061,
+        "worstCurrentA": 0.8181651619899277,
+        "failureReasons": [
+          "endpoint error",
+          "catch travel >0.35 m"
+        ]
+      },
+      {
+        "id": "grade-3deg",
+        "passed": 6,
+        "total": 17,
+        "worstPathErrorM": 1.7193747442701703,
+        "worstHeadingErrorDeg": 0.33590588422881235,
+        "worstPitchDeg": 4.120891012396628,
+        "worstCurrentA": 1.219782745504156,
+        "failureReasons": [
+          "endpoint error",
+          "did not settle for final 1 s"
+        ]
+      },
+      {
+        "id": "cross-slope-3deg",
+        "passed": 6,
+        "total": 17,
+        "worstPathErrorM": 0.9682807857380162,
+        "worstHeadingErrorDeg": 0.7451182442364513,
+        "worstPitchDeg": 3.3716434923521166,
+        "worstCurrentA": 0.7276292669693947,
+        "failureReasons": [
+          "endpoint error"
+        ]
+      },
+      {
+        "id": "reverse-2m",
+        "passed": 6,
+        "total": 17,
+        "worstPathErrorM": 0.8949332589113003,
+        "worstHeadingErrorDeg": 0.31419519186783357,
+        "worstPitchDeg": 3.930908200887408,
+        "worstCurrentA": 0.8181651619899277,
+        "failureReasons": [
+          "endpoint error"
+        ]
+      },
+      {
+        "id": "right-90",
+        "passed": 4,
+        "total": 17,
+        "worstPathErrorM": 0.5671713562033154,
+        "worstHeadingErrorDeg": 3.4460877755645445,
+        "worstPitchDeg": 3.552831368931738,
+        "worstCurrentA": 1.028605427016174,
+        "failureReasons": [
+          "endpoint error",
+          "did not settle for final 1 s"
+        ]
+      },
+      {
+        "id": "pivot-right-360",
+        "passed": 7,
+        "total": 17,
+        "worstPathErrorM": 0.42174662490252957,
+        "worstHeadingErrorDeg": 3.5185251041555627,
+        "worstPitchDeg": 2.062651805440061,
+        "worstCurrentA": 0.9282369040042191,
+        "failureReasons": [
+          "endpoint error"
+        ]
+      },
+      {
+        "id": "fore-negative-0.2s",
+        "passed": 5,
+        "total": 17,
+        "worstPathErrorM": 0.8286618038007633,
+        "worstHeadingErrorDeg": 0.27004859576598256,
+        "worstPitchDeg": 5.376731281141623,
+        "worstCurrentA": 0.8181651619899277,
+        "failureReasons": [
+          "endpoint error",
+          "catch travel >0.35 m"
+        ]
+      },
+      {
+        "id": "fore-negative-0.05s",
+        "passed": 5,
+        "total": 17,
+        "worstPathErrorM": 0.8256230046084942,
+        "worstHeadingErrorDeg": 0.2275670963120053,
+        "worstPitchDeg": 5.5179162216292585,
+        "worstCurrentA": 1.2576077074245338,
+        "failureReasons": [
+          "endpoint error",
+          "catch travel >0.35 m",
+          "push recovery >3 s"
+        ]
+      },
+      {
+        "id": "side-negative-0.2s",
+        "passed": 7,
+        "total": 17,
+        "worstPathErrorM": 0.6820255003497073,
+        "worstHeadingErrorDeg": 0.24002810754063775,
+        "worstPitchDeg": 2.062651805440061,
+        "worstCurrentA": 0.8181651619899277,
+        "failureReasons": [
+          "endpoint error",
+          "catch travel >0.35 m"
+        ]
+      },
+      {
+        "id": "side-negative-0.05s",
+        "passed": 7,
+        "total": 17,
+        "worstPathErrorM": 0.6804905916341057,
+        "worstHeadingErrorDeg": 0.19729294338779177,
+        "worstPitchDeg": 2.062651805440061,
+        "worstCurrentA": 0.8181651619899277,
+        "failureReasons": [
+          "endpoint error",
+          "catch travel >0.35 m"
+        ]
+      },
+      {
+        "id": "grade--3deg",
+        "passed": 6,
+        "total": 17,
+        "worstPathErrorM": 1.3765695736040735,
+        "worstHeadingErrorDeg": 0.2889194061228195,
+        "worstPitchDeg": 4.014926457101619,
+        "worstCurrentA": 1.219782745504156,
+        "failureReasons": [
+          "endpoint error",
+          "did not settle for final 1 s"
+        ]
+      },
+      {
+        "id": "cross-slope--3deg",
+        "passed": 6,
+        "total": 17,
+        "worstPathErrorM": 0.9756155426419404,
+        "worstHeadingErrorDeg": 0.6664648399026502,
+        "worstPitchDeg": 3.3532443779236996,
+        "worstCurrentA": 0.5691958490021649,
+        "failureReasons": [
+          "endpoint error"
+        ]
+      },
+      {
+        "id": "bump-5mm",
+        "passed": 6,
+        "total": 17,
+        "worstPathErrorM": 0.9697497199646191,
+        "worstHeadingErrorDeg": 1.1987087786472053,
+        "worstPitchDeg": 3.647011887298872,
+        "worstCurrentA": 0.9093756712815659,
+        "failureReasons": [
+          "endpoint error"
+        ]
+      },
+      {
+        "id": "one-wheel-bump-5mm",
+        "passed": 6,
+        "total": 17,
+        "worstPathErrorM": 0.9697497199646191,
+        "worstHeadingErrorDeg": 1.8271003200675602,
+        "worstPitchDeg": 3.3243655312900118,
+        "worstCurrentA": 1.1035211563397476,
+        "failureReasons": [
+          "endpoint error"
+        ]
+      },
+      {
+        "id": "step-3mm",
+        "passed": 6,
+        "total": 17,
+        "worstPathErrorM": 0.9697497199646191,
+        "worstHeadingErrorDeg": 0.3780468493365346,
+        "worstPitchDeg": 5.444007810369761,
+        "worstCurrentA": 1.739542232100163,
+        "failureReasons": [
+          "endpoint error"
+        ]
+      },
+      {
+        "id": "drive-with-push",
+        "passed": 5,
+        "total": 17,
+        "worstPathErrorM": 1.0723722226631518,
+        "worstHeadingErrorDeg": 0.358162723176679,
+        "worstPitchDeg": 5.561454353087503,
+        "worstCurrentA": 0.8181651619899277,
+        "failureReasons": [
+          "endpoint error",
+          "recovery speed >0.65 m/s"
+        ]
+      }
+    ],
+    "challengePasses": 1,
+    "convergencePass": true
+  },
+  "finding": "Unmodeled fore-aft CoM offsets up to 4 mm exceed the weak position feedback authority. Position-reference clamp then permits drift. Retain acceptance thresholds and strengthen position feedback.",
+  "intermediate": {
+    "q_weights": [
+      64,
+      12,
+      120,
+      2
+    ],
+    "reference_bound_m": 0.15,
+    "summary": {
+      "passed": 387,
+      "total": 391,
+      "groups": [
+        {
+          "id": "balance-60s",
+          "passed": 17,
+          "total": 17,
+          "worstPathErrorM": 0.07634568747090267,
+          "worstHeadingErrorDeg": 0.35987265390075107,
+          "worstPitchDeg": 1.9917996920715033,
+          "worstCurrentA": 1.3634469070344968,
+          "failureReasons": []
+        },
+        {
+          "id": "forward-2m",
+          "passed": 17,
+          "total": 17,
+          "worstPathErrorM": 0.08436376197435526,
+          "worstHeadingErrorDeg": 0.3311084981835503,
+          "worstPitchDeg": 5.669635980242913,
+          "worstCurrentA": 1.3634469070344968,
+          "failureReasons": []
+        },
+        {
+          "id": "left-90",
+          "passed": 17,
+          "total": 17,
+          "worstPathErrorM": 0.0894207424164261,
+          "worstHeadingErrorDeg": 3.3593414926770517,
+          "worstPitchDeg": 5.302770404185875,
+          "worstCurrentA": 1.3634469070344968,
+          "failureReasons": []
+        },
+        {
+          "id": "pivot-left-360",
+          "passed": 17,
+          "total": 17,
+          "worstPathErrorM": 0.07841294799175745,
+          "worstHeadingErrorDeg": 4.3974295240917165,
+          "worstPitchDeg": 1.9917996920715033,
+          "worstCurrentA": 1.3634469070344968,
+          "failureReasons": []
+        },
+        {
+          "id": "fore-positive-0.2s",
+          "passed": 16,
+          "total": 17,
+          "worstPathErrorM": 0.11038120308236177,
+          "worstHeadingErrorDeg": 0.20160515835297022,
+          "worstPitchDeg": 9.32748694674454,
+          "worstCurrentA": 1.3634469070344968,
+          "failureReasons": [
+            "did not settle for final 1 s"
+          ]
+        },
+        {
+          "id": "fore-positive-0.05s",
+          "passed": 17,
+          "total": 17,
+          "worstPathErrorM": 0.11167653981619687,
+          "worstHeadingErrorDeg": 0.13260695126151914,
+          "worstPitchDeg": 9.80616642561771,
+          "worstCurrentA": 1.481272103671318,
+          "failureReasons": []
+        },
+        {
+          "id": "side-positive-0.2s",
+          "passed": 17,
+          "total": 17,
+          "worstPathErrorM": 0.07503925349781054,
+          "worstHeadingErrorDeg": 0.09237441689226018,
+          "worstPitchDeg": 1.9917996920715033,
+          "worstCurrentA": 1.3634469070344968,
+          "failureReasons": []
+        },
+        {
+          "id": "side-positive-0.05s",
+          "passed": 17,
+          "total": 17,
+          "worstPathErrorM": 0.07434742234251211,
+          "worstHeadingErrorDeg": 0.08481883456355475,
+          "worstPitchDeg": 2.0098451592845836,
+          "worstCurrentA": 1.3634469070344968,
+          "failureReasons": []
+        },
+        {
+          "id": "grade-3deg",
+          "passed": 16,
+          "total": 17,
+          "worstPathErrorM": 0.1260638723322258,
+          "worstHeadingErrorDeg": 0.29404269832365976,
+          "worstPitchDeg": 5.801106743105456,
+          "worstCurrentA": 2.1795131127685905,
+          "failureReasons": [
+            "did not settle for final 1 s"
+          ]
+        },
+        {
+          "id": "cross-slope-3deg",
+          "passed": 17,
+          "total": 17,
+          "worstPathErrorM": 0.0824159393278643,
+          "worstHeadingErrorDeg": 0.7011170959495872,
+          "worstPitchDeg": 4.784114810848567,
+          "worstCurrentA": 0.9324209291263637,
+          "failureReasons": []
+        },
+        {
+          "id": "reverse-2m",
+          "passed": 17,
+          "total": 17,
+          "worstPathErrorM": 0.08237465387669725,
+          "worstHeadingErrorDeg": 0.45771918224327734,
+          "worstPitchDeg": 5.31477024952728,
+          "worstCurrentA": 1.3634469070344968,
+          "failureReasons": []
+        },
+        {
+          "id": "right-90",
+          "passed": 17,
+          "total": 17,
+          "worstPathErrorM": 0.08701369620231389,
+          "worstHeadingErrorDeg": 3.60093171195916,
+          "worstPitchDeg": 5.367317332827254,
+          "worstCurrentA": 1.3634469070344968,
+          "failureReasons": []
+        },
+        {
+          "id": "pivot-right-360",
+          "passed": 17,
+          "total": 17,
+          "worstPathErrorM": 0.07315671014106911,
+          "worstHeadingErrorDeg": 3.5881085386825875,
+          "worstPitchDeg": 2.0267467939409682,
+          "worstCurrentA": 1.3634469070344968,
+          "failureReasons": []
+        },
+        {
+          "id": "fore-negative-0.2s",
+          "passed": 17,
+          "total": 17,
+          "worstPathErrorM": 0.10123080910820664,
+          "worstHeadingErrorDeg": 0.21999153393707901,
+          "worstPitchDeg": 8.985910131932478,
+          "worstCurrentA": 1.3634469070344968,
+          "failureReasons": []
+        },
+        {
+          "id": "fore-negative-0.05s",
+          "passed": 17,
+          "total": 17,
+          "worstPathErrorM": 0.09844453566674698,
+          "worstHeadingErrorDeg": 0.3208561926182263,
+          "worstPitchDeg": 9.409689974951878,
+          "worstCurrentA": 1.4547388144172977,
+          "failureReasons": []
+        },
+        {
+          "id": "side-negative-0.2s",
+          "passed": 17,
+          "total": 17,
+          "worstPathErrorM": 0.0751200325982959,
+          "worstHeadingErrorDeg": 0.08294843894493956,
+          "worstPitchDeg": 2.0170690725501457,
+          "worstCurrentA": 1.3634469070344968,
+          "failureReasons": []
+        },
+        {
+          "id": "side-negative-0.05s",
+          "passed": 17,
+          "total": 17,
+          "worstPathErrorM": 0.07381427375805238,
+          "worstHeadingErrorDeg": 0.0828432649683802,
+          "worstPitchDeg": 1.9917996920715033,
+          "worstCurrentA": 1.3634469070344968,
+          "failureReasons": []
+        },
+        {
+          "id": "grade--3deg",
+          "passed": 16,
+          "total": 17,
+          "worstPathErrorM": 0.10782944941116372,
+          "worstHeadingErrorDeg": 0.21534858295034084,
+          "worstPitchDeg": 5.306840608338192,
+          "worstCurrentA": 2.1795131127685905,
+          "failureReasons": [
+            "did not settle for final 1 s"
+          ]
+        },
+        {
+          "id": "cross-slope--3deg",
+          "passed": 17,
+          "total": 17,
+          "worstPathErrorM": 0.08232343691722332,
+          "worstHeadingErrorDeg": 0.6459259930586967,
+          "worstPitchDeg": 4.792476184481678,
+          "worstCurrentA": 2.2135876890846875,
+          "failureReasons": []
+        },
+        {
+          "id": "bump-5mm",
+          "passed": 17,
+          "total": 17,
+          "worstPathErrorM": 0.07885488446696869,
+          "worstHeadingErrorDeg": 0.8159000228545307,
+          "worstPitchDeg": 4.811373496118627,
+          "worstCurrentA": 1.3634469070344968,
+          "failureReasons": []
+        },
+        {
+          "id": "one-wheel-bump-5mm",
+          "passed": 17,
+          "total": 17,
+          "worstPathErrorM": 0.08436984339632729,
+          "worstHeadingErrorDeg": 1.3741389182169261,
+          "worstPitchDeg": 4.7686410927474645,
+          "worstCurrentA": 1.7894857004025346,
+          "failureReasons": []
+        },
+        {
+          "id": "step-3mm",
+          "passed": 16,
+          "total": 17,
+          "worstPathErrorM": 0.13769328608206133,
+          "worstHeadingErrorDeg": 1.2047425838702355,
+          "worstPitchDeg": 8.57421640845862,
+          "worstCurrentA": 1.7084128913393244,
+          "failureReasons": [
+            "endpoint error"
+          ]
+        },
+        {
+          "id": "drive-with-push",
+          "passed": 17,
+          "total": 17,
+          "worstPathErrorM": 0.0999796653850218,
+          "worstHeadingErrorDeg": 0.2792725504533551,
+          "worstPitchDeg": 9.448028630950382,
+          "worstCurrentA": 1.3634469070344968,
+          "failureReasons": []
+        }
+      ],
+      "challengePasses": 1,
+      "convergencePass": true
+    },
+    "inputHashes": {
+      "model.json": "0bd551ff771faf4c5f627ab914b52eb3fe2bcffcf4372093722bd557084148a1",
+      "sim.js": "0b57403efeef2d186876f5fd3b2264c6db6629319e36f9645dceadebe4fe0e76",
+      "run_sim.js": "9ae21f3584eec785642a054c29ad5baf73a07ce56e3e263d5762b6bfabd02952"
+    }
+  },
+  "rejected_more_damping": {
+    "q_weights": [
+      64,
+      12,
+      120,
+      4
+    ],
+    "reference_bound_m": 0.2,
+    "summary": {
+      "passed": 330,
+      "total": 391,
+      "groups": [
+        {
+          "id": "balance-60s",
+          "passed": 15,
+          "total": 17,
+          "worstPathErrorM": 0.09158580789973922,
+          "worstHeadingErrorDeg": 1.4575521668820548,
+          "worstPitchDeg": 2.2840640127927663,
+          "worstCurrentA": 2.171889546184257,
+          "failureReasons": [
+            "RMS current >1.2 A"
+          ]
+        },
+        {
+          "id": "forward-2m",
+          "passed": 14,
+          "total": 17,
+          "worstPathErrorM": 0.08993923726569546,
+          "worstHeadingErrorDeg": 0.34494029761023975,
+          "worstPitchDeg": 5.687868895634154,
+          "worstCurrentA": 2.1648177924665344,
+          "failureReasons": [
+            "RMS current >1.2 A"
+          ]
+        },
+        {
+          "id": "left-90",
+          "passed": 15,
+          "total": 17,
+          "worstPathErrorM": 0.09311093818476168,
+          "worstHeadingErrorDeg": 3.5764362845737923,
+          "worstPitchDeg": 5.1783337277881865,
+          "worstCurrentA": 2.1970734585681373,
+          "failureReasons": [
+            "RMS current >1.2 A"
+          ]
+        },
+        {
+          "id": "pivot-left-360",
+          "passed": 13,
+          "total": 17,
+          "worstPathErrorM": 0.08577050495774988,
+          "worstHeadingErrorDeg": 3.9974297497539792,
+          "worstPitchDeg": 2.2840640127927663,
+          "worstCurrentA": 2.1649323037877544,
+          "failureReasons": [
+            "RMS current >1.2 A",
+            "did not settle for final 1 s"
+          ]
+        },
+        {
+          "id": "fore-positive-0.2s",
+          "passed": 15,
+          "total": 17,
+          "worstPathErrorM": 0.0823727925366907,
+          "worstHeadingErrorDeg": 0.44760641970432263,
+          "worstPitchDeg": 9.553493178062594,
+          "worstCurrentA": 2.2215928140649273,
+          "failureReasons": [
+            "RMS current >1.2 A",
+            "did not settle for final 1 s",
+            "push recovery >3 s"
+          ]
+        },
+        {
+          "id": "fore-positive-0.05s",
+          "passed": 15,
+          "total": 17,
+          "worstPathErrorM": 0.0829077391974422,
+          "worstHeadingErrorDeg": 0.2859979683221025,
+          "worstPitchDeg": 9.68605056776648,
+          "worstCurrentA": 2.2232844048969342,
+          "failureReasons": [
+            "RMS current >1.2 A",
+            "did not settle for final 1 s",
+            "push recovery >3 s"
+          ]
+        },
+        {
+          "id": "side-positive-0.2s",
+          "passed": 15,
+          "total": 17,
+          "worstPathErrorM": 0.08200522584615119,
+          "worstHeadingErrorDeg": 0.2394860445333012,
+          "worstPitchDeg": 2.2840640127927663,
+          "worstCurrentA": 2.1755039409748003,
+          "failureReasons": [
+            "RMS current >1.2 A",
+            "did not settle for final 1 s",
+            "push recovery >3 s"
+          ]
+        },
+        {
+          "id": "side-positive-0.05s",
+          "passed": 15,
+          "total": 17,
+          "worstPathErrorM": 0.08393576095618642,
+          "worstHeadingErrorDeg": 0.3894263946829559,
+          "worstPitchDeg": 2.2840640127927663,
+          "worstCurrentA": 2.1561552611680184,
+          "failureReasons": [
+            "RMS current >1.2 A",
+            "did not settle for final 1 s"
+          ]
+        },
+        {
+          "id": "grade-3deg",
+          "passed": 11,
+          "total": 17,
+          "worstPathErrorM": 0.13099142079810563,
+          "worstHeadingErrorDeg": 0.32119546371219276,
+          "worstPitchDeg": 5.70040478409432,
+          "worstCurrentA": 2.186266394361711,
+          "failureReasons": [
+            "RMS current >1.2 A",
+            "did not settle for final 1 s"
+          ]
+        },
+        {
+          "id": "cross-slope-3deg",
+          "passed": 15,
+          "total": 17,
+          "worstPathErrorM": 0.08840380748273077,
+          "worstHeadingErrorDeg": 0.7560203478419942,
+          "worstPitchDeg": 4.672314245169754,
+          "worstCurrentA": 2.29510474056122,
+          "failureReasons": [
+            "RMS current >1.2 A"
+          ]
+        },
+        {
+          "id": "reverse-2m",
+          "passed": 14,
+          "total": 17,
+          "worstPathErrorM": 0.08962630246807395,
+          "worstHeadingErrorDeg": 0.2264055912901972,
+          "worstPitchDeg": 5.581819358599166,
+          "worstCurrentA": 2.1839501226906424,
+          "failureReasons": [
+            "RMS current >1.2 A"
+          ]
+        },
+        {
+          "id": "right-90",
+          "passed": 15,
+          "total": 17,
+          "worstPathErrorM": 0.09307558866179336,
+          "worstHeadingErrorDeg": 3.3741353009583284,
+          "worstPitchDeg": 5.216481346678481,
+          "worstCurrentA": 2.2080026092004608,
+          "failureReasons": [
+            "RMS current >1.2 A",
+            "did not settle for final 1 s"
+          ]
+        },
+        {
+          "id": "pivot-right-360",
+          "passed": 13,
+          "total": 17,
+          "worstPathErrorM": 0.08223424601716509,
+          "worstHeadingErrorDeg": 3.5090433108254744,
+          "worstPitchDeg": 2.2840640127927663,
+          "worstCurrentA": 2.1838577528474623,
+          "failureReasons": [
+            "RMS current >1.2 A",
+            "did not settle for final 1 s"
+          ]
+        },
+        {
+          "id": "fore-negative-0.2s",
+          "passed": 15,
+          "total": 17,
+          "worstPathErrorM": 0.08199660874795686,
+          "worstHeadingErrorDeg": 0.39620085310311237,
+          "worstPitchDeg": 8.927721131204668,
+          "worstCurrentA": 2.1837950630769165,
+          "failureReasons": [
+            "RMS current >1.2 A",
+            "did not settle for final 1 s",
+            "push recovery >3 s"
+          ]
+        },
+        {
+          "id": "fore-negative-0.05s",
+          "passed": 15,
+          "total": 17,
+          "worstPathErrorM": 0.08291552717247946,
+          "worstHeadingErrorDeg": 0.39210137049160937,
+          "worstPitchDeg": 9.08283323403258,
+          "worstCurrentA": 2.288101026512414,
+          "failureReasons": [
+            "RMS current >1.2 A",
+            "did not settle for final 1 s"
+          ]
+        },
+        {
+          "id": "side-negative-0.2s",
+          "passed": 15,
+          "total": 17,
+          "worstPathErrorM": 0.08223503600072428,
+          "worstHeadingErrorDeg": 0.4512355880230632,
+          "worstPitchDeg": 2.2840640127927663,
+          "worstCurrentA": 2.1561552611680184,
+          "failureReasons": [
+            "RMS current >1.2 A",
+            "did not settle for final 1 s",
+            "push recovery >3 s"
+          ]
+        },
+        {
+          "id": "side-negative-0.05s",
+          "passed": 15,
+          "total": 17,
+          "worstPathErrorM": 0.08154001553414357,
+          "worstHeadingErrorDeg": 0.29650889563269006,
+          "worstPitchDeg": 2.3309110710300707,
+          "worstCurrentA": 2.1561552611680184,
+          "failureReasons": [
+            "RMS current >1.2 A",
+            "did not settle for final 1 s"
+          ]
+        },
+        {
+          "id": "grade--3deg",
+          "passed": 11,
+          "total": 17,
+          "worstPathErrorM": 0.11856440641982145,
+          "worstHeadingErrorDeg": 0.3323529721683585,
+          "worstPitchDeg": 5.475272421943199,
+          "worstCurrentA": 2.172586225463899,
+          "failureReasons": [
+            "RMS current >1.2 A",
+            "did not settle for final 1 s"
+          ]
+        },
+        {
+          "id": "cross-slope--3deg",
+          "passed": 15,
+          "total": 17,
+          "worstPathErrorM": 0.0889361315634272,
+          "worstHeadingErrorDeg": 0.7845381994112753,
+          "worstPitchDeg": 4.642240307242793,
+          "worstCurrentA": 2.0088992407414668,
+          "failureReasons": [
+            "RMS current >1.2 A"
+          ]
+        },
+        {
+          "id": "bump-5mm",
+          "passed": 15,
+          "total": 17,
+          "worstPathErrorM": 0.08541635551834245,
+          "worstHeadingErrorDeg": 0.5775921563396352,
+          "worstPitchDeg": 5.039733940174677,
+          "worstCurrentA": 2.1769659087419777,
+          "failureReasons": [
+            "RMS current >1.2 A"
+          ]
+        },
+        {
+          "id": "one-wheel-bump-5mm",
+          "passed": 15,
+          "total": 17,
+          "worstPathErrorM": 0.09045433351537509,
+          "worstHeadingErrorDeg": 1.5141619065415748,
+          "worstPitchDeg": 4.7170235523859665,
+          "worstCurrentA": 2.141019885280321,
+          "failureReasons": [
+            "RMS current >1.2 A"
+          ]
+        },
+        {
+          "id": "step-3mm",
+          "passed": 15,
+          "total": 17,
+          "worstPathErrorM": 0.1027879187711038,
+          "worstHeadingErrorDeg": 1.2949529074803834,
+          "worstPitchDeg": 8.995118289435888,
+          "worstCurrentA": 2.157376807402844,
+          "failureReasons": [
+            "RMS current >1.2 A"
+          ]
+        },
+        {
+          "id": "drive-with-push",
+          "passed": 14,
+          "total": 17,
+          "worstPathErrorM": 0.09020666244134279,
+          "worstHeadingErrorDeg": 0.33522676102639837,
+          "worstPitchDeg": 9.667693790358577,
+          "worstCurrentA": 2.190860233273529,
+          "failureReasons": [
+            "RMS current >1.2 A"
+          ]
+        }
+      ],
+      "challengePasses": 1,
+      "convergencePass": true
+    },
+    "inputHashes": {
+      "model.json": "0bd551ff771faf4c5f627ab914b52eb3fe2bcffcf4372093722bd557084148a1",
+      "sim.js": "883cb9f3286b02e5ce1c9b4ee11d18cb6391d7e7a26a3e3945a2a3f2ca58087b",
+      "run_sim.js": "9ba41083e20ed559704ecaaba59ec11d33512dd585835252b994740dcea8223d"
+    },
+    "finding": "Additional derivative gain caused high-frequency current activity with sensor/drive delay and reversal lost motion. Rejected despite improving isolated settling cases."
+  }
+}

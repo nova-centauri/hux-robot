@@ -137,7 +137,7 @@ def outputs(c):
     b = c["budget"]
     sources = {s["id"]: s for s in c["sources"]}
     lines = ["# V1-PROOF budget", "", f"**${r['total_cap_usd']:,.0f} planned ceiling, including shipping, tax and repair contingency.** The hard limit is strictly under $1,000. No purchases made by this revision. The previous stair budget is [parked](archive/stair-v1/bom.md).", "",
-             "These are maximum allocations, not a fully quoted cart. Known motor/driver/servo references fit their rows at the listed prices checked 2026-09-28; stock, delivery, import charges and all other rows still need quotes. Existing shop tools and unpaid fabrication labor are assumed; new tools or outsourced work must fit this same total or the design must change.", "",
+             "These are maximum allocations, not a fully quoted cart. Selected motor/driver/servo parts fit their rows at prices checked 2026-09-28. Driver backorders and IMU stock remain procurement issues; delivery, import charges and remaining rows need quotes. Existing shop tools and unpaid fabrication labor are assumed; new tools or outsourced work must fit this same total or the design must change. See the [hardware decisions](v1-proof-hardware.md).", "",
              "**No free inventory is assumed.** Confirmed reuse credit is $0. Replace a row's cash cost only after the exact usable item is confirmed in [parts-on-hand.md](parts-on-hand.md); retain the shipping/tax and repair reserves. A Pi, cameras, display and Jetson are outside this build.", "",
              "| Qty | Item | Unit cap | Total cap | Stage |", "| ---: | --- | ---: | ---: | --- |"]
     for row in b["rows"]:
@@ -151,9 +151,10 @@ def outputs(c):
               f"| | **Total** | | **${r['total_cap_usd']:.2f}** | |", "",
               f"The difference to $1,000 is ${r['headroom_usd']:.0f}; spending the entire difference would violate the strictly-under-$1,000 requirement. Prefer savings from reuse; do not turn them into added features.", "",
               "## Reference prices and scope", "",
-              "- Pololu 4752: $60.95 each; two encoder motors fit the $125 allocation. A reference for sizing, not an order.",
-              "- Pololu G2 18v17: $44.95 each; two fit the $100 driver allowance. Verify hardware current limiting at the intended low setting; the factory threshold does not protect these motors.",
-              "- Waveshare ST3215 series: listed $16.99–21.99 depending on variant. Two 12 V class servos fit the $60 allocation. Continuous holding performance is unverified; budget includes a separate transmission row.",
+              "- Pololu 4752: $60.95 each; two selected encoder motors fit the $125 allocation. No order placed.",
+              "- Pololu 4035 DRV8874: $11.94 each; two carriers plus current-limit passives fit the $40 allowance. Measure the 2.5 A limit; stock page allows backorders. This replaces the oversized G2 reference.",
+              "- Waveshare ST3215 series: listed $16.99–21.99 depending on variant. Select the 12 V variant; qualify holding performance on the regulated 9 V rail. Two fit the $60 allocation, with a separate transmission row.",
+              "- Pico 2 + Adafruit LSM6DSOX 4438 + half-duplex adapter share the $40 controller allowance. The IMU lists $11.95 and was out of stock; board/interface costs still need a complete quote.",
               "- Manual input can reuse RC or a laptop/gamepad with a timed deadman link. The $60 fallback is an allocation, not a claim that a new TBS receiver and transmitter together cost $60.", "",
               "## Build sequence", "",
               "P0 inventories and qualifies existing controls. P1 builds the supported wheel rig and pinned structure. P2 proves two-wheel balance and slow teleop. P3 adds the two leg servos/reductions. P4 runs the finish-line trials. These stages share one budget; do not add a second two-motor robot to the four-motor cost. Quotes exceeding an allocation consume the reserve or force a substitution before purchase.", "",
@@ -180,7 +181,7 @@ def outputs(c):
              "## Evidence and limits", "",
              "Official references checked 2026-09-28:", ""]
     calc += [f'- [{src["title"]}]({src["url"]}): {src["note"]}' for src in c["sources"]]
-    calc += ["", "The model does not validate full solid clearance, belt tooth engagement, bearing life, frame strength, CoM/inertia, contact friction, battery protection, control timing, thermal duty or closed-loop balance. Those checks are staged in the [build checklist](checklists/mechanical-v1.md). No simulated success or completed physical test is claimed.", ""]
+    calc += ["", "This sizing screen does not validate full solid clearance, belt engagement, bearing life, strength, measured CoM/inertia, contact friction, battery protection, control timing or thermal duty. The separate [closed-loop simulation report](v1-proof-simulation.md) covers pinned-leg maneuver and disturbance trials with explicit limitations. Powered height motion and all physical acceptance tests remain open. See the [build checklist](checklists/mechanical-v1.md).", ""]
     return {
         ROOT / "docs/bom.md": "\n".join(lines),
         ROOT / "docs/v1-proof-sizing.md": "\n".join(calc),

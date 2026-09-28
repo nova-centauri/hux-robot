@@ -1,6 +1,6 @@
 # V1-PROOF sizing screen
 
-Generated from [model.json](../tools/v1-proof/model.json), revision 2026-09-28-A. All masses and geometry are allocations. **Hardware validation and fabrication release remain false.**
+Generated from [model.json](../tools/v1-proof/model.json), revision 2026-09-28-B. All masses and geometry are allocations. **Hardware validation and fabrication release remain false.**
 
 ## Geometry and load assumptions
 
@@ -48,9 +48,12 @@ The 3.0 kg limit is a redesign threshold. Reweigh after each stage. Do not add a
 
 Official references checked 2026-09-28:
 
-- [Pololu 4752 gearmotor](https://www.pololu.com/product/4752): Reference, not selected inventory. Stall torque/current are extrapolated, not continuous ratings.
-- [Pololu G2 18v17 H-bridge](https://www.pololu.com/product/2991): Reference. Factory current limit is much too high; verify a lowered limit before motor operation.
-- [Waveshare ST3215 series](https://www.waveshare.com/product/st3215-servo.htm): Select the 12 V variant when checking fit. 30 kg-cm is not a demonstrated continuous holding rating.
+- [Pololu 4752 gearmotor](https://www.pololu.com/product/4752): Selected baseline. 200 g each, 1920 quadrature counts/output revolution; stall values are extrapolations.
+- [Pololu 4035 DRV8874 carrier](https://www.pololu.com/product/4035): Selected baseline. 2.1 A carrier continuous rating in open-air tests; adjustable limit and default sleep. Backorders listed at review.
+- [Waveshare ST3215 series](https://www.waveshare.com/product/st3215-servo.htm): Selected 12 V variant, powered from a regulated 9 V branch. 12 V advertised stall torque does not qualify 9 V hold duty.
 - [Waveshare ST3215 documentation](https://www.waveshare.com/wiki/ST3215_Servo): Current page specifies 6–12.6 V for the 12 V version. Confirm actual revision and protect against regenerative voltage rise.
+- [Raspberry Pi Pico 2](https://www.raspberrypi.com/products/raspberry-pi-pico-2/): RP2350, C/C++ SDK, PIO encoders, SPI IMU, USB logs. Board timing remains to be measured.
+- [Adafruit LSM6DSOX 4438](https://www.adafruit.com/product/4438): SPI/I2C, two interrupt pins; out of stock on manufacturer page when checked. Selection is not a stock promise.
+- [TI DRV8874 datasheet](https://www.ti.com/lit/ds/symlink/drv8874.pdf): Use datasheet tolerances for current regulation and IPROPI sampling; verify braking and current-chopping behavior on bench.
 
-The model does not validate full solid clearance, belt tooth engagement, bearing life, frame strength, CoM/inertia, contact friction, battery protection, control timing, thermal duty or closed-loop balance. Those checks are staged in the [build checklist](checklists/mechanical-v1.md). No simulated success or completed physical test is claimed.
+This sizing screen does not validate full solid clearance, belt engagement, bearing life, strength, measured CoM/inertia, contact friction, battery protection, control timing or thermal duty. The separate [closed-loop simulation report](v1-proof-simulation.md) covers pinned-leg maneuver and disturbance trials with explicit limitations. Powered height motion and all physical acceptance tests remain open. See the [build checklist](checklists/mechanical-v1.md).

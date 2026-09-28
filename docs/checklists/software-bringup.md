@@ -12,3 +12,10 @@
 - [ ] Complete the ten-minute mixed session and retain faults/current/voltage/timing logs.
 
 No firmware implementation or hardware pass is implied by the model's host-side tests.
+
+## Revision B mobility gates
+
+- [ ] Follow the [selected hardware and interface decisions](../v1-proof-hardware.md).
+- [ ] Complete the [physical mobility/disturbance protocol](../v1-proof-validation.md), including reverse travel, both arcs, both pivots, pulses and uneven fixtures.
+- [ ] Record measured CoM/inertia, motor response, current, latency, traction and backlash; rerun the simulation with those values.
+- [ ] Retain failures and logs; simulated passes do not close physical acceptance boxes.

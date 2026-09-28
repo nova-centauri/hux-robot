@@ -30,3 +30,10 @@
 - [ ] Run a ten-minute mixed session without resets, overloads or falls.
 - [ ] Record final mass, actual spend including freight/tax/repairs, videos and logs.
 - [ ] Close every [finish-line](../v1-proof.md#finish-line) criterion; do not substitute calculated screens for physical tests.
+
+## Revision B mobility gates
+
+- [ ] Follow the [selected hardware and interface decisions](../v1-proof-hardware.md).
+- [ ] Complete the [physical mobility/disturbance protocol](../v1-proof-validation.md), including reverse travel, both arcs, both pivots, pulses and uneven fixtures.
+- [ ] Record measured CoM/inertia, motor response, current, latency, traction and backlash; rerun the simulation with those values.
+- [ ] Retain failures and logs; simulated passes do not close physical acceptance boxes.

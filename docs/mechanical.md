@@ -6,7 +6,7 @@ Use a simple bolted chassis and suitable scrap/COTS stock. Aluminum flat bar, pl
 
 ## Wheel and leg arrangement
 
-One encoder gearmotor at each wheel carrier. Use proper hubs, supported axles and a bearing path for robot weight; an unqualified motor shaft is not automatically a structural axle. Inboard motors are allowed. Check the complete motor length and wiring sweep before fixing the track. Proposed track is 230 mm and wheel width 25 mm, giving 255 mm across the tires.
+One selected Pololu 4752 encoder gearmotor at each wheel carrier. Use proper hubs, supported axles and a bearing path for robot weight; an unqualified motor shaft is not automatically a structural axle. Inboard motors are allowed. Check the complete motor length and wiring sweep before fixing the track. Proposed track is 230 mm and wheel width 25 mm, giving 255 mm across the tires.
 
 Each leg has two 110 mm parallel links. Body pivots and wheel-carrier pivots have matching 40 mm vertical separation, making a planar parallelogram. One servo drives one body pivot through a 3:1 belt reduction; the other pivots are passive and bearing-supported. Link angle is 15–45° rearward from downward vertical. Use independent bearings on the driven shaft, hard stops and removable lock pins. This is one powered leg coordinate per side, not independently commanded hip/knee joints.
 
@@ -26,3 +26,9 @@ Measure mass, whole-robot CoM, gear backlash, tire traction and pitch trim acros
 4. Fit both powered legs and qualify small, slow synchronized height changes.
 
 The sketch does not validate bolts, bearing fits, swept clearance or structure. Detailed dimensions follow measured available parts. [Build checklist](checklists/mechanical-v1.md).
+
+## Bounded disturbance envelope
+
+The [pinned-leg 3D study](v1-proof-simulation.md) exercises the 230 mm track against longitudinal/lateral pushes and shallow uneven fixtures. Lateral recovery comes from track width and passive ground contact; no roll axis or active one-wheel recovery is present. Keep travel pinned at 30° until the [physical protocol](v1-proof-validation.md) passes. Fixed 15°/45° simulated corners do not validate servo motion, belt compliance or real load distribution. Measured CoM/inertia and tire friction must replace the assumed values before expanding terrain or payload.
+
+Provide adjustable battery/electronics mounting and measure the sprung fore/aft CoM at pinned neutral. Target **within ±2 mm of the nominal balance line** before grade qualification; a near −4 mm offset failed the strict grade-settling gate. Recheck trim at each fixed height. The full uncertainty matrix retains its wider ±4 mm corners and their failures.

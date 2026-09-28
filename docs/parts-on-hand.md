@@ -17,3 +17,5 @@
 For each confirmed item record date, exact variant, quantity, condition, electrical limits, measured mass/envelope and whether it is available for Hux. A vendor CAD file is not owned hardware. A board's presence does not establish spare pins or compatible logic levels. A receiver needs a usable transmitter/link.
 
 The [budget](bom.md) contains replacement allowances until confirmation. Subtract only actual displaced purchases; do not count the same item in two rows or spend the savings on new features. Keep the reserve. [Shop capabilities](capabilities.md) describes tools, not component stock.
+
+The selected replacement baseline is now [Pico 2 + SPI LSM6DSOX, Pololu 4752/DRV8874 wheel channels and ST3215 legs](v1-proof-hardware.md). Historical candidates above are potential substitutions, not coequal undecided architectures. They earn credit only after qualification.

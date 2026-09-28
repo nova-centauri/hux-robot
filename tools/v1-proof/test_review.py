@@ -15,8 +15,8 @@ class ProofChecks(unittest.TestCase):
 
     def test_strict_budget_rejects_1000_and_ignores_unconfirmed_reuse(self):
         result = r.report(self.c)
-        self.assertEqual(result["total_cap_usd"], 940)
-        self.c["budget"]["shipping_tax_usd"] += 60
+        self.assertEqual(result["total_cap_usd"], 900)
+        self.c["budget"]["shipping_tax_usd"] += 100
         self.c["budget"]["confirmed_reuse_credit_usd"] = 900
         self.assertFalse(r.report(self.c)["under_budget"])
 

@@ -1,15 +1,19 @@
-# V1-PROOF numerical model
+# V1-PROOF numerical studies
 
-Active planning model: four actuators, 2.5 kg target, flat indoor floor and a strictly-under-$1,000 cash budget. [Plan](../../docs/v1-proof.md).
+Four actuators, 2.5 kg target / 3.0 kg maximum, indoor mobility and bounded disturbances, strictly under $1,000. [Plan](../../docs/v1-proof.md) · [hardware decisions](../../docs/v1-proof-hardware.md).
 
 ```sh
 python3 tools/v1-proof/review.py --write
-python3 tools/v1-proof/test_review.py
-python3 tools/v1-proof/review.py --check
+cd tools/living-drawings
+npm ci
+npm run simulate
+npm test
 ```
 
-No dependencies beyond Python's standard library. `model.json` owns geometry, mass allocations, electrical sizing assumptions, budget caps and source references. `review.py` generates the active BOM, sizing note, results JSON, 2D SVG and browser data. `--check` detects stale generated outputs without writing.
+`model.json` owns hardware selections, dimensions, mass, electrical screens, operating targets and budget. Standard-library `review.py` generates BOM, sizing, SVG, results and browser planning data. Its `--check` detects stale outputs.
 
-Tests cover strict budget rejection at $1,000, no speculative reuse discounts, constant link lengths, gravity virtual work, mass/voltage/speed sensitivity and the distinction between a preliminary screen and hardware release. None tests closed-loop balance. The website is a planning view, not a simulator.
+`sim.js` builds the pinned-leg 3D rigid-body model and controller using the repository's pinned Rapier 0.20.0 dependency. No legacy stair motors, masses or joint model are imported. `run_sim.js` runs 23 scenarios across 17 configurations, six challenge cases, five timestep comparisons and six separate CoM-adjustment checks. `--quick` runs nominal/challenge/convergence only; use `--write` without `--quick` for published evidence. `--check` verifies saved source hashes. `report_sim.py` generates the [evidence report](../../docs/v1-proof-simulation.md). [Interactive replay](../living-drawings/proof-simulation.html).
 
-The previous [stair numerical model](../engineering/README.md) is separate and parked. Its publisher writes only the archived stair budget; do not import those motors, masses or stair gates into V1-PROOF.
+`npm test` covers budgets/geometry plus gravity without control, mass, contact, voltage/speed/current bounds, balance-priority steering, signed maneuvers and deterministic reruns. The full sweep is explicit with `npm run simulate`; failed cases remain in the report. The initial controller's weaker results are retained in `sim-tuning-history.json`.
+
+The simulation assumes delayed attitude estimates and bounded torque response. It does not implement raw IMU fusion, MCU firmware, a thermal model, regenerative power electronics or powered leg dynamics. Read the report's assumptions before quoting outcomes. All [physical tests](../../docs/v1-proof-validation.md) remain open. The previous stair model is parked separately.

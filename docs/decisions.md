@@ -6,26 +6,26 @@ Dated log of Steve's Hux decisions as they landed on `main`. Newest intent **sup
 
 Source of truth is this repo (`nova-centauri/hux-robot`). Docs only. **No spend.** No SKU locks beyond what is already decided below.
 
-## Current governing decisions — V1-PROOF, 2026-09-28
+## Current governing decisions — V1-PROOF, 2026-09-28 revision B
 
-The newest user request parks the ambitious stair plan. Older dated entries are history, including superseded locks and purchase claims.
+The user extended V1-PROOF to dependable forward/reverse traversal, left/right turns, turning in place, bounded pushes/uneven terrain and concrete component decisions. This extends the proof scope while retaining its cost, mass and four-axis limits. Earlier dated entries remain history.
 
-| Topic | Current intent / status |
+| Topic | Current decision |
 | --- | --- |
-| Active model | **V1-PROOF**; old stair work parked and preserved |
-| Cost | **Strictly under $1,000** new cash; $940 conservative allocation including shipping/tax and repairs |
-| Reuse | Inventory first. Existing parts reduce spend only when exact usable items are confirmed |
-| Mass / size | Proposed 2.5 kg target, 3.0 kg maximum; roughly 28–31 cm high / 25.5 cm wide |
-| Axes | Four maximum: two wheel drives and one simple leg adjustment per side; first balance with legs pinned |
-| Wheels / legs | Small encoder gearmotors and reduced small servos acceptable; brushed drive allowed; no hip roll/active ankle/independent knee |
-| Terrain / motion | Flat indoor floor, slow manual drive, modest height change; no stairs, one-wheel stance, jumping or obstacle requirement |
-| Electronics | Reuse suitable MCU/IMU/manual input; proposed compatible 3S power; no mandatory CAN, 8S, Pi, cameras or ROS |
-| Structure | Shop scrap/COTS stock, service access, real bearings and cable routes; carbon and styled head not required |
-| Verification | Measured balance, teleop, leg motion, faults and ten-minute duty trial; numerical screens do not release hardware |
-| Old models | [STAIR-V1 archive](archive/stair-v1/README.md); old research/simulator remain labeled and separate |
-| Purchase / publication | Planning/model edits authorized; Steve subsequently requested committing and pushing V1-PROOF to `main`. No component order or site deployment is implied |
+| Active model | V1-PROOF; STAIR-V1 remains parked |
+| Cost / mass | Strictly < $1,000; **$900** allocation including $225 reserves; 2.5 kg target / 3.0 kg maximum |
+| Actuators | **2 × Pololu 4752 wheels + 2 × ST3215 12 V variant legs through 3:1 belts**; first mobility with pinned 30° legs |
+| Drivers | **2 × Pololu 4035 DRV8874**, configured current limiting, sleep/kill/watchdog, PH/EN and fixed-off-time regulation |
+| Control / sensing | **Pico 2 + LSM6DSOX SPI**, encoder/current/fault/battery feedback; confirmed equivalent reuse may substitute after qualification |
+| Power | 3S approximately 2.2 Ah; **9 V servo / 5 V logic branches**; actual pack, regulators and protection require measured circuit qualification |
+| Cameras | **Zero onboard in V1**; existing external video for trials; perception is a later version gate |
+| Motion | 0.25 m/s cruise, 0.15 m/s uneven fixtures, 0.4 rad/s arc / 0.6 rad/s pivot; 0.5 m/s not yet qualified |
+| Disturbances | Qualification targets: 0.8 N·s longitudinal / 0.4 N·s lateral at 0.20 m, 50/200 ms pulses; 3° grades/cross-slopes, 5 mm smooth bump, 3 mm seam |
+| Evidence | Pinned-leg 3D closed-loop simulation with seed/parameter sweep and failure cases; physical validation and powered-leg dynamics remain open |
+| Next versions | Carry measured actuator/sensor models, telemetry, fault behavior and tests forward; no promised stair upgrade of this chassis |
+| Orders / publication | Model, simulation and component decisions authorized. No purchases or deployment made by this revision |
 
-The [active plan](v1-proof.md), [PF requirements](requirements.md) and [model source](../tools/v1-proof/model.json) replace old R1–R44 constraints for this proof. Detailed geometry and SKU references are proposed implementation choices, not additional user decisions.
+See [hardware decisions](v1-proof-hardware.md), [simulation evidence](v1-proof-simulation.md), [physical acceptance](v1-proof-validation.md), [PF requirements](requirements.md) and [numerical source](../tools/v1-proof/model.json). Hardware selections are the current engineering baseline; they remain subject to explicit bench rejection criteria and budget limits.
 
 ---
 
@@ -375,3 +375,11 @@ Cost allocation: $715 parts and fixture + $100 tax/shipping + $125 repair/overru
 No old BLDC-at-rim, CAN, 8S, carbon-spar, large-head, four manual modes or onboard-compute lock applies. Use suitable available controllers/IMUs and a compatible lower-voltage pack. Finish-line trials cover two-wheel balance, slow manual driving, leg height, fault handling and a ten-minute session. All physical tests remain open. No components bought, firmware flashed, physical robot built or site deployed by this planning revision.
 
 **Publication:** Steve subsequently requested “push to main,” authorizing this V1-PROOF planning/model revision to be committed and pushed directly to `main`. Seven active model checks and generated-output consistency checks pass. Pre-existing untracked vendor CAD and downloaded mesh folders are outside this revision.
+
+### 2026-09-28 — V1-PROOF mobility and hardware baseline
+
+User requested additional simulations, reliable movement in all directions and in-place rotation, push/uneven-surface tolerance, hardware decisions and a sound progression to later versions. Added an independent four-axis-proof simulation with the legs pinned, contact physics, actuator/sensor uncertainty, quantitative maneuver gates, saved failures and timestep checks. Added a hardware decision record and measured acceptance protocol; selected the smaller DRV8874 driver and protected 9 V servo branch. Budget changes from $940 to $900 including unchanged $225 reserves. No hardware tests, purchases, commit, merge or deployment are claimed by this entry.
+
+Final evidence for revision B: 388/391 in the unchanged broad uncertainty matrix; all six directional maneuver cases pass 17/17 configurations. Retain three settling failures at the near −4 mm CoM corner and require ±2 mm fore/aft mass placement before grade/disturbance qualification; six separate adjusted-placement checks pass. Higher derivative gain was rejected for excessive modeled RMS current under delay/lost motion. Physics/controller regression checks and timestep consistency pass; no physical acceptance box is closed.
+
+**Publication:** User subsequently requested “Push to remote main,” authorizing this simulation, hardware baseline and acceptance protocol to be committed and pushed directly to `main`. Pre-existing untracked vendor CAD and downloaded mesh folders are outside this revision.

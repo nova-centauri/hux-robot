@@ -2,8 +2,8 @@
 window.HuxProof = {
   "model": {
     "name": "V1-PROOF",
-    "revision": "2026-09-28-A",
-    "status": "active planning model; hardware unvalidated",
+    "revision": "2026-09-28-B",
+    "status": "simulation-backed component baseline; physical qualification open",
     "actuators": {
       "wheels": 2,
       "legs": 2
@@ -110,7 +110,7 @@ window.HuxProof = {
         {
           "id": "wheel_motors",
           "qty": 2,
-          "item": "Encoder gearmotors, 12 V / 30:1 class",
+          "item": "Pololu 4752 12 V 30:1 encoder gearmotors",
           "unit_cap_usd": 62.5,
           "stage": "P1",
           "reuse": "Only a matched pair with useful encoders, reversal response and load data",
@@ -119,8 +119,8 @@ window.HuxProof = {
         {
           "id": "wheel_drivers",
           "qty": 2,
-          "item": "Bidirectional H-bridges, current sensing and adjustable limiting",
-          "unit_cap_usd": 50,
+          "item": "Pololu 4035 DRV8874 carriers + current-limit passives",
+          "unit_cap_usd": 20,
           "stage": "P1",
           "reuse": "Existing drone ESCs do not substitute for a brushed H-bridge",
           "source": "wheel_driver"
@@ -128,7 +128,7 @@ window.HuxProof = {
         {
           "id": "leg_servos",
           "qty": 2,
-          "item": "Small position servos, ST3215 12 V class",
+          "item": "Waveshare ST3215, 12 V variant (9 V qualified rail)",
           "unit_cap_usd": 30,
           "stage": "P3",
           "reuse": "Existing servos only after mounted hold and feedback tests",
@@ -153,10 +153,10 @@ window.HuxProof = {
         {
           "id": "controller",
           "qty": 1,
-          "item": "MCU, IMU and servo interface allowance",
+          "item": "Pico 2, LSM6DSOX and half-duplex servo interface",
           "unit_cap_usd": 40,
           "stage": "P0",
-          "reuse": "F765/F722/Mamba or ESP32 plus IMU, subject to pin/timing check"
+          "reuse": "Confirmed equivalent MCU/IMU may substitute only after timing/pin/level qualification"
         },
         {
           "id": "manual_link",
@@ -185,8 +185,8 @@ window.HuxProof = {
         {
           "id": "power",
           "qty": 1,
-          "item": "Logic/servo regulation, fuse, kill, transient protection",
-          "unit_cap_usd": 45,
+          "item": "9 V servo and 5 V logic rails, fuse, kill, regeneration protection",
+          "unit_cap_usd": 65,
           "stage": "P1",
           "reuse": "Only parts meeting rail voltage and current requirements"
         },
@@ -223,15 +223,15 @@ window.HuxProof = {
         "url": "https://www.pololu.com/product/4752",
         "checked": "2026-09-28",
         "listed_usd": 60.95,
-        "note": "Reference, not selected inventory. Stall torque/current are extrapolated, not continuous ratings."
+        "note": "Selected baseline. 200 g each, 1920 quadrature counts/output revolution; stall values are extrapolations."
       },
       {
         "id": "wheel_driver",
-        "title": "Pololu G2 18v17 H-bridge",
-        "url": "https://www.pololu.com/product/2991",
+        "title": "Pololu 4035 DRV8874 carrier",
+        "url": "https://www.pololu.com/product/4035",
         "checked": "2026-09-28",
-        "listed_usd": 44.95,
-        "note": "Reference. Factory current limit is much too high; verify a lowered limit before motor operation."
+        "listed_usd": 11.94,
+        "note": "Selected baseline. 2.1 A carrier continuous rating in open-air tests; adjustable limit and default sleep. Backorders listed at review."
       },
       {
         "id": "leg_servo",
@@ -242,7 +242,7 @@ window.HuxProof = {
           16.99,
           21.99
         ],
-        "note": "Select the 12 V variant when checking fit. 30 kg-cm is not a demonstrated continuous holding rating."
+        "note": "Selected 12 V variant, powered from a regulated 9 V branch. 12 V advertised stall torque does not qualify 9 V hold duty."
       },
       {
         "id": "leg_servo_docs",
@@ -250,16 +250,106 @@ window.HuxProof = {
         "url": "https://www.waveshare.com/wiki/ST3215_Servo",
         "checked": "2026-09-28",
         "note": "Current page specifies 6\u201312.6 V for the 12 V version. Confirm actual revision and protect against regenerative voltage rise."
+      },
+      {
+        "id": "controller",
+        "title": "Raspberry Pi Pico 2",
+        "url": "https://www.raspberrypi.com/products/raspberry-pi-pico-2/",
+        "checked": "2026-09-28",
+        "note": "RP2350, C/C++ SDK, PIO encoders, SPI IMU, USB logs. Board timing remains to be measured."
+      },
+      {
+        "id": "imu",
+        "title": "Adafruit LSM6DSOX 4438",
+        "url": "https://www.adafruit.com/product/4438",
+        "checked": "2026-09-28",
+        "listed_usd": 11.95,
+        "note": "SPI/I2C, two interrupt pins; out of stock on manufacturer page when checked. Selection is not a stock promise."
+      },
+      {
+        "id": "driver_datasheet",
+        "title": "TI DRV8874 datasheet",
+        "url": "https://www.ti.com/lit/ds/symlink/drv8874.pdf",
+        "checked": "2026-09-28",
+        "note": "Use datasheet tolerances for current regulation and IPROPI sampling; verify braking and current-chopping behavior on bench."
       }
-    ]
+    ],
+    "hardware": {
+      "wheel_motor": {
+        "part": "Pololu 4752",
+        "quantity": 2,
+        "gear_ratio": 30,
+        "encoder_counts_per_output_rev": 1920,
+        "state": "selected for bench qualification"
+      },
+      "wheel_driver": {
+        "part": "Pololu 4035 / DRV8874",
+        "quantity": 2,
+        "logic_v": 3.3,
+        "mode": "PH/EN drive-brake",
+        "current_limit_a": 2.5,
+        "state": "selected; measure actual chopping threshold",
+        "current_regulation": "IMODE tied to ground: fixed off-time, fault does not report routine chopping; MCU latches real faults"
+      },
+      "leg_servo": {
+        "part": "Waveshare ST3215, 30 kg-cm at 12 V variant",
+        "quantity": 2,
+        "rail_v": 9.0,
+        "reduction": 3,
+        "state": "selected; mounted duty at 9 V unqualified"
+      },
+      "controller": {
+        "part": "Raspberry Pi Pico 2 (RP2350, non-wireless)",
+        "runtime": "C/C++",
+        "state": "reference implementation target; confirmed equivalent reuse allowed"
+      },
+      "imu": {
+        "part": "Adafruit 4438 / ST LSM6DSOX",
+        "interface": "SPI with data-ready interrupt",
+        "state": "selected; manufacturer lists out of stock, no delivery claim"
+      },
+      "cameras": {
+        "onboard_quantity": 0,
+        "decision": "External existing phone/camera for synchronized trial video; perception deferred to V2"
+      },
+      "manual_link": {
+        "decision": "Existing laptop/gamepad over USB serial deadman for fixture trials; qualified RC reuse for untethered trials"
+      },
+      "battery": {
+        "decision": "3S 2.2 Ah lithium pack; exact reused pack and charger require inventory and condition check"
+      },
+      "power": {
+        "decision": "9 V regulated servo branch, separate 5 V logic branch, fused wheel branch, hardware cut and regeneration clamp; part numbers after simultaneous-load bench sizing"
+      }
+    },
+    "motion_envelope": {
+      "cruise_ms": 0.25,
+      "uneven_ground_ms": 0.15,
+      "acceleration_ms2": 0.35,
+      "arc_yaw_rads": 0.4,
+      "pivot_yaw_rads": 0.6,
+      "yaw_acceleration_rads2": 1.2,
+      "fore_push_ns": 0.8,
+      "lateral_push_ns": 0.4,
+      "push_height_m": 0.2,
+      "pulse_durations_s": [
+        0.05,
+        0.2
+      ],
+      "slope_deg": 3,
+      "smooth_bump_mm": 5,
+      "smooth_bump_length_mm": 300,
+      "square_seam_mm": 3,
+      "unqualified_speed_cap_ms": 0.5
+    }
   },
   "results": {
     "name": "V1-PROOF",
-    "revision": "2026-09-28-A",
+    "revision": "2026-09-28-B",
     "actuator_count": 4,
-    "parts_cap_usd": 715.0,
-    "total_cap_usd": 940.0,
-    "headroom_usd": 60.0,
+    "parts_cap_usd": 675.0,
+    "total_cap_usd": 900.0,
+    "headroom_usd": 100.0,
     "under_budget": true,
     "mass_allocation_kg": 2.5,
     "within_mass_limit": true,
