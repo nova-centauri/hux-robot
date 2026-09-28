@@ -29,9 +29,10 @@ near(S.tireSupport(0.4).z, -S.tireSupport(-0.4).z);
 const reference = K.referenceClimbFrame(0, 0);
 reference.latLeft = 0;
 const a = K.projectFrame(reference);
-near(a.com.kg, M.exampleMassKg); /* 7.75 kg with the locked actuator set (actuators.js); was 6 */
+near(a.com.kg, M.exampleMassKg); /* the bottom-up mass budget (actuators.js massParts, 5.67 kg on 2026-09-27; was a 7.75 kg picture) */
 near(a.com.z, 0);
-assert.ok(Math.abs(a.spatial.rollHoldingNm.left) > 5);
+/* the hold with a wheel up is the body + free leg cantilever: ~0.28 N·m per kg of robot per inch of roll-axis offset here (4.7 N·m at 5.67 kg, 3.0") */
+assert.ok(Math.abs(a.spatial.rollHoldingNm.left) > 0.2 * M.exampleMassKg * M.hipLateral);
 assert.ok(Math.abs(a.spatial.rollHoldingNm.left - a.spatial.tippingNm.left) > 0.5);
 const b = structuredClone(a.spatial);
 for (const axis of ["x", "y", "z"]) {
@@ -82,7 +83,8 @@ near(K.P.bodyCom, SPEC.layout.bodyComForwardIn);
 // One knee spring fit (kin.js kneeSpring, drawn on Sheet 2, printed on Sheet 1): it passes through the
 // two-leg gravity knee torque at the 92% stance and the 75% crouch, on the spec's pulley.
 const spring = K.kneeSpring();
-const twoLeg = (th, ph) => Math.abs(K.legTorques(th, ph, { x: 0, y: M.exampleMassKg * M.g / 2 }, { x: 0, y: 0 }, 0).knee);
+/* the ground carries half the weight; the wheel lump's own weight comes off it (kin.js standHold) */
+const twoLeg = (th, ph) => Math.abs(K.legTorques(th, ph, { x: 0, y: M.exampleMassKg * M.g / 2 - M.mass.wheel * M.g }, { x: 0, y: -M.mass.knee * M.g }, 0).knee);
 near(spring.torque(M.balancePhi), twoLeg(M.balanceTheta, M.balancePhi));
 near(spring.torque(M.deepPhi), twoLeg(M.deepTheta, M.deepPhi));
 near(spring.pulleyIn, SPEC.sheet2.spring.pulleyIn);

@@ -62,7 +62,7 @@
 
       <article class="card">
         <h2>4 · Hip band — shell section and wire entry</h2>
-        <p class="hint">Front section through the hip axes. The lower shell is as wide as the two roll housings; the head narrows above it. The yokes hang outside the shell on the roll flanges, so the roll travel needs no slot. The wire loops enter the band's lower front face beside each roll housing.</p>
+        <p class="hint">Front section through the hip axes. The lower shell is as wide as the two roll housings; the head narrows above it. The yokes hang outside the shell on the roll flanges, so the roll travel needs no slot; the shell stops at the roll RS02 output-flange face (as first drawn its front corner sat in the RS00's path at 4.5° of roll). The wire loops enter the band's lower front face beside each roll housing.</p>
         <svg id="t4" class="sheet" role="img" aria-label="Hip band shell section"></svg>
         <div class="readout" id="u4"></div>
       </article>
@@ -77,7 +77,7 @@
             <tr><td>F1</td><td>Hip yoke ×2</td><td>RS02 roll flange → hip pivot at the leg plane; RS00 stator outboard</td><td>Mill, 6061</td><td>The roll flange bolt circle from the RS02 STEP. Carries the whole one-leg load path; not printed.</td></tr>
             <tr><td>F2</td><td>Upper tube fitting, hip end ×2</td><td>RS00 output flange → 40 mm tube socket; cable port</td><td>Print, inserts</td><td>Bonded socket, one cross pin. The RS00 output is the hip swing.</td></tr>
             <tr><td>F3</td><td>Upper tube fitting, knee end ×2</td><td>Tube socket → RS02 stator mount; spring anchor; cable port</td><td>Print, inserts</td><td>Stator side of the knee. Anchor 1.5" up the link, 0.55" to the rear.</td></tr>
-            <tr><td>F4</td><td>Knee output arm ×2</td><td>RS02 output flange → around the housing → lower tube socket at the leg plane; spring anchor</td><td>Print, inserts (machine if it flexes)</td><td>The arm bridges the 1.8" between the flange face and the leg plane; it sees the full 12–17 N·m.</td></tr>
+            <tr><td>F4</td><td>Knee output arm ×2</td><td>RS02 output flange → around the housing → lower tube socket at the leg plane; spring anchor</td><td>Print, inserts (machine if it flexes)</td><td>The arm bridges the 1.8" between the flange face and the leg plane; it sees the full 8–17 N·m.</td></tr>
             <tr><td>F5</td><td>Axle fitting ×2</td><td>Lower tube socket → RS05 stator face; cable port at the axle</td><td>Mill, 6061</td><td>Spans the 0.20" from the tube's outer wall to the stator face; the RS05 lead enters here.</td></tr>
             <tr><td>F6</td><td>Rim + web ×2</td><td>3.75" bead × 1.25" wide; 3 mm disc web to the RS05 output flange</td><td>Lathe, 6061</td><td>Cantilevered on the RS05 output bearing — rating to confirm (open).</td></tr>
             <tr><td>F7</td><td>Hip band shell ×1</td><td>XT90-S, step-down, Teensy + IMU; the roll housings are its side faces. The pack sits above, at the top of the head.</td><td>Print, two halves</td><td>9.1" × 3.1" × ~3.0" band, chamfered to the 7" head. Service access from below; the pack from the head's top lid (R22).</td></tr>
@@ -93,13 +93,13 @@
           <thead><tr><th>Item</th><th>On the sheet</th><th>State</th></tr></thead>
           <tbody>
             <tr><td>Tube</td><td>16 × 14 mm carbon for both links (the BOM tube). Cuts and loads in view 1. The bonded socket is the limit, not the tube.</td><td><span class="chip settled">Proposed</span></td></tr>
-            <tr><td>Knee spring</td><td>Extension spring behind the knee, fitted to the two-leg gravity curve. Takes the stand-up hold from ~12 N·m to under the RS02's 7 rated; costs the swing leg ~6 N·m to hold its knee bent.</td><td><span class="chip settled">Proposed</span></td></tr>
+            <tr><td>Knee spring</td><td>Extension spring behind the knee, fitted to the two-leg gravity curve. Takes the stand-up hold from ~8 N·m to ~4.7, under the RS02's 7 rated; costs the swing leg ~3.4 N·m to hold its knee bent.</td><td><span class="chip settled">Proposed</span></td></tr>
             <tr><td>RS05 hub</td><td>Flush outboard, stator inboard on F5: nothing proud, inside the envelope. Closes Sheet 1's open call (10).</td><td><span class="chip settled">Proposed</span></td></tr>
             <tr><td>Head at the band</td><td>One wider lower shell, not pods. Closes Sheet 1's open call (11).</td><td><span class="chip settled">Proposed</span></td></tr>
             <tr><td>Wire ports (R21)</td><td>Bundles inside the tubes, ports in F2 / F3 / F5, service loops at the knee and hip, entry into the band beside the roll housings. No belts, so no belt-run rule applies.</td><td><span class="chip settled">Proposed</span></td></tr>
             <tr><td>RS05 output bearing</td><td>The rim is cantilevered on it; the radial / moment rating is not published in the spec table.</td><td><span class="chip open">Manual / bench</span></td></tr>
             <tr><td>Bolt patterns</td><td>Every fitting's bolt circle comes from the vendor STEP files in cad/vendor; not drawn here.</td><td><span class="chip open">Sheet 3 / CAD</span></td></tr>
-            <tr><td>Spring part</td><td>A rate and a free length, not a SKU. Size on the bench against the real knee; the fit here assumes a linear spring with ~0.4 N·m (12 N) preload at the straight leg.</td><td><span class="chip later">Bench</span></td></tr>
+            <tr><td>Spring part</td><td>A rate and a free length, not a SKU. Size on the bench against the real knee; the fit here assumes a linear spring (~1.8 kN/m, 10 lbf/in) with ~0.23 N·m (7 N) preload at the straight leg.</td><td><span class="chip later">Bench</span></td></tr>
           </tbody>
         </table>
       </div>

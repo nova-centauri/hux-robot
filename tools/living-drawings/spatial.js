@@ -6,8 +6,10 @@
   /* Torque limits are the locked actuator set's PEAK numbers (actuators.js, 2026-09-26).
      Rated (continuous) numbers live there too; the models report both. */
   const ACT = root.HuxActuators || require("./actuators.js");
+  const SPEC = root.HuxSpec || require("./spec.js");
+  const ROLL = SPEC.layout.rollStopDeg * Math.PI / 180; /* ±50° since 2026-09-27 (was ±0.6 rad) */
   const limits = {
-    roll: [-0.6, 0.6], hip: [-40 * Math.PI / 180, 170 * Math.PI / 180],
+    roll: [-ROLL, ROLL], hip: [-40 * Math.PI / 180, 170 * Math.PI / 180],
     knee: [0.2, 2.7],
     tauWheel: ACT.peak.wheel, tauHip: ACT.peak.hip, tauKnee: ACT.peak.knee, tauRoll: ACT.peak.roll,
     ratedWheel: ACT.rated.wheel, ratedHip: ACT.rated.hip, ratedKnee: ACT.rated.knee, ratedRoll: ACT.rated.roll

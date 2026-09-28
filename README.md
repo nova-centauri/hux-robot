@@ -20,7 +20,7 @@ This repo is the source of truth for Steve Barrett's Hux project. It is a docs-a
 | Requirements | Draft captured in [`docs/requirements.md`](docs/requirements.md) |
 | Decisions | Dated log in [`docs/decisions.md`](docs/decisions.md) |
 | Compute | **Four layers** (2026-09-26): CAN actuators → portable control core → CAN real-time MCU (**Teensy 4.1**, in the order-now cart) → ROS 2 companion (Pi 5 now, Jetson at P5). F765-Wing is a bench board. |
-| Actuators | **Temporary lock (2026-09-26):** 4× RobStride 02, 2× RS00, 2× RS05 — `tools/living-drawings/actuators.js` feeds every model. Not ordered. Mass picture **7.75 kg**; hip roll axes at **3.0"** on Sheet 1 (one-wheel hold 6.3 N·m vs RS02's 7 rated). |
+| Actuators | **Temporary lock (2026-09-26):** 4× RobStride 02, 2× RS00, 2× RS05 — `tools/living-drawings/actuators.js` feeds every model. Not ordered. Mass budget **5.67 kg** (4.73–6.94, nothing weighed yet — [`mass-budget.md`](docs/research/mass-budget.md)); hip roll axes at **3.0"** on Sheet 1 (one-wheel hold 5.2 N·m vs RS02's 7 rated). |
 | Power | **8S** (decided 2026-09-26: 4S → 6S → 8S once the actuator voltage floor was checked), one 3300 mAh pack, XT90 / XT90-S, step-down rails |
 | Mechanical V1 | **Sheet 1 (layout) and Sheet 2 (make-up) drawn 2026-09-27**; the leg and hip band go to CAD once Steve agrees both. No part made yet. **~24" × ~14"**, 16 × 14 carbon-tube spars, RS02 at the knee with a pulley spring, RS05 flush in the hub. Head inside, wheels outside. |
 | Modes | `PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY` before autonomy |
@@ -32,7 +32,7 @@ First milestones live in [`NOTES.md`](NOTES.md).
 
 ## How it is supposed to work
 
-Balance on two wheeled legs for teleop. Gate stair work behind one-leg work (hip roll **in V1** + planted-wheel fore/aft). Then: shift the mass over one wheel → lift the other for a short, timed single support (a *static* one-wheel stand is not available on this geometry — [`one-leg-stance.md`](docs/research/one-leg-stance.md)) → place the raised wheel at the rear of the next tread's slot (~9.5") → shove and catch → plant. V1 is one such step; a flight repeats it (V2).
+Balance on two wheeled legs for teleop. Gate stair work behind one-leg work (hip roll **in V1** + planted-wheel fore/aft). Then: shift the mass over one wheel → lift the other for a short, timed single support (a *static* one-wheel stand looks possible on paper with both hips, ±50° roll stops and the free leg swung forward — 7.3 mm of capture against ~2 mm of CoM doubt — but the sandbox does not hold one yet; [`one-leg-stance.md`](docs/research/one-leg-stance.md)) → place the raised wheel at the rear of the next tread's slot (~9.5") → shove and catch → plant. V1 is one such step; a flight repeats it (V2).
 
 ## Repo layout
 

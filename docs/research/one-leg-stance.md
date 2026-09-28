@@ -139,3 +139,34 @@ The hold (6.3 N·m) and the shift (24.2°) do not move: they depend on where the
 - **Tucking the free leg is worse** (2.9 mm with both hips) — keep it long; it is the counterweight.
 
 With both hips, ±45° of roll and a CoM known to a few mm, a quiet stand on a flat floor looks possible but fragile. That is a model estimate, not a demonstration: the next step is the sandbox (both-hip poise, its body re-tuned to 3.39" — open call 17).
+
+## Addendum 2026-09-27 (evening) — both hips, more travel, the real weight, the tire footprint
+
+Steve: "1. balance both hips 2. more hip travel 3. calculate weight better 4. the tire footprint will be hard to measure until I get one, proceed with estimates." Tools: `studies/one-wheel-capture.js` (capture region), `studies/roll-travel.js` (what each hip can roll before a part hits), `studies/mass-budget.js` ([`mass-budget.md`](mass-budget.md)), `tire.js footprint()`, and the sandbox's new both-hip stand.
+
+**The weight.** The model now runs on a parts budget, 5.67 kg (4.73–6.94), not the 7.75 kg picture. Legs are 57 % of it; the body is 2.42 kg with its CoM 0.55" behind the hip-swing axis. At the 92 % stance the shift is **25.6°**, the planted hip holds **5.2 N·m** (RS02 rated 7), the body swings 32° per 10 mm of CoM error on the planted hip alone and 26° / 33° (body / free leg) with both hips. The CoM doubt before weighing is **~2 mm laterally** (Monte Carlo over the budget), not the ±20 mm carried above.
+
+**Hip travel — what actually stops it.** The ±34.4° stop was a drawing assumption. On Sheet 1's parts:
+
+- A leg alone rolls outward (abduction) until the RS00's top inner corner meets the head: **40°**; a **1" chamfer on the head's lower long edges** moves that to **56°**. Inward (adduction) it goes to **71°** before the knee RS02 meets the band.
+- **Sheet 1's hip band collided at 4.5°** — its front corner sat in the RS00's path. The band has to end at the roll RS02's output-flange face (where the yoke bolts on anyway). Fixed in `spec.js` and on the sheets.
+- At the one-wheel stance the **legs meet each other first**: with the free leg hanging, the planted hip has only **8.5°** left before the lower tubes touch, and the free hip 8.5° inward. Swinging the free leg **45° forward** with its hip swing clears the planted leg across the whole travel.
+- New joint stops **±50°** (6° inside the chamfered abduction limit). `spatial.js` and the sandbox read `spec.js layout.rollStopDeg`.
+
+**Capture region** (either sign of CoM error, signed travel rooms):
+
+| Configuration | Capture |
+| --- | ---: |
+| Old: ±34° stops, free leg hanging, planted hip or both | 2.6 mm |
+| ±50°, chamfer, both hips, free leg hanging | 2.6 mm (the legs touch) |
+| ±50°, chamfer, both hips, free leg 30° forward | 5.3 mm |
+| **±50°, chamfer, both hips, free leg 45° forward — the stand pose** | **7.3 mm** |
+| same, planted hip only | 4.8 mm |
+| same + the tire footprint | 7.6 mm |
+| same, the LQR leaning harder on the free hip | 8.2 mm |
+
+So the three levers multiply: travel and free-leg pose open the room, both hips use it. **7–8 mm of capture against a ~2 mm (1σ) CoM doubt is a static stand that looks possible on paper** — about 3.5σ before any bench measurement — where the study above said 2–3 mm against ±20 mm. It is still a small margin: a push, a bump in the floor or a stale estimate uses it up.
+
+**Tire footprint (estimate, no tire in hand).** The air carries the load: area = load / pressure. On the 6 × 1.25's round crown the patch is ~19 × 9 mm on one wheel at 60 psi (~27 × 12 mm at 30 psi); radial rate ~60–90 kN/m at 40–60 psi (the sandbox's 40 kN/m guess is on the soft side). Its resistance to camber is **k_roll ≈ load × crown radius / 2 ≈ 0.44 N·m/rad — independent of pressure** (a harder tire has a narrower patch), against ~19 N·m/rad of gravity toppling at the stance. It is worth 0.3 mm of capture. Do not count on it; measure when the tires arrive.
+
+**The sandbox (the both-hip stand, `knobs.oneLift`, still experimental and off by default).** New: a three-link frontal model built from the rigid bodies each 50 ms, a two-input LQR (planted and free hip), the free leg swinging 45° forward as it lifts, the balance point taken from the model's gravity vector rather than the handover pose, the hand-over triggered on measured free-wheel load (the modelled mass offset read ~15 mm with 1 % left on the tire), and the catch no longer tripping on the body roll the balancer uses on purpose. Result: **the free wheel stays up 0.7–1.2 s with both hips, 0.2 s with the planted hip alone** — the both-hip controller is ~4× better, but it **does not hold a stand yet**: the planted-hip torque chatters at ~50 Hz (the leg-roll rate loop through the 15 ms rate filter) and the body creeps round its hip until the travel runs out. That is controller work, not geometry: the model says the room is there. The sandbox also now runs on the mass budget and its own body CoM; the hop and the poise pass (`npm test`), the 1" sill no longer crosses at any speed (open call 13 got worse with the lighter body).

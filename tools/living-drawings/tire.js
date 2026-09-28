@@ -127,9 +127,25 @@
       };
     }
 
+    /* Footprint of an inflated tire from its pressure (2026-09-27 estimate; no tire in hand yet).
+       The air carries the load: area ≈ load / pressure (carcass stiffness ignored). On a round
+       crown the patch is an ellipse, length 2√(2Rδ), width 2√(2rδ), so area = 2π√(Rr)·δ gives the
+       squish δ, the radial rate k = 2πp√(Rr), and the patch's resistance to camber
+       k_roll ≈ k·W²/16 = load · r / 2 — the same at any pressure (a harder tire has a narrower
+       patch). Lengths follow the profile's unit except load (N) and pressure (psi); returns mm, N/m,
+       N·m/rad. */
+    function footprint(loadN, psi) {
+      const toM = opt.unit === "in" ? 0.0254 : opt.unit === "mm" ? 0.001 : 1;   /* metres when no unit is given (the sandbox) */
+      const Rm = R * toM, rm = crown * toM, p = psi * 6894.76;
+      const k = 2 * Math.PI * p * Math.sqrt(Rm * rm);
+      const d = loadN / k;
+      const L = 2 * Math.sqrt(2 * Rm * d), Wd = Math.min(width * toM, 2 * Math.sqrt(2 * rm * d));
+      return { areaMm2: loadN / p * 1e6, deflectionMm: d * 1000, lengthMm: L * 1000, widthMm: Wd * 1000, radialK: k, rollK: loadN * rm / 2 };
+    }
+
     return {
       R: R, width: width, crown: crown, shoulder: shoulder, bead: bead, full: full, halfTread: halfTread,
-      profile: profile, hull: hull, support: support, supportFromAxisY: supportFromAxisY, pad: pad, domeR: domeR
+      profile: profile, hull: hull, support: support, supportFromAxisY: supportFromAxisY, pad: pad, domeR: domeR, footprint: footprint
     };
   }
 

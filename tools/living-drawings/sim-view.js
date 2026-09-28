@@ -598,7 +598,7 @@
     mu: function (x) { return x.toFixed(2); },
     tireK: function (x) { return (x / 1000).toFixed(0) + " kN/m · " + (sim.s.totalKg * 9.81 / 2 / x * 1000).toFixed(2) + " mm at half the weight"; },
     tireZeta: function (x) { return x.toFixed(2); },
-    massScale: function (x) { return (M.actuators.lumps.total * x).toFixed(1) + " kg lumps"; },
+    massScale: function (x) { return (M.actuators.lumps.total * x).toFixed(2) + " kg (mass budget)"; },
     bodyCom: function (x) { return x.toFixed(1) + "\""; },
     bodyComUp: function (x) { return x.toFixed(2) + "\""; },
     legHz: function (x) { return x.toFixed(1) + " Hz"; },

@@ -41,7 +41,7 @@
     <div class="views">
       <article class="card">
         <h2>1 · Side elevation</h2>
-        <p class="hint">Planted leg at the 92% stance with the hip over its axle; the raised leg placed on the next tread at the rear of the slot, which is where the landing is aimed (a forward error is the failure mode). Grey leg is the raised one. Motor boxes are the vendors' housing envelopes. The red cross is the lump picture's centre of mass.</p>
+        <p class="hint">Planted leg at the 92% stance with the hip over its axle; the raised leg placed on the next tread at the rear of the slot, which is where the landing is aimed (a forward error is the failure mode). Grey leg is the raised one. Motor boxes are the vendors' housing envelopes. The red cross is the mass budget's centre of mass.</p>
         <svg id="s1" class="sheet" role="img" aria-label="Side elevation of Hux on the step"></svg>
         <div class="readout" id="r1"></div>
       </article>
@@ -55,7 +55,7 @@
 
       <article class="card">
         <h2>3 · Plan</h2>
-        <p class="hint">From above, forward up the page. Roll housings behind the swing axis with their flanges forward into the yokes; the pack (dashed) is above them at the top of the head, 1" forward. Knees fold to the rear. Dashed outline is the 8" × 7" head.</p>
+        <p class="hint">From above, forward up the page. Roll housings behind the swing axis with their flanges forward into the yokes; the pack (dashed) is above them at the top of the head, 2.2" forward. Knees fold to the rear. Dashed outline is the 8" × 7" head.</p>
         <svg id="s3" class="sheet" role="img" aria-label="Plan view of Hux"></svg>
         <div class="readout" id="r3"></div>
       </article>
@@ -74,14 +74,14 @@
         <table>
           <thead><tr><th>Item</th><th>On the sheet</th><th>State</th></tr></thead>
           <tbody>
-            <tr><td>Hip roll axes</td><td>3.0" from the centreline, fore-aft, in a 9.1" hip band under the 7" head. The roll hold with one wheel up is ~6.3 N·m against the RS02's 7 rated.</td><td><span class="chip settled">Drawn to the requirement</span></td></tr>
-            <tr><td>Levelling during the shift</td><td>New finding from this sheet: the wheel planes are 3.375" outboard of the roll axes, so the 24° parallelogram roll puts the two axles 2.8" apart in height. Equal leg lengths no longer keep the body level (they did within 0.8" at the old 5.4" axes); the legs take up the difference as part of the shift — 3.0" of leg-length difference (2 × spacer × tan γ; the side view's readout computes it). The sandbox now does this by feed-forward and settles the poise; the control core needs the same term.</td><td><span class="chip open">Controls</span></td></tr>
+            <tr><td>Hip roll axes</td><td>3.0" from the centreline, fore-aft, in a 9.1" hip band under the 7" head. The band ends at the roll RS02's output-flange face (as first drawn its front corner hit the RS00 at 4.5° of roll). Joint stops ±50°. The roll hold with one wheel up is ~5.2 N·m against the RS02's 7 rated.</td><td><span class="chip settled">Drawn to the requirement</span></td></tr>
+            <tr><td>Levelling during the shift</td><td>New finding from this sheet: the wheel planes are 3.375" outboard of the roll axes, so the ~26° parallelogram roll puts the two axles 2.9" apart in height. Equal leg lengths no longer keep the body level (they did within 0.8" at the old 5.4" axes); the legs take up the difference as part of the shift — 3.2" of leg-length difference (2 × spacer × tan γ; the side view's readout computes it). The sandbox now does this by feed-forward and settles the poise; the control core needs the same term.</td><td><span class="chip open">Controls</span></td></tr>
             <tr><td>Leg plane and yoke</td><td>Tubes at 4.75", 0.2" clear of the roll housing's outer face; a short yoke from the flange out to the hip pivot.</td><td><span class="chip settled">Layout</span></td></tr>
-            <tr><td>Knee actuator</td><td>RS02 on the knee joint, inboard of the tube plane so it can never meet the tire (R39). Gravity spring at the knee, fitted on <a href="sheet2.html">Sheet 2</a> to the two-leg hold: 2.8 N·m at 92%, 4.8 at 75%.</td><td><span class="chip settled">R39</span></td></tr>
+            <tr><td>Knee actuator</td><td>RS02 on the knee joint, inboard of the tube plane so it can never meet the tire (R39). Gravity spring at the knee, fitted on <a href="sheet2.html">Sheet 2</a> to the two-leg hold: 1.7 N·m at 92%, 2.8 at 75%.</td><td><span class="chip settled">R39</span></td></tr>
             <tr><td>Hip swing actuator</td><td>RS00 outboard of the leg plane at the hip; its outer face lands on the 14" envelope.</td><td><span class="chip settled">Layout</span></td></tr>
-            <tr><td>Pack and body CoM</td><td>8S pack at the top of the head, 1" forward and 4.3" above the roll axes (Steve 2026-09-27: move the battery up; <code>studies/pack-sweep.js</code>). Body CoM +1.0" forward (widest throw window), +3.39" up. It raises the one-wheel capture region by about a third and is neutral for the stair (the shove re-times gentler) — it does <b>not</b> make a static one-wheel stand: the pack is 9% of the mass.</td><td><span class="chip settled">Layout</span></td></tr>
+            <tr><td>Pack and body CoM</td><td>8S pack (~620 g) at the top of the head, 2.2" forward and 4.3" above the roll axes (Steve 2026-09-27: move the battery up; <code>studies/pack-sweep.js</code>). Body CoM from the mass budget (<code>studies/mass-budget.js</code>): 0.55" <b>behind</b> the hip-swing axis, 1.97" up — the two roll RS02s and the band sit aft. On its own the pack does <b>not</b> make a static one-wheel stand; both hips, ±50° stops, the head chamfer and the free leg 45° forward give 7.3 mm of capture on paper. The planar throw does not crest until the body CoM is ≥ 2.5" ahead of the swing axis.</td><td><span class="chip settled">Layout</span></td></tr>
             <tr><td>RS05 in the wheel</td><td>44 mm long in a 31.75 mm tire: centred, it was 0.24" proud of each face and 0.24" past the envelope. Answered on <a href="sheet2.html">Sheet 2</a> (call 10, proposed): flush with the tire's outboard face, stator inboard on the axle fitting; nothing proud. This sheet now draws it that way.</td><td><span class="chip settled">Sheet 2</span></td></tr>
-            <tr><td>Head shape</td><td>7" wide above the band, 9.1" at the band: the roll housings are proud of the head's faces by 1.05" each side. Answered on <a href="sheet2.html">Sheet 2</a> (call 11, proposed): one wider lower shell, 9.1" × 3.1" × ~3.0", not pods.</td><td><span class="chip settled">Sheet 2</span></td></tr>
+            <tr><td>Head shape</td><td>7" wide above the band, 9.1" at the band: the roll housings are proud of the head's faces by 1.05" each side. Answered on <a href="sheet2.html">Sheet 2</a> (call 11, proposed): one wider lower shell, 9.1" × 3.1" × ~3.0", not pods. A 1" chamfer on the head's lower long edges lets a leg roll out to 56° before the RS00 meets the head (40° without).</td><td><span class="chip settled">Sheet 2</span></td></tr>
             <tr><td>Tubes, fittings, spring, wire ports</td><td>Not on this sheet. Tube OD / wall, the end fittings, the spring type and the R21 wire ports are Sheet 2, after this sheet is agreed.</td><td><span class="chip later">Sheet 2</span></td></tr>
             <tr><td>Stair candidate</td><td>The 2D climb is still a rejected candidate on spatial reach (model-corrections.md); this sheet draws the poses, it does not validate the gait. No validated step exists yet for the V1 finish line (R37).</td><td><span class="chip open">Controls</span></td></tr>
           </tbody>
@@ -90,7 +90,7 @@
     </section>
 
     <footer class="note">
-      Geometry from <code>kin.js</code> (docs/research/leg-geometry.md), housings and masses from <code>actuators.js</code> (the 2026-09-26 temporary lock), decisions and layout numbers from <code>spec.js</code> (docs/decisions.md 2026-09-27, R37–R40). The <a href="index.html">working drawings</a> and the <a href="sim.html">sandbox</a> read the same files, so this sheet cannot drift from them. Blender waits on Sheet 2 (R23).
+      Geometry from <code>kin.js</code> (docs/research/leg-geometry.md), housings and the mass budget from <code>actuators.js</code> (the 2026-09-26 temporary lock), decisions and layout numbers from <code>spec.js</code> (docs/decisions.md 2026-09-27, R37–R40). The <a href="index.html">working drawings</a> and the <a href="sim.html">sandbox</a> read the same files, so this sheet cannot drift from them. Blender waits on Sheet 2 (R23).
     </footer>
   </div>
   <script src="actuators.js"></script>

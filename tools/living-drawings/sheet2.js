@@ -23,7 +23,7 @@
     lower: { exposed: linkMm - S2.reachMm.knee - S2.reachMm.axle, cut: linkMm - S2.reachMm.knee - S2.reachMm.axle + 2 * T.socketMm }
   };
   const W = M.exampleMassKg * M.g;
-  function hold(theta, phi, share) { return K.legTorques(theta, phi, { x: 0, y: W * (share || 1) }, { x: 0, y: 0 }, 0); }
+  function hold(theta, phi, share) { return K.standHold(theta, phi, share || 1); } /* the wheel's own weight off the ground force (kin.js) */
   const standIk = K.ik(1.0, -9.0);
   const kneeStand = Math.abs(hold(standIk.theta, standIk.phi).knee);
   const sigmaStand = kneeStand * 1000 / Zs, sigmaPeak = ACT.peak.knee * 1000 / Zs;     /* MPa */

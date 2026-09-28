@@ -45,14 +45,14 @@
   }
 
   /** Discrete LQR by Riccati iteration for ẋ = A x + B u sampled at dt (2nd-order hold on A). */
-  function lqr(A, B, dt, Qd, Rd, maxIt) {
+  function lqr(A, B, dt, Qd, Rd, maxIt, P0) {
     const n = A.length, m = B[0].length;
     const A2 = mmul(A, A);
     const Ad = madd(madd(eye(n), A, dt), A2, 0.5 * dt * dt);
     const Bd = madd(B.map(r => r.map(x => x * dt)), mmul(A, B), 0.5 * dt * dt);
     const Q = zeros(n, n); Qd.forEach((q, i) => { Q[i][i] = q; });
     const Rm = zeros(m, m); Rd.forEach((r, i) => { Rm[i][i] = r; });
-    let P = Q.map(r => r.slice());
+    let P = P0 ? P0.map(r => r.slice()) : Q.map(r => r.slice());   /* warm start: the sandbox re-solves every 50 ms */
     let K = zeros(m, n);
     let conv = false;
     for (let it = 0; it < (maxIt || 100000); it++) {
@@ -118,6 +118,10 @@
    *   freeLen    free leg hip-to-axle, in (default: same as the planted leg)
    *   freeRoll   free leg roll relative to the body, rad (+ swings its wheel toward the planted side)
    *   massScale
+   *   patch      true: add the pneumatic contact patch's roll stiffness, k = F · rc / 2 (see tire.js
+   *              patchRollK); it is pressure-independent for a round crown: a stiffer tire has a
+   *              narrower patch
+   *   contactRollK  override that stiffness, N·m/rad
    */
   function robot(opts) {
     const M = opts.M;
@@ -133,7 +137,14 @@
     /* lumps from kin.js (the locked actuator set, actuators.js): body 4.35, each hip yoke 0.75,
        knee 0.46, wheel 0.49 — 7.75 kg. Falls back to actuators.js directly if M carries no mass. */
     const mm = M.mass || (root.HuxActuators || require("./actuators.js")).lumps;
-    const lump = { body: mm.body * ms, yoke: (mm.hips / 2) * ms, knee: mm.knee * ms, tube: 0.03 * ms, wheel: mm.wheel * ms };
+    const ACTm = (root.HuxActuators || require("./actuators.js")).lumps;
+    const lump = { body: mm.body * ms, yoke: (mm.hips / 2) * ms, knee: mm.knee * ms, tube: (ACTm.tube !== undefined ? ACTm.tube : 0.03) * ms, wheel: mm.wheel * ms };
+    /* Lateral positions of the per-side lumps (actuators.js lumps.latIn, from the mass budget):
+       the yoke + RS00 sit outboard of the roll axis, the knee RS02 near the leg plane, the RS05 at
+       the tire. Offsets are measured outboard from the roll axis; opts.legOnAxis puts them all
+       back on the roll axis (the pre-2026-09-27 model) for comparison. */
+    const LAT = ACTm.latIn || { hip: hipLat / IN, knee: hipLat / IN, wheel: M.track / 2 };
+    const outb = k => opts.legOnAxis ? 0 : (LAT[k] - hipLat / IN) * IN;
     /* Each mass as a function of q = [q1, q2, q3]. Frame: contact at the origin, +z right
        (inboard for a left plant), +y up. rot(p, a) rotates p by a about the fore-aft axis
        (+ tips the top to the right). */
@@ -154,26 +165,26 @@
       const hipL = { z: legZ, y: R - rc + d };
       const kneeL = { z: legZ, y: R - rc + d / 2 };
       function L1(p, m, name) { out.push({ m: m, p: add(pivot, rot(p, q1)), link: 1, name: name }); }
-      L1(axleL, lump.wheel, "wheel");
-      L1({ z: legZ, y: R - rc + d / 4 }, lump.tube, "lower tube");
-      L1(kneeL, lump.knee, "knee");
-      L1({ z: legZ, y: R - rc + 3 * d / 4 }, lump.tube, "upper tube");
-      L1(hipL, lump.yoke, "yoke");
+      L1({ z: legZ - outb("wheel") - (legZ - spacer), y: R - rc }, lump.wheel, "wheel");
+      L1({ z: legZ - outb("knee") * 0.5, y: R - rc + d / 4 }, lump.tube, "lower tube");
+      L1({ z: legZ - outb("knee"), y: kneeL.y }, lump.knee, "knee");
+      L1({ z: legZ - outb("knee") * 0.5, y: R - rc + 3 * d / 4 }, lump.tube, "upper tube");
+      L1({ z: legZ - outb("hip"), y: hipL.y }, lump.yoke, "yoke");
       const hip = add(pivot, rot(hipL, q1));
       /* link 2: trunk and the free yoke, hung from the planted hip; body roll q1 + q2 */
       const b = q1 + q2;
       const bodyC = { z: hipLat, y: comUp };
       const freeHipB = { z: 2 * hipLat, y: 0 };
       out.push({ m: lump.body, p: add(hip, rot(bodyC, b)), link: 2, name: "body" });
-      out.push({ m: lump.yoke, p: add(hip, rot(freeHipB, b)), link: 2, name: "free yoke" });
       const freeHip = add(hip, rot(freeHipB, b));
-      /* link 3: the free leg hanging from its hip; absolute roll q1 + q2 + q3 */
+      /* link 3: the free leg (with its yoke and RS00) hanging from its roll axis; absolute roll q1 + q2 + q3 */
       const f = b + q3;
       function L3(p, m, name) { out.push({ m: m, p: add(freeHip, rot(p, f)), link: 3, name: name }); }
-      L3({ z: 0, y: -d3 / 4 }, lump.tube, "free upper tube");
-      L3({ z: 0, y: -d3 / 2 }, lump.knee, "free knee");
-      L3({ z: 0, y: -3 * d3 / 4 }, lump.tube, "free lower tube");
-      L3({ z: spacer, y: -d3 }, lump.wheel, "free wheel");
+      L3({ z: outb("hip"), y: 0 }, lump.yoke, "free yoke");
+      L3({ z: outb("knee") * 0.5, y: -d3 / 4 }, lump.tube, "free upper tube");
+      L3({ z: outb("knee"), y: -d3 / 2 }, lump.knee, "free knee");
+      L3({ z: outb("knee") * 0.5, y: -3 * d3 / 4 }, lump.tube, "free lower tube");
+      L3({ z: spacer + (LAT.wheel - M.track / 2) * IN, y: -d3 }, lump.wheel, "free wheel");
       return { pts: out, hip: hip, freeHip: freeHip };
     }
     function com(q) {
@@ -240,6 +251,11 @@
         const gp = gvec(qp), gm = gvec(qm);
         for (let a = 0; a < n; a++) Hm[a][k] = (gp[a] - gm[a]) / (2 * h);
       }
+      /* the contact patch resists leg roll relative to the ground like a small torsion spring */
+      if (opts.patch || opts.contactRollK) {
+        const W = (M.exampleMassKg || 7.75) * ms * G;
+        Hm[0][0] += opts.contactRollK !== undefined ? opts.contactRollK : W * rc / 2;
+      }
       return { M: Mm, g: g0, H: Hm };
     }
     /**
@@ -281,7 +297,7 @@
       let x = new Array(n).fill(0);
       x[0] = err / lin.com.y;
       const dt = 0.0005;
-      const peak = { q1: 0, q2: 0, q3: 0, u: lin.inputs.map(() => 0), settle: null };
+      const peak = { q1: 0, q2: 0, q3: 0, u: lin.inputs.map(() => 0), settle: null, q2p: 0, q2n: 0, q3p: 0, q3n: 0 };
       for (let t = 0; t < 4; t += dt) {
         const u = K.K.map(r => -r.reduce((s, k, j) => s + k * x[j], 0));
         u.forEach((v, i) => { peak.u[i] = Math.max(peak.u[i], Math.abs(v)); });
@@ -290,6 +306,8 @@
         peak.q1 = Math.max(peak.q1, Math.abs(x[0]));
         peak.q2 = Math.max(peak.q2, Math.abs(x[2]));
         peak.q3 = Math.max(peak.q3, Math.abs(x[4] || 0));
+        peak.q2p = Math.max(peak.q2p, x[2]); peak.q2n = Math.min(peak.q2n, x[2]);
+        peak.q3p = Math.max(peak.q3p, x[4] || 0); peak.q3n = Math.min(peak.q3n, x[4] || 0);
         if (peak.settle === null && t > 0.2 && Math.abs(x[0]) < 0.1 * err / lin.com.y && Math.abs(x[1]) < 0.02) peak.settle = t;
       }
       /* unstable poles: sqrt of the positive eigenvalues of −M⁻¹H (real: M⁻¹H is similar to a

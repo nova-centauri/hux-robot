@@ -14,8 +14,9 @@ const IN = S.IN;
 function assert(ok, msg) { if (!ok) throw new Error(msg); }
 
 /* The sandbox reads the same decisions as the drawings (spec.js, actuators.js). */
-/* Known gaps: the sandbox body CoM stays at 0" forward / 2.7" up (its one-wheel tuning); the spec says +1.0" / +3.39"
-   with the pack at the top of the head (sim-core.js KNOBS, NOTES open call 17). */
+/* Known gaps (2026-09-27 evening): the sandbox body CoM now reads the mass budget (spec.js bodyLump, −0.55" / 1.97");
+   it still has no knee spring (open call 18), hangs the legs on the roll axis (19), and does not hold a static
+   one-wheel stand (22). */
 assert(M.hipLateral === SPEC.layout.hipRollAxisIn, "sandbox hip roll axes are not spec.layout.hipRollAxisIn");
 assert(S.KNOBS.tauWheel === M.actuators.peak.wheel && S.KNOBS.tauKnee === M.actuators.peak.knee, "sandbox torque caps are not the actuator lock");
 
@@ -170,7 +171,11 @@ function run(opts, plan) {
     });
     found.tireSquishMm = (probe.last.tires[0].deflection * 1000).toFixed(2);
     found.padIn = (probe.last.tires[0].padLength / IN).toFixed(2) + " × " + (probe.last.tires[0].padWidth / IN).toFixed(2);
-    assert(Math.abs(probe.last.contacts[0].force + probe.last.contacts[1].force - w) < 0.05 * w, "wheel loads should sum to the weight with the tread rings in the chain");
+    /* the carcass springs (k · deflection + tread weight) are the load cell; Rapier's reported
+       contact impulse can drift ~10 % with the contact manifold (see the stand check below) */
+    const carcass = (probe.last.tires[0].deflection + probe.last.tires[1].deflection) * probe.s.knobs.tireK + 2 * probe.s.mTread * 9.81;
+    assert(Math.abs(carcass - w) < 0.05 * w, "carcass loads should sum to the weight with the tread rings in the chain: " + carcass.toFixed(1) + " vs " + w.toFixed(1));
+    found.probeContactReport = ((probe.last.contacts[0].force + probe.last.contacts[1].force) / w * 100 - 100).toFixed(0) + "% vs the weight (instantaneous, Rapier report)";
   }
   assert(probe.last.supportState === "TWO_CONTACT" && !probe.last.singleSupportValidated, "standing is not single support");
   probe.ctrl.estop = true;
@@ -364,8 +369,28 @@ function run(opts, plan) {
       };
     }
   });
-  const lift = poise("LEFT_ONLY", { oneLift: true });
-  found.oneWheel.experimentalLift = lift.fell ? "falls (an acrobot with a few mm of capture region on this geometry; docs/research/one-leg-stance.md)" : "survives, caught " + (lift.sim.last.caught || 0) + "×";
+  /* Experimental stand (knobs.oneLift): how long the free wheel stays off the floor before the
+     balancer loses it, with both hip rolls balancing (the free leg a counter-pendulum, swung
+     forward; the 2026-09-27 default) and with the planted hip alone. Reported, not asserted:
+     no controller here holds a static stand yet (docs/research/one-leg-stance.md). */
+  function standAir(mode, knobs) {
+    const sim = new S.Sim(R, M, { knobs: Object.assign({ oneLift: true }, knobs || {}), floorOnly: true });
+    const n = sim.s.knobs.rate, fi = mode === "LEFT_ONLY" ? 1 : 0;
+    for (let i = 0; i < 1.5 * n; i++) sim.step({});
+    const w = sim.s.totalKg * 9.81;
+    let air = 0, best = 0, fell = false;
+    for (let i = 0; i < 16 * n; i++) {
+      const o = sim.step(i === 0 ? { mode: mode } : {});
+      air = o.contacts[fi].n === 0 && o.contacts[fi].force < 0.02 * w ? air + 1 / n : 0;
+      best = Math.max(best, air);
+      if (o.fallen) { fell = true; break; }
+    }
+    return best.toFixed(2) + " s in the air" + (fell ? ", then falls" : "");
+  }
+  found.oneWheel.experimentalStand = {
+    bothHips: { left: standAir("LEFT_ONLY"), right: standAir("RIGHT_ONLY") },
+    plantedHipOnly: { left: standAir("LEFT_ONLY", { oneBoth: false }), right: standAir("RIGHT_ONLY", { oneBoth: false }) }
+  };
 
   /* Dynamic single support: from the poise, lift the free wheel for T with the hip rolls held
      stiff, tip toward the free side, land, and come back to two wheels. The 0.2 s hop must
@@ -399,11 +424,12 @@ function run(opts, plan) {
   const F = require("./frontal.js");
   const fr = F.robot({ M: M });
   const g92 = fr.balanceRoll(0);
-  assert(Math.abs(-g92 * 180 / Math.PI - 24.2) < 1.0, "frontal.js balance roll moved: " + (-g92 * 180 / Math.PI).toFixed(1) + "°");
+  /* pinned to the 2026-09-27 mass budget (5.67 kg; the 7.75 kg picture gave 24.2° / 6.3 N·m) */
+  assert(Math.abs(-g92 * 180 / Math.PI - 25.6) < 1.0, "frontal.js balance roll moved: " + (-g92 * 180 / Math.PI).toFixed(1) + "°");
   const hold = fr.holdTorque([g92, -g92, 0]);
-  /* frontal.js at 7.75 kg: 4.5 N·m at 2", 6.3 at the Sheet 1 axes (3.0", spec.js), 10.7 at the old 5.4" —
-     ≈ 0.8 + 1.84 N·m per inch of hip offset. Band scales with the lump picture and follows the spec. */
-  const holdRef = (0.78 + 1.84 * M.hipLateral) * (M.exampleMassKg / 7.752);
+  /* frontal.js on the mass budget: 4.1 N·m at 2", 5.2 at the Sheet 1 axes (3.0", spec.js), 7.6 at the old 5.4" —
+     ≈ 2.1 + 1.0 N·m per inch of hip offset (the lump picture was 0.8 + 1.84). Band follows the spec. */
+  const holdRef = (2.11 + 1.015 * M.hipLateral) * (M.exampleMassKg / 5.6725);
   assert(hold > holdRef * 0.9 && hold < holdRef * 1.1, "frontal.js hold torque moved: " + hold.toFixed(2) + " vs ~" + holdRef.toFixed(1));
   const resp = fr.response(0, [2], 0.010, undefined, true);
   found.oneWheel.frontal = {

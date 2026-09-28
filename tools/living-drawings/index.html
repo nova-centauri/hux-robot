@@ -13,7 +13,7 @@
         <p class="kicker">Hux</p>
         <h1>Living drawings</h1>
         <p>Side and top views of the working model, and a candidate stair climb. Drag the joints, request a wheel position, or press Play. The 9.5 by 9.5 inch stair is a design target, not a validated capability; the V1 finish line is one step, 9 of 10 (R37). The layout the model is drawn to is <a href="sheet.html">Sheet 1</a> and
-          <a href="sheet2.html">Sheet 2</a>; its roll axes (3.0"), leg plane and body-CoM offset (+1") come from <code>spec.js</code>.</p>
+          <a href="sheet2.html">Sheet 2</a>; its roll axes (3.0") and leg plane come from <code>spec.js</code>, and its body CoM (0.55" behind the hip-swing axis) from the mass budget.</p>
         <nav class="pages" aria-label="Pages">
           <a href="index.html" aria-current="page">Drawings</a>
           <a href="sheet.html">Sheet 1</a>
@@ -207,7 +207,7 @@
     <footer class="note">
       Design dimensions and working assumptions come from <code>docs/research/leg-geometry.md</code> and <code>docs/bom.md</code>. The climb dynamics are explained in <code>docs/research/stair-climb-dynamics.md</code>.
       The knee folds to the rear. The 6 inch body height above the hip is the working assumption. Body length on the drawing is 8 inches and is not a decision. Motor boxes are rough bulk, not a shopping list.
-      Mass in the roll readout is the 7.75 kg lump picture from the locked actuator set (actuators.js), not a weight target.
+      Mass in the roll readout is the 5.67 kg mass budget, part by part in actuators.js (docs/research/mass-budget.md), not a weight target and not weighed.
     </footer>
   </div>
   <script src="actuators.js"></script>

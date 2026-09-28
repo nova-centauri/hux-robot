@@ -19,28 +19,19 @@ const F = require(path.join(here, "frontal.js"));
 const K = globalThis.HuxKin, M = K.M, P = K.P;
 const IN = 0.0254, deg = r => r * 180 / Math.PI, LIM = 0.6; /* rad, the sandbox / spatial roll stop */
 
-function evaluate(pk) {
-  const b = SPEC.bodyLump(pk);
+const CAP = require(path.join(__dirname, "one-wheel-capture.js"));
+function evaluate(pk, head) {
+  const b = SPEC.bodyLump({ pack: pk, headFwdIn: head !== undefined ? head : SPEC.layout.headFwdIn });
   M.bodyComUp = b.upIn; M.bodyIpitch = b.Iz; M.bodyIroll = b.Ix; P.bodyCom = b.fwdIn;
   K.rebuild();
   const c = K.climb();
   const out = { pack: pk, body: b };
-  const cases = {
-    planted: { inputs: [2], lock: true, opts: {} },
-    both: { inputs: [2, 3], lock: false, opts: {} },
-    bothTuck: { inputs: [2, 3], lock: false, opts: { freeLen: 7 } }
-  };
-  for (const k in cases) {
-    const cs = cases[k];
-    const r = F.robot(Object.assign({ M: M }, cs.opts));
-    const res = r.response(0, cs.inputs, 0.010, undefined, cs.lock);
-    const g = -res.lin.q[0];
-    const room = LIM - g;                         /* planted hip: roll left before the stop */
-    const capBody = 10 * room / Math.max(1e-6, res.peak.q2);
-    const capFree = res.peak.q3 > 1e-6 ? 10 * LIM / res.peak.q3 : Infinity;
-    out[k] = { gammaDeg: deg(g), holdNm: res.lin.hold, bodyPer10: deg(res.peak.q2), freePer10: deg(res.peak.q3),
-      tau: res.peak.u, captureMm: Math.min(capBody, capFree), comY: res.lin.com.y };
-  }
+  /* the one-wheel capture region at the chosen stand configuration (both hips, ±50° stops, head
+     chamfer, free leg 45° forward) and with the planted hip alone */
+  const best = CAP.capture({ both: true, stopDeg: 50, chamfer: 1, dth: -45 });
+  const plantedOnly = CAP.capture({ both: false, stopDeg: 50, chamfer: 1, dth: -45 });
+  out.planted = { gammaDeg: best.gammaDeg, holdNm: best.hold, captureMm: plantedOnly.capMm };
+  out.both = { captureMm: best.capMm };
   /* two wheels at 92%: whole-robot CoM height (sagittal plane, lumps at their heights) */
   const p = K.planted(M.balanceTheta, M.balancePhi);
   const mm = M.mass;
@@ -51,19 +42,18 @@ function evaluate(pk) {
 }
 
 const rows = [];
-const ups = [0, 1.5, 2.5, 3.5, 4.3, 4.8];
-ups.forEach(u => rows.push(evaluate({ fwdIn: 1.0, upIn: u })));
-[0.0, 1.0, 2.0, 2.7].forEach(f => rows.push(evaluate({ fwdIn: f, upIn: 4.8 })));
-rows.push(evaluate({ fwdIn: SPEC.layout.pack.fwdIn, upIn: SPEC.layout.pack.upIn })); /* the chosen placement (spec.js) */
+const ups = [0, 2.5, 3.5, 4.3];
+ups.forEach(u => rows.push(evaluate({ fwdIn: 1.0, upIn: u }, 0)));
+[0.0, 2.0, 2.4].forEach(f => rows.push(evaluate({ fwdIn: f, upIn: 4.3 }, 0)));
+[0.5, 1.0, 1.5].forEach(h => rows.push(evaluate({ fwdIn: 2.0, upIn: 4.3 }, h)));
+rows.push(evaluate({ fwdIn: SPEC.layout.pack.fwdIn, upIn: SPEC.layout.pack.upIn }, SPEC.layout.headFwdIn)); /* the chosen placement (spec.js) */
 const f1 = x => x.toFixed(1), f2 = x => x.toFixed(2);
-console.log("pack (fwd, up) | body CoM (fwd, up) | γ | hold | planted: body°/10mm cap | both: body°/free° cap | both+tuck cap | stair need–max (window), lift at tPush | 2-wheel CoM h, tip°");
+console.log("pack (fwd, up) + head | body CoM (fwd, up) | γ | hold | capture planted / both hips | stair need–max (window), lift at tPush | 2-wheel CoM h, tip°");
 rows.forEach(r => console.log([
-  "(" + f1(r.pack.fwdIn) + ", " + f1(r.pack.upIn) + ")",
+  "(" + f1(r.pack.fwdIn) + ", " + f1(r.pack.upIn) + ") + " + f1(r.body.headFwdIn),
   "(" + f2(r.body.fwdIn) + ", " + f2(r.body.upIn) + ")",
   f1(r.planted.gammaDeg) + "°", f2(r.planted.holdNm) + " N·m",
-  f1(r.planted.bodyPer10) + "° " + f1(r.planted.captureMm) + " mm",
-  f1(r.both.bodyPer10) + "°/" + f1(r.both.freePer10) + "° " + f1(r.both.captureMm) + " mm",
-  f1(r.bothTuck.captureMm) + " mm",
+  f1(r.planted.captureMm) + " / " + f1(r.both.captureMm) + " mm",
   f2(r.stair.need) + "–" + f2(r.stair.max) + " (" + f2(r.stair.window) + "), " + f2(r.stair.lift),
   f1(r.two.comHeightIn) + "\" " + f1(r.two.tipDeg) + "°"
 ].join(" | ")));

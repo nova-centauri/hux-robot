@@ -1,6 +1,6 @@
 # Actuator shortlist — what decides it, and what the 2026 numbers say
 
-> **Status 2026-09-27:** the recommended set is the **temporary lock** (`actuators.js`, not ordered). The 6 kg / 5.4" numbers below are superseded: 7.75 kg picture, roll axes at **3.0"** (Sheet 1), roll hold **6.3 N·m** (not 6.0), knee stand-up hold **12.4 N·m** (not 13.6 / 10.6), **6.4** with the Sheet 2 spring. RS05 rated is **1.7 N·m** in `actuators.js`. First buy is **one RS02** on the Teensy. Current: [`../decisions.md`](../decisions.md).
+> **Status 2026-09-27:** the recommended set is the **temporary lock** (`actuators.js`, not ordered). The 6 kg / 5.4" numbers below are superseded: the **5.67 kg** [mass budget](mass-budget.md) (it replaced the 7.75 kg picture), roll axes at **3.0"** (Sheet 1), roll hold **5.2 N·m** (not 6.0), knee stand-up hold **8.2 N·m** (not 13.6 / 10.6), **4.7** with the Sheet 2 spring. The pack is ~620 g (550–700) in the budget. RS05 rated is **1.7 N·m** in `actuators.js`. First buy is **one RS02** on the Teensy. Current: [`../decisions.md`](../decisions.md).
 
 **2026-09-26.** Steve: "I am not sure about the actuator shortlist. I think it's a good time to decide. What should I consider?" This note is the decision framework plus the candidates checked against Hux's own numbers. **No SKU locked here. No spend.** Steve owns the cart line.
 
@@ -69,7 +69,7 @@ Rough budget for Hux balancing and driving (no measurement yet): 8 actuators qui
 | 8S 2700 mAh | 80 Wh | ~560 g | 1.0–2.0 h |
 | 8S 2200 mAh | 65 Wh | ~470 g | 0.8–1.6 h |
 
-**Decided: one 8S 3300 mAh, 50–60C, XT90 on the pack, XT90-S anti-spark on the harness** (in [`../bom.md`](../bom.md)). 1–2 h at the budget, ~700 g, common drone SKU. Measure real draw at P2 and re-size; 2700 mAh if it will not package.
+**Decided: one 8S 3300 mAh, 50–60C, XT90 on the pack, XT90-S anti-spark on the harness** (in [`../bom.md`](../bom.md)). 1–2 h at the budget, ~700 g *(2026-09-27 mass budget: ~620 g, 550–700)*, common drone SKU. Measure real draw at P2 and re-size; 2700 mAh if it will not package.
 
 ## 5. A shortlist that closes
 

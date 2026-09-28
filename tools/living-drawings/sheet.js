@@ -34,7 +34,7 @@
 
   /* one-leg holding torques (gravity only, the whole lump picture on one leg) */
   const W = M.exampleMassKg * M.g;
-  function hold(theta, phi) { return K.legTorques(theta, phi, { x: 0, y: W }, { x: 0, y: 0 }, 0); }
+  function hold(theta, phi) { return K.standHold(theta, phi, 1); } /* the wheel's own weight off the ground force (kin.js) */
   const holdStance = hold(M.balanceTheta, M.balancePhi);
   const holdCrouch = hold(M.deepTheta, M.deepPhi);
   const holdStand = hold(standIk.theta, standIk.phi);
@@ -89,7 +89,11 @@
     const bodyTop = hip.y + M.bodyAboveHip;
     const bandBottom = hip.y - ENV.rollD / 2;
     /* shell: head above the hip axis, hip band around it (the roll housings' height) */
-    rect(svg, F.X(hip.x - M.bodyLength / 2), F.Y(bodyTop), M.bodyLength * D.S, (bodyTop - bandBottom) * D.S, "#d5e0ea", "#1f4e79");
+    /* head over the full length; the hip band below it only from the head's rear to the roll
+       RS02 output-flange face (spec.js sheet2.band), so the RS00 never meets it */
+    const bandTopS = hip.y + ENV.rollD / 2;
+    rect(svg, F.X(hip.x - M.bodyLength / 2), F.Y(bodyTop), M.bodyLength * D.S, (bodyTop - bandTopS) * D.S, "#d5e0ea", "#1f4e79");
+    rect(svg, F.X(hip.x - 4.0), F.Y(bandTopS), (SPEC.sheet2.band.frontIn + 4.0) * D.S, (bandTopS - bandBottom) * D.S, "#d5e0ea", "#1f4e79");
     /* pack, at the top of the head (spec.layout.pack), and the body lump's CoM (computed) */
     box(svg, F, hip.x + L.pack.fwdIn, hip.y + L.pack.upIn, L.packIn.w, L.packIn.h, "#efe2b8", "#8a5a12");
     text(svg, F.X(hip.x + L.pack.fwdIn), F.Y(hip.y + L.pack.upIn) + 4, "8S pack", "middle", 9.5, "#5c3d0a");
@@ -130,7 +134,7 @@
     ext(svg, F.X(hip.x), F.Y(hip.y), F.X(-9.2), F.Y(hip.y));
     dimV(svg, F.X(-6.6), F.Y(hip.y), F.Y(bodyTop), inch(M.bodyAboveHip), true);
     dimH(svg, F.X(-slot - R), F.X(slot + R), F.Y(-0.5), "±" + inch(slot, 2) + " roll room in the slot", false);
-    dimH(svg, F.X(hip.x), F.X(hip.x + L.bodyComForwardIn), F.Y(bodyTop + 0.6), "+" + inch(L.bodyComForwardIn, 2) + " body CoM");
+    dimH(svg, F.X(hip.x), F.X(hip.x + L.bodyComForwardIn), F.Y(bodyTop + 0.6), (L.bodyComForwardIn >= 0 ? "+" + inch(L.bodyComForwardIn, 2) + " body CoM" : inch(-L.bodyComForwardIn, 2) + " aft: body CoM"));
     ext(svg, F.X(hip.x), F.Y(hip.y), F.X(hip.x), F.Y(bodyTop + 0.6)); ext(svg, F.X(hip.x + L.bodyComForwardIn), F.Y(hip.y + L.bodyComUpIn), F.X(hip.x + L.bodyComForwardIn), F.Y(bodyTop + 0.6));
     note(svg, F.X(-8.9), F.Y(2.0), "knee " + inch(Math.abs(stance.knee.x)) + " aft");
     note(svg, F.X(-8.9), F.Y(1.2), "7.5\" + 7.5\" tubes");
@@ -145,7 +149,7 @@
       ["Knee holds, 75% crouch", nm(Math.abs(holdCrouch.knee)), ""],
       ["Knee holds, standing up on the shelf", nm(Math.abs(holdStand.knee)) + " (" + nm(standMotor) + " at the motor with the spring) vs RS02 " + ACT.rated.knee + " rated / " + ACT.peak.knee + " peak", Math.abs(holdStand.knee) > ACT.peak.knee ? "bad" : ""],
       ["Hip swing holds, one leg at 92%", nm(Math.abs(holdStance.hip)) + " vs RS00 " + ACT.rated.hip + " rated", ""],
-      ["Lump picture", fmt(M.exampleMassKg, 2) + " kg; body " + fmt(M.mass.body, 2) + " kg with its CoM " + inch(L.bodyComForwardIn, 2) + " ahead of and " + inch(L.bodyComUpIn, 2) + " above the hip axes", ""],
+      ["Mass budget", fmt(M.exampleMassKg, 2) + " kg bottom-up (" + fmt(ACT.lumps.range.lo, 2) + "–" + fmt(ACT.lumps.range.hi, 2) + ", actuators.js massParts); body " + fmt(M.mass.body, 2) + " kg with its CoM " + inch(Math.abs(L.bodyComForwardIn), 2) + (L.bodyComForwardIn >= 0 ? " ahead of" : " behind") + " and " + inch(L.bodyComUpIn, 2) + " above the hip axes; legs are " + fmt(100 * (1 - M.mass.body / M.exampleMassKg), 0) + " % of it", ""],
       ["Pack", "top of the head: centre " + inch(L.pack.fwdIn, 1) + " forward, " + inch(L.pack.upIn, 1) + " up, long axis lateral (" + inch(L.packIn.l, 1) + " × " + inch(L.packIn.w, 1) + " × " + inch(L.packIn.h, 1) + ") — high for the one-wheel stand, forward for the throw (studies/pack-sweep.js)", ""],
       ["Soffit", inch(H - M.soffit - M.wheelOd) + " of air under a 1\" soffit with a 6\" tire", "good"]
     ]);
@@ -166,7 +170,10 @@
     const bodyTop = hip.y + M.bodyAboveHip;
     const bandBottom = hip.y - ENV.rollD / 2, bandTop = hip.y + ENV.rollD / 2;
     /* head above the hip band (the pack at its top); hip band (two roll housings) */
-    rect(svg, F.X(-Z.head), F.Y(bodyTop), 2 * Z.head * D.S, (bodyTop - bandTop) * D.S, "#d5e0ea", "#1f4e79");
+    /* head with the 1" chamfer on its lower long edges (spec.js layout.headChamferIn): the RS00's
+       top corner clears it to 56° of abduction instead of 40° */
+    const ch = L.headChamferIn || 0;
+    D.el && svg.appendChild(D.el("path", { d: `M ${F.X(-Z.head)} ${F.Y(bodyTop)} L ${F.X(Z.head)} ${F.Y(bodyTop)} L ${F.X(Z.head)} ${F.Y(bandTop + ch)} L ${F.X(Z.head - ch)} ${F.Y(bandTop)} L ${F.X(-Z.head + ch)} ${F.Y(bandTop)} L ${F.X(-Z.head)} ${F.Y(bandTop + ch)} Z`, fill: "#d5e0ea", stroke: "#1f4e79", "stroke-width": 1.4 }));
     [-1, 1].forEach(sg => {
       motor(svg, F, sg * Z.rollAxis, hip.y, ENV.rollD, ENV.rollD, "RS02 roll");
       circle(svg, F.X(sg * Z.rollAxis), F.Y(hip.y), 3, "#fbf8f1", "#1b2430", 1.2);

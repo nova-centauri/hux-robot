@@ -16,7 +16,7 @@ Electronics first: [`electronics-bringup.md`](electronics-bringup.md) (blink, bi
 - [ ] Telem (USB / serial first; Wi‑Fi later) shows the same mode the pilot selected, on every switch.
 - [ ] Failsafe: pull the TX or disarm → **Parked**, from 2-wheel and from each one-wheel mode.
 - [ ] `TWO_WHEEL` speed command clamps at **1.5 m/s**, cruise 1.0 (R38); crosses a **1" sill** at cruise and holds a **~20° slope** (R40).
-- [ ] One-leg shift includes the **geometric levelling** term (leg-length difference 2 × 3.375" × tan γ ≈ 3.0" at 24°) — the sandbox's feed-forward, in the portable core.
+- [ ] One-leg shift includes the **geometric levelling** term (leg-length difference 2 × 3.375" × tan γ ≈ 3.2" at 25.6°) — the sandbox's feed-forward, in the portable core.
 - [ ] Only then: **open-loop step** toward a 9.5" riser fixture. No vision required.
 - [ ] **V1 finish line (R37):** one 9.5" step, **9 of 10** attempts, from a standstill on the lower tread. A flight is V2.
 

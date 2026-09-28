@@ -618,9 +618,17 @@
      the lump picture on each knee, point load at the axle) at the 92% stance and the 75% crouch.
      The one fit Sheet 1 and Sheet 2 both print; it follows the lumps, the stance and the pulley.
      (The fixed "~2.2 N·m" of the 6 kg picture is retired.) */
+  /* Static joint torques on a planted leg carrying `share` of the robot's weight at its contact.
+     The wheel lump (hub, rim, tire, half the lower tube) hangs at the axle and the knee lump at the
+     knee, so the knee only feels the ground force minus the wheel's own weight. (Before
+     2026-09-27 the sheets put the full share at the axle: ~10 % high at 7.75 kg, ~20 % at the
+     5.67 kg mass budget with its heavier legs.) */
+  function standHold(thetaDeg, phiDeg, share) {
+    const W = M.exampleMassKg * M.g * (share === undefined ? 1 : share);
+    return legTorques(thetaDeg, phiDeg, { x: 0, y: W - M.mass.wheel * M.g }, { x: 0, y: -M.mass.knee * M.g }, 0);
+  }
   function kneeSpring() {
-    const W2 = M.exampleMassKg * M.g / 2;
-    const two = function (th, ph) { return Math.abs(legTorques(th, ph, { x: 0, y: W2 }, { x: 0, y: 0 }, 0).knee); };
+    const two = function (th, ph) { return Math.abs(standHold(th, ph, 0.5).knee); };
     const two92 = two(M.balanceTheta, M.balancePhi);
     const two75 = two(M.deepTheta, M.deepPhi);
     const phi92 = rad(M.balancePhi), phi75 = rad(M.deepPhi);
@@ -1650,6 +1658,7 @@
     frontView: frontView,
     rebuild: rebuild,
     legTorques: legTorques,
+    standHold: standHold,
     kneeSpring: kneeSpring,
     climb: function () { return CLIMB; },
     groundY: groundY,

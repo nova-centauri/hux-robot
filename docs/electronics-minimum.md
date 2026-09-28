@@ -103,13 +103,13 @@ Mode spec: [`software.md`](software.md).
 - **Fallback stepper:** a CAN / step-dir driver board between the MCU and the motors; the MCU never drives coils. Knee is not a bare stepper; swing belt (if used) **is** that joint's reduction.
 - **Fallback servo:** 4 channels on a **regulated** pose rail (R11). Not raw pack.
 - Pose is teleop / hold. No autonomy. Balance is still two-wheel.
-- Size for one-leg (~2×) load (R36). Knee stand-up hold is **12.4 N·m**, **6.4 N·m** at the motor with the Sheet 2 spring (RS02: 7 rated / 17 peak). GIM8108-8 was the earlier yardstick.
+- Size for one-leg (~2×) load (R36). Knee stand-up hold is **8.2 N·m**, **4.7 N·m** at the motor with the Sheet 2 spring (RS02: 7 rated / 17 peak). GIM8108-8 was the earlier yardstick.
 
 ### P4 — Hip roll
 
 **2× dynamic roll actuators into `LEFT_ONLY` / `RIGHT_ONLY` experiments.**
 
-- 2× **RS02** hip roll at 3.0" roll axes: **6.3 N·m** hold with one wheel up vs 7 rated. **Not a stepper. In V1.** Experimental — may not work as hoped. Still wire the axes.
+- 2× **RS02** hip roll at 3.0" roll axes: **5.2 N·m** hold with one wheel up vs 7 rated. **Not a stepper. In V1.** Experimental — may not work as hoped. Still wire the axes.
 - Interface: **CAN bus A**, same as the wheels.
 - One-leg modes: **`LEFT_ONLY`**, **`RIGHT_ONLY`**. Gate before any stair cycle. Mode change does not lift or plant.
 

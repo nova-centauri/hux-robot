@@ -248,8 +248,7 @@
     const foot = K.axleStatus(p.axle);
     const onNext = Math.abs(p.contact.y - M.rise) < 0.2 && Math.abs(p.axle.x - M.going) < 0.4;
     /* Static joint torques for this one leg carrying the whole example mass. */
-    const load = mode.value === "planted" ? M.exampleMassKg * M.g : 0;
-    const tq = K.legTorques(c.theta, c.phi, { x: 0, y: load }, { x: 0, y: 0 }, 0);
+    const tq = mode.value === "planted" ? K.standHold(c.theta, c.phi, 1) : K.legTorques(c.theta, c.phi, { x: 0, y: -M.mass.wheel * M.g }, { x: 0, y: -M.mass.knee * M.g }, 0);
     const cells = [
       ["Extension", (p.extension * 100).toFixed(0) + "%", ""],
       ["Hip above contact", p.hipHeight.toFixed(1) + "\"", ""],
@@ -314,7 +313,7 @@
     fillRead("topRead", [
       ["Whole-robot CoM, lateral", space.com.z.toFixed(2) + " in", ""],
       ["Tipping moment, left / right contact", space.tippingNm.left.toFixed(2) + " / " + space.tippingNm.right.toFixed(2) + " N·m", ""],
-      ["Hip holding demand if opposite wheel lifted", Math.abs(space.rollHoldingNm.left).toFixed(2) + " / " + Math.abs(space.rollHoldingNm.right).toFixed(2) + " N·m at this roll (the frontal model's 6.3 N·m is at the ~24° shifted pose)", ""],
+      ["Hip holding demand if opposite wheel lifted", Math.abs(space.rollHoldingNm.left).toFixed(2) + " / " + Math.abs(space.rollHoldingNm.right).toFixed(2) + " N·m at this roll (the frontal model's 5.2 N·m is at the 25.6° shifted pose)", ""],
       ["Hip roll / model mass", num(roll).toFixed(1) + "° / " + space.com.kg.toFixed(1) + " kg", ""],
       ["Contact assumption", "Rigid rounded tires; roll study alone does not prove balance", ""],
       ["Joint travel", Object.keys(q).some(key => q[key] < K.spatial.limits[key][0] || q[key] > K.spatial.limits[key][1]) ? "Outside working limits" : "Within working limits", ""]

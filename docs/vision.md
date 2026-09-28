@@ -11,7 +11,7 @@ Decision log: [`decisions.md`](decisions.md).
 1. Stand and balance on **two** wheeled legs (teleop baseline — `TWO_WHEEL`).
 2. Prove **one-leg** balance (`LEFT_ONLY` / `RIGHT_ONLY`) — gate before any stair attempt.
 3. Lift one wheeled leg.
-4. Balance on the planted wheel (hip roll + planted-wheel fore/aft) — a timed single support (≤ 0.3 s from a ~8% poise), not a static one-wheel stand, which is not a V1 capability ([`research/one-leg-stance.md`](research/one-leg-stance.md)).
+4. Balance on the planted wheel (hip roll + planted-wheel fore/aft) — a timed single support (≤ 0.3 s from a ~8% poise), not a static one-wheel stand. A stand looks possible on paper (7.3 mm of capture against ~2 mm of CoM doubt) but the sandbox does not hold one yet ([`research/one-leg-stance.md`](research/one-leg-stance.md)).
 5. Rotate / place the raised wheel onto the next tread.
 6. Plant. Repeat up or down.
 
@@ -75,7 +75,7 @@ Their stack is 3S + Arduino + 40 kg-class servos and **no stair / one-leg plant*
 - **~24"** tall at full extension
 - **~14"** wide, head inside, wheels and legs outside the head
 - Carbon-tube spars; printed / machined end fittings
-- Mass budget **soft / blown**; the current picture is **7.75 kg** with the locked actuators
+- Mass budget **soft / blown**; the parts budget is **5.67 kg** (4.73–6.94) with the locked actuators, nothing weighed yet ([`research/mass-budget.md`](research/mass-budget.md))
 
 ## Explicitly TBD
 

@@ -11,12 +11,12 @@ Parent plan (classes, P0–P5, not a BOM): [`electronics-minimum.md`](electronic
 | Piece | Choice | Notes |
 | --- | --- | --- |
 | Powertrain | **Electric-only** | No ICE, no hybrid. Whole robot. |
-| Battery | **One 8S 3300 mAh 50–60C LiPo, XT90** (pack) + **XT90-S anti-spark** (harness) — Steve 2026-09-26 | **33.6 V full / 29.6 V nominal / 26.4 V cutoff** (3.3 V/cell). ~98 Wh, ~700 g. Every shortlisted actuator (RobStride 24–60 V) runs through the whole discharge. Steve's first pick was 6S 5200; the RobStride 00/01/02 floor is 24 V, so 8S. [`research/actuator-shortlist.md`](research/actuator-shortlist.md) §3–4. |
+| Battery | **One 8S 3300 mAh 50–60C LiPo, XT90** (pack) + **XT90-S anti-spark** (harness) — Steve 2026-09-26 | **33.6 V full / 29.6 V nominal / 26.4 V cutoff** (3.3 V/cell). ~98 Wh, ~620 g (550–700). Every shortlisted actuator (RobStride 24–60 V) runs through the whole discharge. Steve's first pick was 6S 5200; the RobStride 00/01/02 floor is 24 V, so 8S. [`research/actuator-shortlist.md`](research/actuator-shortlist.md) §3–4. |
 | Rails | **Regulated step-down** from 8S, every regulator rated **≥36 V in** | **5 V** (MCU, RX, Pi 5 at 5 A), **12–19 V** (companion slot — a Jetson kit takes 9–19 V), pose rail only if the fallback servo class is used. SKUs **TBD**. |
 | Actuator bus | **CAN** — two classic 1 Mbit buses | **A:** 2× RS05 wheel + 2× RS02 hip roll. **B:** 2× RS02 knee + 2× RS00 hip swing. RobStride's CAN protocol per the vendor manuals (`cad/vendor/`, local only). 120 Ω at each bus end. |
 | Wheels | **In-wheel brushless FOC** + encoder, on CAN | **RS05** (temporary lock): 1.7 rated / 5.5 peak N·m, driver + encoders on board. Motor at the rim (R6 / R30), flush in the hub (Sheet 2). |
-| Knee / hip swing | **CAN QDD / FOC working class**; servo or stepper+belt is the **fallback** | **RS02 knee / RS00 swing** (temporary lock). Knee holds 12.4 N·m standing up over the front wheel, 6.4 at the motor with the Sheet 2 spring (RS02 7 rated / 17 peak). GIM8108-8 was the earlier yardstick. |
-| Hip roll | **In V1.** CAN QDD / FOC | **RS02** (temporary lock). Not a stepper. One-wheel hold 6.3 N·m at the 3.0" roll axes. Experimental — may not work. Still wire the axis and the modes. |
+| Knee / hip swing | **CAN QDD / FOC working class**; servo or stepper+belt is the **fallback** | **RS02 knee / RS00 swing** (temporary lock). Knee holds 8.2 N·m standing up over the front wheel, 4.7 at the motor with the Sheet 2 spring (RS02 7 rated / 17 peak). GIM8108-8 was the earlier yardstick. |
+| Hip roll | **In V1.** CAN QDD / FOC | **RS02** (temporary lock). Not a stepper. One-wheel hold 5.2 N·m at the 3.0" roll axes. Experimental — may not work. Still wire the axis and the modes. |
 | Real-time MCU | **Teensy 4.1** + ICM-42688-P breakout + 3× CAN transceivers (Steve 2026-09-26: "add the CAN MCU") | 3× CAN ports (CAN1/CAN2 classic, CAN3 FD-capable), built-in microSD for blackbox, 600 MHz. Eight classic-CAN nodes need ≥2 buses at 1 kHz, which rules out a one-CAN Wing board. In [`bom.md`](bom.md) order-now. |
 | Bench board | **F765-Wing** (on hand) | P0–P1 only: blink, CRSF, one SimpleFOC wheel over UART. No CAN. Nothing written for it is expected to survive. |
 | RC RX | **TBS Nano RX** | CRSF into a full UART on the MCU. |
@@ -46,7 +46,7 @@ Why: the shortlisted CAN QDD actuators (RobStride 00/01/02) specify **24–60 V*
 | One pack vs two | **One.** If a second is ever added in parallel: same cell count, chemistry and age, matched to within ~0.1 V before connecting, a fuse per pack. | Decided 2026-09-26. |
 | Capacity / C | **3300 mAh / 50–60C → ~98 Wh.** Budget 40–80 W typical → **1–2 h**. | Measure real draw at P2 and log it; re-size then. |
 | Connector | **XT90** on the pack. **XT90-S** (anti-spark) on the harness side, or a precharge resistor / soft-start on the distribution board. | A bare XT90 into FOC bulk capacitance arcs at 25 V and pits the contacts. |
-| Mass / volume | **~700 g, ~150 × 60 × 50 mm** (the number `spec.js` and the sheets draw) | Measure the real pack; brands vary. In the 7.75 kg picture's body lump. **At the top of the head**, long axis lateral, 1" forward, 4.3" above the roll axes (2026-09-27); leads run down to the XT90-S in the hip band. |
+| Mass / volume | **~620 g (550–700), envelope 150 × 45 × 56 mm** (the numbers `spec.js` and the sheets draw) | Measure the real pack; brands vary (real 8S 3300 packs run ~139–143 × 43–44 × 42–56 mm). A row of the [mass budget](research/mass-budget.md). **At the top of the head**, long axis lateral, 2.2" forward, 4.3" above the roll axes (2026-09-27); leads run down to the XT90-S in the hip band. |
 | Charger | 8S-capable balance charger | Bench tool, not BOM. Many hobby chargers stop at 6S — check before the pack arrives. |
 | Motor bus | **8S direct** via a real distribution board / harness | High-draw FOC. Not through the MCU or any logic PCB. |
 | 5 V rail | MCU, RX, **Pi 5 (5 V / 5 A, USB-PD-class connector)** | A 25 W buck, not a servo BEC. |
@@ -73,7 +73,7 @@ When a real pack is on the bench, record cell count, chemistry, measured resting
 
 ## Wheel drive class (R25) — RS05, temporary lock
 
-The wheel motor is a **balance actuator**. Hux has to catch a tip on one skinny rim. That is a torque-bandwidth / reaction-speed problem, not a continuous-watts problem. On the 7.75 kg picture a 30° lean-equilibrium is about **2.9 N·m** (2.2 at the old 6 kg); the RS05's 5.5 N·m peak is above the ~4.1 N·m traction limit, so the catch is grip-limited. At 1.5 m/s it has 2.0 N·m left — about a 20° lean. On the step the shelf caps the catch at about ±6°. Math: [`research/leg-geometry.md`](research/leg-geometry.md).
+The wheel motor is a **balance actuator**. Hux has to catch a tip on one skinny rim. That is a torque-bandwidth / reaction-speed problem, not a continuous-watts problem. On the 5.67 kg mass budget a 30° lean-equilibrium is about **2.1 N·m** (2.9 at the old 7.75 kg picture); the RS05's 5.5 N·m peak is above the ~3.0 N·m traction limit, so the catch is grip-limited. At 1.5 m/s it has 2.0 N·m left — about a 28° lean. On the step the shelf caps the catch at about ±6°. Math: [`research/leg-geometry.md`](research/leg-geometry.md).
 
 | Criterion | Intent | Status |
 | --- | --- | --- |
@@ -100,8 +100,8 @@ The wheel motor is a **balance actuator**. Hux has to catch a tip on one skinny 
 | Joint | Working class | Fallback | Electronics implication |
 | --- | --- | --- | --- |
 | **Wheels** | In-wheel FOC on CAN | — | 2 CAN nodes. Not steppers. |
-| **Knee / hip swing** | CAN QDD: RS02 knee (7.75:1), RS00 swing (10:1) | Servo on a regulated rail, or stepper + belt behind a CAN / step-dir driver board | 4 CAN nodes (bus B). Knee stand-up 12.4 N·m; the Sheet 2 knee spring brings it to 6.4 at the motor (R7). |
-| **Hip roll** | CAN QDD / FOC, backdrivable: RS02 | none — **not a stepper** | 2 CAN nodes (bus A). Torque-mode / high-rate current loop. 6.3 N·m one-wheel hold at 3.0". |
+| **Knee / hip swing** | CAN QDD: RS02 knee (7.75:1), RS00 swing (10:1) | Servo on a regulated rail, or stepper + belt behind a CAN / step-dir driver board | 4 CAN nodes (bus B). Knee stand-up 8.2 N·m; the Sheet 2 knee spring brings it to 4.7 at the motor (R7). |
+| **Hip roll** | CAN QDD / FOC, backdrivable: RS02 | none — **not a stepper** | 2 CAN nodes (bus A). Torque-mode / high-rate current loop. 5.2 N·m one-wheel hold at 3.0". |
 
 Do not put a stepper on hip roll to “match” the knees. Missed steps, resonance, and belt stretch / backlash hurt the CoG loop that pairs with wheel fore-aft. If the fallback stepper class is ever used on knee / swing: closed-loop drivers, short low-backlash belts, mounted high (R32), and a written acceptance of lower bandwidth.
 
