@@ -6,27 +6,26 @@ Dated log of Steve's Hux decisions as they landed on `main`. Newest intent **sup
 
 Source of truth is this repo (`nova-centauri/hux-robot`). Docs only. **No spend.** No SKU locks beyond what is already decided below.
 
-## Current governing decisions — reviewed 2026-09-28
+## Current governing decisions — V1-PROOF, 2026-09-28
 
-Newest user intent supersedes older log entries. Historical statements below are retained as history, including purchase claims now corrected.
+The newest user request parks the ambitious stair plan. Older dated entries are history, including superseded locks and purchase claims.
 
 | Topic | Current intent / status |
 | --- | --- |
-| Inventory | **No components purchased**, per Steve 2026-09-28. No confirmed Hux order or reserved inventory. Vendor CAD is not ownership. |
-| Stair objective | Retain one complete 9.5 × 9.5-inch step, 9/10 from a standstill. **Fix the legs before buying the set.** A short hop does not waive controlled single support. |
-| Actuator lock | The old 4×RS02 / 2×RS00 / 2×RS05 set is **reopened**, now a comparison case. Peak ratings do not qualify stationary hold. No full-set procurement release. |
-| Leg architecture | Hip roll + knee-at-knee remains a starting point. Ten-axis hip/ankle roll with finite-width wheel support is a **candidate**; its pitch-level carrier is unresolved. Simply relocating hip motors to ankles is not a fix. |
-| Envelope | Compact target approximately 24-inch high / 14-inch wide. H1 top +100 mm, 8.5-inch links fits nominal height but fails stair reach. Approximately 26-inch candidate passes the limited static reach/clearance screen, but is an **unaccepted height alternative**, not a requirement change. |
-| Head | Itemized mass/CoM/inertia required (R42). H1 203.2 mm depth / 120 mm middle bay / 177.8 mm top cap / 242 lower cassette is a **candidate allocation**; remove the unsubstantiated +1-inch head CoM lock. |
-| Wheels | Approximately 6-inch OD retained. Width/profile reopened for lateral support. Actual contact footprint, motor bearing loads and ankle orientation must be established. |
-| Power | 8S remains the conservative baseline pending conflicting vendor voltage revisions. Pack SKU and dimensions unchosen. 60-V-input regulator class plus verified transient/regen path. |
-| Controls | Four manual modes before autonomy; supported `PARKED`. Portable control core, CAN MCU and ROS 2 companion architecture retained. No firmware yet. |
-| MCU / buses | Teensy 4.1 candidate, three controllers (one FD-capable), three transceivers. Mixed-rate classic CAN; proposed ten-node schedule 1000/400/400 Hz across 2/4/4 nodes. |
-| Compute | Pi 5 class slot initially, optional Jetson later. Budget does not assume owned compute. One camera initially; seven cameras are deferred. |
-| Materials / process | Carbon-tube primary spars, COTS structure, serviceable customs, deliberate cable routes, 2D before CAD. Old cuts/springs/mounts are not fabrication releases. |
-| Speed / terrain | Targets retained: 1.5 m/s top, 1.0 cruise; flat + 1-inch sills + approximately 20° slopes. These are unproven capabilities. |
-| Research / twin | Reuse sound research with license boundaries; no RL or twin-platform gate before mechanics and classical balance. Existing sandbox is a **legacy experiment**, not the candidate digital twin. |
-| Purchase / publishing | Engineering and BOM changes authorized by this review. Steve subsequently authorized committing and pushing the review to `main`. No order placed; publication does not release the design for fabrication or purchase. |
+| Active model | **V1-PROOF**; old stair work parked and preserved |
+| Cost | **Strictly under $1,000** new cash; $940 conservative allocation including shipping/tax and repairs |
+| Reuse | Inventory first. Existing parts reduce spend only when exact usable items are confirmed |
+| Mass / size | Proposed 2.5 kg target, 3.0 kg maximum; roughly 28–31 cm high / 25.5 cm wide |
+| Axes | Four maximum: two wheel drives and one simple leg adjustment per side; first balance with legs pinned |
+| Wheels / legs | Small encoder gearmotors and reduced small servos acceptable; brushed drive allowed; no hip roll/active ankle/independent knee |
+| Terrain / motion | Flat indoor floor, slow manual drive, modest height change; no stairs, one-wheel stance, jumping or obstacle requirement |
+| Electronics | Reuse suitable MCU/IMU/manual input; proposed compatible 3S power; no mandatory CAN, 8S, Pi, cameras or ROS |
+| Structure | Shop scrap/COTS stock, service access, real bearings and cable routes; carbon and styled head not required |
+| Verification | Measured balance, teleop, leg motion, faults and ten-minute duty trial; numerical screens do not release hardware |
+| Old models | [STAIR-V1 archive](archive/stair-v1/README.md); old research/simulator remain labeled and separate |
+| Purchase / publication | Planning/model edits authorized; Steve subsequently requested committing and pushing V1-PROOF to `main`. No component order or site deployment is implied |
+
+The [active plan](v1-proof.md), [PF requirements](requirements.md) and [model source](../tools/v1-proof/model.json) replace old R1–R44 constraints for this proof. Detailed geometry and SKU references are proposed implementation choices, not additional user decisions.
 
 ---
 
@@ -362,3 +361,17 @@ One-paragraph intent. Note any ID it owns or supersedes.
 ```
 
 Keep the **Current governing decisions** table honest if the new PR changes a lock.
+
+### 2026-09-28 — V1-PROOF scope reset; stair planning parked
+
+Steve: “This project is very ambitious and basically too expensive. I want to shift all our planning to the side and create a new V1-PROOF model. This V1-PROOF model should be under $1000 and use stuff we have around. We can use a smaller target mass, less actuators, drop the stair stepping, use smaller actuators.”
+
+This supersedes the stair finish line and its hardware constraints for active work. Preserve the old plan in STAIR-V1 and keep its numerical model and simulator labeled as historical. V1-PROOF has its own requirements, numerical input, budget, calculations, 2D sketch and landing page.
+
+Proposed implementation: 2.5 kg target / 3.0 kg maximum, two encoder wheel gearmotors plus two reduced small leg servos. First balance with the legs pinned; then add slow synchronized height adjustment while both wheels stay down. Roughly 100 mm wheels, 278–306 mm upright height, 255 mm outside width and 28.5 mm theoretical height adjustment. The four-bar also sweeps the axle 49.3 mm fore/aft, so pose-dependent measured CoM/pitch trim is required. No stair-upgrade promise.
+
+Cost allocation: $715 parts and fixture + $100 tax/shipping + $125 repair/overrun reserve = $940. Exact reusable stock remains unconfirmed, so no free-inventory credits are taken. Manufacturer motor/driver/servo references were checked for pricing/specification plausibility; other rows are caps pending quotes, not a shopping cart. Existing tools and personal fabrication labor are assumed. Any new tooling or outsourcing must fit the same cap.
+
+No old BLDC-at-rim, CAN, 8S, carbon-spar, large-head, four manual modes or onboard-compute lock applies. Use suitable available controllers/IMUs and a compatible lower-voltage pack. Finish-line trials cover two-wheel balance, slow manual driving, leg height, fault handling and a ten-minute session. All physical tests remain open. No components bought, firmware flashed, physical robot built or site deployed by this planning revision.
+
+**Publication:** Steve subsequently requested “push to main,” authorizing this V1-PROOF planning/model revision to be committed and pushed directly to `main`. Seven active model checks and generated-output consistency checks pass. Pre-existing untracked vendor CAD and downloaded mesh folders are outside this revision.

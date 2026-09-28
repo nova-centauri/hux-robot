@@ -1,3 +1,5 @@
+> **PARKED STAIR-V1 — 2026-09-28.** This is historical research, not an active requirement, BOM or build gate. [V1-PROOF](../v1-proof.md) governs current work.
+
 # RAI Institute — Roadrunner
 
 Steve shared this as research inspiration (one of [two X shares](inspiration.md)). **Watch and extract heuristics. Do not start build work from it.**

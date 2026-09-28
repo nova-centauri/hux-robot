@@ -1,3 +1,5 @@
+> **PARKED STAIR-V1 — 2026-09-28.** This is historical research, not an active requirement, BOM or build gate. [V1-PROOF](../v1-proof.md) governs current work.
+
 # Study plan (before hardware)
 
 Phased research checklist. Tick only when the work is real. **No spend** until Steve asks. **FC stays TBD.** Printable wheel-leg is **Phase D**, not Phase A. **Phase E** (digital twin + dojo) is a **horizon** after D and after V1 modes / classical balance. Do not start E to skip print or R18.

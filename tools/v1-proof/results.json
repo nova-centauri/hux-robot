@@ -1,0 +1,53 @@
+{
+  "name": "V1-PROOF",
+  "revision": "2026-09-28-A",
+  "actuator_count": 4,
+  "parts_cap_usd": 715.0,
+  "total_cap_usd": 940.0,
+  "headroom_usd": 60.0,
+  "under_budget": true,
+  "mass_allocation_kg": 2.5,
+  "within_mass_limit": true,
+  "overall_width_mm": 255,
+  "poses": [
+    {
+      "angle_deg": 15,
+      "axle_rearward_mm": 28.470094961277283,
+      "pivot_above_axle_mm": 106.25184089179751,
+      "overall_height_mm": 306.25184089179754,
+      "servo_from_neutral_deg": -45
+    },
+    {
+      "angle_deg": 45,
+      "axle_rearward_mm": 77.78174593052022,
+      "pivot_above_axle_mm": 77.78174593052023,
+      "overall_height_mm": 277.78174593052023,
+      "servo_from_neutral_deg": 45
+    }
+  ],
+  "height_travel_mm": 28.47009496127731,
+  "axle_fore_aft_travel_mm": 49.31165096924293,
+  "worst_static_servo_nm": 0.5386157135847552,
+  "wheel_at_target_mass": {
+    "rpm": 95.4929658551372,
+    "screen_voltage_v": 9.9,
+    "no_load_rpm": 272.25,
+    "demand_nm_per_wheel": 0.316260575117194,
+    "available_peak_nm_estimate": 0.5958002452830188,
+    "current_limited_nm_estimate": 0.5958002452830188,
+    "passes_preliminary_screen": true,
+    "hardware_validated": false
+  },
+  "wheel_at_max_mass": {
+    "rpm": 95.4929658551372,
+    "screen_voltage_v": 9.9,
+    "no_load_rpm": 272.25,
+    "demand_nm_per_wheel": 0.3795126901406329,
+    "available_peak_nm_estimate": 0.5958002452830188,
+    "current_limited_nm_estimate": 0.5958002452830188,
+    "passes_preliminary_screen": true,
+    "hardware_validated": false
+  },
+  "hardware_validated": false,
+  "fabrication_ready": false
+}

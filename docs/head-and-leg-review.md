@@ -1,3 +1,5 @@
+> **PARKED STAIR-V1 — 2026-09-28.** This is historical research, not an active requirement, BOM or build gate. [V1-PROOF](v1-proof.md) governs current work.
+
 # Head and leg engineering review — 2026-09-28
 
 **Disposition: retain the one-step objective, reopen the leg architecture, and do not buy the actuator set yet.** The old robot has neither a demonstrated controlled single-support phase nor a feasible full spatial stair trajectory. A 0.2-second floor hop does not establish either. Steve's instruction today is to fix the legs to justify the actuator cost, or explicitly drop stairs; this review does **not** silently drop stairs.

@@ -1,11 +1,7 @@
-# CAD
+# Hux CAD and layouts
 
-No released Hux CAD parts. [H1 dimensioned packaging study](layouts/head-h1.svg) is a nominal allocation, not a fabrication drawing. [Engineering review](../docs/head-and-leg-review.md) governs the redesigned head and legs; old Sheets 1/2 do not release redesigned hardware.
+Active: [V1-PROOF envelope sketch](layouts/v1-proof.svg), generated from [model.json](../tools/v1-proof/model.json). It shows side, front and plan envelopes plus the simple parallel-link leg. It is not a fabrication drawing or clearance validation.
 
-**Vendor geometry lives in [`vendor/`](vendor/README.md)** (2026-09-26): RobStride RS00 / RS02 / RS05 and the Teensy 4.1 as the vendors' STEP files plus full-resolution GLBs, with orientation notes and the converter that makes the light copies the 3D sandbox draws. Those are candidate component references, not purchased parts; the 2D gate below is about ours.
+Next: measure available parts, mock up the pinned-leg chassis, then detail bearings, pivots, reductions and cables for one leg. Keep 2D layouts before detailed 3D work. Suitable scrap/COTS stock is welcome; no carbon or custom in-wheel motor requirement.
 
-**Gate:** several **2D sketch layouts** (side / front / top + linkage) must exist **before** Blender or other 3D CAD (R23). A `.blend` with no preceding 2D is a process miss.
-
-V1 expected: one wheel-leg — **carbon-tube spars** + printed / machined **end fittings**, sized toward a ~9.5" step inside **~24" tall / ~14" wide** (see [`../docs/mechanical.md`](../docs/mechanical.md) and [`../docs/checklists/mechanical-v1.md`](../docs/checklists/mechanical-v1.md)).
-
-2D scans / exports can live here too. Keep intentional exports (`.stl`, `.3mf`, `.step`). Scratch backups are gitignored.
+[H1](layouts/head-h1.svg), the [stair engineering review](../docs/head-and-leg-review.md), old sheets and downloaded vendor geometry are parked references. Vendor files in `vendor/` remain untouched and do not establish ownership. No released Hux custom parts exist.

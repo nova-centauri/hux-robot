@@ -1,11 +1,13 @@
 {
   "name": "hux-living-drawings",
   "private": true,
-  "description": "Hux living drawings and 3D sandbox. The pages need no build; this only pins the physics engine for the headless checks.",
+  "description": "Active V1-PROOF planning page and preserved stair studies. Pages need no build.",
   "license": "MIT",
   "scripts": {
-    "test": "python3 ../engineering/test_review.py && node validation-test.js && node assumption-audit.js > /dev/null && node frontal.js > /dev/null && node sim-test.js",
-    "engineering": "python3 ../engineering/review.py --write"
+    "test": "python3 ../v1-proof/test_review.py && python3 ../v1-proof/review.py --check",
+    "engineering": "python3 ../v1-proof/review.py --write",
+    "test:legacy": "python3 ../engineering/test_review.py && node validation-test.js && node assumption-audit.js > /dev/null && node frontal.js > /dev/null && node sim-test.js",
+    "engineering:legacy": "python3 ../engineering/review.py --write"
   },
   "devDependencies": {
     "@dimforge/rapier3d-compat": "0.20.0"

@@ -1,3 +1,5 @@
+> **PARKED STAIR-V1 — 2026-09-28.** This is historical research, not an active requirement, BOM or build gate. [V1-PROOF](../v1-proof.md) governs current work.
+
 # XRobots shortlist (James Bruton)
 
 Upstream org: [github.com/XRobots](https://github.com/XRobots) · site: [XRobots.co.uk](http://XRobots.co.uk)

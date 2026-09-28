@@ -1,3 +1,5 @@
+> **PARKED STAIR-V1 — 2026-09-28.** This is historical research, not an active requirement, BOM or build gate. [V1-PROOF](../v1-proof.md) governs current work.
+
 # Steve's inspirations
 
 Steve clarified these shares are inspiration. **Watch and extract vibe / capability / packaging. Do not start build work.** No spend. Flight controller stays **TBD**. Nothing here is a Hux stack, BOM, or CAD source. Diablo is a **commercial** platform — still inspiration only; **do not buy it.** SpdrBot's Fusion / print pack is **paid** — still inspiration only; **do not buy it.**

@@ -1,4 +1,6 @@
-# Engineering candidate — revision 2026-09-28-B
+> **PARKED STAIR-V1.** [V1-PROOF](../v1-proof/README.md) is the active numerical model. This publisher cannot overwrite the proof BOM.
+
+# Parked stair engineering candidate — revision 2026-09-28-B
 
 No components purchased; no fabrication or full actuator-set release. Start with
 [the review](../../docs/head-and-leg-review.md) and
@@ -15,8 +17,8 @@ rows and their procurement gates. Generated outputs:
 
 - `docs/research/head-leg-results.json`: results and 91-frame paths for compact, extended and narrow-entry candidates; other cases summarized.
 - `cad/layouts/head-h1.svg`: dimensioned head allocation.
-- `tools/living-drawings/engineering.html`: current review entry point.
-- `docs/bom.md`: budget computed from quantities and unit ranges.
+- `tools/living-drawings/engineering.html`: parked stair review page.
+- `docs/archive/stair-v1/bom.md`: archived budget computed from quantities and unit ranges.
 
 Coordinates in the input and result positions are **mm**, X forward, Y left, Z up;
 the body datum is midway between the hip-roll axes. Inertia is kg·m², torque N·m,

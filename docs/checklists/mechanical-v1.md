@@ -1,21 +1,32 @@
-# Checklist: mechanical release before the actuator set
+# V1-PROOF mechanical and acceptance checklist
 
-**2026-09-28: no components purchased. Current eight-axis stair design rejected.** See [head and leg review](../head-and-leg-review.md). Checked research work does not mean hardware has passed.
+## P0 — inventory and layout
 
-- [x] Audit prior head dimensions, CoM assumptions, single-support claims, vendor ratings and BOM.
-- [x] Produce candidate H1 front/side/plan allocations and itemized mass/inertia model.
-- [x] Run 91-sample full-step screening with real yoke/axle offsets; record failed compact cases and the 26-inch connected candidate, including 810 interpolation checks and explicit limitations.
-- [ ] Decide support mechanism: finite-width tire contact plus controlled ankle, or leveled positively locked landing shoe. Show the real ankle orientation/load path.
-- [ ] Decide compact 24-inch target versus explicit taller alternative; tire envelope, track and roll travel follow the mechanism.
-- [ ] Validate a timed full-step path with the real ankle mechanism in both support directions; extend the sampled 26-inch result. Both feet end on the upper tread; no clamped IK or instantaneous height changes.
-- [ ] Check swept head/frame/housings/knees/treads/links/fasteners/cables/springs against one another and the actual stair/nosing.
-- [ ] Select real battery and boards; confirm nominal fit, connectors, cable bends, cooling, removal and restraint.
-- [ ] Verify head mass/COM/inertia and per-link mass with measurements; keep contingency separate.
-- [ ] Size mounted stationary and dynamic joint duty, reductions, spring curve, external bearings and structural fatigue/deflection.
-- [ ] Validate carbon layup, tube cuts, sockets and bond/pin coupons. Old Sheet 2 cuts/springs are not released.
-- [ ] Full-size nonpowered mockup clears the entire articulation before motor commitment.
-- [ ] Restrained one-leg rig: 10-second controlled support, ±10 mm COM uncertainty, defined disturbance and controlled return, both sides.
-- [ ] Mounted thermal duty and torque-speed/current at battery minimum; loss-of-power support and hardware catch.
-- [ ] Only then release the remaining motor set, fabricate the second leg and begin 9/10 complete-step trials.
+- [ ] Record reusable parts, exact variants and quantities in [inventory](../parts-on-hand.md).
+- [ ] Quote missing items; maintain < $1,000 all-in and the repair allowance.
+- [ ] Weigh allocations against 2.5 kg target / 3.0 kg maximum.
+- [ ] Mock up full wheel/motor/bearing/battery envelopes, body, pivots and cable sweep.
+- [ ] Detail both the pinned structure and one reduced-servo parallelogram before machining parts.
 
-Historical Sheets 1/2 exist and count as past 2D study, not approval for manufacturing a redesigned leg. COTS spars, service access, draft-friendly customs and deliberate internal wire paths remain requirements.
+## P1–P2 — two driven wheels, pinned legs
+
+- [ ] Secure wheels to supported axles, route wires and fit rest skids/catch fixture.
+- [ ] Pin both legs at neutral; measure assembled CoM and wheel/encoder polarity.
+- [ ] Qualify wheel torque/reversal/thermal behavior at low operating voltage.
+- [ ] Complete 60-second balance in 9/10 starts without support contact.
+- [ ] Complete five forward/stop/reverse/turn sequences at 0.25 m/s.
+
+## P3 — one then two powered legs
+
+- [ ] Verify bearing-supported driven pivots, 3:1 reductions, belt engagement, mechanical stops and lock pins.
+- [ ] Hold 0.75 N·m at the mounted servo for 10 minutes at the lowest actual rail voltage within documented thermal limits; separately qualify 1.0 N·m short transient.
+- [ ] Measure backlash, friction and full swept clearances under load.
+- [ ] Measure CoM and required pitch trim at low/mid/high poses; keep both wheels loaded.
+- [ ] Add synchronized slow height motion; complete ten low/high/low cycles with ≥25 mm measured body-height change and no support contact.
+
+## P4 — full proof
+
+- [ ] Run fault tests in the fixture and verify deliberate rearm.
+- [ ] Run a ten-minute mixed session without resets, overloads or falls.
+- [ ] Record final mass, actual spend including freight/tax/repairs, videos and logs.
+- [ ] Close every [finish-line](../v1-proof.md#finish-line) criterion; do not substitute calculated screens for physical tests.

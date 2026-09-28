@@ -1,3 +1,5 @@
+> **V1-PROOF update — 2026-09-28:** the shop capabilities below remain useful. References to carbon spars, custom in-wheel hubs and stair geometry are historical; suitable scrap/COTS construction is now preferred. [Active mechanical plan](mechanical.md).
+
 # Shop capabilities
 
 **Status:** Steve 2026-09-20. **Docs only.** These are **tools he can use**, not parts on hand and not a buy list. **No new spend.**

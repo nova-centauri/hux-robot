@@ -1,3 +1,5 @@
+> **PARKED STAIR-V1 — 2026-09-28.** This is historical research, not an active requirement, BOM or build gate. [V1-PROOF](../docs/v1-proof.md) governs current work.
+
 # Art
 
 Exploratory visuals for Hux, made to look at before any accurate model work. These are concept renders and image-to-mesh studies. They are not measured geometry, they do not meet the 2D-layout gate, and they stay out of `cad/`.

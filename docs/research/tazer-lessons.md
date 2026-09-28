@@ -1,3 +1,5 @@
+> **PARKED STAIR-V1 — 2026-09-28.** This is historical research, not an active requirement, BOM or build gate. [V1-PROOF](../v1-proof.md) governs current work.
+
 # Tazer — learn from the mistakes
 
 > **2026-09-28:** historical study. Current head/leg dimensions, procurement and support gates are in [the engineering review](../head-and-leg-review.md). No components have been purchased; older order/selection claims are superseded.

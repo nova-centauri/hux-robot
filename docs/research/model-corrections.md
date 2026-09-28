@@ -1,3 +1,5 @@
+> **PARKED STAIR-V1 — 2026-09-28.** This is historical research, not an active requirement, BOM or build gate. [V1-PROOF](../v1-proof.md) governs current work.
+
 # Model corrections — 2026-09-23
 
 Implemented after the [real-world audit](real-world-validation.md). These changes correct the software model and remove unsupported engineering claims. They do **not** complete a physical robot or a working stair gait.

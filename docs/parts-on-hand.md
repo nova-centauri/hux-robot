@@ -1,16 +1,19 @@
-# Parts on hand and purchase status
+# V1-PROOF reuse inventory
 
-**2026-09-28 — Steve: “I have not bought any components!”** No Hux components are confirmed purchased, ordered, received or reserved. This supersedes earlier claims about Zantle wheels, carbon stock, batteries and an order-now cart. Downloaded CAD/STEP files are reference geometry, not purchased hardware.
+**2026-09-28:** the user wants to use equipment already around. Earlier clarification said no Hux components had been purchased; it did not establish that no personal electronics exist. Exact available parts and reservations are still unconfirmed. This revision has bought nothing.
 
-| Category | Confirmed Hux purchase / reservation | Current treatment |
-| --- | --- | --- |
-| Actuators, wheels, tubes, carbon, springs, bearings | None | Candidate design only; stair procurement on hold |
-| Battery, charger, anti-spark, regulators, harness | None | Include in budget; verify actual interfaces before release |
-| MCU, IMU, CAN transceivers | None | Bench candidates |
-| Companion, RC receiver, cameras, display | None | Include in budget unless ownership is separately confirmed |
+| Candidate reuse | Availability / condition | V1-PROOF use | Credit currently counted |
+| --- | --- | --- | ---: |
+| F765-Wing, F722 boards, Mamba board | Historical mentions; verify exact board | MCU + built-in IMU if pins/timing work | $0 |
+| ESP32 | Historical mention; revision/IMU unknown | Alternative controller or manual-link bridge | $0 |
+| TBS Nano RX and compatible transmitter | Receiver mentioned historically; full link unconfirmed | Manual input | $0 |
+| Pi 5 / existing laptop | Historical Pi mention; availability unconfirmed | Off-robot logging; no onboard Pi required | $0 |
+| Motors, gearboxes and encoders | No usable pair confirmed | Two bidirectional wheel channels | $0 |
+| Small servos | None confirmed | Two leg adjustments after pinned-leg balance | $0 |
+| Battery and balance charger/supply | Cell count, condition and models unknown | Compatible 3S-class system or deliberate requalification | $0 |
+| Wheels, hubs, bearings, belts, fasteners | None reserved | Approximately 100 mm wheel package and simple legs | $0 |
+| Aluminum, plywood, tube, wire, connectors | Shop stock not inventoried | Frame, fixture and harness | $0 |
 
-Earlier notes described Pi 5, ESP32, TBS Nano RX, F722/F765 and Mamba boards as existing personal equipment. Those are **historical, unverified reuse possibilities**, not a Hux inventory or a reason to assign zero cost. The latest clarification governs procurement. Do not erase or dispose of anything based on this document.
+For each confirmed item record date, exact variant, quantity, condition, electrical limits, measured mass/envelope and whether it is available for Hux. A vendor CAD file is not owned hardware. A board's presence does not establish spare pins or compatible logic levels. A receiver needs a usable transmitter/link.
 
-Shop capabilities remain listed in [capabilities.md](capabilities.md); tools are not component stock. When an item is actually confirmed, record date, exact model/revision, quantity, ordered/received status, measured mass/envelope, and whether it is reserved for Hux.
-
-Buying decisions and budget: [bom.md](bom.md). Engineering gate: [head-and-leg-review.md](head-and-leg-review.md). Decision history: [decisions.md](decisions.md).
+The [budget](bom.md) contains replacement allowances until confirmation. Subtract only actual displaced purchases; do not count the same item in two rows or spend the savings on new features. Keep the reserve. [Shop capabilities](capabilities.md) describes tools, not component stock.

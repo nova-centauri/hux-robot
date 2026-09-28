@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1180" height="970" viewBox="0 0 1180 970">
 <rect width="1180" height="970" fill="#fff"/>
 <style>text{font-family:Arial,sans-serif;fill:#1d2936;font-size:14px}.title{font-size:25px;font-weight:bold}.small{font-size:12px}.dim{stroke:#b14328;fill:none;stroke-width:1}.shell{fill:none;stroke:#28435b;stroke-width:2}</style>
-<text x="35" y="42" class="title" text-anchor="start">HUX / H1 HEAD PACKAGING</text>
+<text x="35" y="42" class="title" text-anchor="start">PARKED STAIR-V1 / H1 HEAD PACKAGING</text>
 <text x="35" y="69" class="" text-anchor="start">2026-09-28-B | millimetres | nominal allocations, NOT fabrication drawings</text>
 <text x="35" y="93" class="" text-anchor="start">Candidate: 2.26 kg head; hip motors excluded. Stair architecture and actuator procurement remain HOLD.</text>
 <text x="70" y="140" class="" text-anchor="start">FRONT: +Y left, +Z up</text>

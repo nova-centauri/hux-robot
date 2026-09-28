@@ -1,3 +1,5 @@
+> **PARKED STAIR-V1 — 2026-09-28.** This is historical research, not an active requirement, BOM or build gate. [V1-PROOF](../v1-proof.md) governs current work.
+
 # Engineering verification — 2026-09-28
 
 Revision: **2026-09-28-B**. Input SHA-256: `3aef03b21d75b8c224e416facf1859d6a5627259db956ccc661751a9979dd252`.

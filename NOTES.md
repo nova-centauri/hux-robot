@@ -1,25 +1,22 @@
-# Working notes — 2026-09-28
+# Working notes — V1-PROOF, 2026-09-28
 
-**No components purchased. Fix the stair mechanism before the actuator set.** This is Steve's current direction, superseding old ordered/on-hand claims and the temporary motor lock. [Decision log](docs/decisions.md) retains the history.
+The active objective is a useful, inexpensive proof robot. **Under $1,000; reuse first; 2.5 kg target; four actuators; flat floor.** The previous stair work is [parked](docs/archive/stair-v1/README.md).
 
-## Completed in this review
+## Ready for review
 
-- [x] Audited head envelopes, component mass/CoM assumptions, thermal ratings, CAN capacity and cost omissions.
-- [x] Created H1 dimensioned front/side/plan and a machine-readable head, mass and budget source.
-- [x] Added exact split-offset leg FK/IK and 91-sample complete-step screening. Compact candidate fails; 26-inch candidate has a connected path with 810 additional sampled checks, without dynamic/hardware validation.
-- [x] Corrected current inventory, requirements, mechanical/electrical/software interfaces and procurement gates.
-- [x] Preserved and labeled the old drawings/simulator as the legacy eight-axis experiment.
+- [x] Separate V1-PROOF model, requirements, cost/mass allocations and finish line.
+- [x] Small four-actuator concept; first build uses two driven wheels and pinned legs.
+- [x] Conservative $940 budget including replacement allowances and reserves.
+- [x] Preliminary 2D envelopes and reproducible geometry/load calculations.
+- [x] Previous plans preserved and legacy pages labeled.
 
-## Next decisions and engineering work
+## Next physical work
 
-1. **Support mechanism:** hip+ankle roll with finite-width wheel contacts and a real pitch-level carrier, or deployable positively locked landing shoes. Simple motor relocation and a free swivel are not fixes.
-2. **Scale:** retain the compact 24-inch target while exploring whether the approximately 26-inch/narrow-entry option with moving-width margin is acceptable. Do not silently relax it.
-3. **Real trajectory:** replace the assumed ankle carrier with real joints, validate all swept solids, and time/retime the connected 26-inch path within speed/acceleration/contact limits. Sampled static reach does not make a gait.
-4. **Head hardware fit:** pick exact battery/board/connector envelopes and mocked cable routes. H1's nominal allocation passes box separation only.
-5. **Joint sizing:** Narrow-entry gravity peaks of 6.61/3.92/7.89 N·m at roll/pitch/knee exceed the reference stationary ratings. Evaluate actual reduction or another axis with the mass/thermal/geometry cascade.
-6. **Bench sequence:** nonpowered full-size mockup, then one representative axis/contact assembly, mounted thermal test and 10-second controlled one-leg support/return before the rest of the set.
-7. **Controller contract:** explicit joint axes, SI frame, mass tensor, effective contact footprint, timestamped mixed-rate CAN and safe supported abort.
+1. Confirm reusable motors/servos, controller/IMU, radio/transmitter, batteries/charger, wheels and stock in [inventory](docs/parts-on-hand.md). Record exact variants; do not count a zero-cost row before confirmation.
+2. Make a scrap/cardboard mockup at the proposed 28–31 cm height. Weigh the pile. Check that two gearmotors, bearings, wheels, wiring and the battery fit.
+3. Qualify one wheel channel and controller in a supported fixture. Verify encoder sign, reversal, hardware current limit, kill, watchdog and available torque at speed.
+4. Build the second wheel channel and pin both legs at neutral. Tune conventional two-wheel balance and slow manual driving.
+5. Bench-test one small servo with its 3:1 reduction and a loaded leg. Then add both leg channels, slowly, while keeping both wheels planted.
+6. Run the [acceptance trials](docs/v1-proof.md#finish-line). Keep measured results separate from this planning screen.
 
-Full analysis: [docs/head-and-leg-review.md](docs/head-and-leg-review.md). Current budget: [docs/bom.md](docs/bom.md). Checklists: [docs/checklists/mechanical-v1.md](docs/checklists/mechanical-v1.md).
-
-Research, license boundaries, COTS carbon spars, service access and the long-term digital-twin horizon remain. No new artwork, no firmware implementation and no component order. Steve subsequently authorized committing and pushing this review to `main`; all hardware validation gates remain open.
+No stair analysis, perception hardware or detailed cosmetic head work is on the critical path. No components bought by this revision. Source/model tests cannot check physical balance.

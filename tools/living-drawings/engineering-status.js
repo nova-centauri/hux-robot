@@ -5,11 +5,11 @@
   box.setAttribute("role", "note");
   box.style.cssText = "padding:16px 24px;background:#fff0d8;color:#422a0f;border-bottom:2px solid #bc793b;font:16px/1.5 system-ui";
   const title = document.createElement("strong");
-  title.textContent = "2026-09-28: legacy study — not the current stair purchase baseline. ";
-  box.append(title, document.createTextNode("No components purchased. Single support, full-step reach and stationary thermal duty remain unresolved. "));
+  title.textContent = "PARKED STAIR-V1 — historical study. ";
+  box.append(title, document.createTextNode("V1-PROOF is now the active plan: under $1,000, four actuators and flat-floor balance. The numbers and requirements below belong to the previous project. "));
   const link = document.createElement("a");
-  link.href = "engineering.html";
-  link.textContent = "Open the head/leg review and current BOM";
+  link.href = "index.html";
+  link.textContent = "Open V1-PROOF";
   box.append(link);
   document.body.prepend(box);
 })();

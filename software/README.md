@@ -1,12 +1,5 @@
-# Software
+# Companion software
 
-Empty on purpose. Raspberry Pi companion code lives here later.
+V1-PROOF needs no onboard companion computer. Use an existing laptop for logs and optional timed manual commands. An available Pi can help off-robot, but cameras, ROS, pathfinding and new compute purchases are deferred.
 
-Intended later work (not now):
-
-- Wi‑Fi telemetry that **reports the active manual mode**
-- One camera stream for teleop
-- Pathfinding inference (not on the FC)
-- Optional pose / step/dir host **if** steppers are chosen (R29)
-
-See [`../docs/software.md`](../docs/software.md). Four manual modes come before cameras. Pathfinding **motion** waits on those modes.
+The MCU runs the balance loop. [Active software plan](../docs/software.md). No companion implementation yet.

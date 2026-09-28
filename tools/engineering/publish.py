@@ -1,6 +1,8 @@
 """Generate the review's simple dimensioned layout, landing page and budget table."""
 import html
 import json
+import os
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -16,7 +18,7 @@ def publish(c, r):
     def text(x, y, label, cls="", anchor="start"):
         svg.append(f'<text x="{x}" y="{y}" class="{cls}" text-anchor="{anchor}">{html.escape(label)}</text>')
 
-    text(35, 42, "HUX / H1 HEAD PACKAGING", "title")
+    text(35, 42, "PARKED STAIR-V1 / H1 HEAD PACKAGING", "title")
     text(35, 69, f"{c['revision']} | millimetres | nominal allocations, NOT fabrication drawings")
     text(35, 93, "Candidate: 2.26 kg head; hip motors excluded. Stair architecture and actuator procurement remain HOLD.")
     s = 1.75
@@ -86,7 +88,18 @@ def publish(c, r):
               "## Sources and updates", "",
               "Canonical budget rows: [`tools/engineering/bom.json`](../tools/engineering/bom.json). Regenerate this table with `python3 tools/engineering/review.py --write`. Prices are allowances retained or introduced for budgeting; supplier stock and quotes must be checked at purchase. [Manufacturer engineering references](head-and-leg-review.md#evidence-and-reproducibility) support specifications, not these prices.", "",
               "Inventory confirmation lives in [parts-on-hand.md](parts-on-hand.md). Package masses and installed positions live separately in [`baseline.json`](../tools/engineering/baseline.json); budget rows must not be added again to the mass budget.", ""]
-    (ROOT / "docs/bom.md").write_text("\n".join(lines))
+    # The stair publisher must never replace the active V1-PROOF budget.
+    archive_bom = ROOT / "docs/archive/stair-v1/bom.md"
+    def archive_link(match):
+        url = match.group(1)
+        if re.match(r"(?:[a-z]+:|#|/)", url):
+            return match.group(0)
+        path, separator, anchor = url.partition("#")
+        resolved = (ROOT / "docs" / path).resolve()
+        return "](" + os.path.relpath(resolved, archive_bom.parent) + (separator + anchor if separator else "") + ")"
+    archived_text = re.sub(r"\]\(([^)]+)\)", archive_link, "\n".join(lines))
+    archive_bom.parent.mkdir(parents=True, exist_ok=True)
+    archive_bom.write_text("> **PARKED STAIR-V1.** [V1-PROOF](../../v1-proof.md) is active; this generated budget is historical.\n\n" + archived_text)
     comparison = [("24-inch / wide entry", r["stair_candidate"]),
                   ("24-inch / narrow entry", r["narrow_24inch_comparison"]),
                   ("25-inch / narrow entry", r["narrow_25inch_comparison"]),
@@ -101,4 +114,7 @@ def publish(c, r):
 <section class="block"><p class="callout"><b>No components purchased. Stair procurement is on hold.</b> A successful short hop does not establish controlled one-leg support or a full step. The ten-axis alternative below is a candidate, not a validated fix.</p><h2>Calculated screening results</h2><div class="table-wrap"><table><thead><tr><th>Case</th><th>Failed geometry samples</th><th>Clearance flags</th><th>Peak gravity hip roll</th><th>Modeled span</th><th>Release</th></tr></thead><tbody>{rows}</tbody></table></div><p>The wide-entry cases require a large sideways head excursion. The 26-inch narrow-entry candidate connects its poses and passes 810 interpolated reach/limited-clearance/width samples, with {r['preferred_candidate']['interpolation_screen']['max_com_error_mm']:.2f} mm maximum modeled COM residual. Its nominal {r['preferred_candidate']['max_lateral_span_mm']:.1f} mm span has almost no allowance below 14 inches; it is not a manufactured-envelope guarantee. The actual ankle mechanism, full solid collisions, timing, dynamics and mounted thermal duty remain unvalidated.</p></section>
 <section class="block"><h2>H1 head allocation</h2><p>203.2 mm deep, 120 mm middle bay, 177.8 mm top-cap width, {r['head']['guarded_cassette_width_mm']:.0f} mm lower cassette. Top +100 mm and cassette floor −45 mm from the hips. Estimated head mass 2.26 kg; CoM ({r['head']['com_mm'][0]:.2f}, 0, +{r['head']['com_mm'][2]:.2f}) mm. Shortening the head permits longer legs, but the compact candidate still fails the step screen.</p><img src="../../cad/layouts/head-h1.svg" alt="Dimensioned front, side and plan views of candidate H1 head packaging" style="display:block;width:100%;height:auto"></section>
 <section class="block"><h2>What changes before a purchase</h2><p>Establish finite lateral contact width and a torque-transmitting ankle, solve the real ankle orientation and linkage, time and validate the connected path with full collisions, then test mounted torque/temperature and actual contact behavior. A loose swivel and a wider tire do not by themselves solve balance.</p><p>Complete ten-axis candidate budget: <b>${low:,}–{high:,}</b> before shipping/tax. Includes charging, power, bearings, frame stock and harnesses. Prices are planning allowances.</p><p><a href="../../docs/head-and-leg-review.md">Full findings, equations, sources and release gates</a> · <a href="../../docs/research/head-leg-results.json">Machine-readable results</a> · <a href="../../docs/decisions.md">Decision log</a></p></section></main></body></html>'''
+    page = page.replace("<body>", '<body><script src="engineering-status.js"></script>')
+    page = page.replace("../../docs/bom.md", "../../docs/archive/stair-v1/bom.md")
+    page = page.replace("<title>Hux engineering review</title>", "<title>Parked stair engineering review</title>")
     (ROOT / "tools/living-drawings/engineering.html").write_text(page + "\n")

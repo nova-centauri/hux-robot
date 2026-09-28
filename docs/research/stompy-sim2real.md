@@ -1,3 +1,5 @@
+> **PARKED STAIR-V1 — 2026-09-28.** This is historical research, not an active requirement, BOM or build gate. [V1-PROOF](../v1-proof.md) governs current work.
+
 # Stompy — CAD → sim → real
 
 Steve 2026-09-21: analyze [I Trained a Robot in Simulation. Then I Made It Walk.](https://www.youtube.com/watch?v=gEjg179fvmc) (Kayden Knapik — **Stompy**). Especially **simulations and matching CAD to reality**.

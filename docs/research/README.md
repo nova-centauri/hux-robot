@@ -1,3 +1,5 @@
+> **PARKED STAIR-V1 — 2026-09-28.** This is historical research, not an active requirement, BOM or build gate. [V1-PROOF](../v1-proof.md) governs current work.
+
 # Research first
 
 **Current engineering baseline (2026-09-28):** [head and leg review](../head-and-leg-review.md), [reproducible numerical results](head-leg-results.json), [decision log](../decisions.md). Older research below is dated evidence, not current purchasing or fabrication authority. No Hux components purchased.

@@ -1,44 +1,37 @@
-# Electronics
+# V1-PROOF electronics
 
-**Status:** architecture decided 2026-09-26 ([`decisions.md`](decisions.md)). No wiring diagram, no actuator SKU, no components purchased; budget and release gates in [`bom.md`](bom.md).
+**Reuse a suitable MCU, IMU, manual controller and power equipment.** No CAN, 8S, new Linux computer or camera is required. [Previous electronics plan](archive/stair-v1/electronics.md) is parked.
 
-**8S + regulated step-down** is the power class (2026-09-26: 4S → 6S → 8S, retained conservatively while vendor 15/24 V minimum tables conflict). **Actuator bus is CAN.** **Hip roll is in V1.** **The real-time MCU must have CAN — the F765-Wing does not, so it is a bench board.**
+```text
+Compatible 3S battery -> fuse + physical motor-power cut
+  -> two bidirectional H-bridges -> encoder wheel gearmotors
+  -> suitable servo rail -> two small leg servos (later stage)
+  -> separate logic regulator -> MCU + IMU + receiver
+MCU -> PWM/direction/enable -> wheel drivers
+MCU <- wheel encoders + current/fault feedback
+MCU <-> UART half-duplex adapter or PWM -> leg servos
+MCU <- RC or other timed manual command link
+MCU -> USB/serial logs -> existing laptop
+```
 
-Parent plan (classes, P0–P5, not a BOM): [`electronics-minimum.md`](electronics-minimum.md). Inventory: [`parts-on-hand.md`](parts-on-hand.md). Software layers: [`software.md`](software.md). Actuator trade: [`research/actuators-legs.md`](research/actuators-legs.md). Review behind this page: [`research/compute-stack-review.md`](research/compute-stack-review.md).
+## Reuse qualification
 
-## Current engineering disposition — 2026-09-28
+Historical candidates are F765/F722/Mamba boards or ESP32 plus an IMU. Ownership and exact revisions remain unconfirmed. Select the available board after mapping two wheel PWM/direction channels, driver enables, two quadrature encoders, IMU, current inputs and manual/servo communications. Verify logic levels, usable pins and timer/interrupt capacity. CAN support is irrelevant to this proposed interface.
 
-**No components purchased. Full actuator-set procurement is on hold.** [Head and leg review](head-and-leg-review.md) governs component qualification; [bom.md](bom.md) is a budget, not a released cart.
+The TBS Nano requires a compatible transmitter, not just a receiver. A known laptop/gamepad can provide a bounded-rate manual link with a deadman timeout if RC is unavailable. Pi 5 can be an off-robot logger; it does not run the time-critical balance loop or need a robot power allocation.
 
-| Interface | Baseline / open qualification |
-| --- | --- |
-| Battery | 8S retained: 33.6 V full, 29.6 nominal, 26.4 planning cutoff; actual cells, sag, capacity, dimensions and regen acceptance unverified |
-| Logic power | 60-V-input-rated converter class plus measured transient/regen protection; 5 V / 5 A companion branch and separately protected MCU/RX branch |
-| Future companion power | Regulated 12–19 V only when the selected companion requires it; never raw 8S into the kit |
-| Motor distribution | Dedicated fused harness and hardware disconnect; logic bypasses motor disconnect so it can log/report. Anti-spark is not a regen clamp |
-| Controller | Teensy 4.1 candidate; three CAN controllers, only one FD-capable; external IMU and three transceivers |
-| Candidate ten-node CAN | Bus A: two wheels, 1000 Hz. B: hip roll + ankle roll, four nodes at 400 Hz. C: hip pitch + knee, four nodes at 400 Hz |
-| Bus load budget | 160 bits per extended eight-byte frame, command + reply, plus 10% allowance: A 74%, B/C 61.2%; prove deadline/latency on hardware |
-| Termination | Two 120-ohm ends per physical bus, six total on three buses; short stubs and a deliberate signal-ground/common-mode plan |
-| Actuators | RS02/RS00/RS05 are references, not accepted selections; ankle architecture and possible hip reduction are unresolved |
-| Hold torque | Vendor stationary references RS02 6 / RS00 3.6 / RS05 1.2 N·m, conditional on cooling; not installed ratings |
-| Companion | Pi 5 class; one camera initially. No ownership or zero-cost reuse assumed. Jetson and multi-camera coverage deferred |
-| RC | TBS Nano class pending confirmed transmitter compatibility; watchdog and loss-of-link behavior tested independently of Linux |
-| F765 / other legacy boards | Historical reuse possibilities only, unconfirmed for Hux; they do not replace the CAN MCU |
+## Power and drivers
 
-The July RS00/02 manuals say 24–60 V; the September manufacturer table says 15–60 V. Keep the conservative 24 V floor for now and record actual part/firmware revision before changing the bus. 26.4 V is a planning cutoff, not proof of cell-level protection or voltage under a motor pulse.
+The proposed battery is a 3S pack around 2.2 Ah: 11.1 V nominal, 12.6 V full. The 9.9 V wheel sizing point is an assumption, not the selected pack's approved cutoff. Determine low-voltage behavior from the actual pack and load. Do not reuse an unknown/damaged pack or feed a higher-cell-count pack into 12 V parts.
 
-A four-node bus at 1 kHz with command/reply can require 1.28 Mbit/s. A 1 kHz estimator can consume 400 Hz timestamped joint feedback and let the actuators run local PD loops. Do not claim that CAN FD support on one controller accelerates classic-CAN nodes. Choose compatible transceivers by exact suffix; a 3.3-V logic interface does not imply a 3.3-V supply requirement.
+Wheel reference: a 12 V encoder gearmotor and a current-sensing, bidirectional H-bridge such as the G2 18v17. Driver operating voltage must cover full charge and braking transients. Initially qualify 2.5 A short peaks and 1.2 A RMS per wheel. The reference driver's factory chopping threshold is far too high; implement and measure a lower limit before connecting an unrestricted pack. Motor torque/current estimates are in [sizing](v1-proof-sizing.md).
 
-At 8S 3.3 Ah, nominal energy is 97.68 Wh. With 80% usable energy and 90% distribution efficiency, predicted load energy is 70.33 Wh: 1.76 / 0.88 / 0.59 hours at 40 / 80 / 120 W. Measure actual draw. Include an 8S-capable charger in procurement; none is assumed owned.
+The current G2 revision enables its sleep input by default; provide a deliberate hardware disable at reset. Its current-sense output omits braking intervals, so an unqualified average of that signal is not motor RMS current. Verify the waveform and limit with bench instrumentation before relying on telemetry. [Manufacturer pinout and current-sense notes](https://www.pololu.com/product/2991).
 
-## Before energizing a leg
+The 12 V ST3215 reference is listed for 6–12.6 V; that maximum leaves no transient headroom on a fully charged 3S pack. Prefer a suitable regulated servo rail with voltage margin and a defined clamp/energy path, then qualify torque at its lowest loaded voltage. Verify the exact servo variant. Its power wiring must support simultaneous servo current without resetting logic. A half-duplex interface is required for the serial version; a bare UART TX/RX tie is not the design.
 
-- Select actual connectors, conductor size, fusing, disconnect and converter input ratings from load/fault measurements. Verify polarity and current limiting on the bench.
-- Establish a rated independent wheel-bearing load path, restraint/overhead catch, real contact support and a supported rest pose. A power cut can make a balancing robot fall.
-- Calibrate joint IDs, directions, offsets and IMU transform; report sample timestamps, faults and temperature. Verify watchdog behavior on each actuator's actual firmware.
-- Test temperature with the proposed frame and heat spreaders. A cold overload curve or a controller temperature threshold is not repeated-duty qualification.
-- Log supply and per-cell voltage/current during acceleration, braking and disconnect; verify the regen path with a full battery. Bench supplies may not absorb returned energy.
-- Do one representative axis before the full set. No automatic motor enable after reconnect/reset.
+Encoders may need level conversion for a 3.3 V MCU. Keep motor/servo current out of the controller board, use a common signal reference, and provide appropriate connectors, fusing, branch wiring, strain relief and local capacitance. A bench supply that cannot absorb braking energy is not a battery substitute without a defined energy path. Power conversion, protection and interfaces have explicit [budget](bom.md) rows.
 
-Software contract: [software.md](software.md). Current physical layout and mass model: [head-and-leg-review.md](head-and-leg-review.md). Historical research/class phases remain in [electronics-minimum.md](electronics-minimum.md), but its old quantities and shopping statements are not current procurement instructions.
+## First bench result
+
+USB-powered control and sensor logging, then one restrained wheel, then two. Check encoder direction, timing, current limit, fault flags, kill and command loss before putting the pinned chassis in its catch frame. [Electronics checklist](checklists/electronics-bringup.md).

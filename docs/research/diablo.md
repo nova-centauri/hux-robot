@@ -1,3 +1,5 @@
+> **PARKED STAIR-V1 — 2026-09-28.** This is historical research, not an active requirement, BOM or build gate. [V1-PROOF](../v1-proof.md) governs current work.
+
 # Direct Drive Tech — Diablo (wheeled-leg)
 
 Steve 2026-09-21: more research — watch [ETA Prime's Diablo review](https://www.youtube.com/watch?v=S5PoZ8aNwvs) and cite the paper [DIABLO: A 6-DoF Wheeled Bipedal Robot Composed Entirely of Direct-Drive Joints](https://ar5iv.labs.arxiv.org/html/2407.21500) (arXiv:2407.21500). Shop / SDK only as a brief cite.

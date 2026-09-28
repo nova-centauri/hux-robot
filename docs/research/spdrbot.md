@@ -1,3 +1,5 @@
+> **PARKED STAIR-V1 — 2026-09-28.** This is historical research, not an active requirement, BOM or build gate. [V1-PROOF](../v1-proof.md) governs current work.
+
 # SpdrBot — Isaac Sim / Isaac Lab (pipeline, not a spider)
 
 Steve 2026-09-24: more research — watch [I Tried To Build a Robot Like Boston Dynamics With Isaac Sim](https://www.youtube.com/watch?v=YDzHL2JSCHc) and cite [Indystrycc/SpdrBot](https://github.com/Indystrycc/SpdrBot). Fusion → URDF → USD; Isaac Lab RL; then a **hand-tuned gait** after the SKRL → Isaac Sim wall.

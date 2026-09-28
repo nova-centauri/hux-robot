@@ -11,9 +11,10 @@
 
   const spec = {
     asOf: "2026-09-27",
-    status: "legacy eight-axis experiment; stair baseline rejected 2026-09-28",
+    status: "PARKED STAIR-V1 eight-axis experiment; V1-PROOF is active",
     procurementReleased: false,
     candidateSource: "../engineering/baseline.json",
+    activeModel: "../v1-proof/model.json",
 
     /* R37 — what "done" means for V1. The north star is still stairs; a flight is V2 on the same
        hardware (the same cycle repeated with the landing error held inside the slot every time). */

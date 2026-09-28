@@ -1,220 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hux living drawings</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Hux / V1-PROOF</title>
+  <meta name="description" content="A small four-actuator wheeled robot, under $1,000. The active Hux proof model, budget and build sequence.">
+  <link rel="stylesheet" href="proof.css">
 </head>
 <body>
-  <script src="engineering-status.js"></script>
-  <div class="page">
-    <header class="mast">
-      <div>
-        <p class="kicker">Hux</p>
-        <h1>Living drawings</h1>
-        <p>Side and top views of the working model, and the stair climb. Drag the joints, request a wheel position, or press Play. The 9.5 by 9.5 inch stair is a design target, not a validated capability; the V1 finish line is one step, 9 of 10 (R37). The layout the model is drawn to is <a href="sheet.html">Sheet 1</a>
-          <a href="sheet2.html">Sheet 2</a>; its roll axes (3.0"), leg plane and body-CoM offset (+1") come from <code>spec.js</code>.</p>
-        <nav class="pages" aria-label="Pages">
-          <a href="index.html" aria-current="page">Drawings</a>
-          <a href="sheet.html">Sheet 1</a>
-          <a href="sim.html">3D sandbox</a>
-          <a href="flow.html">Data flow</a>
-          <a href="software.html">Software</a>
-          <a href="hardware.html">Hardware</a>
-          <a href="media.html">Media</a>
-        </nav>
-      </div>
-      <div class="stamp">
-        Model 2026-09-27<br>
-        6" × 1.25" wheel<br>
-        7.5" + 7.5" tubes<br>
-        24" tall · 14" wide
-      </div>
-    </header>
-
-    <div class="views">
-      <article class="card">
-        <h2>Side — one leg</h2>
-        <p class="hint">Positive hip angle puts the knee to the rear. Knee bend brings the lower tube forward under the hip. Balance is the 92% crouch, hip over the axle, knee behind. Request a wheel position and the hip and knee follow. The red dot is the center of mass, and the dashed line is gravity down to the tread under it. Motor boxes are rough envelopes, not parts.</p>
-        <svg id="side" class="sheet" role="img" aria-label="Side view of one Hux leg"></svg>
-        <div class="controls">
-          <div class="presets" role="group" aria-label="Poses">
-            <button type="button" data-pose="straight">Straight</button>
-            <button type="button" data-pose="balance">Balance</button>
-            <button type="button" data-pose="crouch">Crouch</button>
-            <button type="button" data-pose="place">Place on next step</button>
-          </div>
-          <label class="mode">View
-            <select id="mode">
-              <option value="planted">Wheel planted on this tread</option>
-              <option value="swing">Hip fixed, wheel swings</option>
-              <option value="wheel">Request a wheel position</option>
-            </select>
-          </label>
-          <div id="jointAsk">
-            <label>Hip <output id="hipOut"></output>
-              <input id="hip" type="range" min="-40" max="170" step="0.1" value="23">
-            </label>
-            <label>Knee bend <output id="kneeOut"></output>
-              <input id="knee" type="range" min="-180" max="180" step="0.1" value="46">
-            </label>
-          </div>
-          <div id="wheelAsk" hidden>
-            <label>Hip forward <output id="hipLeanOut"></output>
-              <input id="hipLean" type="range" min="-6" max="16" step="0.1" value="0">
-            </label>
-            <label>Wheel X <output id="wheelXOut"></output>
-              <input id="wheelX" type="range" min="-4" max="16" step="0.1" value="0">
-            </label>
-            <label>Wheel Y <output id="wheelYOut"></output>
-              <input id="wheelY" type="range" min="3" max="22" step="0.1" value="3">
-            </label>
-          </div>
-        </div>
-        <div class="readout" id="sideRead"></div>
-      </article>
-
-      <article class="card">
-        <h2>Top — stance and body</h2>
-        <p class="hint">Neutral overall width is 14 inches; hip roll changes the swept envelope. The head is the center box. Wheels and legs sit outside it. Track is 12.75 inches with a 1.25 inch tire. The knee folds rearward.</p>
-        <svg id="top" class="sheet" role="img" aria-label="Top view of Hux stance and body"></svg>
-        <div class="controls">
-          <label>Hip roll <output id="rollOut"></output>
-            <input id="roll" type="range" min="-30" max="30" step="0.1" value="0">
-          </label>
-        </div>
-        <div class="readout" id="topRead"></div>
-      </article>
-    </div>
-
-    <article class="card pair-wrap">
-      <h2>Side — both legs on the stair</h2>
-      <p class="hint">Inspect a candidate stair motion. Side and front views share one spatial chain with joint limits. Red crosses are requested wheel positions; dashed red lines show targets the mechanism cannot reach. CoM includes both legs. The verdict below rejects invalid geometry, forces and actuator demands. Playback does not establish a working gait.</p>
-      <div class="pair-views">
-        <svg id="pair" class="sheet" role="img" aria-label="Side view of both Hux legs on a stair"></svg>
-        <div class="front-wrap">
-          <h3>Front — sway and roll</h3>
-          <svg id="front" class="sheet" role="img" aria-label="Front view of Hux on the stair, showing the lateral sway"></svg>
-          <p class="hint small">The actual spatial links and whole-robot CoM are projected here. Hip axes are 5.4″ from the body center. Hip holding torque is calculated separately from the gravity moment about the tire. Requested sway is not automatically achievable.</p>
-        </div>
-      </div>
-      <div class="transport">
-        <button type="button" id="pairPlay" class="play" aria-pressed="false">Play</button>
-        <label>Speed
-          <select id="speed">
-            <option value="1" selected>Real time</option>
-            <option value="0.5">Half</option>
-            <option value="0.25">Quarter</option>
-            <option value="0.1">Tenth</option>
-          </select>
-        </label>
-        <span class="now" id="climbStatus">step 0</span>
-      </div>
-      <svg id="timeline" class="strip" role="img" aria-label="Phases of one step against real time"></svg>
-      <svg id="traces" class="strip tall" role="img" aria-label="Knee torque and forward angular momentum over one step"></svg>
-      <div class="controls pair-controls">
-        <div class="leg-right">
-          <h3>Right leg</h3>
-          <label>Hip <output id="rHipOut"></output>
-            <input id="rHip" type="range" min="-40" max="170" step="0.1">
-          </label>
-          <label>Knee bend <output id="rKneeOut"></output>
-            <input id="rKnee" type="range" min="-180" max="180" step="0.1">
-          </label>
-        </div>
-        <div class="leg-left">
-          <h3>Left leg</h3>
-          <label>Hip <output id="lHipOut"></output>
-            <input id="lHip" type="range" min="-40" max="170" step="0.1">
-          </label>
-          <label>Knee bend <output id="lKneeOut"></output>
-            <input id="lKnee" type="range" min="-180" max="180" step="0.1">
-          </label>
-        </div>
-        <div>
-          <h3>Head</h3>
-          <label>X, forward <output id="headXOut"></output>
-            <input id="headX" type="range" min="-8" max="80" step="0.1" value="0">
-          </label>
-          <label>Y, hip height <output id="headYOut"></output>
-            <input id="headY" type="range" min="8" max="80" step="0.1" value="16.8">
-          </label>
-          <div class="presets">
-            <button type="button" id="pairBalance">Both balance</button>
-            <button type="button" id="pairStep">Left down, right up</button>
-            <button type="button" id="pairCopy">Copy right to left</button>
-          </div>
-        </div>
-      </div>
-      <div class="controls climb-bar">
-        <label class="mode">Drive
-          <select id="pairDrive">
-            <option value="joints">Joint angles</option>
-            <option value="wheels">Wheel positions</option>
-            <option value="climb">Climb the stairs</option>
-          </select>
-        </label>
-        <div id="wheelDrive" hidden>
-          <label>Right wheel X <output id="rWheelXOut"></output>
-            <input id="rWheelX" type="range" min="-8" max="80" step="0.1" value="0">
-          </label>
-          <label>Right wheel Y <output id="rWheelYOut"></output>
-            <input id="rWheelY" type="range" min="3" max="80" step="0.1" value="3">
-          </label>
-          <label>Left wheel X <output id="lWheelXOut"></output>
-            <input id="lWheelX" type="range" min="-8" max="80" step="0.1" value="0">
-          </label>
-          <label>Left wheel Y <output id="lWheelYOut"></output>
-            <input id="lWheelY" type="range" min="3" max="80" step="0.1" value="3">
-          </label>
-        </div>
-        <label>Along the climb <output id="climbOut"></output>
-          <input id="climb" type="range" min="0" max="4" step="0.0005" value="0">
-        </label>
-      </div>
-      <div class="readout" id="pairRead"></div>
-
-      <h3 class="knobs-title">What the step depends on</h3>
-      <p class="hint">Each of these rebuilds the climb. Defaults are the working assumptions in <code>docs/research/leg-geometry.md</code>, not decisions. The verdict below is for one step at these settings.</p>
-      <div class="controls knobs">
-        <label>Shove duration <output id="knobPushOut"></output>
-          <input id="knobPush" type="range" min="0.30" max="1.20" step="0.01" value="0.44">
-        </label>
-        <label>Wheel torque <output id="knobTauOut"></output>
-          <input id="knobTau" type="range" min="0.3" max="6" step="0.1" value="3">
-        </label>
-        <label>Front wheel may roll back <output id="knobRoomOut"></output>
-          <input id="knobRoom" type="range" min="0" max="1.75" step="0.05" value="1">
-        </label>
-        <label>Landing error, + is forward <output id="knobLandOut"></output>
-          <input id="knobLand" type="range" min="-1.0" max="0.75" step="0.05" value="0">
-        </label>
-        <label>Body mass forward of the hips <output id="knobComOut"></output>
-          <input id="knobCom" type="range" min="-1" max="3" step="0.1" value="1">
-        </label>
-        <label>Example mass <output id="knobMassOut"></output>
-          <input id="knobMass" type="range" min="0.67" max="1.5" step="0.01" value="1">
-        </label>
-        <label>Tire friction μ <output id="knobMuOut"></output>
-          <input id="knobMu" type="range" min="0.4" max="1.0" step="0.05" value="0.7">
-        </label>
-        <div class="presets"><button type="button" id="knobReset">Back to the working assumptions</button></div>
-      </div>
-      <div class="readout" id="verdict"></div>
-    </article>
-
-    <footer class="note">
-      Design dimensions and working assumptions come from <code>docs/research/leg-geometry.md</code> and <code>docs/bom.md</code>. The climb dynamics are explained in <code>docs/research/stair-climb-dynamics.md</code>.
-      The knee folds to the rear. The 6 inch body height above the hip is the working assumption. Body length on the drawing is 8 inches and is not a decision. Motor boxes are rough bulk, not a shopping list.
-      Mass in the roll readout is the 7.75 kg lump picture from the locked actuator set (actuators.js), not a weight target.
-    </footer>
-  </div>
-  <script src="actuators.js"></script>
-  <script src="spec.js"></script>
-  <script src="tire.js"></script>
-  <script src="spatial.js"></script>
-  <script src="kin.js"></script>
-  <script src="app.js"></script>
+  <header><div class="topbar"><div class="wordmark">HUX<span>WORKSHOP / 01</span></div><nav aria-label="Main navigation"><a href="#model">Proof model</a><a href="#budget">Budget</a><a href="#build">Build sequence</a><a href="#archive">Parked research</a></nav></div></header>
+  <main>
+    <section class="hero" aria-labelledby="title"><div><p class="eyebrow">Active direction · 28 September 2026</p><h1 id="title">V1-PROOF</h1><p class="intro">A small robot that balances, drives and adjusts its height. Built around the parts we have and a budget we can finish within.</p><span class="status">Planning model · physical tests pending</span></div><aside class="hero-note"><p><strong>First, make two wheels balance.</strong><br>Pin the legs, prove the controls, then add one small leg actuator per side.</p><small>Flat indoor floor. Slow manual driving. The stair project is parked.</small></aside></section>
+    <div class="metrics" aria-label="Design targets"><div class="metric"><strong id="total-budget">$940</strong><span>All-in planning ceiling, with reserves</span></div><div class="metric"><strong id="target-mass">2.5 kg</strong><span>Target mass · 3.0 kg maximum</span></div><div class="metric"><strong id="axis-count">4</strong><span>Actuators · two wheels + two legs</span></div><div class="metric"><strong id="height-travel">28 mm</strong><span>Nominal height adjustment</span></div></div>
+    <section id="model" aria-labelledby="model-title"><div class="section-head"><div><p class="eyebrow">01 / The smaller machine</p><h2 id="model-title">Just enough leg.</h2><p>Small gearmotors at the wheels. Simple parallel links and reduced servos at the legs. Change the pose to inspect the proposed envelope.</p></div><a href="../../cad/layouts/v1-proof.svg">Open the full 2D sheet ↗</a></div>
+      <div class="model-card"><div class="drawing"><svg id="proof-drawing" viewBox="0 0 740 420" role="img" aria-label="Interactive V1-PROOF side and front layout"></svg><p class="caption">Upright geometry only. The drawing does not simulate balance or validate component fit. Dimensions in millimetres.</p></div><div class="model-controls"><p class="eyebrow">Explore the assumptions</p><label for="leg-angle">Leg angle <output id="angle-value" for="leg-angle">30°</output></label><input id="leg-angle" type="range" min="15" max="45" step="1" value="30"><label for="mass">Total mass <output id="mass-value" for="mass">2.5 kg</output></label><input id="mass" type="range" min="1.5" max="3" step="0.1" value="2.5"><dl class="readings" aria-live="polite"><div><dt>Upright height</dt><dd id="read-height"></dd></div><div><dt>Axle behind pivot</dt><dd id="read-offset"></dd></div><div><dt>Static servo demand</dt><dd id="read-torque"></dd></div><div><dt>Servo from neutral</dt><dd id="read-travel"></dd></div></dl><p class="small">3:1 reduction · 60/40 wheel load split · assumed 85% transmission efficiency. Static load only; mounted testing is still required.</p><a class="small" href="../../docs/v1-proof-sizing.md">Equations, mass budget and limits ↗</a></div></div>
+      <p class="callout"><strong>The tradeoff:</strong> height adjustment also moves the axle about 49 mm fore/aft. Measure the center of mass and pitch trim at each pose. Start with the legs pinned; qualify powered motion after balance works.</p>
+    </section>
+    <section class="section" id="budget" aria-labelledby="budget-title"><div class="section-head"><div><p class="eyebrow">02 / A hard limit</p><h2 id="budget-title">Keep it below $1,000.</h2><p>Replacement allowances are included until reusable parts are confirmed. Every stage shares this budget.</p></div><a href="../../docs/bom.md">Detailed budget &amp; references ↗</a></div><div class="split"><div class="table-wrap"><table><caption class="sr-only">V1-PROOF cash allocations including reserves</caption><thead><tr><th scope="col">Allocation</th><th scope="col">Cap</th></tr></thead><tbody id="budget-rows"></tbody><tfoot><tr><td>Total planned ceiling</td><td id="budget-sum">$940</td></tr></tfoot></table></div><aside class="budget-note"><p class="eyebrow">Reuse lowers the spend</p><h3>Inventory comes first.</h3><p>Check available controllers, IMUs, radio equipment, batteries, chargers, wheels and frame material before choosing parts.</p><span class="budget-number" id="parts-total">$715</span><p>Parts and fixture allowance. Motor, driver and servo references fit their rows at checked prices; other allocations need quotes.</p><span class="budget-number" id="reserve-total">$225</span><p>Reserved for shipping, tax, repairs and overruns. The conservative total takes <strong>$0 in unconfirmed reuse credits</strong>.</p><p class="small">Existing tools and personal fabrication labor are assumed. New tools or outside fabrication must fit the same cap.</p><a href="../../docs/parts-on-hand.md">Open the reuse inventory ↗</a></aside></div></section>
+    <section class="section" id="build" aria-labelledby="build-title"><div class="section-head"><div><p class="eyebrow">03 / Build in useful steps</p><h2 id="build-title">One robot. Four stages.</h2></div><a href="../../docs/checklists/README.md">Open the build checklists ↗</a></div><div class="steps"><article class="step"><span class="number">01 / BENCH</span><h3>Inventory &amp; wheel</h3><p>Measure available parts. Qualify one restrained wheel, its encoder, current limit and controller. Mock up the small frame.</p></article><article class="step"><span class="number">02 / BALANCE</span><h3>Pin the legs</h3><p>Build both wheel channels. Prove balance and slow manual driving with the legs mechanically locked.</p></article><article class="step"><span class="number">03 / LEG MOTION</span><h3>Add two servos</h3><p>Test one reduced-servo leg under load. Then qualify slow, synchronized height changes with both wheels down.</p></article><article class="step"><span class="number">04 / PROOF</span><h3>Repeat the result</h3><p>Run balance, drive, height and fault trials. Finish a ten-minute session within measured mass and cost limits.</p></article></div><div class="finish"><h3>What “done” looks like</h3><p>60-second balance in 9 of 10 starts. Five controlled drive sequences. Ten height cycles with at least 25 mm measured travel. Tested fault handling and a ten-minute mixed session. <a href="../../docs/v1-proof.md#finish-line">Full acceptance criteria ↗</a></p></div></section>
+    <section class="archive" id="archive"><div><p class="eyebrow">Preserved / out of the current scope</p><h2>The stair work can wait.</h2><p>Earlier drawings, actuator studies and simulations remain available. Their requirements do not apply to V1-PROOF, and this chassis has no promised stair upgrade path.</p></div><div class="links"><a href="../../docs/archive/stair-v1/README.md">Planning archive ↗</a><a href="stairs.html">Old living drawings ↗</a><a href="engineering.html">Head &amp; leg review ↗</a><a href="sim.html">Old 3D sandbox ↗</a><a href="../../docs/decisions.md">Decision history ↗</a></div></section>
+  </main>
+  <footer>Hux / V1-PROOF · <a href="../../docs/v1-proof.md">Active plan</a> · <a href="../v1-proof/model.json">Numerical source</a> · Preliminary model, no physical validation claimed.</footer>
+  <noscript><p>Interactive views need JavaScript. The <a href="../../docs/v1-proof.md">plan</a> and <a href="../../cad/layouts/v1-proof.svg">2D sheet</a> remain available.</p></noscript>
+  <script src="proof-data.js"></script><script src="proof.js"></script>
 </body>
 </html>
