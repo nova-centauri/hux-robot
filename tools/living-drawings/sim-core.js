@@ -19,6 +19,10 @@
                           Sheet 1): the sandbox's one-wheel sequence is tuned at 0, and at +1" the 0.2 s hop from
                           the 8% poise no longer returns to two wheels (sim-test.js, 2026-09-27). Open: re-tune,
                           then default this to the spec. The knob reaches +1" from the page. */
+    bodyComUp: 2.7,    /* in, body lump height above the hip axes. NOT yet spec.layout.bodyComUpIn (3.39" with the
+                          pack at the top of the head, 2026-09-27): the one-wheel sequence is tuned at 2.7, and at
+                          3.39 it reaches the poise, loses it after ~2 s and falls on the way back to two wheels.
+                          Open (NOTES 17): re-tune, then default this and the body inertia to the spec. */
     mu: 0.7,           /* tire to floor friction */
     tireK: 40000,      /* N/m, carcass stiffness of a 6×1.25 high-pressure pneumatic. Unmeasured; 25–60 kN/m is the plausible band */
     tireZeta: 0.2,     /* damping ratio of the tread ring on that stiffness. Pneumatics are lightly damped */
@@ -117,7 +121,8 @@
       bodyWid: M.bodyWidth * IN,
       bodyUp: M.bodyAboveHip * IN,
       bodyDown: 1.0 * IN,
-      comUp: 0.45 * M.bodyAboveHip * IN,
+      comUp: k.bodyComUp * IN, /* the knob, not yet the spec (see KNOBS) */
+      bodyI: SPEC.bodyLump(), /* body lump inertias at the spec's pack placement, kg·m² — used once the knob follows the spec */
       comFwd: k.bodyCom * IN,
       tubeR: 0.008,
       mBody: lump.body * ms,
@@ -263,6 +268,8 @@
   }
 
   /* ---------- robot ---------- */
+  /* the mass knob scales the body lump; its inertias scale with it */
+  function ms0(s) { return s.mBody / ACT.lumps.body; }
   function boxInertia(m, a, b, c) {
     return v(m * (b * b + c * c) / 12, m * (a * a + c * c) / 12, m * (a * a + b * b) / 12);
   }
@@ -323,11 +330,15 @@
     const parts = [];
     /* Body: the head / pack. Box from 1" below the hip axes to 6" above. */
     const bodyH = s.bodyUp + s.bodyDown;
-    const trunk = body(v(0, hipY, 0), null, s.mBody, v(s.comFwd, s.comUp, 0),
-      boxInertia(s.mBody, s.bodyLen, s.bodyUp, s.bodyWid));
+    /* the trunk inertia: the shell box while the sandbox runs its tuned 2.7" body; the spec's
+       bodyLump() inertias once bodyComUp follows the spec (NOTES 17) */
+    const bodyIn = Math.abs(s.comUp / IN - SPEC.layout.bodyComUpIn) < 0.05
+      ? v(s.bodyI.Ix * ms0(s), s.bodyI.Iy * ms0(s), s.bodyI.Iz * ms0(s))
+      : boxInertia(s.mBody, s.bodyLen, s.bodyUp, s.bodyWid);
+    const trunk = body(v(0, hipY, 0), null, s.mBody, v(s.comFwd, s.comUp, 0), bodyIn);
     const trunkCol = collide(R.ColliderDesc.cuboid(s.bodyLen / 2, bodyH / 2, s.bodyWid / 2)
       .setTranslation(0, (s.bodyUp - s.bodyDown) / 2, 0), trunk);
-    parts.push({ kind: "body", rb: trunk, ixx: boxInertia(s.mBody, s.bodyLen, s.bodyUp, s.bodyWid).x });
+    parts.push({ kind: "body", rb: trunk, ixx: bodyIn.x });
     /* Proposal only: a rear skid so PARKED has somewhere to rest (docs/research/sim-sandbox.md). */
     const skidA = v(-s.bodyLen / 2, -s.bodyDown, 0);
     const skidB = v(-0.24, -0.23, 0);
@@ -444,7 +455,7 @@
         return adjacency.has([ba, bb].sort((x, y) => x - y).join(":")) ? null : R.SolverFlags.COMPUTE_IMPULSE;
       }, filterIntersectionPair: function () { return true; }
     };
-    return { R: R, hooks: hooks, s: s, trunk: trunk, trunkCol: trunkCol, legs: legs, parts: parts, skid: skid };
+    return { R: R, hooks: hooks, s: s, trunk: trunk, trunkCol: trunkCol, trunkIz: bodyIn.z, legs: legs, parts: parts, skid: skid };
   }
 
   /* ---------- sensing ---------- */
@@ -646,7 +657,7 @@
       I += e.m * (df * df + du * du);
     });
     /* principal inertias about the lateral axis (bodies stay roughly aligned with it) */
-    I += this.s.mBody * (this.s.bodyLen * this.s.bodyLen + this.s.bodyUp * this.s.bodyUp) / 12;
+    I += this.robot.trunkIz !== undefined ? this.robot.trunkIz : this.s.mBody * (this.s.bodyLen * this.s.bodyLen + this.s.bodyUp * this.s.bodyUp) / 12;
     return { m: m, c: c, cv: cv, I: I };
   };
 

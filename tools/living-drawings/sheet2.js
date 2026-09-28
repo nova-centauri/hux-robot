@@ -311,11 +311,18 @@
       const wp = `M ${F.X(sg * (L1.legPlaneIn - 0.2))} ${F.Y(hip.y - 0.5)} Q ${F.X(sg * (bandW / 2 + 0.6))} ${F.Y(hip.y - 1.9)} ${F.X(sg * (bandW / 2 - 0.3))} ${F.Y(bottom + 0.5)} L ${F.X(sg * (L1.hipRollAxisIn - ENV.rollD / 2 - 0.15))} ${F.Y(bottom + 0.5)}`;
       svg.appendChild(el("path", { d: wp, fill: "none", stroke: "#d0342c", "stroke-width": 1.6, "stroke-dasharray": "5 3" }));
     });
-    box(svg, F, 0, hip.y, L1.packIn.w, L1.packIn.h, "#efe2b8", "#8a5a12");
-    text(svg, F.X(0), F.Y(hip.y) + 4, "8S pack", "middle", 9.5, "#5c3d0a");
-    /* Teensy above the pack, in the head */
-    box(svg, F, 0, top + 1.6, 2.4, 0.4, "#2d6a4f", "#1b2430");
-    note(svg, F.X(1.4), F.Y(top + 1.5), "Teensy 4.1 + IMU");
+    /* the pack at the top of the head (spec.layout.pack), long axis lateral */
+    const packY = hip.y + L1.pack.upIn;
+    box(svg, F, 0, packY, L1.packIn.l, L1.packIn.h, "#efe2b8", "#8a5a12");
+    text(svg, F.X(0), F.Y(packY) + 4, "8S pack", "middle", 9.5, "#5c3d0a");
+    /* the band carries the electronics between the roll housings: Teensy + IMU, step-down, XT90-S */
+    box(svg, F, 0, hip.y + 0.4, 2.4, 0.4, "#2d6a4f", "#1b2430");
+    box(svg, F, 0, hip.y - 0.6, 2.0, 0.6, "#c9c3b4", "#1b2430");
+    note(svg, F.X(-8.8), F.Y(bottom - 2.3), "in the band: Teensy 4.1 + IMU (green), step-down + XT90-S (grey)", "#2d6a4f");
+    /* the companion slot under the pack */
+    const slotH = packY - L1.packIn.h / 2 - 0.1 - (top + 0.1);
+    rect(svg, F.X(-2.0), F.Y(packY - L1.packIn.h / 2 - 0.1), 4.0 * D.S, slotH * D.S, "none", "#5e6a78", "3 2");
+    note(svg, F.X(-1.9), F.Y(top + 0.45), "companion, " + inch(slotH, 1) + " tall", "#5e6a78");
     note(svg, F.X(-8.8), F.Y(head + 1.4), "yokes roll ±" + fmt(K.deg(K.spatial.limits.roll[1]), 0) + "° outside the shell, on the roll flanges", "#5e6a78");
     note(svg, F.X(-8.8), F.Y(bottom - 1.6), "wire loops enter the band's lower front face beside each roll housing", "#d0342c");
     dimH(svg, F.X(-bandW / 2), F.X(bandW / 2), F.Y(bottom - 0.6), inch(bandW) + " band", false);
@@ -326,8 +333,9 @@
     text(svg, F.X(-8.8), F.Y(24.3), "HIP BAND — front section: a wider lower shell, not pods", "start", 12);
     fill("u4", [
       ["Shell", "lower band " + inch(bandW) + " wide × " + inch(bandH) + " tall (the roll housings' square) × ~" + inch(S2.band.lengthIn) + " long, chamfered up to the " + inch(M.bodyWidth) + " head. One printed shell in two halves; the roll flanges are its side faces.", ""],
-      ["Why not pods", "the band is 3.1\" tall by 3\" long: at that size two pods and a bridge weigh more than one wider shell and leave the pack unsupported; the band also gives the pack a floor and the Teensy a ceiling", ""],
-      ["Inside the band", "pack between the roll housings (" + inch(L1.packIn.w) + " × " + inch(L1.packIn.h) + " × " + inch(L1.packIn.l) + ", " + inch(L1.bodyComForwardIn) + " forward), XT90-S and the step-down on the band floor; Teensy + IMU above, at the hip axis height + " + inch(top + 1.6 - hip.y), ""],
+      ["Why not pods", "the band is 3.1\" tall by 3\" long: at that size two pods and a bridge weigh more than one wider shell and leave the electronics unsupported; the band also gives the head a floor and the Teensy a ceiling", ""],
+      ["Inside the band", "between the roll housings (" + inch(2 * (L1.hipRollAxisIn - ENV.rollD / 2), 2) + " clear): the step-down and XT90-S on the floor, the Teensy + IMU above them near the roll axes", ""],
+      ["Head", "the 8S pack at the top, long axis lateral (" + inch(L1.packIn.l, 1) + " in a " + inch(M.bodyWidth) + " head), centre " + inch(L1.pack.fwdIn, 1) + " forward and " + inch(L1.pack.upIn, 1) + " up — high for the one-wheel stand (2026-09-27, studies/pack-sweep.js); the companion slot under it, " + inch(packY - L1.packIn.h / 2 - 0.2 - top, 1) + " tall (a Pi 5 with its cooler fits; check a Jetson kit's fan height at P5); display, eyes and the stereo pair in the " + inch(M.bodyLength / 2 - L1.pack.fwdIn - L1.packIn.w / 2, 1) + " in front of it. Pack leads down to the XT90-S in the band.", ""],
       ["Wire entry", "each leg's bundle (RS05 + knee RS02 + swing RS00 + roll RS02 = 4 actuators, 2 CAN buses + power) enters the band's lower front face beside the roll housing with a loop for the ±" + fmt(K.deg(K.spatial.limits.roll[1]), 0) + "° roll; nothing passes through an actuator", "good"],
       ["Width check", "band " + inch(bandW) + " + yokes + RS00s: outer faces at ±" + inch(L1.legPlaneIn + ENV.swing.t, 2) + " inside the " + inch(M.envelopeWidth) + " envelope", L1.legPlaneIn + ENV.swing.t <= M.envelopeWidth / 2 ? "good" : "bad"]
     ]);

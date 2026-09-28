@@ -117,3 +117,25 @@ Lump masses, not a weighed robot: ±20 mm on the CoM is the honest number until 
 Sheet 1 puts the roll axes at **3.0"** from the centreline; the wheel planes stay at 6.375" (12.75" track), so each wheel plane is **3.375" outboard of its roll axis** (yoke 1.75" + axle spacer 1.63"). The frontal closed form is unchanged in its answer for the shift itself — **24.2°** of parallelogram roll puts the mass over one crown contact at 92%, and the planted hip holds **6.3 N·m** (vs 10.7 at 5.4") — but the offset has a second effect the 5.4" layout hid: rolling both legs by γ with both wheels down lifts one axle and drops the other by **2 × 3.375" × sin γ = 2.8"**. Equal leg lengths therefore no longer keep the body level (at 5.4" axes the offset was 0.975" and the mismatch 0.8", a 4° tilt the levelling integrator absorbed). Without compensation the body tilts ~13° *against* the shift and the mass never reaches the tire; the sandbox at 3.0" ran to its 34° roll stop with a quarter of the weight still on the free wheel.
 
 **Fix, and a control-core requirement:** the shift is **roll plus a planned leg-length difference** — the leg on the side the body moves toward shortens by spacer × tan γ, the other lengthens — fed forward from the commanded roll (`sim-core.js`, 2026-09-27). An integrator cannot do it (§5: the levelling integrator and the shift servo fought). With the feed-forward the sandbox settles the poise at ~20° roll at the 75% ride and the `npm test` reference for the hold now scales with the hip offset. The closed form's sweep (`frontal.js`) now uses the overridden offset for the spacer too: 2" → 4.5 N·m / 23.9°, 3" → 6.3 / 24.2°, 4" → 8.1 / 24.6°, 5.4" → 10.7 / 25.0°.
+
+## Addendum 2026-09-27 (later) — the pack at the top of the head; what is left for a static stand
+
+Steve wants a static one-leg stand if possible ("important to go up stairs in the future"), ruled out a reaction wheel, and asked for the battery to move up to its best position. `tools/living-drawings/studies/pack-sweep.js` runs this note's frontal model (plus the planar stair and the two-wheel stance) at each pack placement; `spec.js → bodyLump()` now builds the body CoM and inertias from the pack's position. Capture region = the CoM error the cheap-control LQR recovers before a hip roll reaches its ±34.4° stop (10.2° left on the planted hip after the 24.2° shift):
+
+| Pack centre (fwd, up) | Body CoM up | Planted hip only: body swing per 10 mm → capture | Both hips: body / free swing → capture |
+| --- | ---: | ---: | ---: |
+| hip band (1.0", 0.0") — Sheet 1 as first drawn | 2.70" | 49.7° → **2.0 mm** | 15.9° / 40.6° → **6.4 mm** |
+| head, 2.5" up | 3.10" | 41.7° → 2.4 mm | 14.1° / 44.3° → 7.2 mm |
+| **head top (1.0", 4.3") — chosen** | **3.39"** | 38.1° → **2.7 mm** | 13.2° / 45.9° → **7.5 mm** |
+| head top, 4.8" up | 3.47" | 37.2° → 2.7 mm | 13.0° / 46.2° → 7.4 mm |
+
+The hold (6.3 N·m) and the shift (24.2°) do not move: they depend on where the mass is sideways, not how high. The pack is 9 % of the mass, so §3's verdict stands in kind — it buys a third more capture region, not a stand. A lighter weighed body would not rescue it (2.5 kg body: 1.9–2.2 mm planted / 4.5–6.1 mm both hips).
+
+**Levers left, measured on the same model:**
+
+- **Both-hip control** — the free leg as a counter-pendulum: 2.7 → 7.5 mm. The biggest one, and it is controls only. The sandbox holds the free hip stiff in the poise today.
+- **Hip-roll travel** — the ±34.4° stop is a drawing assumption: ±40° → 4.2 / 8.7 mm, ±45° → 5.5 / 9.8 mm, ±52° → 7.2 / 11.2 mm (planted / both). Needs the yokes to clear the band and the head on Sheet 1.
+- **CoM knowledge** — a stand needs the estimate inside the capture region. The lump model's ±20 mm has to come down to a few mm: weigh the parts, find the CoM on a bench tilt test, trim it online in the poise.
+- **Tucking the free leg is worse** (2.9 mm with both hips) — keep it long; it is the counterweight.
+
+With both hips, ±45° of roll and a CoM known to a few mm, a quiet stand on a flat floor looks possible but fragile. That is a model estimate, not a demonstration: the next step is the sandbox (both-hip poise, its body re-tuned to 3.39" — open call 17).

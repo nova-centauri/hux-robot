@@ -53,6 +53,11 @@
   M.asOf = SPEC.asOf;
   M.hipLateral = SPEC.layout.hipRollAxisIn;
   M.legPlane = SPEC.layout.legPlaneIn;
+  /* Body lump CoM height above the hip axes and its inertias come from the pack placement
+     (spec.js bodyLump(); was a fixed 0.45 × bodyAboveHip = 2.7"). */
+  M.bodyComUp = SPEC.layout.bodyComUpIn;
+  M.bodyIpitch = SPEC.bodyLump().Iz;
+  M.bodyIroll = SPEC.bodyLump().Ix;
   M.motorKnee = { w: ACT.envIn.knee.w, h: ACT.envIn.knee.h, t: ACT.envIn.knee.t };
   M.motorSwing = { w: ACT.envIn.swing.w, h: ACT.envIn.swing.h, t: ACT.envIn.swing.t };
   M.motorRollD = ACT.envIn.rollD;
@@ -73,7 +78,9 @@
   const spatial = Spatial.create(M);
 
   const P = {
-    tPush: 0.44,      /* s, duration of the rear-leg shove with both wheels down */
+    tPush: 0.48,      /* s, duration of the rear-leg shove with both wheels down. Re-centred in the window 2026-09-27
+                         when the pack moved to the top of the head (was 0.44: the same shove throws a higher body
+                         harder, and 0.44 now lands on the edge of the forward room) */
     wheelTau: ACT.peak.wheel, /* N·m, peak torque the front wheel can put on the tread (RS05: 5.5; the 2026-09-22 study used 3.0) */
     catchRoom: 1.0,   /* in, how far the front wheel may roll back in its slot during the catch */
     landErr: 0,       /* in, where the front wheel actually lands relative to slot center (+ = forward) */
@@ -210,7 +217,7 @@
   function comOf(left, right) {
     const hip = left.hip;
     const parts = [
-      [M.mass.body, hip.x + P.bodyCom, hip.y + M.bodyAboveHip * 0.45],
+      [M.mass.body, hip.x + P.bodyCom, hip.y + M.bodyComUp],
       [M.mass.hips, hip.x, hip.y],
       [M.mass.knee, left.knee.x, left.knee.y],
       [M.mass.knee, right.knee.x, right.knee.y],
@@ -502,7 +509,7 @@
   function lumpsOf(sol) {
     const hip = sol.pA.hip;
     return [
-      [M.mass.body, hip.x + P.bodyCom, hip.y + M.bodyAboveHip * 0.45],
+      [M.mass.body, hip.x + P.bodyCom, hip.y + M.bodyComUp],
       [M.mass.hips, hip.x, hip.y],
       [M.mass.knee, sol.pA.knee.x, sol.pA.knee.y],
       [M.mass.knee, sol.pB.knee.x, sol.pB.knee.y],
@@ -512,7 +519,7 @@
   }
 
   function bodyInertia() {
-    return M.mass.body * ((M.bodyLength * INCH) ** 2 + (M.bodyAboveHip * INCH) ** 2) / 12;
+    return M.bodyIpitch * (M.mass.body / ACT.lumps.body); /* spec.bodyLump(): shell box + the placed pack, scaled with the mass knob */
   }
 
   function angMom(sol0, sol1, dt, cx, cy) {

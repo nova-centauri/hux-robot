@@ -46,7 +46,7 @@ Why: the shortlisted CAN QDD actuators (RobStride 00/01/02) specify **24–60 V*
 | One pack vs two | **One.** If a second is ever added in parallel: same cell count, chemistry and age, matched to within ~0.1 V before connecting, a fuse per pack. | Decided 2026-09-26. |
 | Capacity / C | **3300 mAh / 50–60C → ~98 Wh.** Budget 40–80 W typical → **1–2 h**. | Measure real draw at P2 and log it; re-size then. |
 | Connector | **XT90** on the pack. **XT90-S** (anti-spark) on the harness side, or a precharge resistor / soft-start on the distribution board. | A bare XT90 into FOC bulk capacitance arcs at 25 V and pits the contacts. |
-| Mass / volume | **~700 g, ~150 × 50 × 60 mm** (the number `spec.js` and Sheet 1 draw) | Measure the real pack; brands vary. In the 7.75 kg picture's body lump; Sheet 1 puts it on the hip-band floor, 1" forward of the roll axes. |
+| Mass / volume | **~700 g, ~150 × 60 × 50 mm** (the number `spec.js` and the sheets draw) | Measure the real pack; brands vary. In the 7.75 kg picture's body lump. **At the top of the head**, long axis lateral, 1" forward, 4.3" above the roll axes (2026-09-27); leads run down to the XT90-S in the hip band. |
 | Charger | 8S-capable balance charger | Bench tool, not BOM. Many hobby chargers stop at 6S — check before the pack arrives. |
 | Motor bus | **8S direct** via a real distribution board / harness | High-draw FOC. Not through the MCU or any logic PCB. |
 | 5 V rail | MCU, RX, **Pi 5 (5 V / 5 A, USB-PD-class connector)** | A 25 W buck, not a servo BEC. |

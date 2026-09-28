@@ -46,9 +46,26 @@
     layout: {
       hipRollAxisIn: ROLL_AXIS_IN, /* lateral, from the body centreline, each side */
       legPlaneIn: 4.75,        /* lateral, the tube / joint plane, each side */
-      bodyComForwardIn: 1.0,   /* body lump ahead of the hip roll axes */
-      hipBandWidthIn: 2 * (ROLL_AXIS_IN + ACT.envIn.rollD / 2), /* two RS02 roll housings flanking the pack */
-      packIn: { l: 150 / 25.4, w: 50 / 25.4, h: 60 / 25.4 }, /* 8S 3300 mAh, docs/electronics.md */
+      hipBandWidthIn: 2 * (ROLL_AXIS_IN + ACT.envIn.rollD / 2), /* two RS02 roll housings */
+      packIn: { l: 150 / 25.4, w: 60 / 25.4, h: 50 / 25.4 }, /* 8S 3300 mAh (~150 × 60 × 50 mm), docs/electronics.md, as it lies in the head: l lateral, w fore-aft, h vertical */
+      /* The body lump (actuators.js lumps.body, 4.35 kg) split into the pack and everything else
+         (head and band shells, electronics, harness, display, cameras). Positions are the part's
+         centre from the midpoint of the hip roll axes: fwd + ahead, up + above. bodyRest is the lump
+         picture as it stood before the pack was placed (the whole body at +1.0" / +2.7", with the
+         pack at the hip axes) — a picture, not a weighed shell. The pack is placed on purpose
+         (below). bodyComForwardIn / bodyComUpIn below are computed, never typed. */
+      /* Steve 2026-09-27: no reaction wheel; move the battery up to an optimal position. The sweep
+         (studies/pack-sweep.js) puts it at the top of the head, long axis lateral, 1" forward:
+         the one-wheel capture region peaks with the pack 3.5–4.3" up (higher only grows the
+         free-leg swing); height is neutral for the stair (need 0.79 → 0.80 kg·m²/s, window 0.15),
+         but the same shove throws a higher body harder, so the shove re-times gentler (kin.js
+         tPush); the throw window is widest with the body CoM at +1.0", which the pack at 1"
+         forward keeps. 4.3" up leaves ~0.6" over the pack for the top wall and the balance lead;
+         1" forward leaves ~1.8" of head in front of it for the display, eyes and stereo pair.
+         The pack is 9 % of the mass: this buys about a third more capture region, not a static
+         stand. Was in the hip band between the roll housings, at the roll-axis height (fwd 1.0, up 0.0). */
+      pack: { kg: 0.70, fwdIn: 1.0, upIn: 4.3, where: "top of the head, long axis lateral, 1\" forward (2026-09-27)" },
+      bodyRest: { fwdIn: 1.0, upIn: (ACT.lumps.body * 2.7 - 0.70 * 0.0) / (ACT.lumps.body - 0.70) },
       landing: "rear of the next slot; a forward landing error is the failure mode"
     },
 
@@ -88,6 +105,28 @@
     const w0 = ACT.noLoadRadS(ACT.axes.wheel, volts);
     return w0 * (1 - reserveNm / ACT.peak.wheel) * R;
   }
+  /* The body lump's CoM and principal inertias (kg·m², about its own CoM; x fore-aft (roll),
+     y vertical (yaw), z lateral (pitch)) from the rest (a uniform box the size of the shell,
+     8" × 7" × 7.55" from the band floor to the head top) plus the pack as a box at its position.
+     Pass a pack override { fwdIn, upIn } to evaluate another placement. */
+  function bodyLump(packOverride) {
+    const L = spec.layout, pk = Object.assign({}, L.pack, packOverride || {});
+    const mB = ACT.lumps.body, mP = pk.kg, mR = mB - mP;
+    const fwd = (mR * L.bodyRest.fwdIn + mP * pk.fwdIn) / mB;
+    const up = (mR * L.bodyRest.upIn + mP * pk.upIn) / mB;
+    const box = (m, a, b) => m * ((a * IN) ** 2 + (b * IN) ** 2) / 12;
+    const len = 8, wid = 7, ht = 7.55, D = L.packIn;
+    const dR = { x: (L.bodyRest.fwdIn - fwd) * IN, y: (L.bodyRest.upIn - up) * IN };
+    const dP = { x: (pk.fwdIn - fwd) * IN, y: (pk.upIn - up) * IN };
+    const Ix = box(mR, wid, ht) + mR * dR.y ** 2 + box(mP, D.l, D.h) + mP * dP.y ** 2;
+    const Iz = box(mR, len, ht) + mR * (dR.x ** 2 + dR.y ** 2) + box(mP, D.w, D.h) + mP * (dP.x ** 2 + dP.y ** 2);
+    const Iy = box(mR, len, wid) + mR * dR.x ** 2 + box(mP, D.l, D.w) + mP * dP.x ** 2;
+    return { kg: mB, fwdIn: fwd, upIn: up, Ix: Ix, Iy: Iy, Iz: Iz, pack: pk };
+  }
+  spec.bodyLump = bodyLump;
+  Object.defineProperty(spec.layout, "bodyComForwardIn", { enumerable: true, get: () => bodyLump().fwdIn });
+  Object.defineProperty(spec.layout, "bodyComUpIn", { enumerable: true, get: () => bodyLump().upIn });
+
   spec.wheelAtSpeed = wheelAtSpeed;
   spec.speedWithReserve = speedWithReserve;
 

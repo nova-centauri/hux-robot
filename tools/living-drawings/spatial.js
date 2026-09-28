@@ -96,7 +96,7 @@
       const body = result.body;
       const left = result.legs.left, right = result.legs.right;
       const lumps = [
-        { m: M.mass.body, p: { x: body.x + P.bodyCom, y: body.y + M.bodyAboveHip * 0.45, z: body.z }, owner: "body" },
+        { m: M.mass.body, p: { x: body.x + P.bodyCom, y: body.y + (M.bodyComUp !== undefined ? M.bodyComUp : M.bodyAboveHip * 0.45), z: body.z }, owner: "body" },
         ...["left", "right"].flatMap(name => {
           const leg = result.legs[name];
           return [{ m: M.mass.hips / 2, p: leg.hip, owner: name },

@@ -56,7 +56,7 @@
     hubIn: SPEC.sheet2.hub.flushOutboard ? M.track / 2 + M.wheelWidth / 2 - ENV.wheelW : M.track / 2 - ENV.wheelW / 2,
     hubOut: SPEC.sheet2.hub.flushOutboard ? M.track / 2 + M.wheelWidth / 2 : M.track / 2 + ENV.wheelW / 2,
     head: M.bodyWidth / 2, env: M.envelopeWidth / 2,
-    pack: L.packIn.w / 2
+    pack: L.packIn.l / 2
   };
   const ROLL_X = -2.4; /* the roll housing's centre, aft of the swing axis, so it clears the RS00 */
   const hubProud = Math.max(0, Z.hubOut - Z.tireOut);
@@ -85,14 +85,16 @@
     line(svg, F.X(-9), F.Y(M.envelopeHeight), F.X(9), F.Y(M.envelopeHeight), "#c8bfae", 1, "6 4");
     note(svg, F.X(-8.8), F.Y(M.envelopeHeight) - 4, "24\" envelope (R35)");
 
-    /* body: shell 8" × 6" above the hip, hip band below it, pack 1" forward, CoM */
+    /* body: shell 8" × 6" above the hip, hip band below it, the pack high in the head, the body CoM */
     const bodyTop = hip.y + M.bodyAboveHip;
     const bandBottom = hip.y - ENV.rollD / 2;
     /* shell: head above the hip axis, hip band around it (the roll housings' height) */
     rect(svg, F.X(hip.x - M.bodyLength / 2), F.Y(bodyTop), M.bodyLength * D.S, (bodyTop - bandBottom) * D.S, "#d5e0ea", "#1f4e79");
-    /* pack, in the hip band, centred 1" ahead of the hip axes */
-    box(svg, F, hip.x + L.bodyComForwardIn, hip.y, L.packIn.l, L.packIn.h, "#efe2b8", "#8a5a12");
-    text(svg, F.X(hip.x + L.bodyComForwardIn + 1.2), F.Y(hip.y + 0.7), "8S pack", "middle", 9.5, "#5c3d0a");
+    /* pack, at the top of the head (spec.layout.pack), and the body lump's CoM (computed) */
+    box(svg, F, hip.x + L.pack.fwdIn, hip.y + L.pack.upIn, L.packIn.w, L.packIn.h, "#efe2b8", "#8a5a12");
+    text(svg, F.X(hip.x + L.pack.fwdIn), F.Y(hip.y + L.pack.upIn) + 4, "8S pack", "middle", 9.5, "#5c3d0a");
+    cross(svg, F.X(hip.x + L.bodyComForwardIn), F.Y(hip.y + L.bodyComUpIn), "#1f4e79");
+    note(svg, F.X(hip.x + L.bodyComForwardIn) - 60, F.Y(hip.y + L.bodyComUpIn) + 4, "body CoM", "#1f4e79");
     /* roll RS02 seen from the side: its length along x, its square height, on the roll axis behind the swing axis */
     motor(svg, F, hip.x + ROLL_X, hip.y, ENV.rollL, ENV.rollD, "roll");
     /* raised leg first (behind), then the planted leg */
@@ -128,8 +130,8 @@
     ext(svg, F.X(hip.x), F.Y(hip.y), F.X(-9.2), F.Y(hip.y));
     dimV(svg, F.X(-6.6), F.Y(hip.y), F.Y(bodyTop), inch(M.bodyAboveHip), true);
     dimH(svg, F.X(-slot - R), F.X(slot + R), F.Y(-0.5), "±" + inch(slot, 2) + " roll room in the slot", false);
-    dimH(svg, F.X(hip.x), F.X(hip.x + L.bodyComForwardIn), F.Y(bodyTop + 0.6), "+" + inch(L.bodyComForwardIn) + " pack / CoM");
-    ext(svg, F.X(hip.x), F.Y(hip.y), F.X(hip.x), F.Y(bodyTop + 0.6)); ext(svg, F.X(hip.x + 1), F.Y(bodyTop), F.X(hip.x + 1), F.Y(bodyTop + 0.6));
+    dimH(svg, F.X(hip.x), F.X(hip.x + L.bodyComForwardIn), F.Y(bodyTop + 0.6), "+" + inch(L.bodyComForwardIn, 2) + " body CoM");
+    ext(svg, F.X(hip.x), F.Y(hip.y), F.X(hip.x), F.Y(bodyTop + 0.6)); ext(svg, F.X(hip.x + L.bodyComForwardIn), F.Y(hip.y + L.bodyComUpIn), F.X(hip.x + L.bodyComForwardIn), F.Y(bodyTop + 0.6));
     note(svg, F.X(-8.9), F.Y(2.0), "knee " + inch(Math.abs(stance.knee.x)) + " aft");
     note(svg, F.X(-8.9), F.Y(1.2), "7.5\" + 7.5\" tubes");
     text(svg, F.X(-9.6), F.Y(25.4), "SIDE — planted at 92%, raised wheel on the next tread", "start", 12);
@@ -143,7 +145,8 @@
       ["Knee holds, 75% crouch", nm(Math.abs(holdCrouch.knee)), ""],
       ["Knee holds, standing up on the shelf", nm(Math.abs(holdStand.knee)) + " (" + nm(standMotor) + " at the motor with the spring) vs RS02 " + ACT.rated.knee + " rated / " + ACT.peak.knee + " peak", Math.abs(holdStand.knee) > ACT.peak.knee ? "bad" : ""],
       ["Hip swing holds, one leg at 92%", nm(Math.abs(holdStance.hip)) + " vs RS00 " + ACT.rated.hip + " rated", ""],
-      ["Lump picture", fmt(M.exampleMassKg, 2) + " kg, body " + fmt(M.mass.body, 2) + " with the pack " + inch(L.bodyComForwardIn) + " ahead of the hips", ""],
+      ["Lump picture", fmt(M.exampleMassKg, 2) + " kg; body " + fmt(M.mass.body, 2) + " kg with its CoM " + inch(L.bodyComForwardIn, 2) + " ahead of and " + inch(L.bodyComUpIn, 2) + " above the hip axes", ""],
+      ["Pack", "top of the head: centre " + inch(L.pack.fwdIn, 1) + " forward, " + inch(L.pack.upIn, 1) + " up, long axis lateral (" + inch(L.packIn.l, 1) + " × " + inch(L.packIn.w, 1) + " × " + inch(L.packIn.h, 1) + ") — high for the one-wheel stand, forward for the throw (studies/pack-sweep.js)", ""],
       ["Soffit", inch(H - M.soffit - M.wheelOd) + " of air under a 1\" soffit with a 6\" tire", "good"]
     ]);
   }
@@ -162,14 +165,14 @@
     text(svg, F.X(Z.env) - 4, F.Y(24.6), "14\" envelope (R15)", "end", 10.5, "#5e6a78");
     const bodyTop = hip.y + M.bodyAboveHip;
     const bandBottom = hip.y - ENV.rollD / 2, bandTop = hip.y + ENV.rollD / 2;
-    /* head above the hip band; hip band (two roll housings + the pack between them) */
+    /* head above the hip band (the pack at its top); hip band (two roll housings) */
     rect(svg, F.X(-Z.head), F.Y(bodyTop), 2 * Z.head * D.S, (bodyTop - bandTop) * D.S, "#d5e0ea", "#1f4e79");
     [-1, 1].forEach(sg => {
       motor(svg, F, sg * Z.rollAxis, hip.y, ENV.rollD, ENV.rollD, "RS02 roll");
       circle(svg, F.X(sg * Z.rollAxis), F.Y(hip.y), 3, "#fbf8f1", "#1b2430", 1.2);
     });
-    box(svg, F, 0, hip.y, L.packIn.w, L.packIn.h, "#efe2b8", "#8a5a12");
-    text(svg, F.X(0), F.Y(hip.y) + 4, "pack", "middle", 9.5, "#5c3d0a");
+    box(svg, F, 0, hip.y + L.pack.upIn, L.packIn.l, L.packIn.h, "#efe2b8", "#8a5a12");
+    text(svg, F.X(0), F.Y(hip.y + L.pack.upIn) + 4, "8S pack", "middle", 9.5, "#5c3d0a");
     /* legs: at 92% the two tubes overlap in this view — one bar from the hip to the axle height,
        the knee RS02 inboard of the leg plane, the RS00 outboard at the hip */
     [-1, 1].forEach(sg => {
@@ -213,7 +216,7 @@
     const levelIn = 2 * (Z.axle - Z.rollAxis) * Math.tan(-g92);
     fill("r2", [
       ["Hip roll axes", inch(Z.rollAxis) + " from the centreline (requirement ≤ 3\", 2026-09-26)", Z.rollAxis <= 3 ? "good" : "bad"],
-      ["Hip band", inch(2 * Z.rollOut) + " wide: two RS02 roll housings (" + inch(ENV.rollD) + " sq) flanking the " + inch(L.packIn.w) + " pack", ""],
+      ["Hip band", inch(2 * Z.rollOut) + " wide: two RS02 roll housings (" + inch(ENV.rollD) + " sq); between them the Teensy, IMU, step-down and XT90-S. The pack is in the head, " + inch(L.pack.upIn, 1) + " up", ""],
       ["Head", inch(M.bodyWidth) + " wide above the band; the housings sit " + inch(rollProud, 2) + " proud of its faces", ""],
       ["Leg plane", inch(Z.leg, 2) + " out — " + inch(Z.leg - Z.rollOut, 2) + " clear of the roll housing", Z.leg > Z.rollOut ? "good" : "bad"],
       ["Knee RS02", "inboard of the leg plane, " + inch(Z.kneeIn, 2) + "–" + inch(Z.kneeOut, 2) + " — clears the tire (" + inch(Z.tireIn) + " in) at every fold", ""],
@@ -259,8 +262,8 @@
       text(svg, F.X(sg * Z.rollAxis), F.Y(hip.x + ROLL_X) + 3, "RS02 roll", "middle", 9.5, "#fbf8f1");
       line(svg, F.X(sg * Z.rollAxis), F.Y(hip.x - 3.5), F.X(sg * Z.rollAxis), F.Y(hip.x + 2.5), "#5e6a78", 0.8, "10 4 2 4");
     });
-    rect(svg, F.X(-Z.pack), F.Y(hip.x + L.bodyComForwardIn + L.packIn.l / 2), 2 * Z.pack * D.S, L.packIn.l * D.S, "#efe2b8", "#8a5a12");
-    text(svg, F.X(0), F.Y(hip.x + L.bodyComForwardIn) + 4, "8S pack", "middle", 9.5, "#5c3d0a");
+    rect(svg, F.X(-Z.pack), F.Y(hip.x + L.pack.fwdIn + L.packIn.w / 2), 2 * Z.pack * D.S, L.packIn.w * D.S, "#efe2b8", "#8a5a12", "3 2");
+    text(svg, F.X(0), F.Y(hip.x + L.pack.fwdIn) + 4, "8S pack (in the head, above)", "middle", 9.5, "#5c3d0a");
     [-1, 1].forEach(sg => {
       const z = sg * Z.leg;
       line(svg, F.X(sg * Z.rollOut), F.Y(hip.x), F.X(z), F.Y(hip.x), "#1b2430", 5);           /* yoke */
@@ -276,7 +279,7 @@
     dimH(svg, F.X(-Z.head), F.X(Z.head), F.Y(hip.x + M.bodyLength / 2 + 0.6), inch(M.bodyWidth) + " × " + inch(M.bodyLength) + " head");
     text(svg, F.X(-9.2), F.Y(7.3), "PLAN — hip band, leg planes, knees aft at 92% · forward ↑", "start", 12);
     fill("r3", [
-      ["Hip band", "RS02 roll housings on the roll axes, flanges forward into the yokes; the pack between them, " + inch(L.bodyComForwardIn) + " forward", ""],
+      ["Hip band", "RS02 roll housings on the roll axes, flanges forward into the yokes; the pack is above, in the head, " + inch(L.pack.fwdIn, 1) + " forward", ""],
       ["Yoke", "from the roll flange out to the leg plane at " + inch(Z.leg) + "; carries the RS00 outboard and the hip pivot", ""],
       ["Knee", inch(Math.abs(stance.knee.x)) + " aft of the hip and axle at 92%; the RS02 sits inboard of the tube plane", ""],
       ["Wire path (R21)", "RS05 lead: axle → inboard face of the lower tube → knee fitting → upper tube → yoke. No belt runs.", ""],

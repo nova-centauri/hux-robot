@@ -277,17 +277,18 @@
     const b = byKind.body.g;
     const bodyH = s.bodyUp + s.bodyDown;
     /* The body shell goes see-through once the interior parts exist, so the pack and the MCU
-       show where the mass sketch wants them (docs/mechanical.md: pack low and central). */
+       show where the layout puts them (spec.js layout.pack: top of the head, 2026-09-27). */
     const interior = !!vendorGeo.teensy41;
     add(b, new THREE.BoxGeometry(s.bodyLen, bodyH, s.bodyWid), mat(C.body, interior ? { roughness: 0.55, transparent: true, opacity: 0.42, depthWrite: false } : { roughness: 0.55 }), { x: 0, y: (s.bodyUp - s.bodyDown) / 2, z: 0 });
     if (interior) {
-      /* 8S 3300 mAh pack, the BOM's ~150 × 50 × 60 mm class; no SKU, so a box. Long axis
-         forward, standing on the body floor. */
-      const pack = { l: 0.150, w: 0.050, h: 0.060 };
-      const packM = add(b, new THREE.BoxGeometry(pack.l, pack.h, pack.w), vendorMat.pack, { x: 0, y: -s.bodyDown + pack.h / 2 + 0.004, z: 0 });
+      /* 8S 3300 mAh pack (~150 × 60 × 50 mm, no SKU, so a box) where spec.js puts it: top of the
+         head, long axis lateral, forward of centre. */
+      const PK = window.HuxSpec.layout.pack, PD = window.HuxSpec.layout.packIn;
+      const pack = { l: PD.l * IN, w: PD.w * IN, h: PD.h * IN };
+      const packM = add(b, new THREE.BoxGeometry(pack.w, pack.h, pack.l), vendorMat.pack, { x: PK.fwdIn * IN, y: PK.upIn * IN, z: 0 });
       packM.userData.vendor = false;
-      /* Teensy 4.1 flat above the pack, USB end forward. */
-      vendorPart(b, "teensy41", { x: -0.012, y: -s.bodyDown + pack.h + 0.022, z: 0 }, { x: 0, y: 1, z: 0 }, vendorMat.board);
+      /* Teensy 4.1 flat in the hip band between the roll housings, USB end forward. */
+      vendorPart(b, "teensy41", { x: -0.012, y: 0.4 * IN, z: 0 }, { x: 0, y: 1, z: 0 }, vendorMat.board);
     }
     /* Face and cameras placed as in the 2D drawings (app.js drawFaceSide / drawFaceTop). */
     const front = s.bodyLen / 2;
@@ -599,6 +600,7 @@
     tireZeta: function (x) { return x.toFixed(2); },
     massScale: function (x) { return (M.actuators.lumps.total * x).toFixed(1) + " kg lumps"; },
     bodyCom: function (x) { return x.toFixed(1) + "\""; },
+    bodyComUp: function (x) { return x.toFixed(2) + "\""; },
     legHz: function (x) { return x.toFixed(1) + " Hz"; },
     legZeta: function (x) { return x.toFixed(2); },
     sensorDelayMs: function (x) { return x.toFixed(0) + " ms"; },

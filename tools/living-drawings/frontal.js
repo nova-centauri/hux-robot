@@ -113,7 +113,8 @@
    *   M          HuxKin.M (geometry + lumps)
    *   extension  hip-to-axle as a fraction of the full leg (0.92 = the drawings' stance)
    *   hipLateral override, in
-   *   comUp      body lump height above the hip axes, in (kin.js: 0.45 × bodyAboveHip)
+   *   comUp      body lump height above the hip axes, in (default: kin.js M.bodyComUp, from spec.js pack placement)
+   *   bodyIroll  body lump roll inertia about its own CoM, kg·m² (default: M.bodyIroll)
    *   freeLen    free leg hip-to-axle, in (default: same as the planted leg)
    *   freeRoll   free leg roll relative to the body, rad (+ swings its wheel toward the planted side)
    *   massScale
@@ -128,7 +129,7 @@
     const L = M.link * IN;
     const d = 2 * L * (opts.extension || M.stanceFraction);
     const d3 = (opts.freeLen !== undefined ? opts.freeLen * IN : d);
-    const comUp = (opts.comUp !== undefined ? opts.comUp : 0.45 * M.bodyAboveHip) * IN;
+    const comUp = (opts.comUp !== undefined ? opts.comUp : (M.bodyComUp !== undefined ? M.bodyComUp : 0.45 * M.bodyAboveHip)) * IN;
     /* lumps from kin.js (the locked actuator set, actuators.js): body 4.35, each hip yoke 0.75,
        knee 0.46, wheel 0.49 — 7.75 kg. Falls back to actuators.js directly if M carries no mass. */
     const mm = M.mass || (root.HuxActuators || require("./actuators.js")).lumps;
@@ -216,7 +217,7 @@
       const Mm = zeros(n, n);
       base.forEach((e, i) => { for (let a = 0; a < n; a++) for (let b = 0; b < n; b++) Mm[a][b] += e.m * (Jz[i][a] * Jz[i][b] + Jy[i][a] * Jy[i][b]); });
       /* a little own inertia for the trunk (box) so the body is not a point */
-      const Ibody = lump.body * (Math.pow(M.bodyWidth * IN, 2) + Math.pow(M.bodyAboveHip * IN, 2)) / 12;
+      const Ibody = (opts.bodyIroll !== undefined ? opts.bodyIroll : (M.bodyIroll !== undefined ? M.bodyIroll * ms : lump.body * (Math.pow(M.bodyWidth * IN, 2) + Math.pow(M.bodyAboveHip * IN, 2)) / 12));
       for (let a = 0; a < 2; a++) for (let b = 0; b < 2; b++) Mm[a][b] += Ibody;
       /* gravity torque g(q) = ∂V/∂q, V = Σ m g y */
       function gvec(qq) {
