@@ -4,7 +4,7 @@
   "description": "Active V1-PROOF planning page and preserved stair studies. Pages need no build.",
   "license": "MIT",
   "scripts": {
-    "test": "python3 ../v1-proof/test_review.py && python3 ../v1-proof/review.py --check && node ../v1-proof/test_sim.js && node ../v1-proof/run_sim.js --check && python3 ../v1-proof/report_sim.py --check",
+    "test": "python3 ../v1-proof/test_review.py && python3 ../v1-proof/review.py --check && node ../v1-proof/test_sim.js && node ../v1-proof/test_sandbox.js && node ../v1-proof/run_sim.js --check && python3 ../v1-proof/report_sim.py --check",
     "engineering": "python3 ../v1-proof/review.py --write",
     "test:legacy": "python3 ../engineering/test_review.py && node validation-test.js && node assumption-audit.js > /dev/null && node frontal.js > /dev/null && node sim-test.js",
     "engineering:legacy": "python3 ../engineering/review.py --write",

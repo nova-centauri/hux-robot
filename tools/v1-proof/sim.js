@@ -3,8 +3,12 @@
  * No pose animation, planar lock, support force or simulator velocity feedback.
  */
 "use strict";
-const R = require("../living-drawings/node_modules/@dimforge/rapier3d-compat");
-const model = require("./model.json");
+// Node: require() as before. Browser (3D sandbox): HuxProofSimFactory(RAPIER, window.HuxProof.model)
+// returns the same exports, so the sandbox runs this exact plant and controller.
+(function (root, factory) {
+  if (typeof module === "object" && module.exports) module.exports = factory(require("../living-drawings/node_modules/@dimforge/rapier3d-compat"), require("./model.json"));
+  else root.HuxProofSimFactory = factory;
+})(typeof self !== "undefined" ? self : this, function (R, model) {
 const G = 9.81, TAU = 2 * Math.PI;
 const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
 const v = (x=0, y=0, z=0) => ({x,y,z});
@@ -211,4 +215,5 @@ class Simulation {
   finish() { const duration=this.tick*this.dt; const out={...this.metrics,rmsCurrent:this.metrics.currentSq.map(x=>Math.sqrt(x/duration)),duration,final:this.out};delete out.currentSq;return out; }
   free(){this.world.free();}
 }
-module.exports={R,model,DEFAULTS,Simulation,motorLimit,allocate,gains,random,clamp};
+return {R,model,DEFAULTS,Simulation,motorLimit,allocate,gains,random,clamp};
+});

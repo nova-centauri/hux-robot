@@ -11,6 +11,7 @@ The active objective is a useful, inexpensive proof robot. **Under $1,000; reuse
 - [x] Selected hardware baseline and physical mobility/disturbance protocol.
 - [x] Pinned-leg 3D maneuver simulation, uncertainty sweep and saved challenge cases.
 - [x] Previous plans preserved and legacy pages labeled.
+- [x] Drivable [3D sandbox](tools/living-drawings/proof-sandbox.html) on the study's own simulator and the protocol fixtures, with size references. Leg-height motion there is a preview only.
 
 ## Next physical work
 

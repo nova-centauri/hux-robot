@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>V1-PROOF · 3D sandbox</title>
+  <meta name="description" content="Drive the V1-PROOF robot at full scale on the physical test fixtures, using the same rigid-body plant and balance controller as the saved simulation study.">
+  <link rel="stylesheet" href="proof.css">
+  <link rel="stylesheet" href="proof-sandbox.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <header><div class="topbar"><a class="wordmark" href="index.html">Hux <span>V1-PROOF</span></a><nav aria-label="Main navigation"><a href="index.html">Model &amp; budget</a><a href="proof-sandbox.html" aria-current="page">3D sandbox</a><a href="proof-simulation.html">Simulations</a><a href="../../docs/v1-proof-hardware.md">Hardware decisions</a><a href="../../docs/v1-proof-validation.md">Physical tests</a></nav></div></header>
+  <main>
+    <section class="sbx-head">
+      <div>
+        <p class="eyebrow">3D sandbox / 28 September 2026</p>
+        <h1>Drive it.</h1>
+        <p class="intro">V1-PROOF at full scale on the physical test fixtures. The physics and balance controller are the same code as the saved study, not a look-alike.</p>
+      </div>
+      <dl class="sbx-stamp" id="stamp" aria-label="Model dimensions"></dl>
+    </section>
+
+    <div class="sbx-card">
+      <div class="sbx-stage" id="stage" tabindex="0" aria-label="3D view of V1-PROOF. Click here, then drive with the keyboard; keys are listed under the view.">
+        <canvas id="view"></canvas>
+        <div class="hud hud-left" id="hudLeft" aria-live="off">Loading three.js and Rapier…</div>
+        <div class="hud hud-right" id="hudRight"></div>
+        <div class="hud hud-banner" id="banner" hidden></div>
+        <div class="pad" id="pad" aria-hidden="true">
+          <button type="button" data-hold="up">▲</button>
+          <button type="button" data-hold="left">◀</button>
+          <button type="button" data-hold="down">▼</button>
+          <button type="button" data-hold="right">▶</button>
+          <button type="button" data-hold="lower" class="pad-leg">Q</button>
+          <button type="button" data-hold="raise" class="pad-leg">E</button>
+        </div>
+      </div>
+
+      <div class="sbx-bar">
+        <div class="sbx-field">
+          <span class="sbx-label">Start lane</span>
+          <select id="lane" aria-label="Start lane"></select>
+        </div>
+        <div class="sbx-field">
+          <span class="sbx-label">Camera</span>
+          <select id="camera" aria-label="Camera">
+            <option value="chase">Chase</option>
+            <option value="orbit">Orbit (drag)</option>
+            <option value="side">Side</option>
+            <option value="front">Front</option>
+            <option value="top">Top</option>
+          </select>
+        </div>
+        <div class="sbx-field">
+          <span class="sbx-label">Time</span>
+          <select id="timeScale" aria-label="Time scale">
+            <option value="1" selected>Real time</option>
+            <option value="0.5">Half</option>
+            <option value="0.25">Quarter</option>
+            <option value="0.1">Tenth</option>
+          </select>
+        </div>
+        <div class="sbx-field sbx-grow sbx-leg">
+          <span class="sbx-label">Leg angle <output id="legOut"></output></span>
+          <div class="sbx-row">
+            <button type="button" data-leg="15">Tall 15°</button>
+            <button type="button" data-leg="30" class="active">Pinned 30°</button>
+            <button type="button" data-leg="45">Low 45°</button>
+          </div>
+          <input id="leg" type="range" min="15" max="45" step="1" value="30" aria-label="Leg angle target">
+        </div>
+        <div class="sbx-field sbx-grow">
+          <span class="sbx-label">Drive speed <output id="speedOut"></output></span>
+          <input id="speed" type="range" min="0.05" max="0.5" step="0.05" value="0.25" aria-label="Drive speed">
+        </div>
+      </div>
+      <div class="sbx-bar sbx-actions">
+        <div class="sbx-row" role="group" aria-label="Shoves at 0.20 m, as in the physical protocol">
+          <span class="sbx-label">Shove</span>
+          <button type="button" data-shove="fore">0.8 N·s fwd</button>
+          <button type="button" data-shove="back">0.8 N·s back</button>
+          <button type="button" data-shove="left">0.4 N·s left</button>
+          <button type="button" data-shove="right">0.4 N·s right</button>
+          <button type="button" data-shove="big" title="Study challenge case: 4 N·s at 0.24 m. Expected to fail.">4 N·s (fails)</button>
+        </div>
+        <div class="sbx-row" role="group" aria-label="Actions">
+          <button type="button" id="btnKill" aria-pressed="false">Kill motors</button>
+          <button type="button" id="btnReset">Reset</button>
+          <button type="button" id="btnPause" aria-pressed="false">Pause</button>
+          <label class="sbx-check"><input type="checkbox" id="showDims" checked> Dimensions &amp; CoM</label>
+          <label class="sbx-check"><input type="checkbox" id="showRefs" checked> Size references</label>
+        </div>
+      </div>
+
+      <p class="sbx-keys"><b>Drive</b> W A S D or arrows · <b>Shift</b> for the drive-speed slider's top (0.5 m/s is unqualified) · <b>Legs</b> Q lower / E raise, or 1 tall, 2 pinned 30°, 3 low · <b>Shove</b> F forward, B back, Z left, X right · <b>R</b> reset · <b>K</b> kill · <b>C</b> camera · <b>P</b> pause · <b>Mouse wheel</b> zoom. A gamepad works: left stick drives, right stick moves the legs, A shoves, B resets.</p>
+
+      <div class="sbx-charts">
+        <div>
+          <h3>Pitch from trim, last 10 s</h3>
+          <canvas id="chartPitch" class="chart" aria-label="Pitch error against the ±12° study gate"></canvas>
+        </div>
+        <div>
+          <h3>Motor current, last 10 s</h3>
+          <canvas id="chartCurrent" class="chart" aria-label="Left and right motor current against the 2.5 A limit"></canvas>
+        </div>
+        <div>
+          <h3>Speed vs command, last 10 s</h3>
+          <canvas id="chartSpeed" class="chart" aria-label="Measured ground speed and ramped speed reference"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="split">
+        <div class="sbx-knobs-card">
+          <p class="eyebrow">Study parameters</p>
+          <h2>Break it on purpose.</h2>
+          <p class="small">Same parameter names and sweep ranges as <code>tools/v1-proof/run_sim.js</code>. The controller keeps its nominal gains, as in the study. <b>Live</b> knobs apply at once; <b>rebuild</b> knobs reset the robot at the current lane.</p>
+          <div class="sbx-knobs" id="knobs"></div>
+          <div class="sbx-row"><button type="button" id="knobReset">Back to the study nominal</button></div>
+        </div>
+        <aside class="budget-note">
+          <h3>What this is and is not</h3>
+          <ul class="sbx-notes">
+            <li><b>Same plant and controller.</b> The page loads <code>tools/v1-proof/sim.js</code> itself: Rapier rigid bodies at 1 kHz, encoder-quantized odometry, delayed noisy attitude, the 500 Hz discrete LQR, voltage- and speed-limited motor torque, drive lag, deadband and optional backlash.</li>
+            <li><b>Fixtures.</b> The lanes are the physical protocol's fixtures: 3° grade, 3° cross-slope, 5 mm bump (both wheels and one wheel), 3 mm seam, plus the 20 mm threshold the study records as a failure. Fixture ramps have kinks and transitions; the study tilted the whole floor.</li>
+            <li><b>Leg height is a preview.</b> Pinned 15°, 30° and 45° poses were in the study and pass. Moving between them re-places the CoM and pitch trim at 10°/s; leg inertia, servo torque and its reaction on the body are not modelled. Powered height motion is unvalidated.</li>
+            <li><b>Size.</b> Body, links, wheels and motors are drawn from <code>model.json</code> envelopes: 120 × 110 × 150 mm body, 110 mm links, 100 mm wheels at 230 mm track. Packaging, belts and wiring are not detailed. The dashed box is the parked STAIR-V1 envelope for scale.</li>
+            <li><b>Not modelled.</b> Raw IMU fusion, firmware timing, thermal limits, tire compliance, regeneration, servo dynamics. A good run here is a candidate for a bench test, not evidence the robot works.</li>
+          </ul>
+          <p class="small">Headless check: <code>node tools/v1-proof/test_sandbox.js</code>. Saved evidence: <a href="proof-simulation.html">Simulations</a>.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <footer>V1-PROOF · 3D sandbox on the study simulator · pinned-leg evidence only · needs a network connection the first time: three.js and Rapier load from jsDelivr.</footer>
+  <noscript><p>The sandbox needs JavaScript. The <a href="../../docs/v1-proof.md">plan</a> and <a href="../../cad/layouts/v1-proof.svg">2D sheet</a> remain available.</p></noscript>
+  <script src="proof-data.js"></script>
+  <script src="../v1-proof/sim.js"></script>
+  <script src="proof-sandbox-core.js"></script>
+  <script src="proof-sandbox.js"></script>
+</body>
+</html>
