@@ -1,5 +1,7 @@
 # Leg actuators — axis roles + V1 intent
 
+> **2026-09-28:** historical study. Current head/leg dimensions, procurement and support gates are in [the engineering review](../head-and-leg-review.md). No components have been purchased; older order/selection claims are superseded.
+
 Steve **2026-09-20** (axis jobs + I/O) and follow-up (servo vs stepper TBD), plus **2026-09-21** (GIM8108-class candidate, soft mass). **No spend. No locked SKU. FC stays TBD.**
 
 This note does not pick a part. It does not replace [`../requirements.md`](../requirements.md) or [`../mechanical.md`](../mechanical.md). Decision log: [`../decisions.md`](../decisions.md).

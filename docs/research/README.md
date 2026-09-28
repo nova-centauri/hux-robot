@@ -1,5 +1,7 @@
 # Research first
 
+**Current engineering baseline (2026-09-28):** [head and leg review](../head-and-leg-review.md), [reproducible numerical results](head-leg-results.json), [decision log](../decisions.md). Older research below is dated evidence, not current purchasing or fabrication authority. No Hux components purchased.
+
 Hux is still early R&D. **Study before we build.** Watch, read, extract control and stair heuristics, then decide what to adapt versus rewrite. Do not vendor James Bruton / [XRobots](https://github.com/XRobots) trees into this repo yet. Do not spend. Flight controller stays **TBD**.
 
 This packet is the working study set. It does not replace [`../requirements.md`](../requirements.md) or [`../vision.md`](../vision.md).

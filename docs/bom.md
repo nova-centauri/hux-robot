@@ -1,65 +1,47 @@
-# Bill of materials
+# Bill of materials — procurement review, 2026-09-28
 
-Started **2026-09-21**. Prices are page prices or class estimates from that day. Shipping and tax are extra. A tire outside **5.75–6.25"** overall, or wider than **~1.25"**, does not count as the foot.
+**No Hux components purchased or ordered. No order is being placed.** Earlier order-now and free-inventory totals are superseded by Steve's clarification. Prior discussion of a cart was not evidence of purchase.
 
-The BOM is **need-driven**: the project buys what the design needs. Inventory ([`parts-on-hand.md`](parts-on-hand.md)) is a reference, not a design driver. Steve owns edits to the order-now breakout.
+**Actuator-set purchase: HOLD.** The current stair design fails single-support/geometry gates. Read [the head and leg review](head-and-leg-review.md) before selecting parts. Ten actuators below are a costed research candidate, not a recommendation to buy all ten.
 
-**To order now: $89.41 + the CAN MCU kit (~$55) + anti-spark + one 8S 3300 mAh pack (~$70–90).** That is the only authorized spend. MCU, anti-spark and pack added 2026-09-26; **8S confirmed by Steve the same day.**
+Complete candidate allowance: **$2,236–3,498**, before shipping/tax. These are **unverified planning prices**, not quotes. The old $1,140/$1,640 totals omitted or contradicted necessary items. All previously assumed shop stock, compute, receiver and charging equipment are included until ownership is confirmed.
 
-**Working total if the later estimates are bought as written: about $1,640.** Eight real QDD actuators moved it; that is the cost of the CAN decision and it is the honest number. The actuator block is most of that, and it is not chosen.
+The eight-motor reference was $1,120 at its old point estimates; two reference ankle motors add $320. Extra motors alone do not solve the stair mechanism. Hip/knee transmissions or replacement actuators may increase this budget. Labor, machining services and test fixtures are excluded. Jetson and seven-camera coverage are excluded.
 
-Inventory of what is already here: [`parts-on-hand.md`](parts-on-hand.md).
+| Qty | Item | Unit allowance | Line allowance | Stage / acceptance condition |
+| ---: | --- | ---: | ---: | --- |
+| 4 | RS02 reference actuators: two knees, two hip rolls | $145–200 | $580–800 | **HOLD** — hip roll and knee exceed bare RS02 stationary reference in the preferred 26-inch study; reduction/replacement or validated spring must be closed |
+| 2 | RS00 hip pitch reference actuators | $150–180 | $300–360 | **HOLD** — 3.92 Nm gravity peak exceeds 3.6 Nm stationary reference; geometry and mounted duty required |
+| 2 | RS05 wheel reference actuators | $100–130 | $200–260 | **HOLD** — independent wheel bearings, wheel inertia and continuous-turn firmware |
+| 2 | Additional ankle-roll reference actuators for ten-axis study | $150–180 | $300–360 | **CANDIDATE** — architecture approval, pitch-level carrier and contact footprint; omit if architecture changes |
+| 4 | Real-rubber 6-inch narrow treads for dual-contact wheel feet | $11–25 | $44–100 | **CANDIDATE** — tread spacing/contact tests; tube/rim interface and actual diameter |
+| 4 | Inner tubes if pneumatic treads are selected | $8–12 | $32–48 | **CANDIDATE** — compatible tire, bead and valve clearance |
+| 2 | 16 mm carbon stock, 1 m; wall/layup not released | $17–30 | $34–60 | **HOLD** — new link lengths, bonded socket coupon, supplier laminate data |
+| 1 | Teensy 4.1 | $32–45 | $32–45 | **BENCH CANDIDATE** — three bus pin assignment and carrier layout |
+| 1 | SPI IMU breakout, ICM-42688-P class | $12–25 | $12–25 | **BENCH CANDIDATE** — actual breakout and SPI voltage compatibility |
+| 3 | 3.3-V-logic-compatible CAN transceivers | $4–10 | $12–30 | **BENCH CANDIDATE** — controller-side logic and bus common-mode ratings; not all TJA1051 variants are 3.3 V supply |
+| 1 | Pi 5 class companion, cooler and storage | $80–150 | $80–150 | **DEFER** — reuse only if separately confirmed; not needed for balance bench |
+| 1 | RC receiver | $30–50 | $30–50 | **DEFER** — existing transmitter compatibility and failsafe |
+| 1 | 8S LiPo, 2.7-3.3 Ah packaging study | $70–120 | $70–120 | **HOLD** — actual dimensions <=150 x 50 x 60 mm, mass, discharge/regen current and charger |
+| 1 | 8S-capable balance charging system | $90–180 | $90–180 | **HOLD** — no charger ownership assumed; suitable supply and 8S balance connection |
+| 1 | 60-V-input-class bucks, fuse, motor disconnect, anti-spark, distribution, voltage/current sensing | $80–160 | $80–160 | **BENCH CANDIDATE** — 5 V/5 A companion plus separate controller branch; verified transient/regen handling |
+| 1 | Actuator connector harness, CAN pairs, six terminators, strain relief | $50–100 | $50–100 | **HOLD** — joint travel, current and branch topology |
+| 1 | Frame/heat-spreader stock, axle bearings, shafts, rims and hardware | $120–240 | $120–240 | **HOLD** — no free shop stock assumed; drawings and bearing load path |
+| 1 | End fittings, shell/trays, inserts and prototype material | $40–90 | $40–90 | **HOLD** — head and leg clearance review |
+| 2 | Knee gravity compensation assemblies | $20–50 | $40–100 | **HOLD** — torque curve throughout stance and swing; stored energy and spring travel |
+| 2 | Passive pitch-level ankle carrier/linkage allowance | $30–70 | $60–140 | **CANDIDATE** — unresolved mechanism; allowance is not a finished BOM |
+| 1 | One camera/face module allowance | $30–80 | $30–80 | **DEFER** — keep seven cameras and Jetson out of V1 purchase |
+| | **Total** | | **$2,236–3,498** | Not a released cart |
 
-3D models of the bought parts (RobStride 00 / 02 / 05, Teensy 4.1 — vendor STEP files, full and sandbox meshes, orientation notes): [`../cad/vendor/`](../cad/vendor/README.md). Tire, pack, connector and breakout boards have no vendor model yet; the sandbox draws those from the BOM's dimensions.
+## Sensible purchase sequence
 
-## Order now — $89.41
+1. First resolve the load path and make a full-size cardboard/stock fixture of the head, joints, tire envelope and stair. No motor purchase is required to expose collisions or impossible reach.
+2. Once the mechanism closes, select one representative motor plus the controller/IMU/CAN/power bench harness. RS02 remains a useful test candidate, but its stationary 6 N·m fixture reference does not qualify the preferred candidate’s hip/knee loads; include the intended reduction or test a different candidate.
+3. Buy one real tire/contact assembly only after its diameter, actual contact spacing and rim/valve clearance are resolved. Two existing 1.25-inch treads do not fit the 80 mm candidate footprint with 60 mm contact-center spacing.
+4. Release the remaining axes and final battery only after mounted thermal tests, independent bearing design, a measured support footprint and full step geometry pass. Buy electronics needed for that bench, not perception hardware.
 
-| Qty | What | Unit | Line | Store |
-| --- | --- | ---: | ---: | --- |
-| 3 | 6×1.25 ribbed pneumatic tire, 85 PSI, 3.75" bead | $11.00 | $33.00 | [Scooterworks 154-18](https://www.scooterworks.com/products/universal-parts-6x1-25-tire-154-18). If that page is out: [DIY Mobility 6×1¼ rib](https://diymobilityparts.com/collections/pneumatic-wheelchair-tires) at about $12. |
-| 3 | 6×1.25 inner tube, bent Schrader stem | $7.95 | $23.85 | [ElectricScooterParts TUB-6X1.25](https://electricscooterparts.com/tubes.html) |
-| 2 | Carbon tube, 16×14 mm, 1 m | $16.28 | $32.56 | [Windcatcher 16×14×1000](https://windcatcherrc.com/product/carbon-fiber-tube-16mm-x-14mm-x-1000mm/). A 16×12 or 16×13 stick is the stiffer wall if the price is close. |
-| 1 | **Teensy 4.1** | ~$32 | $32 | **CAN real-time MCU (Steve 2026-09-26: "add the CAN MCU").** 600 MHz, **3× CAN 2.0 / FD**, built-in microSD (blackbox), plenty of UARTs. [PJRC](https://www.pjrc.com/store/teensy41.html). Chosen over an H743-WING because eight classic-CAN nodes need two buses minimum ([`research/actuator-shortlist.md`](research/actuator-shortlist.md) §1.4). |
-| 1 | ICM-42688-P IMU breakout (SPI) | ~$12 | $12 | The Teensy has no IMU. One 6-axis on the balance board; the Wing's MPU6000 stays on the bench. Adafruit / SparkFun class. |
-| 3 | CAN transceiver breakout, 3.3 V (SN65HVD230 / TJA1051-class) | ~$3–4 | ~$10 | One per Teensy CAN port. Add a 120 Ω terminator at each bus end. |
-| 1 | **XT90-S anti-spark connector pair** | ~$5 | $5 | **Steve 2026-09-26: "add the anti spark."** On the harness side; the pack keeps a plain XT90. |
-| 1 | **8S 3300 mAh 50–60C LiPo, XT90** | ~$70–90 | ~$80 | **Steve 2026-09-26: 8S yes.** One pack (~98 Wh, 1–2 h at 40–80 W, ~700 g, ~150 × 50 × 60 mm). Brand / store his pick (HRB / Ovonic / Zeee / Tattu class). 33.6 V full, 29.6 V nominal, **alarm / cutoff 26.4 V** (3.3 V/cell). Needs an 8S-capable balance charger — check the drone bench. Why 8S: the RobStride 00/01/02 input floor is 24 V ([`research/actuator-shortlist.md`](research/actuator-shortlist.md) §3). 2700 mAh is the smaller alternative if the 3300 will not package. |
-| | **Total to order now** | | **~$230** | $89.41 tires/tubes/tube + ~$59 MCU kit + anti-spark + ~$80 pack. Shipping extra. |
+## Sources and updates
 
-## Already here — $0 more
+Canonical budget rows: [`tools/engineering/bom.json`](../tools/engineering/bom.json). Regenerate this table with `python3 tools/engineering/review.py --write`. Prices are allowances retained or introduced for budgeting; supplier stock and quotes must be checked at purchase. [Manufacturer engineering references](head-and-leg-review.md#evidence-and-reproducibility) support specifications, not these prices.
 
-| Item | Notes |
-| --- | --- |
-| Zantle 5" walker pair | Already bought, about $15. Bench donor, not the foot. |
-| F722 Wing, F765 Wing, F722 drone FC, Mamba F405 | On hand. Pick one to blink. Not a new board. |
-| TBS Nano RX | On hand. |
-| Raspberry Pi, ESP32 | On hand. Face, cameras, and telemetry later. |
-
-Pack in the order-now table. 4S → 6S → 8S all on 2026-09-26; 8S is the one that survived the actuator voltage check.
-
-## Later — class estimates, not a cart
-
-No SKU is locked on these. The dollar is a midpoint so the total is not a blank. Do not buy them off this table.
-
-| Qty | What | Est. each | Line | Store / note |
-| --- | --- | ---: | ---: | --- |
-| 2 | Wheel actuator (in-wheel), about 3 N·m | $100 | $200 | **Temporary lock 2026-09-26: 2× RobStride 05** (5.5 N·m peak, 191 g, 46 × 46 × 44 mm). Driver and encoder are on the actuator. The 44 mm housing is wider than the 31.75 mm tire — hub drawing before any order. |
-| 2 | Hip roll actuator | $160 | $320 | **Temporary lock 2026-09-26: 2× RobStride 02** — and the hip roll axes must come in to **≤ 3"** (hold 6.0 N·m vs 7 rated with the real masses; 10.7 N·m at the drawn 5.4", which nothing in the family holds at rating). Not an order. |
-| 4 | Knee and hip-swing actuator | $170 | $680 | **Temporary lock 2026-09-26:** knees **2× RobStride 02**, swing **2× RobStride 00**. One RS02 first on the Teensy before the set. Servo / stepper+belt is the fallback. |
-| 7 | Cameras (2 front, plus back, sides, top, bottom) | $20 | $140 | No module picked. |
-| 1 | Small front display, about 2.2" × 1.0" | $20 | $20 | Preset faces. No panel picked. |
-| 2 | RGB into the eye sockets | $10 | $20 | The lit socket is the eye. No LED picked. |
-| 1 | Step-down and distribution | $30 | $30 | 5 V and 12–19 V bucks rated ≥36 V in, a hardware kill, fuse. No board picked. |
-| | **Later estimate** | | **~$1,410** | Actuator block ~$1,200 for eight RobStride units. |
-
-Hubs, fasteners, wire, and bearings are shop stock. They are not in the total.
-
-## Totals
-
-| | Amount |
-| --- | ---: |
-| Order now | $89.41 |
-| Later, class estimate | $1,050 |
-| **Working total** | **about $1,140** |
-
-Shipping, tax, and a wrong actuator guess move the $1,140. The $89.41 does not.
+Inventory confirmation lives in [parts-on-hand.md](parts-on-hand.md). Package masses and installed positions live separately in [`baseline.json`](../tools/engineering/baseline.json); budget rows must not be added again to the mass budget.

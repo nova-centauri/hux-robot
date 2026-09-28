@@ -2,6 +2,8 @@
 
 Draft from Steve, 2026-09-20, plus scale / structure 2026-09-21. Source of truth: this GitHub repo (`nova-centauri/hux-robot`). Decision log: [`decisions.md`](decisions.md). Architecture is also folded into [`vision.md`](vision.md), [`electronics.md`](electronics.md), and [`mechanical.md`](mechanical.md).
 
+**2026-09-28 governing update:** no components purchased; stair architecture reopened. [Head and leg review](head-and-leg-review.md) supersedes earlier sizing claims. R2/R3/R17 remain requirements, not demonstrated capabilities.
+
 ## Goal
 
 Wheeled biped that can climb and descend stairs by: lift one wheeled leg → balance on the planted leg → rotate/place the raised wheel onto the next tread → plant → repeat.
@@ -22,13 +24,13 @@ Inspiration: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori
 | R8 | Local compute for **pathfinding inference** | Needs cameras; not on the FC |
 | R9 | Cameras | At least one stream for teleop; stereo / depth later for stairs |
 | R10 | **Electric-only** powertrain | Entire robot is electric. No ICE, no hybrid. |
-| R11 | Battery: **8S LiPo** + **regulated step-down** | **33.6 V full / 29.6 V nominal / 26.4 V cutoff.** One 8S 3300 mAh 50–60C, XT90; XT90-S on the harness. Set by the RobStride 24 V floor (2026-09-26). Regulators ≥36 V in. [`research/actuator-shortlist.md`](research/actuator-shortlist.md). Actuators on the pack; **5 V** rail for MCU / RX / Pi, **12–19 V** rail for the companion slot. Superseded 4S on 2026-09-26. No pack / regulator SKU. |
+| R11 | Battery: **8S LiPo**, regulated logic rails | Retain 33.6 V full / 29.6 V nominal / 26.4 V planning cutoff; exact pack/revision and under-load limits require validation. 2.7–3.3 Ah packaging study, no SKU. **60-V-input-rated regulator class**, with transient/regen design. Vendor 15/24 V minimum conflict is recorded in [review](head-and-leg-review.md). |
 | R12 | Knee + hip swing: **CAN QDD / FOC working class** (2026-09-26); servo vs stepper+belt is the **fallback** | No SKU. Size whichever we pick for one-leg plant load (R36). Powerful / fast / reliable still required. **GIM8108-8** is a *candidate* for these axes — not ordered, not locked. See [`research/actuators-legs.md`](research/actuators-legs.md). |
-| R13 | Wheels: **6" OD**, **~1–1.25" wide**, real rubber, torsionally stiff | **Locked.** A measured OD of **5.75–6.25"** still counts. Whole tire sits in the 9.5" going with ~±1.75" of roll. 5" Zantle is a bench donor, not the foot. Not a buy. No spokes. [`research/leg-geometry.md`](research/leg-geometry.md). |
+| R13 | Approximately **6-inch OD** real-rubber wheels | **Width/contact profile reopened 2026-09-28** to fix single support. 80 mm dual-contact wheel-foot is an unsourced study allocation. Tire width is not a measured support polygon. No Zantle purchase or wheel SKU. |
 | R14 | Four **manual** modes before autonomy | **`PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY`**. Spec: [`software.md`](software.md). Gate before open-loop step, pathfinding motion, stair scripts. |
 | R15 | V1 overall width **~14"** | Outside-to-outside, wheels included. The head sits inside. Legs and wheels are outside the head. |
-| R16 | **Hip roll is IN V1** | Dynamic FOC / QDD / fast servo (R27). Experimental — may not work as hoped. Still ship the joint and the one-leg modes. **Not a stepper. Not V2.** |
-| R17 | One-leg balance is a **full loop** | (a) hip roll keeps weight over the planted wheel, **and** (b) that wheel drives fore/aft so the contact stays under the CoG. |
+| R16 | **Hip roll remains in the research baseline** | Joint travel, leverage and ankle support are reopened. Do not buy or ship an inadequate joint merely to preserve the old eight-axis drawing. |
+| R17 | **Controlled one-leg support and return** before stairs | Lateral support moment and fore-aft balance must both be real. A 0.2-second hop is not a substitute. Proposed bench gate: 10-second support, ±10 mm CoM uncertainty and controlled return on both legs. |
 | R18 | **Reuse existing control** | Explicit non-goal: writing a novel Hux balance stack from scratch for V1. TBD which we adopt. |
 | R19 | Prefer **cheap COTS stock** for primary structure | Carbon tubes / rods, metal stock, fasteners. Do not custom-print a spar when off-the-shelf will do. Printed / machined parts are joints, hubs, brackets. |
 | R20 | Custom parts are **draft-friendly** | 3D print now, injection mold later. Avoid undercuts; parting-line awareness; printable orientation. |
@@ -38,16 +40,16 @@ Inspiration: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori
 | R25 | Wheel motors sized for **reaction speed / torque bandwidth** | Balance actuator, not max continuous power. 8S bus, CAN. Two wheel motors + drivers must leave room for pose joints, structure, pack, FC, Pi. |
 | R26 | Leg actuators **by axis role** | Jobs differ. Do not force one type on roll, swing, and knee. Trade: [`research/actuators-legs.md`](research/actuators-legs.md). |
 | R27 | Hip-roll actuator = **dynamic** FOC BLDC / **small** QDD / fast bus servo | Working V1 class. High-rate torque; ideally backdrivable. Pairs with planted-wheel fore/aft (R17). |
-| R29 | **I/O:** up to **8 axes**; **FC does not drive stepper coils** | If pose joints are steppers: 2 wheel BLDC + 4 steppers + 2 hip-roll dynamic. Driver board(s) between host and steppers. Preferred: FC = IMU + wheel FOC (+ roll if PWM/CAN); **Pi or dedicated stepper controller** = pose step/dir. Drone firmware as stepper host is a V1 anti-pattern. If servos are chosen instead, still 8 axes — different drivers. Spec: [`electronics.md`](electronics.md). |
+| R29 | Axis count follows validated mechanism; MCU does not drive coils | Eight-axis old model is rejected for stair procurement. Ten-axis hip/ankle candidate under study. Three classic-CAN buses with a verified mixed-rate schedule; do not budget all nodes at 1 kHz. |
 | R30 | Wheel **BLDC at the wheel** | Hub / coaxial at the rim. Not remote-driven from the hip. |
 | R31 | **kV match** is a sizing goal | 8S + wheel diameter + balance bandwidth. TBD — no invented number. |
-| R32 | Pose-actuator mass **high** | If steppers: mount **above the knee**; belts to the pivots. Do not hang pose motors at the shin or wheel. |
+| R32 | Prefer **proximal actuator mass** | Keep any stepper pose motors above the knee. The active ankle-roll candidate explicitly trades added distal mass for a ground-moment load path; account for its mass and inertia before accepting it. |
 | R33 | If belts: **one inside, one outside**; integrate pulley where possible | Clearance / service / no rub. Face assignment TBD on the 2D set. Draft-friendly printed tooth form (R20) or COTS pulley fallback. |
 | R34 | Primary **upper + lower leg spars** are **carbon fiber tubes** | COTS (R19). Printed / machined **fittings at the ends** only (hubs, belt mounts, joint flanges). Do not print or mill the spar. Tube OD / wall TBD. |
 | R35 | V1 envelope up to **~24" tall at full extension** | Still must reach a **~9.5"** riser **with margin** (R3). Width is **~14"** (R15). |
-| R36 | **One-wheel standing load** ≈ **2×** two-wheel stance | Plant-side knee, hip swing, and hip roll see roughly all the weight on one leg path. **Size for that case**, not average two-wheel load. Rule of thumb until we weigh a real Hux. |
+| R36 | Size for **single-support loads and complete duty cycle** | Full load-path/inverse-dynamics calculation, contact margin, mounted thermal limits and transients; ~2× average is only a preliminary heuristic. Peak torque is not a continuous holding allowance. |
 | R37 | **V1 finish line: one 9.5" step, 9 of 10 attempts, from a standstill on the lower tread** | 2026-09-27. A full flight is V2 on the same hardware. North star (stairs) unchanged. Supersedes nothing; names the pass mark for R3. |
-| R38 | **Flat-ground top speed 1.5 m/s, cruise 1.0 m/s** | 2026-09-27. Locked RS05 on 8S at the 6" wheel with ~2 N·m of catch torque in reserve (~1.3 m/s near cutoff). Not 2 m/s. |
+| R38 | **1.5 m/s top, 1.0 m/s cruise** remains the flat-ground target | Battery-dependent torque-speed reserve is unverified on hardware. The legacy straight-line motor curve is a scenario, not qualification. |
 | R39 | **Knee actuator at the knee in V1; knee gravity spring in scope; no parallel / five-bar leg** | 2026-09-27. Hip-driven knee linkage is a V2 refinement. [`research/knee-linkage.md`](research/knee-linkage.md). |
 | R40 | **V1 terrain: flat + 1" sills + ~20° slopes** | 2026-09-27. Rough outdoor ground is V3 / Phase E (controls + perception), not a leg change. |
 
@@ -58,59 +60,23 @@ Inspiration: [Alex Hattori — STRIDE wheeled biped V2](https://www.alex-hattori
 | R24 | V1 mass **aspirational 4–5 lb** / **under 6 lb** — **historical soft preference only** | Steve 2026-09-21: budget is **explicitly blown / soft**. Capability and packaging over the old number. **Not a gate.** Sketch: [`mechanical.md`](mechanical.md). |
 | R28 | All-stepper is **not** the baseline | Residual risk only. If later forced onto *roll*: closed-loop, minimal-backlash belts, accept lower one-leg bandwidth. Do not fake a CoG shift in software. Do not delete the V1 roll axis. Wheels stay FOC (R6). |
 
-## Soft / architecture intent
+## Current architecture and milestones
 
-- Four layers (2026-09-26): CAN actuators with their own FOC / PD → portable control core (C++ library) → CAN real-time MCU at 1 kHz (IMU, CRSF, watchdog) → ROS 2 Linux companion (Pi 5 now, Jetson at P5). ESP32 optional Wi‑Fi / telemetry bridge. [`software.md`](software.md).
-- Entire robot is **electric**. **8S** one 3300 mAh LiPo (2026-09-26); the distribution board stays **TBD**. Pose / logic on **regulated** rails. Do not invent a stack.
-- **Knee + hip swing undecided** (Steve 2026-09-20 follow-up). Document both servo and stepper+belt. Do not prefer one in the baseline. Size either for R36. **GIM8108-8** is a candidate, not an order.
-- **Hip roll ships in V1** even if the first actuator is imperfect. One-leg CoG shift is a **best-effort** goal.
-- V1 scale: **~24" tall at full extension** (R35), **~14" wide** (R15). The head is inside that width. Leg geometry still owns the **~9.5"** step (R3) with margin.
-- Structure: **carbon tubes** for the long bits of upper and lower leg (R34). Shop fittings at the ends — print / mill / lathe; see [`capabilities.md`](capabilities.md). Inventory: [`parts-on-hand.md`](parts-on-hand.md).
-- Longer tubes → **longer belt runs** if a belt is the joint reducer. Joint actuators sit at **hip / knee** with tube between.
-- Higher CoG: slower inverted-pendulum fall (helps) and more inertia / longer disturbance arms (hurts).
-- Mass is **soft**. Old 4–5 lb / under 6 lb numbers stay as a preference, not a kill-switch.
-- Fabrication: COTS first (R19), draft-friendly customs (R20), wire ports (R21), service access (R22), **2D before Blender** (R23).
-- Hattori V2 lessons: extra leg DOF helps stairs / fall recovery; larger wheels help terrain; serial / linkage knees beat “knees both sides” parallel for stairs; springs for gravity assist if actuators are small; **motors at the wheels**.
-- Serra / Build Some Stuff lessons (packaging, not files): in-wheel BLDC + encoder; jointed legs keep CoG over contact as height changes; serviceable modular prints; wheel-under-CoG geometry. See [`research/inspiration.md`](research/inspiration.md).
-- No **new** spend until Steve approves purchases. Prefer parts he already owns. 5" Zantle wheels already ordered — bench donor only. The 6" wheel is a locked size, not an order.
+- Four layers remain: CAN actuators → portable control core → real-time MCU → ROS 2 companion. A 1 kHz estimator does not require every CAN node to update at 1 kHz.
+- No Hux components are purchased/ordered. Historical personal electronics are unverified reuse possibilities, not free BOM inventory. [parts-on-hand.md](parts-on-hand.md).
+- Keep 24-inch height / 14-inch width as the compact target. The approximately 26-inch candidate and different landing track are explicit alternatives requiring a decision, not silent requirement changes.
+- H1 head, link lengths, wider contacts, ankle mechanism and actuator reductions remain candidates. [head-and-leg-review.md](head-and-leg-review.md).
+- Choose the support mechanism; find a continuous full-step path with real joint centers and swept clearances; mock up packages; test one representative axis and contact assembly; validate single support; only then buy the remaining set.
+- Existing modes precede autonomous motion. Supported `PARKED` requires a rest support; power loss is not a guaranteed safe park.
+- V1 one-step success is 9/10 (R37). Neither a floor hop nor individually reachable poses passes it. Both feet must finish on the upper tread.
 
-## Candidate hardware (on hand / ordered)
+## 2026-09-28 engineering gates
 
-Inventory (owned / ordered, reserved TBD): [`parts-on-hand.md`](parts-on-hand.md). Shop tools (not parts): [`capabilities.md`](capabilities.md). Candidates that are **not owned**: same page, Candidates section (GIM8108-8).
+| ID | Requirement | Acceptance evidence |
+| --- | --- | --- |
+| R41 | Fix single support and full stair geometry before full-set procurement | Continuous, collision-free complete step plus controlled support/return; no hidden extra joint or clamped reach |
+| R42 | Itemized head mass properties and explicit coordinate transforms | Mass, CoM, inertia, units, status and revision; pack position is not whole-head CoM |
+| R43 | Firm decisions cascade as one revision | CAD joint centers, contact geometry, BOM, dynamics and firmware joint map agree; historical models labeled |
+| R44 | Stationary thermal and bus-load budgets are real | Mounted duty test; timestamped joint data, bus utilization/deadline measurements, transient/regen validation |
 
-- Bench FCs (no CAN): F722 Wing, F765 Wing, F722 drone FC, Mamba F405
-- Compute: ESP32, Raspberry Pi
-- RX: TBS Nano RX
-- Wheels: **6" OD** locked. 5" Zantle **bench donor** ordered (not a BLDC hub, not the foot). [`research/leg-geometry.md`](research/leg-geometry.md).
-- Motors: in-wheel brushless FOC (exact models TBD)
-- Battery: **8S 3300 mAh 50–60C LiPo, XT90.** Brand TBD.
-- Knee / hip swing: **CAN QDD** working class; servo / stepper+belt fallback. GIM8108-8 candidate (not ordered).
-- Hip roll: dynamic class (R27). SKU TBD.
-- Structure: carbon-tube spars **class** (R34). No tube SKU.
-
-## Recommended default (proposal)
-
-- **Real-time MCU:** **CAN-capable** (Teensy 4.1-class or H743-WING-class), picked with the actuators (2026-09-26). The on-hand FCs are bench boards for P0–P1; none has CAN. Architecture: [`software.md`](software.md).
-- **Battery:** **8S 3300 mAh LiPo** + **controlled step-down** to 5 V and 12–19 V rails (≥36 V-in regulators). One pack. Regulator SKU **TBD**.
-- **Wheels:** in-wheel brushless FOC. **6" OD × ~1–1.25"** real rubber, torsionally stiff. Locked size, not a buy. Zantle 5" is a bench donor. Geometry: [`research/leg-geometry.md`](research/leg-geometry.md).
-- **Knee / hip swing:** **CAN QDD** working class on 8S; servo / stepper+belt fallback. Size for one-leg (~2×) load. GIM8108-8 is a candidate only.
-- **Hip roll:** **in V1**, dynamic class, experimental / best-effort CoG shift.
-- **Companion:** Pi 5 in containers on ROS 2 now; Jetson (Orin Nano Super kit class) at P5 for perception. Not a pose brain — pose joints are on CAN.
-- **Wi‑Fi:** Pi first; ESP32 if we want a thin telemetry bridge off the Pi.
-- **V1 mechanical target:** one wheel-leg — carbon-tube spars + printed / machined end fittings + linkage / spring stub — sized toward a 9.5" step, inside a **~24" tall / ~14" wide** envelope, **2D layouts first**.
-- **Mass:** soft. 4–5 lb / under 6 lb is historical preference, not a gate.
-
-Do not buy anything for this list. Wheels already ordered stay on [`parts-on-hand.md`](parts-on-hand.md) only. Do not lock the FC, a tube, or a joint SKU.
-
-## Milestone order
-
-Tracked in [`../NOTES.md`](../NOTES.md). Summary:
-
-1. Confirm SoT URL (`nova-centauri/hux-robot`) — this repo.
-2. Several **2D sketch layouts** (R23), then size + fit first wheel-leg (carbon-tube spars, end fittings) for ~9.5" inside the ~24" envelope, including **one-wheel (~2×) load**. FC stays TBD. Servo vs stepper TBD.
-3. Blink LED → restrained wheel spin once an FC is on the bench (not on carpet).
-4. Manual modes: **`PARKED` → `TWO_WHEEL`** (TBS + telem).
-5. **`LEFT_ONLY` / `RIGHT_ONLY`** — V1 best-effort CoG shift via hip roll + planted-wheel fore/aft.
-6. Open-loop step-up toward 9.5" riser fixture. Not before the four modes work. **V1 finish line: one step, 9/10 (R37).**
-7. Camera stream → local pathfinding later.
-8. Lock FC into [`electronics.md`](electronics.md) when ready.
+Working milestones: [NOTES.md](../NOTES.md). All proposed changes are logged in [decisions.md](decisions.md).

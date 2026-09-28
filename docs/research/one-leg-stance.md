@@ -1,5 +1,8 @@
 # Standing on one wheel — the frontal-plane mechanics, and what the sandbox says
 
+> **Historical study — superseded for procurement on 2026-09-28.** [Current head/leg review](../head-and-leg-review.md) reopens single support, geometry and actuator sizing. No components purchased. Old purchase claims, 7 N·m stationary-hold assumptions, pack=body CoM, and two-bus 1 kHz claims must not be used to buy/build. Historical numbers below are preserved, not revalidated. The failed controller/capture study is not a universal impossibility proof; the current code uses a 68.6 mm head CoM height, and a short hop is not the accepted stair gate.
+
+
 Written **2026-09-26**. Steve: the one-leg stand needs much more work, the mechanics of the hip roll weight shift are unclear, and the one-leg action does not work in the simulation. This note works the frontal plane from first principles with the lumps and geometry in `kin.js` (6 kg picture, 7.5" + 7.5" tubes, 6 × 1.25" round-crown tire, hips 5.4" off the centreline, 12.75" track), checks it against the Rapier sandbox, and says what the numbers mean for the plan. Nothing here is a decision.
 
 Tools: `tools/living-drawings/frontal.js` (closed form; `node frontal.js` prints the tables), `sim-core.js` (sandbox; `npm test` in that folder prints the one-wheel findings, including the hop rows below).

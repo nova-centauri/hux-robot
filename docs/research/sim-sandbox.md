@@ -1,5 +1,8 @@
 # 3D sandbox — corrected model and measured simulation results
 
+> **Historical study — superseded for procurement on 2026-09-28.** [Current head/leg review](../head-and-leg-review.md) reopens single support, geometry and actuator sizing. No components purchased. Old purchase claims, 7 N·m stationary-hold assumptions, pack=body CoM, and two-bus 1 kHz claims must not be used to buy/build. Historical numbers below are preserved, not revalidated.
+
+
 The sandbox is a design investigation, not firmware or hardware validation. Run `cd tools/living-drawings && npm test`. The [correction record](model-corrections.md) explains the changes; the [original audit](real-world-validation.md) records the earlier baseline.
 
 ## Current model

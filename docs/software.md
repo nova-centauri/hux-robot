@@ -4,30 +4,42 @@
 
 Prefer checklists and milestone order over a fake finished stack. Electronics that enable the modes: [`electronics-minimum.md`](electronics-minimum.md). Review that produced this shape: [`research/compute-stack-review.md`](research/compute-stack-review.md).
 
+## Mechanical interface correction — 2026-09-28
+
+The eight-axis sandbox is a legacy experiment, not the current stair design. [Head and leg review](head-and-leg-review.md) governs the redesign. The architecture may have ten powered axes plus a passive pitch-level carrier; **neither is implemented in firmware**. No controller may treat a short hop as the single-support gate.
+
+Required interface fields: `geometry_revision`, explicit SI units; X forward / Y left / Z up; hip-center datum; real joint origins/axes, yoke and axle offsets; joint limits and calibrated zero/sign; per-link mass/COM/full inertia; effective contact geometry and contact/load state; installed torque/speed/thermal limits; IMU-to-frame transform. Legacy drawing axes map `(x, y_up, z_right)` to `(X=x, Y=-z_right, Z=y_up)`, converting inches to metres.
+
+Candidate bus schedule: wheel nodes at 1 kHz on A; four hip/ankle-roll nodes at 400 Hz on B; four hip-pitch/knee nodes at 400 Hz on C. Run estimator/mode control at 1 kHz with timestamps, interpolation/prediction and stale-data rejection. Arbitration, watchdog and bounded command latency must be measured; a node-count array hard-coded to eight is not acceptable for the candidate.
+
+Whole-robot COM must be summed from articulated masses. Recalibrate after moving the battery, changing a companion or adding a bracket. Ankle roll must correspond to the **real** carrier transform; counter-rotating a motor about a pitched shin axis does not keep the wheel upright without yaw. Enforce friction/COP limits and a controlled return to two contacts. No instantaneous pose/height changes may be hidden by the simulator.
+
+Legacy numerical results are research evidence only. The full-step acceptance test requires a continuous collision-free trajectory, measured support margin, actual torque-speed/thermal duty and physical controlled support/return before R37 trials. A motor-off event is a fall risk until a physical support/catch exists.
+
 ## Four layers (decided 2026-09-26)
 
 The pattern Diablo, Mini-Cheetah, Unitree and Stompy converge on. Hux adopts the shape, not anyone's code.
 
 | Layer | What runs there | Rate | Hux choice |
 | --- | --- | --- | --- |
-| **1. Actuators** | FOC current loop and joint PD **on the actuator**. Takes torque / position / velocity setpoints over **CAN**. | 10–40 kHz FOC, 1 kHz setpoints | CAN QDD / FOC actuators on **8S**. Wheels, hip roll, knee, hip swing. SKUs TBD ([`electronics.md`](electronics.md)). |
+| **1. Actuators** | FOC current loop and joint PD **on the actuator**. Takes torque / position / velocity setpoints over **CAN**. | Vendor-dependent FOC; 400–1000 Hz setpoints | CAN QDD / FOC actuators on **8S**. Wheels, hip roll, knee, hip swing. SKUs TBD ([`electronics.md`](electronics.md)). |
 | **2. Control core** | Estimator (IMU + wheel odometry), mode machine, balance controller, one-leg loop, safety limits. **Plain C++ library, no hardware calls, unit-tested.** | — | `firmware/hux_control/` (name TBD). The **same source** links into layer 3, layer 4 and the digital twin. |
 | **3. Real-time MCU** | Runs layer 2 at **1 kHz**: reads the IMU, parses CRSF, is CAN master, holds the mode, enforces the hardware watchdog and torque cut, logs blackbox. | 1 kHz | **MCU with CAN** — Teensy 4.1-class or H743-WING-class, picked with the actuators. **Not the F765-Wing** (no CAN; P0–P1 bench only). |
-| **4. Linux companion** | **ROS 2.** Teleop, telemetry, live parameters, MCAP logging, cameras, face, later perception and the trained policy. Talks to layer 3 over a framed binary serial / USB link. | 50–500 Hz | **Pi 5 now**, in containers, no Pi-specific libraries. **Jetson (Orin Nano Super kit class) at P5** for stereo depth and a multi-camera head. Same containers. |
+| **4. Linux companion** | **ROS 2.** Teleop, telemetry, live parameters, MCAP logging, cameras, face, later perception and the trained policy. Talks to layer 3 over a framed binary serial / USB link. | 50–500 Hz | **Pi 5 class initially**; one camera. Jetson at P5 only if workloads justify it. Portable application containers plus platform-specific camera/acceleration adapters. |
 
 Rules that fall out of this:
 
 - **The actuator bus picks the MCU.** CAN is decided; the exact MCU follows the actuator choice (how many buses, FD or classic, which CAN protocol the actuators speak).
 - **Layer 2 never includes a HAL call.** If it needs the time, it takes a timestamp argument. If it needs an IMU sample, it takes a struct. That is what makes it run unchanged on the MCU, on the Pi, on a Jetson and inside the twin — the carry-forward Steve asked for.
 - **Layer 3 is thin.** Drivers, timing, CAN framing, safety. It does not own gains or logic; those are layer 2 and are set as parameters from layer 4.
-- **Layer 4 is not real-time and never in the torque path.** A hung companion means the MCU keeps balancing or drops to `PARKED`, never a fall.
+- **Layer 4 is not real-time and never in the torque path.** A hung companion must trigger the measured local abort/stop behavior; `PARKED` is entered only after a physical rest support is verified. Continued balance cannot be guaranteed through power loss or mechanical failure.
 - **ROS 2 on the companion only.** The MCU speaks a small framed protocol (micro-ROS is optional later). The reason for ROS 2 is what plugs into it: Isaac ROS on a Jetson, MuJoCo / Isaac bridges for the twin, rosbag / MCAP, Foxglove, PlotJuggler.
-- **Containers on the companion from day one.** arm64 images run on the Pi 5 and on a Jetson (JetPack 6 is Ubuntu 22.04; the Pi is on Trixie — the container makes that irrelevant). Cameras through V4L2 / GStreamer, not `picamera2`. No Pi GPIO in the stack.
+- **Containers on the companion from day one.** Keep portable arm64 application code, with platform adapters for camera drivers and acceleration. Containerization does not eliminate host-kernel, camera or JetPack compatibility checks. Avoid coupling the control core to Pi GPIO or camera-specific libraries.
 - **Licensing:** Hux is MIT. Layer 2 is clean-room from understanding (R18 pointers below). ROS 2 is Apache-2.0, SimpleFOC MIT, CAN actuator SDKs vary — cite each.
 
-### The F765-Wing and Pi 5 on the table
+### Historical F765-Wing and Pi 5 bench plan
 
-The 2026-09-25 bench plan (F765-Wing bare metal + Pi 5 listener, [`../tools/living-drawings/software.html`](../tools/living-drawings/software.html)) is **bench learning, P0–P1**: blink, bind the Nano, learn CRSF, spin one SimpleFOC wheel over UART. Nothing written for it is expected to survive except what lands in layer 2. The Pi 5 **is** the layer-4 board for V1 and its code does carry, as long as it stays in containers.
+The 2026-09-25 bench plan (F765-Wing bare metal + Pi 5 listener, [`../tools/living-drawings/software.html`](../tools/living-drawings/software.html)) is **bench learning, P0–P1**: blink, bind the Nano, learn CRSF, spin one SimpleFOC wheel over UART. Nothing written for it is expected to survive except what lands in layer 2. Neither board is confirmed reserved inventory. Pi 5 remains the initial companion class; application portability still needs camera/driver compatibility checks.
 
 ## Manual control modes
 
@@ -96,24 +108,26 @@ Bring-up order for these modes: [`checklists/software-bringup.md`](checklists/so
 
 Steve 2026-09-20 / confirmed. One-leg balance is a **full control loop**, not a hip pose and not a wheel-only trick (R17).
 
-**Hip roll is in V1** (R16). One-leg CoG shift is a **best-effort** goal, not a promise. It may not work as hoped. Keep the axis and the modes anyway so we can learn.
+**Hip roll remains in the research baseline** (R16), with active ankle roll and finite-width contact under investigation. Controlled support and return are required before committing to the stair actuator set; merely shipping a joint and mode name does not meet that gate.
 
 ### Coupled jobs (R17)
 
-On one wheel the machine is an inverted pendulum with a **narrow** support. Two things have to stay true at once:
+On one wheeled leg, lateral and fore-aft balance must both remain controlled. The candidate adds finite lateral support, which must stay loaded:
 
 1. **Hip roll → CoG over the planted wheel.** Lean the body so the CoG projection sits on the planted contact. Without this (or an equivalent lateral shift), the free side falls. Mechanical DOF: [`mechanical.md`](mechanical.md). The roll actuator is **dynamic** (FOC BLDC / small QDD / fast bus servo) — **not a stepper**.
 2. **Planted wheel → contact under the CoG.** Drive that wheel forward / back so the contact patch stays under the CoG in the pitch plane. Same class of problem as a Segway / two-wheel balancer, but on **one** rim. Serra's teaching loop is a simple P; Hux still studies XRobots PID.
 
-Neither job is optional if we claim one-leg balance. Hip-roll-only is a lean that still tips fore/aft. Wheel-only is a Segway that still falls sideways.
+3. **Ankle/contact → lateral support moment.** Regulate the real ankle and estimate contact load/COP so both lateral tread contacts remain loaded within friction and camber limits. The proposed pitch-level carrier must exist physically; its transform cannot be invented in the controller.
+
+All three functions are needed for the candidate. Centering the mass alone does not establish a stable, recoverable support state.
 
 Do not write gains, a mixer, or a channel map here. This is the story, not a controller; the controller is layer 2. Do not fake a CoG shift if the roll joint is unplugged — and do not unplug it to wait for V2.
 
 ### How the modes use the loop
 
-- **Parked** — loops off. Failsafe / default.
+- **Parked** — loops off only after mechanical support is verified; not a catch-all failsafe.
 - **TWO_WHEEL** — both wheels in the pitch / yaw balance. Hip roll is optional disturbance lean, not the one-leg gate.
-- **LEFT_ONLY** — hip roll toward the left + left wheel fore/aft under CoG. Right wheel is not a support.
+- **LEFT_ONLY** — measured left-foot support, active lateral ankle/contact moment, hip placement and wheel fore/aft balance. Right foot must be verified unloaded before lift.
 - **RIGHT_ONLY** — mirror.
 
 Bring-up still goes Parked → 2-wheel → left-only → right-only.

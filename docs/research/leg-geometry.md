@@ -1,5 +1,8 @@
 # Leg geometry — strength, give, and reaction speed
 
+> **Historical study — superseded for procurement on 2026-09-28.** [Current head/leg review](../head-and-leg-review.md) reopens single support, geometry and actuator sizing. No components purchased. Old purchase claims, 7 N·m stationary-hold assumptions, pack=body CoM, and two-bus 1 kHz claims must not be used to buy/build. Historical numbers below are preserved, not revalidated.
+
+
 **Review correction (2026-09-23):** [real-world validation](real-world-validation.md) confirms the basic planar math but identifies missing spatial reach/contact constraints. The arrest formula and ±6° slot angle are not proven catch envelopes; GIM8108 compatibility requires an exact variant; the ~90 Hz tube example uses a different wall thickness from the BOM. Read the audit before sizing hardware from this note.
 
 Steve **2026-09-21**: review the plan and the leg math. The ordered walker wheels are not a good enough foot. Real rubber, yes. A kids bike tire, no.

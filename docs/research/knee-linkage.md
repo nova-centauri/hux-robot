@@ -1,5 +1,8 @@
 # Knee: actuator at the joint, actuator at the hip through a linkage, or no knee (compound-linkage leg)
 
+> **Historical study — superseded for procurement on 2026-09-28.** [Current head/leg review](../head-and-leg-review.md) reopens single support, geometry and actuator sizing. No components purchased. Old purchase claims, 7 N·m stationary-hold assumptions, pack=body CoM, and two-bus 1 kHz claims must not be used to buy/build. Historical numbers below are preserved, not revalidated.
+
+
 Steve **2026-09-26**: "I wonder if we should get rid of the knee actuator and use a compound linkage … same effect. That is what stepbysteprobotics did and AgileX does not appear to have a knee actuator. Consider it while we're early."
 
 **Status: decided 2026-09-27 (R39) — knee RS02 at the knee for V1, spring in scope, hip-driven linkage parked as V2, no five-bar.** Below is the trade as it was worked. Nothing here lifts the temporary actuator lock (`decisions.md`, 2026-09-26). Written before the first 2D sheet, which is where this gets settled (R23).

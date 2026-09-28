@@ -6,34 +6,27 @@ Dated log of Steve's Hux decisions as they landed on `main`. Newest intent **sup
 
 Source of truth is this repo (`nova-centauri/hux-robot`). Docs only. **No spend.** No SKU locks beyond what is already decided below.
 
-## Current locked decisions
+## Current governing decisions — reviewed 2026-09-28
 
-These must stay true on `main`. Later rows in the log explain how we got here.
+Newest user intent supersedes older log entries. Historical statements below are retained as history, including purchase claims now corrected.
 
-| Topic | Locked intent |
+| Topic | Current intent / status |
 | --- | --- |
-| Stairs | **9.5" rise × 9.5" going** (nosing to nosing). Rise was already the north star. Going is the design tread the wheel was settled against. A deeper real tread is spare. |
-| Modes | **`PARKED` / `TWO_WHEEL` / `LEFT_ONLY` / `RIGHT_ONLY`** before any autonomy |
-| Power | **All-electric.** **8S LiPo** — **33.6 V full / 29.6 V nominal / 26.4 V cutoff**. **One 8S 3300 mAh 50–60C LiPo, XT90** (pack) + **XT90-S anti-spark** (harness). Decided 2026-09-26 after 4S → 6S → 8S: the RobStride 00/01/02 input floor is 24 V. **Regulated step-down** for 5 V / 12 V logic and pose rails. TBS Nano RX. **Superseded 4S on 2026-09-26.** |
-| Architecture | **Four layers** (2026-09-26): (1) **smart actuators on CAN** (FOC + joint PD on the actuator); (2) the **control core as a portable C++ library** — estimator, mode machine, balance controller, no hardware calls — that links into the MCU firmware, the Linux companion and the twin alike; (3) a **small real-time MCU with CAN** runs that core at 1 kHz with the IMU, RC and a hardware watchdog; (4) a **Linux companion on ROS 2** for teleop, logging, params, cameras, later perception and policy. **The actuator bus picks the MCU.** |
-| Real-time board | **Teensy 4.1** + ICM-42688-P + 3× CAN transceivers (2026-09-26; in the order-now cart). **Not the F765-Wing** (no CAN) — that is the P0–P1 bench board only. |
-| Companion | **Pi 5 now**, in containers, no Pi-specific libraries, so a **Jetson (Orin Nano Super kit class) at P5** is a bolt-in. Head has a companion **slot** with a 12–19 V feed. **Jetson is a perception buy, not a V1 buy.** |
-| Wheels | **6" OD locked** (a real tire at **5.75–6.25"** still counts). Width **~1–1.25"**. Real rubber, torsionally stiff. **In-wheel BLDC FOC.** Zantle 5" is a bench donor, not the foot. Not a buy. No spokes. |
-| Knee + hip swing | **CAN QDD / FOC is the working class** on 8S (2026-09-26); servo or stepper+belt is the **fallback**. Size for **~2× one-leg plant load** (~10 N·m knee holding). |
-| Hip roll | **IN V1** (dynamic FOC / QDD / fast servo), even if imperfect. Not a stepper. Not V2. |
-| Structure / envelope | **Carbon fiber tubes** for upper / lower leg spars. **~24"** full extension. **~14"** outside width. Head inside, wheels and legs outside the head. Mass budget **soft / blown.** |
-| Fabrication | **COTS** structure, **draft-friendly** customs, **wire ports**, **serviceability**, **2D before Blender** |
-| Shop | Mill / lathe / brake / bender / bandsaw / weld / solder / breadboards. Fab is welcome. |
-| Stepper I/O (if chosen) | **The RT MCU does not drive stepper coils.** Stepper drivers behind CAN / step-dir for pose. Steppers are now the **fallback**, not the peer, for knee / swing: CAN QDD on 8S is the working class. |
-| Research | Steal **Build Some Stuff (Serra)** + **Roadrunner** + **FrRonconi** + **XRobots** as research / inspiration. **Tazer**: learn from the mistakes (anti-patterns). **Stompy**: CAD/reality match + shared zero; **not** RL walking for V1. **Diablo**: split brain, DD/QDD class, LQR/PID before RL, height as states; **do not buy**; not 22 kg; no head/cargo V1. **SpdrBot**: Isaac Sim / Lab pipeline + failure modes for the Phase E horizon; **not** spider morphology; **not** Isaac Lab before `TWO_WHEEL`; **do not buy** Indystry packs or a 4090 for V1. Twin stack (Isaac / MuJoCo / mjlab / other) stays **TBD** — steal pipeline lessons, do not pick a dojo. Do not vendor. |
-| Twin / sim | **Pipeline TBD.** Lock the *contract* first (CAD→URDF/USD or MJCF lockstep, observation parity, motorcycle-crown tire contact, firmware zeros, stack willingness). Do **not** lock Isaac / MuJoCo / mjlab. Living-drawings 3D sandbox is a **design toy**, not the twin. Not a V1 gate. |
-| Process / horizon | Repo is the plan SoT. Hux bot is **advisory / tracking / brainstorming / adversarial** — not a large-task executor. **Inventory does not drive design.** Prefer the correct actuator / wheel over the shelf part. Authorized spend stays the [`bom.md`](bom.md) order-now cart; Steve owns those breakout edits. **Digital twin + training dojo** is the long-term north star, **after** Phase V1 classical / reused balance + modes (R14 / R18). Not a V1 gate. Do **not** stand up Isaac Lab, buy a 4090, or make RL a V1 balance gate before `TWO_WHEEL`. |
-| **V1 finish line** (2026-09-27) | **One 9.5" step, 9 of 10 attempts, from a standstill on the lower tread.** The north star stays *stairs*; a full flight is **V2 on the same hardware** (repetition inside the ±1.75" slot tolerance), not a V1 gate. Steve: "I want to actually finish this project." |
-| **Flat-ground speed** (2026-09-27) | **1.5 m/s top, 1.0 m/s cruise.** Set by the locked RS05 on 8S at the 6" wheel with ~2 N·m of catch torque kept in reserve (~1.3 m/s near cutoff). 1.8–2.0 m/s would reopen the wheel actuator / ratio; not wanted. A brisk walk, not a jog. |
-| **Knee actuator placement** (2026-09-27) | **RS02 at the knee for V1**, knee gravity spring (~2.2 N·m two-leg) in scope. The hip-driven knee linkage (T-REX / Cheetah look, torque advantage at the stand-up, no cable across the knee) is a **V2 refinement**, backlog only. **No five-bar / parallel leg**: [`research/knee-linkage.md`](research/knee-linkage.md) — no five-bar inside 24" reaches the shove pose. |
-| **Terrain scope, V1 controls** (2026-09-27) | **Flat floor + 1" sills + ~20° slopes** (T-REX-class) with the stair leg. Rough outdoor ground (grass, roots, gravel, curbs at walking pace) is **V3 / Phase E** — a controls and perception problem, not a leg change; the serial stair leg already is the more capable leg. |
-| **Reference machine** (2026-09-27) | **AgileX T-REX 2.0 is the scale / packaging reference** (5.8 kg, 291 mm track, 125 mm wheels, two pose motors per leg on the body, Orin Nano for SLAM) — **not the leg reference**: its 148 mm stroke is 60 % of one riser. Hux matches its class and exceeds it in exactly one thing: the step. Do not chase its jump. |
-| Actuators — **TEMPORARY LOCK** (2026-09-26, Steve: "put a temporary decision lock on all of those motors; proceed with that set and do more calculations; validate more before buying one") | **4× RobStride 02** (knee ×2, hip roll ×2; 7 / 17 N·m, 0.39 kg), **2× RobStride 00** (hip swing; 5 / 14 N·m, 0.31 kg), **2× RobStride 05** (wheel; 1.7 / 5.5 N·m, 0.19 kg). 2.56 kg, ~$1,120. **Not ordered.** The set is the single source in `tools/living-drawings/actuators.js`; the 2D model, the sandbox and the frontal model read masses, envelopes, torque caps and no-load speeds from it. **Applied 2026-09-26: the mass picture is now 7.75 kg** (was 6.0). With the real leg masses the planted hip roll hold is **10.7 N·m at the drawn 5.4" hips — above RS02 and at RS06's rating — and 6.0 N·m at 3.0"**: **the hip roll axes must come in to ≤ 3"** for this set to work; that is a design requirement now, not a preference. Knee hold standing up over the front wheel is **13.6 N·m** (1.9× RS02 rated, under its 17 peak) — knee gravity springs are back on the list. | Classic CAN 1 Mbit on **two buses** (wheels + roll; knees + swing). Requires **≥24 V bus → 8S**. GIM8108-8 was the earlier yardstick. [`research/actuator-shortlist.md`](research/actuator-shortlist.md). Steve confirms; then it is a cart line. |
+| Inventory | **No components purchased**, per Steve 2026-09-28. No confirmed Hux order or reserved inventory. Vendor CAD is not ownership. |
+| Stair objective | Retain one complete 9.5 × 9.5-inch step, 9/10 from a standstill. **Fix the legs before buying the set.** A short hop does not waive controlled single support. |
+| Actuator lock | The old 4×RS02 / 2×RS00 / 2×RS05 set is **reopened**, now a comparison case. Peak ratings do not qualify stationary hold. No full-set procurement release. |
+| Leg architecture | Hip roll + knee-at-knee remains a starting point. Ten-axis hip/ankle roll with finite-width wheel support is a **candidate**; its pitch-level carrier is unresolved. Simply relocating hip motors to ankles is not a fix. |
+| Envelope | Compact target approximately 24-inch high / 14-inch wide. H1 top +100 mm, 8.5-inch links fits nominal height but fails stair reach. Approximately 26-inch candidate passes the limited static reach/clearance screen, but is an **unaccepted height alternative**, not a requirement change. |
+| Head | Itemized mass/CoM/inertia required (R42). H1 203.2 mm depth / 120 mm middle bay / 177.8 mm top cap / 242 lower cassette is a **candidate allocation**; remove the unsubstantiated +1-inch head CoM lock. |
+| Wheels | Approximately 6-inch OD retained. Width/profile reopened for lateral support. Actual contact footprint, motor bearing loads and ankle orientation must be established. |
+| Power | 8S remains the conservative baseline pending conflicting vendor voltage revisions. Pack SKU and dimensions unchosen. 60-V-input regulator class plus verified transient/regen path. |
+| Controls | Four manual modes before autonomy; supported `PARKED`. Portable control core, CAN MCU and ROS 2 companion architecture retained. No firmware yet. |
+| MCU / buses | Teensy 4.1 candidate, three controllers (one FD-capable), three transceivers. Mixed-rate classic CAN; proposed ten-node schedule 1000/400/400 Hz across 2/4/4 nodes. |
+| Compute | Pi 5 class slot initially, optional Jetson later. Budget does not assume owned compute. One camera initially; seven cameras are deferred. |
+| Materials / process | Carbon-tube primary spars, COTS structure, serviceable customs, deliberate cable routes, 2D before CAD. Old cuts/springs/mounts are not fabrication releases. |
+| Speed / terrain | Targets retained: 1.5 m/s top, 1.0 cruise; flat + 1-inch sills + approximately 20° slopes. These are unproven capabilities. |
+| Research / twin | Reuse sound research with license boundaries; no RL or twin-platform gate before mechanics and classical balance. Existing sandbox is a **legacy experiment**, not the candidate digital twin. |
+| Purchase / publishing | Engineering and BOM changes authorized by this review. Steve subsequently authorized committing and pushing the review to `main`. No order placed; publication does not release the design for fabrication or purchase. |
 
 ---
 
@@ -340,6 +333,26 @@ Steve: "go ahead and do sheet two and then push everything to main."
 **R23 status:** Sheet 1 (layout) and Sheet 2 (make-up) exist for the leg and the hip band. Blender can open for the head's styling; the leg and band go to CAD from these two sheets once Steve agrees them. Pushed to `main` with everything from 2026-09-27.
 
 
+### 2026-09-28 — head audit and stair architecture reopened
+
+Steve requested a high-effort pass focused on math, physics, geometry, kinematics and BOM, explicitly said **no components have been bought**, and authorized better component choices. During the review he identified the fundamental failure of single-leg support and asked that the legs justify the actuator cost rather than quietly abandoning stairs.
+
+Steve subsequently instructed: **“Commit and push to main.”** This authorizes publishing the engineering review and its reproducible analyses; it does not change the validation gates or constitute approval to purchase components or fabricate the candidate.
+
+**Firm corrections:** no confirmed Hux purchases/orders; old motor set is a reference, not a release; a floor hop does not qualify R2/R17/R37; battery location is not body CoM; stationary torque and actual cooling must govern holds; the old two-bus 1 kHz claim does not fit extended classic CAN. Added R41–R44. 8S remains conservative because July manuals say 24 V minimum while September tables say 15 V; hardware revision must resolve that conflict.
+
+**Candidate H1:** H1 revision B: 203.2 mm depth, 120 mm middle bay, 177.8 mm top cap above Z = 80 mm; top +100 mm, cassette bottom −45 mm. The 242 mm-wide motor cassette is forward at X 32…89 mm; motor centers X = +60.5 mm. This fixes rear-folding link/motor interference and clears the rolled hip-pitch housings; the previous aft cassette/full-width middle bay are rejected. 150 × 50 × 60 mm pack class and separated compute/control/power allocations. Camera space is included; the control bay is 60 × 90 × 22 mm at X = 50.5 mm. Cassette width includes a 2.5 mm wall and 3.05 mm clearance outside each motor. Itemized nominal head 2.26 kg at (+6.19, 0, +20.78) mm; high case +0.60 kg. These are estimates, including explicit contingency, not measurements or a fabrication release.
+
+**Leg results:** revision B's split-offset spatial model screens a complete step at 91 poses. The 24-inch wide-entry case fails 14 reach samples. Narrowing the stepping track to 120 mm reduces the lateral cantilever, but the 24-inch variant still fails three reach samples and flags 17 envelopes; the 25-inch variant hits the conservative knee/riser envelope during transfer. With 9.5-inch links / 658.8 mm (25.94-inch) height, the narrow-entry candidate connects and passes 810 interpolated reach/limited-clearance/width checks in both nominal and +0.60 kg head scenarios. Modeled nominal COM residual is 0.17 mm; peak span 355.44 mm leaves only 0.16 mm below the nominal width limit. Gravity roll/pitch/knee demands are 6.61/3.92/7.89 N·m, or 7.02/3.84/8.95 N·m in the heavier case. **Carry this 26-inch candidate forward for research; no hardware release or approved height change.** The 27-inch variant also connects but adds height and knee demand. A wide-entry 27-inch variant spans 547.1 mm despite its 14-inch initial wheel envelope, so wheel track alone must never stand in for moving-body width.
+
+**Support mechanism:** keep hip roll, add active ankle roll and finite-width contacts. The ten-axis study still requires a real passive pitch-level carrier; it is not designed. Simply relocating the hip motors to the ankles is not a drop-in fix. Positively locked deployable landing shoes remain an alternative to investigate.
+
+**Actuator finding:** vendor stationary references are RS02 6 N·m, RS00 3.6, RS05 1.2, RS06 8, conditional on vendor fixtures. Compact candidate hip roll reaches about 9.29 N·m; the preferred narrow-entry candidate reduces it to 6.61 N·m before dynamics, but hip pitch and knee also exceed reference stationary ratings. Do not substitute a 7 N·m rotating rating or a 17 N·m peak to pass it. Reduction/larger actuators require new packaging and duty calculations. Full-set procurement stays on hold.
+
+**Cascade:** `tools/engineering/baseline.json` and `bom.json` are candidate numerical sources; `review.py` regenerates `head-leg-results.json`, H1 dimensioned SVG, the engineering page and the BOM. Physical-invariant tests cover mass/inertia, CoM sensitivity, split-offset FK/IK, gravity virtual work, contact-load sequencing, actual moving width and negative clearance/CAN gates. The full findings and remaining checks are in [head-and-leg-review.md](head-and-leg-review.md). Requirements, mechanical, electronics, software interfaces, checklists, inventory, README and notes point to the new disposition. Legacy model geometry/controllers are deliberately not relabeled as the ten-axis robot; pages visibly identify them as the rejected old stair baseline.
+
+**Budget:** complete candidate allowance $2,236–3,498 before tax/shipping, with no assumed free boards/charger/stock. Price allowances are unverified; no supplier contacted, no order made. Firmware and validated CAD do not yet exist. **No component selection or dimension is called build-ready by this review.**
+
 When a docs PR merges, add a dated heading:
 
 ```
@@ -348,4 +361,4 @@ When a docs PR merges, add a dated heading:
 One-paragraph intent. Note any ID it owns or supersedes.
 ```
 
-Keep the **Current locked decisions** table honest if the new PR changes a lock.
+Keep the **Current governing decisions** table honest if the new PR changes a lock.

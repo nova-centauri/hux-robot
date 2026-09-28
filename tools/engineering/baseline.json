@@ -1,0 +1,429 @@
+{
+  "revision": "2026-09-28-B",
+  "status": "engineering candidate; no hardware release; no components purchased",
+  "frame": "millimetres; X forward, Y left, Z up; origin midway between hip roll axes",
+  "head": {
+    "upper_box_mm": {
+      "min": [
+        -101.6,
+        -60,
+        48
+      ],
+      "max": [
+        101.6,
+        60,
+        100
+      ]
+    },
+    "lower_core_mm": {
+      "min": [
+        -101.6,
+        -34,
+        -44
+      ],
+      "max": [
+        101.6,
+        34,
+        48
+      ]
+    },
+    "hip_cassette_mm": {
+      "x": [
+        32,
+        89
+      ],
+      "half_width": 121,
+      "z": [
+        -45,
+        45
+      ]
+    },
+    "wall_mm": 2.5,
+    "assembly_clearance_mm": 3,
+    "pack": {
+      "center_mm": [
+        8,
+        0,
+        -8
+      ],
+      "size_mm": [
+        150,
+        50,
+        60
+      ],
+      "mass_kg": 0.7,
+      "trim_x_mm": [
+        -10,
+        15
+      ]
+    },
+    "zones": [
+      {
+        "id": "battery",
+        "center_mm": [
+          8,
+          0,
+          -8
+        ],
+        "size_mm": [
+          162,
+          60,
+          66
+        ]
+      },
+      {
+        "id": "companion_with_cooling",
+        "center_mm": [
+          -40,
+          0,
+          73
+        ],
+        "size_mm": [
+          115,
+          105,
+          44
+        ]
+      },
+      {
+        "id": "control_imu",
+        "center_mm": [
+          50.5,
+          0,
+          63
+        ],
+        "size_mm": [
+          60,
+          90,
+          22
+        ]
+      },
+      {
+        "id": "power_distribution",
+        "center_mm": [
+          -64,
+          0,
+          38
+        ],
+        "size_mm": [
+          58,
+          56,
+          18
+        ]
+      },
+      {
+        "id": "pack_connector_service",
+        "center_mm": [
+          53,
+          0,
+          39
+        ],
+        "size_mm": [
+          50,
+          28,
+          20
+        ]
+      },
+      {
+        "id": "face_camera",
+        "center_mm": [
+          91,
+          0,
+          75
+        ],
+        "size_mm": [
+          12,
+          110,
+          40
+        ]
+      }
+    ],
+    "mass_items": [
+      {
+        "id": "battery",
+        "kg": 0.7,
+        "center_mm": [
+          8,
+          0,
+          -8
+        ],
+        "size_mm": [
+          150,
+          50,
+          60
+        ]
+      },
+      {
+        "id": "frame_heat_spreaders",
+        "kg": 0.38,
+        "center_mm": [
+          35,
+          0,
+          0
+        ],
+        "size_mm": [
+          90,
+          235,
+          80
+        ]
+      },
+      {
+        "id": "shell_and_trays",
+        "kg": 0.25,
+        "center_mm": [
+          0,
+          0,
+          40
+        ],
+        "size_mm": [
+          200,
+          175,
+          120
+        ]
+      },
+      {
+        "id": "pi_cooler_storage",
+        "kg": 0.15,
+        "center_mm": [
+          -40,
+          0,
+          73
+        ],
+        "size_mm": [
+          100,
+          85,
+          35
+        ]
+      },
+      {
+        "id": "mcu_imu_can_rx",
+        "kg": 0.08,
+        "center_mm": [
+          50.5,
+          0,
+          63
+        ],
+        "size_mm": [
+          60,
+          90,
+          22
+        ]
+      },
+      {
+        "id": "power_fuse_disconnect",
+        "kg": 0.16,
+        "center_mm": [
+          -64,
+          0,
+          38
+        ],
+        "size_mm": [
+          58,
+          56,
+          18
+        ]
+      },
+      {
+        "id": "face_camera",
+        "kg": 0.08,
+        "center_mm": [
+          91,
+          0,
+          75
+        ],
+        "size_mm": [
+          12,
+          110,
+          40
+        ]
+      },
+      {
+        "id": "harness_fasteners",
+        "kg": 0.16,
+        "center_mm": [
+          0,
+          0,
+          25
+        ],
+        "size_mm": [
+          170,
+          130,
+          90
+        ]
+      },
+      {
+        "id": "explicit_contingency",
+        "kg": 0.3,
+        "center_mm": [
+          0,
+          0,
+          35
+        ],
+        "size_mm": [
+          180,
+          150,
+          100
+        ]
+      }
+    ],
+    "high_mass_extra_kg": 0.6,
+    "roll_motor_center_x_mm": 60.5,
+    "top_cap_mm": {
+      "min": [
+        -101.6,
+        -88.9,
+        80
+      ],
+      "max": [
+        101.6,
+        88.9,
+        100
+      ]
+    }
+  },
+  "leg": {
+    "link_mm": 215.9,
+    "legacy_link_mm": 190.5,
+    "hip_half_spacing_mm": 76.2,
+    "leg_plane_mm": 120.65,
+    "wheel_radius_mm": 76.2,
+    "wheel_assembly_width_mm": 80,
+    "neutral_wheel_outside_width_mm": 355.6,
+    "effective_contact_half_width_mm": 30,
+    "hip_roll_limit_deg": 55,
+    "hip_pitch_limits_deg": [
+      -40,
+      170
+    ],
+    "knee_limits_deg": [
+      12,
+      155
+    ],
+    "ankle_roll_limit_deg": 60,
+    "mass_kg": {
+      "hip_pair_per_side": 0.78,
+      "knee": 0.46,
+      "upper_tube": 0.035,
+      "lower_tube": 0.035,
+      "foot_including_ankle": 0.92,
+      "pitch_level_linkage": 0.15
+    },
+    "architecture": "hip roll + hip pitch + knee pitch + ankle roll + wheel per leg; passive pitch-level carrier REQUIRED",
+    "stair_mm": {
+      "rise": 241.3,
+      "going": 241.3,
+      "wheel_clearance": 10
+    },
+    "foot_x_mm": [
+      -100,
+      100
+    ],
+    "body_z_search_mm": [
+      330,
+      505,
+      5
+    ]
+  },
+  "actuator_screen": {
+    "rs02": {
+      "mass_kg": 0.38,
+      "peak_nm": 17,
+      "stall_reference_nm": 6,
+      "planning_usd": 145
+    },
+    "rs00": {
+      "mass_kg": 0.31,
+      "peak_nm": 14,
+      "stall_reference_nm": 3.6,
+      "planning_usd": 160
+    },
+    "rs05": {
+      "mass_kg": 0.191,
+      "peak_nm": 5.5,
+      "stall_reference_nm": 1.2,
+      "planning_usd": 110
+    },
+    "note": "thermal references depend on vendor fixture; NOT installed continuous allowances; prices are unverified planning allowances"
+  },
+  "power": {
+    "cells": 8,
+    "ah": 3.3,
+    "nominal_cell_v": 3.7,
+    "usable_fraction": 0.8,
+    "distribution_efficiency": 0.9,
+    "regulator_input_rating_v": 60
+  },
+  "can": {
+    "bitrate": 1000000,
+    "frame_bits_budget": 160,
+    "telemetry_reserve_fraction": 0.1,
+    "buses": [
+      {
+        "id": "A",
+        "role": "wheels",
+        "nodes": 2,
+        "update_hz": 1000
+      },
+      {
+        "id": "B",
+        "role": "hip roll + ankle roll",
+        "nodes": 4,
+        "update_hz": 400
+      },
+      {
+        "id": "C",
+        "role": "hip pitch + knee",
+        "nodes": 4,
+        "update_hz": 400
+      }
+    ]
+  },
+  "studies": {
+    "taller_leg_overrides": {
+      "link_mm": 241.3,
+      "landing_half_track_mm": 60,
+      "hip_roll_limit_deg": 70,
+      "ankle_roll_limit_deg": 75,
+      "foot_x_mm": [
+        -90,
+        90
+      ],
+      "body_z_search_mm": [
+        300,
+        550,
+        3
+      ]
+    },
+    "extended_leg_overrides": {
+      "link_mm": 254,
+      "body_z_search_mm": [
+        300,
+        578,
+        3
+      ]
+    },
+    "narrow_stance_overrides": {
+      "stance_half_track_mm": 60,
+      "body_z_search_mm": [
+        270,
+        578,
+        3
+      ],
+      "swept_width_limit_mm": 355.6
+    },
+    "small_narrow_overrides": {
+      "narrow_24inch_comparison": {
+        "link_mm": 215.9,
+        "hip_roll_limit_deg": 55
+      },
+      "narrow_25inch_comparison": {
+        "link_mm": 228.6
+      }
+    }
+  },
+  "structure_screen": {
+    "tube_od_mm": 16,
+    "tube_id_mm": 14,
+    "assumed_axial_E_GPa": 100,
+    "note": "historical tube class; unqualified homogeneous-beam reference, NOT supplier laminate data or structural approval"
+  }
+}

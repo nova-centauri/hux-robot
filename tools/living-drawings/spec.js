@@ -11,6 +11,9 @@
 
   const spec = {
     asOf: "2026-09-27",
+    status: "legacy eight-axis experiment; stair baseline rejected 2026-09-28",
+    procurementReleased: false,
+    candidateSource: "../engineering/baseline.json",
 
     /* R37 — what "done" means for V1. The north star is still stairs; a flight is V2 on the same
        hardware (the same cycle repeated with the landing error held inside the slot every time). */
@@ -21,7 +24,7 @@
       flight: "V2, same hardware"
     },
 
-    /* R38 — flat-ground pace. Set by the locked RS05 on the 8S bus at the 6" wheel, keeping
+    /* R38 — flat-ground pace. Set by the historical RS05 reference on the 8S bus at the 6" wheel, keeping
        `reserveNm` of catch torque in hand at the top speed (see wheelAtSpeed below). */
     speed: { id: "R38", topMs: 1.5, cruiseMs: 1.0, reserveNm: 2.0 },
 
@@ -40,14 +43,14 @@
     layout: {
       hipRollAxisIn: 3.0,      /* lateral, from the body centreline, each side */
       legPlaneIn: 4.75,        /* lateral, the tube / joint plane, each side */
-      bodyComForwardIn: 1.0,   /* body lump ahead of the hip roll axes */
+      bodyComForwardIn: 1.0,   /* LEGACY dynamics scenario only; not pack location or validated head CoM */
       hipBandWidthIn: 2 * (3.0 + ACT.envIn.rollD / 2), /* two RS02 roll housings flanking the pack */
       packIn: { l: 150 / 25.4, w: 50 / 25.4, h: 60 / 25.4 }, /* 8S 3300 mAh, docs/electronics.md */
       landing: "rear of the next slot; a forward landing error is the failure mode"
     },
 
-    /* Sheet 2 — tubes, fittings, spring, hub, wire path (2026-09-27). Proposals drawn to the
-       order-now parts (docs/bom.md): 16 × 14 mm carbon tube, 6 × 1.25 tire on a 3.75" bead. */
+    /* Sheet 2 — tubes, fittings, spring, hub, wire path (2026-09-27). Historical proposals drawn to the
+       former parts list (not today's BOM): 16 × 14 mm carbon tube, 6 × 1.25 tire on a 3.75" bead. */
     sheet2: {
       tube: { odMm: 16, idMm: 14, eGPa: 100, densityGcc: 1.6, flexMPa: 500, socketMm: 40, source: "Windcatcher 16×14×1000 (bom.md)" },
       /* joint axis → tube end, per fitting: half the housing plus the fitting wall */

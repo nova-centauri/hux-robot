@@ -1,5 +1,7 @@
 # Tazer — learn from the mistakes
 
+> **2026-09-28:** historical study. Current head/leg dimensions, procurement and support gates are in [the engineering review](../head-and-leg-review.md). No components have been purchased; older order/selection claims are superseded.
+
 Steve 2026-09-21: watch [My Robot almost got me Kicked out of Uni](https://www.youtube.com/watch?v=gqnW9qBCHnM) (Tazer) and **learn a lot from this guy's mistakes**. Inspiration + anti-patterns. **Not a Hux stack, BOM, or CAD source.** No spend. FC stays **TBD**.
 
 This sits next to [inspiration.md](inspiration.md). It does not replace [XRobots](xrobots.md), Hattori, Serra, or [study-plan.md](study-plan.md) Phases A–D.

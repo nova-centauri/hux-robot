@@ -1,0 +1,28 @@
+{
+  "as_of": "2026-09-28",
+  "currency": "USD",
+  "basis": "planning allowances, not verified quotes; no purchases, shipping/tax excluded",
+  "rows": [
+    {"id": "knee_roll_rs02", "qty": 4, "item": "RS02 reference actuators: two knees, two hip rolls", "unit_usd": [145, 200], "stage": "HOLD", "gate": "hip roll and knee exceed bare RS02 stationary reference in the preferred 26-inch study; reduction/replacement or validated spring must be closed"},
+    {"id": "hip_rs00", "qty": 2, "item": "RS00 hip pitch reference actuators", "unit_usd": [150, 180], "stage": "HOLD", "gate": "3.92 Nm gravity peak exceeds 3.6 Nm stationary reference; geometry and mounted duty required"},
+    {"id": "wheel_rs05", "qty": 2, "item": "RS05 wheel reference actuators", "unit_usd": [100, 130], "stage": "HOLD", "gate": "independent wheel bearings, wheel inertia and continuous-turn firmware"},
+    {"id": "ankle_rs00", "qty": 2, "item": "Additional ankle-roll reference actuators for ten-axis study", "unit_usd": [150, 180], "stage": "CANDIDATE", "gate": "architecture approval, pitch-level carrier and contact footprint; omit if architecture changes"},
+    {"id": "wheel_treads", "qty": 4, "item": "Real-rubber 6-inch narrow treads for dual-contact wheel feet", "unit_usd": [11, 25], "stage": "CANDIDATE", "gate": "tread spacing/contact tests; tube/rim interface and actual diameter"},
+    {"id": "tubes", "qty": 4, "item": "Inner tubes if pneumatic treads are selected", "unit_usd": [8, 12], "stage": "CANDIDATE", "gate": "compatible tire, bead and valve clearance"},
+    {"id": "carbon", "qty": 2, "item": "16 mm carbon stock, 1 m; wall/layup not released", "unit_usd": [17, 30], "stage": "HOLD", "gate": "new link lengths, bonded socket coupon, supplier laminate data"},
+    {"id": "teensy", "qty": 1, "item": "Teensy 4.1", "unit_usd": [32, 45], "stage": "BENCH CANDIDATE", "gate": "three bus pin assignment and carrier layout"},
+    {"id": "imu", "qty": 1, "item": "SPI IMU breakout, ICM-42688-P class", "unit_usd": [12, 25], "stage": "BENCH CANDIDATE", "gate": "actual breakout and SPI voltage compatibility"},
+    {"id": "can", "qty": 3, "item": "3.3-V-logic-compatible CAN transceivers", "unit_usd": [4, 10], "stage": "BENCH CANDIDATE", "gate": "controller-side logic and bus common-mode ratings; not all TJA1051 variants are 3.3 V supply"},
+    {"id": "companion", "qty": 1, "item": "Pi 5 class companion, cooler and storage", "unit_usd": [80, 150], "stage": "DEFER", "gate": "reuse only if separately confirmed; not needed for balance bench"},
+    {"id": "rx", "qty": 1, "item": "RC receiver", "unit_usd": [30, 50], "stage": "DEFER", "gate": "existing transmitter compatibility and failsafe"},
+    {"id": "pack", "qty": 1, "item": "8S LiPo, 2.7-3.3 Ah packaging study", "unit_usd": [70, 120], "stage": "HOLD", "gate": "actual dimensions <=150 x 50 x 60 mm, mass, discharge/regen current and charger"},
+    {"id": "charger", "qty": 1, "item": "8S-capable balance charging system", "unit_usd": [90, 180], "stage": "HOLD", "gate": "no charger ownership assumed; suitable supply and 8S balance connection"},
+    {"id": "power", "qty": 1, "item": "60-V-input-class bucks, fuse, motor disconnect, anti-spark, distribution, voltage/current sensing", "unit_usd": [80, 160], "stage": "BENCH CANDIDATE", "gate": "5 V/5 A companion plus separate controller branch; verified transient/regen handling"},
+    {"id": "harness", "qty": 1, "item": "Actuator connector harness, CAN pairs, six terminators, strain relief", "unit_usd": [50, 100], "stage": "HOLD", "gate": "joint travel, current and branch topology"},
+    {"id": "metal", "qty": 1, "item": "Frame/heat-spreader stock, axle bearings, shafts, rims and hardware", "unit_usd": [120, 240], "stage": "HOLD", "gate": "no free shop stock assumed; drawings and bearing load path"},
+    {"id": "customs", "qty": 1, "item": "End fittings, shell/trays, inserts and prototype material", "unit_usd": [40, 90], "stage": "HOLD", "gate": "head and leg clearance review"},
+    {"id": "springs", "qty": 2, "item": "Knee gravity compensation assemblies", "unit_usd": [20, 50], "stage": "HOLD", "gate": "torque curve throughout stance and swing; stored energy and spring travel"},
+    {"id": "ankle_carriers", "qty": 2, "item": "Passive pitch-level ankle carrier/linkage allowance", "unit_usd": [30, 70], "stage": "CANDIDATE", "gate": "unresolved mechanism; allowance is not a finished BOM"},
+    {"id": "face", "qty": 1, "item": "One camera/face module allowance", "unit_usd": [30, 80], "stage": "DEFER", "gate": "keep seven cameras and Jetson out of V1 purchase"}
+  ]
+}

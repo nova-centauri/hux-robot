@@ -1,5 +1,8 @@
 # Minimum electronics (V1)
 
+> **Historical study — superseded for procurement on 2026-09-28.** [Current head/leg review](head-and-leg-review.md) reopens single support, geometry and actuator sizing. No components purchased. Old purchase claims, 7 N·m stationary-hold assumptions, pack=body CoM, and two-bus 1 kHz claims must not be used to buy/build. Historical numbers below are preserved, not revalidated.
+
+
 **Status:** planning note, revised 2026-09-26 for **8S + CAN + a CAN-capable real-time MCU** ([`decisions.md`](decisions.md)). **Docs only.** **No new spend** beyond [`bom.md`](bom.md). No locked SKUs. The F765-Wing is a **P0–P1 bench board** (no CAN), not the robot's MCU.
 
 This is the **smallest electronics set** that can meet Hux V1 goals: four **manual** modes first, then pose joints, then hip-roll experiments. Classes and on-hand parts only. Every pack, driver, and motor model stays **TBD** until Steve asks to buy or a real part is on the bench.

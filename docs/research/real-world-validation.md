@@ -1,5 +1,7 @@
 # Hux: real-world assumptions review
 
+> **2026-09-28:** historical study. Current head/leg dimensions, procurement and support gates are in [the engineering review](../head-and-leg-review.md). No components have been purchased; older order/selection claims are superseded.
+
 **Historical baseline audit.** The findings below describe the pre-correction model at the commit named here. [Implemented corrections](model-corrections.md) and [current sandbox results](sim-sandbox.md) supersede its descriptions of the live code. Running the commands now tests the corrected model; the saved baseline output remains unchanged.
 
 

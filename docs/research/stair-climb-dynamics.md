@@ -1,5 +1,8 @@
 # Stair candidate — corrected feasibility status
 
+> **Historical study — superseded for procurement on 2026-09-28.** [Current head/leg review](../head-and-leg-review.md) reopens single support, geometry and actuator sizing. No components purchased. Old purchase claims, 7 N·m stationary-hold assumptions, pack=body CoM, and two-bus 1 kHz claims must not be used to buy/build. Historical numbers below are preserved, not revalidated.
+
+
 The 9.5-inch rise × 9.5-inch going remains a design target. **The current candidate is rejected.** The earlier planar momentum window did not establish a working stair gait. See the [sourced audit](real-world-validation.md) and [correction record](model-corrections.md).
 
 ## Geometry and balance

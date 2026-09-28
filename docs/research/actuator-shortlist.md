@@ -1,5 +1,8 @@
 # Actuator shortlist — what decides it, and what the 2026 numbers say
 
+> **Historical study — superseded for procurement on 2026-09-28.** [Current head/leg review](../head-and-leg-review.md) reopens single support, geometry and actuator sizing. No components purchased. Old purchase claims, 7 N·m stationary-hold assumptions, pack=body CoM, and two-bus 1 kHz claims must not be used to buy/build. Historical numbers below are preserved, not revalidated.
+
+
 **2026-09-26.** Steve: "I am not sure about the actuator shortlist. I think it's a good time to decide. What should I consider?" This note is the decision framework plus the candidates checked against Hux's own numbers. **No SKU locked here. No spend.** Steve owns the cart line.
 
 Hux numbers used (settled geometry, 6 kg example, [`leg-geometry.md`](leg-geometry.md), [`stair-climb-dynamics.md`](stair-climb-dynamics.md), [`sim-sandbox.md`](sim-sandbox.md)):

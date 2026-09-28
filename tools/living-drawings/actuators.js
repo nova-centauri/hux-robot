@@ -1,8 +1,8 @@
 /* Hux actuator set — the temporary decision lock of 2026-09-26 (docs/decisions.md).
    One table, read by spatial.js (torque limits), kin.js (lumps, motor envelopes), sim-core.js
    (torque caps, torque-speed lines, masses) and frontal.js (lumps). Change the set here and
-   every model follows. Vendor numbers are from the RobStride spec tables and US retailer pages
-   on 2026-09-26; nothing here is measured on a bench yet. SI unless the key says otherwise. */
+   every LEGACY model follows. 2026-09-28: this set is reopened, not a procurement release.
+   See docs/head-and-leg-review.md. No components purchased. SI unless noted. */
 (function (root) {
   "use strict";
   const IN = 0.0254;
@@ -14,23 +14,29 @@
   const parts = {
     rs02: {
       name: "RobStride 02", role: "knee, hip roll",
-      massKg: 0.39,          /* 380 g (spec table) – 405 g (retailer); the mean */
-      ratedNm: 7, peakNm: 17,  /* spec table; one retailer lists 6 rated — margins below use 7 */
+      massKg: 0.39,          /* retained legacy planning mass; vendor table 0.380 ±0.003 kg */
+      vendorMassKg: 0.380,
+      ratedNm: 6, peakNm: 17, /* conservative July manual rotating rating; heat sink required */
+      stallReferenceNm: 6, catalogRotatingNm: 7, outputInertiaKgM2: 0.0042,
+      thermalNote: "July: 6 Nm rotating on 260x280 mm plate; September: 7 rotating/6 stationary on specified fixture. Installed rating unknown.",
       ratio: 7.75, noLoadRpmAt48V: 410,
       vMin: 24, vMax: 60, encoders: 2,
+      voltageNote: "July manual/README 24 V min; September PDF 15 V. Retain conservative floor until hardware revision confirmed.",
       env: { w: 78.5e-3, h: 78.5e-3, t: 45.5e-3 }, /* square housing, axial length */
       usd: 145
     },
     rs00: {
       name: "RobStride 00", role: "hip swing",
       massKg: 0.31, ratedNm: 5, peakNm: 14, ratio: 10, noLoadRpmAt48V: 315,
+      stallReferenceNm: 3.6, outputInertiaKgM2: 0.001,
       vMin: 24, vMax: 60, encoders: 2,
       env: { w: 57e-3, h: 57e-3, t: 51e-3 },
       usd: 160
     },
     rs05: {
       name: "RobStride 05", role: "wheel",
-      massKg: 0.191, ratedNm: 1.7, peakNm: 5.5, ratio: 7.75, noLoadRpmAt48V: 480,
+      massKg: 0.191, ratedNm: 1.6, peakNm: 5.5, ratio: 7.75, noLoadRpmAt48V: 480,
+      stallReferenceNm: 1.2, catalogRotatingNm: 1.8, outputInertiaKgM2: 0.0007,
       vMin: 15, vMax: 60, encoders: 2,
       env: { w: 46e-3, h: 46e-3, t: 44e-3 },
       usd: 110
@@ -43,7 +49,9 @@
   function noLoadRadS(part, volts) {
     return part.noLoadRpmAt48V * ((volts || bus.vNominal) / bus.vRated) * 2 * Math.PI / 60;
   }
-  /* Vendor no-load speeds are at the output. Reflected rotor inertia is not published; left out. */
+  /* No-load speeds are output speeds. Equivalent output inertia IS published in the September
+     sheet (metadata above), but not implemented in the legacy physics. Do not qualify a wheel
+     from its peak-to-no-load straight line; hardware torque-speed/current tests are required. */
 
   /* Lumped masses for the 2D picture, kilograms. The 2026-09-22 picture was body 4.0 (4S pack),
      both hip actuators 0.8, each knee 0.25, each wheel 0.35 = 6.0 kg. With the locked set:
@@ -62,7 +70,9 @@
   lumps.total = lumps.body + lumps.hips + 2 * lumps.knee + 2 * lumps.wheel;
 
   const set = {
-    lockedOn: "2026-09-26 (temporary decision lock; validate before buying one)",
+    lockedOn: "2026-09-26 reference set; reopened 2026-09-28, not released",
+    procurementReleased: false,
+    review: "../../docs/head-and-leg-review.md",
     bus, parts, axes, lumps, noLoadRadS,
     peak: { wheel: axes.wheel.peakNm, knee: axes.knee.peakNm, hip: axes.hip.peakNm, roll: axes.roll.peakNm },
     rated: { wheel: axes.wheel.ratedNm, knee: axes.knee.ratedNm, hip: axes.hip.ratedNm, roll: axes.roll.ratedNm },

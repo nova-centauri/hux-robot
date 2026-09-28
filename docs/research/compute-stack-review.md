@@ -1,5 +1,8 @@
 # Compute and software-stack review — 2026-09-26
 
+> **Historical study — superseded for procurement on 2026-09-28.** [Current head/leg review](../head-and-leg-review.md) reopens single support, geometry and actuator sizing. No components purchased. Old purchase claims, 7 N·m stationary-hold assumptions, pack=body CoM, and two-bus 1 kHz claims must not be used to buy/build. Historical numbers below are preserved, not revalidated.
+
+
 Steve asked for a review of the software stack that will run on the hardware, and whether a "high-power NVIDIA single-board computer, about $400–600" fits Hux. **Docs only. No lock changed. No spend.** This is the advisory read (decisions 2026-09-22: advisory / adversarial), not a plan rewrite.
 
 Reviewed: [`../software.md`](../software.md), [`../electronics.md`](../electronics.md), [`../electronics-minimum.md`](../electronics-minimum.md), [`../parts-on-hand.md`](../parts-on-hand.md), the living-drawings **Software / Data flow / Hardware** pages (the 2026-09-25 F765-Wing + Pi 5 bench plan), and the Matek F765-WING spec sheet.
