@@ -1,0 +1,306 @@
+{
+  "mesh_checks": {
+    "01_layout_deck": {
+      "watertight": true,
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "zero_area_faces": 0,
+      "connected_solids": 1,
+      "volume_mm3": 50281.65,
+      "bounds_mm": [
+        120.0,
+        110.0,
+        4.0
+      ],
+      "minimum_z_mm": 0.0
+    },
+    "02_fixed_pivot_plate": {
+      "watertight": true,
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "zero_area_faces": 0,
+      "connected_solids": 1,
+      "volume_mm3": 27659.61,
+      "bounds_mm": [
+        70.0,
+        70.0,
+        6.0
+      ],
+      "minimum_z_mm": 0.0
+    },
+    "03_link_110": {
+      "watertight": true,
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "zero_area_faces": 0,
+      "connected_solids": 1,
+      "volume_mm3": 5777.68,
+      "bounds_mm": [
+        126.0,
+        16.0,
+        5.0
+      ],
+      "minimum_z_mm": 0.0
+    },
+    "04_carrier_40": {
+      "watertight": true,
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "zero_area_faces": 0,
+      "connected_solids": 1,
+      "volume_mm3": 4840.88,
+      "bounds_mm": [
+        56.0,
+        16.0,
+        6.0
+      ],
+      "minimum_z_mm": 0.0
+    },
+    "05_spacer_2mm": {
+      "watertight": true,
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "zero_area_faces": 0,
+      "connected_solids": 1,
+      "volume_mm3": 94.4,
+      "bounds_mm": [
+        9.0,
+        9.0,
+        2.0
+      ],
+      "minimum_z_mm": 0.0
+    },
+    "06_spacer_12mm": {
+      "watertight": true,
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "zero_area_faces": 0,
+      "connected_solids": 1,
+      "volume_mm3": 571.19,
+      "bounds_mm": [
+        9.0,
+        9.0,
+        12.0
+      ],
+      "minimum_z_mm": 0.0
+    },
+    "07_hole_fit_coupon": {
+      "watertight": true,
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "zero_area_faces": 0,
+      "connected_solids": 1,
+      "volume_mm3": 8167.43,
+      "bounds_mm": [
+        82.0,
+        26.0,
+        4.0
+      ],
+      "minimum_z_mm": 0.0
+    },
+    "08_wheel_envelope_100": {
+      "watertight": true,
+      "nonmanifold_edges": 0,
+      "loose_vertices": 0,
+      "zero_area_faces": 0,
+      "connected_solids": 1,
+      "volume_mm3": 12036.73,
+      "bounds_mm": [
+        100.0,
+        100.0,
+        2.0
+      ],
+      "minimum_z_mm": 0.0
+    }
+  },
+  "sweep": [
+    {
+      "angle_deg": 15,
+      "axle_rearward_mm": 28.4701,
+      "axle_below_pivot_mm": 106.2518,
+      "projected_neck_hardware_clearance_mm": 1.8528
+    },
+    {
+      "angle_deg": 16,
+      "axle_rearward_mm": 30.3201,
+      "axle_below_pivot_mm": 105.7388,
+      "projected_neck_hardware_clearance_mm": 2.5255
+    },
+    {
+      "angle_deg": 17,
+      "axle_rearward_mm": 32.1609,
+      "axle_below_pivot_mm": 105.1935,
+      "projected_neck_hardware_clearance_mm": 3.1949
+    },
+    {
+      "angle_deg": 18,
+      "axle_rearward_mm": 33.9919,
+      "axle_below_pivot_mm": 104.6162,
+      "projected_neck_hardware_clearance_mm": 3.8607
+    },
+    {
+      "angle_deg": 19,
+      "axle_rearward_mm": 35.8125,
+      "axle_below_pivot_mm": 104.007,
+      "projected_neck_hardware_clearance_mm": 4.5227
+    },
+    {
+      "angle_deg": 20,
+      "axle_rearward_mm": 37.6222,
+      "axle_below_pivot_mm": 103.3662,
+      "projected_neck_hardware_clearance_mm": 5.1808
+    },
+    {
+      "angle_deg": 21,
+      "axle_rearward_mm": 39.4205,
+      "axle_below_pivot_mm": 102.6938,
+      "projected_neck_hardware_clearance_mm": 5.8347
+    },
+    {
+      "angle_deg": 22,
+      "axle_rearward_mm": 41.2067,
+      "axle_below_pivot_mm": 101.9902,
+      "projected_neck_hardware_clearance_mm": 6.4843
+    },
+    {
+      "angle_deg": 23,
+      "axle_rearward_mm": 42.9804,
+      "axle_below_pivot_mm": 101.2555,
+      "projected_neck_hardware_clearance_mm": 7.1292
+    },
+    {
+      "angle_deg": 24,
+      "axle_rearward_mm": 44.741,
+      "axle_below_pivot_mm": 100.49,
+      "projected_neck_hardware_clearance_mm": 7.7695
+    },
+    {
+      "angle_deg": 25,
+      "axle_rearward_mm": 46.488,
+      "axle_below_pivot_mm": 99.6939,
+      "projected_neck_hardware_clearance_mm": 8.4047
+    },
+    {
+      "angle_deg": 26,
+      "axle_rearward_mm": 48.2208,
+      "axle_below_pivot_mm": 98.8673,
+      "projected_neck_hardware_clearance_mm": 9.0348
+    },
+    {
+      "angle_deg": 27,
+      "axle_rearward_mm": 49.939,
+      "axle_below_pivot_mm": 98.0107,
+      "projected_neck_hardware_clearance_mm": 9.6596
+    },
+    {
+      "angle_deg": 28,
+      "axle_rearward_mm": 51.6419,
+      "axle_below_pivot_mm": 97.1242,
+      "projected_neck_hardware_clearance_mm": 10.2789
+    },
+    {
+      "angle_deg": 29,
+      "axle_rearward_mm": 53.3291,
+      "axle_below_pivot_mm": 96.2082,
+      "projected_neck_hardware_clearance_mm": 10.8924
+    },
+    {
+      "angle_deg": 30,
+      "axle_rearward_mm": 55.0,
+      "axle_below_pivot_mm": 95.2628,
+      "projected_neck_hardware_clearance_mm": 11.5
+    },
+    {
+      "angle_deg": 31,
+      "axle_rearward_mm": 56.6542,
+      "axle_below_pivot_mm": 94.2884,
+      "projected_neck_hardware_clearance_mm": 12.1015
+    },
+    {
+      "angle_deg": 32,
+      "axle_rearward_mm": 58.2911,
+      "axle_below_pivot_mm": 93.2853,
+      "projected_neck_hardware_clearance_mm": 12.6968
+    },
+    {
+      "angle_deg": 33,
+      "axle_rearward_mm": 59.9103,
+      "axle_below_pivot_mm": 92.2538,
+      "projected_neck_hardware_clearance_mm": 13.2856
+    },
+    {
+      "angle_deg": 34,
+      "axle_rearward_mm": 61.5112,
+      "axle_below_pivot_mm": 91.1941,
+      "projected_neck_hardware_clearance_mm": 13.8677
+    },
+    {
+      "angle_deg": 35,
+      "axle_rearward_mm": 63.0934,
+      "axle_below_pivot_mm": 90.1067,
+      "projected_neck_hardware_clearance_mm": 14.4431
+    },
+    {
+      "angle_deg": 36,
+      "axle_rearward_mm": 64.6564,
+      "axle_below_pivot_mm": 88.9919,
+      "projected_neck_hardware_clearance_mm": 15.0114
+    },
+    {
+      "angle_deg": 37,
+      "axle_rearward_mm": 66.1997,
+      "axle_below_pivot_mm": 87.8499,
+      "projected_neck_hardware_clearance_mm": 15.5726
+    },
+    {
+      "angle_deg": 38,
+      "axle_rearward_mm": 67.7228,
+      "axle_below_pivot_mm": 86.6812,
+      "projected_neck_hardware_clearance_mm": 16.1265
+    },
+    {
+      "angle_deg": 39,
+      "axle_rearward_mm": 69.2252,
+      "axle_below_pivot_mm": 85.4861,
+      "projected_neck_hardware_clearance_mm": 16.6728
+    },
+    {
+      "angle_deg": 40,
+      "axle_rearward_mm": 70.7066,
+      "axle_below_pivot_mm": 84.2649,
+      "projected_neck_hardware_clearance_mm": 17.2115
+    },
+    {
+      "angle_deg": 41,
+      "axle_rearward_mm": 72.1665,
+      "axle_below_pivot_mm": 83.0181,
+      "projected_neck_hardware_clearance_mm": 17.7424
+    },
+    {
+      "angle_deg": 42,
+      "axle_rearward_mm": 73.6044,
+      "axle_below_pivot_mm": 81.7459,
+      "projected_neck_hardware_clearance_mm": 18.2652
+    },
+    {
+      "angle_deg": 43,
+      "axle_rearward_mm": 75.0198,
+      "axle_below_pivot_mm": 80.4489,
+      "projected_neck_hardware_clearance_mm": 18.7799
+    },
+    {
+      "angle_deg": 44,
+      "axle_rearward_mm": 76.4124,
+      "axle_below_pivot_mm": 79.1274,
+      "projected_neck_hardware_clearance_mm": 19.2863
+    },
+    {
+      "angle_deg": 45,
+      "axle_rearward_mm": 77.7817,
+      "axle_below_pivot_mm": 77.7817,
+      "projected_neck_hardware_clearance_mm": 19.7843
+    }
+  ],
+  "minimum_neck_hardware_clearance_mm": 1.8528,
+  "scope": "Mesh topology and nominal geometry only; no print, fit or load test has occurred."
+}

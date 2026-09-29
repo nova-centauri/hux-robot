@@ -50,7 +50,8 @@
         "summary": "Pololu 4752 wheel motors and ST3215 12 V servos are ordered and awaiting arrival. Build a restrained one-leg/one-wheel test article, record the missing purchase details, and qualify each actuator before the two-wheel robot. No physical test has been completed.",
         "sourcePaths": [
           "docs/one-leg-bench.md",
-          "docs/parts-on-hand.md"
+          "docs/parts-on-hand.md",
+          "cad/prints/v1-proof-r01/README.md"
         ]
       },
       "nextActions": [
@@ -67,11 +68,12 @@
         {
           "id": "fixture-mockup",
           "title": "Prepare the passive bench fixture",
-          "detail": "Print the 1:1 template and verify its 100 mm scale. Mock up the two 110 mm links, 40 mm pivot spacing, supported carrier, lock and catch; leave hardware-specific fits unfinished.",
+          "detail": "The Bambu X1C / PLA passive kit is drafted. Print and measure its fit coupon first; M4 clearances are provisional. Then mock up the 110 mm links and 40 mm pivot spacing by hand, using the 1:1 template as a reference. The supported powered fixture, lock, catch and actuator-specific fits still need detailing.",
           "status": "ready",
           "sourcePaths": [
             "docs/one-leg-bench.md",
-            "cad/layouts/one-leg-bench-template.svg"
+            "cad/layouts/one-leg-bench-template.svg",
+            "cad/prints/v1-proof-r01/README.md"
           ]
         },
         {
@@ -472,6 +474,11 @@
           "kind": "drawing"
         },
         {
+          "title": "R01 passive PLA print kit",
+          "path": "cad/prints/v1-proof-r01/README.md",
+          "kind": "print candidate"
+        },
+        {
           "title": "Parts and purchase inventory",
           "path": "docs/parts-on-hand.md",
           "kind": "inventory"
@@ -518,6 +525,16 @@
         }
       ],
       "updates": [
+        {
+          "date": "2026-09-29",
+          "title": "R01 passive print kit drafted",
+          "summary": "Eight STL part types and a Blender project are drafted for a Bambu X1C / PLA passive mockup using 110 mm link centers and 40 mm pivot spacing. M4 clearances are provisional: print and measure the fit coupon first. No physical print, fit, load test or bench milestone is complete. The ordered Pololu 4752 motors and ST3215 12 V servos remain awaiting arrival.",
+          "sourcePaths": [
+            "cad/prints/v1-proof-r01/README.md",
+            "docs/one-leg-bench.md",
+            "docs/parts-on-hand.md"
+          ]
+        },
         {
           "date": "2026-09-29",
           "title": "Actuator orders and single-leg bench preparation",

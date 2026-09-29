@@ -15,6 +15,8 @@ The active objective is a useful, inexpensive proof robot. **Under $1,000; reuse
 
 ## Next physical work
 
+**2026-09-29 print-kit update:** drafted the [V1-PROOF R01 passive mockup](cad/prints/v1-proof-r01/README.md) for **Bambu X1C / PLA**, with eight STL part types and a Blender project. It preserves 110 mm link centers and 40 mm pivot spacing; M4 interfaces are provisional. Print and measure the fit coupon first, then inspect the passive linkage by hand. No physical print, fit, load or bench milestone is complete. Pololu 4752 motors and ST3215 12 V servos remain ordered and awaiting arrival.
+
 **2026-09-29 update:** the user confirmed **Pololu 4752 motors and ST3215 12 V servos are ordered for V1-PROOF**; quantities and actual costs remain to record. RobStride is for the future full-size Hux. A bench supply is available with ratings still to confirm, and controller/driver/interface availability remains open. Start the [single-leg bench plan](docs/one-leg-bench.md) while awaiting delivery. Its [1:1 template](cad/layouts/one-leg-bench-template.svg) supports a passive mockup now; hardware-specific machining follows receipt/label checks. Supported leg motion can precede balance. The pinned-leg-first sequence below governs the freely moving robot.
 
 1. Record quantities, delivery and actual cost of the ordered Pololu 4752/ST3215 12 V actuators in [inventory](docs/parts-on-hand.md). Confirm the bench supply rating and available driver, servo interface, controller/IMU, radio/transmitter, batteries/charger, wheels and stock. Newly ordered parts are project spend, not free reuse.

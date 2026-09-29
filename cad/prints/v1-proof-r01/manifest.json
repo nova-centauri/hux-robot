@@ -1,0 +1,329 @@
+{
+  "revision": "V1-PROOF R01",
+  "date": "2026-09-29",
+  "printer": "Bambu X1C",
+  "material": "PLA",
+  "units": "mm",
+  "status": "Print candidates for passive fit/geometry checks; not powered or load qualified",
+  "hole_diameter_default_mm": 4.5,
+  "planned_geometry": {
+    "link_centers_mm": 110,
+    "pivot_centers_mm": 40,
+    "angle_range_deg": [
+      15,
+      45
+    ],
+    "neutral_deg": 30
+  },
+  "parts": [
+    {
+      "id": "01_layout_deck",
+      "file": "stl/01_layout_deck.stl",
+      "quantity": 1,
+      "use": "Electronics and packaging layout; generic slots, not qualified chassis",
+      "features": {
+        "footprint_mm": [
+          120,
+          110
+        ],
+        "thickness_mm": 4,
+        "mounting_slot_centers_mm": [
+          [
+            -44,
+            -35
+          ],
+          [
+            -44,
+            35
+          ],
+          [
+            44,
+            -35
+          ],
+          [
+            44,
+            35
+          ]
+        ],
+        "mounting_slots_mm": [
+          18,
+          4.5
+        ],
+        "cable_slots_mm": [
+          24,
+          6
+        ]
+      },
+      "audit": {
+        "watertight": true,
+        "nonmanifold_edges": 0,
+        "loose_vertices": 0,
+        "zero_area_faces": 0,
+        "connected_solids": 1,
+        "volume_mm3": 50281.65,
+        "bounds_mm": [
+          120.0,
+          110.0,
+          4.0
+        ],
+        "minimum_z_mm": 0.0
+      }
+    },
+    {
+      "id": "02_fixed_pivot_plate",
+      "file": "stl/02_fixed_pivot_plate.stl",
+      "quantity": 1,
+      "use": "Fixed side of passive full-size parallelogram; mount to independent rigid backing",
+      "features": {
+        "pivot_centers_mm": [
+          [
+            0,
+            -20
+          ],
+          [
+            0,
+            20
+          ]
+        ],
+        "center_distance_mm": 40,
+        "thickness_mm": 6
+      },
+      "audit": {
+        "watertight": true,
+        "nonmanifold_edges": 0,
+        "loose_vertices": 0,
+        "zero_area_faces": 0,
+        "connected_solids": 1,
+        "volume_mm3": 27659.61,
+        "bounds_mm": [
+          70.0,
+          70.0,
+          6.0
+        ],
+        "minimum_z_mm": 0.0
+      }
+    },
+    {
+      "id": "03_link_110",
+      "file": "stl/03_link_110.stl",
+      "quantity": 2,
+      "use": "Passive geometry link; no motor or payload loads",
+      "features": {
+        "pivot_centers_mm": [
+          [
+            0,
+            0
+          ],
+          [
+            110,
+            0
+          ]
+        ],
+        "center_distance_mm": 110,
+        "boss_diameter_mm": 16,
+        "neck_width_mm": 8,
+        "thickness_mm": 5
+      },
+      "audit": {
+        "watertight": true,
+        "nonmanifold_edges": 0,
+        "loose_vertices": 0,
+        "zero_area_faces": 0,
+        "connected_solids": 1,
+        "volume_mm3": 5777.68,
+        "bounds_mm": [
+          126.0,
+          16.0,
+          5.0
+        ],
+        "minimum_z_mm": 0.0
+      }
+    },
+    {
+      "id": "04_carrier_40",
+      "file": "stl/04_carrier_40.stl",
+      "quantity": 1,
+      "use": "Passive carrier; no bearing, motor or wheel load interface",
+      "features": {
+        "pivot_centers_mm": [
+          [
+            0,
+            0
+          ],
+          [
+            40,
+            0
+          ]
+        ],
+        "center_distance_mm": 40,
+        "thickness_mm": 6
+      },
+      "audit": {
+        "watertight": true,
+        "nonmanifold_edges": 0,
+        "loose_vertices": 0,
+        "zero_area_faces": 0,
+        "connected_solids": 1,
+        "volume_mm3": 4840.88,
+        "bounds_mm": [
+          56.0,
+          16.0,
+          6.0
+        ],
+        "minimum_z_mm": 0.0
+      }
+    },
+    {
+      "id": "05_spacer_2mm",
+      "file": "stl/05_spacer_2mm.stl",
+      "quantity": 2,
+      "use": "Loose passive spacing; not a bearing or preload sleeve",
+      "features": {
+        "outside_diameter_mm": 9,
+        "inside_diameter_mm": 4.5,
+        "height_mm": 2
+      },
+      "audit": {
+        "watertight": true,
+        "nonmanifold_edges": 0,
+        "loose_vertices": 0,
+        "zero_area_faces": 0,
+        "connected_solids": 1,
+        "volume_mm3": 94.4,
+        "bounds_mm": [
+          9.0,
+          9.0,
+          2.0
+        ],
+        "minimum_z_mm": 0.0
+      }
+    },
+    {
+      "id": "06_spacer_12mm",
+      "file": "stl/06_spacer_12mm.stl",
+      "quantity": 2,
+      "use": "Loose passive spacing; not a bearing or preload sleeve",
+      "features": {
+        "outside_diameter_mm": 9,
+        "inside_diameter_mm": 4.5,
+        "height_mm": 12
+      },
+      "audit": {
+        "watertight": true,
+        "nonmanifold_edges": 0,
+        "loose_vertices": 0,
+        "zero_area_faces": 0,
+        "connected_solids": 1,
+        "volume_mm3": 571.19,
+        "bounds_mm": [
+          9.0,
+          9.0,
+          12.0
+        ],
+        "minimum_z_mm": 0.0
+      }
+    },
+    {
+      "id": "07_hole_fit_coupon",
+      "file": "stl/07_hole_fit_coupon.stl",
+      "quantity": 1,
+      "use": "Print first; choose hole fit on this printer and filament",
+      "features": {
+        "hole_diameters_mm": [
+          4.1,
+          4.3,
+          4.5,
+          4.7,
+          4.9
+        ],
+        "hole_centers_mm": [
+          [
+            -28,
+            3
+          ],
+          [
+            -14,
+            3
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            14,
+            3
+          ],
+          [
+            28,
+            3
+          ]
+        ],
+        "thickness_mm": 4
+      },
+      "audit": {
+        "watertight": true,
+        "nonmanifold_edges": 0,
+        "loose_vertices": 0,
+        "zero_area_faces": 0,
+        "connected_solids": 1,
+        "volume_mm3": 8167.43,
+        "bounds_mm": [
+          82.0,
+          26.0,
+          4.0
+        ],
+        "minimum_z_mm": 0.0
+      }
+    },
+    {
+      "id": "08_wheel_envelope_100",
+      "file": "stl/08_wheel_envelope_100.stl",
+      "quantity": 1,
+      "use": "Optional wheel-size clearance gauge; not a driven wheel or hub",
+      "features": {
+        "outside_diameter_mm": 100,
+        "thickness_mm": 2,
+        "bore_mm": 4.5
+      },
+      "audit": {
+        "watertight": true,
+        "nonmanifold_edges": 0,
+        "loose_vertices": 0,
+        "zero_area_faces": 0,
+        "connected_solids": 1,
+        "volume_mm3": 12036.73,
+        "bounds_mm": [
+          100.0,
+          100.0,
+          2.0
+        ],
+        "minimum_z_mm": 0.0
+      }
+    }
+  ],
+  "assembly_stack_mm": {
+    "plate": [
+      0,
+      6
+    ],
+    "lower_link": [
+      8,
+      13
+    ],
+    "upper_link": [
+      18,
+      23
+    ],
+    "lower_spacers": 2,
+    "upper_spacers": 12
+  },
+  "not_included": [
+    "actuator mounts",
+    "bearing seats",
+    "wheel hubs",
+    "powered fixture load rating",
+    "final bolt lengths",
+    "slicer G-code"
+  ],
+  "source": "build.py"
+}

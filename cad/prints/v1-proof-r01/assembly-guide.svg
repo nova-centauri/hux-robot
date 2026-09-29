@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1020" viewBox="0 0 1400 1020" role="img" aria-labelledby="title description">
+  <title id="title">V1-PROOF R01 passive leg assembly guide</title>
+  <desc id="description">A side view shows two 110 millimetre parallel links at 30 degrees rearward from downward vertical, with 40 millimetre fixed and carrier pivot separation and a dashed 100 millimetre wheel envelope. Separate lower and upper pivot cross-section rows show 6 millimetre plates, 2 or 12 millimetre spacers, and 5 millimetre links. PLA mockup only; physical print and fit are unverified.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#67786e"/></marker>
+    <style>
+      text{font-family:Arial,Helvetica,sans-serif;fill:#243a30;font-size:18px}
+      .title{font-size:34px;font-weight:700;letter-spacing:-.6px}
+      .section{font-size:23px;font-weight:700}
+      .small{font-size:16px;fill:#5d7064}
+      .label{font-size:17px;font-weight:700}
+      .mini{font-size:14px}
+      .muted{fill:#5d7064}
+      .white{fill:#fffefa}
+      .dimension{fill:none;stroke:#67786e;stroke-width:1.5;marker-start:url(#arrow);marker-end:url(#arrow)}
+      .extension{stroke:#a8b4ac;stroke-width:1;fill:none}
+      .leader{stroke:#67786e;stroke-width:1.5;fill:none}
+      .hole{fill:#fffefa;stroke:#294538;stroke-width:1.5}
+      .hardware{fill:none;stroke:#294538;stroke-width:1.4;stroke-dasharray:3 3}
+    </style>
+  </defs>
+  <rect width="1400" height="1020" fill="#f5f4ed"/>
+  <text x="40" y="60" class="title">V1-PROOF / R01 · Passive assembly</text>
+  <text x="40" y="95" class="muted">Full-scale PLA geometry mockup · dimensions in millimetres · physical print and fit not verified</text>
+  <path d="M40 120H1360" stroke="#ccd7cd"/>
+
+  <rect x="40" y="150" width="650" height="690" rx="10" fill="#fffefa" stroke="#d5ddd3"/>
+  <text x="65" y="192" class="section">Side view</text>
+  <text x="65" y="220" class="small">Neutral: 30° rearward from downward vertical</text>
+  <path d="M478 258H608" stroke="#67786e" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="477" y="248" class="small">Rearward</text>
+
+  <!-- Scale 2.5 px/mm. Fixed lower=(0,200), upper=(0,240).
+       Carrier lower=(55,104.737), upper=(55,144.737), in world y-up. -->
+  <circle cx="357.5" cy="648.1575" r="125" fill="#eef2ea" fill-opacity=".5" stroke="#8a9f8f" stroke-width="2" stroke-dasharray="8 6"/>
+  <path d="M347.5 648.1575H367.5M357.5 638.1575V658.1575" stroke="#8a9f8f" stroke-width="1.5"/>
+  <rect x="132.5" y="272.5" width="175" height="175" rx="12" fill="#e0e5de" stroke="#718578" stroke-width="2"/>
+  <text x="141" y="292" class="mini">Fixed plate</text>
+  <rect x="337.5" y="528.1575" width="40" height="140" rx="18" fill="#e0e5de" stroke="#718578" stroke-width="2"/>
+
+  <!-- Upper and lower links: 16 mm end bosses with 8 mm necks. -->
+  <path d="M220 310L357.5 548.1575" stroke="#b57a41" stroke-width="20" stroke-linecap="round"/>
+  <circle cx="220" cy="310" r="20" fill="#b57a41"/>
+  <circle cx="357.5" cy="548.1575" r="20" fill="#b57a41"/>
+  <path d="M220 410L357.5 648.1575" stroke="#357457" stroke-width="20" stroke-linecap="round"/>
+  <circle cx="220" cy="410" r="20" fill="#357457"/>
+  <circle cx="357.5" cy="648.1575" r="20" fill="#357457"/>
+
+  <g class="hardware">
+    <circle cx="220" cy="310" r="11.25"/><circle cx="220" cy="410" r="11.25"/>
+    <circle cx="357.5" cy="548.1575" r="11.25"/><circle cx="357.5" cy="648.1575" r="11.25"/>
+  </g>
+  <g class="hole">
+    <circle cx="220" cy="310" r="5.625"/><circle cx="220" cy="410" r="5.625"/>
+    <circle cx="357.5" cy="548.1575" r="5.625"/><circle cx="357.5" cy="648.1575" r="5.625"/>
+  </g>
+
+  <path d="M125 310H90M125 410H90" class="extension"/>
+  <path d="M98 310V410" class="dimension"/>
+  <text x="83" y="360" text-anchor="middle" transform="rotate(-90 83 360)" class="label">40 mm</text>
+  <path d="M385 548.1575H420M385 648.1575H420" class="extension"/>
+  <path d="M410 548.1575V648.1575" class="dimension"/>
+  <text x="438" y="598.1575" text-anchor="middle" transform="rotate(-90 438 598.1575)" class="label">40 mm</text>
+
+  <g transform="translate(288.75 429.07875) rotate(60)">
+    <rect x="-47" y="-13" width="94" height="26" rx="4" fill="#fffefa"/>
+    <text text-anchor="middle" y="6" class="label">110 mm</text>
+  </g>
+  <g transform="translate(288.75 529.07875) rotate(60)">
+    <rect x="-47" y="-13" width="94" height="26" rx="4" fill="#fffefa"/>
+    <text text-anchor="middle" y="6" class="label">110 mm</text>
+  </g>
+  <path d="M220 435V530" stroke="#809586" stroke-dasharray="4 4" fill="none"/>
+  <path d="M220 465A55 55 0 0 0 247.5 457.6314" fill="none" stroke="#67786e" stroke-width="1.6"/>
+  <text x="229" y="492" class="label">30°</text>
+  <text x="176" y="553" class="small" text-anchor="middle">Down</text>
+
+  <path d="M386 576H496" class="leader"/>
+  <text x="505" y="574" class="label">Carrier</text>
+  <text x="505" y="598" class="small">Behind links</text>
+  <text x="357.5" y="802" text-anchor="middle" class="small">Dashed circle: Ø100 wheel envelope only</text>
+
+  <rect x="720" y="150" width="640" height="690" rx="10" fill="#fffefa" stroke="#d5ddd3"/>
+  <text x="745" y="192" class="section">End view / lateral stack</text>
+  <text x="745" y="220" class="small">Separate rows show the two pivot stacks.</text>
+  <path d="M865 274H1210" stroke="#67786e" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="865" y="259" class="small">Back face</text>
+  <text x="1210" y="259" text-anchor="end" class="small">Outward →</text>
+  <path d="M865 292V686" stroke="#a8b4ac" stroke-width="1" stroke-dasharray="4 5"/>
+
+  <!-- Stack scale 15 px/mm; lower pivot: plate 0..6, spacer 6..8, link 8..13. -->
+  <text x="745" y="330" class="label">Lower pivot</text>
+  <rect x="865" y="355" width="90" height="66" rx="3" fill="#dfe5dc" stroke="#718578"/>
+  <rect x="955" y="371" width="30" height="34" fill="#ccd4c7" stroke="#718578"/>
+  <rect x="985" y="355" width="75" height="66" rx="3" fill="#357457"/>
+  <path d="M837 388H1098" stroke="#50695a" stroke-width="1" stroke-dasharray="5 5"/>
+  <text x="910" y="381" text-anchor="middle" class="mini">Plate</text>
+  <text x="910" y="404" text-anchor="middle" class="mini">0–6</text>
+  <text x="1022.5" y="381" text-anchor="middle" class="mini white">Link</text>
+  <text x="1022.5" y="404" text-anchor="middle" class="mini white">8–13</text>
+  <path d="M970 370V344" class="leader"/>
+  <text x="970" y="336" text-anchor="middle" class="small">2 mm spacer</text>
+  <text x="865" y="450" class="small">Lower link: outward depth 8–13 mm</text>
+
+  <!-- Upper pivot: plate 0..6, spacer 6..18, link 18..23. -->
+  <text x="745" y="530" class="label">Upper pivot</text>
+  <rect x="865" y="555" width="90" height="66" rx="3" fill="#dfe5dc" stroke="#718578"/>
+  <rect x="955" y="571" width="180" height="34" fill="#ccd4c7" stroke="#718578"/>
+  <rect x="1135" y="555" width="75" height="66" rx="3" fill="#b57a41"/>
+  <path d="M837 588H1248" stroke="#50695a" stroke-width="1" stroke-dasharray="5 5"/>
+  <text x="910" y="581" text-anchor="middle" class="mini">Plate</text>
+  <text x="910" y="604" text-anchor="middle" class="mini">0–6</text>
+  <text x="1172.5" y="581" text-anchor="middle" class="mini white">Link</text>
+  <text x="1172.5" y="604" text-anchor="middle" class="mini white">18–23</text>
+  <text x="1045" y="548" text-anchor="middle" class="small">12 mm spacer</text>
+  <text x="865" y="650" class="small">Upper link: outward depth 18–23 mm</text>
+
+  <path d="M745 704H1335" stroke="#d5ddd3"/>
+  <text x="745" y="733" class="small">Repeat each stack at both ends of its link.</text>
+  <text x="745" y="760" class="small">“Plate” means the fixed plate or the 6 mm carrier.</text>
+  <text x="745" y="795" class="small">Near-link hardware must end below the far link.</text>
+
+  <rect x="40" y="865" width="1320" height="115" rx="8" fill="#e8ede3"/>
+  <text x="62" y="897" class="label">Provisional interfaces · confirm with the printed coupon and actual hardware</text>
+  <text x="62" y="925" class="small">M4 intent / Ø4.5 holes · dashed pivot rings = Ø9 hardware envelope · fastener lengths and clearances as measured.</text>
+  <text x="62" y="953" class="small">Passive PLA only. No powered motion or load qualification. No structural deck-to-upright connection is implied.</text>
+  <text x="40" y="1003" class="mini muted">HUX / V1-PROOF / R01 · Illustrative views, not a print-scale template. Use with README.md and the single-leg bench plan.</text>
+</svg>

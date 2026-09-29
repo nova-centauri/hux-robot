@@ -12,6 +12,8 @@ This bench work can happen **before** two-wheel balance. The pinned-leg-first ru
 
 ## Prepare before delivery
 
+**2026-09-29 — passive print kit drafted:** the [V1-PROOF R01 kit](../cad/prints/v1-proof-r01/README.md) provides eight STL part types and a Blender project for a **Bambu X1C / PLA** mockup of the 110 mm links and 40 mm pivot spacing. **Print the fit coupon first**, measure it and try the intended M4 hardware; its clearances and the printed sections remain provisional. This is a hand-moved geometry mockup, not the powered bench fixture. No physical print, fit or load test has been completed, and no bench stage is closed. The ordered actuators remain awaiting arrival.
+
 1. Print the [1:1 geometry template](../cad/layouts/one-leg-bench-template.svg) at actual size and check its 100 mm scale. Make a paper or scrap linkage; leave actuator-specific mounts and bearing holes unfinished.
 2. Assemble a rigid base and upright, with two body-pivot centers 40 mm apart vertically. Clamp or bolt the base to the bench. Include a padded catch immediately beneath the moving assembly and room for its whole sweep.
 3. Prepare two equal link blanks, a vertical carrier, spacers and a removable neutral-position lock. Use a common drilling jig so the two center distances match. Final material section, edge distances, bearings, fits and fasteners await a side-view **and end-view** assembly detail.

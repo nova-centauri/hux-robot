@@ -1,0 +1,745 @@
+{
+  "schema_version": 1,
+  "validator": "validate_stl.py; independent Python stdlib binary-STL inspection",
+  "manifest_sha256": "e5cf4e8c73db8e836e725b235eccf5e512ca264e57957ff9011eeae117e4212e",
+  "revision": "V1-PROOF R01",
+  "passed": true,
+  "scope": "Exported mesh topology, nominal dimensions, individual bed fit, and mid-height bores only. No physical print, fit, strength, assembly collision or powered-motion validation.",
+  "units": "mm; STL carries no unit metadata, import at 100% in millimetres",
+  "tolerances_mm": {
+    "vertex_weld": 1e-05,
+    "bounds": 0.02,
+    "hole_diameter_and_center": 0.02
+  },
+  "checks": {
+    "manifest_units_mm": true,
+    "manifest_printer_x1c": true,
+    "manifest_material_pla": true,
+    "exactly_the_specified_unique_parts": true,
+    "all_and_only_expected_stl_files": true,
+    "specified_quantities": true,
+    "manifest_paths_match_part_ids": true
+  },
+  "required_printed_pieces": 10,
+  "optional_printed_pieces": 1,
+  "parts": {
+    "01_layout_deck": {
+      "file": "01_layout_deck.stl",
+      "sha256": "fe163fda4058e95cc70564e49d1275a51277408368db006a7cf55fe1b8d1befe",
+      "passed": true,
+      "checks": {
+        "finite_coordinates_and_normals": true,
+        "nonzero_triangle_areas": true,
+        "no_collapsed_triangles_after_weld": true,
+        "all_mesh_edges_paired": true,
+        "consistent_triangle_winding": true,
+        "stored_normals_agree_with_triangles": true,
+        "one_connected_solid": true,
+        "positive_signed_volume": true,
+        "nominal_dimensions_mm": true,
+        "sits_on_z_zero": true,
+        "fits_x1c_individually": true,
+        "nominal_bores_in_mid_height_section": true
+      },
+      "triangles": 4252,
+      "welded_vertices": 2116,
+      "edges": 6378,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "inconsistently_oriented_edges": 0,
+      "zero_area_triangles": 0,
+      "collapsed_triangles_after_weld": 0,
+      "opposed_or_zero_stored_normals": 0,
+      "connected_components": 1,
+      "component_vertex_counts": [
+        2116
+      ],
+      "signed_volume_mm3": 50281.640319,
+      "surface_area_mm2": 28081.619535,
+      "bounds_mm": [
+        120.0,
+        110.0,
+        4.0
+      ],
+      "expected_bounds_mm": [
+        120,
+        110,
+        4
+      ],
+      "minimum_mm": [
+        -60.0,
+        -55.0,
+        0.0
+      ],
+      "maximum_mm": [
+        60.0,
+        55.0,
+        4.0
+      ],
+      "hole_section_z_mm": 2.0,
+      "hole_sections": [],
+      "manifest_quantity": 1,
+      "optional": false
+    },
+    "02_fixed_pivot_plate": {
+      "file": "02_fixed_pivot_plate.stl",
+      "sha256": "687da20cc41bef014d89cfc6dbcb365625fcf7e42257459e2c5911b05b727b36",
+      "passed": true,
+      "checks": {
+        "finite_coordinates_and_normals": true,
+        "nonzero_triangle_areas": true,
+        "no_collapsed_triangles_after_weld": true,
+        "all_mesh_edges_paired": true,
+        "consistent_triangle_winding": true,
+        "stored_normals_agree_with_triangles": true,
+        "one_connected_solid": true,
+        "positive_signed_volume": true,
+        "nominal_dimensions_mm": true,
+        "sits_on_z_zero": true,
+        "fits_x1c_individually": true,
+        "nominal_bores_in_mid_height_section": true,
+        "pivot_center_spacing": true
+      },
+      "triangles": 3690,
+      "welded_vertices": 1835,
+      "edges": 5535,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "inconsistently_oriented_edges": 0,
+      "zero_area_triangles": 0,
+      "collapsed_triangles_after_weld": 0,
+      "opposed_or_zero_stored_normals": 0,
+      "connected_components": 1,
+      "component_vertex_counts": [
+        1835
+      ],
+      "signed_volume_mm3": 27659.609068,
+      "surface_area_mm2": 11839.753341,
+      "bounds_mm": [
+        70.0,
+        70.0,
+        6.0
+      ],
+      "expected_bounds_mm": [
+        70,
+        70,
+        6
+      ],
+      "minimum_mm": [
+        -35.0,
+        -35.0,
+        0.0
+      ],
+      "maximum_mm": [
+        35.0,
+        35.0,
+        6.0
+      ],
+      "hole_section_z_mm": 3.0,
+      "hole_sections": [
+        {
+          "expected_center_mm": [
+            0,
+            -20
+          ],
+          "measured_center_mm": [
+            0.0,
+            -20.0
+          ],
+          "nominal_diameter_mm": 4.5,
+          "section_diameter_min_mm": 4.497589,
+          "section_diameter_max_mm": 4.500001,
+          "maximum_diameter_error_mm": 0.002411,
+          "center_in_void": true,
+          "ray_count": 64,
+          "passed": true
+        },
+        {
+          "expected_center_mm": [
+            0,
+            20
+          ],
+          "measured_center_mm": [
+            0.0,
+            20.0
+          ],
+          "nominal_diameter_mm": 4.5,
+          "section_diameter_min_mm": 4.497589,
+          "section_diameter_max_mm": 4.500001,
+          "maximum_diameter_error_mm": 0.002411,
+          "center_in_void": true,
+          "ray_count": 64,
+          "passed": true
+        }
+      ],
+      "measured_pivot_spacing_mm": 40.0,
+      "expected_pivot_spacing_mm": 40,
+      "manifest_quantity": 1,
+      "optional": false
+    },
+    "03_link_110": {
+      "file": "03_link_110.stl",
+      "sha256": "2a2abca2df4f99683d8287e08ab35818bc37db317b47ac3200c3b521c5eba243",
+      "passed": true,
+      "checks": {
+        "finite_coordinates_and_normals": true,
+        "nonzero_triangle_areas": true,
+        "no_collapsed_triangles_after_weld": true,
+        "all_mesh_edges_paired": true,
+        "consistent_triangle_winding": true,
+        "stored_normals_agree_with_triangles": true,
+        "one_connected_solid": true,
+        "positive_signed_volume": true,
+        "nominal_dimensions_mm": true,
+        "sits_on_z_zero": true,
+        "fits_x1c_individually": true,
+        "nominal_bores_in_mid_height_section": true,
+        "pivot_center_spacing": true
+      },
+      "triangles": 2884,
+      "welded_vertices": 1440,
+      "edges": 4326,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "inconsistently_oriented_edges": 0,
+      "zero_area_triangles": 0,
+      "collapsed_triangles_after_weld": 0,
+      "opposed_or_zero_stored_normals": 0,
+      "connected_components": 1,
+      "component_vertex_counts": [
+        1440
+      ],
+      "signed_volume_mm3": 5777.679582,
+      "surface_area_mm2": 3806.249792,
+      "bounds_mm": [
+        126.0,
+        16.0,
+        5.0
+      ],
+      "expected_bounds_mm": [
+        126,
+        16,
+        5
+      ],
+      "minimum_mm": [
+        -8.0,
+        -8.0,
+        0.0
+      ],
+      "maximum_mm": [
+        118.0,
+        8.0,
+        5.0
+      ],
+      "hole_section_z_mm": 2.5,
+      "hole_sections": [
+        {
+          "expected_center_mm": [
+            0,
+            0
+          ],
+          "measured_center_mm": [
+            0.0,
+            0.0
+          ],
+          "nominal_diameter_mm": 4.5,
+          "section_diameter_min_mm": 4.497591,
+          "section_diameter_max_mm": 4.5,
+          "maximum_diameter_error_mm": 0.002409,
+          "center_in_void": true,
+          "ray_count": 64,
+          "passed": true
+        },
+        {
+          "expected_center_mm": [
+            110,
+            0
+          ],
+          "measured_center_mm": [
+            110.0,
+            0.0
+          ],
+          "nominal_diameter_mm": 4.5,
+          "section_diameter_min_mm": 4.497589,
+          "section_diameter_max_mm": 4.5,
+          "maximum_diameter_error_mm": 0.002411,
+          "center_in_void": true,
+          "ray_count": 64,
+          "passed": true
+        }
+      ],
+      "measured_pivot_spacing_mm": 110.0,
+      "expected_pivot_spacing_mm": 110,
+      "manifest_quantity": 2,
+      "optional": false
+    },
+    "04_carrier_40": {
+      "file": "04_carrier_40.stl",
+      "sha256": "bd4b5237cbd5a8c599276ca5273f0ef163f66bdaceade504528f4da1690847ee",
+      "passed": true,
+      "checks": {
+        "finite_coordinates_and_normals": true,
+        "nonzero_triangle_areas": true,
+        "no_collapsed_triangles_after_weld": true,
+        "all_mesh_edges_paired": true,
+        "consistent_triangle_winding": true,
+        "stored_normals_agree_with_triangles": true,
+        "one_connected_solid": true,
+        "positive_signed_volume": true,
+        "nominal_dimensions_mm": true,
+        "sits_on_z_zero": true,
+        "fits_x1c_individually": true,
+        "nominal_bores_in_mid_height_section": true,
+        "pivot_center_spacing": true
+      },
+      "triangles": 2280,
+      "welded_vertices": 1138,
+      "edges": 3420,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "inconsistently_oriented_edges": 0,
+      "zero_area_triangles": 0,
+      "collapsed_triangles_after_weld": 0,
+      "opposed_or_zero_stored_normals": 0,
+      "connected_components": 1,
+      "component_vertex_counts": [
+        1138
+      ],
+      "signed_volume_mm3": 4840.879228,
+      "surface_area_mm2": 2540.836071,
+      "bounds_mm": [
+        56.0,
+        16.0,
+        6.0
+      ],
+      "expected_bounds_mm": [
+        56,
+        16,
+        6
+      ],
+      "minimum_mm": [
+        -8.0,
+        -8.0,
+        0.0
+      ],
+      "maximum_mm": [
+        48.0,
+        8.0,
+        6.0
+      ],
+      "hole_section_z_mm": 3.0,
+      "hole_sections": [
+        {
+          "expected_center_mm": [
+            0,
+            0
+          ],
+          "measured_center_mm": [
+            0.0,
+            0.0
+          ],
+          "nominal_diameter_mm": 4.5,
+          "section_diameter_min_mm": 4.497591,
+          "section_diameter_max_mm": 4.5,
+          "maximum_diameter_error_mm": 0.002409,
+          "center_in_void": true,
+          "ray_count": 64,
+          "passed": true
+        },
+        {
+          "expected_center_mm": [
+            40,
+            0
+          ],
+          "measured_center_mm": [
+            40.0,
+            0.0
+          ],
+          "nominal_diameter_mm": 4.5,
+          "section_diameter_min_mm": 4.497589,
+          "section_diameter_max_mm": 4.500002,
+          "maximum_diameter_error_mm": 0.002411,
+          "center_in_void": true,
+          "ray_count": 64,
+          "passed": true
+        }
+      ],
+      "measured_pivot_spacing_mm": 40.0,
+      "expected_pivot_spacing_mm": 40,
+      "manifest_quantity": 1,
+      "optional": false
+    },
+    "05_spacer_2mm": {
+      "file": "05_spacer_2mm.stl",
+      "sha256": "c1b7999e33b370f2109899568a8f43fc92c9280ad264747385bdae6c75b0e573",
+      "passed": true,
+      "checks": {
+        "finite_coordinates_and_normals": true,
+        "nonzero_triangle_areas": true,
+        "no_collapsed_triangles_after_weld": true,
+        "all_mesh_edges_paired": true,
+        "consistent_triangle_winding": true,
+        "stored_normals_agree_with_triangles": true,
+        "one_connected_solid": true,
+        "positive_signed_volume": true,
+        "nominal_dimensions_mm": true,
+        "sits_on_z_zero": true,
+        "fits_x1c_individually": true,
+        "nominal_bores_in_mid_height_section": true
+      },
+      "triangles": 1536,
+      "welded_vertices": 768,
+      "edges": 2304,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "inconsistently_oriented_edges": 0,
+      "zero_area_triangles": 0,
+      "collapsed_triangles_after_weld": 0,
+      "opposed_or_zero_stored_normals": 0,
+      "connected_components": 1,
+      "component_vertex_counts": [
+        768
+      ],
+      "signed_volume_mm3": 94.403674,
+      "surface_area_mm2": 172.713731,
+      "bounds_mm": [
+        9.0,
+        9.0,
+        2.0
+      ],
+      "expected_bounds_mm": [
+        9,
+        9,
+        2
+      ],
+      "minimum_mm": [
+        -4.5,
+        -4.5,
+        0.0
+      ],
+      "maximum_mm": [
+        4.5,
+        4.5,
+        2.0
+      ],
+      "hole_section_z_mm": 1.0,
+      "hole_sections": [
+        {
+          "expected_center_mm": [
+            0,
+            0
+          ],
+          "measured_center_mm": [
+            0.0,
+            0.0
+          ],
+          "nominal_diameter_mm": 4.5,
+          "section_diameter_min_mm": 4.497591,
+          "section_diameter_max_mm": 4.5,
+          "maximum_diameter_error_mm": 0.002409,
+          "center_in_void": true,
+          "ray_count": 64,
+          "passed": true
+        }
+      ],
+      "manifest_quantity": 2,
+      "optional": false
+    },
+    "06_spacer_12mm": {
+      "file": "06_spacer_12mm.stl",
+      "sha256": "b873ede16ed3bd2afa8f693f4e9de6e3bff3fb6206faaa48986f8d203edbac7b",
+      "passed": true,
+      "checks": {
+        "finite_coordinates_and_normals": true,
+        "nonzero_triangle_areas": true,
+        "no_collapsed_triangles_after_weld": true,
+        "all_mesh_edges_paired": true,
+        "consistent_triangle_winding": true,
+        "stored_normals_agree_with_triangles": true,
+        "one_connected_solid": true,
+        "positive_signed_volume": true,
+        "nominal_dimensions_mm": true,
+        "sits_on_z_zero": true,
+        "fits_x1c_individually": true,
+        "nominal_bores_in_mid_height_section": true
+      },
+      "triangles": 1536,
+      "welded_vertices": 768,
+      "edges": 2304,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "inconsistently_oriented_edges": 0,
+      "zero_area_triangles": 0,
+      "collapsed_triangles_after_weld": 0,
+      "opposed_or_zero_stored_normals": 0,
+      "connected_components": 1,
+      "component_vertex_counts": [
+        768
+      ],
+      "signed_volume_mm3": 571.192489,
+      "surface_area_mm2": 596.753049,
+      "bounds_mm": [
+        9.0,
+        9.0,
+        12.0
+      ],
+      "expected_bounds_mm": [
+        9,
+        9,
+        12
+      ],
+      "minimum_mm": [
+        -4.5,
+        -4.5,
+        0.0
+      ],
+      "maximum_mm": [
+        4.5,
+        4.5,
+        12.0
+      ],
+      "hole_section_z_mm": 6.0,
+      "hole_sections": [
+        {
+          "expected_center_mm": [
+            0,
+            0
+          ],
+          "measured_center_mm": [
+            -0.0,
+            0.0
+          ],
+          "nominal_diameter_mm": 4.5,
+          "section_diameter_min_mm": 4.497591,
+          "section_diameter_max_mm": 4.5,
+          "maximum_diameter_error_mm": 0.002409,
+          "center_in_void": true,
+          "ray_count": 64,
+          "passed": true
+        }
+      ],
+      "manifest_quantity": 2,
+      "optional": false
+    },
+    "07_hole_fit_coupon": {
+      "file": "07_hole_fit_coupon.stl",
+      "sha256": "5f667275e6d66d7e780bf0481696dc99b084f48f549bbbcf11aea9d41a71cd1f",
+      "passed": true,
+      "checks": {
+        "finite_coordinates_and_normals": true,
+        "nonzero_triangle_areas": true,
+        "no_collapsed_triangles_after_weld": true,
+        "all_mesh_edges_paired": true,
+        "consistent_triangle_winding": true,
+        "stored_normals_agree_with_triangles": true,
+        "one_connected_solid": true,
+        "positive_signed_volume": true,
+        "nominal_dimensions_mm": true,
+        "sits_on_z_zero": true,
+        "fits_x1c_individually": true,
+        "nominal_bores_in_mid_height_section": true
+      },
+      "triangles": 5406,
+      "welded_vertices": 2695,
+      "edges": 8109,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "inconsistently_oriented_edges": 0,
+      "zero_area_triangles": 0,
+      "collapsed_triangles_after_weld": 0,
+      "opposed_or_zero_stored_normals": 0,
+      "connected_components": 1,
+      "component_vertex_counts": [
+        2695
+      ],
+      "signed_volume_mm3": 8167.433078,
+      "surface_area_mm2": 5275.526265,
+      "bounds_mm": [
+        82.0,
+        26.0,
+        4.0
+      ],
+      "expected_bounds_mm": [
+        82,
+        26,
+        4
+      ],
+      "minimum_mm": [
+        -41.0,
+        -13.0,
+        0.0
+      ],
+      "maximum_mm": [
+        41.0,
+        13.0,
+        4.0
+      ],
+      "hole_section_z_mm": 2.0,
+      "hole_sections": [
+        {
+          "expected_center_mm": [
+            -28,
+            3
+          ],
+          "measured_center_mm": [
+            -28.0,
+            3.0
+          ],
+          "nominal_diameter_mm": 4.1,
+          "section_diameter_min_mm": 4.097804,
+          "section_diameter_max_mm": 4.100002,
+          "maximum_diameter_error_mm": 0.002196,
+          "center_in_void": true,
+          "ray_count": 64,
+          "passed": true
+        },
+        {
+          "expected_center_mm": [
+            -14,
+            3
+          ],
+          "measured_center_mm": [
+            -14.0,
+            3.0
+          ],
+          "nominal_diameter_mm": 4.3,
+          "section_diameter_min_mm": 4.297697,
+          "section_diameter_max_mm": 4.3,
+          "maximum_diameter_error_mm": 0.002303,
+          "center_in_void": true,
+          "ray_count": 64,
+          "passed": true
+        },
+        {
+          "expected_center_mm": [
+            0,
+            3
+          ],
+          "measured_center_mm": [
+            0.0,
+            3.0
+          ],
+          "nominal_diameter_mm": 4.5,
+          "section_diameter_min_mm": 4.497591,
+          "section_diameter_max_mm": 4.5,
+          "maximum_diameter_error_mm": 0.002409,
+          "center_in_void": true,
+          "ray_count": 64,
+          "passed": true
+        },
+        {
+          "expected_center_mm": [
+            14,
+            3
+          ],
+          "measured_center_mm": [
+            14.0,
+            3.0
+          ],
+          "nominal_diameter_mm": 4.7,
+          "section_diameter_min_mm": 4.697483,
+          "section_diameter_max_mm": 4.700001,
+          "maximum_diameter_error_mm": 0.002517,
+          "center_in_void": true,
+          "ray_count": 64,
+          "passed": true
+        },
+        {
+          "expected_center_mm": [
+            28,
+            3
+          ],
+          "measured_center_mm": [
+            28.0,
+            3.0
+          ],
+          "nominal_diameter_mm": 4.9,
+          "section_diameter_min_mm": 4.897375,
+          "section_diameter_max_mm": 4.900002,
+          "maximum_diameter_error_mm": 0.002625,
+          "center_in_void": true,
+          "ray_count": 64,
+          "passed": true
+        }
+      ],
+      "manifest_quantity": 1,
+      "optional": false
+    },
+    "08_wheel_envelope_100": {
+      "file": "08_wheel_envelope_100.stl",
+      "sha256": "ce3e2c34ad6313ad6d7b4b1b56c38b6c6f9d0cb1c2e4dd0dca009df594a24d1f",
+      "passed": true,
+      "checks": {
+        "finite_coordinates_and_normals": true,
+        "nonzero_triangle_areas": true,
+        "no_collapsed_triangles_after_weld": true,
+        "all_mesh_edges_paired": true,
+        "consistent_triangle_winding": true,
+        "stored_normals_agree_with_triangles": true,
+        "one_connected_solid": true,
+        "positive_signed_volume": true,
+        "nominal_dimensions_mm": true,
+        "sits_on_z_zero": true,
+        "fits_x1c_individually": true,
+        "nominal_bores_in_mid_height_section": true
+      },
+      "triangles": 6628,
+      "welded_vertices": 3306,
+      "edges": 9942,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "inconsistently_oriented_edges": 0,
+      "zero_area_triangles": 0,
+      "collapsed_triangles_after_weld": 0,
+      "opposed_or_zero_stored_normals": 0,
+      "connected_components": 1,
+      "component_vertex_counts": [
+        3306
+      ],
+      "signed_volume_mm3": 12036.732922,
+      "surface_area_mm2": 13425.38111,
+      "bounds_mm": [
+        100.0,
+        100.0,
+        2.0
+      ],
+      "expected_bounds_mm": [
+        100,
+        100,
+        2
+      ],
+      "minimum_mm": [
+        -50.0,
+        -50.0,
+        0.0
+      ],
+      "maximum_mm": [
+        50.0,
+        50.0,
+        2.0
+      ],
+      "hole_section_z_mm": 1.0,
+      "hole_sections": [
+        {
+          "expected_center_mm": [
+            0,
+            0
+          ],
+          "measured_center_mm": [
+            0.0,
+            0.0
+          ],
+          "nominal_diameter_mm": 4.5,
+          "section_diameter_min_mm": 4.497591,
+          "section_diameter_max_mm": 4.5,
+          "maximum_diameter_error_mm": 0.002409,
+          "center_in_void": true,
+          "ray_count": 64,
+          "passed": true
+        }
+      ],
+      "manifest_quantity": 1,
+      "optional": true
+    }
+  }
+}
