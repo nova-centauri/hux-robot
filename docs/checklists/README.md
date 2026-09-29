@@ -4,6 +4,7 @@ The active checklists are for the small, four-actuator indoor proof with bounded
 
 - [Mobility and disturbance protocol](../v1-proof-validation.md)
 - [Hardware decisions and interfaces](../v1-proof-hardware.md)
+- [Single-leg bench plan](../one-leg-bench.md) and [copyable session record](one-leg-bench-session.md)
 - [Mechanical stages and trials](mechanical-v1.md)
 - [Electronics bring-up](electronics-bringup.md)
 - [Software bring-up](software-bringup.md)

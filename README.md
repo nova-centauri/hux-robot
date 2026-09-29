@@ -19,6 +19,7 @@ No stairs, one-wheel stance, jumping, rough terrain, onboard cameras, autonomy o
 
 ## Working documents
 
+- [Single-leg bench preparation](docs/one-leg-bench.md), [printable geometry template](cad/layouts/one-leg-bench-template.svg) and [session record](docs/checklists/one-leg-bench-session.md)
 - [Requirements](docs/requirements.md) and [decision log](docs/decisions.md)
 - [Mechanical](docs/mechanical.md), [electronics](docs/electronics.md), [software](docs/software.md)
 - [Parts to confirm](docs/parts-on-hand.md) and [next work](NOTES.md)
@@ -31,4 +32,4 @@ The [STAIR-V1 archive](docs/archive/stair-v1/README.md) preserves the earlier pl
 
 Regenerate the active model with `python3 tools/v1-proof/review.py --write`; verify it with `python3 tools/v1-proof/test_review.py` and `python3 tools/v1-proof/review.py --check`. From `tools/living-drawings`, `npm test` checks the active model; `npm run test:legacy` retains the old regression suite.
 
-This repository contains planning, sizing and a reproducible pinned-leg 3D simulation study. No physical build, firmware implementation, component order or successful balance test is claimed. [MIT](LICENSE).
+This repository contains planning, sizing and a reproducible pinned-leg 3D simulation study. **Pololu 4752 motors and ST3215 12 V servos are ordered for V1-PROOF**, confirmed by the user on 2026-09-29; delivery, quantities and actual costs are tracked in the [inventory](docs/parts-on-hand.md). RobStride actuators are intended for the future full-size Hux. No physical build, firmware implementation or successful balance test is claimed. [MIT](LICENSE).

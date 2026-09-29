@@ -1,10 +1,10 @@
 # V1-PROOF budget
 
-**$900 planned ceiling, including shipping, tax and repair contingency.** The hard limit is strictly under $1,000. No purchases made by this revision. The previous stair budget is [parked](archive/stair-v1/bom.md).
+**$900 planned ceiling, including shipping, tax and repair contingency.** The hard limit is strictly under $1,000. The user confirmed Pololu 4752 motors and ST3215 12 V servos ordered for V1-PROOF on 2026-09-29; actual quantities and costs remain to record in [inventory](parts-on-hand.md). The previous stair budget is [parked](archive/stair-v1/bom.md).
 
 These are maximum allocations, not a fully quoted cart. Selected motor/driver/servo parts fit their rows at prices checked 2026-09-28. Driver backorders and IMU stock remain procurement issues; delivery, import charges and remaining rows need quotes. Existing shop tools and unpaid fabrication labor are assumed; new tools or outsourced work must fit this same total or the design must change. See the [hardware decisions](v1-proof-hardware.md).
 
-**No free inventory is assumed.** Confirmed reuse credit is $0. Replace a row's cash cost only after the exact usable item is confirmed in [parts-on-hand.md](parts-on-hand.md); retain the shipping/tax and repair reserves. A Pi, cameras, display and Jetson are outside this build.
+**No free inventory is assumed.** Confirmed reuse credit is $0. The quantities below are planned build quantities, not a record of the order. Newly ordered parts count toward project spend; they do not become free reuse. Replace estimates with recorded actual costs and credit qualified existing equipment only when it displaces a purchase; retain the shipping/tax and repair reserves. A Pi, cameras, display and Jetson are outside this build.
 
 | Qty | Item | Unit cap | Total cap | Stage |
 | ---: | --- | ---: | ---: | --- |
@@ -30,9 +30,9 @@ The difference to $1,000 is $100; spending the entire difference would violate t
 
 ## Reference prices and scope
 
-- Pololu 4752: $60.95 each; two selected encoder motors fit the $125 allocation. No order placed.
+- Pololu 4752: reference price $60.95 each; two selected encoder motors fit the $125 allocation. Model confirmed ordered; actual quantity and cost pending.
 - Pololu 4035 DRV8874: $11.94 each; two carriers plus current-limit passives fit the $40 allowance. Measure the 2.5 A limit; stock page allows backorders. This replaces the oversized G2 reference.
-- Waveshare ST3215 series: listed $16.99–21.99 depending on variant. Select the 12 V variant; qualify holding performance on the regulated 9 V rail. Two fit the $60 allocation, with a separate transmission row.
+- Waveshare ST3215 series: listed $16.99–21.99 depending on variant. The 12 V variant is confirmed ordered; actual quantity and cost pending. Qualify holding performance on the regulated 9 V rail. Two fit the $60 allocation, with a separate transmission row.
 - Pico 2 + Adafruit LSM6DSOX 4438 + half-duplex adapter share the $40 controller allowance. The IMU lists $11.95 and was out of stock; board/interface costs still need a complete quote.
 - Manual input can reuse RC or a laptop/gamepad with a timed deadman link. The $60 fallback is an allocation, not a claim that a new TBS receiver and transmitter together cost $60.
 

@@ -6,13 +6,13 @@ Dated log of Steve's Hux decisions as they landed on `main`. Newest intent **sup
 
 Source of truth is this repo (`nova-centauri/hux-robot`). Docs only. **No spend.** No SKU locks beyond what is already decided below.
 
-## Current governing decisions — V1-PROOF, 2026-09-28 revision B
+## Current governing decisions — V1-PROOF, 2026-09-29 purchase update
 
 The user extended V1-PROOF to dependable forward/reverse traversal, left/right turns, turning in place, bounded pushes/uneven terrain and concrete component decisions. This extends the proof scope while retaining its cost, mass and four-axis limits. Earlier dated entries remain history.
 
 | Topic | Current decision |
 | --- | --- |
-| Active model | V1-PROOF; STAIR-V1 remains parked |
+| Active model | V1-PROOF test version; RobStride is intended for future full-size Hux; STAIR-V1 remains parked |
 | Cost / mass | Strictly < $1,000; **$900** allocation including $225 reserves; 2.5 kg target / 3.0 kg maximum |
 | Actuators | **2 × Pololu 4752 wheels + 2 × ST3215 12 V variant legs through 3:1 belts**; first mobility with pinned 30° legs |
 | Drivers | **2 × Pololu 4035 DRV8874**, configured current limiting, sleep/kill/watchdog, PH/EN and fixed-off-time regulation |
@@ -23,13 +23,21 @@ The user extended V1-PROOF to dependable forward/reverse traversal, left/right t
 | Disturbances | Qualification targets: 0.8 N·s longitudinal / 0.4 N·s lateral at 0.20 m, 50/200 ms pulses; 3° grades/cross-slopes, 5 mm smooth bump, 3 mm seam |
 | Evidence | Pinned-leg 3D closed-loop simulation with seed/parameter sweep and failure cases; physical validation and powered-leg dynamics remain open |
 | Next versions | Carry measured actuator/sensor models, telemetry, fault behavior and tests forward; no promised stair upgrade of this chassis |
-| Orders / publication | Model, simulation and component decisions authorized. No purchases or deployment made by this revision |
+| Orders / publication | User confirmed Pololu 4752 motors and ST3215 12 V servos ordered for V1-PROOF on 2026-09-29. Quantities/costs and other component purchases unconfirmed; no deployment claimed |
 
 See [hardware decisions](v1-proof-hardware.md), [simulation evidence](v1-proof-simulation.md), [physical acceptance](v1-proof-validation.md), [PF requirements](requirements.md) and [numerical source](../tools/v1-proof/model.json). Hardware selections are the current engineering baseline; they remain subject to explicit bench rejection criteria and budget limits.
 
 ---
 
 ## Log
+
+### 2026-09-29 — V1-PROOF actuator orders confirmed; single-leg bench preparation
+
+The user confirmed the ordered actuators are **Pololu 4752 gearmotors and ST3215 12 V servos**, for the current **V1-PROOF test version**. RobStride actuators are more expensive and intended for the future full-size Hux; this clarification does not establish a RobStride purchase. Older conflicting vendor-CAD purchase wording does not govern V1-PROOF.
+
+Prepare a supported single-leg bench before parts arrive, using the current 110 mm parallel-link geometry. This can precede two-wheel balance; pinned legs remain the first free-robot mobility configuration. A bench supply is available, with model/ratings still needed. Actuator quantities, actual costs, drivers, controller and servo interface remain to record. No physical test or firmware implementation is claimed. See [bench plan](one-leg-bench.md) and [inventory](parts-on-hand.md).
+
+**Publication:** the user requested “Commit and push this to main,” authorizing the bench plan, printable geometry template, session record and confirmed actuator inventory to be committed and pushed directly to `main`. Seven model checks and generated-output consistency checks pass. Pre-existing untracked vendor CAD and downloaded meshes are outside this change.
 
 ### 2026-09-20 — #1 scaffold (merged)
 

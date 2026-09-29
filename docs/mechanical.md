@@ -20,6 +20,8 @@ Measure mass, whole-robot CoM, gear backlash, tire traction and pitch trim acros
 
 ## Fabrication sequence
 
+The [single-leg bench plan](one-leg-bench.md) and [1:1 paper template](../cad/layouts/one-leg-bench-template.svg) can be used before these full-robot stages. The body is clamped and the mechanism supported when torque disappears. Detail lateral link spacing: at 15°, link centerlines are only 10.35 mm apart perpendicular to their length, so ordinary coplanar flat bars can collide. The upper carrier pivot also lies inside the wheel's projected radius and needs lateral clearance. The existing envelope sketch does not resolve either interference.
+
 1. Mock up the body, wheels, full gearmotor envelopes, battery, pivots and wiring in 2D/scrap.
 2. Build the pinned neutral stance (30° link angle) and qualify two-wheel balance.
 3. Detail one reduced-servo leg, including belt engagement, bearings, stops and cable sweep; test it under load in a fixture.

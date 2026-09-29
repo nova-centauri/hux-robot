@@ -23,9 +23,15 @@ A stale manual command (>250 ms), stale critical sensor, missed control deadline
 
 ## Height changes later
 
-Start height adjustment only in `BALANCE`, at zero travel command. Command both legs together slowly and ramp gains/trim against measured height and CoM. The linkage moves the axles fore/aft as well as vertically; chassis pitch setpoint will change. Wheel rotation alone does not remove the static CoM offset. Verify range and thermal behavior before enabling repeated height cycles. No `LEFT_ONLY`, `RIGHT_ONLY`, stair mode or autonomous motion.
+On the freely balancing robot, start height adjustment only in `BALANCE`, at zero travel command. Command both legs together slowly and ramp gains/trim against measured height and CoM. The linkage moves the axles fore/aft as well as vertically; chassis pitch setpoint will change. Wheel rotation alone does not remove the static CoM offset. Verify range and thermal behavior before enabling repeated height cycles. No `LEFT_ONLY`, `RIGHT_ONLY`, stair mode or autonomous motion.
 
 Keep the estimator/controller code independent of the hardware adapter when practical, but do not build an unused four-layer framework first. Existing PID code needs license review before copying. This revision adds host-side 3D simulation and controller tests; no MCU firmware has been implemented. The simulated pitch input is a delayed/bias/noise attitude estimate, not a raw-IMU fusion implementation. Confirm filtering and acceleration rejection on the real IMU before using simulated gains. [Bring-up checklist](checklists/software-bringup.md).
+
+## Supported bench controls
+
+Before balance, a dedicated `BENCH_ARMED` state may operate one leg and one lifted wheel on a rigid fixture. The [bench plan](one-leg-bench.md) defines small motion bounds, zero/sign calibration, command expiry, independent actuator arming, logs and fault tests. It needs no balance loop or IMU. This is a proposed implementation, not working firmware.
+
+Distinguish healthy software stop from torque disable. In DRV8874 PH/EN mode, `EN=0` brakes while `SLEEP=0` makes outputs high impedance. Loss of servo communications must invoke the verified actuator-power cut; a silent bus does not guarantee torque off. The fixture must support the leg after power loss. All reconnects and resets require deliberate rearm.
 
 ## Mobility contract and next-version interface
 

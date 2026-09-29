@@ -15,14 +15,16 @@ The active objective is a useful, inexpensive proof robot. **Under $1,000; reuse
 
 ## Next physical work
 
-1. Confirm reusable motors/servos, controller/IMU, radio/transmitter, batteries/charger, wheels and stock in [inventory](docs/parts-on-hand.md). Record exact variants; do not count a zero-cost row before confirmation.
+**2026-09-29 update:** the user confirmed **Pololu 4752 motors and ST3215 12 V servos are ordered for V1-PROOF**; quantities and actual costs remain to record. RobStride is for the future full-size Hux. A bench supply is available with ratings still to confirm, and controller/driver/interface availability remains open. Start the [single-leg bench plan](docs/one-leg-bench.md) while awaiting delivery. Its [1:1 template](cad/layouts/one-leg-bench-template.svg) supports a passive mockup now; hardware-specific machining follows receipt/label checks. Supported leg motion can precede balance. The pinned-leg-first sequence below governs the freely moving robot.
+
+1. Record quantities, delivery and actual cost of the ordered Pololu 4752/ST3215 12 V actuators in [inventory](docs/parts-on-hand.md). Confirm the bench supply rating and available driver, servo interface, controller/IMU, radio/transmitter, batteries/charger, wheels and stock. Newly ordered parts are project spend, not free reuse.
 2. Make a scrap/cardboard mockup at the proposed 28–31 cm height. Weigh the pile. Check that two gearmotors, bearings, wheels, wiring and the battery fit.
 3. Qualify one wheel channel and controller in a supported fixture. Verify encoder sign, reversal, hardware current limit, kill, watchdog and available torque at speed.
 4. Build the second wheel channel and pin both legs at neutral. Tune conventional two-wheel balance and slow manual driving.
 5. Bench-test one small servo with its 3:1 reduction and a loaded leg. Then add both leg channels, slowly, while keeping both wheels planted.
 6. Run the expanded [mobility and disturbance trials](docs/v1-proof-validation.md), then the height/duty/fault finish line. Replace simulation assumptions with measured data and rerun the matrix.
 
-No stair analysis, perception hardware or detailed cosmetic head work is on the critical path. No components bought by this revision. Source/model tests cannot check physical balance.
+No stair analysis, perception hardware or detailed cosmetic head work is on the critical path. The 2026-09-28 design revision placed no orders; the user's subsequent purchase report is recorded above. Source/model tests cannot check physical balance.
 
 ## Latest simulation outcome
 

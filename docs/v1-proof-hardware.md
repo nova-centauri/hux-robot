@@ -1,6 +1,6 @@
 # V1-PROOF hardware decisions — 2026-09-28
 
-**Freeze this component baseline for bench qualification.** The user requested dependable forward/reverse travel, both turns, turning in place, bounded disturbance tolerance and a useful foundation for later versions. Selection is authorized; no parts were ordered. Physical performance, fabrication details and stock are separate release gates. The [budget](bom.md) is **$900 including $100 freight/tax and $125 repair reserve**, with no assumed reuse credit.
+**Freeze this component baseline for bench qualification.** The user requested dependable forward/reverse travel, both turns, turning in place, bounded disturbance tolerance and a useful foundation for later versions. **2026-09-29 purchase update:** the user confirmed Pololu 4752 motors and ST3215 12 V servos are ordered for V1-PROOF. RobStride is intended for the future full-size Hux. Quantities, actual costs and the availability of drivers/control interfaces remain to record in [inventory](parts-on-hand.md). Physical performance, fabrication details and delivery are separate release gates. The [budget](bom.md) is a **$900 planning allocation including $100 freight/tax and $125 repair reserve**, with no assumed reuse credit.
 
 | Subsystem | Decision | Reason and release condition |
 | --- | --- | --- |

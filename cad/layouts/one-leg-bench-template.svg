@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="210mm" height="297mm" viewBox="0 0 210 297" role="img" aria-labelledby="title desc">
+  <title id="title">V1-PROOF single-leg bench kinematic template, full scale</title>
+  <desc id="desc">A4 portrait paper or scrap mock-up template. Two parallel links have 110 millimetre pivot centres. The fixed body pivots and moving carrier pivots each have 40 millimetre spacing. Teal shows 30 degrees rearward from downward vertical, and dashed outlines show 15 and 45 degrees. All views are side projections, not a structural drilling or clearance release. Shaft, hole and bearing sizes are unspecified.</desc>
+  <metadata>Source: tools/v1-proof/model.json revision 2026-09-28-B. Units: mm. One SVG user unit equals one physical millimetre at 100 percent print scale. Lower fixed pivot A=(145,95); upper fixed pivot B=(145,55). For q in degrees: lower carrier C=(145-110*sin(q),95+110*cos(q)); upper carrier D=C+(0,-40). Neutral q=30. Wheel outline diameter=100. Drawing created 2026-09-29. Pololu 4752 motors and ST3215 12 V servos confirmed ordered for V1-PROOF by the user on 2026-09-29. Final structural dimensions and actuator mounts remain unqualified.</metadata>
+  <defs>
+    <style>
+      text { font-family: Arial, sans-serif; fill: #16342e; }
+      .heading { font-size: 5px; font-weight: bold; }
+      .small { font-size: 2.8px; }
+      .note { font-size: 2.7px; }
+      .label { font-size: 3.2px; font-weight: bold; }
+      .end-pose { fill: none; stroke: #98aaa4; stroke-width: 0.45; stroke-dasharray: 2 1.5; }
+      .neutral { fill: none; stroke: #136b57; stroke-width: 0.75; }
+      .wheel { fill: none; stroke: #bbc8c2; stroke-width: 0.35; stroke-dasharray: 1.2 1.2; }
+      .dimension { fill: none; stroke: #526b61; stroke-width: 0.3; }
+      .cross { fill: none; stroke: #0c4034; stroke-width: 0.3; }
+      .leader { fill: none; stroke: #687d73; stroke-width: 0.25; }
+    </style>
+    <g id="pivot-mark" class="cross">
+      <path d="M-2.2 0H2.2 M0-2.2V2.2"/>
+    </g>
+  </defs>
+
+  <rect width="210" height="297" fill="white"/>
+  <text x="12" y="15" class="heading">ONE-LEG BENCH / V1-PROOF</text>
+  <text x="12" y="22" class="small">1:1 paper / scrap geometry mock-up · A4 portrait · 2026-09-29</text>
+  <text x="12" y="28" class="small">Teal: 30° neutral. Dashed: 15° and 45°. Side projection only.</text>
+  <text x="12" y="35" class="label">V1-PROOF GEOMETRY — NOT A STRUCTURAL DRILLING PLAN</text>
+
+  <!-- Fixed body pivots: the vertical line is a centreline, not a plate edge. -->
+  <path d="M145 45V125" stroke="#80968b" stroke-width="0.35" stroke-dasharray="3 1.5"/>
+  <path d="M145 55V95" stroke="#136b57" stroke-width="0.9"/>
+  <text x="151" y="48" class="small">FIXED BODY</text>
+  <text x="148" y="58" class="label">B</text>
+  <text x="148" y="98" class="label">A</text>
+  <text x="148" y="113" class="small">Downward vertical</text>
+  <path d="M145 115V122 M143.8 120.2L145 122L146.2 120.2" class="leader"/>
+
+  <!-- End positions retain the exact 110 mm centre distances. -->
+  <g id="pose-15" data-angle-deg="15" class="end-pose">
+    <path d="M145 95L116.529905 201.251841L116.529905 161.251841L145 55"/>
+  </g>
+  <g id="pose-45" data-angle-deg="45" class="end-pose">
+    <path d="M145 95L67.218254 172.781746L67.218254 132.781746L145 55"/>
+  </g>
+  <circle id="wheel-15" class="wheel" cx="116.529905" cy="201.251841" r="50"/>
+  <circle id="wheel-45" class="wheel" cx="67.218254" cy="172.781746" r="50"/>
+
+  <!-- Neutral four-bar; C is also the nominal wheel axle in this model. -->
+  <g id="pose-30" data-angle-deg="30" class="neutral">
+    <path d="M145 95L90 190.262794L90 150.262794L145 55"/>
+  </g>
+  <circle id="wheel-30" cx="90" cy="190.262794" r="50" fill="none" stroke="#90b1a2" stroke-width="0.45"/>
+  <use href="#pivot-mark" x="145" y="95"/>
+  <use href="#pivot-mark" x="145" y="55"/>
+  <use href="#pivot-mark" x="90" y="190.262794"/>
+  <use href="#pivot-mark" x="90" y="150.262794"/>
+  <text x="94" y="194" class="label">C / AXLE</text>
+  <text x="85" y="149" text-anchor="end" class="label">D</text>
+  <text x="49" y="125" class="small">45°</text>
+  <path d="M57 124L66 130" class="leader"/>
+  <text x="30" y="105" class="label">30° NEUTRAL</text>
+  <path d="M58 104L113 110" class="leader"/>
+  <text x="123" y="160" class="small">15°</text>
+  <path d="M122 161L118 161.251841" class="leader"/>
+
+  <!-- 110 mm dimension parallel to lower link, 12 mm away from its centreline. -->
+  <path d="M145 95L132.009619 87.5 M90 190.262794L77.009619 182.762794 M134.607695 89L79.607695 184.262794" class="dimension"/>
+  <path d="M132.875644 88L136.339746 90 M77.875644 183.262794L81.339746 185.262794" class="dimension"/>
+  <g transform="translate(107.107695 136.631397) rotate(-60)">
+    <rect x="-18" y="-4.3" width="36" height="5.7" fill="white"/>
+    <text x="0" y="0" text-anchor="middle" class="label">110 mm CENTRES</text>
+  </g>
+  <text x="18" y="80" class="small">Both links have equal</text>
+  <text x="18" y="85" class="label">110 mm pivot centres.</text>
+  <text x="18" y="91" class="small">This is not stock cut length.</text>
+
+  <!-- Matching fixed and moving pivot separations. -->
+  <path d="M153 55H163 M153 95H163 M160 55V95 M158 55H162 M158 95H162" class="dimension"/>
+  <text x="163" y="77" class="label">40 mm</text>
+  <path d="M86 150.262794H77 M86 190.262794H77 M80 150.262794V190.262794 M78 150.262794H82 M78 190.262794H82" class="dimension"/>
+  <text x="77" y="175" text-anchor="end" class="label">40 mm</text>
+  <text x="165" y="128" class="small">q is rearward</text>
+  <text x="165" y="133" class="small">from vertical.</text>
+  <text x="165" y="145" class="small">3:1 reduction:</text>
+  <text x="165" y="150" class="small">±45° servo</text>
+  <text x="165" y="155" class="small">about neutral</text>
+  <text x="165" y="160" class="small">for q=15–45°.</text>
+
+  <text x="22" y="230" class="small">Ø100 wheel projection</text>
+  <text x="22" y="235" class="small">Wheel must occupy a separate lateral plane.</text>
+  <text x="12" y="257" class="small">Print at 100% / actual size. Disable “fit to page”. Verify this bar before use:</text>
+  <path d="M15 265H115 M15 262V268 M65 263V267 M115 262V268" stroke="#16342e" stroke-width="0.4" fill="none"/>
+  <text x="119" y="266" class="label">100 mm SCALE CHECK</text>
+  <text x="12" y="276" class="note">Crosses mark centres only. Shaft, hole, bearing, fastener and stock dimensions: TBD.</text>
+  <text x="12" y="281" class="note">At 15°, parallel link centrelines are only 10.35 mm apart perpendicular to the links.</text>
+  <text x="12" y="286" class="note">Use separated link planes / spacers as required; prove full swept clearance by hand.</text>
+  <text x="12" y="291" class="note">Stops, lock pins, supported shafts, transmission and purchased-part fit still require detail.</text>
+</svg>
