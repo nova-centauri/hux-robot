@@ -1,6 +1,12 @@
-# V1-PROOF hardware decisions — 2026-09-28
+# V1-PROOF hardware decisions — 2026-09-29
 
-**Freeze this component baseline for bench qualification.** The user requested dependable forward/reverse travel, both turns, turning in place, bounded disturbance tolerance and a useful foundation for later versions. **2026-09-29 purchase update:** the user confirmed Pololu 4752 motors and ST3215 12 V servos are ordered for V1-PROOF. RobStride is intended for the future full-size Hux. Quantities, actual costs and the availability of drivers/control interfaces remain to record in [inventory](parts-on-hand.md). Physical performance, fabrication details and delivery are separate release gates. The [budget](bom.md) is a **$900 planning allocation including $100 freight/tax and $125 repair reserve**, with no assumed reuse credit.
+**Freeze this component baseline for bench qualification.** The user requested dependable forward/reverse travel, both turns, turning in place, bounded disturbance tolerance and a useful foundation for later versions. **2026-09-29 purchase update:** receipts confirm **one Pololu 4752 motor, one Pololu 4035 driver and two ST3215-series servos**, with **$143.12 paid including shipping and tax**. The user confirmed the 12 V servo variant; verify that variant on arrival. Pololu has shipped, with an October 1 estimated delivery; the Waveshare receipt does not establish shipment. [Purchase evidence](purchases.md) and [inventory](parts-on-hand.md) track those facts. RobStride is intended for the future full-size Hux. Physical performance, fabrication details and delivery are separate release gates. The [budget](bom.md) retains a **$900 planning allocation including $100 freight/tax and $125 repair reserve**, with no assumed reuse credit.
+
+## Ordered parts define the build
+
+**Pololu 4752 wheel motors, Pololu 4035 wheel drivers and ST3215 12 V leg servos are the locked purchased baseline.** Design the harness, motor mounts, wheel hubs and leg transmission around these exact models. The robot needs two of each: one wheel motor/driver pair is coming and a second pair remains to buy; both leg servos are ordered. Arrival and tested condition still need recording. Retain the 100 mm wheel / 3:1 leg-belt concept while fit, strength and performance are qualified.
+
+The remaining supporting electronics are **selected, purchase unconfirmed**: Pico 2, LSM6DSOX IMU, encoder level conversion, servo bus interface and power protection. The purchased motor/driver pair supports one bench wheel channel, not a complete two-wheel drive system. Substituting an actuator or driver reopens this baseline explicitly; finding a suitable existing controller only changes the implementation after qualification. See [what the motor connects to](electronics.md#what-will-the-motor-plug-into) and [how Hux intelligence works](software.md#how-the-intelligence-works).
 
 | Subsystem | Decision | Reason and release condition |
 | --- | --- | --- |
@@ -15,13 +21,13 @@
 | Power | **3S, approximately 2.2 Ah; separate 9 V servo and 5 V logic branches** | Exact reused battery/charger remain an inventory decision. Protection/regulator allowance increases from $45 to $65. A new nominal capacity does not prove discharge capability or pack health. |
 | Structure | 230 mm track, 100 × 25 mm rubber tires, 110 mm parallel links, four total axes | First driving configuration is pinned at 30°. Keep electronics, wheel carriers and battery accessible. Tires/hubs/bearings are dimension-locked, not a falsely specified shopping cart. |
 
-Primary specifications: [motor and encoder](https://www.pololu.com/product/4752), [driver carrier](https://www.pololu.com/product/4035), [ST3215 variants](https://www.waveshare.com/product/st3215-servo.htm), [Pico 2](https://www.raspberrypi.com/products/raspberry-pi-pico-2/), [LSM6DSOX breakout](https://www.adafruit.com/product/4438), [ST LSM6DSOX register/data-rate reference](https://www.st.com/resource/en/datasheet/lsm6dsox.pdf). Checked 2026-09-28. The IMU page listed **out of stock** and both motor and driver pages allowed **backorders**. These are design selections, not delivery commitments. No alternative purchase is silently substituted.
+Primary specifications: [motor and encoder](https://www.pololu.com/product/4752), [driver carrier](https://www.pololu.com/product/4035), [ST3215 variants](https://www.waveshare.com/product/st3215-servo.htm), [Pico 2](https://www.raspberrypi.com/products/raspberry-pi-pico-2/), [LSM6DSOX breakout](https://www.adafruit.com/product/4438), [ST LSM6DSOX register/data-rate reference](https://www.st.com/resource/en/datasheet/lsm6dsox.pdf). Motor wiring and driver interfaces rechecked against Pololu on 2026-09-29. Other selection specifications were checked 2026-09-28. Vendor stock labels do not establish what shipped in this order; [inventory](parts-on-hand.md) records the user's purchase status separately.
 
 ## Interfaces that must be built correctly
 
 The encoder provides **1920 counts per output revolution** using both edges of both channels. Power it at 5 V and level-shift its A/B signals to 3.3 V; its specified supply starts above 3.3 V. Do not connect 5 V outputs directly to the Pico. At 100 mm wheel diameter, one count is approximately 0.164 mm. Estimate speed over several samples while retaining low-latency position counts.
 
-Set DRV8874 **PMODE low** before enable. Set **IMODE directly to ground** for fixed-off-time regulation: its default 20 kΩ state reports routine current chopping on nFAULT, which must not be mistaken for a latched robot fault. Add a 3.3 V pull-up to each fault output, a physical kill and hardware watchdog gate on enable, and MCU fault latching requiring deliberate rearm. Driver automatic retry never authorizes robot rearming. Start VREF sizing near 2.8 V with the board's 2.49 kΩ CS resistor, then measure the threshold and tolerance; an approximate divider is not a calibrated current limit. [TI current regulation and fault modes, Table 6](https://www.ti.com/lit/ds/symlink/drv8874.pdf).
+Set DRV8874 **PMODE low** before enable. Set **IMODE directly to ground** for fixed-off-time regulation: its default 20 kΩ state reports routine current chopping on nFAULT, which must not be mistaken for a latched robot fault. Add a 3.3 V pull-up to each fault output, a physical actuator-power cut and hardware watchdog gate on **SLEEP**, and MCU fault latching requiring deliberate rearm. In PH/EN mode, EN low brakes; SLEEP low disables the outputs. Driver automatic retry never authorizes robot rearming. Start VREF sizing near 2.8 V with the board's 2.49 kΩ CS resistor, then measure the threshold and tolerance; an approximate divider is not a calibrated current limit. [TI current regulation and fault modes, Table 6](https://www.ti.com/lit/ds/symlink/drv8874.pdf).
 
 Use PWM-synchronized CS samples and an instrumented motor-current check. Confirm sensing during drive, braking and reversal before deriving RMS current or closing any current loop. The simulation's bounded torque response is a bench target, not an implemented torque controller.
 
@@ -34,7 +40,7 @@ Proposed Pico pin allocation, to verify before soldering:
 | 0 / 1 | UART0 manual receiver or external command bridge |
 | 2 / 3, 4 / 5 | Left and right quadrature encoders through level conversion |
 | 6 / 7, 8 / 9 | Left PWM/direction, right PWM/direction |
-| 10 | Both driver enables through kill/watchdog gating |
+| 10 | Both driver SLEEP inputs through kill/watchdog gating |
 | 11 / 18 | Left / right active-low driver fault inputs |
 | 12 / 13 / 14 / 15 | SPI1 MISO / chip-select / clock / MOSI |
 | 16 | IMU data-ready interrupt |

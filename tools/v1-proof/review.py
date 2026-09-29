@@ -3,11 +3,124 @@
 import argparse
 import json
 import math
+from decimal import Decimal
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 CONFIG = Path(__file__).with_name("model.json")
+PLAN = ROOT / "tools/living-drawings/plan-data.json"
 G = 9.81
+
+
+def money(value):
+    """Keep missing receipt amounts distinct from a recorded zero charge."""
+    return "Not recorded" if value is None else f"${value:,.2f}"
+
+
+def purchase_quantities(version):
+    """Count recorded order items, without treating unknown quantities as zero."""
+    counts = {}
+    orders = version.get("orders")
+    for part_id in ("pololu-4752", "pololu-4035", "st3215"):
+        part = next((p for p in version.get("purchases", []) if p["id"] == part_id), {})
+        planned = part.get("plannedQuantity")
+        quantities = [item.get("quantity") for order in orders or []
+                      for item in order["items"] if item["partId"] == part_id]
+        known = isinstance(orders, list) and all(type(q) is int and q >= 0 for q in quantities)
+        ordered = sum(quantities) if known else None
+        if type(planned) is not int or planned < 0:
+            planned = None
+        missing = None if planned is None or ordered is None else max(0, planned - ordered)
+        counts[part_id] = {"planned": planned, "ordered": ordered, "missing": missing}
+    return counts
+
+
+def quantity_summary(counts):
+    motor, driver, servo = (counts[key] for key in ("pololu-4752", "pololu-4035", "st3215"))
+    show = lambda value: "Not recorded" if value is None else str(value)
+    units = lambda value, name: f"{name} count not recorded" if value is None else f"{value} {name}{'' if value == 1 else 's'}"
+    coverage = (f"Wheel orders: {show(motor['ordered'])} of {show(motor['planned'])} motors and "
+                f"{show(driver['ordered'])} of {show(driver['planned'])} drivers. "
+                f"Still needed: {units(motor['missing'], 'motor')} and {units(driver['missing'], 'driver')}.")
+    if motor["missing"] == 0 and driver["missing"] == 0 and motor["planned"] == driver["planned"] == 2:
+        wheel = "The full wheel motor/driver pair is ordered; delivery and qualification remain separate gates."
+    elif motor["ordered"] == driver["ordered"] == 1 and motor["planned"] == driver["planned"] == 2:
+        wheel = "The first restrained bench channel is ordered; the second wheel channel is still required."
+    else:
+        wheel = "Recorded quantities do not yet establish a complete wheel motor/driver pair."
+    legs = (f"Leg orders: {show(servo['ordered'])} of {show(servo['planned'])} ST3215 servos; "
+            f"{show(servo['missing'])} still needed.")
+    return f"**{coverage}** {wheel} {legs}"
+
+
+def purchase_report(c, plan):
+    version = next(version for version in plan["versions"] if version["id"] == "V1-PROOF")
+    orders = version["orders"]
+    ids = [order["id"] for order in orders]
+    if len(ids) != len(set(ids)):
+        raise ValueError("Duplicate purchase order would double-count spend")
+
+    def amount(value):
+        return None if value is None else Decimal(str(value))
+
+    def total(values):
+        values = list(values)
+        return None if not values or any(v is None for v in values) else sum(values, Decimal(0))
+
+    for order in orders:
+        if order["currency"] != "USD":
+            raise ValueError("V1-PROOF budget requires a recorded USD cost")
+        items = total(None if item.get("unitCost") is None or item.get("quantity") is None else
+                      amount(item["unitCost"]) * item["quantity"] for item in order["items"])
+        goods = amount(order.get("merchandiseCost"))
+        charges = total(amount(order.get(key)) for key in ("merchandiseCost", "shippingCost", "taxCost"))
+        paid = amount(order.get("paidTotal"))
+        if items is not None and goods is not None and items != goods:
+            raise ValueError(f"Item costs do not reconcile for {order['id']}")
+        if charges is not None and paid is not None and charges != paid:
+            raise ValueError(f"Order charges do not reconcile for {order['id']}")
+    totals = {key: total(amount(order.get(key)) for order in orders)
+              for key in ("merchandiseCost", "shippingCost", "taxCost", "paidTotal")}
+    freight_tax = total([totals["shippingCost"], totals["taxCost"]])
+    original = report(c)
+    remaining = {
+        "parts": None if totals["merchandiseCost"] is None else amount(original["parts_cap_usd"]) - totals["merchandiseCost"],
+        "shippingTax": None if freight_tax is None else amount(c["budget"]["shipping_tax_usd"]) - freight_tax,
+        "total": None if totals["paidTotal"] is None else amount(original["total_cap_usd"]) - totals["paidTotal"],
+    }
+    return {"orders": orders, "totals": totals, "remaining": remaining,
+            "quantities": purchase_quantities(version)}
+
+
+def purchase_lines(c, plan):
+    p = purchase_report(c, plan)
+    t, remaining = p["totals"], p["remaining"]
+    lines = [f"**Recorded paid spend: {money(t['paidTotal'])}. Remaining against the planning ceiling: {money(remaining['total'])}.** Remaining money includes all unfinished purchases and reserves; it is not a completion quote.", "",
+             "## What is coming", "", "| Vendor / ordered part | Ordered quantity | Unit paid | Goods total | Order status |", "| --- | ---: | ---: | ---: | --- |"]
+    for order in p["orders"]:
+        for item in order["items"]:
+            qty, unit = item.get("quantity"), item.get("unitCost")
+            cost = None if qty is None or unit is None else Decimal(str(unit)) * qty
+            status = "Shipped" if order["status"] == "shipped" else "Paid; awaiting shipment" if order["status"] == "ordered" else order["status"]
+            lines.append(f"| {order['vendor']} {item['name']} | {qty if qty is not None else 'Not recorded'} | {money(unit)} | {money(cost)} | {status} |")
+    lines += [""]
+    lines += [f"- **{order['vendor']}:** {order['deliveryNote']}" for order in p["orders"]]
+    lines += ["", quantity_summary(p["quantities"]) + " Verify their 12 V labels on arrival: the receipt names the ST3215 series and the user confirmed the voltage variant. [Motor connections and controls](v1-proof-hardware.md).", "",
+              "## Paid orders", "", "| Vendor / paid date | Goods | Shipping / handling | Tax | Total paid |", "| --- | ---: | ---: | ---: | ---: |"]
+    for order in p["orders"]:
+        tax = money(order.get("taxCost"))
+        if order.get("taxCost") == 0:
+            tax += " separately charged"
+        lines.append(f"| {order['vendor']} / {order['paidOn']} | {money(order.get('merchandiseCost'))} | {money(order.get('shippingCost'))} | {tax} | **{money(order.get('paidTotal'))}** |")
+    lines += [f"| **Recorded spend** | **{money(t['merchandiseCost'])}** | **{money(t['shippingCost'])}** | **{money(t['taxCost'])}** | **{money(t['paidTotal'])}** |", "",
+              "Receipt amounts are authoritative for recorded purchases; reference prices below are historical. A payment-service confirmation corroborates its vendor order and is not counted again. Missing amounts stay unrecorded, never zero. See [purchase evidence](purchases.md) for the September 29 reconciliation and the [inventory](parts-on-hand.md) for delivery and qualification gates.", "",
+              "## Remaining planning allocations", "", "| Allocation | Not yet spent |", "| --- | ---: |",
+              f"| Parts and fixture allowance | {money(remaining['parts'])} |",
+              f"| Shipping, tax and import-charge allowance | {money(remaining['shippingTax'])} |",
+              f"| Repair and overrun reserve retained | {money(c['budget']['repair_contingency_usd'])} |",
+              f"| **Remaining against the planning ceiling** | **{money(remaining['total'])}** |", "",
+              "The controller, IMU, servo interface, encoder level conversion, current-limit passives, wheels/hubs, protected power and wiring still need inventory or receipt confirmation. Bench-supply ratings remain unconfirmed. Historical carts and unassigned V0-GENESIS parts are not recorded V1-PROOF spending.", ""]
+    return lines
 
 
 def geometry(c, angle_deg):
@@ -132,13 +245,17 @@ def svg(c, r):
 </svg>\n'''
 
 
-def outputs(c):
+def outputs(c, plan=None):
     r = report(c)
     b = c["budget"]
     sources = {s["id"]: s for s in c["sources"]}
-    lines = ["# V1-PROOF budget", "", f"**${r['total_cap_usd']:,.0f} planned ceiling, including shipping, tax and repair contingency.** The hard limit is strictly under $1,000. The user confirmed Pololu 4752 motors and ST3215 12 V servos ordered for V1-PROOF on 2026-09-29; actual quantities and costs remain to record in [inventory](parts-on-hand.md). The previous stair budget is [parked](archive/stair-v1/bom.md).", "",
-             "These are maximum allocations, not a fully quoted cart. Selected motor/driver/servo parts fit their rows at prices checked 2026-09-28. Driver backorders and IMU stock remain procurement issues; delivery, import charges and remaining rows need quotes. Existing shop tools and unpaid fabrication labor are assumed; new tools or outsourced work must fit this same total or the design must change. See the [hardware decisions](v1-proof-hardware.md).", "",
-             "**No free inventory is assumed.** Confirmed reuse credit is $0. The quantities below are planned build quantities, not a record of the order. Newly ordered parts count toward project spend; they do not become free reuse. Replace estimates with recorded actual costs and credit qualified existing equipment only when it displaces a purchase; retain the shipping/tax and repair reserves. A Pi, cameras, display and Jetson are outside this build.", "",
+    if plan is None:
+        plan = json.loads(PLAN.read_text())
+    lines = ["# V1-PROOF budget", "", f"**${r['total_cap_usd']:,.0f} planned ceiling, including shipping, tax and repair contingency.** The hard limit is strictly under $1,000. The paid Pololu and Waveshare orders below are committed V1-PROOF spend. The previous stair budget is [parked](archive/stair-v1/bom.md).", ""]
+    lines += purchase_lines(c, plan)
+    lines += ["## Original planning caps", "",
+             "These maximum allocations are retained for comparison with actual spending; they are not a fully quoted remaining cart. Delivery, import charges and unpurchased rows need current quotes. Existing shop tools and unpaid fabrication labor are assumed; new tools or outsourced work must fit this same total or the design must change. See the [hardware decisions](v1-proof-hardware.md).", "",
+             "**No free inventory is assumed.** Confirmed reuse credit is $0. The quantities below are planned build quantities, not ordered quantities. Paid purchases already consume these allocations; do not add their cost to the $900 ceiling or subtract them again as free reuse. Credit qualified existing equipment only when it displaces a purchase; retain the shipping/tax and repair reserves. A Pi, cameras, display and Jetson are outside this build.", "",
              "| Qty | Item | Unit cap | Total cap | Stage |", "| ---: | --- | ---: | ---: | --- |"]
     for row in b["rows"]:
         item = row["item"]
@@ -150,15 +267,16 @@ def outputs(c):
               f"| | Repairs, replacement parts and overrun reserve | | ${b['repair_contingency_usd']:.2f} | Reserved |",
               f"| | **Total** | | **${r['total_cap_usd']:.2f}** | |", "",
               f"The difference to $1,000 is ${r['headroom_usd']:.0f}; spending the entire difference would violate the strictly-under-$1,000 requirement. Prefer savings from reuse; do not turn them into added features.", "",
-              "## Reference prices and scope", "",
-              "- Pololu 4752: reference price $60.95 each; two selected encoder motors fit the $125 allocation. Model confirmed ordered; actual quantity and cost pending.",
-              "- Pololu 4035 DRV8874: $11.94 each; two carriers plus current-limit passives fit the $40 allowance. Measure the 2.5 A limit; stock page allows backorders. This replaces the oversized G2 reference.",
-              "- Waveshare ST3215 series: listed $16.99–21.99 depending on variant. The 12 V variant is confirmed ordered; actual quantity and cost pending. Qualify holding performance on the regulated 9 V rail. Two fit the $60 allocation, with a separate transmission row.",
-              "- Pico 2 + Adafruit LSM6DSOX 4438 + half-duplex adapter share the $40 controller allowance. The IMU lists $11.95 and was out of stock; board/interface costs still need a complete quote.",
+              "## Historical reference prices and scope", "",
+              "The following price and availability observations were checked **2026-09-28**. They are not current stock checks or evidence of further purchases; the receipt table above controls actual spend.", "",
+              "- Pololu 4752: reference price $60.95 each; two selected encoder motors fit the $125 allocation. Current purchased quantities and remaining needs are calculated above.",
+              "- Pololu 4035 DRV8874: reference $11.94 each; two carriers plus current-limit passives fit the $40 allowance. Current-limit passives still need confirmation; measure the 2.5 A limit. The historical stock page allowed backorders; this replaces the oversized G2 reference.",
+              "- Waveshare ST3215 series: reference listing $16.99–21.99 depending on variant; receipt prices are recorded above. Qualify holding performance on the regulated 9 V rail. The $60 allocation remains the original cap, with a separate transmission row.",
+              "- Pico 2 + Adafruit LSM6DSOX 4438 + half-duplex adapter share the $40 controller allowance. The IMU reference was $11.95 and out of stock; board/interface costs and availability still need a current complete quote.",
               "- Manual input can reuse RC or a laptop/gamepad with a timed deadman link. The $60 fallback is an allocation, not a claim that a new TBS receiver and transmitter together cost $60.", "",
               "## Build sequence", "",
               "P0 inventories and qualifies existing controls. P1 builds the supported wheel rig and pinned structure. P2 proves two-wheel balance and slow teleop. P3 adds the two leg servos/reductions. P4 runs the finish-line trials. These stages share one budget; do not add a second two-motor robot to the four-motor cost. Quotes exceeding an allocation consume the reserve or force a substitution before purchase.", "",
-              "Source: [model.json](../tools/v1-proof/model.json). Regenerate with `python3 tools/v1-proof/review.py --write`. [Active plan](v1-proof.md) · [Inventory](parts-on-hand.md).", ""]
+              "Sources: planning caps in [model.json](../tools/v1-proof/model.json); paid orders in [plan-data.json](../tools/living-drawings/plan-data.json), under V1-PROOF `orders`; [receipt provenance](purchases.md). Regenerate with `python3 tools/v1-proof/review.py --write`. [Active plan](v1-proof.md) · [Inventory](parts-on-hand.md).", ""]
     wheel = r["wheel_at_max_mass"]
     calc = ["# V1-PROOF sizing screen", "", f"Generated from [model.json](../tools/v1-proof/model.json), revision {c['revision']}. All masses and geometry are allocations. **Hardware validation and fabrication release remain false.**", "",
             "## Geometry and load assumptions", "",

@@ -23,13 +23,25 @@ The user extended V1-PROOF to dependable forward/reverse traversal, left/right t
 | Disturbances | Qualification targets: 0.8 N·s longitudinal / 0.4 N·s lateral at 0.20 m, 50/200 ms pulses; 3° grades/cross-slopes, 5 mm smooth bump, 3 mm seam |
 | Evidence | Pinned-leg 3D closed-loop simulation with seed/parameter sweep and failure cases; physical validation and powered-leg dynamics remain open |
 | Next versions | Carry measured actuator/sensor models, telemetry, fault behavior and tests forward; no promised stair upgrade of this chassis |
-| Orders / publication | User confirmed Pololu 4752 motors and ST3215 12 V servos ordered for V1-PROOF on 2026-09-29. Quantities/costs and other component purchases unconfirmed; no deployment claimed |
+| Orders / publication | September 28 receipts reconciled September 29: **1 × 4752 + 1 × 4035 shipped, 2 × ST3215 paid; $143.12 total**. User confirms servo 12 V variant. Second wheel motor/driver still required. Publish through the existing CI/CD and verify the live pages. |
 
 See [hardware decisions](v1-proof-hardware.md), [simulation evidence](v1-proof-simulation.md), [physical acceptance](v1-proof-validation.md), [PF requirements](requirements.md) and [numerical source](../tools/v1-proof/model.json). Hardware selections are the current engineering baseline; they remain subject to explicit bench rejection criteria and budget limits.
 
 ---
 
 ## Log
+
+### 2026-09-29 — Paid parts lock the proof design; publish wiring and intelligence
+
+The user requested the incoming Pololu order and actual spend on the budget page, an explanation of the motor connections and V1-PROOF intelligence, and a current published living page. Read-only receipt reconciliation establishes **one Pololu 4752 + one Pololu 4035 shipped for $88.34**, and **two ST3215 servos paid for $54.78**, including shipping/tax. **Total paid: $143.12; $756.88 remains within the $900 planning ceiling**, including future purchases and reserves. See [public-safe purchase evidence](purchases.md). Earlier missing quantity/cost notes below are historical.
+
+Lock the purchased motor, driver and servo models as the V1-PROOF bench baseline. The robot still requires two wheel channels; only one is purchased. The user confirms the servo 12 V variant, and receipt/label verification remains an arrival gate. Keep the 100 mm wheels, 3:1 leg reductions, 110 mm links and pinned-leg-first free-robot sequence. Hardware fit, loaded performance and control implementation remain open; substitutions require an explicit recorded decision supported by bench evidence.
+
+The wheel motor's six-wire connector splits into driver power and encoder feedback through a harness. The Pico 2 controls the DRV8874; encoder A/B need level conversion. V1 intelligence is timestamped IMU/encoder estimation, conventional balance control, bounded human commands, slower height control and local fault handling. The existing simulation is host software; embedded firmware and physical balance are not yet implemented or proven. [Hardware](v1-proof-hardware.md) · [Software](software.md).
+
+**Publication:** the host was serving raw source files, leaving generated document pages unavailable. Infrastructure [PR #27](https://github.com/nova-centauri/vps-1/pull/27) and [PR #28](https://github.com/nova-centauri/vps-1/pull/28) passed required CI and merged in two stages. The host now builds validated releases, atomically promotes the site, checks document routes and exposes its deployed Hux revision at `/deployment.json`. The baseline rendered budget and guides were verified before pushing this content update. The user requested this repo update and live CI/CD validation, authorizing publication to `main`.
+
+**Validation:** all 42 site/data/notebook/budget tests pass; active model and simulation checks pass, and the generated site has no broken local links. No physical milestone is completed by this publication.
 
 ### 2026-09-29 — Versioned living build plan
 

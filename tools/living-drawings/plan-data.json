@@ -8,14 +8,15 @@
     "awaiting-parts": "Awaiting parts",
     "ready": "Ready to prepare",
     "planned": "Planned",
-    "ordered": "Ordered · awaiting arrival",
+    "ordered": "Ordered · awaiting shipment",
     "available": "Available · details pending",
     "unconfirmed": "Unconfirmed",
     "archived": "Parked history",
     "future": "Future · unscoped",
     "passed": "Passed with evidence",
     "blocked": "Blocked",
-    "unverified": "Unverified"
+    "unverified": "Unverified",
+    "shipped": "Shipped · awaiting arrival"
   },
   "maintenance": {
     "sourceOfTruth": "Repository documents and recorded physical evidence",
@@ -47,8 +48,9 @@
       ],
       "focus": {
         "title": "Prepare the single-leg actuator bench",
-        "summary": "Pololu 4752 wheel motors and ST3215 12 V servos are ordered and awaiting arrival. Build a restrained one-leg/one-wheel test article, record the missing purchase details, and qualify each actuator before the two-wheel robot. No physical test has been completed.",
+        "summary": "One Pololu 4752 motor and one Pololu 4035 driver are shipped; two ST3215 servos are paid and awaiting shipment in the latest vendor record. $143.12 is paid in total. These parts lock the one-leg/one-wheel bench baseline; the full robot still needs its second wheel motor and driver. No physical test has been completed.",
         "sourcePaths": [
+          "docs/purchases.md",
           "docs/one-leg-bench.md",
           "docs/parts-on-hand.md",
           "cad/prints/v1-proof-r01/README.md"
@@ -57,12 +59,12 @@
       "nextActions": [
         {
           "id": "record-orders",
-          "title": "Record the order details",
-          "detail": "Add ordered quantities, paid costs, shipping/tax and delivery status for Pololu 4752 motors and ST3215 12 V servos. Keep unknown values explicit.",
-          "status": "ready",
+          "title": "Receive and identify the ordered parts",
+          "detail": "Check the incoming Pololu motor/driver against the receipt and the two ST3215 servos against the requested 12 V variant. Pololu shipment email estimates 1 October; servo dispatch is unconfirmed. Record delivery, labels, dimensions and condition.",
+          "status": "awaiting-parts",
           "sourcePaths": [
-            "docs/parts-on-hand.md",
-            "docs/bom.md"
+            "docs/purchases.md",
+            "docs/parts-on-hand.md"
           ]
         },
         {
@@ -79,7 +81,7 @@
         {
           "id": "inventory-interfaces",
           "title": "Confirm controls and power interfaces",
-          "detail": "Record the bench-supply model and ratings; check availability of the wheel driver, controller, servo interface and encoder level conversion before buying more parts.",
+          "detail": "One DRV8874 is coming with the wheel motor. Confirm the Pico 2, IMU, half-duplex servo interface, encoder level conversion, harness and protected power rails. Record bench-supply ratings. The second wheel motor/driver remain unpurchased in the current records.",
           "status": "ready",
           "sourcePaths": [
             "docs/parts-on-hand.md",
@@ -111,7 +113,12 @@
         {
           "label": "Planned all-in budget",
           "value": "$900",
-          "note": "Includes $100 shipping/tax and $125 repair/overrun reserve; actual spend is not yet recorded."
+          "note": "Includes $100 shipping/tax and $125 repair/overrun reserve. Confirmed paid: $143.12; unspent to this ceiling: $756.88, including future purchases and reserves."
+        },
+        {
+          "label": "Confirmed paid",
+          "value": "$143.12",
+          "note": "Pololu $88.34 + Waveshare $54.78; includes recorded shipping and tax. Receipts dated 28 September 2026."
         },
         {
           "label": "Hard spend limit",
@@ -143,14 +150,15 @@
         {
           "id": "pololu-4752",
           "name": "Pololu 4752 encoder gearmotors",
-          "status": "ordered",
+          "status": "shipped",
           "plannedQuantity": 2,
-          "orderedQuantity": null,
-          "actualCost": null,
+          "orderedQuantity": 1,
+          "actualCost": 60.95,
           "currency": "USD",
           "confirmedOn": "2026-09-29",
-          "note": "Model confirmed ordered; awaiting arrival. The planned pair does not establish the ordered quantity or paid price.",
+          "note": "One purchased wheel motor, shipped 28 September. Locks the first wheel test channel; planned robot quantity is two, so a second remains to buy. Line-item spend excludes order shipping/tax.",
           "sourcePaths": [
+            "docs/purchases.md",
             "docs/parts-on-hand.md",
             "docs/bom.md"
           ]
@@ -160,12 +168,13 @@
           "name": "Waveshare ST3215, 12 V variant",
           "status": "ordered",
           "plannedQuantity": 2,
-          "orderedQuantity": null,
-          "actualCost": null,
+          "orderedQuantity": 2,
+          "actualCost": 42.38,
           "currency": "USD",
           "confirmedOn": "2026-09-29",
-          "note": "Model and voltage variant confirmed ordered; awaiting arrival. Qualify on the project’s regulated 9 V rail.",
+          "note": "Two servos paid 28 September; latest vendor record says awaiting shipment. Receipt SKU 22414 names the series; user confirmed the 12 V variant. Verify labels on arrival and qualify the regulated 9 V rail. Line-item spend excludes shipping.",
           "sourcePaths": [
+            "docs/purchases.md",
             "docs/parts-on-hand.md",
             "docs/bom.md"
           ]
@@ -173,16 +182,17 @@
         {
           "id": "pololu-4035",
           "name": "Pololu 4035 DRV8874 wheel drivers",
-          "status": "unconfirmed",
+          "status": "shipped",
           "plannedQuantity": 2,
-          "orderedQuantity": null,
-          "actualCost": null,
+          "orderedQuantity": 1,
+          "actualCost": 11.94,
           "currency": "USD",
-          "confirmedOn": null,
-          "note": "Selected baseline; purchase and availability unconfirmed. Hardware current limiting and sleep/kill behavior require bench qualification.",
+          "confirmedOn": "2026-09-29",
+          "note": "One purchased DRV8874 carrier in the same Pololu shipment. It drives the first 4752; a second driver and current-limit/harness parts are still needed. Line-item spend excludes order shipping/tax.",
           "sourcePaths": [
+            "docs/purchases.md",
             "docs/parts-on-hand.md",
-            "docs/v1-proof-hardware.md"
+            "docs/bom.md"
           ]
         },
         {
@@ -249,7 +259,7 @@
           "id": "P0",
           "title": "Inventory and layout",
           "status": "in-progress",
-          "summary": "Actuator models are confirmed ordered; quantities, spend, received dimensions and supporting interfaces remain open.",
+          "summary": "Paid receipts establish one wheel motor, one driver and two leg servos. Incoming actuator models are locked; received dimensions, electronics interfaces and second wheel channel remain open.",
           "criteria": [
             "Record exact parts, variants, quantities, costs and reusable stock.",
             "Quote missing items and retain reserves inside the strict cash cap.",
@@ -479,6 +489,11 @@
           "kind": "print candidate"
         },
         {
+          "title": "Paid orders and incoming parts",
+          "path": "docs/purchases.md",
+          "kind": "receipts"
+        },
+        {
           "title": "Parts and purchase inventory",
           "path": "docs/parts-on-hand.md",
           "kind": "inventory"
@@ -492,6 +507,11 @@
           "title": "Hardware and interfaces",
           "path": "docs/v1-proof-hardware.md",
           "kind": "guide"
+        },
+        {
+          "title": "How V1-PROOF intelligence works",
+          "path": "docs/software.md",
+          "kind": "architecture"
         },
         {
           "title": "Physical acceptance protocol",
@@ -525,6 +545,18 @@
         }
       ],
       "updates": [
+        {
+          "date": "2026-09-29",
+          "title": "Paid orders lock the actuator baseline",
+          "summary": "Reconciled Pololu and Waveshare receipts: one 4752 motor + one 4035 driver shipped ($88.34), and two ST3215 servos paid ($54.78), for $143.12 total including shipping/tax. The second wheel channel remains to buy. Added motor wiring and Pico control architecture; firmware and physical tests remain open.",
+          "sourcePaths": [
+            "docs/purchases.md",
+            "docs/bom.md",
+            "docs/v1-proof-hardware.md",
+            "docs/software.md",
+            "docs/decisions.md"
+          ]
+        },
         {
           "date": "2026-09-29",
           "title": "R01 passive print kit drafted",
@@ -563,6 +595,60 @@
             "docs/v1-proof.md",
             "docs/archive/stair-v1/README.md",
             "docs/decisions.md"
+          ]
+        }
+      ],
+      "orders": [
+        {
+          "id": "pololu-2026-09-28",
+          "vendor": "Pololu",
+          "paidOn": "2026-09-28",
+          "status": "shipped",
+          "currency": "USD",
+          "items": [
+            {
+              "partId": "pololu-4752",
+              "name": "4752 · 30:1 12 V encoder gearmotor",
+              "quantity": 1,
+              "unitCost": 60.95
+            },
+            {
+              "partId": "pololu-4035",
+              "name": "4035 · DRV8874 motor driver",
+              "quantity": 1,
+              "unitCost": 11.94
+            }
+          ],
+          "merchandiseCost": 72.89,
+          "shippingCost": 10.45,
+          "taxCost": 5.0,
+          "paidTotal": 88.34,
+          "deliveryNote": "Shipped 28 September via UPS Ground. Shipment email estimates Thursday 1 October; not a live tracking check.",
+          "sourcePaths": [
+            "docs/purchases.md"
+          ]
+        },
+        {
+          "id": "waveshare-2026-09-28",
+          "vendor": "Waveshare",
+          "paidOn": "2026-09-28",
+          "status": "ordered",
+          "currency": "USD",
+          "items": [
+            {
+              "partId": "st3215",
+              "name": "22414 · ST3215 servo series (12 V per user)",
+              "quantity": 2,
+              "unitCost": 21.19
+            }
+          ],
+          "merchandiseCost": 42.38,
+          "shippingCost": 12.4,
+          "taxCost": 0.0,
+          "paidTotal": 54.78,
+          "deliveryNote": "Paid; latest vendor receipt says awaiting shipment. No dispatch or delivery date confirmed. Tax is not separately charged in this receipt.",
+          "sourcePaths": [
+            "docs/purchases.md"
           ]
         }
       ]

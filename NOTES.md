@@ -15,11 +15,13 @@ The active objective is a useful, inexpensive proof robot. **Under $1,000; reuse
 
 ## Next physical work
 
+**2026-09-29 receipt update (supersedes missing-cost notes below):** [Paid receipts](docs/purchases.md) establish one Pololu 4752 motor + one 4035 driver shipped ($88.34), and two ST3215 servos paid ($54.78). Total **$143.12**, including shipping/tax. These models lock the actuator baseline; the second wheel channel is still required. The website now explains [motor wiring](docs/v1-proof-hardware.md) and [Pico-based intelligence](docs/software.md). Firmware and physical qualification remain open.
+
 **2026-09-29 print-kit update:** drafted the [V1-PROOF R01 passive mockup](cad/prints/v1-proof-r01/README.md) for **Bambu X1C / PLA**, with eight STL part types and a Blender project. It preserves 110 mm link centers and 40 mm pivot spacing; M4 interfaces are provisional. Print and measure the fit coupon first, then inspect the passive linkage by hand. No physical print, fit, load or bench milestone is complete. Pololu 4752 motors and ST3215 12 V servos remain ordered and awaiting arrival.
 
 **2026-09-29 update:** the user confirmed **Pololu 4752 motors and ST3215 12 V servos are ordered for V1-PROOF**; quantities and actual costs remain to record. RobStride is for the future full-size Hux. A bench supply is available with ratings still to confirm, and controller/driver/interface availability remains open. Start the [single-leg bench plan](docs/one-leg-bench.md) while awaiting delivery. Its [1:1 template](cad/layouts/one-leg-bench-template.svg) supports a passive mockup now; hardware-specific machining follows receipt/label checks. Supported leg motion can precede balance. The pinned-leg-first sequence below governs the freely moving robot.
 
-1. Record quantities, delivery and actual cost of the ordered Pololu 4752/ST3215 12 V actuators in [inventory](docs/parts-on-hand.md). Confirm the bench supply rating and available driver, servo interface, controller/IMU, radio/transmitter, batteries/charger, wheels and stock. Newly ordered parts are project spend, not free reuse.
+1. Receive and inspect the **one Pololu 4752 + one 4035 driver** and **two ST3215 servos** in the [paid-order ledger](docs/purchases.md). **$143.12 paid** is reconciled; delivery and servo voltage labels still need verification. Confirm bench-supply rating, servo interface, controller/IMU, radio/transmitter, battery/charger, wheels and stock. The second wheel motor/driver remain to buy.
 2. Make a scrap/cardboard mockup at the proposed 28–31 cm height. Weigh the pile. Check that two gearmotors, bearings, wheels, wiring and the battery fit.
 3. Qualify one wheel channel and controller in a supported fixture. Verify encoder sign, reversal, hardware current limit, kill, watchdog and available torque at speed.
 4. Build the second wheel channel and pin both legs at neutral. Tune conventional two-wheel balance and slow manual driving.

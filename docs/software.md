@@ -2,6 +2,38 @@
 
 Use a conventional two-wheel balance controller on the selected Pico 2 in C/C++, or a qualified equivalent reused MCU. First pin both legs. Adapt a known, license-compatible controller pattern: IMU attitude estimate, inner pitch stabilization, slower wheel-speed/position correction, and limited differential steering. The host-side simulation uses a fixed four-state LQR, bounded position reference and differential yaw feedback; it is not installed firmware. No ROS, pathfinding, camera stack or gait controller is required. [Previous stack](archive/stair-v1/software.md) is parked.
 
+## How the intelligence works
+
+**V1-PROOF's onboard brain is the selected Pico 2 running a fast feedback controller.** It will continually measure which way Hux is falling and roll the wheels underneath the body to recover balance. A human supplies the requested speed and turn. The first proof depends on reliable sensing, timing and fault handling; conversational AI, vision and autonomous navigation are future additions.
+
+| Job | Planned owner | What it does |
+| --- | --- | --- |
+| Sense and estimate | Pico + LSM6DSOX + wheel encoders | Combine gyro/accelerometer measurements into pitch/rate; use signed wheel counts for travel and speed. Calibrate biases and reject acceleration artifacts. |
+| Balance and drive | Pico control loop | Correct pitch, then track bounded travel/turn requests. Feed the two wheel drivers with PWM/direction while reserving authority for balance. |
+| Move the legs | Pico + ST3215 internal controllers | After pinned-leg balance passes, send slow, coordinated position requests and read back servo feedback through the TTL bus. |
+| Supervise operation | Pico + independent hardware kill/watchdog | Require deliberate arming; check command age, sensor age, loop timing, tilt, supply and current; latch a fault when limits are violated. |
+| Operator and evidence | Existing laptop/gamepad, later qualified RC link | Request motion, show/log telemetry and record tests. A laptop connection supplies commands and logs; the fast balance loop runs onboard. |
+| Future perception/AI | Companion computer, not selected for V1-PROOF | Interpret cameras or higher-level goals and send bounded speed/yaw requests through the same command contract. The MCU keeps final authority over motion limits and faults. |
+
+At the initial **500 Hz target**, about every 2 ms the Pico will read the latest timestamped sensors, estimate state, calculate a correction, check limits and update both wheel commands. Leaning forward calls for a controlled wheel response to recover the body; differential left/right commands turn it. Sensor freshness and the real motor response matter as much as the requested loop frequency. The 833 Hz IMU output setting and ≤6 ms estimator-age/≤10 ms drive-lag targets remain measurements to prove on hardware.
+
+```text
+Human speed / turn request -> bounded command + deadman
+                                       |
+IMU + encoders -> state estimate -> Pico balance / drive controller
+                                       |
+                             PWM + direction -> DRV8874 -> wheels
+                                       |
+                       slow height request -> TTL interface -> ST3215
+
+Voltage / current / faults / timestamps -> supervisor -> drive permission
+Physical kill + hardware watchdog ------------------> actuator disable
+```
+
+**Implemented today:** host-side dynamics simulation, controller experiments, regression checks and the living documentation. **Still to build:** embedded firmware, real IMU fusion/calibration, encoder acquisition, device drivers, operator protocol, fault supervision and physical tuning. [The firmware directory](../firmware/README.md) currently records this absence. Simulation gains and successful simulated trials are starting evidence, not flashed code or measured robot performance.
+
+The purchase locks the control interfaces to Pololu 4752 encoder wheel motors, Pololu 4035 wheel drivers and ST3215 12 V bus servos. One wheel motor/driver pair has shipped and both leg servos are ordered; the second wheel pair is still required. Start with readback and small supported bench motions, then both legs pinned, then balance and manual travel, and finally qualified height adjustment. The Pico, IMU and TTL interface remain selected parts with purchase status unconfirmed. See [electrical connections](electronics.md) and the [ordered hardware baseline](v1-proof-hardware.md).
+
 ## Minimal control contract
 
 - Initial target: 500 Hz measured estimator/control loop, IMU SPI/data-ready acquisition at 833 Hz, measured sensor/estimator age ≤6 ms and effective drive lag ≤10 ms; slower telemetry and manual input. Establish timing on the actual board instead of treating a requested frequency as measured performance.

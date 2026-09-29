@@ -2,6 +2,7 @@
 import importlib.util
 import json
 import math
+from decimal import Decimal
 from pathlib import Path
 import tempfile
 import unittest
@@ -19,6 +20,86 @@ class ProofChecks(unittest.TestCase):
         self.c["budget"]["shipping_tax_usd"] += 100
         self.c["budget"]["confirmed_reuse_credit_usd"] = 900
         self.assertFalse(r.report(self.c)["under_budget"])
+
+    def test_receipts_reconcile_to_paid_spend_and_remaining_allocations(self):
+        plan = json.loads(r.PLAN.read_text())
+        purchases = r.purchase_report(self.c, plan)
+        self.assertEqual(purchases["totals"]["paidTotal"], Decimal("143.12"))
+        self.assertEqual(purchases["totals"]["merchandiseCost"], Decimal("115.27"))
+        self.assertEqual(purchases["remaining"]["parts"], Decimal("559.73"))
+        self.assertEqual(purchases["remaining"]["shippingTax"], Decimal("72.15"))
+        self.assertEqual(purchases["remaining"]["total"], Decimal("756.88"))
+        ordered = {item["partId"]: item["quantity"] for order in purchases["orders"] for item in order["items"]}
+        self.assertEqual(ordered, {"pololu-4752": 1, "pololu-4035": 1, "st3215": 2})
+        budget = r.outputs(self.c, plan)[r.ROOT / "docs/bom.md"]
+        self.assertIn("**$143.12**", budget)
+        self.assertIn("**$756.88**", budget)
+        self.assertIn("**$900.00**", budget)
+
+    def test_receipt_mismatch_and_duplicate_order_are_rejected(self):
+        for mutation in ("quantity", "charges", "duplicate"):
+            with self.subTest(mutation=mutation):
+                plan = json.loads(r.PLAN.read_text())
+                orders = next(v for v in plan["versions"] if v["id"] == "V1-PROOF")["orders"]
+                if mutation == "quantity":
+                    orders[0]["items"][0]["quantity"] += 1
+                elif mutation == "charges":
+                    orders[0]["shippingCost"] += 1
+                else:
+                    orders.append(orders[0])
+                with self.assertRaises(ValueError):
+                    r.purchase_report(self.c, plan)
+
+    def test_unknown_receipt_amount_is_not_zero_or_an_available_balance(self):
+        plan = json.loads(r.PLAN.read_text())
+        orders = next(v for v in plan["versions"] if v["id"] == "V1-PROOF")["orders"]
+        orders[0]["paidTotal"] = None
+        orders[0]["shippingCost"] = None
+        purchases = r.purchase_report(self.c, plan)
+        self.assertIsNone(purchases["totals"]["paidTotal"])
+        self.assertIsNone(purchases["remaining"]["total"])
+        self.assertIsNone(purchases["remaining"]["shippingTax"])
+        self.assertEqual(r.money(None), "Not recorded")
+        self.assertEqual(r.money(0), "$0.00")
+        budget = r.outputs(self.c, plan)[r.ROOT / "docs/bom.md"]
+        self.assertIn("Recorded paid spend: Not recorded", budget)
+        self.assertNotIn("$756.88", budget)
+
+    def test_second_wheel_order_updates_coverage_without_stale_first_channel_claims(self):
+        plan = json.loads(r.PLAN.read_text())
+        version = next(v for v in plan["versions"] if v["id"] == "V1-PROOF")
+        first = r.purchase_report(self.c, plan)["quantities"]
+        self.assertEqual(first["pololu-4752"]["missing"], 1)
+        self.assertEqual(first["pololu-4035"]["missing"], 1)
+        self.assertEqual(first["st3215"]["missing"], 0)
+        # A later receipt is enough; purchase-card snapshots may not yet be updated.
+        second = json.loads(json.dumps(version["orders"][0]))
+        second["id"] = "second-wheel-channel"
+        version["orders"].append(second)
+        result = r.purchase_report(self.c, plan)
+        self.assertEqual(result["quantities"]["pololu-4752"]["ordered"], 2)
+        self.assertEqual(result["quantities"]["pololu-4035"]["missing"], 0)
+        budget = r.outputs(self.c, plan)[r.ROOT / "docs/bom.md"]
+        self.assertIn("The full wheel motor/driver pair is ordered", budget)
+        self.assertIn("Still needed: 0 motors and 0 drivers", budget)
+        for stale in ("Only one wheel", "first restrained bench channel", "second remains to buy", "second and passives"):
+            self.assertNotIn(stale, budget)
+
+    def test_unknown_order_or_planned_quantity_cannot_claim_complete_coverage(self):
+        plan = json.loads(r.PLAN.read_text())
+        version = next(v for v in plan["versions"] if v["id"] == "V1-PROOF")
+        version["orders"][0]["items"][0]["quantity"] = None
+        next(p for p in version["purchases"] if p["id"] == "st3215")["plannedQuantity"] = None
+        counts = r.purchase_report(self.c, plan)["quantities"]
+        self.assertIsNone(counts["pololu-4752"]["ordered"])
+        self.assertIsNone(counts["pololu-4752"]["missing"])
+        self.assertEqual(counts["st3215"]["ordered"], 2)
+        self.assertIsNone(counts["st3215"]["missing"])
+        budget = r.outputs(self.c, plan)[r.ROOT / "docs/bom.md"]
+        self.assertIn("motor count not recorded", budget)
+        self.assertIn("Not recorded still needed", budget)
+        self.assertNotIn("The full wheel motor/driver pair is ordered", budget)
+        self.assertNotIn("first restrained bench channel", budget)
 
     def test_link_length_and_parallelogram_remain_constant(self):
         g = self.c["geometry"]

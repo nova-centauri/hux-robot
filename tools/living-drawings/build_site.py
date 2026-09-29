@@ -25,9 +25,10 @@ ROOT = Path(__file__).resolve().parents[2]
 WEB = PurePosixPath("tools/living-drawings")
 SOURCE_TREES = ("docs", "cad", "art", "firmware", "software", "tools/v1-proof", "tools/engineering")
 OMIT = {".git", "node_modules", "__pycache__", ".DS_Store"}
-# These pre-existing local downloads are intentionally outside this repository's
-# published sources. The legacy sandbox already falls back to envelope geometry.
-LOCAL_ONLY = (PurePosixPath("cad/vendor"), WEB / "models")
+# Local downloads and the extracted copy of the print ZIP are not source pages.
+# Publish the canonical print-kit folder and ZIP; the sandbox has a mesh fallback.
+LOCAL_ONLY = (PurePosixPath("cad/vendor"), WEB / "models",
+              PurePosixPath("cad/prints/v1-proof-r01/hux-v1-proof-r01"))
 URL_ATTRS = {"href", "src", "poster", "data-mesh", "data-poster"}
 LIST = re.compile(r"^( *)([-+*]|\d+[.)]) +(.*)$")
 

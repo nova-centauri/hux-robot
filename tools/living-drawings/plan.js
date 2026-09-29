@@ -102,7 +102,36 @@
     }
   }
 
-  const API = { Notebook, validateRecord, targetsFor, sourceURL, escape };
+  function purchaseQuantities(version) {
+    const counts = {};
+    for (const id of ['pololu-4752', 'pololu-4035', 'st3215']) {
+      const part = list(version.purchases).find((item) => item.id === id) || {};
+      const quantities = list(version.orders).flatMap((order) => list(order.items)).filter((item) => item.partId === id).map((item) => item.quantity);
+      const known = Array.isArray(version.orders) && quantities.every((value) => Number.isInteger(value) && value >= 0);
+      const ordered = known ? quantities.reduce((sum, value) => sum + value, 0) : null;
+      const planned = Number.isInteger(part.plannedQuantity) && part.plannedQuantity >= 0 ? part.plannedQuantity : null;
+      counts[id] = { ordered, planned, missing: planned === null || ordered === null ? null : Math.max(0, planned - ordered) };
+    }
+    return counts;
+  }
+
+  function quantitySummary(version) {
+    const counts = purchaseQuantities(version);
+    const motor = counts['pololu-4752'], driver = counts['pololu-4035'], servo = counts.st3215;
+    const show = (value) => value === null ? 'Not recorded' : String(value);
+    const units = (value, name) => value === null ? `${name} count not recorded` : `${value} ${name}${value === 1 ? '' : 's'}`;
+    const needed = `${units(motor.missing, 'motor')} + ${units(driver.missing, 'driver')}`;
+    let wheel = 'Recorded quantities do not yet establish a complete wheel motor/driver pair.';
+    if (motor.missing === 0 && driver.missing === 0 && motor.planned === 2 && driver.planned === 2) {
+      wheel = 'The full wheel motor/driver pair is ordered; delivery and qualification remain separate gates.';
+    } else if (motor.ordered === 1 && driver.ordered === 1 && motor.planned === 2 && driver.planned === 2) {
+      wheel = 'The first restrained bench channel is ordered; the second wheel channel is still required.';
+    }
+    const detail = `Ordered: ${show(motor.ordered)} / ${show(motor.planned)} motors, ${show(driver.ordered)} / ${show(driver.planned)} drivers, and ${show(servo.ordered)} / ${show(servo.planned)} servos (${show(servo.missing)} servos still needed). ${wheel}`;
+    return { needed, detail };
+  }
+
+  const API = { Notebook, validateRecord, targetsFor, sourceURL, escape, purchaseQuantities, quantitySummary };
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
   if (!root.document) return;
   const scriptBase = new URL('.', root.document.currentScript.src);
@@ -112,7 +141,7 @@
     const links = list(paths).map((path, index) => {
       const url = sourceURL(path, scriptBase);
       if (!url) return '';
-      const readable = title || text(path).split('/').pop().replace(/\.md(?:#.*)?$/, '').replace(/-/g, ' ');
+      const readable = title || text(path).split('/').pop().replace(/\.(?:md|html)(?:#.*)?$/, '').replace(/-/g, ' ');
       return `<a href="${escape(url)}">${escape(readable === 'README' ? 'Overview' : readable)} <span aria-hidden="true">↗</span></a>`;
     }).filter(Boolean);
     return links.length ? `<div class="plan-sources">${links.join('')}</div>` : '';
@@ -120,7 +149,7 @@
 
   function status(value) {
     const normalized = text(value).toLowerCase();
-    const kind = /ordered|current|active|progress/.test(normalized) ? 'active' : /archive|parked|blocked|unconfirmed|pending/.test(normalized) ? 'pending' : /complete|confirmed|passed/.test(normalized) ? 'recorded' : 'neutral';
+    const kind = /ordered|shipped|current|active|progress/.test(normalized) ? 'active' : /archive|parked|blocked|unconfirmed|pending/.test(normalized) ? 'pending' : /complete|confirmed|passed/.test(normalized) ? 'recorded' : 'neutral';
     return `<span class="plan-status plan-status--${kind}">${escape(statusLabels[value] || label(value || 'Not recorded'))}</span>`;
   }
 
@@ -139,7 +168,24 @@
   }
 
   function parts(version) {
-    return `<div class="plan-block-head"><div><p class="plan-kicker">Purchases & availability</p><h3>What is actually on hand?</h3><p class="plan-description">Purchase status, quantities and actual spend are kept separate from design allowances.</p></div></div><div class="plan-part-grid">${list(version.purchases).map((part) => `<article class="plan-part"><div class="plan-item-heading"><h4>${escape(part.name)}</h4>${status(part.status)}</div><dl><div><dt>Planned quantity</dt><dd>${quantity(part.plannedQuantity)}</dd></div><div><dt>Ordered quantity</dt><dd>${quantity(part.orderedQuantity)}</dd></div><div><dt>Actual spend</dt><dd>${part.actualCost === null || part.actualCost === undefined ? 'Not recorded' : typeof part.actualCost === 'number' ? '$' + part.actualCost.toFixed(2) : escape(part.actualCost)}</dd></div><div><dt>Confirmed on</dt><dd>${quantity(part.confirmedOn)}</dd></div></dl><p>${escape(part.note)}</p>${sources(part.sourcePaths)}</article>`).join('') || '<p class="plan-empty">No confirmed purchases are recorded for this version.</p>'}</div>`;
+    return `<div class="plan-block-head"><div><p class="plan-kicker">Purchases & availability</p><h3>What is actually on hand?</h3><p class="plan-description">Purchase status, quantities and actual spend are kept separate from design allowances.</p></div></div><div class="plan-part-grid">${list(version.purchases).map((part) => `<article class="plan-part"><div class="plan-item-heading"><h4>${escape(part.name)}</h4>${status(part.status)}</div><dl><div><dt>Planned quantity</dt><dd>${quantity(part.plannedQuantity)}</dd></div><div><dt>Ordered quantity</dt><dd>${quantity(part.orderedQuantity)}</dd></div><div><dt>Goods paid (excl. shipping/tax)</dt><dd>${part.actualCost === null || part.actualCost === undefined ? 'Not recorded' : typeof part.actualCost === 'number' ? '$' + part.actualCost.toFixed(2) : escape(part.actualCost)}</dd></div><div><dt>Confirmed on</dt><dd>${quantity(part.confirmedOn)}</dd></div></dl><p>${escape(part.note)}</p>${sources(part.sourcePaths)}</article>`).join('') || '<p class="plan-empty">No confirmed purchases are recorded for this version.</p>'}</div>`;
+  }
+
+  function purchaseLedger(version) {
+    const target = root.document.getElementById('purchase-ledger');
+    if (!target || !list(version.orders).length) return;
+    const money = (amount) => amount == null ? 'Not recorded' : new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+    const orders = version.orders;
+    // Sum only order totals: purchase cards repeat goods costs, and are not extra spend.
+    const known = orders.every((order) => Number.isFinite(order.paidTotal));
+    const paidCents = orders.reduce((total, order) => total + Math.round((order.paidTotal || 0) * 100), 0);
+    const ceiling = root.HuxProof && root.HuxProof.results.total_cap_usd;
+    const paid = known ? paidCents / 100 : null;
+    const remaining = known && Number.isFinite(ceiling) ? (Math.round(ceiling * 100) - paidCents) / 100 : null;
+    const quantities = quantitySummary(version);
+    target.innerHTML = `<div class="purchase-summary"><div><span class="plan-kicker">Confirmed order payments</span><strong>${money(paid)}</strong><p>Goods + recorded shipping and tax. Each order counted once.</p></div><div><span class="plan-kicker">Unspent to ${money(ceiling)} plan</span><strong>${money(remaining)}</strong><p>Includes everything still to buy and retained reserves; not spare feature budget.</p></div><div><span class="plan-kicker">Still needed for two wheels</span><strong>${escape(quantities.needed)}</strong><p>${escape(quantities.detail)}</p></div></div>
+      <div class="table-wrap"><table><caption class="sr-only">Paid orders and incoming components</caption><thead><tr><th scope="col">Order / incoming parts</th><th scope="col">Goods</th><th scope="col">Shipping</th><th scope="col">Tax</th><th scope="col">Paid total / status</th></tr></thead><tbody>${orders.map((order) => `<tr><td><strong>${escape(order.vendor)}</strong><small>${list(order.items).map((item) => `${quantity(item.quantity)} × ${escape(item.name)} · ${money(item.unitCost)} each`).join('<br>')}</small><small>Paid ${escape(order.paidOn)}</small></td><td class="money">${money(order.merchandiseCost)}</td><td class="money">${money(order.shippingCost)}</td><td class="money">${money(order.taxCost)}</td><td><strong class="money">${money(order.paidTotal)}</strong><br>${status(order.status)}<small>${escape(order.deliveryNote)}</small></td></tr>`).join('')}</tbody><tfoot><tr><td colspan="4">Total confirmed paid</td><td>${money(paid)}</td></tr></tfoot></table></div>
+      <p class="small">Receipts reconciled 29 September 2026. Shipment estimates are dated email evidence; delivery is not yet confirmed. Servo 12 V variant comes from the user’s confirmation; inspect labels on arrival.</p>${sources(['docs/purchases.md', 'docs/parts-on-hand.md'])}`;
   }
 
   function milestones(version) {
@@ -261,6 +307,13 @@
       const version = versions.find((item) => item.slug === container.dataset.version);
       if (!version) throw new Error('Version not found.');
       render(container, data, version);
+      purchaseLedger(version);
+      // The asynchronous board changes section positions after native hash
+      // navigation. Land deep links on their section after the content exists.
+      if (root.location.hash) {
+        const anchor = document.getElementById(root.location.hash.slice(1));
+        if (anchor) anchor.scrollIntoView({ behavior: 'instant', block: 'start' });
+      }
     } catch (error) {
       const path = container.dataset.version === 'v0-genesis' ? 'docs/archive/stair-v1/README.md' : 'docs/v1-proof.md';
       container.innerHTML = `<p class="plan-error" role="alert">The working plan could not load. <a href="${escape(sourceURL(path, scriptBase))}">Read the published plan</a> or reload this page.</p>`;

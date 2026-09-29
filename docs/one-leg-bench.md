@@ -4,7 +4,7 @@
 
 ## Parts and scope
 
-**Confirmed by the user, 2026-09-29:** **Pololu 4752 wheel gearmotors and ST3215 12 V servos are ordered for V1-PROOF**, awaiting delivery. A bench supply is available. Ordered quantities, actual costs, controller/driver/interface availability and supply ratings remain to be recorded. The selected wheel driver is Pololu 4035 DRV8874; its purchase is not yet confirmed. See [inventory](parts-on-hand.md) and [hardware selection](v1-proof-hardware.md).
+**Receipts reconciled 2026-09-29:** **one Pololu 4752 wheel motor + one Pololu 4035 DRV8874 driver are shipped; two ST3215 servos are paid**, awaiting shipment in the latest vendor record. **$143.12 is paid**, including shipping/tax. The user confirms the servo 12 V variant; verify labels on arrival. This supplies the purchased actuator baseline for the first bench channel; the two-wheel robot still needs a second motor/driver. A bench supply is available, with ratings unconfirmed. Controller, servo interface and harness availability remain to record. See [paid orders](purchases.md), [inventory](parts-on-hand.md) and [hardware selection](v1-proof-hardware.md).
 
 **This plan is for V1-PROOF and the confirmed Pololu/ST3215 actuators.** RobStride is intended for the future full-size Hux. The 110 mm linkage geometry applies to this test version; final structural fits and the power circuit still need measured hardware and supply checks.
 
@@ -80,10 +80,10 @@ Confirm the supplies' grounding arrangement, current capacity, connector polarit
 
 | Item / status | Bench configuration |
 | --- | --- |
-| ST3215 **12 V variant — ordered** | The project uses a **9 V** servo rail for this confirmed variant. Check the received label against the order before power-up. Use position mode with readback, one servo connected initially. [Variant specifications](https://www.waveshare.com/product/modules/st3215-servo.htm). |
+| ST3215 **12 V variant — two paid** | The project uses a **9 V** servo rail for this confirmed variant. Check the received label against the order before power-up. Use position mode with readback, one servo connected initially. [Variant specifications](https://www.waveshare.com/product/modules/st3215-servo.htm). |
 | Waveshare Bus Servo Adapter A, if available | An official USB/Python route for the one-servo test. It passes input voltage through and is rated **5 A maximum**; it is not a 9 V regulator or a qualified path for the planned two-servo 6 A peak. [Adapter documentation](https://docs.waveshare.com/Bus_Servo_Adapter_A/FAQ). |
-| Pololu 4752 motor — ordered | A brushed motor requiring an H-bridge for commanded reversal. Qualify at **12 V**, then the project's **9.9 V sizing point**; the actual battery minimum remains unconfirmed. Encoder supply is 3.5–20 V, so use the selected 5 V supply with logic conversion. Expected quadrature scale is **1920 counts/output revolution**. [Motor specification](https://www.pololu.com/product/4752). |
-| Pololu 4035 driver — selected, purchase unconfirmed | Configure PH/EN (`PMODE=0`) before waking it, `IMODE` directly grounded, fault pulled up to 3.3 V, and a measured hardware current limit. `EN=0` brakes; `SLEEP=0` coasts. Default current limiting is not the project's calibrated setting. [Driver specification](https://www.pololu.com/product/4035). |
+| Pololu 4752 motor — one shipped | A brushed motor requiring an H-bridge for commanded reversal. Qualify at **12 V**, then the project's **9.9 V sizing point**; the actual battery minimum remains unconfirmed. Encoder supply is 3.5–20 V, so use the selected 5 V supply with logic conversion. Expected quadrature scale is **1920 counts/output revolution**. [Motor specification](https://www.pololu.com/product/4752). |
+| Pololu 4035 driver — one shipped | Configure PH/EN (`PMODE=0`) before waking it, `IMODE` directly grounded, fault pulled up to 3.3 V, and a measured hardware current limit. `EN=0` brakes; `SLEEP=0` coasts. Default current limiting is not the project's calibrated setting. [Driver specification](https://www.pololu.com/product/4035). |
 
 The MCU servo path requires a compatible half-duplex TTL interface; do not tie bare TX/RX together or treat ST3215 as an ordinary three-wire PWM hobby servo. Verify every connector against its own documentation; matching colors or plug shapes are insufficient.
 
