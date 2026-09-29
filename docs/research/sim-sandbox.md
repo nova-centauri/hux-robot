@@ -64,7 +64,7 @@ Steve, 2026-09-25: the 3D sandbox taught a lot and framed capabilities / expecta
 
 ## 2026-09-26 — vendor geometry in the sandbox
 
-The envelope boxes and cylinders for the actuators are now the vendors' own shapes when the page is served over http (`tools/living-drawings/models/*.glb`, light copies of the STEP files in [`../../cad/vendor/`](../../cad/vendor/README.md)). Opened straight from the file the fetch fails and the primitives stay, so nothing depends on it. What changed in the picture, and only the picture — colliders, masses and joints are untouched:
+The envelope boxes and cylinders can use the vendors' own shapes when optional local meshes are served over HTTP (`tools/living-drawings/models/*.glb`, derived from STEP files in `cad/vendor/`). These local vendor downloads are excluded from the published website; the public sandbox uses its envelope-geometry fallback. See the [CAD and layout guide](../../cad/README.md). If a mesh fetch fails, the primitives stay, so nothing depends on it. What changed in the picture, and only the picture — colliders, masses and joints are untouched:
 
 - **RS02** on each hip-roll axis (flange toward the yoke) and at each knee (flange outboard); **RS00** in each yoke (flange outboard); **RS05** on each axle as the lower leg's stator, flange outboard, with a disc web from the flange to the bead so the wheel is seen turning. The RS05 is 44 mm wide against the 31.75 mm tire, and the drawing now shows that overlap instead of a hub disc — the hub drawing is still owed.
 - The body shell goes see-through with the **8S pack** (BOM class box, 150 × 50 × 60 mm, on the body floor) and the **Teensy 4.1** above it, so the mass sketch's "pack low and central" is visible. Neither position is a decision.

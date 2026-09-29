@@ -1,7 +1,7 @@
 {
   "name": "hux-living-drawings",
   "private": true,
-  "description": "Active V1-PROOF planning page and preserved stair studies. Pages need no build.",
+  "description": "HUX living build plans, versioned research and rendered documentation.",
   "license": "MIT",
   "scripts": {
     "test": "python3 ../v1-proof/test_review.py && python3 ../v1-proof/review.py --check && node ../v1-proof/test_sim.js && node ../v1-proof/test_sandbox.js && node ../v1-proof/run_sim.js --check && python3 ../v1-proof/report_sim.py --check",
@@ -9,7 +9,9 @@
     "test:legacy": "python3 ../engineering/test_review.py && node validation-test.js && node assumption-audit.js > /dev/null && node frontal.js > /dev/null && node sim-test.js",
     "engineering:legacy": "python3 ../engineering/review.py --write",
     "simulate": "node ../v1-proof/run_sim.js --write && python3 ../v1-proof/report_sim.py",
-    "simulate:quick": "node ../v1-proof/run_sim.js --quick"
+    "simulate:quick": "node ../v1-proof/run_sim.js --quick",
+    "build": "python3 build_site.py",
+    "test:site": "python3 test_site.py && python3 test_plan_data.py && node --test plan.test.js"
   },
   "devDependencies": {
     "@dimforge/rapier3d-compat": "0.20.0"

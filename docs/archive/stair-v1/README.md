@@ -1,4 +1,6 @@
-# STAIR-V1 — parked planning archive
+# V0-GENESIS — original planning archive
+
+**V0-GENESIS** is the public name of HUX's old planning model. Historical documents below retain their original **STAIR-V1** or **V1** terminology and dates; the `stair-v1` source paths remain stable. [Open the V0-GENESIS version page](../../../tools/living-drawings/v0-genesis.html).
 
 **Parked on 2026-09-28 at the user's request.** The ambitious stair robot was too costly. [V1-PROOF](../../v1-proof.md) is now the active model, with strictly under $1,000 new cash, smaller mass, fewer/smaller actuators and no stair requirement.
 

@@ -26,9 +26,15 @@ No stairs, one-wheel stance, jumping, rough terrain, onboard cameras, autonomy o
 - [Build checklists](docs/checklists/), [sizing calculations](docs/v1-proof-sizing.md)
 - [Model source and checks](tools/v1-proof/README.md)
 
+## Living website
+
+The website routes **V1-PROOF** to the current build and **V0-GENESIS** to the original planning archive. The current workbench tracks actuator orders, the supported single-leg exercise, milestone gates and dated updates. A third version remains future and unscoped. Browser bench notes are local drafts; the shared plan is maintained in `tools/living-drawings/plan-data.json` alongside its referenced documents.
+
+Run `npm run build` and `npm run test:site` from `tools/living-drawings`; serve or publish `dist/site`. Markdown guides become real HTML pages with version navigation. See [website maintenance](docs/site-maintenance.md) for the update and preview workflow.
+
 ## Parked work
 
-The [STAIR-V1 archive](docs/archive/stair-v1/README.md) preserves the earlier plans. Existing research, H1 layout, actuator studies and the old eight-axis simulator remain available as historical work. They do not define V1-PROOF, and this proof chassis has no promised stair upgrade path.
+The [V0-GENESIS archive](docs/archive/stair-v1/README.md) preserves the earlier plans (historically named STAIR-V1). Existing research, H1 layout, actuator studies and the old eight-axis simulator remain available as historical work. They do not define V1-PROOF, and this proof chassis has no promised stair upgrade path.
 
 Regenerate the active model with `python3 tools/v1-proof/review.py --write`; verify it with `python3 tools/v1-proof/test_review.py` and `python3 tools/v1-proof/review.py --check`. From `tools/living-drawings`, `npm test` checks the active model; `npm run test:legacy` retains the old regression suite.
 

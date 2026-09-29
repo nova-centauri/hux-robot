@@ -1,0 +1,742 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-29",
+  "currentVersion": "v1-proof",
+  "description": "Source-backed HUX work-in-progress plan. Proposed and simulated work is separate from measured physical evidence. Null order quantities and costs mean unknown, not zero.",
+  "statusLabels": {
+    "in-progress": "In progress",
+    "awaiting-parts": "Awaiting parts",
+    "ready": "Ready to prepare",
+    "planned": "Planned",
+    "ordered": "Ordered · awaiting arrival",
+    "available": "Available · details pending",
+    "unconfirmed": "Unconfirmed",
+    "archived": "Parked history",
+    "future": "Future · unscoped",
+    "passed": "Passed with evidence",
+    "blocked": "Blocked",
+    "unverified": "Unverified"
+  },
+  "maintenance": {
+    "sourceOfTruth": "Repository documents and recorded physical evidence",
+    "instructions": [
+      "Update the relevant source document and this plan together when a decision, order or measured result changes.",
+      "Record dates, exact parts, quantities and actual costs; unknown values remain null.",
+      "Move physical milestones to passed only with linked session records, logs and measured acceptance evidence.",
+      "Keep failed trials and superseded decisions in history. Simulation results never close hardware acceptance."
+    ],
+    "sourcePaths": [
+      "docs/decisions.md",
+      "docs/parts-on-hand.md",
+      "docs/checklists/README.md",
+      "docs/checklists/one-leg-bench-session.md"
+    ]
+  },
+  "versions": [
+    {
+      "id": "V1-PROOF",
+      "slug": "v1-proof",
+      "name": "V1-PROOF",
+      "role": "current",
+      "status": "in-progress",
+      "summary": "The current HUX: a small, four-actuator wheeled robot to prove balance, manual driving and slow leg-height changes for strictly less than $1,000.",
+      "sourcePaths": [
+        "docs/v1-proof.md",
+        "docs/decisions.md",
+        "docs/parts-on-hand.md"
+      ],
+      "focus": {
+        "title": "Prepare the single-leg actuator bench",
+        "summary": "Pololu 4752 wheel motors and ST3215 12 V servos are ordered and awaiting arrival. Build a restrained one-leg/one-wheel test article, record the missing purchase details, and qualify each actuator before the two-wheel robot. No physical test has been completed.",
+        "sourcePaths": [
+          "docs/one-leg-bench.md",
+          "docs/parts-on-hand.md"
+        ]
+      },
+      "nextActions": [
+        {
+          "id": "record-orders",
+          "title": "Record the order details",
+          "detail": "Add ordered quantities, paid costs, shipping/tax and delivery status for Pololu 4752 motors and ST3215 12 V servos. Keep unknown values explicit.",
+          "status": "ready",
+          "sourcePaths": [
+            "docs/parts-on-hand.md",
+            "docs/bom.md"
+          ]
+        },
+        {
+          "id": "fixture-mockup",
+          "title": "Prepare the passive bench fixture",
+          "detail": "Print the 1:1 template and verify its 100 mm scale. Mock up the two 110 mm links, 40 mm pivot spacing, supported carrier, lock and catch; leave hardware-specific fits unfinished.",
+          "status": "ready",
+          "sourcePaths": [
+            "docs/one-leg-bench.md",
+            "cad/layouts/one-leg-bench-template.svg"
+          ]
+        },
+        {
+          "id": "inventory-interfaces",
+          "title": "Confirm controls and power interfaces",
+          "detail": "Record the bench-supply model and ratings; check availability of the wheel driver, controller, servo interface and encoder level conversion before buying more parts.",
+          "status": "ready",
+          "sourcePaths": [
+            "docs/parts-on-hand.md",
+            "docs/one-leg-bench.md"
+          ]
+        },
+        {
+          "id": "power-gates",
+          "title": "Resolve power and return-energy protection",
+          "detail": "Prepare a fused harness and independent actuator-power cut. Verify supply behavior, current limits and a regeneration path before loaded lowering, backdriving or aggressive reversals.",
+          "status": "planned",
+          "sourcePaths": [
+            "docs/one-leg-bench.md",
+            "docs/v1-proof-hardware.md"
+          ]
+        },
+        {
+          "id": "record-session",
+          "title": "Open the first measured session",
+          "detail": "On arrival, identify the received hardware, then follow the staged bench sequence. Save wiring/firmware revision, measurements, photos, logs and failed trials in a copied session record.",
+          "status": "awaiting-parts",
+          "sourcePaths": [
+            "docs/checklists/one-leg-bench-session.md",
+            "docs/one-leg-bench.md"
+          ]
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Planned all-in budget",
+          "value": "$900",
+          "note": "Includes $100 shipping/tax and $125 repair/overrun reserve; actual spend is not yet recorded."
+        },
+        {
+          "label": "Hard spend limit",
+          "value": "< $1,000",
+          "note": "All new cash, including replacements, tools, freight and tax."
+        },
+        {
+          "label": "Mass target / ceiling",
+          "value": "2.5 / 3.0 kg",
+          "note": "Planning target and maximum; assembled mass is unmeasured."
+        },
+        {
+          "label": "Powered axes",
+          "value": "4",
+          "note": "Two wheel motors and two reduced leg servos; first free-standing balance uses pinned legs."
+        },
+        {
+          "label": "Simulation evidence",
+          "value": "388 / 391",
+          "note": "Numerical qualification scenarios passed; retain three settling failures. No physical reliability claim."
+        },
+        {
+          "label": "Physical acceptance",
+          "value": "All open",
+          "note": "No hardware test or firmware implementation is established by the current records."
+        }
+      ],
+      "purchases": [
+        {
+          "id": "pololu-4752",
+          "name": "Pololu 4752 encoder gearmotors",
+          "status": "ordered",
+          "plannedQuantity": 2,
+          "orderedQuantity": null,
+          "actualCost": null,
+          "currency": "USD",
+          "confirmedOn": "2026-09-29",
+          "note": "Model confirmed ordered; awaiting arrival. The planned pair does not establish the ordered quantity or paid price.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md",
+            "docs/bom.md"
+          ]
+        },
+        {
+          "id": "st3215",
+          "name": "Waveshare ST3215, 12 V variant",
+          "status": "ordered",
+          "plannedQuantity": 2,
+          "orderedQuantity": null,
+          "actualCost": null,
+          "currency": "USD",
+          "confirmedOn": "2026-09-29",
+          "note": "Model and voltage variant confirmed ordered; awaiting arrival. Qualify on the project’s regulated 9 V rail.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md",
+            "docs/bom.md"
+          ]
+        },
+        {
+          "id": "pololu-4035",
+          "name": "Pololu 4035 DRV8874 wheel drivers",
+          "status": "unconfirmed",
+          "plannedQuantity": 2,
+          "orderedQuantity": null,
+          "actualCost": null,
+          "currency": "USD",
+          "confirmedOn": null,
+          "note": "Selected baseline; purchase and availability unconfirmed. Hardware current limiting and sleep/kill behavior require bench qualification.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md",
+            "docs/v1-proof-hardware.md"
+          ]
+        },
+        {
+          "id": "control-interface",
+          "name": "Pico 2, LSM6DSOX and compatible servo interface",
+          "status": "unconfirmed",
+          "plannedQuantity": null,
+          "orderedQuantity": null,
+          "actualCost": null,
+          "currency": "USD",
+          "confirmedOn": null,
+          "note": "Controller/IMU/interface ownership is not established. Confirmed equivalent reuse may substitute after qualification.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md",
+            "docs/v1-proof-hardware.md"
+          ]
+        },
+        {
+          "id": "bench-supply",
+          "name": "Bench supply",
+          "status": "available",
+          "plannedQuantity": null,
+          "orderedQuantity": null,
+          "actualCost": null,
+          "currency": "USD",
+          "confirmedOn": "2026-09-29",
+          "note": "Available per user; model, voltage/current ratings and reverse-energy behavior remain to be recorded. No reuse credit is inferred.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md"
+          ]
+        },
+        {
+          "id": "battery-charger",
+          "name": "Compatible battery and balance charger",
+          "status": "unconfirmed",
+          "plannedQuantity": null,
+          "orderedQuantity": null,
+          "actualCost": null,
+          "currency": "USD",
+          "confirmedOn": null,
+          "note": "Exact models, condition and cell count remain unknown. The planning baseline is a compatible 3S pack.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md",
+            "docs/v1-proof-hardware.md"
+          ]
+        },
+        {
+          "id": "mechanical-stock",
+          "name": "Wheels, bearings, belts, frame stock and harness parts",
+          "status": "unconfirmed",
+          "plannedQuantity": null,
+          "orderedQuantity": null,
+          "actualCost": null,
+          "currency": "USD",
+          "confirmedOn": null,
+          "note": "No parts reserved and shop stock not yet inventoried. Selected geometry does not establish owned components.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md"
+          ]
+        }
+      ],
+      "milestones": [
+        {
+          "id": "P0",
+          "title": "Inventory and layout",
+          "status": "in-progress",
+          "summary": "Actuator models are confirmed ordered; quantities, spend, received dimensions and supporting interfaces remain open.",
+          "criteria": [
+            "Record exact parts, variants, quantities, costs and reusable stock.",
+            "Quote missing items and retain reserves inside the strict cash cap.",
+            "Check mass allocations and the full wheel, motor, bearing, battery and cable envelopes.",
+            "Detail the pinned structure and a supported reduced-servo leg before final machining."
+          ],
+          "sourcePaths": [
+            "docs/checklists/mechanical-v1.md",
+            "docs/parts-on-hand.md",
+            "docs/bom.md"
+          ]
+        },
+        {
+          "id": "BENCH",
+          "title": "One-leg actuator exercise",
+          "status": "planned",
+          "summary": "Prepare now; test one supported leg and lifted wheel after the parts and interfaces are identified. This can precede balance.",
+          "criteria": [
+            "Complete the staged session with bounded commands, measured signs and disabled startup.",
+            "Record passive clearances, backlash and measured leg/wheel response.",
+            "Demonstrate independent power cut and implemented fault behavior in the fixture.",
+            "Use measured load, electrical and thermal results to inform the robot; a bench pass does not prove balance."
+          ],
+          "sourcePaths": [
+            "docs/one-leg-bench.md",
+            "docs/checklists/one-leg-bench-session.md"
+          ]
+        },
+        {
+          "id": "P1",
+          "title": "Supported wheels and pinned chassis",
+          "status": "planned",
+          "summary": "Qualify the wheel channels and basic electronics before attempting free-standing balance.",
+          "criteria": [
+            "Build supported axles, pinned neutral legs, rest skids and a catch fixture.",
+            "Verify motor/encoder polarity, current limits, low-voltage response and thermal behavior.",
+            "Test physical kill, watchdog, reset, stale commands and sensor faults with deliberate rearm.",
+            "Measure assembled mass, center of mass, timing and power behavior."
+          ],
+          "sourcePaths": [
+            "docs/checklists/mechanical-v1.md",
+            "docs/checklists/electronics-bringup.md",
+            "docs/checklists/software-bringup.md"
+          ]
+        },
+        {
+          "id": "P2",
+          "title": "Pinned-leg balance and manual drive",
+          "status": "planned",
+          "summary": "Prove two-wheel mobility with both legs mechanically pinned at neutral.",
+          "criteria": [
+            "Hold balance for 60 seconds in at least 9 of 10 starts without support contact.",
+            "Complete logged 2 m forward/reverse runs, left/right arcs and both 360° in-place turns under the physical protocol.",
+            "Complete five combined sequences at bounded speed, on the required floors and voltages.",
+            "Keep failures and configuration hashes; simulated success does not close this gate."
+          ],
+          "sourcePaths": [
+            "docs/v1-proof-validation.md",
+            "docs/checklists/mechanical-v1.md"
+          ]
+        },
+        {
+          "id": "P3",
+          "title": "Powered leg-height adjustment",
+          "status": "planned",
+          "summary": "Add supported 3:1 reductions after pinned-leg balance; qualify each leg before synchronized movement.",
+          "criteria": [
+            "Qualify 0.75 N·m mounted servo hold for 10 minutes and the separate 1.0 N·m short transient target.",
+            "Measure backlash, loaded clearance and pose-dependent pitch trim.",
+            "Complete ten low/high/low cycles with both wheels loaded, targeting at least 25 mm actual body-height change.",
+            "No support contact, overload or balance loss; use the measured qualified range."
+          ],
+          "sourcePaths": [
+            "docs/checklists/mechanical-v1.md",
+            "docs/v1-proof-validation.md"
+          ]
+        },
+        {
+          "id": "P4",
+          "title": "Complete the physical proof",
+          "status": "planned",
+          "summary": "Close the measured mobility, disturbance, fault, duty, mass and budget gates before expanding scope.",
+          "criteria": [
+            "Qualify the specified 0.8 N·s longitudinal and 0.4 N·s lateral pulses, both signs and durations.",
+            "Qualify separate 3° slopes, 5 mm smooth bumps and 3 mm seam fixtures at 0.15 m/s.",
+            "Complete a 10-minute mixed session within measured electrical and thermal limits, with no resets.",
+            "Record final mass ≤3.0 kg and all-in new cash < $1,000.",
+            "Archive logs, videos and failure counts; replace model assumptions with measurements and rerun the matrix."
+          ],
+          "sourcePaths": [
+            "docs/v1-proof-validation.md",
+            "docs/v1-proof.md"
+          ]
+        }
+      ],
+      "bench": {
+        "title": "Single-leg bench exercise",
+        "status": "planned",
+        "summary": "One restrained leg adjustment and one lifted driven wheel. Preparation plan dated 2026-09-29; no hardware has been tested. Start one actuator at a time. The full guide owns the wiring, power gates and detailed stop conditions.",
+        "sourcePaths": [
+          "docs/one-leg-bench.md",
+          "docs/checklists/one-leg-bench-session.md"
+        ],
+        "geometry": [
+          {
+            "label": "Links",
+            "value": "2 × 110 mm between pivot centers"
+          },
+          {
+            "label": "Pivot separation",
+            "value": "40 mm on body and carrier"
+          },
+          {
+            "label": "Neutral / design range",
+            "value": "30° / 15–45° from downward vertical"
+          },
+          {
+            "label": "Transmission",
+            "value": "3:1, on a bearing-supported shaft"
+          },
+          {
+            "label": "First driven leg range",
+            "value": "28–32° at 1°/s after bare-servo checks"
+          },
+          {
+            "label": "Wheel",
+            "value": "100 mm nominal; lifted for first powered tests"
+          }
+        ],
+        "stages": [
+          {
+            "id": "B0",
+            "title": "Identify received parts",
+            "status": "planned",
+            "action": "Record labels, quantities, pinouts, dimensions and condition.",
+            "evidence": "Confirmed inventory and a marked wiring diagram; template updated for actual parts."
+          },
+          {
+            "id": "B1",
+            "title": "Power and readback",
+            "status": "planned",
+            "action": "Check disconnected rails and polarity, secure the bare servo, verify disabled startup and read feedback; read encoder counts with motor power off.",
+            "evidence": "Stable communications, expected counts per measured wheel revolution, and a verified independent power cut."
+          },
+          {
+            "id": "B2",
+            "title": "Bare servo",
+            "status": "planned",
+            "action": "After verifying startup and target mapping, command ±5° at the servo output at no more than 5°/s with horn, belt and load removed.",
+            "evidence": "Correct direction with no startup jump, reset, unexpected current or tracking fault."
+          },
+          {
+            "id": "B3",
+            "title": "Passive linkage",
+            "status": "planned",
+            "action": "Disconnect the drive and sweep the scrap linkage by hand through the 15–45° design range.",
+            "evidence": "No binding, cable contact or hardware collision; correct center spacing and functioning catch support."
+          },
+          {
+            "id": "B4",
+            "title": "Small driven leg cycles",
+            "status": "planned",
+            "action": "Align at 30° with power off; remove the lock before arming. Begin 28–32° at 1°/s, holding 2 seconds at each end.",
+            "evidence": "Ten small cycles with independently measured angle, no jump or binding, and logged current, voltage and temperature."
+          },
+          {
+            "id": "B5",
+            "title": "Wider unloaded travel",
+            "status": "planned",
+            "action": "After small-cycle success, try 25–35° and expand only within measured clearance and stop margins.",
+            "evidence": "Repeatable endpoints, measured vertical/fore-aft travel and approach-direction backlash; no stop strikes."
+          },
+          {
+            "id": "B6",
+            "title": "Wheel alone",
+            "status": "planned",
+            "action": "Pin the leg, keep the wheel lifted and servo torque off. Verify sign, then try +10 rpm → 0 → −10 rpm, waiting for measured zero before reversal.",
+            "evidence": "Stable low-speed response with correct feedback sign; no reset or overvoltage. Record stiction before raising limits."
+          },
+          {
+            "id": "B7",
+            "title": "Fault behavior",
+            "status": "planned",
+            "action": "Within the supported small-motion envelope, test deadman release, lost commands/feedback, reset, lost servo communication and physical kill.",
+            "evidence": "Faults latch, the catch contains torque loss, the cut works without software, and reconnection never rearms automatically."
+          },
+          {
+            "id": "B8",
+            "title": "Combined unloaded motion",
+            "status": "planned",
+            "action": "After separate and fault tests, slowly sweep 28–32° while the lifted wheel turns at 10 rpm.",
+            "evidence": "Five repeatable cycles with no dropped commands, resets, wiring snags or rail violations."
+          },
+          {
+            "id": "B9",
+            "title": "Measured loading",
+            "status": "planned",
+            "action": "Only after electrical and thermal gates, add a captured, measured load in steps with a known force direction and lever arm.",
+            "evidence": "Record deflection, backlash, temperature and rail behavior under load, including supported power loss. Later torque/duty qualification remains separate."
+          }
+        ]
+      },
+      "documents": [
+        {
+          "title": "Current build plan",
+          "path": "docs/v1-proof.md",
+          "kind": "guide"
+        },
+        {
+          "title": "Single-leg bench guide",
+          "path": "docs/one-leg-bench.md",
+          "kind": "guide"
+        },
+        {
+          "title": "Bench session record",
+          "path": "docs/checklists/one-leg-bench-session.md",
+          "kind": "record"
+        },
+        {
+          "title": "Printable bench template",
+          "path": "cad/layouts/one-leg-bench-template.svg",
+          "kind": "drawing"
+        },
+        {
+          "title": "Parts and purchase inventory",
+          "path": "docs/parts-on-hand.md",
+          "kind": "inventory"
+        },
+        {
+          "title": "Budget and allocations",
+          "path": "docs/bom.md",
+          "kind": "budget"
+        },
+        {
+          "title": "Hardware and interfaces",
+          "path": "docs/v1-proof-hardware.md",
+          "kind": "guide"
+        },
+        {
+          "title": "Physical acceptance protocol",
+          "path": "docs/v1-proof-validation.md",
+          "kind": "acceptance"
+        },
+        {
+          "title": "Build checklists",
+          "path": "docs/checklists/README.md",
+          "kind": "checklist"
+        },
+        {
+          "title": "Requirements",
+          "path": "docs/requirements.md",
+          "kind": "guide"
+        },
+        {
+          "title": "Simulation evidence",
+          "path": "docs/v1-proof-simulation.md",
+          "kind": "evidence"
+        },
+        {
+          "title": "Sizing and assumptions",
+          "path": "docs/v1-proof-sizing.md",
+          "kind": "evidence"
+        },
+        {
+          "title": "Decision log",
+          "path": "docs/decisions.md",
+          "kind": "history"
+        }
+      ],
+      "updates": [
+        {
+          "date": "2026-09-29",
+          "title": "Actuator orders and single-leg bench preparation",
+          "summary": "The user confirmed Pololu 4752 motors and ST3215 12 V servos ordered for V1-PROOF, awaiting arrival, and a bench supply available. Quantities, actual cost and supply ratings are pending. The supported one-leg exercise and session template are prepared; no hardware test is claimed.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md",
+            "docs/one-leg-bench.md",
+            "docs/decisions.md"
+          ]
+        },
+        {
+          "date": "2026-09-28",
+          "title": "Mobility baseline and retained simulation failures",
+          "summary": "The pinned-leg numerical study passes 388 of 391 broad-matrix cases. The physical protocol covers both driving directions, turns, bounded pushes and shallow uneven fixtures. Three settling failures remain recorded; physical acceptance and powered-leg dynamics remain open.",
+          "sourcePaths": [
+            "docs/v1-proof-simulation.md",
+            "docs/v1-proof-validation.md",
+            "docs/decisions.md"
+          ]
+        },
+        {
+          "date": "2026-09-28",
+          "title": "V1-PROOF becomes the current model",
+          "summary": "The stair-focused plan was parked. Active work moved to a smaller four-axis robot, pinned-leg balance first, with a strict sub-$1,000 budget and no stair requirement.",
+          "sourcePaths": [
+            "docs/v1-proof.md",
+            "docs/archive/stair-v1/README.md",
+            "docs/decisions.md"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "V0-GENESIS",
+      "slug": "v0-genesis",
+      "name": "V0-GENESIS",
+      "role": "archive",
+      "status": "archived",
+      "summary": "The original, ambitious stair-capable planning model. Parked on 2026-09-28; preserved as research and design history. Its old requirements and budgets do not govern V1-PROOF.",
+      "sourcePaths": [
+        "docs/archive/stair-v1/README.md",
+        "docs/archive/stair-v1/project-readme.md",
+        "docs/decisions.md"
+      ],
+      "focus": {
+        "title": "Preserve the original planning history",
+        "summary": "V0-GENESIS is the user-facing name for the former STAIR-V1 planning archive. Existing stair-v1 file paths and historical labels remain provenance. Stair reach, single-support mechanics, actuator duty and full procurement release were unresolved when parked.",
+        "sourcePaths": [
+          "docs/archive/stair-v1/README.md",
+          "docs/archive/stair-v1/project-readme.md"
+        ]
+      },
+      "nextActions": [],
+      "metrics": [
+        {
+          "label": "Disposition",
+          "value": "Parked",
+          "note": "Scope reset on 2026-09-28."
+        },
+        {
+          "label": "Original ambition",
+          "value": "Stair traversal",
+          "note": "One wheeled leg at a time; historical target, not demonstrated capability."
+        },
+        {
+          "label": "Hardware release",
+          "value": "Unreleased",
+          "note": "Engineering and procurement gates remained open at the archive snapshot."
+        }
+      ],
+      "purchases": [],
+      "milestones": [
+        {
+          "id": "V0-research",
+          "title": "Research and architecture studies",
+          "status": "archived",
+          "summary": "Preserved requirements, mass/geometry studies, actuator investigations and candidate layouts.",
+          "criteria": [],
+          "sourcePaths": [
+            "docs/archive/stair-v1/README.md",
+            "docs/research/README.md"
+          ]
+        },
+        {
+          "id": "V0-engineering",
+          "title": "Stair engineering gates",
+          "status": "archived",
+          "summary": "Reach, loaded contact mechanics, passive carrier design, actuator duty and procurement remained unresolved when work was parked.",
+          "criteria": [],
+          "sourcePaths": [
+            "docs/archive/stair-v1/project-readme.md",
+            "docs/head-and-leg-review.md"
+          ]
+        }
+      ],
+      "bench": null,
+      "documents": [
+        {
+          "title": "Archive overview",
+          "path": "docs/archive/stair-v1/README.md",
+          "kind": "history"
+        },
+        {
+          "title": "Original project plan",
+          "path": "docs/archive/stair-v1/project-readme.md",
+          "kind": "history"
+        },
+        {
+          "title": "Historical requirements R1–R44",
+          "path": "docs/archive/stair-v1/requirements.md",
+          "kind": "history"
+        },
+        {
+          "title": "Mechanical architecture",
+          "path": "docs/archive/stair-v1/mechanical.md",
+          "kind": "history"
+        },
+        {
+          "title": "Electronics architecture",
+          "path": "docs/archive/stair-v1/electronics.md",
+          "kind": "history"
+        },
+        {
+          "title": "Software architecture",
+          "path": "docs/archive/stair-v1/software.md",
+          "kind": "history"
+        },
+        {
+          "title": "Historical budget",
+          "path": "docs/archive/stair-v1/bom.md",
+          "kind": "history"
+        },
+        {
+          "title": "Parked checklists",
+          "path": "docs/archive/stair-v1/checklists/README.md",
+          "kind": "history"
+        },
+        {
+          "title": "Head and leg engineering review",
+          "path": "docs/head-and-leg-review.md",
+          "kind": "evidence"
+        },
+        {
+          "title": "Research library",
+          "path": "docs/research/README.md",
+          "kind": "history"
+        }
+      ],
+      "updates": [
+        {
+          "date": "2026-09-28",
+          "title": "Stair planning parked",
+          "summary": "The user reset the project around an affordable proof robot. The existing stair planning model, documents, research and numerical work were preserved; reopening this architecture requires a later scope decision.",
+          "sourcePaths": [
+            "docs/archive/stair-v1/README.md",
+            "docs/decisions.md"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "NEXT",
+      "slug": "next",
+      "name": "Next version",
+      "role": "future",
+      "status": "future",
+      "summary": "The third HUX version follows V1-PROOF. Its name, requirements, budget and schedule are intentionally undecided.",
+      "sourcePaths": [
+        "docs/v1-proof-validation.md",
+        "docs/decisions.md",
+        "docs/parts-on-hand.md"
+      ],
+      "focus": {
+        "title": "Let measured proof results define the next version",
+        "summary": "Carry forward measured actuator and sensor behavior, telemetry, fault handling and test evidence. Future full-size Hux has a stated RobStride direction, but no RobStride order or third-version hardware release is established.",
+        "sourcePaths": [
+          "docs/v1-proof-validation.md",
+          "docs/decisions.md",
+          "docs/parts-on-hand.md"
+        ]
+      },
+      "nextActions": [
+        {
+          "id": "next-release",
+          "title": "Close and archive the V1-PROOF evidence",
+          "detail": "Complete the physical acceptance gates and preserve logs, videos, failure counts and firmware/model revisions before selecting expanded requirements.",
+          "status": "planned",
+          "sourcePaths": [
+            "docs/v1-proof-validation.md"
+          ]
+        },
+        {
+          "id": "next-scope",
+          "title": "Make an explicit next-version scope decision",
+          "detail": "Choose the third version’s name, requirements, architecture and budget from the proof’s measured results. V1 success does not promise a stair upgrade of the proof chassis.",
+          "status": "future",
+          "sourcePaths": [
+            "docs/decisions.md",
+            "docs/v1-proof.md"
+          ]
+        }
+      ],
+      "metrics": [],
+      "purchases": [],
+      "milestones": [],
+      "bench": null,
+      "documents": [
+        {
+          "title": "Proof release and handoff gates",
+          "path": "docs/v1-proof-validation.md",
+          "kind": "acceptance"
+        },
+        {
+          "title": "Version decisions",
+          "path": "docs/decisions.md",
+          "kind": "history"
+        }
+      ],
+      "updates": []
+    }
+  ]
+}

@@ -12,7 +12,7 @@ The user extended V1-PROOF to dependable forward/reverse traversal, left/right t
 
 | Topic | Current decision |
 | --- | --- |
-| Active model | V1-PROOF test version; RobStride is intended for future full-size Hux; STAIR-V1 remains parked |
+| Active model | V1-PROOF is current; V0-GENESIS names the old planning model (historically STAIR-V1); a third version follows the proof, with scope/name open |
 | Cost / mass | Strictly < $1,000; **$900** allocation including $225 reserves; 2.5 kg target / 3.0 kg maximum |
 | Actuators | **2 × Pololu 4752 wheels + 2 × ST3215 12 V variant legs through 3:1 belts**; first mobility with pinned 30° legs |
 | Drivers | **2 × Pololu 4035 DRV8874**, configured current limiting, sleep/kill/watchdog, PH/EN and fixed-off-time regulation |
@@ -30,6 +30,14 @@ See [hardware decisions](v1-proof-hardware.md), [simulation evidence](v1-proof-s
 ---
 
 ## Log
+
+### 2026-09-29 — Versioned living build plan
+
+The user named the old planning model **V0-GENESIS** and reaffirmed **V1-PROOF** as the current build, followed by a third version. The third version remains unnamed and unscoped. Preserve original stair research filenames, dates and historical terminology under the V0-GENESIS archive; their requirements do not govern the proof.
+
+The website now has distinct version routes and a source-backed WIP plan for orders, the single-leg bench exercise, milestone criteria and dated updates. Render source Markdown into navigable HTML pages. Browser bench notes remain local drafts until reviewed and recorded in the repository. Ordered quantities, paid costs and delivery remain open; no physical tests are completed by publishing a page.
+
+**Publication:** the user requested “push to main,” authorizing this website and planning update to be committed and pushed directly to `main`. All 28 site checks and the active model/simulation checks pass. The generated site contains 65 readable guides with no broken local links or section anchors. Pre-existing local vendor CAD and downloaded meshes remain outside the commit and published bundle. Live hosting deployment is separate and remains unverified.
 
 ### 2026-09-29 — V1-PROOF actuator orders confirmed; single-leg bench preparation
 
