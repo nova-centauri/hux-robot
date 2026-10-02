@@ -19,6 +19,7 @@ No stairs, one-wheel stance, jumping, rough terrain, onboard cameras, autonomy o
 
 ## Working documents
 
+- [Mechanical testing layout and timeline](tools/living-drawings/mechanical-tests.html): movable side/end views, R01 rendering, test steps and dated session drafts.
 - [Single-leg bench preparation](docs/one-leg-bench.md), [printable geometry template](cad/layouts/one-leg-bench-template.svg) and [session record](docs/checklists/one-leg-bench-session.md)
 - [Requirements](docs/requirements.md) and [decision log](docs/decisions.md)
 - [Mechanical](docs/mechanical.md), [electronics](docs/electronics.md), [software](docs/software.md)
@@ -38,4 +39,4 @@ The [V0-GENESIS archive](docs/archive/stair-v1/README.md) preserves the earlier 
 
 Regenerate the active model with `python3 tools/v1-proof/review.py --write`; verify it with `python3 tools/v1-proof/test_review.py` and `python3 tools/v1-proof/review.py --check`. From `tools/living-drawings`, `npm test` checks the active model; `npm run test:legacy` retains the old regression suite.
 
-This repository contains planning, sizing and a reproducible pinned-leg 3D simulation study. **One Pololu 4752 motor and one Pololu 4035 driver are shipped; two ST3215 servos are paid**, with the 12 V variant confirmed by the user. **$143.12 is spent**, including shipping/tax, against the $900 plan. These actuator models are locked for V1-PROOF; the second wheel motor/driver are still needed. See [paid orders](docs/purchases.md), [motor connections](docs/v1-proof-hardware.md) and [how the intelligence works](docs/software.md). RobStride actuators are intended for the future full-size Hux. No physical build, firmware implementation or successful balance test is claimed. [MIT](LICENSE).
+This repository contains planning, sizing and a reproducible pinned-leg 3D simulation study. **2026-10-02: the 30:1 gearmotor and DRV8874 drivers are received, and the parts are 3D printed**, per the user. Begin the [first mechanical fit session](docs/checklists/2026-10-02-mechanical-fit.md). The paid record covers one Pololu 4752 motor and one Pololu 4035 driver; total delivered driver count remains to confirm. Two ST3215 servos are paid, with the 12 V variant confirmed and arrival unreported. **$143.12 is recorded spent**, including shipping/tax, against the $900 plan. These actuator models are locked for V1-PROOF; a second wheel motor is still needed. See [paid orders](docs/purchases.md), [motor connections](docs/v1-proof-hardware.md) and [how the intelligence works](docs/software.md). RobStride actuators are intended for the future full-size Hux. Fit, load, firmware and balance qualification remain open. [MIT](LICENSE).

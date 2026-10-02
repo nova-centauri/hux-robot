@@ -1,6 +1,6 @@
 # V1-PROOF R01 — passive PLA mockup
 
-**Printer: Bambu X1C. Material: PLA for this first phase. Status: print candidate; no physical print, fit or load evidence yet.**
+**Design printer: Bambu X1C. Design material: PLA for this first phase. Status: printing reported 2026-10-02; printed revision/material and fit measurements remain to record.** The user also reports the 30:1 motor and DRV8874 drivers received. Confirm the prints match R01, then use the [first mechanical fit session](../../../docs/checklists/2026-10-02-mechanical-fit.md). No fit, load or powered-test result is recorded.
 
 This full-scale kit checks the proposed body footprint, parallel-link motion and lateral spacing by hand. It is **not a powered assembly, a load-qualified robot leg or a released actuator mount**. Bearings, drivetrain interfaces and motor/servo mounting patterns await measured hardware.
 

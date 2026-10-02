@@ -4,15 +4,15 @@
 
 **Recorded paid spend: $143.12. Remaining against the planning ceiling: $756.88.** Remaining money includes all unfinished purchases and reserves; it is not a completion quote.
 
-## What is coming
+## Ordered parts and delivery
 
 | Vendor / ordered part | Ordered quantity | Unit paid | Goods total | Order status |
 | --- | ---: | ---: | ---: | --- |
-| Pololu 4752 · 30:1 12 V encoder gearmotor | 1 | $60.95 | $60.95 | Shipped |
-| Pololu 4035 · DRV8874 motor driver | 1 | $11.94 | $11.94 | Shipped |
+| Pololu 4752 · 30:1 12 V encoder gearmotor | 1 | $60.95 | $60.95 | Received; untested |
+| Pololu 4035 · DRV8874 motor driver | 1 | $11.94 | $11.94 | Received; untested |
 | Waveshare 22414 · ST3215 servo series (12 V per user) | 2 | $21.19 | $42.38 | Paid; awaiting shipment |
 
-- **Pololu:** Shipped 28 September via UPS Ground. Shipment email estimates Thursday 1 October; not a live tracking check.
+- **Pololu:** Motor and DRV8874 drivers received per user report recorded 2 October; exact delivery date, total driver count, labels and inspection remain unrecorded. This paid receipt covers one motor and one driver. Shipped 28 September via UPS Ground.
 - **Waveshare:** Paid; latest vendor receipt says awaiting shipment. No dispatch or delivery date confirmed. Tax is not separately charged in this receipt.
 
 **Wheel orders: 1 of 2 motors and 1 of 2 drivers. Still needed: 1 motor and 1 driver.** The first restrained bench channel is ordered; the second wheel channel is still required. Leg orders: 2 of 2 ST3215 servos; 0 still needed. Verify their 12 V labels on arrival: the receipt names the ST3215 series and the user confirmed the voltage variant. [Motor connections and controls](v1-proof-hardware.md).

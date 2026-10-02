@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-29",
+  "updatedAt": "2026-10-02",
   "currentVersion": "v1-proof",
   "description": "Source-backed HUX work-in-progress plan. Proposed and simulated work is separate from measured physical evidence. Null order quantities and costs mean unknown, not zero.",
   "statusLabels": {
@@ -16,7 +16,8 @@
     "passed": "Passed with evidence",
     "blocked": "Blocked",
     "unverified": "Unverified",
-    "shipped": "Shipped · awaiting arrival"
+    "shipped": "Shipped · awaiting arrival",
+    "received": "Received · untested"
   },
   "maintenance": {
     "sourceOfTruth": "Repository documents and recorded physical evidence",
@@ -47,41 +48,54 @@
         "docs/parts-on-hand.md"
       ],
       "focus": {
-        "title": "Prepare the single-leg actuator bench",
-        "summary": "One Pololu 4752 motor and one Pololu 4035 driver are shipped; two ST3215 servos are paid and awaiting shipment in the latest vendor record. $143.12 is paid in total. These parts lock the one-leg/one-wheel bench baseline; the full robot still needs its second wheel motor and driver. No physical test has been completed.",
+        "title": "Start mechanical fit testing",
+        "summary": "The user reports the 30:1 metal gearmotor and DRV8874 drivers received, and the parts 3D printed. Start with unpowered inspection, linkage assembly, hand sweeps and motor/wheel packaging checks. The paid record covers one motor and one driver; total received driver count and printed revision/material remain to confirm. ST3215 arrival is unreported. Recorded paid spend remains $143.12; no test results are recorded.",
         "sourcePaths": [
-          "docs/purchases.md",
-          "docs/one-leg-bench.md",
+          "tools/living-drawings/mechanical-tests.html",
+          "docs/checklists/2026-10-02-mechanical-fit.md",
           "docs/parts-on-hand.md",
+          "docs/purchases.md",
           "cad/prints/v1-proof-r01/README.md"
         ]
       },
       "nextActions": [
         {
-          "id": "record-orders",
-          "title": "Receive and identify the ordered parts",
-          "detail": "Check the incoming Pololu motor/driver against the receipt and the two ST3215 servos against the requested 12 V variant. Pololu shipment email estimates 1 October; servo dispatch is unconfirmed. Record delivery, labels, dimensions and condition.",
-          "status": "awaiting-parts",
-          "sourcePaths": [
-            "docs/purchases.md",
-            "docs/parts-on-hand.md"
-          ]
-        },
-        {
           "id": "fixture-mockup",
-          "title": "Prepare the passive bench fixture",
-          "detail": "The Bambu X1C / PLA passive kit is drafted. Print and measure its fit coupon first; M4 clearances are provisional. Then mock up the 110 mm links and 40 mm pivot spacing by hand, using the 1:1 template as a reference. The supported powered fixture, lock, catch and actuator-specific fits still need detailing.",
+          "title": "Check the printed passive linkage",
+          "detail": "Printing is reported complete. Confirm printed revision and material, measure the fit coupon if printed, and check actual M4 hardware. For R01, assemble the 110 mm links and 40 mm pivots with the specified lateral spacers; sweep 15–45° by hand and dry-fit the received motor/wheel envelope with all power disconnected. Powered mounts, bearings and load capacity remain unqualified.",
           "status": "ready",
           "sourcePaths": [
+            "docs/checklists/2026-10-02-mechanical-fit.md",
             "docs/one-leg-bench.md",
             "cad/layouts/one-leg-bench-template.svg",
             "cad/prints/v1-proof-r01/README.md"
           ]
         },
         {
+          "id": "record-orders",
+          "title": "Identify the received parts and outstanding arrivals",
+          "detail": "Record motor/driver labels, total received driver count, dimensions and condition. The receipt covers one Pololu 4752 and one 4035. Record ST3215 arrival and verify the 12 V labels when available; servo arrival is not reported.",
+          "status": "ready",
+          "sourcePaths": [
+            "docs/purchases.md",
+            "docs/parts-on-hand.md"
+          ]
+        },
+        {
+          "id": "record-session",
+          "title": "Record the first mechanical fit session",
+          "detail": "A first fit-session checklist is open, with no results entered. Save actual dimensions, printed revision/material, photos of closest clearances, neutral free play and failed checks. Use the full bench template for later powered tests.",
+          "status": "ready",
+          "sourcePaths": [
+            "docs/checklists/2026-10-02-mechanical-fit.md",
+            "docs/checklists/one-leg-bench-session.md",
+            "docs/one-leg-bench.md"
+          ]
+        },
+        {
           "id": "inventory-interfaces",
           "title": "Confirm controls and power interfaces",
-          "detail": "One DRV8874 is coming with the wheel motor. Confirm the Pico 2, IMU, half-duplex servo interface, encoder level conversion, harness and protected power rails. Record bench-supply ratings. The second wheel motor/driver remain unpurchased in the current records.",
+          "detail": "DRV8874 drivers are received, with total count pending. Confirm the controller, half-duplex servo interface, encoder level conversion, harness and protected power rails. Record bench-supply ratings. A second wheel motor is still needed; reconcile driver inventory before ordering another. These interfaces are not needed for the first passive fit checks.",
           "status": "ready",
           "sourcePaths": [
             "docs/parts-on-hand.md",
@@ -96,16 +110,6 @@
           "sourcePaths": [
             "docs/one-leg-bench.md",
             "docs/v1-proof-hardware.md"
-          ]
-        },
-        {
-          "id": "record-session",
-          "title": "Open the first measured session",
-          "detail": "On arrival, identify the received hardware, then follow the staged bench sequence. Save wiring/firmware revision, measurements, photos, logs and failed trials in a copied session record.",
-          "status": "awaiting-parts",
-          "sourcePaths": [
-            "docs/checklists/one-leg-bench-session.md",
-            "docs/one-leg-bench.md"
           ]
         }
       ],
@@ -150,18 +154,19 @@
         {
           "id": "pololu-4752",
           "name": "Pololu 4752 encoder gearmotors",
-          "status": "shipped",
+          "status": "received",
           "plannedQuantity": 2,
           "orderedQuantity": 1,
           "actualCost": 60.95,
           "currency": "USD",
-          "confirmedOn": "2026-09-29",
-          "note": "One purchased wheel motor, shipped 28 September. Locks the first wheel test channel; planned robot quantity is two, so a second remains to buy. Line-item spend excludes order shipping/tax.",
+          "confirmedOn": "2026-10-02",
+          "note": "One 30:1 wheel motor received per user report recorded 2 October; identify the label and measure the actual mounting/shaft envelope before fit testing. Untested. The planned robot quantity is two, so a second motor remains to buy. Recorded goods spend excludes shipping/tax.",
           "sourcePaths": [
             "docs/purchases.md",
             "docs/parts-on-hand.md",
             "docs/bom.md"
-          ]
+          ],
+          "receivedQuantity": 1
         },
         {
           "id": "st3215",
@@ -182,18 +187,19 @@
         {
           "id": "pololu-4035",
           "name": "Pololu 4035 DRV8874 wheel drivers",
-          "status": "shipped",
+          "status": "received",
           "plannedQuantity": 2,
           "orderedQuantity": 1,
           "actualCost": 11.94,
           "currency": "USD",
-          "confirmedOn": "2026-09-29",
-          "note": "One purchased DRV8874 carrier in the same Pololu shipment. It drives the first 4752; a second driver and current-limit/harness parts are still needed. Line-item spend excludes order shipping/tax.",
+          "confirmedOn": "2026-10-02",
+          "note": "DRV8874 drivers received per user report recorded 2 October; total delivered count remains to confirm. The paid receipt covers one Pololu 4035 at $11.94 goods. Reconcile inventory and any additional order before buying another driver. Current-limit/harness parts and electrical qualification remain open.",
           "sourcePaths": [
             "docs/purchases.md",
             "docs/parts-on-hand.md",
             "docs/bom.md"
-          ]
+          ],
+          "receivedQuantity": null
         },
         {
           "id": "control-interface",
@@ -240,6 +246,23 @@
           ]
         },
         {
+          "id": "printed-parts",
+          "name": "3D-printed mechanical parts",
+          "status": "received",
+          "plannedQuantity": null,
+          "orderedQuantity": null,
+          "receivedQuantity": null,
+          "actualCost": null,
+          "currency": "USD",
+          "confirmedOn": "2026-10-02",
+          "note": "Printing reported complete by the user. Printed revision, material, quantities and dimensions remain to record. Begin passive fit and packaging checks; no fit, load or powered test is recorded. Print costs are unrecorded and not added to receipt totals.",
+          "sourcePaths": [
+            "docs/checklists/2026-10-02-mechanical-fit.md",
+            "cad/prints/v1-proof-r01/README.md",
+            "docs/parts-on-hand.md"
+          ]
+        },
+        {
           "id": "mechanical-stock",
           "name": "Wheels, bearings, belts, frame stock and harness parts",
           "status": "unconfirmed",
@@ -259,7 +282,7 @@
           "id": "P0",
           "title": "Inventory and layout",
           "status": "in-progress",
-          "summary": "Paid receipts establish one wheel motor, one driver and two leg servos. Incoming actuator models are locked; received dimensions, electronics interfaces and second wheel channel remain open.",
+          "summary": "Motor/drivers received and parts printed per user. Paid receipts cover one wheel motor, one driver and two leg servos. Received labels/counts, printed fits, electronics interfaces and the second wheel motor remain open.",
           "criteria": [
             "Record exact parts, variants, quantities, costs and reusable stock.",
             "Quote missing items and retain reserves inside the strict cash cap.",
@@ -275,8 +298,8 @@
         {
           "id": "BENCH",
           "title": "One-leg actuator exercise",
-          "status": "planned",
-          "summary": "Prepare now; test one supported leg and lifted wheel after the parts and interfaces are identified. This can precede balance.",
+          "status": "ready",
+          "summary": "Begin passive mechanical fit checks now using the printed parts and received motor. Powered one-leg/one-wheel tests follow identified hardware, supported mounts and qualified interfaces. No bench stage has passed.",
           "criteria": [
             "Complete the staged session with bounded commands, measured signs and disabled startup.",
             "Record passive clearances, backlash and measured leg/wheel response.",
@@ -284,6 +307,7 @@
             "Use measured load, electrical and thermal results to inform the robot; a bench pass does not prove balance."
           ],
           "sourcePaths": [
+            "docs/checklists/2026-10-02-mechanical-fit.md",
             "docs/one-leg-bench.md",
             "docs/checklists/one-leg-bench-session.md"
           ]
@@ -357,9 +381,10 @@
       ],
       "bench": {
         "title": "Single-leg bench exercise",
-        "status": "planned",
-        "summary": "One restrained leg adjustment and one lifted driven wheel. Preparation plan dated 2026-09-29; no hardware has been tested. Start one actuator at a time. The full guide owns the wiring, power gates and detailed stop conditions.",
+        "status": "ready",
+        "summary": "Motor/drivers are received and parts are printed per user report recorded 2026-10-02. Start with identification and passive linkage checks (B0 and B3) before powered stages; these checks need no servo or controller. No test results are recorded. Powered motion still requires qualified mounts, interfaces and the guide’s electrical/fault gates.",
         "sourcePaths": [
+          "docs/checklists/2026-10-02-mechanical-fit.md",
           "docs/one-leg-bench.md",
           "docs/checklists/one-leg-bench-session.md"
         ],
@@ -393,8 +418,8 @@
           {
             "id": "B0",
             "title": "Identify received parts",
-            "status": "planned",
-            "action": "Record labels, quantities, pinouts, dimensions and condition.",
+            "status": "ready",
+            "action": "Identify received motor/driver labels, total driver count, printed revision/material, dimensions and condition. Receipt and printing alone do not complete this stage.",
             "evidence": "Confirmed inventory and a marked wiring diagram; template updated for actual parts."
           },
           {
@@ -414,9 +439,9 @@
           {
             "id": "B3",
             "title": "Passive linkage",
-            "status": "planned",
-            "action": "Disconnect the drive and sweep the scrap linkage by hand through the 15–45° design range.",
-            "evidence": "No binding, cable contact or hardware collision; correct center spacing and functioning catch support."
+            "status": "ready",
+            "action": "With all power disconnected and servo/belt detached, assemble the printed passive parallelogram using the confirmed revision’s spacer layout. Sweep 15–45° by hand and check motor/wheel packaging; record measured fits, closest clearances and free play.",
+            "evidence": "Recorded center spacing, retained fastener stack and photos showing no binding or hardware contact through the hand sweep. Powered-fixture catch and load capacity remain separate checks."
           },
           {
             "id": "B4",
@@ -464,6 +489,16 @@
       },
       "documents": [
         {
+          "title": "Mechanical testing · layout and timeline",
+          "path": "tools/living-drawings/mechanical-tests.html",
+          "kind": "living diagram"
+        },
+        {
+          "title": "First mechanical fit session · 2 October",
+          "path": "docs/checklists/2026-10-02-mechanical-fit.md",
+          "kind": "session checklist"
+        },
+        {
           "title": "Current build plan",
           "path": "docs/v1-proof.md",
           "kind": "guide"
@@ -486,10 +521,10 @@
         {
           "title": "R01 passive PLA print kit",
           "path": "cad/prints/v1-proof-r01/README.md",
-          "kind": "print candidate"
+          "kind": "passive fit guide"
         },
         {
-          "title": "Paid orders and incoming parts",
+          "title": "Paid orders and delivery status",
           "path": "docs/purchases.md",
           "kind": "receipts"
         },
@@ -545,6 +580,36 @@
         }
       ],
       "updates": [
+        {
+          "date": "2026-10-02",
+          "title": "Mechanical layout and test timeline added",
+          "summary": "Added a movable side/end-view linkage diagram, the R01 print rendering, eight evidence-based test steps and a dated project timeline. A device-local session journal records measurements, outcomes and evidence with export/import. Shared history records the arrival/printing report; no physical test result or milestone pass is invented.",
+          "sourcePaths": [
+            "tools/living-drawings/mechanical-tests.html",
+            "docs/mechanical-testing.md",
+            "docs/checklists/2026-10-02-mechanical-fit.md"
+          ]
+        },
+        {
+          "date": "2026-10-02",
+          "title": "Motor/drivers received and parts printed",
+          "summary": "The user reports the 30:1 metal gearmotor and DRV8874 drivers received and parts 3D printed, ready to begin mechanical testing. Recorded the arrival against the existing Pololu baseline and opened a passive fit-session checklist. Total delivered driver count, printed revision/material, servo arrival and all measured test results remain open. Receipt quantities and $143.12 recorded paid spend are retained; no additional spending or physical pass is inferred.",
+          "sourcePaths": [
+            "docs/checklists/2026-10-02-mechanical-fit.md",
+            "docs/parts-on-hand.md",
+            "docs/purchases.md",
+            "cad/prints/v1-proof-r01/README.md"
+          ]
+        },
+        {
+          "date": "2026-10-01",
+          "title": "Salvaged motors recorded for possible reuse",
+          "summary": "Steve reports one servo and two steppers. Three photos identify the servo as Panasonic MSMD042G1A and one stepper as Astrosyn 610-024; the second stepper label and stepper ratings remain unverified. The 400 W industrial servo needs a compatible 200 V-class drive and is too heavy for a direct V1-PROOF substitution. Retained as untested bench/future candidates with no reuse credit, new spending or change to the locked actuators.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md#motor-stock-recorded-2026-10-01",
+            "docs/v1-proof-hardware.md"
+          ]
+        },
         {
           "date": "2026-09-29",
           "title": "Paid orders lock the actuator baseline",
@@ -603,7 +668,7 @@
           "id": "pololu-2026-09-28",
           "vendor": "Pololu",
           "paidOn": "2026-09-28",
-          "status": "shipped",
+          "status": "received",
           "currency": "USD",
           "items": [
             {
@@ -623,7 +688,7 @@
           "shippingCost": 10.45,
           "taxCost": 5.0,
           "paidTotal": 88.34,
-          "deliveryNote": "Shipped 28 September via UPS Ground. Shipment email estimates Thursday 1 October; not a live tracking check.",
+          "deliveryNote": "Motor and DRV8874 drivers received per user report recorded 2 October; exact delivery date, total driver count, labels and inspection remain unrecorded. This paid receipt covers one motor and one driver. Shipped 28 September via UPS Ground.",
           "sourcePaths": [
             "docs/purchases.md"
           ]

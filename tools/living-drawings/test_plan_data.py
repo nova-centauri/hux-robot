@@ -54,7 +54,9 @@ class PlanDataTests(unittest.TestCase):
         build_site.build(ROOT, cls.output)
 
     def reference_entries(self):
-        for location, value in mappings(self.data):
+        mechanical = json.loads((HERE / "mechanical-tests-data.json").read_text())
+        entries = [*mappings(self.data), *mappings(mechanical, "mechanical")]
+        for location, value in entries:
             for key in ("sourcePaths", "evidencePaths"):
                 if key not in value:
                     continue

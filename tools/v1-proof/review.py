@@ -96,12 +96,12 @@ def purchase_lines(c, plan):
     p = purchase_report(c, plan)
     t, remaining = p["totals"], p["remaining"]
     lines = [f"**Recorded paid spend: {money(t['paidTotal'])}. Remaining against the planning ceiling: {money(remaining['total'])}.** Remaining money includes all unfinished purchases and reserves; it is not a completion quote.", "",
-             "## What is coming", "", "| Vendor / ordered part | Ordered quantity | Unit paid | Goods total | Order status |", "| --- | ---: | ---: | ---: | --- |"]
+             "## Ordered parts and delivery", "", "| Vendor / ordered part | Ordered quantity | Unit paid | Goods total | Order status |", "| --- | ---: | ---: | ---: | --- |"]
     for order in p["orders"]:
         for item in order["items"]:
             qty, unit = item.get("quantity"), item.get("unitCost")
             cost = None if qty is None or unit is None else Decimal(str(unit)) * qty
-            status = "Shipped" if order["status"] == "shipped" else "Paid; awaiting shipment" if order["status"] == "ordered" else order["status"]
+            status = {"shipped": "Shipped", "ordered": "Paid; awaiting shipment", "received": "Received; untested"}.get(order["status"], order["status"])
             lines.append(f"| {order['vendor']} {item['name']} | {qty if qty is not None else 'Not recorded'} | {money(unit)} | {money(cost)} | {status} |")
     lines += [""]
     lines += [f"- **{order['vendor']}:** {order['deliveryNote']}" for order in p["orders"]]

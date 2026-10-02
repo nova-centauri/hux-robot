@@ -2,7 +2,7 @@
 
 **Selected baseline: Pico 2, SPI LSM6DSOX, two Pololu 4035 DRV8874 carriers and two ST3215 12 V variant servos.** [Exact interfaces, proposed GPIO map, component sources and qualification gates](v1-proof-hardware.md). Confirmed equivalent existing equipment may reduce spend only after it meets the same contract. No onboard Linux computer or camera is required.
 
-**Purchase status, 2026-09-29:** one Pololu 4752 motor and one Pololu 4035 driver have shipped together; two ST3215-series servos are ordered, with the 12 V variant confirmed by the user. A second motor/driver pair is still required for the complete robot. Controller, IMU, adapters and power electronics remain purchase-unconfirmed. [Receipts and delivery status](purchases.md). This is a wiring plan awaiting assembly and bench checks.
+**Status, 2026-10-02:** the user reports the 30:1 motor and DRV8874 drivers received and parts printed. Receipts cover one Pololu 4752 motor and one Pololu 4035 driver; total received driver count remains to confirm. Two ST3215-series servos are ordered, with the 12 V variant confirmed and arrival unreported. A second wheel motor is still required; confirm driver coverage before buying another. Controller, IMU, adapters and power electronics remain purchase-unconfirmed. [Receipts and delivery status](purchases.md). Begin with [passive mechanical fit checks](checklists/2026-10-02-mechanical-fit.md); this wiring plan still awaits assembly and bench checks.
 
 ## What will the motor plug into?
 

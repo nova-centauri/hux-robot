@@ -11,7 +11,7 @@
     "simulate": "node ../v1-proof/run_sim.js --write && python3 ../v1-proof/report_sim.py",
     "simulate:quick": "node ../v1-proof/run_sim.js --quick",
     "build": "python3 build_site.py",
-    "test:site": "python3 test_site.py && python3 test_plan_data.py && node --test plan.test.js"
+    "test:site": "python3 test_site.py && python3 test_plan_data.py && node --test plan.test.js mechanical-tests.test.js"
   },
   "devDependencies": {
     "@dimforge/rapier3d-compat": "0.20.0"

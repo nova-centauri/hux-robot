@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HUX / Mechanical testing — Layout and timeline</title>
+  <meta name="description" content="Inspect the Hux passive linkage, follow the mechanical test steps and keep dated measurements, outcomes and evidence.">
+  <link rel="stylesheet" href="proof.css">
+  <link rel="stylesheet" href="mechanical-tests.css">
+  <script src="mechanical-tests.js" defer></script>
+</head>
+<body class="mechanical-page">
+  <a class="skip-link" href="#layout">Skip to the mechanical layout</a>
+  <header><div class="topbar"><a class="wordmark" href="index.html">HUX<span>THE WORKSHOP</span></a><nav aria-label="Main navigation"><a href="v1-proof.html">Build plan</a><a href="mechanical-tests.html" aria-current="page">Mechanical testing</a><a href="proof-sandbox.html">3D sandbox</a><a href="../../docs/one-leg-bench.md">Bench guide ↗</a></nav></div></header>
+  <main>
+    <section class="mechanical-heading" aria-labelledby="page-title">
+      <div><p class="eyebrow">V1-PROOF / From parts to evidence</p><h1 id="page-title">Mechanical testing.</h1><p>Measure the parts. Move the linkage. Keep a record of what happens.</p></div>
+      <a class="primary-link" href="#session">Record a session <span aria-hidden="true">↘</span></a>
+    </section>
+    <div class="bench-state"><span><span class="live-dot" aria-hidden="true"></span>Motor + drivers received · parts printed</span><span>Reported 02 Oct 2026 · <strong id="shared-test-count">0</strong> shared test results</span></div>
+
+    <section id="layout" class="mechanical-layout" aria-labelledby="layout-title">
+      <div class="layout-heading"><div><p class="eyebrow">01 / The first fixture</p><h2 id="layout-title">One passive leg, in detail.</h2></div><div class="view-switch" role="group" aria-label="Layout view"><button type="button" data-view="diagram" aria-pressed="true">Side &amp; end views</button><button type="button" data-view="render" aria-pressed="false">3D print rendering</button></div></div>
+      <div class="bench-canvas">
+        <div id="diagram-view"><div id="bench-drawing"><img src="../../cad/layouts/mechanical-test-bench.svg" alt="Neutral passive leg layout: 110 mm parallel links, 40 mm pivot spacing and lateral spacer stacks."></div></div>
+        <figure id="render-view" hidden><img src="../../cad/prints/v1-proof-r01/passive-assembly.png" alt="Blender design rendering of the passive R01 leg at neutral, with two links on a fixed plate and a wheel-envelope disc."><figcaption>R01 design rendering at neutral · wheel disc is a clearance gauge · actual printed fits remain to measure.</figcaption></figure>
+        <div class="pose-controls" id="pose-controls"><div class="angle-control"><label for="bench-angle">Leg angle <output id="bench-angle-value" for="bench-angle">30°</output></label><input type="range" id="bench-angle" min="15" max="45" step="1" value="30"><div class="angle-presets"><button type="button" data-angle="15">15° / tall</button><button type="button" data-angle="30">30° / neutral</button><button type="button" data-angle="45">45° / low</button></div></div><dl class="pose-readings" aria-live="polite"><div><dt>Axle rearward</dt><dd id="axle-x">55.00 mm</dd></div><div><dt>Axle below pivot</dt><dd id="axle-y">95.26 mm</dd></div><div><dt>Link centers</dt><dd>110 mm</dd></div></dl></div>
+      </div>
+      <p class="layout-note"><strong>Hand moved, power disconnected.</strong> Confirm the prints match R01 before using the spacer stack. Motor mounts, hub/bearing support and load capacity still need qualification. <a href="../../cad/prints/v1-proof-r01/README.md#assemble-and-check-by-hand">Assembly guide ↗</a> · <a href="../../cad/layouts/mechanical-test-bench.svg">Open the layout sheet ↗</a></p>
+    </section>
+
+    <div class="test-workspace">
+      <section id="steps" class="test-route" aria-labelledby="steps-title"><div class="section-head"><div><p class="eyebrow">02 / The test route</p><h2 id="steps-title">Earn the next step.</h2><p>Record each trial. Advance only with the evidence for the whole stage.</p></div></div><ol id="mechanical-steps" class="mechanical-steps"><li>Inspect → assemble → hand sweep → packaging → repeatability → qualified powered tests. <a href="../../docs/checklists/2026-10-02-mechanical-fit.md">Open the first checklist ↗</a></li></ol></section>
+      <section id="session" class="test-session" aria-labelledby="session-title"><p class="eyebrow">03 / Your session notebook</p><h2 id="session-title">What did you observe?</h2><p class="session-notice">Saved on this device. Export a copy to keep it or bring it back to this chat for the shared project record.</p>
+        <form id="mechanical-session-form">
+          <div class="session-fields"><label>Session date &amp; time<input type="datetime-local" name="when" required><small id="session-zone"></small></label><label>Trial result<select name="outcome"><option value="note">Observation</option><option value="passed">Passed trial</option><option value="failed">Failed trial</option><option value="blocked">Blocked / incomplete</option></select></label></div>
+          <label>Test step<select name="stepId" id="session-step" required><option value="">Loading the test route…</option></select></label>
+          <p id="step-measurement-hint" class="measurement-hint"></p>
+          <label>Measurements<textarea name="measurements" rows="3" maxlength="8000" placeholder="Actual dimensions, angle, clearance, play or cycle count — include units."></textarea></label>
+          <label>Observations<textarea name="notes" rows="3" maxlength="8000" required placeholder="Setup, what moved freely, what bound, what changed, and the next bounded test."></textarea></label>
+          <label>Photo / log / session reference<textarea name="evidence" rows="2" maxlength="8000" placeholder="Photo filename or log reference. A passed trial needs measurements and evidence."></textarea></label>
+          <div class="session-actions"><button class="test-button test-button--primary" type="submit" id="save-session" disabled>Save device draft</button><button class="test-button" type="button" id="export-journal" disabled>Export journal</button><button class="test-button" type="button" id="import-journal" disabled>Import journal</button><input type="file" id="journal-file" accept="application/json,.json" hidden></div>
+          <p id="session-message" class="session-message" role="status" aria-live="polite"></p><p id="journal-warning" class="journal-warning" role="alert" hidden></p>
+        </form>
+        <details id="journal-backup" class="journal-backup" hidden><summary>Journal backup</summary><p>Download the file, or select and copy the backup text to keep with your photos and logs.</p><label for="journal-backup-text">Backup text<textarea id="journal-backup-text" rows="7" readonly></textarea></label><div class="session-actions"><a class="test-button" id="journal-download">Download journal file</a><button class="test-button" type="button" id="select-backup">Select backup text</button></div></details>
+      </section>
+    </div>
+
+    <section id="timeline" class="test-timeline" aria-labelledby="timeline-title"><div class="section-head"><div><p class="eyebrow">04 / The dated record</p><h2 id="timeline-title">Every test leaves a trail.</h2><p>Latest first. Shared project records and your device drafts keep their own labels.</p></div><div class="history-switch" role="group" aria-label="Timeline filter"><button type="button" data-history="all" aria-pressed="true">All history</button><button type="button" data-history="test" aria-pressed="false">Trials only</button></div></div><ol id="mechanical-history" class="mechanical-history"><li><time datetime="2026-10-02">02 Oct 2026</time><h3>Motor/drivers received · parts printed</h3><p>The mechanical fit session is ready. No measured test results are reported.</p></li></ol><p id="history-empty" class="history-empty" hidden>No trials recorded yet. Start with inspection and passive fit.</p></section>
+    <section class="test-references" aria-label="Mechanical test references"><a href="../../docs/checklists/2026-10-02-mechanical-fit.md">First fit-session checklist ↗</a><a href="../../docs/checklists/one-leg-bench-session.md">Full bench session record ↗</a><a href="../../docs/mechanical-testing.md">How the dated record works ↗</a><a href="../../docs/one-leg-bench.md">Power and fault gates ↗</a></section>
+    <noscript><p>The neutral layout, <a href="../../cad/prints/v1-proof-r01/passive-assembly.png">print rendering</a> and <a href="../../docs/checklists/2026-10-02-mechanical-fit.md">first fit checklist</a> are available without JavaScript. The movable diagram and session notebook need JavaScript.</p></noscript>
+  </main>
+  <footer>HUX / V1-PROOF · Mechanical testing · <a href="v1-proof.html">Return to the build plan</a><span class="footer-note">Geometry is a design reference. Recorded trials and physical acceptance remain separate.</span></footer>
+</body>
+</html>

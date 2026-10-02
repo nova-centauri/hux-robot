@@ -16,6 +16,8 @@ The current build page includes a local notebook for work and test observations.
 
 “Passed” in a local observation describes that recorded trial only. It does not release a whole build stage. Record the setup, outcome and evidence; keep the full [session template](checklists/one-leg-bench-session.md) for physical trials.
 
+The [mechanical testing page](../tools/living-drawings/mechanical-tests.html) adds a movable layout and a dated session journal. Shared steps/history are in `tools/living-drawings/mechanical-tests-data.json`; actual test events need a dated repository session and linked measurements/evidence. Device drafts use separate browser storage, export/import without silently replacing conflicting sessions, and retain removed drafts for restoration. They never close shared gates. See the [recording workflow](mechanical-testing.md).
+
 ## Build and preview
 
 Run from `tools/living-drawings`:
