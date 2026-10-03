@@ -22,7 +22,7 @@ Start with lock pins in both legs. The first real success is a two-motor balance
 | Ground | Dry indoor floor plus defined 3° / 5 mm bump / 3 mm seam test fixtures |
 | Speed | 0.25 m/s cruise; 0.15 m/s on uneven fixtures; 0.5 m/s remains unqualified |
 | Power | Compatible 3S pack, approximately 2.2 Ah; actual reused pack governs interfaces |
-| Control | Pico 2 + LSM6DSOX SPI baseline; qualified reuse allowed; timed manual commands |
+| Control | Pico 2 + LSM6DSO SPI baseline; qualified reuse allowed; timed manual commands |
 | Compute | Laptop logging initially; Pi optional off-robot, no new SBC requirement |
 
 The [layout](../cad/layouts/v1-proof.svg) is an envelope sketch, not a fabrication release. The [sizing screen](v1-proof-sizing.md) exposes formulas and omissions. Small size reduces structural loads, but also makes the robot fall faster; low backlash and controller timing still matter.
@@ -41,9 +41,11 @@ Carry forward service access, deliberate wiring, real mass accounting, known lic
 
 The parallel-link leg also moves the axle about 49 mm fore/aft across the height range. That changes the pitch trim required to put the whole center of mass over the wheel contact line. Height changes begin slowly at zero travel command, with measured trim at each position. If the full range is impractical, reduce it or revise the linkage inside the same cost/mass budget; do not add another motor axis.
 
-**Control and power:** select Pico 2 with a SPI LSM6DSOX IMU, two encoder channels, current/fault feedback and pack voltage measurement. A confirmed equivalent existing board can displace that purchase after pin/logic/timing qualification. Use 3S power with separate 9 V servo and 5 V logic branches and a measured regeneration path. **Zero onboard cameras**; use existing external video for trials. Battery/charger inventory and regulator/protection circuit details remain measured selections, not invented SKUs.
+**Control and power:** use the received Pico 2 with the ordered SparkFun SPI LSM6DSO IMU, two encoder channels, current/fault feedback and pack voltage measurement. A confirmed equivalent existing board can displace that purchase after pin/logic/timing qualification. Use 3S power with separate 9 V servo and 5 V logic branches and a measured regeneration path. **Zero onboard cameras**; use existing external video for trials. Battery/charger inventory and regulator/protection circuit details remain measured selections, not invented SKUs.
 
 ## Reuse and money
+
+**2026-10-03 controller/IMU update:** one Pico 2 with pre-soldered headers is received, untested; begin [USB/LED checks](checklists/2026-10-03-pico-bringup.md). The SparkFun LSM6DSO is also received per the user, replacing the earlier Adafruit LSM6DSOX selection; sensor qualification remains open. Its combined controller/IMU order total is $30.58, bringing recorded spend to **$173.70**, with **$726.30** remaining under the $900 plan. Individual prices and charge breakdown are unshown. This supersedes the controller/IMU availability and current spend in the older dated update below.
 
 **2026-10-02 inventory update:** the user reports the **30:1 motor and DRV8874 drivers received, and parts 3D printed**, ready for the [first mechanical fit session](checklists/2026-10-02-mechanical-fit.md). Paid receipts cover **one Pololu 4752 motor, one Pololu 4035 driver and two ST3215 servos** (12 V variant confirmed by user). **$143.12 is recorded paid**, including shipping/tax. A second wheel motor is still required; total received driver count and servo arrival remain to confirm. Printed revision, material and fit are unrecorded. These purchased models lock the actuator baseline for V1-PROOF. [Order evidence](purchases.md). A bench supply is available, with ratings pending. Historical notes mention Pi 5, ESP32, TBS Nano RX and F722/F765/Mamba boards, but they are not currently confirmed as available for Hux. Pack, charger, interfaces and remaining structural stock remain unconfirmed. The [budget](bom.md) includes replacement allowances and takes **$0 in reuse credits**. Ordered actuators count toward new project spend. See the [inventory](parts-on-hand.md) and [single-leg bench plan](one-leg-bench.md).
 

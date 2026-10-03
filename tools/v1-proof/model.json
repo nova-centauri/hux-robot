@@ -151,7 +151,7 @@
       {
         "id": "controller",
         "qty": 1,
-        "item": "Pico 2, LSM6DSOX and half-duplex servo interface",
+        "item": "Pico 2, SparkFun LSM6DSO and half-duplex servo interface",
         "unit_cap_usd": 40,
         "stage": "P0",
         "reuse": "Confirmed equivalent MCU/IMU may substitute only after timing/pin/level qualification"
@@ -258,11 +258,10 @@
     },
     {
       "id": "imu",
-      "title": "Adafruit LSM6DSOX 4438",
-      "url": "https://www.adafruit.com/product/4438",
-      "checked": "2026-09-28",
-      "listed_usd": 11.95,
-      "note": "SPI/I2C, two interrupt pins; out of stock on manufacturer page when checked. Selection is not a stock promise."
+      "title": "SparkFun LSM6DSO Qwiic SEN-18020",
+      "url": "https://www.sparkfun.com/sparkfun-6-degrees-of-freedom-breakout-lsm6dso-qwiic.html",
+      "checked": "2026-10-03",
+      "note": "Received with the Pico 2 per user confirmation October 3; individual price unconfirmed within the $30.58 combined order. Main SPI/I2C, exposed interrupts, 3.3 V supply/logic. Replaces the earlier Adafruit LSM6DSOX selection; qualify readback and timing."
     },
     {
       "id": "driver_datasheet",
@@ -299,12 +298,12 @@
     "controller": {
       "part": "Raspberry Pi Pico 2 (RP2350, non-wireless)",
       "runtime": "C/C++",
-      "state": "reference implementation target; confirmed equivalent reuse allowed"
+      "state": "one Pico 2 with pre-soldered headers received 2026-10-03; inspection/USB and firmware qualification open"
     },
     "imu": {
-      "part": "Adafruit 4438 / ST LSM6DSOX",
+      "part": "SparkFun SEN-18020 / ST LSM6DSO",
       "interface": "SPI with data-ready interrupt",
-      "state": "selected; manufacturer lists out of stock, no delivery claim"
+      "state": "one SparkFun LSM6DSO Qwiic IMU received per user 2026-10-03; identification and sensor qualification open"
     },
     "cameras": {
       "onboard_quantity": 0,

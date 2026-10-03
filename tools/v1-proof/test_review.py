@@ -24,17 +24,20 @@ class ProofChecks(unittest.TestCase):
     def test_receipts_reconcile_to_paid_spend_and_remaining_allocations(self):
         plan = json.loads(r.PLAN.read_text())
         purchases = r.purchase_report(self.c, plan)
-        self.assertEqual(purchases["totals"]["paidTotal"], Decimal("143.12"))
-        self.assertEqual(purchases["totals"]["merchandiseCost"], Decimal("115.27"))
-        self.assertEqual(purchases["remaining"]["parts"], Decimal("559.73"))
-        self.assertEqual(purchases["remaining"]["shippingTax"], Decimal("72.15"))
-        self.assertEqual(purchases["remaining"]["total"], Decimal("756.88"))
+        self.assertEqual(purchases["totals"]["paidTotal"], Decimal("173.70"))
+        self.assertIsNone(purchases["totals"]["merchandiseCost"])
+        self.assertIsNone(purchases["remaining"]["parts"])
+        self.assertIsNone(purchases["remaining"]["shippingTax"])
+        self.assertEqual(purchases["remaining"]["total"], Decimal("726.30"))
         ordered = {item["partId"]: item["quantity"] for order in purchases["orders"] for item in order["items"]}
-        self.assertEqual(ordered, {"pololu-4752": 1, "pololu-4035": 1, "st3215": 2})
+        self.assertEqual(ordered, {"pololu-4752": 1, "pololu-4035": 1, "st3215": 2, "pico2": 1, "lsm6dso": 1})
         budget = r.outputs(self.c, plan)[r.ROOT / "docs/bom.md"]
-        self.assertIn("**$143.12**", budget)
-        self.assertIn("**$756.88**", budget)
+        self.assertIn("**$173.70**", budget)
+        self.assertIn("**$726.30**", budget)
         self.assertIn("**$900.00**", budget)
+        self.assertIn("Amazon / 2026-10-02 (ordered)", budget)
+        self.assertIn("SparkFun LSM6DSO Qwiic IMU | 1 | Not recorded | Not recorded | Received; untested", budget)
+        self.assertIn("Pico 2 with yellow pre-soldered headers | 1 | Not recorded | Not recorded | Received; untested", budget)
 
     def test_receipt_mismatch_and_duplicate_order_are_rejected(self):
         for mutation in ("quantity", "charges", "duplicate"):
@@ -62,8 +65,8 @@ class ProofChecks(unittest.TestCase):
         self.assertEqual(r.money(None), "Not recorded")
         self.assertEqual(r.money(0), "$0.00")
         budget = r.outputs(self.c, plan)[r.ROOT / "docs/bom.md"]
-        self.assertIn("Recorded paid spend: Not recorded", budget)
-        self.assertNotIn("$756.88", budget)
+        self.assertIn("Recorded spend: Not recorded", budget)
+        self.assertNotIn("$726.30", budget)
 
     def test_second_wheel_order_updates_coverage_without_stale_first_channel_claims(self):
         plan = json.loads(r.PLAN.read_text())
@@ -72,6 +75,7 @@ class ProofChecks(unittest.TestCase):
         self.assertEqual(first["pololu-4752"]["missing"], 1)
         self.assertEqual(first["pololu-4035"]["missing"], 1)
         self.assertEqual(first["st3215"]["missing"], 0)
+        self.assertEqual(next(item for item in r.remaining_shopping_list(version) if item.get("partId") == "pololu-4752")["need"], "1 more motor")
         # A later receipt is enough; purchase-card snapshots may not yet be updated.
         second = json.loads(json.dumps(version["orders"][0]))
         second["id"] = "second-wheel-channel"
@@ -79,9 +83,10 @@ class ProofChecks(unittest.TestCase):
         result = r.purchase_report(self.c, plan)
         self.assertEqual(result["quantities"]["pololu-4752"]["ordered"], 2)
         self.assertEqual(result["quantities"]["pololu-4035"]["missing"], 0)
+        self.assertFalse(any(item.get("partId") == "pololu-4752" for item in r.remaining_shopping_list(version)))
         budget = r.outputs(self.c, plan)[r.ROOT / "docs/bom.md"]
         self.assertIn("The full wheel motor/driver pair is ordered", budget)
-        self.assertIn("Still needed: 0 motors and 0 drivers", budget)
+        self.assertIn("Not covered by recorded orders: 0 motors and 0 drivers", budget)
         for stale in ("Only one wheel", "first restrained bench channel", "second remains to buy", "second and passives"):
             self.assertNotIn(stale, budget)
 

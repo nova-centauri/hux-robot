@@ -1,8 +1,10 @@
 # V1-PROOF electronics
 
-**Selected baseline: Pico 2, SPI LSM6DSOX, two Pololu 4035 DRV8874 carriers and two ST3215 12 V variant servos.** [Exact interfaces, proposed GPIO map, component sources and qualification gates](v1-proof-hardware.md). Confirmed equivalent existing equipment may reduce spend only after it meets the same contract. No onboard Linux computer or camera is required.
+**Selected baseline: Pico 2, SPI SparkFun LSM6DSO, two Pololu 4035 DRV8874 carriers and two ST3215 12 V variant servos.** [Exact interfaces, proposed GPIO map, component sources and qualification gates](v1-proof-hardware.md). Confirmed equivalent existing equipment may reduce spend only after it meets the same contract. No onboard Linux computer or camera is required.
 
 **Status, 2026-10-02:** the user reports the 30:1 motor and DRV8874 drivers received and parts printed. Receipts cover one Pololu 4752 motor and one Pololu 4035 driver; total received driver count remains to confirm. Two ST3215-series servos are ordered, with the 12 V variant confirmed and arrival unreported. A second wheel motor is still required; confirm driver coverage before buying another. Controller, IMU, adapters and power electronics remain purchase-unconfirmed. [Receipts and delivery status](purchases.md). Begin with [passive mechanical fit checks](checklists/2026-10-02-mechanical-fit.md); this wiring plan still awaits assembly and bench checks.
+
+**2026-10-03:** one Pico 2 with pre-soldered headers is received, untested. The SparkFun LSM6DSO IMU is also received per the user, untested; it replaces the earlier Adafruit LSM6DSOX selection. Begin [board-only USB/LED checks](checklists/2026-10-03-pico-bringup.md). Verify the received IMU pads/jumpers and use 3.3 V power/logic before sensor wiring.
 
 ## What will the motor plug into?
 
@@ -19,7 +21,7 @@
 
 Repeat for the other wheel. Verify connector orientation by wire function and establish each wheel's forward/encoder sign while lifted. The harness, locking/strain relief and high-current connections still need fabrication; keep motor current out of breadboards and MCU supply pins. The proposed Pico GPIO assignment is in the [hardware plan](v1-proof-hardware.md#interfaces-that-must-be-built-correctly).
 
-The first matching driver is in the same Pololu shipment as the motor. It takes fused, switchable motor power at VIN/GND and accepts the Pico's 3.3 V signals: PWM to EN, direction to PH, with PMODE grounded. Its SLEEP input is the watchdog/kill-gated output-disable path. The driver needs soldered connections or headers; it is a separate power board, with current limiting to be set and measured before running a motor. [Pololu driver connections](https://www.pololu.com/product/4035).
+The first matching driver was in the same Pololu shipment as the motor; the user reports both received, with total driver count pending. It takes fused, switchable motor power at VIN/GND and accepts the Pico's 3.3 V signals: PWM to EN, direction to PH, with PMODE grounded. Its SLEEP input is the watchdog/kill-gated output-disable path. The driver needs soldered connections or headers; it is a separate power board, with current limiting to be set and measured before running a motor. [Pololu driver connections](https://www.pololu.com/product/4035).
 
 **The ST3215 uses a different connection:** the protected 9 V servo branch supplies power, and a compatible half-duplex TTL interface carries serial commands and feedback between the servo bus and Pico UART. Assign distinct servo IDs and verify the received cable pinout before powering either unit. An H-bridge is for the brushed wheel motors; each ST3215 already contains its own motor control electronics. The interface/adapter is still to be confirmed.
 

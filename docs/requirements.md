@@ -14,7 +14,7 @@
 | PF08 | Shallow indoor irregularities | At 0.15 m/s: ±3° cross-slope, 3° ascent/descent, 5 mm smooth bump over 300 mm, 3 mm seam; no rough terrain or stairs |
 | PF09 | Slow travel | 0.25 m/s cruise; 0.5 m/s remains unqualified; recovery clearance to 0.65 m/s |
 | PF10 | Flexible, inexpensive drives | Geared brushed wheel motors and small servos allowed; encoder feedback and mounted duty tests required |
-| PF11 | Minimal electronics | Selected Pico 2 + LSM6DSOX baseline, qualified equivalent reuse allowed; zero onboard cameras |
+| PF11 | Minimal electronics | Received Pico 2 + SparkFun LSM6DSO baseline; electrical/timing qualification required; zero onboard cameras |
 | PF12 | Compatible power and fault handling | Pack/rails verified at full charge and low operating voltage; current limits, physical cut and stale-data handling |
 | PF13 | Serviceable shop construction | Existing/COTS stock, removable pack, accessible fasteners, proper bearings and cable strain relief |
 | PF14 | Honest model and evidence | Preliminary drawings before detail CAD; measured mass/CoM and trial logs before performance claims |

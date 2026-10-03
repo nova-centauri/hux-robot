@@ -1,5 +1,7 @@
 # V1-PROOF electronics checklist
 
+**2026-10-03:** one Pico 2 is received; the SparkFun LSM6DSO IMU is also received, untested. Start the [USB board check](2026-10-03-pico-bringup.md); confirm the IMU and remaining power/interfaces separately.
+
 - [ ] Confirm board/IMU, radio plus transmitter or alternative manual link, pack and charger.
 - [ ] Map available pins/timers for encoders, drivers, IMU, manual input and later servos.
 - [ ] Verify logic levels, encoder scaling and default-disabled wheel drivers.

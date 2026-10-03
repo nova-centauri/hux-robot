@@ -4,6 +4,8 @@
 
 ## Parts and scope
 
+**2026-10-03 controller update:** one Pico 2 with pre-soldered headers is received, untested; start [USB/LED checks](checklists/2026-10-03-pico-bringup.md). The SparkFun LSM6DSO IMU is also received per the user, untested, and recorded spend is now **$173.70**. This updates the controller availability and current total in the older arrival note below. Servo interface, encoder level conversion, harness and protected power still need confirmation.
+
 **Arrival reported 2026-10-02:** the user has received the **30:1 metal gearmotor and DRV8874 drivers** and completed printing. The paid baseline is **one Pololu 4752 wheel motor + one Pololu 4035 driver**; confirm received labels and total driver count. **Two ST3215 servos are paid**, with arrival unreported and shipment unconfirmed in the latest vendor record. **$143.12 is recorded paid**, including shipping/tax. The user confirms the servo 12 V variant; verify labels on arrival. The two-wheel robot still needs a second motor; driver coverage remains to confirm. A bench supply is available, with ratings unconfirmed. Controller, servo interface and harness availability remain to record. See [paid orders](purchases.md), [inventory](parts-on-hand.md) and [hardware selection](v1-proof-hardware.md).
 
 **This plan is for V1-PROOF and the confirmed Pololu/ST3215 actuators.** RobStride is intended for the future full-size Hux. The 110 mm linkage geometry applies to this test version; final structural fits and the power circuit still need measured hardware and supply checks.

@@ -41,7 +41,7 @@ def quantity_summary(counts):
     units = lambda value, name: f"{name} count not recorded" if value is None else f"{value} {name}{'' if value == 1 else 's'}"
     coverage = (f"Wheel orders: {show(motor['ordered'])} of {show(motor['planned'])} motors and "
                 f"{show(driver['ordered'])} of {show(driver['planned'])} drivers. "
-                f"Still needed: {units(motor['missing'], 'motor')} and {units(driver['missing'], 'driver')}.")
+                f"Not covered by recorded orders: {units(motor['missing'], 'motor')} and {units(driver['missing'], 'driver')}.")
     if motor["missing"] == 0 and driver["missing"] == 0 and motor["planned"] == driver["planned"] == 2:
         wheel = "The full wheel motor/driver pair is ordered; delivery and qualification remain separate gates."
     elif motor["ordered"] == driver["ordered"] == 1 and motor["planned"] == driver["planned"] == 2:
@@ -50,7 +50,7 @@ def quantity_summary(counts):
         wheel = "Recorded quantities do not yet establish a complete wheel motor/driver pair."
     legs = (f"Leg orders: {show(servo['ordered'])} of {show(servo['planned'])} ST3215 servos; "
             f"{show(servo['missing'])} still needed.")
-    return f"**{coverage}** {wheel} {legs}"
+    return f"**{coverage}** {wheel} Confirm total received driver count before buying another driver. {legs}"
 
 
 def purchase_report(c, plan):
@@ -92,34 +92,60 @@ def purchase_report(c, plan):
             "quantities": purchase_quantities(version)}
 
 
+def remaining_shopping_list(version):
+    counts = purchase_quantities(version)
+    items = []
+    for item in version.get("shoppingList", []):
+        part = counts.get(item.get("partId"))
+        if part is None:
+            items.append(item)
+            continue
+        missing = part["missing"]
+        if missing == 0:
+            continue
+        need = "Confirm remaining quantity" if missing is None else f"{missing} more {item['unit']}{'' if missing == 1 else 's'}"
+        items.append({**item, "need": need, "status": "check-stock" if missing is None else item["status"]})
+    return items
+
+
 def purchase_lines(c, plan):
     p = purchase_report(c, plan)
     t, remaining = p["totals"], p["remaining"]
-    lines = [f"**Recorded paid spend: {money(t['paidTotal'])}. Remaining against the planning ceiling: {money(remaining['total'])}.** Remaining money includes all unfinished purchases and reserves; it is not a completion quote.", "",
+    lines = [f"**Recorded spend: {money(t['paidTotal'])}. Remaining against the planning ceiling: {money(remaining['total'])}.** Remaining money includes all unfinished purchases and reserves; it is not a completion quote.", "",
              "## Ordered parts and delivery", "", "| Vendor / ordered part | Ordered quantity | Unit paid | Goods total | Order status |", "| --- | ---: | ---: | ---: | --- |"]
     for order in p["orders"]:
         for item in order["items"]:
             qty, unit = item.get("quantity"), item.get("unitCost")
             cost = None if qty is None or unit is None else Decimal(str(unit)) * qty
-            status = {"shipped": "Shipped", "ordered": "Paid; awaiting shipment", "received": "Received; untested"}.get(order["status"], order["status"])
+            delivery = item.get("status", order["status"])
+            status = {"shipped": "Shipped", "ordered": "Paid; awaiting shipment", "received": "Received; untested", "awaiting-arrival": "Awaiting arrival"}.get(delivery, delivery)
             lines.append(f"| {order['vendor']} {item['name']} | {qty if qty is not None else 'Not recorded'} | {money(unit)} | {money(cost)} | {status} |")
     lines += [""]
     lines += [f"- **{order['vendor']}:** {order['deliveryNote']}" for order in p["orders"]]
     lines += ["", quantity_summary(p["quantities"]) + " Verify their 12 V labels on arrival: the receipt names the ST3215 series and the user confirmed the voltage variant. [Motor connections and controls](v1-proof-hardware.md).", "",
-              "## Paid orders", "", "| Vendor / paid date | Goods | Shipping / handling | Tax | Total paid |", "| --- | ---: | ---: | ---: | ---: |"]
+              "## Recorded order totals", "", "| Vendor / recorded date | Goods | Shipping / handling | Tax | Order total |", "| --- | ---: | ---: | ---: | ---: |"]
     for order in p["orders"]:
         tax = money(order.get("taxCost"))
         if order.get("taxCost") == 0:
             tax += " separately charged"
-        lines.append(f"| {order['vendor']} / {order['paidOn']} | {money(order.get('merchandiseCost'))} | {money(order.get('shippingCost'))} | {tax} | **{money(order.get('paidTotal'))}** |")
+        order_date = f"{order['paidOn']} (paid)" if order.get("paidOn") else (f"{order['orderedOn']} (ordered)" if order.get("orderedOn") else "Not recorded")
+        lines.append(f"| {order['vendor']} / {order_date} | {money(order.get('merchandiseCost'))} | {money(order.get('shippingCost'))} | {tax} | **{money(order.get('paidTotal'))}** |")
     lines += [f"| **Recorded spend** | **{money(t['merchandiseCost'])}** | **{money(t['shippingCost'])}** | **{money(t['taxCost'])}** | **{money(t['paidTotal'])}** |", "",
-              "Receipt amounts are authoritative for recorded purchases; reference prices below are historical. A payment-service confirmation corroborates its vendor order and is not counted again. Missing amounts stay unrecorded, never zero. See [purchase evidence](purchases.md) for the September 29 reconciliation and the [inventory](parts-on-hand.md) for delivery and qualification gates.", "",
+              "Recorded order totals count each purchase once; reference prices below are historical. A payment-service confirmation corroborates its vendor order and is not counted again. An order-placement date does not establish its payment date. Missing amounts stay unrecorded, never zero: an unitemized order total can establish overall spend while separate goods and shipping/tax balances remain unknown. See [purchase evidence](purchases.md) and the [inventory](parts-on-hand.md) for delivery and qualification gates.", "",
               "## Remaining planning allocations", "", "| Allocation | Not yet spent |", "| --- | ---: |",
               f"| Parts and fixture allowance | {money(remaining['parts'])} |",
               f"| Shipping, tax and import-charge allowance | {money(remaining['shippingTax'])} |",
               f"| Repair and overrun reserve retained | {money(c['budget']['repair_contingency_usd'])} |",
               f"| **Remaining against the planning ceiling** | **{money(remaining['total'])}** |", "",
-              "The controller, IMU, servo interface, encoder level conversion, current-limit passives, wheels/hubs, protected power and wiring still need inventory or receipt confirmation. Bench-supply ratings remain unconfirmed. Historical carts and unassigned V0-GENESIS parts are not recorded V1-PROOF spending.", ""]
+              "See the inventory for controller and IMU receipt status. The servo interface, encoder level conversion, current-limit passives, wheels/hubs, protected power and wiring still need confirmation. Bench-supply ratings remain unconfirmed. Historical carts and unassigned V0-GENESIS parts are not recorded V1-PROOF spending.", ""]
+    version = next(version for version in plan["versions"] if version["id"] == "V1-PROOF")
+    if version.get("shoppingList"):
+        lines += ["## Remaining shopping list", "", version["shoppingSummary"], "",
+                  "| Part / assembly | What remains | Next step |", "| --- | --- | --- |"]
+        for item in remaining_shopping_list(version):
+            status = plan["statusLabels"].get(item["status"], item["status"])
+            lines.append(f"| {item['name']} | {item['need']}. {item['note']} | {status} |")
+        lines += ["", "Original planning caps below cover the full build allocations, including parts already bought. Missing parts still need quotes or confirmed reuse.", ""]
     return lines
 
 
@@ -251,7 +277,7 @@ def outputs(c, plan=None):
     sources = {s["id"]: s for s in c["sources"]}
     if plan is None:
         plan = json.loads(PLAN.read_text())
-    lines = ["# V1-PROOF budget", "", f"**${r['total_cap_usd']:,.0f} planned ceiling, including shipping, tax and repair contingency.** The hard limit is strictly under $1,000. The paid Pololu and Waveshare orders below are committed V1-PROOF spend. The previous stair budget is [parked](archive/stair-v1/bom.md).", ""]
+    lines = ["# V1-PROOF budget", "", f"**${r['total_cap_usd']:,.0f} planned ceiling, including shipping, tax and repair contingency.** The hard limit is strictly under $1,000. The recorded orders below are committed V1-PROOF spend. The previous stair budget is [parked](archive/stair-v1/bom.md).", ""]
     lines += purchase_lines(c, plan)
     lines += ["## Original planning caps", "",
              "These maximum allocations are retained for comparison with actual spending; they are not a fully quoted remaining cart. Delivery, import charges and unpurchased rows need current quotes. Existing shop tools and unpaid fabrication labor are assumed; new tools or outsourced work must fit this same total or the design must change. See the [hardware decisions](v1-proof-hardware.md).", "",
@@ -272,7 +298,7 @@ def outputs(c, plan=None):
               "- Pololu 4752: reference price $60.95 each; two selected encoder motors fit the $125 allocation. Current purchased quantities and remaining needs are calculated above.",
               "- Pololu 4035 DRV8874: reference $11.94 each; two carriers plus current-limit passives fit the $40 allowance. Current-limit passives still need confirmation; measure the 2.5 A limit. The historical stock page allowed backorders; this replaces the oversized G2 reference.",
               "- Waveshare ST3215 series: reference listing $16.99–21.99 depending on variant; receipt prices are recorded above. Qualify holding performance on the regulated 9 V rail. The $60 allocation remains the original cap, with a separate transmission row.",
-              "- Pico 2 + Adafruit LSM6DSOX 4438 + half-duplex adapter share the $40 controller allowance. The IMU reference was $11.95 and out of stock; board/interface costs and availability still need a current complete quote.",
+              "- The original Pico 2 + Adafruit LSM6DSOX 4438 + half-duplex adapter allocation was $40, with an $11.95 IMU reference on September 28. The October 2 controller/IMU order instead names SparkFun LSM6DSO, with a $30.58 combined total and no itemized charges. The servo interface remains unconfirmed; preserve the original cap and record remaining costs separately.",
               "- Manual input can reuse RC or a laptop/gamepad with a timed deadman link. The $60 fallback is an allocation, not a claim that a new TBS receiver and transmitter together cost $60.", "",
               "## Build sequence", "",
               "P0 inventories and qualifies existing controls. P1 builds the supported wheel rig and pinned structure. P2 proves two-wheel balance and slow teleop. P3 adds the two leg servos/reductions. P4 runs the finish-line trials. These stages share one budget; do not add a second two-motor robot to the four-motor cost. Quotes exceeding an allocation consume the reserve or force a substitution before purchase.", "",

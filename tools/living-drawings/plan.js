@@ -131,7 +131,17 @@
     return { needed, detail };
   }
 
-  const API = { Notebook, validateRecord, targetsFor, sourceURL, escape, purchaseQuantities, quantitySummary };
+  function remainingShoppingList(version) {
+    const counts = purchaseQuantities(version);
+    return list(version.shoppingList).flatMap((item) => {
+      if (!item.partId || !counts[item.partId]) return [item];
+      const missing = counts[item.partId].missing;
+      if (missing === 0) return [];
+      return [{ ...item, need: missing === null ? 'Confirm remaining quantity' : `${missing} more ${item.unit}${missing === 1 ? '' : 's'}`, status: missing === null ? 'check-stock' : item.status }];
+    });
+  }
+
+  const API = { Notebook, validateRecord, targetsFor, sourceURL, escape, purchaseQuantities, quantitySummary, remainingShoppingList };
   if (typeof module !== 'undefined' && module.exports) module.exports = API;
   if (!root.document) return;
   const scriptBase = new URL('.', root.document.currentScript.src);
@@ -171,6 +181,12 @@
     return `<div class="plan-block-head"><div><p class="plan-kicker">Purchases & availability</p><h3>What is actually on hand?</h3><p class="plan-description">Purchase status, quantities and actual spend are kept separate from design allowances.</p></div></div><div class="plan-part-grid">${list(version.purchases).map((part) => `<article class="plan-part"><div class="plan-item-heading"><h4>${escape(part.name)}</h4>${status(part.status)}</div><dl><div><dt>Planned quantity</dt><dd>${quantity(part.plannedQuantity)}</dd></div><div><dt>Ordered quantity</dt><dd>${quantity(part.orderedQuantity)}</dd></div><div><dt>Goods paid (excl. shipping/tax)</dt><dd>${part.actualCost === null || part.actualCost === undefined ? 'Not recorded' : typeof part.actualCost === 'number' ? '$' + part.actualCost.toFixed(2) : escape(part.actualCost)}</dd></div><div><dt>Confirmed on</dt><dd>${quantity(part.confirmedOn)}</dd></div></dl><p>${escape(part.note)}</p>${sources(part.sourcePaths)}</article>`).join('') || '<p class="plan-empty">No confirmed purchases are recorded for this version.</p>'}</div>`;
   }
 
+  function shoppingList(version) {
+    const items = remainingShoppingList(version);
+    if (!items.length) return '';
+    return `<div class="purchase-shopping"><h3>Still to buy or check against stock</h3><p>${escape(version.shoppingSummary)}</p><div class="table-wrap"><table><caption class="sr-only">Remaining V1-PROOF shopping list</caption><thead><tr><th scope="col">Part / assembly</th><th scope="col">What remains</th><th scope="col">Next step</th></tr></thead><tbody>${items.map((item) => `<tr><td><strong>${escape(item.name)}</strong></td><td>${escape(item.need)}<small>${escape(item.note)}</small></td><td>${status(item.status)}</td></tr>`).join('')}</tbody></table></div><p class="small">Original planning caps below cover the full build allocations, including parts already bought. Missing parts still need quotes or confirmed reuse.</p></div>`;
+  }
+
   function purchaseLedger(version) {
     const target = root.document.getElementById('purchase-ledger');
     if (!target || !list(version.orders).length) return;
@@ -183,9 +199,9 @@
     const paid = known ? paidCents / 100 : null;
     const remaining = known && Number.isFinite(ceiling) ? (Math.round(ceiling * 100) - paidCents) / 100 : null;
     const quantities = quantitySummary(version);
-    target.innerHTML = `<div class="purchase-summary"><div><span class="plan-kicker">Confirmed order payments</span><strong>${money(paid)}</strong><p>Goods + recorded shipping and tax. Each order counted once.</p></div><div><span class="plan-kicker">Unspent to ${money(ceiling)} plan</span><strong>${money(remaining)}</strong><p>Includes everything still to buy and retained reserves; not spare feature budget.</p></div><div><span class="plan-kicker">Not covered by recorded wheel orders</span><strong>${escape(quantities.needed)}</strong><p>${escape(quantities.detail)}</p></div></div>
-      <div class="table-wrap"><table><caption class="sr-only">Paid orders and incoming components</caption><thead><tr><th scope="col">Order / incoming parts</th><th scope="col">Goods</th><th scope="col">Shipping</th><th scope="col">Tax</th><th scope="col">Paid total / status</th></tr></thead><tbody>${orders.map((order) => `<tr><td><strong>${escape(order.vendor)}</strong><small>${list(order.items).map((item) => `${quantity(item.quantity)} × ${escape(item.name)} · ${money(item.unitCost)} each`).join('<br>')}</small><small>Paid ${escape(order.paidOn)}</small></td><td class="money">${money(order.merchandiseCost)}</td><td class="money">${money(order.shippingCost)}</td><td class="money">${money(order.taxCost)}</td><td><strong class="money">${money(order.paidTotal)}</strong><br>${status(order.status)}<small>${escape(order.deliveryNote)}</small></td></tr>`).join('')}</tbody><tfoot><tr><td colspan="4">Total confirmed paid</td><td>${money(paid)}</td></tr></tfoot></table></div>
-      <p class="small">Receipt coverage and received inventory are recorded separately. Check each order’s delivery note and the inventory before buying remaining parts. Servo 12 V variant comes from the user’s confirmation; inspect labels on arrival.</p>${sources(['docs/purchases.md', 'docs/parts-on-hand.md'])}`;
+    target.innerHTML = `<div class="purchase-summary"><div><span class="plan-kicker">Recorded order totals</span><strong>${money(paid)}</strong><p>Combined order totals. Each order counted once; unshown charge breakdowns stay unknown.</p></div><div><span class="plan-kicker">Unspent to ${money(ceiling)} plan</span><strong>${money(remaining)}</strong><p>Includes everything still to buy and retained reserves; not spare feature budget.</p></div><div><span class="plan-kicker">Not covered by recorded wheel orders</span><strong>${escape(quantities.needed)}</strong><p>${escape(quantities.detail)}</p></div></div>
+      <div class="table-wrap"><table><caption class="sr-only">Recorded orders and incoming components</caption><thead><tr><th scope="col">Order / incoming parts</th><th scope="col">Goods</th><th scope="col">Shipping</th><th scope="col">Tax</th><th scope="col">Order total / status</th></tr></thead><tbody>${orders.map((order) => `<tr><td><strong>${escape(order.vendor)}</strong><small>${list(order.items).map((item) => `${quantity(item.quantity)} × ${escape(item.name)} · ${money(item.unitCost)} each`).join('<br>')}</small><small>${order.paidOn ? `Paid ${escape(order.paidOn)}` : order.orderedOn ? `Ordered ${escape(order.orderedOn)}` : "Date not recorded"}</small></td><td class="money">${money(order.merchandiseCost)}</td><td class="money">${money(order.shippingCost)}</td><td class="money">${money(order.taxCost)}</td><td><strong class="money">${money(order.paidTotal)}</strong><br>${status(order.status)}<small>${escape(order.deliveryNote)}</small></td></tr>`).join('')}</tbody><tfoot><tr><td colspan="4">Total recorded spend</td><td>${money(paid)}</td></tr></tfoot></table></div>
+      <p class="small">Receipt coverage and received inventory are recorded separately. Confirm the total received driver count before buying another driver. Servo 12 V variant comes from the user’s confirmation; inspect labels on arrival.</p>${sources(['docs/purchases.md', 'docs/parts-on-hand.md'])}${shoppingList(version)}`;
   }
 
   function milestones(version) {

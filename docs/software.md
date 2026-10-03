@@ -8,7 +8,7 @@ Use a conventional two-wheel balance controller on the selected Pico 2 in C/C++,
 
 | Job | Planned owner | What it does |
 | --- | --- | --- |
-| Sense and estimate | Pico + LSM6DSOX + wheel encoders | Combine gyro/accelerometer measurements into pitch/rate; use signed wheel counts for travel and speed. Calibrate biases and reject acceleration artifacts. |
+| Sense and estimate | Pico + LSM6DSO + wheel encoders | Combine gyro/accelerometer measurements into pitch/rate; use signed wheel counts for travel and speed. Calibrate biases and reject acceleration artifacts. |
 | Balance and drive | Pico control loop | Correct pitch, then track bounded travel/turn requests. Feed the two wheel drivers with PWM/direction while reserving authority for balance. |
 | Move the legs | Pico + ST3215 internal controllers | After pinned-leg balance passes, send slow, coordinated position requests and read back servo feedback through the TTL bus. |
 | Supervise operation | Pico + independent hardware kill/watchdog | Require deliberate arming; check command age, sensor age, loop timing, tilt, supply and current; latch a fault when limits are violated. |
@@ -32,7 +32,7 @@ Physical kill + hardware watchdog ------------------> actuator disable
 
 **Implemented today:** host-side dynamics simulation, controller experiments, regression checks and the living documentation. **Still to build:** embedded firmware, real IMU fusion/calibration, encoder acquisition, device drivers, operator protocol, fault supervision and physical tuning. [The firmware directory](../firmware/README.md) currently records this absence. Simulation gains and successful simulated trials are starting evidence, not flashed code or measured robot performance.
 
-The purchase locks the control interfaces to Pololu 4752 encoder wheel motors, Pololu 4035 wheel drivers and ST3215 12 V bus servos. One wheel motor/driver pair has shipped and both leg servos are ordered; the second wheel pair is still required. Start with readback and small supported bench motions, then both legs pinned, then balance and manual travel, and finally qualified height adjustment. The Pico, IMU and TTL interface remain selected parts with purchase status unconfirmed. See [electrical connections](electronics.md) and the [ordered hardware baseline](v1-proof-hardware.md).
+The purchase locks the control interfaces to Pololu 4752 encoder wheel motors, Pololu 4035 wheel drivers and ST3215 12 V bus servos. One wheel motor and drivers are received, with total driver count pending; both leg servos are ordered and the second wheel motor is still required. The Pico 2 is received, untested. The SparkFun LSM6DSO is received, untested, replacing the earlier LSM6DSOX selection; sensor qualification and the TTL interface remain open. Start with [USB/LED checks](checklists/2026-10-03-pico-bringup.md), readback and small supported bench motions, then both legs pinned, then balance and manual travel, and finally qualified height adjustment. See [electrical connections](electronics.md) and the [ordered hardware baseline](v1-proof-hardware.md).
 
 ## Minimal control contract
 

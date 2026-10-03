@@ -6,7 +6,7 @@ Dated log of Steve's Hux decisions as they landed on `main`. Newest intent **sup
 
 Source of truth is this repo (`nova-centauri/hux-robot`). Docs only. **No spend.** No SKU locks beyond what is already decided below.
 
-## Current governing decisions — V1-PROOF, 2026-09-29 purchase update
+## Current governing decisions — V1-PROOF, updated 2026-10-03
 
 The user extended V1-PROOF to dependable forward/reverse traversal, left/right turns, turning in place, bounded pushes/uneven terrain and concrete component decisions. This extends the proof scope while retaining its cost, mass and four-axis limits. Earlier dated entries remain history.
 
@@ -16,20 +16,34 @@ The user extended V1-PROOF to dependable forward/reverse traversal, left/right t
 | Cost / mass | Strictly < $1,000; **$900** allocation including $225 reserves; 2.5 kg target / 3.0 kg maximum |
 | Actuators | **2 × Pololu 4752 wheels + 2 × ST3215 12 V variant legs through 3:1 belts**; first mobility with pinned 30° legs |
 | Drivers | **2 × Pololu 4035 DRV8874**, configured current limiting, sleep/kill/watchdog, PH/EN and fixed-off-time regulation |
-| Control / sensing | **Pico 2 + LSM6DSOX SPI**, encoder/current/fault/battery feedback; confirmed equivalent reuse may substitute after qualification |
+| Control / sensing | **Pico 2 + SparkFun LSM6DSO received, SPI planned**, encoder/current/fault/battery feedback; USB, sensor and timing qualification open |
 | Power | 3S approximately 2.2 Ah; **9 V servo / 5 V logic branches**; actual pack, regulators and protection require measured circuit qualification |
 | Cameras | **Zero onboard in V1**; existing external video for trials; perception is a later version gate |
 | Motion | 0.25 m/s cruise, 0.15 m/s uneven fixtures, 0.4 rad/s arc / 0.6 rad/s pivot; 0.5 m/s not yet qualified |
 | Disturbances | Qualification targets: 0.8 N·s longitudinal / 0.4 N·s lateral at 0.20 m, 50/200 ms pulses; 3° grades/cross-slopes, 5 mm smooth bump, 3 mm seam |
 | Evidence | Pinned-leg 3D closed-loop simulation with seed/parameter sweep and failure cases; physical validation and powered-leg dynamics remain open |
 | Next versions | Carry measured actuator/sensor models, telemetry, fault behavior and tests forward; no promised stair upgrade of this chassis |
-| Orders / publication | September 28 receipts reconciled September 29: **1 × 4752 + 1 × 4035 shipped, 2 × ST3215 paid; $143.12 total**. User confirms servo 12 V variant. Second wheel motor/driver still required. Publish through the existing CI/CD and verify the live pages. |
+| Orders / publication | **Motor/drivers, Pico and LSM6DSO received; 2 × ST3215 ordered; $173.70 recorded spend**. Second wheel motor still required; total delivered driver count pending. User confirms servo 12 V variant. New order charge breakdown is unshown. Publish through the existing CI/CD when authorized and verify live pages. |
 
 See [hardware decisions](v1-proof-hardware.md), [simulation evidence](v1-proof-simulation.md), [physical acceptance](v1-proof-validation.md), [PF requirements](requirements.md) and [numerical source](../tools/v1-proof/model.json). Hardware selections are the current engineering baseline; they remain subject to explicit bench rejection criteria and budget limits.
 
 ---
 
 ## Log
+
+### 2026-10-03 — Pico and IMU received; shopping list reconciled
+
+The user confirms the Pico 2 and SparkFun LSM6DSO IMU are both here. Mark the existing controller/IMU order received; its **$30.58** is already counted, so recorded spend remains **$173.70**, with **$726.30** remaining under the $900 plan. Retain unknown individual costs and charges. No additional purchase or test is reported.
+
+Publish the homepage spending ledger and [remaining shopping list](bom.md#remaining-shopping-list). One more wheel motor is required; confirm the actual driver count before buying another driver. Two ST3215 servos are already paid, with arrival unreported. Remaining interfaces, wheels/transmissions, controls, battery/charging, protected power, harness, assembly hardware and fixture materials require inventory or purchase confirmation. Keep the $125 repair reserve. [Order evidence](purchases.md) · [Inventory](parts-on-hand.md).
+
+### 2026-10-03 — Pico received; ordered LSM6DSO replaces the reference IMU
+
+The user reports Pico 2 receipt and supplies an October 2 Amazon order screenshot totaling **$30.58**. It shows a Pico 2 with yellow pre-soldered headers delivered and a **SparkFun LSM6DSO Qwiic** IMU arriving tomorrow. Recorded October 3, the IMU estimate is October 4; receipt remains unconfirmed. Add this order once to recorded spend: **$173.70 total, $726.30 remaining** under the $900 plan. Leave individual prices, shipping, tax and payment date unknown rather than allocating the combined total. Private order/account details and the unredacted screenshot stay outside the public repo.
+
+Use the ordered LSM6DSO as the sensor baseline, explicitly replacing the earlier Adafruit LSM6DSOX selection. Its documented main SPI, interrupt outputs and 3.3 V operation support the proposed interface; this is an engineering fit assessment, not a measured latency or balance result. Verify the received breakout pads/jumpers and implement LSM6DSO initialization. Preserve the existing ±4 g / ±500°/s / 833 Hz sensing and 500 Hz control targets, all subject to qualification.
+
+Open the [Pico USB/LED checklist](checklists/2026-10-03-pico-bringup.md) using official Raspberry Pi example UF2s. No embedded Hux firmware, board test result or physical milestone pass is reported. Mechanical fit work can proceed alongside this board-only check. [Inventory](parts-on-hand.md) · [Order evidence](purchases.md) · [Hardware](v1-proof-hardware.md).
 
 ### 2026-09-29 — Paid parts lock the proof design; publish wiring and intelligence
 

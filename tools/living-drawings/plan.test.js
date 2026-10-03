@@ -2,7 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const { Notebook, sourceURL, escape, purchaseQuantities, quantitySummary } = require('./plan.js');
+const { Notebook, sourceURL, escape, purchaseQuantities, quantitySummary, remainingShoppingList } = require('./plan.js');
 
 function memoryStorage() {
   const values = new Map();
@@ -19,12 +19,14 @@ function orderedVersion() {
 test('a second wheel order updates the live quantity summary even before purchase cards change', () => {
   const incoming = orderedVersion();
   assert.equal(quantitySummary(incoming).needed, '1 motor + 1 driver');
+  assert.equal(remainingShoppingList(incoming).find((item) => item.partId === 'pololu-4752').need, '1 more motor');
   assert.match(quantitySummary(incoming).detail, /first restrained bench channel/);
   const second = JSON.parse(JSON.stringify(incoming.orders[0]));
   second.id = 'second-wheel-channel';
   incoming.orders.push(second);
   assert.deepEqual(purchaseQuantities(incoming)['pololu-4752'], { ordered: 2, planned: 2, missing: 0 });
   assert.equal(quantitySummary(incoming).needed, '0 motors + 0 drivers');
+  assert.equal(remainingShoppingList(incoming).some((item) => item.partId === 'pololu-4752'), false);
   assert.match(quantitySummary(incoming).detail, /full wheel motor\/driver pair is ordered/);
   assert.match(quantitySummary(incoming).detail, /2 \/ 2 servos \(0 servos still needed\)/);
   assert.doesNotMatch(quantitySummary(incoming).detail, /first restrained bench channel|second wheel channel is still required/);
@@ -36,6 +38,7 @@ test('unknown order and planned quantities remain unknown in the live quantity s
   incoming.purchases.find((item) => item.id === 'st3215').plannedQuantity = null;
   const counts = purchaseQuantities(incoming);
   assert.deepEqual(counts['pololu-4752'], { ordered: null, planned: 2, missing: null });
+  assert.equal(remainingShoppingList(incoming).find((item) => item.partId === 'pololu-4752').need, 'Confirm remaining quantity');
   assert.deepEqual(counts.st3215, { ordered: 2, planned: null, missing: null });
   assert.match(quantitySummary(incoming).needed, /motor count not recorded/);
   assert.match(quantitySummary(incoming).detail, /Not recorded servos still needed/);

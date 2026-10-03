@@ -1,4 +1,4 @@
-# Working notes — V1-PROOF, updated 2026-10-02
+# Working notes — V1-PROOF, updated 2026-10-03
 
 The active objective is a useful, inexpensive proof robot. **Under $1,000; reuse first; 2.5 kg target; four actuators; indoor mobility with bounded disturbance tests.** The previous stair work is [parked](docs/archive/stair-v1/README.md).
 
@@ -15,6 +15,8 @@ The active objective is a useful, inexpensive proof robot. **Under $1,000; reuse
 
 ## Next physical work
 
+**2026-10-03 Pico/IMU arrival:** one Pico 2 with yellow pre-soldered headers and one SparkFun LSM6DSO Qwiic IMU are received, untested. Start the [USB/LED bring-up checklist](docs/checklists/2026-10-03-pico-bringup.md). The October 2 Amazon order totals $30.58 and covers both received parts. User confirmation supersedes the screenshot arrival estimate. This sensor replaces the earlier LSM6DSOX choice, subject to qualification. Recorded spend is now **$173.70**, with **$726.30** remaining under the $900 plan. Item prices, shipping, tax and payment date remain unshown. No test pass is recorded.
+
 **2026-10-02 mechanical timeline:** added the [mechanical testing page](tools/living-drawings/mechanical-tests.html) with a movable side/end-view diagram, the R01 print rendering, eight evidence gates and shared dated history. Device session drafts record measurements, trial outcomes and evidence with export/import and recoverable removal. [Recording workflow](docs/mechanical-testing.md). No physical test result is inferred from this page.
 
 **2026-10-02 arrival and printing update:** the user reports the **30:1 metal gearmotor and DRV8874 drivers received**, and the **parts 3D printed**, ready to begin mechanical testing. Start the [first mechanical fit session](docs/checklists/2026-10-02-mechanical-fit.md): inspect and measure prints, assemble the passive parallelogram, sweep 15–45° by hand, and dry-fit the motor/wheel envelope with all power disconnected. Confirm printed revision/material and total driver count. ST3215 arrival, powered mounts, load capacity and electrical qualification remain open. No test pass is claimed; recorded paid spend remains **$143.12**. This supersedes the arrival/printing status in the dated September 29 notes below.
@@ -25,7 +27,7 @@ The active objective is a useful, inexpensive proof robot. **Under $1,000; reuse
 
 **2026-09-29 update:** the user confirmed **Pololu 4752 motors and ST3215 12 V servos are ordered for V1-PROOF**; quantities and actual costs remain to record. RobStride is for the future full-size Hux. A bench supply is available with ratings still to confirm, and controller/driver/interface availability remains open. Start the [single-leg bench plan](docs/one-leg-bench.md) while awaiting delivery. Its [1:1 template](cad/layouts/one-leg-bench-template.svg) supports a passive mockup now; hardware-specific machining follows receipt/label checks. Supported leg motion can precede balance. The pinned-leg-first sequence below governs the freely moving robot.
 
-1. Inspect and measure the received **Pololu 4752 and DRV8874 drivers** and the printed parts; confirm total driver count against the [paid-order ledger](docs/purchases.md). **$143.12 paid** is reconciled. Record ST3215 arrival and verify servo voltage labels when available. Confirm bench-supply rating, servo interface, controller/IMU, radio/transmitter, battery/charger, wheels and stock. The second wheel motor remains to buy; another driver depends on the inventory count.
+1. Inspect and measure the received **Pololu 4752 and DRV8874 drivers** and the printed parts; confirm total driver count against the [paid-order ledger](docs/purchases.md). **$173.70 recorded spend** includes the new controller/IMU order. Check the received Pico over USB; confirm LSM6DSO and ST3215 arrivals and verify labels when available. Confirm bench-supply rating, servo interface, radio/transmitter, battery/charger, wheels and stock. The second wheel motor remains to buy; another driver depends on the inventory count.
 2. Make a scrap/cardboard mockup at the proposed 28–31 cm height. Weigh the pile. Check that two gearmotors, bearings, wheels, wiring and the battery fit.
 3. Qualify one wheel channel and controller in a supported fixture. Verify encoder sign, reversal, hardware current limit, kill, watchdog and available torque at speed.
 4. Build the second wheel channel and pin both legs at neutral. Tune conventional two-wheel balance and slow manual driving.

@@ -10,5 +10,6 @@ The active checklists are for the small, four-actuator indoor proof with bounded
 - [Mechanical stages and trials](mechanical-v1.md)
 - [Electronics bring-up](electronics-bringup.md)
 - [Software bring-up](software-bringup.md)
+- [Pico 2 USB bring-up, opened 2026-10-03](2026-10-03-pico-bringup.md): controller received; BOOTSEL, LED and optional serial results pending; LSM6DSO expected next.
 
 Check boxes only after physical evidence exists. Previous stair checklists are [parked](../archive/stair-v1/checklists/README.md).

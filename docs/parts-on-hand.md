@@ -1,5 +1,7 @@
 # V1-PROOF parts and reuse inventory
 
+**2026-10-03 controller/IMU arrival:** one **Pico 2 with yellow pre-soldered headers and one SparkFun LSM6DSO Qwiic IMU are received**, per the user; inspection, USB and sensor tests are pending. Their October 2 Amazon order has a **$30.58 combined total**, bringing recorded project spend to **$173.70**, leaving **$726.30** under the $900 plan. This supersedes the screenshot arrival estimate. Item prices, shipping/tax breakdown and payment date remain unshown. The LSM6DSO replaces the prior Adafruit LSM6DSOX selection, subject to sensor qualification. Begin [Pico/IMU bring-up](checklists/2026-10-03-pico-bringup.md). [Remaining shopping list](bom.md#remaining-shopping-list).
+
 **2026-10-02 arrival and printing update:** the user reports the **30:1 metal gearmotor and DRV8874 DC motor drivers received**, and the **parts 3D printed**, ready to begin mechanical testing. This updates the existing Pololu 4752 / 4035 bench baseline to received, untested. The receipt documents one motor and one driver; the total received driver count remains to confirm. Printed revision, material, quantities, dimensions and condition are unrecorded. ST3215 arrival is not reported. Begin the [first mechanical fit session](checklists/2026-10-02-mechanical-fit.md); no fit, load or powered test is recorded yet. Recorded paid spend remains **$143.12**; no additional cost or reuse credit is inferred.
 
 **2026-10-01 motor inventory:** Steve reports **one servo and two steppers**; the photos identify the servo as **Panasonic MSMD042G1A**. One photographed stepper is labeled Astrosyn 610-024; the second label is unverified. These are untested bench/future reuse candidates, with no V1-PROOF substitution or reuse credit. [Photo evidence, specifications and fit assessment](#motor-stock-recorded-2026-10-01).
@@ -14,6 +16,8 @@
 | ESP32 | Historical mention; revision/IMU unknown | Alternative controller or manual-link bridge | $0 |
 | TBS Nano RX and compatible transmitter | Receiver mentioned historically; full link unconfirmed | Manual input | $0 |
 | Pi 5 / existing laptop | Historical Pi mention; availability unconfirmed | Off-robot logging; no onboard Pi required | $0 |
+| Pico 2 with yellow pre-soldered headers | 1 received per user and screenshot 2026-10-03; untested; individual price unshown within $30.58 controller/IMU order | USB/LED bring-up, then C/C++ controller qualification | $0 |
+| SparkFun LSM6DSO Qwiic IMU | 1 received per user 2026-10-03; untested; individual price unshown within the $30.58 controller/IMU order | Main SPI and data-ready sensing; replaces the earlier LSM6DSOX choice after qualification | $0 |
 | Pololu 4752 encoder gearmotors | 1 received per user 2026-10-02, untested; $60.95 goods, part of the $88.34 paid Pololu order; second motor still required | Dry-fit the received motor, then qualify one restrained wheel channel | $0 |
 | ST3215 12 V servos | 2 paid; $42.38 goods + $12.40 shipping = $54.78; awaiting shipment in latest receipt; 12 V variant confirmed by user | Supported single-leg bench now; robot height adjustment after pinned-leg balance | $0 |
 | Pololu 4035 DRV8874 drivers | Received per user 2026-10-02, untested; total delivered count pending; receipt covers 1 at $11.94 goods | H-bridge and current limiting for each wheel motor; confirm coverage of both channels | $0 |
@@ -28,9 +32,9 @@
 
 For each confirmed item record date, exact variant, quantity, condition, electrical limits, measured mass/envelope and whether it is available for Hux. A vendor CAD file is not owned hardware. A board's presence does not establish spare pins or compatible logic levels. A receiver needs a usable transmitter/link.
 
-The [budget](bom.md) now separates **$143.12 paid** from the **$900 planning ceiling**. See the [two paid orders](purchases.md) for shipping/tax and goods totals. Newly ordered components count once as project spend; they are not zero-cost reuse. The remaining $756.88 includes unpurchased parts and reserves. Credit existing equipment only when it actually displaces a purchase; do not count the same item twice or spend the savings on new features. Keep the reserve. [Shop capabilities](capabilities.md) describes tools, not component stock.
+The [budget](bom.md) separates **$173.70 recorded spend** from the **$900 planning ceiling**. See the [order ledger](purchases.md) for the two itemized paid orders and the controller/IMU order with an unshown charge breakdown. Newly ordered components count once as project spend; they are not zero-cost reuse. The remaining $726.30 includes unpurchased parts and reserves. The new order's unknown breakdown prevents exact remaining parts versus freight/tax allocations. Credit existing equipment only when it actually displaces a purchase; do not count the same item twice or spend the savings on new features. Keep the reserve. [Shop capabilities](capabilities.md) describes tools, not component stock.
 
-The control baseline remains [Pico 2 + SPI LSM6DSOX, Pololu 4035 wheel drivers and a compatible ST3215 interface](v1-proof-hardware.md). Controller, IMU and servo interface ownership are not established by these receipts. Historical reuse candidates above earn credit only after qualification.
+The control baseline is [Pico 2 + SPI SparkFun LSM6DSO, Pololu 4035 wheel drivers and a compatible ST3215 interface](v1-proof-hardware.md). Pico and IMU receipt are confirmed; the servo interface and all electrical qualification remain open. Historical reuse candidates above earn credit only after qualification.
 
 ## Motor stock recorded 2026-10-01
 

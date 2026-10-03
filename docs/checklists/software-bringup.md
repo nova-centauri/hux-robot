@@ -1,5 +1,7 @@
 # V1-PROOF software checklist
 
+**2026-10-03:** the Pico 2 is received, untested. Begin the [board-only USB/LED checklist](2026-10-03-pico-bringup.md). The received SparkFun LSM6DSO replaces the earlier LSM6DSOX selection; sensor firmware and qualification remain pending.
+
 - [ ] Blink/log on the available board; identify exact firmware/toolchain and license choices.
 - [ ] Calibrate and timestamp IMU; read signed wheel encoders and battery/current feedback.
 - [ ] Measure 500 Hz control-loop timing under maximum intended logging and input load.

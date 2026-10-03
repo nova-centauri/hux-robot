@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-02",
+  "updatedAt": "2026-10-03",
   "currentVersion": "v1-proof",
   "description": "Source-backed HUX work-in-progress plan. Proposed and simulated work is separate from measured physical evidence. Null order quantities and costs mean unknown, not zero.",
   "statusLabels": {
@@ -8,16 +8,19 @@
     "awaiting-parts": "Awaiting parts",
     "ready": "Ready to prepare",
     "planned": "Planned",
-    "ordered": "Ordered · awaiting shipment",
-    "available": "Available · details pending",
+    "ordered": "Ordered \u00b7 awaiting shipment",
+    "available": "Available \u00b7 details pending",
     "unconfirmed": "Unconfirmed",
     "archived": "Parked history",
-    "future": "Future · unscoped",
+    "future": "Future \u00b7 unscoped",
     "passed": "Passed with evidence",
     "blocked": "Blocked",
     "unverified": "Unverified",
-    "shipped": "Shipped · awaiting arrival",
-    "received": "Received · untested"
+    "shipped": "Shipped \u00b7 awaiting arrival",
+    "received": "Received \u00b7 untested",
+    "awaiting-arrival": "Awaiting arrival",
+    "to-buy": "Still to buy",
+    "check-stock": "Check stock first"
   },
   "maintenance": {
     "sourceOfTruth": "Repository documents and recorded physical evidence",
@@ -48,9 +51,10 @@
         "docs/parts-on-hand.md"
       ],
       "focus": {
-        "title": "Start mechanical fit testing",
-        "summary": "The user reports the 30:1 metal gearmotor and DRV8874 drivers received, and the parts 3D printed. Start with unpowered inspection, linkage assembly, hand sweeps and motor/wheel packaging checks. The paid record covers one motor and one driver; total received driver count and printed revision/material remain to confirm. ST3215 arrival is unreported. Recorded paid spend remains $143.12; no test results are recorded.",
+        "title": "Check the received Pico, IMU and printed mechanical fit",
+        "summary": "One Pico 2 with pre-soldered headers and one SparkFun LSM6DSO IMU are received per user confirmation on 3 October, untested. Begin USB/LED checks and sensor identification while passive mechanical fit testing proceeds. The motor/drivers are received and parts printed; total driver count and printed revision/material remain to record. Recorded spend is $173.70, with $726.30 remaining under the $900 plan. The remaining shopping list separates the second wheel motor from parts that need stock confirmation. No physical test result is recorded.",
         "sourcePaths": [
+          "docs/checklists/2026-10-03-pico-bringup.md",
           "tools/living-drawings/mechanical-tests.html",
           "docs/checklists/2026-10-02-mechanical-fit.md",
           "docs/parts-on-hand.md",
@@ -60,9 +64,19 @@
       },
       "nextActions": [
         {
+          "id": "pico-usb",
+          "title": "Check the received Pico over USB",
+          "detail": "Use a Micro-USB data cable with external GPIO and actuator wiring disconnected. Hold BOOTSEL during connection, confirm the RP2350 drive, load the official Blink UF2 and record LED behavior. Optionally check Hello World over USB serial. The SparkFun LSM6DSO is also received; identify its label and board revision before sensor bring-up. Sensor firmware and timing remain open.",
+          "status": "ready",
+          "sourcePaths": [
+            "docs/checklists/2026-10-03-pico-bringup.md",
+            "firmware/README.md"
+          ]
+        },
+        {
           "id": "fixture-mockup",
           "title": "Check the printed passive linkage",
-          "detail": "Printing is reported complete. Confirm printed revision and material, measure the fit coupon if printed, and check actual M4 hardware. For R01, assemble the 110 mm links and 40 mm pivots with the specified lateral spacers; sweep 15–45° by hand and dry-fit the received motor/wheel envelope with all power disconnected. Powered mounts, bearings and load capacity remain unqualified.",
+          "detail": "Printing is reported complete. Confirm printed revision and material, measure the fit coupon if printed, and check actual M4 hardware. For R01, assemble the 110 mm links and 40 mm pivots with the specified lateral spacers; sweep 15\u201345\u00b0 by hand and dry-fit the received motor/wheel envelope with all power disconnected. Powered mounts, bearings and load capacity remain unqualified.",
           "status": "ready",
           "sourcePaths": [
             "docs/checklists/2026-10-02-mechanical-fit.md",
@@ -74,7 +88,7 @@
         {
           "id": "record-orders",
           "title": "Identify the received parts and outstanding arrivals",
-          "detail": "Record motor/driver labels, total received driver count, dimensions and condition. The receipt covers one Pololu 4752 and one 4035. Record ST3215 arrival and verify the 12 V labels when available; servo arrival is not reported.",
+          "detail": "Record motor/driver labels, total received driver count, dimensions and condition. The receipt covers one Pololu 4752 and one 4035. The Pico is received; record its markings and USB checks. The SparkFun LSM6DSO is received per the user; record its label, board revision and condition. Record ST3215 arrival and verify 12 V labels when available.",
           "status": "ready",
           "sourcePaths": [
             "docs/purchases.md",
@@ -95,7 +109,7 @@
         {
           "id": "inventory-interfaces",
           "title": "Confirm controls and power interfaces",
-          "detail": "DRV8874 drivers are received, with total count pending. Confirm the controller, half-duplex servo interface, encoder level conversion, harness and protected power rails. Record bench-supply ratings. A second wheel motor is still needed; reconcile driver inventory before ordering another. These interfaces are not needed for the first passive fit checks.",
+          "detail": "Pico and DRV8874 drivers are received, with total driver count pending. SparkFun LSM6DSO is received, untested. Confirm the half-duplex servo interface, encoder level conversion, harness and protected power rails; record bench-supply ratings. A second wheel motor is still needed; reconcile driver inventory before ordering another.",
           "status": "ready",
           "sourcePaths": [
             "docs/parts-on-hand.md",
@@ -117,12 +131,12 @@
         {
           "label": "Planned all-in budget",
           "value": "$900",
-          "note": "Includes $100 shipping/tax and $125 repair/overrun reserve. Confirmed paid: $143.12; unspent to this ceiling: $756.88, including future purchases and reserves."
+          "note": "Includes $100 shipping/tax and $125 repair/overrun reserve. Recorded spend: $173.70; remaining to this ceiling: $726.30, including future purchases and reserves. The latest order charge breakdown is unknown."
         },
         {
-          "label": "Confirmed paid",
-          "value": "$143.12",
-          "note": "Pololu $88.34 + Waveshare $54.78; includes recorded shipping and tax. Receipts dated 28 September 2026."
+          "label": "Recorded spend",
+          "value": "$173.70",
+          "note": "Pololu $88.34 + Waveshare $54.78 + Amazon controller/IMU order $30.58. The Amazon screenshot supplies an order total, with item prices, shipping/tax and payment date unshown."
         },
         {
           "label": "Hard spend limit",
@@ -202,15 +216,51 @@
           "receivedQuantity": null
         },
         {
+          "id": "pico2",
+          "name": "Pico 2 with yellow pre-soldered headers",
+          "status": "received",
+          "plannedQuantity": 1,
+          "orderedQuantity": 1,
+          "receivedQuantity": 1,
+          "actualCost": null,
+          "currency": "USD",
+          "confirmedOn": "2026-10-03",
+          "note": "One board received per user and supplied October 2 Amazon order screenshot. Untested; begin BOOTSEL, onboard LED and optional USB serial checks. Individual price is unshown within the $30.58 controller/IMU order.",
+          "sourcePaths": [
+            "docs/checklists/2026-10-03-pico-bringup.md",
+            "docs/parts-on-hand.md",
+            "docs/purchases.md",
+            "docs/v1-proof-hardware.md"
+          ]
+        },
+        {
+          "id": "lsm6dso",
+          "name": "SparkFun LSM6DSO Qwiic IMU",
+          "status": "received",
+          "plannedQuantity": 1,
+          "orderedQuantity": 1,
+          "receivedQuantity": 1,
+          "actualCost": null,
+          "currency": "USD",
+          "confirmedOn": "2026-10-03",
+          "note": "One SparkFun LSM6DSO Qwiic IMU received per user confirmation recorded 3 October, superseding the earlier screenshot delivery estimate. Untested. Bought with the Pico in the $30.58 Amazon order; individual price is unshown. Replaces the prior Adafruit LSM6DSOX selection. Verify label/board revision, 3.3 V main SPI connections and LSM6DSO initialization before qualification.",
+          "sourcePaths": [
+            "docs/checklists/2026-10-03-pico-bringup.md",
+            "docs/parts-on-hand.md",
+            "docs/purchases.md",
+            "docs/v1-proof-hardware.md"
+          ]
+        },
+        {
           "id": "control-interface",
-          "name": "Pico 2, LSM6DSOX and compatible servo interface",
+          "name": "Compatible half-duplex servo interface",
           "status": "unconfirmed",
-          "plannedQuantity": null,
+          "plannedQuantity": 1,
           "orderedQuantity": null,
           "actualCost": null,
           "currency": "USD",
           "confirmedOn": null,
-          "note": "Controller/IMU/interface ownership is not established. Confirmed equivalent reuse may substitute after qualification.",
+          "note": "Servo bus interface ownership/purchase remains unconfirmed. Pico and IMU are tracked separately in the controller/IMU order; no interface is established by that screenshot.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -336,7 +386,7 @@
           "summary": "Prove two-wheel mobility with both legs mechanically pinned at neutral.",
           "criteria": [
             "Hold balance for 60 seconds in at least 9 of 10 starts without support contact.",
-            "Complete logged 2 m forward/reverse runs, left/right arcs and both 360° in-place turns under the physical protocol.",
+            "Complete logged 2 m forward/reverse runs, left/right arcs and both 360\u00b0 in-place turns under the physical protocol.",
             "Complete five combined sequences at bounded speed, on the required floors and voltages.",
             "Keep failures and configuration hashes; simulated success does not close this gate."
           ],
@@ -351,7 +401,7 @@
           "status": "planned",
           "summary": "Add supported 3:1 reductions after pinned-leg balance; qualify each leg before synchronized movement.",
           "criteria": [
-            "Qualify 0.75 N·m mounted servo hold for 10 minutes and the separate 1.0 N·m short transient target.",
+            "Qualify 0.75 N\u00b7m mounted servo hold for 10 minutes and the separate 1.0 N\u00b7m short transient target.",
             "Measure backlash, loaded clearance and pose-dependent pitch trim.",
             "Complete ten low/high/low cycles with both wheels loaded, targeting at least 25 mm actual body-height change.",
             "No support contact, overload or balance loss; use the measured qualified range."
@@ -367,10 +417,10 @@
           "status": "planned",
           "summary": "Close the measured mobility, disturbance, fault, duty, mass and budget gates before expanding scope.",
           "criteria": [
-            "Qualify the specified 0.8 N·s longitudinal and 0.4 N·s lateral pulses, both signs and durations.",
-            "Qualify separate 3° slopes, 5 mm smooth bumps and 3 mm seam fixtures at 0.15 m/s.",
+            "Qualify the specified 0.8 N\u00b7s longitudinal and 0.4 N\u00b7s lateral pulses, both signs and durations.",
+            "Qualify separate 3\u00b0 slopes, 5 mm smooth bumps and 3 mm seam fixtures at 0.15 m/s.",
             "Complete a 10-minute mixed session within measured electrical and thermal limits, with no resets.",
-            "Record final mass ≤3.0 kg and all-in new cash < $1,000.",
+            "Record final mass \u22643.0 kg and all-in new cash < $1,000.",
             "Archive logs, videos and failure counts; replace model assumptions with measurements and rerun the matrix."
           ],
           "sourcePaths": [
@@ -382,7 +432,7 @@
       "bench": {
         "title": "Single-leg bench exercise",
         "status": "ready",
-        "summary": "Motor/drivers are received and parts are printed per user report recorded 2026-10-02. Start with identification and passive linkage checks (B0 and B3) before powered stages; these checks need no servo or controller. No test results are recorded. Powered motion still requires qualified mounts, interfaces and the guide’s electrical/fault gates.",
+        "summary": "Motor/drivers are received and parts are printed per user report recorded 2026-10-02. Start with identification and passive linkage checks (B0 and B3) before powered stages; these checks need no servo or controller. No test results are recorded. Powered motion still requires qualified mounts, interfaces and the guide\u2019s electrical/fault gates.",
         "sourcePaths": [
           "docs/checklists/2026-10-02-mechanical-fit.md",
           "docs/one-leg-bench.md",
@@ -391,7 +441,7 @@
         "geometry": [
           {
             "label": "Links",
-            "value": "2 × 110 mm between pivot centers"
+            "value": "2 \u00d7 110 mm between pivot centers"
           },
           {
             "label": "Pivot separation",
@@ -399,7 +449,7 @@
           },
           {
             "label": "Neutral / design range",
-            "value": "30° / 15–45° from downward vertical"
+            "value": "30\u00b0 / 15\u201345\u00b0 from downward vertical"
           },
           {
             "label": "Transmission",
@@ -407,7 +457,7 @@
           },
           {
             "label": "First driven leg range",
-            "value": "28–32° at 1°/s after bare-servo checks"
+            "value": "28\u201332\u00b0 at 1\u00b0/s after bare-servo checks"
           },
           {
             "label": "Wheel",
@@ -433,35 +483,35 @@
             "id": "B2",
             "title": "Bare servo",
             "status": "planned",
-            "action": "After verifying startup and target mapping, command ±5° at the servo output at no more than 5°/s with horn, belt and load removed.",
+            "action": "After verifying startup and target mapping, command \u00b15\u00b0 at the servo output at no more than 5\u00b0/s with horn, belt and load removed.",
             "evidence": "Correct direction with no startup jump, reset, unexpected current or tracking fault."
           },
           {
             "id": "B3",
             "title": "Passive linkage",
             "status": "ready",
-            "action": "With all power disconnected and servo/belt detached, assemble the printed passive parallelogram using the confirmed revision’s spacer layout. Sweep 15–45° by hand and check motor/wheel packaging; record measured fits, closest clearances and free play.",
+            "action": "With all power disconnected and servo/belt detached, assemble the printed passive parallelogram using the confirmed revision\u2019s spacer layout. Sweep 15\u201345\u00b0 by hand and check motor/wheel packaging; record measured fits, closest clearances and free play.",
             "evidence": "Recorded center spacing, retained fastener stack and photos showing no binding or hardware contact through the hand sweep. Powered-fixture catch and load capacity remain separate checks."
           },
           {
             "id": "B4",
             "title": "Small driven leg cycles",
             "status": "planned",
-            "action": "Align at 30° with power off; remove the lock before arming. Begin 28–32° at 1°/s, holding 2 seconds at each end.",
+            "action": "Align at 30\u00b0 with power off; remove the lock before arming. Begin 28\u201332\u00b0 at 1\u00b0/s, holding 2 seconds at each end.",
             "evidence": "Ten small cycles with independently measured angle, no jump or binding, and logged current, voltage and temperature."
           },
           {
             "id": "B5",
             "title": "Wider unloaded travel",
             "status": "planned",
-            "action": "After small-cycle success, try 25–35° and expand only within measured clearance and stop margins.",
+            "action": "After small-cycle success, try 25\u201335\u00b0 and expand only within measured clearance and stop margins.",
             "evidence": "Repeatable endpoints, measured vertical/fore-aft travel and approach-direction backlash; no stop strikes."
           },
           {
             "id": "B6",
             "title": "Wheel alone",
             "status": "planned",
-            "action": "Pin the leg, keep the wheel lifted and servo torque off. Verify sign, then try +10 rpm → 0 → −10 rpm, waiting for measured zero before reversal.",
+            "action": "Pin the leg, keep the wheel lifted and servo torque off. Verify sign, then try +10 rpm \u2192 0 \u2192 \u221210 rpm, waiting for measured zero before reversal.",
             "evidence": "Stable low-speed response with correct feedback sign; no reset or overvoltage. Record stiction before raising limits."
           },
           {
@@ -475,7 +525,7 @@
             "id": "B8",
             "title": "Combined unloaded motion",
             "status": "planned",
-            "action": "After separate and fault tests, slowly sweep 28–32° while the lifted wheel turns at 10 rpm.",
+            "action": "After separate and fault tests, slowly sweep 28\u201332\u00b0 while the lifted wheel turns at 10 rpm.",
             "evidence": "Five repeatable cycles with no dropped commands, resets, wiring snags or rail violations."
           },
           {
@@ -489,12 +539,17 @@
       },
       "documents": [
         {
-          "title": "Mechanical testing · layout and timeline",
+          "title": "Pico 2 USB bring-up \u00b7 3 October",
+          "path": "docs/checklists/2026-10-03-pico-bringup.md",
+          "kind": "session checklist"
+        },
+        {
+          "title": "Mechanical testing \u00b7 layout and timeline",
           "path": "tools/living-drawings/mechanical-tests.html",
           "kind": "living diagram"
         },
         {
-          "title": "First mechanical fit session · 2 October",
+          "title": "First mechanical fit session \u00b7 2 October",
           "path": "docs/checklists/2026-10-02-mechanical-fit.md",
           "kind": "session checklist"
         },
@@ -580,6 +635,27 @@
         }
       ],
       "updates": [
+        {
+          "date": "2026-10-03",
+          "title": "Pico and IMU received; remaining shopping list updated",
+          "summary": "The user confirms the Pico 2 and SparkFun LSM6DSO IMU are both here. Their existing $30.58 order is counted once: recorded spend remains $173.70, with $726.30 left under the $900 plan. The homepage now lists the second motor still to buy and the supporting parts to check against stock; two ST3215 servos are already paid. Driver count and unknown item/charge breakdowns remain open. No new purchase or hardware test is inferred.",
+          "sourcePaths": [
+            "docs/purchases.md",
+            "docs/parts-on-hand.md",
+            "docs/bom.md"
+          ]
+        },
+        {
+          "date": "2026-10-03",
+          "title": "Pico received; LSM6DSO order recorded",
+          "summary": "The user reports Pico 2 receipt. The supplied screenshot shows an October 2 Amazon controller/IMU order totaling $30.58 and SparkFun LSM6DSO arrival expected tomorrow. Recorded spend becomes $173.70, with $726.30 remaining to the $900 plan; charge breakdown and payment date stay unknown. The ordered LSM6DSO replaces the earlier LSM6DSOX selection, subject to arrival and qualification. A USB/LED checklist is open; no test pass or firmware implementation is claimed.",
+          "sourcePaths": [
+            "docs/checklists/2026-10-03-pico-bringup.md",
+            "docs/parts-on-hand.md",
+            "docs/purchases.md",
+            "docs/v1-proof-hardware.md"
+          ]
+        },
         {
           "date": "2026-10-02",
           "title": "Mechanical layout and test timeline added",
@@ -673,13 +749,13 @@
           "items": [
             {
               "partId": "pololu-4752",
-              "name": "4752 · 30:1 12 V encoder gearmotor",
+              "name": "4752 \u00b7 30:1 12 V encoder gearmotor",
               "quantity": 1,
               "unitCost": 60.95
             },
             {
               "partId": "pololu-4035",
-              "name": "4035 · DRV8874 motor driver",
+              "name": "4035 \u00b7 DRV8874 motor driver",
               "quantity": 1,
               "unitCost": 11.94
             }
@@ -702,7 +778,7 @@
           "items": [
             {
               "partId": "st3215",
-              "name": "22414 · ST3215 servo series (12 V per user)",
+              "name": "22414 \u00b7 ST3215 servo series (12 V per user)",
               "quantity": 2,
               "unitCost": 21.19
             }
@@ -715,8 +791,178 @@
           "sourcePaths": [
             "docs/purchases.md"
           ]
+        },
+        {
+          "id": "amazon-controller-imu-2026-10-02",
+          "vendor": "Amazon",
+          "paidOn": null,
+          "orderedOn": "2026-10-02",
+          "status": "received",
+          "currency": "USD",
+          "items": [
+            {
+              "partId": "pico2",
+              "name": "Pico 2 with yellow pre-soldered headers",
+              "quantity": 1,
+              "unitCost": null,
+              "status": "received"
+            },
+            {
+              "partId": "lsm6dso",
+              "name": "SparkFun LSM6DSO Qwiic IMU",
+              "quantity": 1,
+              "unitCost": null,
+              "status": "received"
+            }
+          ],
+          "merchandiseCost": null,
+          "shippingCost": null,
+          "taxCost": null,
+          "paidTotal": 30.58,
+          "deliveryNote": "Order placed 2 October, total $30.58 in the supplied screenshot. Both the Pico 2 and SparkFun LSM6DSO IMU are received per user confirmation recorded 3 October; untested. This supersedes the screenshot arrival estimate. Item prices, shipping, tax and payment date are not shown.",
+          "sourcePaths": [
+            "docs/purchases.md",
+            "docs/parts-on-hand.md"
+          ]
         }
-      ]
+      ],
+      "shoppingList": [
+        {
+          "id": "second-wheel-motor",
+          "name": "Pololu 4752 encoder wheel motor",
+          "status": "to-buy",
+          "need": "1 more motor",
+          "note": "Two matching wheel motors are required for the complete drive.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md",
+            "docs/v1-proof-hardware.md"
+          ],
+          "partId": "pololu-4752",
+          "unit": "motor"
+        },
+        {
+          "id": "wheel-driver",
+          "name": "DRV8874 wheel driver and current-limit passives",
+          "status": "check-stock",
+          "need": "Confirm coverage for 2 wheel channels",
+          "note": "Receipt covers one driver; total received count is unconfirmed. Buy a second Pololu 4035 only if missing. Current-limit passives still need confirmation.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md",
+            "docs/v1-proof-hardware.md"
+          ]
+        },
+        {
+          "id": "servo-interface",
+          "name": "Compatible half-duplex TTL servo interface",
+          "status": "check-stock",
+          "need": "1 interface",
+          "note": "Pico and IMU are received. The ST3215 bus adapter is a separate part with no confirmed purchase or stock.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md",
+            "docs/v1-proof-hardware.md"
+          ]
+        },
+        {
+          "id": "wheels-hubs",
+          "name": "Rubber wheels, hubs and supported axle hardware",
+          "status": "check-stock",
+          "need": "2 wheel assemblies",
+          "note": "Approximately 100 mm wheels; hubs and axle support must fit the selected motor and layout. No stock is reserved.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md",
+            "docs/v1-proof-hardware.md"
+          ]
+        },
+        {
+          "id": "leg-hardware",
+          "name": "Leg reductions, shafts, pivots, bearings, stops and lock pins",
+          "status": "check-stock",
+          "need": "Hardware for both legs",
+          "note": "Two 3:1 reductions are planned. Printed links are on hand; transmission and pivot hardware still need inventory confirmation.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md",
+            "docs/v1-proof-hardware.md"
+          ]
+        },
+        {
+          "id": "manual-link",
+          "name": "Manual input / deadman link",
+          "status": "check-stock",
+          "need": "1 usable control link",
+          "note": "Confirm a laptop/gamepad or compatible receiver/transmitter before buying replacements.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md",
+            "docs/v1-proof-hardware.md"
+          ]
+        },
+        {
+          "id": "battery",
+          "name": "Compatible 3S battery",
+          "status": "check-stock",
+          "need": "1 pack",
+          "note": "Existing pack model, cell count and condition are unconfirmed; reuse a qualified pack or buy one.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md",
+            "docs/v1-proof-hardware.md"
+          ]
+        },
+        {
+          "id": "charger",
+          "name": "Compatible balance charger, supply and charge lead",
+          "status": "check-stock",
+          "need": "1 charging setup",
+          "note": "Confirm the existing charger and leads match the chosen pack before buying.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md",
+            "docs/v1-proof-hardware.md"
+          ]
+        },
+        {
+          "id": "power",
+          "name": "Regulators and protected power distribution",
+          "status": "check-stock",
+          "need": "9 V servo and 5 V logic rails; fuse, kill and return-energy protection",
+          "note": "Bench supply is available, with ratings unconfirmed. The robot power/protection parts are not yet confirmed.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md",
+            "docs/v1-proof-hardware.md"
+          ]
+        },
+        {
+          "id": "harness",
+          "name": "Wiring, connectors, encoder level shifting and strain relief",
+          "status": "check-stock",
+          "need": "Harness for both wheel channels and the servo bus",
+          "note": "Confirm shop stock; 5 V encoder signals require suitable 3.3 V level conversion.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md",
+            "docs/v1-proof-hardware.md"
+          ]
+        },
+        {
+          "id": "structure",
+          "name": "Frame/bracket stock and mechanical fasteners",
+          "status": "check-stock",
+          "need": "Remaining structure and assembly hardware",
+          "note": "3D printing is reported complete. Confirm printed fit and available fasteners/frame stock before buying more.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md",
+            "docs/v1-proof-hardware.md"
+          ]
+        },
+        {
+          "id": "fixture",
+          "name": "Catch frame, rest skids and padding",
+          "status": "check-stock",
+          "need": "1 test fixture / catch setup",
+          "note": "Confirm usable shop materials and build the fixture before free-standing trials.",
+          "sourcePaths": [
+            "docs/parts-on-hand.md",
+            "docs/v1-proof-hardware.md"
+          ]
+        }
+      ],
+      "shoppingSummary": "Pico 2 and SparkFun LSM6DSO IMU are received and paid for; two ST3215 servos are also already paid, with arrival unreported. Other paid parts are recorded in the order ledger above. Confirm stock for the supporting parts before buying replacements."
     },
     {
       "id": "V0-GENESIS",
@@ -794,7 +1040,7 @@
           "kind": "history"
         },
         {
-          "title": "Historical requirements R1–R44",
+          "title": "Historical requirements R1\u2013R44",
           "path": "docs/archive/stair-v1/requirements.md",
           "kind": "history"
         },
@@ -880,7 +1126,7 @@
         {
           "id": "next-scope",
           "title": "Make an explicit next-version scope decision",
-          "detail": "Choose the third version’s name, requirements, architecture and budget from the proof’s measured results. V1 success does not promise a stair upgrade of the proof chassis.",
+          "detail": "Choose the third version\u2019s name, requirements, architecture and budget from the proof\u2019s measured results. V1 success does not promise a stair upgrade of the proof chassis.",
           "status": "future",
           "sourcePaths": [
             "docs/decisions.md",
