@@ -28,8 +28,8 @@
       "phase": "passive",
       "status": "ready",
       "action": "Check for cracks, warped plates and damaged holes. Try the intended M4 hardware gently. Measure both link centers and both fixed/carrier pivot separations.",
-      "measure": "Link centers: 110 mm each. Pivot spacing: 40 mm on both plates. Record actual hole fit, printed revision, material and quantities.",
-      "evidence": "Dimensions and a photo of the measured parts; retain any fit failures.",
+      "measure": "Link centers: 110 mm each. Pivot separation: 40 mm on both plates. Record the actual hole fit, printed revision, material and quantities.",
+      "evidence": "Dimensions and a photo of the measured parts. Retain any fit failures.",
       "sourcePaths": [
         "docs/checklists/2026-10-02-mechanical-fit.md",
         "cad/prints/v1-proof-r01/README.md"
@@ -40,9 +40,9 @@
       "title": "Assemble the passive parallelogram",
       "phase": "passive",
       "status": "planned",
-      "action": "For R01, place 2 mm spacers at both ends of the lower link and 12 mm spacers at both ends of the upper link. Keep both plates behind the links.",
-      "measure": "Actual spacer and fastener stacks, bolt-end clearance, pivot retention and free motion. Match the printed revision before using this layout.",
-      "evidence": "Side and end-view photos; fasteners retained without binding.",
+      "action": "For R01, place 2 mm spacers at both ends of the lower link. Place 12 mm spacers at both ends of the upper link. Keep both plates behind the links.",
+      "measure": "Actual spacer and fastener stacks, bolt-end clearance, pivot retention and free motion. Match the printed revision before you use this layout.",
+      "evidence": "Side and end-view photos. Fasteners retained without binding.",
       "sourcePaths": [
         "docs/checklists/2026-10-02-mechanical-fit.md",
         "cad/prints/v1-proof-r01/README.md#assemble-and-check-by-hand"
@@ -53,9 +53,9 @@
       "title": "Sweep 15–45° by hand",
       "phase": "passive",
       "status": "planned",
-      "action": "Secure the fixed plate, support the carrier and disconnect the drive. Gently approach 15°, 30° and 45° from both directions; also check intermediate positions.",
+      "action": "Secure the fixed plate, support the carrier and disconnect the drive. Gently approach 15°, 30° and 45° from both directions. Also check the intermediate positions.",
       "measure": "Axle x/y, closest clearance, rubbing, binding and neutral free play. Do not force a collision.",
-      "evidence": "Photos at three poses and notes identifying the closest hardware clearances.",
+      "evidence": "Photos at three poses and notes that identify the closest hardware clearances.",
       "sourcePaths": [
         "docs/checklists/2026-10-02-mechanical-fit.md",
         "docs/one-leg-bench.md#link-lengths-and-fixture"
@@ -67,7 +67,7 @@
       "phase": "passive",
       "status": "planned",
       "action": "Independently support the received motor at the proposed carrier location with power disconnected. Check shaft, hub, wheel, bearing and cable envelopes across the sweep.",
-      "measure": "Motor mass and mounting/shaft dimensions; actual wheel and cable clearances. The Ø100 disc represents an envelope only.",
+      "measure": "Motor mass and mount/shaft dimensions. Actual wheel and cable clearances. The Ø100 disc represents an envelope only.",
       "evidence": "Packaging photos and a list of mount, hub and bearing details still needed.",
       "sourcePaths": [
         "docs/checklists/2026-10-02-mechanical-fit.md",
@@ -81,7 +81,7 @@
       "status": "planned",
       "action": "After a clear first sweep, repeat slowly five times. Recheck retained hardware and print condition, and approach neutral from both directions.",
       "measure": "Cycle count, endpoint repeatability, neutral free play and changes in print condition. No test payload on R01.",
-      "evidence": "Before/after photos and measured play; keep failures in the journal.",
+      "evidence": "Before/after photos and measured play. Keep the failures in the journal.",
       "sourcePaths": [
         "docs/checklists/2026-10-02-mechanical-fit.md"
       ]
@@ -92,7 +92,7 @@
       "phase": "powered",
       "status": "planned",
       "action": "After mount, support and electrical checks, pin the leg and lift the wheel. Verify motor/encoder direction, then follow the bounded wheel-only bench trial.",
-      "measure": "Speed, sign, response, current, rail voltage and temperature. Verify current limiting, kill and fault behavior.",
+      "measure": "Speed, sign, response, current, rail voltage and temperature. Verify the current limit, kill and fault behavior.",
       "evidence": "Wiring/firmware revision, logs and supported fault checks. Start with the full bench guide.",
       "sourcePaths": [
         "docs/one-leg-bench.md#power-and-interfaces",
@@ -119,7 +119,7 @@
       "status": "planned",
       "action": "Use a reviewed structure and load path, captured measured loads and a defined force direction/lever arm. Proceed only after the guide’s unloaded, electrical and fault gates.",
       "measure": "Load, deflection, backlash, hold duty, temperature and power-loss behavior. R01 alone has no applied-load qualification.",
-      "evidence": "Dated load/duty session and measured acceptance evidence; no balance gate is closed by this bench alone.",
+      "evidence": "Dated load/duty session and measured acceptance evidence. This bench alone closes no balance gate.",
       "sourcePaths": [
         "docs/one-leg-bench.md",
         "docs/checklists/mechanical-v1.md"
@@ -132,7 +132,7 @@
       "date": "2026-09-29",
       "kind": "preparation",
       "title": "R01 passive print kit prepared",
-      "notes": "110 mm parallel links, 40 mm pivots and separate lateral spacers; geometry mockup only.",
+      "notes": "110 mm parallel links, 40 mm pivots and separate lateral spacers. Geometry mockup only.",
       "sourcePaths": [
         "cad/prints/v1-proof-r01/README.md"
       ]
@@ -153,7 +153,7 @@
       "date": "2026-10-02",
       "kind": "preparation",
       "title": "Mechanical test route opened",
-      "notes": "The passive fit checklist is ready. Begin inspection, assembly, hand sweeps and packaging; every measured test result is still open.",
+      "notes": "The passive fit checklist is ready. Start the inspection, assembly, hand sweeps and packaging checks. Every measured test result is still open.",
       "sourcePaths": [
         "docs/checklists/2026-10-02-mechanical-fit.md",
         "docs/mechanical-testing.md"

@@ -39,18 +39,18 @@ def quantity_summary(counts):
     motor, driver, servo = (counts[key] for key in ("pololu-4752", "pololu-4035", "st3215"))
     show = lambda value: "Not recorded" if value is None else str(value)
     units = lambda value, name: f"{name} count not recorded" if value is None else f"{value} {name}{'' if value == 1 else 's'}"
-    coverage = (f"Wheel orders: {show(motor['ordered'])} of {show(motor['planned'])} motors and "
+    coverage = (f"Recorded wheel orders cover {show(motor['ordered'])} of {show(motor['planned'])} motors and "
                 f"{show(driver['ordered'])} of {show(driver['planned'])} drivers. "
                 f"Not covered by recorded orders: {units(motor['missing'], 'motor')} and {units(driver['missing'], 'driver')}.")
     if motor["missing"] == 0 and driver["missing"] == 0 and motor["planned"] == driver["planned"] == 2:
-        wheel = "The full wheel motor/driver pair is ordered; delivery and qualification remain separate gates."
+        wheel = "The full wheel motor/driver pair is ordered. Delivery and qualification remain separate gates."
     elif motor["ordered"] == driver["ordered"] == 1 and motor["planned"] == driver["planned"] == 2:
-        wheel = "The first restrained bench channel is ordered; the second wheel channel is still required."
+        wheel = "The first restrained bench channel is ordered. The second wheel channel is still required."
     else:
         wheel = "Recorded quantities do not yet establish a complete wheel motor/driver pair."
-    legs = (f"Leg orders: {show(servo['ordered'])} of {show(servo['planned'])} ST3215 servos; "
-            f"{show(servo['missing'])} still needed.")
-    return f"**{coverage}** {wheel} Confirm total received driver count before buying another driver. {legs}"
+    legs = (f"Recorded leg orders cover {show(servo['ordered'])} of {show(servo['planned'])} ST3215 servos, "
+            f"with {show(servo['missing'])} still needed.")
+    return [f"**{coverage}** {wheel} Confirm the total received driver count before you buy another driver.", "", legs]
 
 
 def purchase_report(c, plan):
@@ -111,7 +111,7 @@ def remaining_shopping_list(version):
 def purchase_lines(c, plan):
     p = purchase_report(c, plan)
     t, remaining = p["totals"], p["remaining"]
-    lines = [f"**Recorded spend: {money(t['paidTotal'])}. Remaining against the planning ceiling: {money(remaining['total'])}.** Remaining money includes all unfinished purchases and reserves; it is not a completion quote.", "",
+    lines = [f"**Recorded spend: {money(t['paidTotal'])}. Remaining against the planning ceiling: {money(remaining['total'])}.** The remaining money includes all unfinished purchases and the reserves. It is not a quote for completion.", "",
              "## Ordered parts and delivery", "", "| Vendor / ordered part | Ordered quantity | Unit paid | Goods total | Order status |", "| --- | ---: | ---: | ---: | --- |"]
     for order in p["orders"]:
         for item in order["items"]:
@@ -122,7 +122,9 @@ def purchase_lines(c, plan):
             lines.append(f"| {order['vendor']} {item['name']} | {qty if qty is not None else 'Not recorded'} | {money(unit)} | {money(cost)} | {status} |")
     lines += [""]
     lines += [f"- **{order['vendor']}:** {order['deliveryNote']}" for order in p["orders"]]
-    lines += ["", quantity_summary(p["quantities"]) + " Verify their 12 V labels on arrival: the receipt names the ST3215 series and the user confirmed the voltage variant. [Motor connections and controls](v1-proof-hardware.md).", "",
+    lines += [""] + quantity_summary(p["quantities"])
+    lines[-1] += " When the servos arrive, make sure that the labels say 12 V. The receipt names the ST3215 series. The user confirmed the voltage variant. [Motor connections and controls](v1-proof-hardware.md)."
+    lines += ["",
               "## Recorded order totals", "", "| Vendor / recorded date | Goods | Shipping / handling | Tax | Order total |", "| --- | ---: | ---: | ---: | ---: |"]
     for order in p["orders"]:
         tax = money(order.get("taxCost"))
@@ -131,13 +133,14 @@ def purchase_lines(c, plan):
         order_date = f"{order['paidOn']} (paid)" if order.get("paidOn") else (f"{order['orderedOn']} (ordered)" if order.get("orderedOn") else "Not recorded")
         lines.append(f"| {order['vendor']} / {order_date} | {money(order.get('merchandiseCost'))} | {money(order.get('shippingCost'))} | {tax} | **{money(order.get('paidTotal'))}** |")
     lines += [f"| **Recorded spend** | **{money(t['merchandiseCost'])}** | **{money(t['shippingCost'])}** | **{money(t['taxCost'])}** | **{money(t['paidTotal'])}** |", "",
-              "Recorded order totals count each purchase once; reference prices below are historical. A payment-service confirmation corroborates its vendor order and is not counted again. An order-placement date does not establish its payment date. Missing amounts stay unrecorded, never zero: an unitemized order total can establish overall spend while separate goods and shipping/tax balances remain unknown. See [purchase evidence](purchases.md) and the [inventory](parts-on-hand.md) for delivery and qualification gates.", "",
+              "Recorded order totals count each purchase one time. The reference prices below are historical. A payment-service confirmation confirms its vendor order, and we do not count it again. An order-placement date does not establish the payment date. Missing amounts stay unrecorded, never zero. An order total without itemized charges can establish the overall spend while the separate goods and shipping/tax balances remain unknown.", "",
+              "Refer to the [purchase evidence](purchases.md) and the [inventory](parts-on-hand.md) for the delivery and qualification gates.", "",
               "## Remaining planning allocations", "", "| Allocation | Not yet spent |", "| --- | ---: |",
               f"| Parts and fixture allowance | {money(remaining['parts'])} |",
               f"| Shipping, tax and import-charge allowance | {money(remaining['shippingTax'])} |",
               f"| Repair and overrun reserve retained | {money(c['budget']['repair_contingency_usd'])} |",
               f"| **Remaining against the planning ceiling** | **{money(remaining['total'])}** |", "",
-              "See the inventory for controller and IMU receipt status. The servo interface, encoder level conversion, current-limit passives, wheels/hubs, protected power and wiring still need confirmation. Bench-supply ratings remain unconfirmed. Historical carts and unassigned V0-GENESIS parts are not recorded V1-PROOF spending.", ""]
+              "Refer to the inventory for the controller and IMU receipt status. The servo interface, encoder level conversion, current-limit passives, wheels/hubs, protected power and wire harness still need confirmation. Bench-supply ratings remain unconfirmed. Historical carts and unassigned V0-GENESIS parts are not recorded V1-PROOF spend.", ""]
     version = next(version for version in plan["versions"] if version["id"] == "V1-PROOF")
     if version.get("shoppingList"):
         lines += ["## Remaining shopping list", "", version["shoppingSummary"], "",
@@ -145,7 +148,7 @@ def purchase_lines(c, plan):
         for item in remaining_shopping_list(version):
             status = plan["statusLabels"].get(item["status"], item["status"])
             lines.append(f"| {item['name']} | {item['need']}. {item['note']} | {status} |")
-        lines += ["", "Original planning caps below cover the full build allocations, including parts already bought. Missing parts still need quotes or confirmed reuse.", ""]
+        lines += ["", "The original planning caps below cover the full build allocations. The allocations include parts already bought. Missing parts still need quotes or confirmed reuse.", ""]
     return lines
 
 
@@ -277,11 +280,12 @@ def outputs(c, plan=None):
     sources = {s["id"]: s for s in c["sources"]}
     if plan is None:
         plan = json.loads(PLAN.read_text())
-    lines = ["# V1-PROOF budget", "", f"**${r['total_cap_usd']:,.0f} planned ceiling, including shipping, tax and repair contingency.** The hard limit is strictly under $1,000. The recorded orders below are committed V1-PROOF spend. The previous stair budget is [parked](archive/stair-v1/bom.md).", ""]
+    lines = ["# V1-PROOF budget", "", f"**${r['total_cap_usd']:,.0f} planned ceiling. The ceiling includes shipping, tax and the repair contingency.** The hard limit is strictly under $1,000. The recorded orders below are committed V1-PROOF spend. The previous stair budget is [parked](archive/stair-v1/bom.md).", ""]
     lines += purchase_lines(c, plan)
     lines += ["## Original planning caps", "",
-             "These maximum allocations are retained for comparison with actual spending; they are not a fully quoted remaining cart. Delivery, import charges and unpurchased rows need current quotes. Existing shop tools and unpaid fabrication labor are assumed; new tools or outsourced work must fit this same total or the design must change. See the [hardware decisions](v1-proof-hardware.md).", "",
-             "**No free inventory is assumed.** Confirmed reuse credit is $0. The quantities below are planned build quantities, not ordered quantities. Paid purchases already consume these allocations; do not add their cost to the $900 ceiling or subtract them again as free reuse. Credit qualified existing equipment only when it displaces a purchase; retain the shipping/tax and repair reserves. A Pi, cameras, display and Jetson are outside this build.", "",
+             "We keep these maximum allocations for comparison with the actual spend. They are not a fully quoted remaining cart. Delivery, import charges and unpurchased rows need current quotes. The plan assumes the shop tools on hand and unpaid fabrication labor. New tools or outsourced work must fit this same total, or the design must change. Refer to the [hardware decisions](v1-proof-hardware.md).", "",
+             "**The plan assumes no free inventory.** The confirmed reuse credit is $0. The quantities below are planned build quantities, not ordered quantities. Paid purchases already consume these allocations. Do not add their cost to the $900 ceiling, and do not subtract them again as free reuse.", "",
+             "Give credit for qualified equipment on hand only when it displaces a purchase. Retain the shipping/tax and repair reserves. A Pi, cameras, display and Jetson are outside this build.", "",
              "| Qty | Item | Unit cap | Total cap | Stage |", "| ---: | --- | ---: | ---: | --- |"]
     for row in b["rows"]:
         item = row["item"]
@@ -292,40 +296,43 @@ def outputs(c, plan=None):
               f"| | Shipping, sales tax and any import charges | | ${b['shipping_tax_usd']:.2f} | Reserved |",
               f"| | Repairs, replacement parts and overrun reserve | | ${b['repair_contingency_usd']:.2f} | Reserved |",
               f"| | **Total** | | **${r['total_cap_usd']:.2f}** | |", "",
-              f"The difference to $1,000 is ${r['headroom_usd']:.0f}; spending the entire difference would violate the strictly-under-$1,000 requirement. Prefer savings from reuse; do not turn them into added features.", "",
+              f"The difference to $1,000 is ${r['headroom_usd']:.0f}. If you spend the full difference, you violate the strictly-under-$1,000 requirement. Prefer savings from reuse. Do not change savings into added features.", "",
               "## Historical reference prices and scope", "",
-              "The following price and availability observations were checked **2026-09-28**. They are not current stock checks or evidence of further purchases; the receipt table above controls actual spend.", "",
-              "- Pololu 4752: reference price $60.95 each; two selected encoder motors fit the $125 allocation. Current purchased quantities and remaining needs are calculated above.",
-              "- Pololu 4035 DRV8874: reference $11.94 each; two carriers plus current-limit passives fit the $40 allowance. Current-limit passives still need confirmation; measure the 2.5 A limit. The historical stock page allowed backorders; this replaces the oversized G2 reference.",
-              "- Waveshare ST3215 series: reference listing $16.99–21.99 depending on variant; receipt prices are recorded above. Qualify holding performance on the regulated 9 V rail. The $60 allocation remains the original cap, with a separate transmission row.",
-              "- The original Pico 2 + Adafruit LSM6DSOX 4438 + half-duplex adapter allocation was $40, with an $11.95 IMU reference on September 28. The October 2 controller/IMU order instead names SparkFun LSM6DSO, with a $30.58 combined total and no itemized charges. The servo interface remains unconfirmed; preserve the original cap and record remaining costs separately.",
+              "We checked the price and availability observations that follow on **2026-09-28**. They are not current stock checks or evidence of more purchases. The receipt table above controls the actual spend.", "",
+              "- Pololu 4752 gearmotor: the reference price is $60.95 each. Two of the selected encoder motors fit the $125 allocation. The report above calculates the current purchased quantities and the remaining needs.",
+              "- DRV8874 driver (Pololu 4035): the reference price is $11.94 each. Two carriers plus the current-limit passives fit the $40 allowance. The current-limit passives still need confirmation. Measure the 2.5 A limit. The historical stock page permitted backorders. This driver replaces the oversized G2 reference.",
+              "- ST3215 servo (Waveshare ST3215 series): the reference price is $16.99–21.99 as a function of the variant. The receipt prices are recorded above. Qualify the hold performance on the regulated 9 V rail. The $60 allocation remains the original cap, with a separate transmission row.",
+              "- The original allocation for the Pico 2, the Adafruit LSM6DSOX 4438 and the half-duplex adapter was $40. The IMU reference price on September 28 was $11.95. The October 2 controller/IMU order instead names the SparkFun LSM6DSO IMU. That order has a $30.58 combined total and no itemized charges. The servo interface remains unconfirmed. Keep the original cap and record the remaining costs separately.",
               "- Manual input can reuse RC or a laptop/gamepad with a timed deadman link. The $60 fallback is an allocation, not a claim that a new TBS receiver and transmitter together cost $60.", "",
               "## Build sequence", "",
-              "P0 inventories and qualifies existing controls. P1 builds the supported wheel rig and pinned structure. P2 proves two-wheel balance and slow teleop. P3 adds the two leg servos/reductions. P4 runs the finish-line trials. These stages share one budget; do not add a second two-motor robot to the four-motor cost. Quotes exceeding an allocation consume the reserve or force a substitution before purchase.", "",
-              "Sources: planning caps in [model.json](../tools/v1-proof/model.json); paid orders in [plan-data.json](../tools/living-drawings/plan-data.json), under V1-PROOF `orders`; [receipt provenance](purchases.md). Regenerate with `python3 tools/v1-proof/review.py --write`. [Active plan](v1-proof.md) · [Inventory](parts-on-hand.md).", ""]
+              "P0 makes an inventory of the controls on hand and qualifies them. P1 builds the supported wheel rig and the pinned structure. P2 proves two-wheel balance and slow teleop. P3 adds the two leg servos and their reductions. P4 runs the finish-line trials.", "",
+              "These stages share one budget. Do not add a second two-motor robot to the four-motor cost. A quote that exceeds an allocation consumes the reserve or forces a substitution before purchase.", "",
+              "Sources: the planning caps are in [model.json](../tools/v1-proof/model.json). The paid orders are in [plan-data.json](../tools/living-drawings/plan-data.json), under V1-PROOF `orders`. Refer to the [receipt provenance](purchases.md). Regenerate with `python3 tools/v1-proof/review.py --write`. [Active plan](v1-proof.md) · [Inventory](parts-on-hand.md).", ""]
     wheel = r["wheel_at_max_mass"]
-    calc = ["# V1-PROOF sizing screen", "", f"Generated from [model.json](../tools/v1-proof/model.json), revision {c['revision']}. All masses and geometry are allocations. **Hardware validation and fabrication release remain false.**", "",
+    calc = ["# V1-PROOF sizing screen", "", f"The source of this screen is [model.json](../tools/v1-proof/model.json), revision {c['revision']}. All masses and geometry are allocations. **Hardware validation and fabrication release remain false.**", "",
             "## Geometry and load assumptions", "",
-            "One four-bar parallelogram per side: two equal parallel links, with vertical separation equal at body and wheel carrier. One bearing-supported driven pivot and a 3:1 belt reduction per side; the servo shaft does not carry the robot. Both wheel contacts stay on level ground. Positive link angle is rearward from downward vertical. Dimensions refer to an upright chassis; a balancing robot needs pose-dependent pitch trim.", "",
-            "For link length L and angle q: axle rearward offset = L sin(q); pivot above axle = L cos(q); body top = wheel radius + L cos(q) + body allocation. Link angles 15–45 degrees avoid the straight-link toggle.", "",
-            f"- Upright height {r['poses'][1]['overall_height_mm']:.1f}–{r['poses'][0]['overall_height_mm']:.1f} mm; outside wheel width {r['overall_width_mm']:.0f} mm.",
-            f"- Nominal height travel {r['height_travel_mm']:.2f} mm; axle sweep {r['axle_fore_aft_travel_mm']:.2f} mm. Servo travel is 90 degrees through the 3:1 reduction.",
-            "- The axle sweep changes the center of mass relative to the contact line. Moving both wheels does not by itself remove that static offset. Measure whole-robot CoM and set a pitch trim for each height; verify it remains within the balancing envelope. Begin with pinned legs. If trim is excessive, reduce travel or revise the linkage inside this budget.", "",
+            "Each side has one four-bar parallelogram with two equal parallel links. The vertical separation of the links is the same at the body and at the wheel carrier. Each side has one bearing-supported driven pivot and a 3:1 belt reduction. The servo shaft does not carry the robot. Both wheel contacts stay on level ground. The positive link angle is rearward from the downward vertical.", "",
+            "The dimensions refer to an upright chassis. A robot that balances needs a pitch trim that changes with the pose.", "",
+            "For link length L and angle q: the axle rearward offset = L sin(q). The pivot above the axle = L cos(q). The body top = wheel radius + L cos(q) + body allocation. Link angles of 15–45 degrees stay clear of the straight-link toggle.", "",
+            f"- The upright height is {r['poses'][1]['overall_height_mm']:.1f}–{r['poses'][0]['overall_height_mm']:.1f} mm. The outside wheel width is {r['overall_width_mm']:.0f} mm.",
+            f"- The nominal height travel is {r['height_travel_mm']:.2f} mm. The axle sweep is {r['axle_fore_aft_travel_mm']:.2f} mm. The servo travel is 90 degrees through the 3:1 reduction.",
+            "- The axle sweep changes the center of mass relative to the contact line. Movement of both wheels alone does not remove that static offset. Measure the whole-robot CoM and set a pitch trim for each height. Make sure that the trim stays in the balance envelope. Start with pinned legs. If the trim is excessive, reduce the travel or revise the linkage inside this budget.", "",
             "## Leg sizing", "",
-            "Use all robot mass as sprung mass for a conservative vertical-load screen: servo torque = m g share L sin(q) / (reduction × efficiency). Efficiency is an assumed 0.85. A 60/40 load split is the worst planned two-wheel condition, not a single-support claim.", "",
-            f"At 3.0 kg, 60% load on one side and 45 degrees: **{r['worst_static_servo_nm']:.3f} N·m** at the servo. Require **0.75 N·m mounted hold for 10 minutes**, plus a separately qualified 1.0 N·m short transient. No spring credit is used. Acceleration, horizontal forces, bearing friction and real efficiency require measurement. A 30 kg-cm (~2.94 N·m) advertised maximum is not a continuous rating.", "",
+            "Use all robot mass as sprung mass for a conservative vertical-load screen: servo torque = m g share L sin(q) / (reduction × efficiency). The assumed efficiency is 0.85. A 60/40 load split is the worst planned two-wheel condition, not a single-support claim.", "",
+            f"At 3.0 kg, 60% load on one side and 45 degrees: **{r['worst_static_servo_nm']:.3f} N·m** at the servo. The requirement is a **0.75 N·m mounted hold for 10 minutes**, plus a separately qualified 1.0 N·m short transient. The screen uses no spring credit. We must measure acceleration, horizontal forces, bearing friction and real efficiency. A 30 kg-cm (~2.94 N·m) advertised maximum is not a continuous rating.", "",
             "## Wheel sizing", "",
-            "With a 100 mm wheel: rpm = speed / radius × 60 / (2 pi). Preliminary demand per wheel = m × [g tan(10 degrees) + 0.03 g] × radius / 2 × 2.5. The final multiplier provides preliminary allowance for omitted inertia and losses; it is not inverse dynamics or a stability proof.", "",
-            f"At 3.0 kg and 0.5 m/s: **{wheel['rpm']:.1f} rpm**, **{wheel['demand_nm_per_wheel']:.3f} N·m** screening demand per wheel. A linear 12 V reference model evaluated at {wheel['screen_voltage_v']:.1f} V and a proposed 2.5 A current limit gives **{wheel['available_peak_nm_estimate']:.3f} N·m**. This is a feasibility estimate, not a usable continuous rating or a measured catch margin.", "",
-            "Qualify at least 0.50 N·m short peak at 96 rpm and 0.15 N·m continuous in the actual installation, both at minimum operating voltage. Initially cap RMS motor current at 1.2 A and short peak at 2.5 A; bench measurements must establish safe pulse duration, temperature limits and controller gains. The 9.9 V value is a loaded-voltage sizing assumption; the selected pack determines its actual low-voltage threshold. Smaller robots fall faster, and gearbox friction/backlash can defeat otherwise adequate torque numbers.", "",
+            "With a 100 mm wheel: rpm = speed / radius × 60 / (2 pi). Preliminary demand per wheel = m × [g tan(10 degrees) + 0.03 g] × radius / 2 × 2.5. The final multiplier gives a preliminary allowance for omitted inertia and losses. It is not inverse dynamics or a stability proof.", "",
+            f"At 3.0 kg and 0.5 m/s: **{wheel['rpm']:.1f} rpm**, **{wheel['demand_nm_per_wheel']:.3f} N·m** screen demand per wheel. A linear 12 V reference model evaluated at {wheel['screen_voltage_v']:.1f} V and a proposed 2.5 A current limit gives **{wheel['available_peak_nm_estimate']:.3f} N·m**. This is a feasibility estimate, not a usable continuous rating or a measured catch margin.", "",
+            "Qualify at least a 0.50 N·m short peak at 96 rpm in the actual installation. Also qualify 0.15 N·m continuous in the actual installation. Do both at the minimum operating voltage. At the start, limit the RMS motor current to 1.2 A and the short peak to 2.5 A. Bench measurements must set the safe pulse duration, the temperature limits and the controller gains.", "",
+            "The 9.9 V value is a loaded-voltage assumption of this sizing screen. The selected pack sets its actual low-voltage threshold. Smaller robots fall faster, and gearbox friction/backlash can defeat otherwise adequate torque numbers.", "",
             "## Mass allocation", "", "| Item | kg |", "| --- | ---: |"]
     calc += [f'| {row["item"]} | {row["kg"]:.2f} |' for row in c["mass_items"]]
     calc += [f"| **Total including unallocated allowance** | **{r['mass_allocation_kg']:.2f}** |", "",
-             "The 3.0 kg limit is a redesign threshold. Reweigh after each stage. Do not add a Pi, cosmetic shell or larger battery by quietly consuming control margin.", "",
+             "The 3.0 kg limit is a redesign threshold. Reweigh after each stage. Do not add a Pi, a cosmetic shell or a larger battery and quietly consume the control margin.", "",
              "## Evidence and limits", "",
-             "Official references checked 2026-09-28:", ""]
+             "We checked these official references on 2026-09-28:", ""]
     calc += [f'- [{src["title"]}]({src["url"]}): {src["note"]}' for src in c["sources"]]
-    calc += ["", "This sizing screen does not validate full solid clearance, belt engagement, bearing life, strength, measured CoM/inertia, contact friction, battery protection, control timing or thermal duty. The separate [closed-loop simulation report](v1-proof-simulation.md) covers pinned-leg maneuver and disturbance trials with explicit limitations. Powered height motion and all physical acceptance tests remain open. See the [build checklist](checklists/mechanical-v1.md).", ""]
+    calc += ["", "This sizing screen does not validate full solid clearance, belt engagement, bearing life, strength, measured CoM/inertia, contact friction, battery protection, control timing or thermal duty. The separate [closed-loop simulation report](v1-proof-simulation.md) covers pinned-leg maneuver and disturbance trials with explicit limitations. Powered height motion and all physical acceptance tests remain open. Refer to the [build checklist](checklists/mechanical-v1.md).", ""]
     return {
         ROOT / "docs/bom.md": "\n".join(lines),
         ROOT / "docs/v1-proof-sizing.md": "\n".join(calc),

@@ -1,6 +1,6 @@
 # V1-PROOF requirements
 
-**Active from 2026-09-28.** The user's scope reset supersedes the stair project. Historical R1–R44 requirements are preserved in the [archive](archive/stair-v1/requirements.md); they do not constrain this proof build. [Plan and finish line](v1-proof.md).
+**Active from 2026-09-28.** The user's scope reset supersedes the stair project. The [archive](archive/stair-v1/requirements.md) keeps the historical R1–R44 requirements. They do not constrain this proof build. [Plan and finish line](v1-proof.md).
 
 | ID | Requirement | Acceptance / scope |
 | --- | --- | --- |
@@ -24,4 +24,4 @@
 | PF17 | Explicit hardware baseline | [Selected components and bench gates](v1-proof-hardware.md); no purchase or physical validation implied |
 | PF18 | Foundation for later versions | Versioned telemetry/commands, measured motor/IMU/contact models, retained failures and regression matrix before payload/perception expansion |
 
-PF01/PF02 and the reduced scope come directly from the user's request. The later 2026-09-28 request adds reliable maneuvers, bounded disturbances, component decisions and a path to higher requirements. Numerical test envelopes and selected components are engineering decisions implementing that request, not measured capabilities. Change them deliberately with the [decision log](decisions.md) and [model.json](../tools/v1-proof/model.json), while preserving the user's budget and scope.
+PF01/PF02 and the reduced scope come directly from the user's request. The later 2026-09-28 request adds reliable maneuvers, bounded disturbances, component decisions and a path to higher requirements. The numerical test envelopes and the selected components are design decisions that put that request into effect. They are not measured capabilities. Change them deliberately with the [decision log](decisions.md) and [model.json](../tools/v1-proof/model.json). Keep the user's budget and scope.

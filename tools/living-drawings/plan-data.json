@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-03",
+  "updatedAt": "2026-10-04",
   "currentVersion": "v1-proof",
   "description": "Source-backed HUX work-in-progress plan. Proposed and simulated work is separate from measured physical evidence. Null order quantities and costs mean unknown, not zero.",
   "statusLabels": {
@@ -8,16 +8,16 @@
     "awaiting-parts": "Awaiting parts",
     "ready": "Ready to prepare",
     "planned": "Planned",
-    "ordered": "Ordered \u00b7 awaiting shipment",
-    "available": "Available \u00b7 details pending",
+    "ordered": "Ordered · not yet shipped",
+    "available": "Available · details to record",
     "unconfirmed": "Unconfirmed",
     "archived": "Parked history",
-    "future": "Future \u00b7 unscoped",
+    "future": "Future · unscoped",
     "passed": "Passed with evidence",
     "blocked": "Blocked",
     "unverified": "Unverified",
-    "shipped": "Shipped \u00b7 awaiting arrival",
-    "received": "Received \u00b7 untested",
+    "shipped": "Shipped · not yet arrived",
+    "received": "Received · untested",
     "awaiting-arrival": "Awaiting arrival",
     "to-buy": "Still to buy",
     "check-stock": "Check stock first"
@@ -26,7 +26,7 @@
     "sourceOfTruth": "Repository documents and recorded physical evidence",
     "instructions": [
       "Update the relevant source document and this plan together when a decision, order or measured result changes.",
-      "Record dates, exact parts, quantities and actual costs; unknown values remain null.",
+      "Record dates, exact parts, quantities and actual costs. Unknown values remain null.",
       "Move physical milestones to passed only with linked session records, logs and measured acceptance evidence.",
       "Keep failed trials and superseded decisions in history. Simulation results never close hardware acceptance."
     ],
@@ -44,7 +44,7 @@
       "name": "V1-PROOF",
       "role": "current",
       "status": "in-progress",
-      "summary": "The current HUX: a small, four-actuator wheeled robot to prove balance, manual driving and slow leg-height changes for strictly less than $1,000.",
+      "summary": "The current HUX: a small, four-actuator wheeled robot to prove balance, manual drive and slow leg-height changes for strictly less than $1,000.",
       "sourcePaths": [
         "docs/v1-proof.md",
         "docs/decisions.md",
@@ -52,7 +52,7 @@
       ],
       "focus": {
         "title": "Check the received Pico, IMU and printed mechanical fit",
-        "summary": "One Pico 2 with pre-soldered headers and one SparkFun LSM6DSO IMU are received per user confirmation on 3 October, untested. Begin USB/LED checks and sensor identification while passive mechanical fit testing proceeds. The motor/drivers are received and parts printed; total driver count and printed revision/material remain to record. Recorded spend is $173.70, with $726.30 remaining under the $900 plan. The remaining shopping list separates the second wheel motor from parts that need stock confirmation. No physical test result is recorded.",
+        "summary": "The user confirmed on 3 October that one Pico 2 with pre-soldered headers and one LSM6DSO IMU are received, untested. Start the USB/LED checks and the sensor identification while the passive mechanical fit tests continue. The gearmotor and the drivers are received and the parts are printed, but the total driver count and the printed revision/material remain to record. Recorded spend is $173.70, with $726.30 remaining under the $900 plan. The remaining shopping list separates the second wheel gearmotor from the parts that need stock confirmation. No physical test result is recorded.",
         "sourcePaths": [
           "docs/checklists/2026-10-03-pico-bringup.md",
           "tools/living-drawings/mechanical-tests.html",
@@ -66,7 +66,7 @@
         {
           "id": "pico-usb",
           "title": "Check the received Pico over USB",
-          "detail": "Use a Micro-USB data cable with external GPIO and actuator wiring disconnected. Hold BOOTSEL during connection, confirm the RP2350 drive, load the official Blink UF2 and record LED behavior. Optionally check Hello World over USB serial. The SparkFun LSM6DSO is also received; identify its label and board revision before sensor bring-up. Sensor firmware and timing remain open.",
+          "detail": "Use a Micro-USB data cable with the external GPIO wires and the actuator wires disconnected. Hold BOOTSEL during connection, confirm the RP2350 drive, load the official Blink UF2 and record the LED behavior. The Hello World check over USB serial is optional. The LSM6DSO IMU is also received. Identify its label and board revision before the sensor bring-up. The sensor firmware and the timing remain open.",
           "status": "ready",
           "sourcePaths": [
             "docs/checklists/2026-10-03-pico-bringup.md",
@@ -76,7 +76,7 @@
         {
           "id": "fixture-mockup",
           "title": "Check the printed passive linkage",
-          "detail": "Printing is reported complete. Confirm printed revision and material, measure the fit coupon if printed, and check actual M4 hardware. For R01, assemble the 110 mm links and 40 mm pivots with the specified lateral spacers; sweep 15\u201345\u00b0 by hand and dry-fit the received motor/wheel envelope with all power disconnected. Powered mounts, bearings and load capacity remain unqualified.",
+          "detail": "The user reports that the print is complete. Confirm the printed revision and material, measure the fit coupon if it is printed, and check the actual M4 hardware. For R01, assemble the 110 mm links and the 40 mm pivots with the specified lateral spacers. Sweep 15–45° by hand and dry-fit the received gearmotor/wheel envelope with all power disconnected. Powered mounts, bearings and load capacity remain unqualified.",
           "status": "ready",
           "sourcePaths": [
             "docs/checklists/2026-10-02-mechanical-fit.md",
@@ -88,7 +88,7 @@
         {
           "id": "record-orders",
           "title": "Identify the received parts and outstanding arrivals",
-          "detail": "Record motor/driver labels, total received driver count, dimensions and condition. The receipt covers one Pololu 4752 and one 4035. The Pico is received; record its markings and USB checks. The SparkFun LSM6DSO is received per the user; record its label, board revision and condition. Record ST3215 arrival and verify 12 V labels when available.",
+          "detail": "Record the gearmotor/driver labels, the total received driver count, the dimensions and the condition. The receipt covers one Pololu 4752 gearmotor and one DRV8874 driver (Pololu 4035). The Pico 2 is received, so record its markings and USB checks. The user reports that the LSM6DSO IMU is received, so record its label, board revision and condition. Record the ST3215 servo arrival and verify the 12 V labels when the servos are available.",
           "status": "ready",
           "sourcePaths": [
             "docs/purchases.md",
@@ -109,7 +109,7 @@
         {
           "id": "inventory-interfaces",
           "title": "Confirm controls and power interfaces",
-          "detail": "Pico and DRV8874 drivers are received, with total driver count pending. SparkFun LSM6DSO is received, untested. Confirm the half-duplex servo interface, encoder level conversion, harness and protected power rails; record bench-supply ratings. A second wheel motor is still needed; reconcile driver inventory before ordering another.",
+          "detail": "The Pico 2 and the DRV8874 drivers are received, but the total driver count remains to record. The LSM6DSO IMU is received, untested. Confirm the half-duplex servo interface, the encoder level conversion, the harness and the protected power rails. Record the bench-supply ratings. A second wheel gearmotor is still necessary. Reconcile the driver inventory before you order another driver.",
           "status": "ready",
           "sourcePaths": [
             "docs/parts-on-hand.md",
@@ -119,7 +119,7 @@
         {
           "id": "power-gates",
           "title": "Resolve power and return-energy protection",
-          "detail": "Prepare a fused harness and independent actuator-power cut. Verify supply behavior, current limits and a regeneration path before loaded lowering, backdriving or aggressive reversals.",
+          "detail": "Prepare a fused harness and an independent actuator-power cut. Verify the supply behavior, the current limits and a regeneration path before you lower a load, backdrive an actuator or reverse aggressively.",
           "status": "planned",
           "sourcePaths": [
             "docs/one-leg-bench.md",
@@ -131,7 +131,7 @@
         {
           "label": "Planned all-in budget",
           "value": "$900",
-          "note": "Includes $100 shipping/tax and $125 repair/overrun reserve. Recorded spend: $173.70; remaining to this ceiling: $726.30, including future purchases and reserves. The latest order charge breakdown is unknown."
+          "note": "Includes $100 shipping/tax and $125 repair/overrun reserve. Recorded spend is $173.70. The remainder to this ceiling is $726.30, which covers future purchases and reserves. The latest order charge breakdown is unknown."
         },
         {
           "label": "Recorded spend",
@@ -141,27 +141,27 @@
         {
           "label": "Hard spend limit",
           "value": "< $1,000",
-          "note": "All new cash, including replacements, tools, freight and tax."
+          "note": "All new cash. This includes replacements, tools, freight and tax."
         },
         {
           "label": "Mass target / ceiling",
           "value": "2.5 / 3.0 kg",
-          "note": "Planning target and maximum; assembled mass is unmeasured."
+          "note": "Plan target and maximum. The assembled mass is unmeasured."
         },
         {
           "label": "Powered axes",
           "value": "4",
-          "note": "Two wheel motors and two reduced leg servos; first free-standing balance uses pinned legs."
+          "note": "Two wheel gearmotors and two reduced leg servos. The first free-standing balance uses pinned legs."
         },
         {
           "label": "Simulation evidence",
           "value": "388 / 391",
-          "note": "Numerical qualification scenarios passed; retain three settling failures. No physical reliability claim."
+          "note": "Numerical qualification scenarios passed. Retain the three settling failures. No physical reliability claim."
         },
         {
           "label": "Physical acceptance",
           "value": "All open",
-          "note": "No hardware test or firmware implementation is established by the current records."
+          "note": "The current records establish no hardware test and no firmware implementation."
         }
       ],
       "purchases": [
@@ -174,7 +174,7 @@
           "actualCost": 60.95,
           "currency": "USD",
           "confirmedOn": "2026-10-02",
-          "note": "One 30:1 wheel motor received per user report recorded 2 October; identify the label and measure the actual mounting/shaft envelope before fit testing. Untested. The planned robot quantity is two, so a second motor remains to buy. Recorded goods spend excludes shipping/tax.",
+          "note": "The user report recorded 2 October says that one 30:1 wheel gearmotor is received. Identify the label and measure the actual mount/shaft envelope before the fit tests. Untested. The planned robot quantity is two, so a second gearmotor remains to buy. The recorded goods spend excludes shipping/tax.",
           "sourcePaths": [
             "docs/purchases.md",
             "docs/parts-on-hand.md",
@@ -191,7 +191,7 @@
           "actualCost": 42.38,
           "currency": "USD",
           "confirmedOn": "2026-09-29",
-          "note": "Two servos paid 28 September; latest vendor record says awaiting shipment. Receipt SKU 22414 names the series; user confirmed the 12 V variant. Verify labels on arrival and qualify the regulated 9 V rail. Line-item spend excludes shipping.",
+          "note": "The payment for two servos is dated 28 September. The latest vendor record says that the order is not yet shipped. Receipt SKU 22414 names the series, and the user confirmed the 12 V variant. Verify the labels on arrival and qualify the regulated 9 V rail. The line-item spend excludes shipping.",
           "sourcePaths": [
             "docs/purchases.md",
             "docs/parts-on-hand.md",
@@ -207,7 +207,7 @@
           "actualCost": 11.94,
           "currency": "USD",
           "confirmedOn": "2026-10-02",
-          "note": "DRV8874 drivers received per user report recorded 2 October; total delivered count remains to confirm. The paid receipt covers one Pololu 4035 at $11.94 goods. Reconcile inventory and any additional order before buying another driver. Current-limit/harness parts and electrical qualification remain open.",
+          "note": "The user report recorded 2 October says that DRV8874 drivers are received. The total delivered count remains to confirm. The paid receipt covers one Pololu 4035 at $11.94 goods. Reconcile the inventory and any additional order before you buy another driver. The current-limit/harness parts and the electrical qualification remain open.",
           "sourcePaths": [
             "docs/purchases.md",
             "docs/parts-on-hand.md",
@@ -225,7 +225,7 @@
           "actualCost": null,
           "currency": "USD",
           "confirmedOn": "2026-10-03",
-          "note": "One board received per user and supplied October 2 Amazon order screenshot. Untested; begin BOOTSEL, onboard LED and optional USB serial checks. Individual price is unshown within the $30.58 controller/IMU order.",
+          "note": "The user reports that one board is received, and the supplied October 2 Amazon order screenshot shows the order. Untested. Start the BOOTSEL, onboard LED and optional USB serial checks. The individual price is not shown in the $30.58 controller/IMU order.",
           "sourcePaths": [
             "docs/checklists/2026-10-03-pico-bringup.md",
             "docs/parts-on-hand.md",
@@ -243,7 +243,7 @@
           "actualCost": null,
           "currency": "USD",
           "confirmedOn": "2026-10-03",
-          "note": "One SparkFun LSM6DSO Qwiic IMU received per user confirmation recorded 3 October, superseding the earlier screenshot delivery estimate. Untested. Bought with the Pico in the $30.58 Amazon order; individual price is unshown. Replaces the prior Adafruit LSM6DSOX selection. Verify label/board revision, 3.3 V main SPI connections and LSM6DSO initialization before qualification.",
+          "note": "The user confirmation recorded 3 October says that one LSM6DSO IMU is received. This confirmation supersedes the earlier screenshot delivery estimate. Untested. The $30.58 Amazon order covers the IMU and the Pico 2, and the individual price is not shown. The IMU replaces the prior Adafruit LSM6DSOX selection. Verify the label/board revision, the 3.3 V main SPI connections and the LSM6DSO initialization before qualification.",
           "sourcePaths": [
             "docs/checklists/2026-10-03-pico-bringup.md",
             "docs/parts-on-hand.md",
@@ -260,7 +260,7 @@
           "actualCost": null,
           "currency": "USD",
           "confirmedOn": null,
-          "note": "Servo bus interface ownership/purchase remains unconfirmed. Pico and IMU are tracked separately in the controller/IMU order; no interface is established by that screenshot.",
+          "note": "The servo bus interface ownership/purchase remains unconfirmed. The controller/IMU order tracks the Pico 2 and the IMU separately. That screenshot establishes no interface.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -275,7 +275,7 @@
           "actualCost": null,
           "currency": "USD",
           "confirmedOn": "2026-09-29",
-          "note": "Available per user; model, voltage/current ratings and reverse-energy behavior remain to be recorded. No reuse credit is inferred.",
+          "note": "The user says that the supply is available. The model, the voltage/current ratings and the reverse-energy behavior remain to record. No reuse credit is inferred.",
           "sourcePaths": [
             "docs/parts-on-hand.md"
           ]
@@ -289,7 +289,7 @@
           "actualCost": null,
           "currency": "USD",
           "confirmedOn": null,
-          "note": "Exact models, condition and cell count remain unknown. The planning baseline is a compatible 3S pack.",
+          "note": "Exact models, condition and cell count remain unknown. The plan baseline is a compatible 3S pack.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -305,7 +305,7 @@
           "actualCost": null,
           "currency": "USD",
           "confirmedOn": "2026-10-02",
-          "note": "Printing reported complete by the user. Printed revision, material, quantities and dimensions remain to record. Begin passive fit and packaging checks; no fit, load or powered test is recorded. Print costs are unrecorded and not added to receipt totals.",
+          "note": "The user reports that the print is complete. The printed revision, material, quantities and dimensions remain to record. Start the passive fit and packaging checks. No fit, load or powered test is recorded. The print costs are unrecorded and not added to the receipt totals.",
           "sourcePaths": [
             "docs/checklists/2026-10-02-mechanical-fit.md",
             "cad/prints/v1-proof-r01/README.md",
@@ -321,7 +321,7 @@
           "actualCost": null,
           "currency": "USD",
           "confirmedOn": null,
-          "note": "No parts reserved and shop stock not yet inventoried. Selected geometry does not establish owned components.",
+          "note": "No parts are reserved, and the shop stock is not yet inventoried. The selected geometry does not establish owned components.",
           "sourcePaths": [
             "docs/parts-on-hand.md"
           ]
@@ -332,7 +332,7 @@
           "id": "P0",
           "title": "Inventory and layout",
           "status": "in-progress",
-          "summary": "Motor/drivers received and parts printed per user. Paid receipts cover one wheel motor, one driver and two leg servos. Received labels/counts, printed fits, electronics interfaces and the second wheel motor remain open.",
+          "summary": "The user reports that the gearmotor and the drivers are received and the parts are printed. Paid receipts cover one wheel gearmotor, one driver and two leg servos. The received labels/counts, the printed fits, the electronics interfaces and the second wheel gearmotor remain open.",
           "criteria": [
             "Record exact parts, variants, quantities, costs and reusable stock.",
             "Quote missing items and retain reserves inside the strict cash cap.",
@@ -349,12 +349,12 @@
           "id": "BENCH",
           "title": "One-leg actuator exercise",
           "status": "ready",
-          "summary": "Begin passive mechanical fit checks now using the printed parts and received motor. Powered one-leg/one-wheel tests follow identified hardware, supported mounts and qualified interfaces. No bench stage has passed.",
+          "summary": "Start the passive mechanical fit checks now with the printed parts and the received gearmotor. Powered one-leg/one-wheel tests follow identified hardware, supported mounts and qualified interfaces. No bench stage passed.",
           "criteria": [
             "Complete the staged session with bounded commands, measured signs and disabled startup.",
             "Record passive clearances, backlash and measured leg/wheel response.",
             "Demonstrate independent power cut and implemented fault behavior in the fixture.",
-            "Use measured load, electrical and thermal results to inform the robot; a bench pass does not prove balance."
+            "Use measured load, electrical and thermal results to inform the robot. A bench pass does not prove balance."
           ],
           "sourcePaths": [
             "docs/checklists/2026-10-02-mechanical-fit.md",
@@ -366,11 +366,11 @@
           "id": "P1",
           "title": "Supported wheels and pinned chassis",
           "status": "planned",
-          "summary": "Qualify the wheel channels and basic electronics before attempting free-standing balance.",
+          "summary": "Qualify the wheel channels and the basic electronics before the first free-standing balance attempt.",
           "criteria": [
             "Build supported axles, pinned neutral legs, rest skids and a catch fixture.",
             "Verify motor/encoder polarity, current limits, low-voltage response and thermal behavior.",
-            "Test physical kill, watchdog, reset, stale commands and sensor faults with deliberate rearm.",
+            "Do tests of the physical kill, watchdog, reset, stale commands and sensor faults with deliberate rearm.",
             "Measure assembled mass, center of mass, timing and power behavior."
           ],
           "sourcePaths": [
@@ -386,9 +386,9 @@
           "summary": "Prove two-wheel mobility with both legs mechanically pinned at neutral.",
           "criteria": [
             "Hold balance for 60 seconds in at least 9 of 10 starts without support contact.",
-            "Complete logged 2 m forward/reverse runs, left/right arcs and both 360\u00b0 in-place turns under the physical protocol.",
+            "Complete logged 2 m forward/reverse runs, left/right arcs and both 360° in-place turns under the physical protocol.",
             "Complete five combined sequences at bounded speed, on the required floors and voltages.",
-            "Keep failures and configuration hashes; simulated success does not close this gate."
+            "Keep the failures and the configuration hashes. Simulated success does not close this gate."
           ],
           "sourcePaths": [
             "docs/v1-proof-validation.md",
@@ -399,12 +399,12 @@
           "id": "P3",
           "title": "Powered leg-height adjustment",
           "status": "planned",
-          "summary": "Add supported 3:1 reductions after pinned-leg balance; qualify each leg before synchronized movement.",
+          "summary": "Add the supported 3:1 reductions after the pinned-leg balance. Qualify each leg before synchronized movement.",
           "criteria": [
-            "Qualify 0.75 N\u00b7m mounted servo hold for 10 minutes and the separate 1.0 N\u00b7m short transient target.",
+            "Qualify the 0.75 N·m mounted servo hold for 10 minutes. Qualify the separate 1.0 N·m short transient target.",
             "Measure backlash, loaded clearance and pose-dependent pitch trim.",
-            "Complete ten low/high/low cycles with both wheels loaded, targeting at least 25 mm actual body-height change.",
-            "No support contact, overload or balance loss; use the measured qualified range."
+            "Complete ten low/high/low cycles with both wheels loaded. The target is at least 25 mm of actual body-height change.",
+            "Make sure that there is no support contact, overload or balance loss. Use the measured qualified range."
           ],
           "sourcePaths": [
             "docs/checklists/mechanical-v1.md",
@@ -415,13 +415,13 @@
           "id": "P4",
           "title": "Complete the physical proof",
           "status": "planned",
-          "summary": "Close the measured mobility, disturbance, fault, duty, mass and budget gates before expanding scope.",
+          "summary": "Close the measured mobility, disturbance, fault, duty, mass and budget gates before you expand the scope.",
           "criteria": [
-            "Qualify the specified 0.8 N\u00b7s longitudinal and 0.4 N\u00b7s lateral pulses, both signs and durations.",
-            "Qualify separate 3\u00b0 slopes, 5 mm smooth bumps and 3 mm seam fixtures at 0.15 m/s.",
-            "Complete a 10-minute mixed session within measured electrical and thermal limits, with no resets.",
-            "Record final mass \u22643.0 kg and all-in new cash < $1,000.",
-            "Archive logs, videos and failure counts; replace model assumptions with measurements and rerun the matrix."
+            "Qualify the specified 0.8 N·s longitudinal and 0.4 N·s lateral pulses, both signs and durations.",
+            "Qualify separate 3° slopes, 5 mm smooth bumps and 3 mm seam fixtures at 0.15 m/s.",
+            "Complete a 10-minute mixed session in the measured electrical and thermal limits, with no resets.",
+            "Record final mass ≤3.0 kg and all-in new cash < $1,000.",
+            "Archive the logs, videos and failure counts. Replace the model assumptions with measurements and rerun the matrix."
           ],
           "sourcePaths": [
             "docs/v1-proof-validation.md",
@@ -432,7 +432,7 @@
       "bench": {
         "title": "Single-leg bench exercise",
         "status": "ready",
-        "summary": "Motor/drivers are received and parts are printed per user report recorded 2026-10-02. Start with identification and passive linkage checks (B0 and B3) before powered stages; these checks need no servo or controller. No test results are recorded. Powered motion still requires qualified mounts, interfaces and the guide\u2019s electrical/fault gates.",
+        "summary": "The user report recorded 2026-10-02 says that the gearmotor and the drivers are received and the parts are printed. Start with the identification and passive linkage checks (B0 and B3) before the powered stages. These checks need no servo and no controller. No test results are recorded. Powered motion still requires qualified mounts, interfaces and the electrical/fault gates of the guide.",
         "sourcePaths": [
           "docs/checklists/2026-10-02-mechanical-fit.md",
           "docs/one-leg-bench.md",
@@ -441,7 +441,7 @@
         "geometry": [
           {
             "label": "Links",
-            "value": "2 \u00d7 110 mm between pivot centers"
+            "value": "2 × 110 mm between pivot centers"
           },
           {
             "label": "Pivot separation",
@@ -449,7 +449,7 @@
           },
           {
             "label": "Neutral / design range",
-            "value": "30\u00b0 / 15\u201345\u00b0 from downward vertical"
+            "value": "30° / 15–45° from downward vertical"
           },
           {
             "label": "Transmission",
@@ -457,7 +457,7 @@
           },
           {
             "label": "First driven leg range",
-            "value": "28\u201332\u00b0 at 1\u00b0/s after bare-servo checks"
+            "value": "28–32° at 1°/s after bare-servo checks"
           },
           {
             "label": "Wheel",
@@ -469,92 +469,92 @@
             "id": "B0",
             "title": "Identify received parts",
             "status": "ready",
-            "action": "Identify received motor/driver labels, total driver count, printed revision/material, dimensions and condition. Receipt and printing alone do not complete this stage.",
-            "evidence": "Confirmed inventory and a marked wiring diagram; template updated for actual parts."
+            "action": "Identify the received gearmotor/driver labels, the total driver count, the printed revision/material, the dimensions and the condition. The receipt and the print alone do not complete this stage.",
+            "evidence": "A confirmed inventory and a marked wiring diagram. The template is updated for the actual parts."
           },
           {
             "id": "B1",
             "title": "Power and readback",
             "status": "planned",
-            "action": "Check disconnected rails and polarity, secure the bare servo, verify disabled startup and read feedback; read encoder counts with motor power off.",
+            "action": "Check the disconnected rails and the polarity. Secure the bare servo. Verify the disabled startup and read the feedback. Read the encoder counts with the motor power off.",
             "evidence": "Stable communications, expected counts per measured wheel revolution, and a verified independent power cut."
           },
           {
             "id": "B2",
             "title": "Bare servo",
             "status": "planned",
-            "action": "After verifying startup and target mapping, command \u00b15\u00b0 at the servo output at no more than 5\u00b0/s with horn, belt and load removed.",
+            "action": "Verify the startup and the target mapping first. Then command ±5° at the servo output at maximum 5°/s with the horn, belt and load removed.",
             "evidence": "Correct direction with no startup jump, reset, unexpected current or tracking fault."
           },
           {
             "id": "B3",
             "title": "Passive linkage",
             "status": "ready",
-            "action": "With all power disconnected and servo/belt detached, assemble the printed passive parallelogram using the confirmed revision\u2019s spacer layout. Sweep 15\u201345\u00b0 by hand and check motor/wheel packaging; record measured fits, closest clearances and free play.",
-            "evidence": "Recorded center spacing, retained fastener stack and photos showing no binding or hardware contact through the hand sweep. Powered-fixture catch and load capacity remain separate checks."
+            "action": "Disconnect all power and detach the servo/belt. Assemble the printed passive parallelogram with the spacer layout of the confirmed revision. Sweep 15–45° by hand and check the gearmotor/wheel packaging. Record the measured fits, the closest clearances and the free play.",
+            "evidence": "The recorded distance between centers, the retained fastener stack, and photos that show no binding or hardware contact through the hand sweep. The powered-fixture catch and the load capacity remain separate checks."
           },
           {
             "id": "B4",
             "title": "Small driven leg cycles",
             "status": "planned",
-            "action": "Align at 30\u00b0 with power off; remove the lock before arming. Begin 28\u201332\u00b0 at 1\u00b0/s, holding 2 seconds at each end.",
+            "action": "Align at 30° with the power off. Remove the lock before you arm the system. Start 28–32° at 1°/s and hold 2 seconds at each end.",
             "evidence": "Ten small cycles with independently measured angle, no jump or binding, and logged current, voltage and temperature."
           },
           {
             "id": "B5",
             "title": "Wider unloaded travel",
             "status": "planned",
-            "action": "After small-cycle success, try 25\u201335\u00b0 and expand only within measured clearance and stop margins.",
-            "evidence": "Repeatable endpoints, measured vertical/fore-aft travel and approach-direction backlash; no stop strikes."
+            "action": "After small-cycle success, try 25–35° and expand only in the measured clearance and stop margins.",
+            "evidence": "Repeatable endpoints, measured vertical/fore-aft travel and approach-direction backlash. No stop strikes."
           },
           {
             "id": "B6",
             "title": "Wheel alone",
             "status": "planned",
-            "action": "Pin the leg, keep the wheel lifted and servo torque off. Verify sign, then try +10 rpm \u2192 0 \u2192 \u221210 rpm, waiting for measured zero before reversal.",
-            "evidence": "Stable low-speed response with correct feedback sign; no reset or overvoltage. Record stiction before raising limits."
+            "action": "Pin the leg, keep the wheel lifted and keep the servo torque off. Verify the sign. Then try +10 rpm → 0 → −10 rpm, and wait for measured zero before the reversal.",
+            "evidence": "Stable low-speed response with the correct feedback sign. No reset or overvoltage. Record the stiction before you raise the limits."
           },
           {
             "id": "B7",
             "title": "Fault behavior",
             "status": "planned",
-            "action": "Within the supported small-motion envelope, test deadman release, lost commands/feedback, reset, lost servo communication and physical kill.",
+            "action": "In the supported small-motion envelope, do tests of the deadman release, lost commands/feedback, reset, lost servo communication and physical kill.",
             "evidence": "Faults latch, the catch contains torque loss, the cut works without software, and reconnection never rearms automatically."
           },
           {
             "id": "B8",
             "title": "Combined unloaded motion",
             "status": "planned",
-            "action": "After separate and fault tests, slowly sweep 28\u201332\u00b0 while the lifted wheel turns at 10 rpm.",
-            "evidence": "Five repeatable cycles with no dropped commands, resets, wiring snags or rail violations."
+            "action": "After separate and fault tests, slowly sweep 28–32° while the lifted wheel turns at 10 rpm.",
+            "evidence": "Five repeatable cycles with no dropped commands, resets, wire snags or rail violations."
           },
           {
             "id": "B9",
             "title": "Measured loading",
             "status": "planned",
-            "action": "Only after electrical and thermal gates, add a captured, measured load in steps with a known force direction and lever arm.",
-            "evidence": "Record deflection, backlash, temperature and rail behavior under load, including supported power loss. Later torque/duty qualification remains separate."
+            "action": "Add a captured, measured load only after the electrical and thermal gates. Add the load in steps with a known force direction and lever arm.",
+            "evidence": "Record the deflection, backlash, temperature and rail behavior under load, with a supported power loss. The later torque/duty qualification remains separate."
           }
         ]
       },
       "documents": [
         {
-          "title": "Wiring atlas \u00b7 EL-01\u201304",
+          "title": "Wiring atlas · EL-01–04",
           "path": "docs/wiring-atlas.md",
           "kind": "source-checked planning drawing"
         },
         {
-          "title": "Pico 2 USB bring-up \u00b7 3 October",
+          "title": "Pico 2 USB bring-up · 3 October",
           "path": "docs/checklists/2026-10-03-pico-bringup.md",
           "kind": "session checklist"
         },
         {
-          "title": "Mechanical testing \u00b7 layout and timeline",
+          "title": "Mechanical testing · layout and timeline",
           "path": "tools/living-drawings/mechanical-tests.html",
           "kind": "living diagram"
         },
         {
-          "title": "First mechanical fit session \u00b7 2 October",
+          "title": "First mechanical fit session · 2 October",
           "path": "docs/checklists/2026-10-02-mechanical-fit.md",
           "kind": "session checklist"
         },
@@ -641,9 +641,18 @@
       ],
       "updates": [
         {
+          "date": "2026-10-04",
+          "title": "Simplified Technical English becomes the writing standard",
+          "summary": "All active text now obeys ASD-STE100 Simplified Technical English. The check tool in tools/ste is a build gate in npm run test:site. The archive, the research notes and the V0-GENESIS pages keep their original text. An independent review found no changed fact in the rewrite. No hardware status changed in this update.",
+          "sourcePaths": [
+            "docs/writing-standard.md",
+            "docs/decisions.md"
+          ]
+        },
+        {
           "date": "2026-10-03",
           "title": "Wiring atlas added to Electrical",
-          "summary": "Four coordinated source-checked sheets cover the architecture, Pico/LSM6DSO main SPI wiring, DRV8874 wheel harness and power/servo interfaces. The Electrical page adds an enlarged vector viewer and printable PDF. Vendor pinouts and motor lead colors were independently reviewed; SPI requires opening the IMU address jumper. Fuse, regulator, protection, translator, adapter and watchdog circuits remain unresolved. No physical test or release gate is closed.",
+          "summary": "Four coordinated source-checked sheets cover the architecture, the Pico 2/LSM6DSO main SPI wires, the DRV8874 wheel harness and the power/servo interfaces. The Electrical page adds an enlarged vector viewer and a printable PDF. An independent review checked the vendor pinouts and the motor lead colors. SPI requires an open IMU address jumper. The fuse, regulator, protection, translator, adapter and watchdog circuits remain unresolved. No physical test or release gate is closed.",
           "sourcePaths": [
             "docs/wiring-atlas.md",
             "tools/living-drawings/electrical.html",
@@ -653,7 +662,7 @@
         {
           "date": "2026-10-03",
           "title": "Pico and IMU received; remaining shopping list updated",
-          "summary": "The user confirms the Pico 2 and SparkFun LSM6DSO IMU are both here. Their existing $30.58 order is counted once: recorded spend remains $173.70, with $726.30 left under the $900 plan. The homepage now lists the second motor still to buy and the supporting parts to check against stock; two ST3215 servos are already paid. Driver count and unknown item/charge breakdowns remain open. No new purchase or hardware test is inferred.",
+          "summary": "The user confirms that the Pico 2 and the LSM6DSO IMU are both here. The $30.58 order is counted one time, so recorded spend remains $173.70, with $726.30 left under the $900 plan. The homepage now lists the second gearmotor still to buy and the support parts to check against stock. Two ST3215 servos are already paid. The driver count and the unknown item/charge breakdowns remain open. No new purchase or hardware test is inferred.",
           "sourcePaths": [
             "docs/purchases.md",
             "docs/parts-on-hand.md",
@@ -663,7 +672,7 @@
         {
           "date": "2026-10-03",
           "title": "Pico received; LSM6DSO order recorded",
-          "summary": "The user reports Pico 2 receipt. The supplied screenshot shows an October 2 Amazon controller/IMU order totaling $30.58 and SparkFun LSM6DSO arrival expected tomorrow. Recorded spend becomes $173.70, with $726.30 remaining to the $900 plan; charge breakdown and payment date stay unknown. The ordered LSM6DSO replaces the earlier LSM6DSOX selection, subject to arrival and qualification. A USB/LED checklist is open; no test pass or firmware implementation is claimed.",
+          "summary": "The user reports the Pico 2 receipt. The supplied screenshot shows an October 2 Amazon controller/IMU order with a $30.58 total and an LSM6DSO IMU arrival expected tomorrow. Recorded spend becomes $173.70, with $726.30 remaining to the $900 plan. The charge breakdown and the payment date stay unknown. The ordered LSM6DSO IMU replaces the earlier LSM6DSOX selection, subject to arrival and qualification. A USB/LED checklist is open, and no test pass or firmware implementation is claimed.",
           "sourcePaths": [
             "docs/checklists/2026-10-03-pico-bringup.md",
             "docs/parts-on-hand.md",
@@ -674,7 +683,7 @@
         {
           "date": "2026-10-02",
           "title": "Mechanical layout and test timeline added",
-          "summary": "Added a movable side/end-view linkage diagram, the R01 print rendering, eight evidence-based test steps and a dated project timeline. A device-local session journal records measurements, outcomes and evidence with export/import. Shared history records the arrival/printing report; no physical test result or milestone pass is invented.",
+          "summary": "We added a movable side/end-view linkage diagram, the R01 print rendering, eight evidence-based test steps and a dated project timeline. A device-local session journal records measurements, outcomes and evidence with export/import. The shared history records the arrival/print report. No physical test result or milestone pass is invented.",
           "sourcePaths": [
             "tools/living-drawings/mechanical-tests.html",
             "docs/mechanical-testing.md",
@@ -684,7 +693,7 @@
         {
           "date": "2026-10-02",
           "title": "Motor/drivers received and parts printed",
-          "summary": "The user reports the 30:1 metal gearmotor and DRV8874 drivers received and parts 3D printed, ready to begin mechanical testing. Recorded the arrival against the existing Pololu baseline and opened a passive fit-session checklist. Total delivered driver count, printed revision/material, servo arrival and all measured test results remain open. Receipt quantities and $143.12 recorded paid spend are retained; no additional spending or physical pass is inferred.",
+          "summary": "The user reports that the 30:1 metal gearmotor and the DRV8874 drivers are received and the parts are 3D printed. The parts are ready for the mechanical tests. We recorded the arrival against the Pololu baseline and opened a passive fit-session checklist. The total delivered driver count, the printed revision/material, the servo arrival and all measured test results remain open. The receipt quantities and the $143.12 recorded paid spend are retained. No additional spend or physical pass is inferred.",
           "sourcePaths": [
             "docs/checklists/2026-10-02-mechanical-fit.md",
             "docs/parts-on-hand.md",
@@ -695,7 +704,7 @@
         {
           "date": "2026-10-01",
           "title": "Salvaged motors recorded for possible reuse",
-          "summary": "Steve reports one servo and two steppers. Three photos identify the servo as Panasonic MSMD042G1A and one stepper as Astrosyn 610-024; the second stepper label and stepper ratings remain unverified. The 400 W industrial servo needs a compatible 200 V-class drive and is too heavy for a direct V1-PROOF substitution. Retained as untested bench/future candidates with no reuse credit, new spending or change to the locked actuators.",
+          "summary": "The user reports one servo and two steppers. Three photos identify the servo as Panasonic MSMD042G1A and one stepper as Astrosyn 610-024. The second stepper label and the stepper ratings remain unverified. The 400 W industrial servo needs a compatible 200 V-class drive and is too heavy for a direct V1-PROOF substitution. These motors are retained as untested bench/future candidates with no reuse credit, no new spend and no change to the locked actuators.",
           "sourcePaths": [
             "docs/parts-on-hand.md#motor-stock-recorded-2026-10-01",
             "docs/v1-proof-hardware.md"
@@ -704,7 +713,7 @@
         {
           "date": "2026-09-29",
           "title": "Paid orders lock the actuator baseline",
-          "summary": "Reconciled Pololu and Waveshare receipts: one 4752 motor + one 4035 driver shipped ($88.34), and two ST3215 servos paid ($54.78), for $143.12 total including shipping/tax. The second wheel channel remains to buy. Added motor wiring and Pico control architecture; firmware and physical tests remain open.",
+          "summary": "We reconciled the Pololu and Waveshare receipts: one 4752 gearmotor + one 4035 driver shipped ($88.34), and two ST3215 servos paid ($54.78), for a $143.12 total. The total includes shipping/tax. The second wheel channel remains to buy. We added the motor wiring and the Pico 2 control architecture. The firmware and the physical tests remain open.",
           "sourcePaths": [
             "docs/purchases.md",
             "docs/bom.md",
@@ -716,7 +725,7 @@
         {
           "date": "2026-09-29",
           "title": "R01 passive print kit drafted",
-          "summary": "Eight STL part types and a Blender project are drafted for a Bambu X1C / PLA passive mockup using 110 mm link centers and 40 mm pivot spacing. M4 clearances are provisional: print and measure the fit coupon first. No physical print, fit, load test or bench milestone is complete. The ordered Pololu 4752 motors and ST3215 12 V servos remain awaiting arrival.",
+          "summary": "Eight STL part types and a Blender project are drafted for a Bambu X1C / PLA passive mockup. The mockup uses 110 mm link centers and 40 mm pivot separation. The M4 clearances are provisional: print and measure the fit coupon first. No physical print, fit, load test or bench milestone is complete. The ordered Pololu 4752 gearmotors and ST3215 12 V servos remain to arrive.",
           "sourcePaths": [
             "cad/prints/v1-proof-r01/README.md",
             "docs/one-leg-bench.md",
@@ -726,7 +735,7 @@
         {
           "date": "2026-09-29",
           "title": "Actuator orders and single-leg bench preparation",
-          "summary": "The user confirmed Pololu 4752 motors and ST3215 12 V servos ordered for V1-PROOF, awaiting arrival, and a bench supply available. Quantities, actual cost and supply ratings are pending. The supported one-leg exercise and session template are prepared; no hardware test is claimed.",
+          "summary": "The user confirmed that Pololu 4752 gearmotors and ST3215 12 V servos are ordered for V1-PROOF and remain to arrive. The user also confirmed that a bench supply is available. The quantities, the actual cost and the supply ratings remain to record. The supported one-leg exercise and the session template are prepared. No hardware test is claimed.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/one-leg-bench.md",
@@ -736,7 +745,7 @@
         {
           "date": "2026-09-28",
           "title": "Mobility baseline and retained simulation failures",
-          "summary": "The pinned-leg numerical study passes 388 of 391 broad-matrix cases. The physical protocol covers both driving directions, turns, bounded pushes and shallow uneven fixtures. Three settling failures remain recorded; physical acceptance and powered-leg dynamics remain open.",
+          "summary": "The pinned-leg numerical study passes 388 of 391 broad-matrix cases. The physical protocol covers both drive directions, turns, bounded pushes and shallow uneven fixtures. Three settling failures remain recorded. The physical acceptance and the powered-leg dynamics remain open.",
           "sourcePaths": [
             "docs/v1-proof-simulation.md",
             "docs/v1-proof-validation.md",
@@ -746,7 +755,7 @@
         {
           "date": "2026-09-28",
           "title": "V1-PROOF becomes the current model",
-          "summary": "The stair-focused plan was parked. Active work moved to a smaller four-axis robot, pinned-leg balance first, with a strict sub-$1,000 budget and no stair requirement.",
+          "summary": "The user parked the stair-focused plan. Active work moved to a smaller four-axis robot, with pinned-leg balance first. The robot has a strict sub-$1,000 budget and no stair requirement.",
           "sourcePaths": [
             "docs/v1-proof.md",
             "docs/archive/stair-v1/README.md",
@@ -764,13 +773,13 @@
           "items": [
             {
               "partId": "pololu-4752",
-              "name": "4752 \u00b7 30:1 12 V encoder gearmotor",
+              "name": "4752 · 30:1 12 V encoder gearmotor",
               "quantity": 1,
               "unitCost": 60.95
             },
             {
               "partId": "pololu-4035",
-              "name": "4035 \u00b7 DRV8874 motor driver",
+              "name": "4035 · DRV8874 motor driver",
               "quantity": 1,
               "unitCost": 11.94
             }
@@ -779,7 +788,7 @@
           "shippingCost": 10.45,
           "taxCost": 5.0,
           "paidTotal": 88.34,
-          "deliveryNote": "Motor and DRV8874 drivers received per user report recorded 2 October; exact delivery date, total driver count, labels and inspection remain unrecorded. This paid receipt covers one motor and one driver. Shipped 28 September via UPS Ground.",
+          "deliveryNote": "The user report recorded 2 October says that the gearmotor and the DRV8874 drivers are received. The exact delivery date, the total driver count, the labels and the inspection remain unrecorded. This paid receipt covers one gearmotor and one driver. The order shipped 28 September via UPS Ground.",
           "sourcePaths": [
             "docs/purchases.md"
           ]
@@ -793,7 +802,7 @@
           "items": [
             {
               "partId": "st3215",
-              "name": "22414 \u00b7 ST3215 servo series (12 V per user)",
+              "name": "22414 · ST3215 servo series (12 V per user)",
               "quantity": 2,
               "unitCost": 21.19
             }
@@ -802,7 +811,7 @@
           "shippingCost": 12.4,
           "taxCost": 0.0,
           "paidTotal": 54.78,
-          "deliveryNote": "Paid; latest vendor receipt says awaiting shipment. No dispatch or delivery date confirmed. Tax is not separately charged in this receipt.",
+          "deliveryNote": "Paid. The latest vendor receipt says that the order is not yet shipped. No dispatch or delivery date is confirmed. This receipt does not charge tax separately.",
           "sourcePaths": [
             "docs/purchases.md"
           ]
@@ -834,7 +843,7 @@
           "shippingCost": null,
           "taxCost": null,
           "paidTotal": 30.58,
-          "deliveryNote": "Order placed 2 October, total $30.58 in the supplied screenshot. Both the Pico 2 and SparkFun LSM6DSO IMU are received per user confirmation recorded 3 October; untested. This supersedes the screenshot arrival estimate. Item prices, shipping, tax and payment date are not shown.",
+          "deliveryNote": "The supplied screenshot shows the order placed 2 October with a $30.58 total. The user confirmation recorded 3 October says that both the Pico 2 and the LSM6DSO IMU are received, untested. This confirmation supersedes the screenshot arrival estimate. The item prices, shipping, tax and payment date are not shown.",
           "sourcePaths": [
             "docs/purchases.md",
             "docs/parts-on-hand.md"
@@ -847,7 +856,7 @@
           "name": "Pololu 4752 encoder wheel motor",
           "status": "to-buy",
           "need": "1 more motor",
-          "note": "Two matching wheel motors are required for the complete drive.",
+          "note": "The complete drive requires two wheel gearmotors of the same model.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -860,7 +869,7 @@
           "name": "DRV8874 wheel driver and current-limit passives",
           "status": "check-stock",
           "need": "Confirm coverage for 2 wheel channels",
-          "note": "Receipt covers one driver; total received count is unconfirmed. Buy a second Pololu 4035 only if missing. Current-limit passives still need confirmation.",
+          "note": "The receipt covers one driver. The total received count is unconfirmed. Buy a second Pololu 4035 only if one is missing. The current-limit passives still need confirmation.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -871,7 +880,7 @@
           "name": "Compatible half-duplex TTL servo interface",
           "status": "check-stock",
           "need": "1 interface",
-          "note": "Pico and IMU are received. The ST3215 bus adapter is a separate part with no confirmed purchase or stock.",
+          "note": "The Pico 2 and the IMU are received. The ST3215 bus adapter is a separate part with no confirmed purchase or stock.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -882,7 +891,7 @@
           "name": "Rubber wheels, hubs and supported axle hardware",
           "status": "check-stock",
           "need": "2 wheel assemblies",
-          "note": "Approximately 100 mm wheels; hubs and axle support must fit the selected motor and layout. No stock is reserved.",
+          "note": "Approximately 100 mm wheels. The hubs and the axle support must fit the selected gearmotor and layout. No stock is reserved.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -893,7 +902,7 @@
           "name": "Leg reductions, shafts, pivots, bearings, stops and lock pins",
           "status": "check-stock",
           "need": "Hardware for both legs",
-          "note": "Two 3:1 reductions are planned. Printed links are on hand; transmission and pivot hardware still need inventory confirmation.",
+          "note": "Two 3:1 reductions are planned. The printed links are on hand. The transmission and pivot hardware still need inventory confirmation.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -904,7 +913,7 @@
           "name": "Manual input / deadman link",
           "status": "check-stock",
           "need": "1 usable control link",
-          "note": "Confirm a laptop/gamepad or compatible receiver/transmitter before buying replacements.",
+          "note": "Confirm a laptop/gamepad or a compatible receiver/transmitter before you buy replacements.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -915,7 +924,7 @@
           "name": "Compatible 3S battery",
           "status": "check-stock",
           "need": "1 pack",
-          "note": "Existing pack model, cell count and condition are unconfirmed; reuse a qualified pack or buy one.",
+          "note": "The model, cell count and condition of the current pack are unconfirmed. Reuse a qualified pack or buy one.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -926,7 +935,7 @@
           "name": "Compatible balance charger, supply and charge lead",
           "status": "check-stock",
           "need": "1 charging setup",
-          "note": "Confirm the existing charger and leads match the chosen pack before buying.",
+          "note": "Confirm that the current charger and leads match the selected pack before you buy.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -936,8 +945,8 @@
           "id": "power",
           "name": "Regulators and protected power distribution",
           "status": "check-stock",
-          "need": "9 V servo and 5 V logic rails; fuse, kill and return-energy protection",
-          "note": "Bench supply is available, with ratings unconfirmed. The robot power/protection parts are not yet confirmed.",
+          "need": "9 V servo and 5 V logic rails, plus fuse, kill and return-energy protection",
+          "note": "The bench supply is available, with ratings unconfirmed. The robot power/protection parts are not yet confirmed.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -948,7 +957,7 @@
           "name": "Wiring, connectors, encoder level shifting and strain relief",
           "status": "check-stock",
           "need": "Harness for both wheel channels and the servo bus",
-          "note": "Confirm shop stock; 5 V encoder signals require suitable 3.3 V level conversion.",
+          "note": "Confirm the shop stock. The 5 V encoder signals require suitable 3.3 V level conversion.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -959,7 +968,7 @@
           "name": "Frame/bracket stock and mechanical fasteners",
           "status": "check-stock",
           "need": "Remaining structure and assembly hardware",
-          "note": "3D printing is reported complete. Confirm printed fit and available fasteners/frame stock before buying more.",
+          "note": "The user reports that the 3D print is complete. Confirm the printed fit and the available fasteners/frame stock before you buy more.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -977,7 +986,7 @@
           ]
         }
       ],
-      "shoppingSummary": "Pico 2 and SparkFun LSM6DSO IMU are received and paid for; two ST3215 servos are also already paid, with arrival unreported. Other paid parts are recorded in the order ledger above. Confirm stock for the supporting parts before buying replacements."
+      "shoppingSummary": "The Pico 2 and the LSM6DSO IMU are received and paid. Two ST3215 servos are also already paid, with arrival unreported. The order ledger above records the other paid parts. Confirm the stock of the support parts before you buy replacements."
     },
     {
       "id": "V0-GENESIS",
@@ -1055,7 +1064,7 @@
           "kind": "history"
         },
         {
-          "title": "Historical requirements R1\u2013R44",
+          "title": "Historical requirements R1–R44",
           "path": "docs/archive/stair-v1/requirements.md",
           "kind": "history"
         },
@@ -1121,7 +1130,7 @@
       ],
       "focus": {
         "title": "Let measured proof results define the next version",
-        "summary": "Carry forward measured actuator and sensor behavior, telemetry, fault handling and test evidence. Future full-size Hux has a stated RobStride direction, but no RobStride order or third-version hardware release is established.",
+        "summary": "Carry forward the measured actuator and sensor behavior, the telemetry, the fault handling and the test evidence. Future full-size Hux has a stated RobStride direction, but no RobStride order or third-version hardware release is established.",
         "sourcePaths": [
           "docs/v1-proof-validation.md",
           "docs/decisions.md",
@@ -1132,7 +1141,7 @@
         {
           "id": "next-release",
           "title": "Close and archive the V1-PROOF evidence",
-          "detail": "Complete the physical acceptance gates and preserve logs, videos, failure counts and firmware/model revisions before selecting expanded requirements.",
+          "detail": "Complete the physical acceptance gates and preserve logs, videos, failure counts and firmware/model revisions before you select expanded requirements.",
           "status": "planned",
           "sourcePaths": [
             "docs/v1-proof-validation.md"
@@ -1141,7 +1150,7 @@
         {
           "id": "next-scope",
           "title": "Make an explicit next-version scope decision",
-          "detail": "Choose the third version\u2019s name, requirements, architecture and budget from the proof\u2019s measured results. V1 success does not promise a stair upgrade of the proof chassis.",
+          "detail": "Choose the third version’s name, requirements, architecture and budget from the proof’s measured results. V1 success does not promise a stair upgrade of the proof chassis.",
           "status": "future",
           "sourcePaths": [
             "docs/decisions.md",

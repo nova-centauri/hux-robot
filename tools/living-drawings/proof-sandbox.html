@@ -31,7 +31,7 @@
     <div class="sbx-card">
       <div class="sbx-stage" id="stage" tabindex="0" aria-label="3D view of V1-PROOF. Click here, then drive with the keyboard; keys are listed under the view.">
         <canvas id="view"></canvas>
-        <div class="hud hud-left" id="hudLeft" aria-live="off">Loading three.js and Rapier…</div>
+        <div class="hud hud-left" id="hudLeft" aria-live="off">The page loads three.js and Rapier…</div>
         <div class="hud hud-right" id="hudRight"></div>
         <div class="hud hud-banner" id="banner" hidden></div>
         <div class="pad" id="pad" aria-hidden="true">
@@ -100,7 +100,7 @@
         </div>
       </div>
 
-      <p class="sbx-keys"><b>Drive</b> W A S D or arrows · <b>Shift</b> for the drive-speed slider's top (0.5 m/s is unqualified) · <b>Legs</b> Q lower / E raise, or 1 tall, 2 pinned 30°, 3 low · <b>Shove</b> F forward, B back, Z left, X right · <b>R</b> reset · <b>K</b> kill · <b>C</b> camera · <b>P</b> pause · <b>Mouse wheel</b> zoom. A gamepad works: left stick drives, right stick moves the legs, A shoves, B resets.</p>
+      <p class="sbx-keys"><b>Drive</b> with W A S D or the arrows. <b>Shift</b> gives the top of the drive-speed slider (0.5 m/s is unqualified). <b>Legs</b> move with Q lower / E raise, or 1 tall, 2 pinned 30°, 3 low. <b>Shove</b> with F forward, B back, Z left, X right. <b>R</b> reset · <b>K</b> kill · <b>C</b> camera · <b>P</b> pause · <b>Mouse wheel</b> zoom. A gamepad works, the left stick drives, the right stick moves the legs, A shoves, B resets.</p>
 
       <div class="sbx-charts">
         <div>
@@ -123,18 +123,18 @@
         <div class="sbx-knobs-card">
           <p class="eyebrow">Study parameters</p>
           <h2>Break it on purpose.</h2>
-          <p class="small">Same parameter names and sweep ranges as <code>tools/v1-proof/run_sim.js</code>. The controller keeps its nominal gains, as in the study. <b>Live</b> knobs apply at once; <b>rebuild</b> knobs reset the robot at the current lane.</p>
+          <p class="small">Same parameter names and sweep ranges as <code>tools/v1-proof/run_sim.js</code>. The controller keeps its nominal gains, as in the study. <b>Live</b> knobs apply at once. <b>Rebuild</b> knobs reset the robot at the current lane.</p>
           <div class="sbx-knobs" id="knobs"></div>
           <div class="sbx-row"><button type="button" id="knobReset">Back to the study nominal</button></div>
         </div>
         <aside class="budget-note">
           <h3>What this is and is not</h3>
           <ul class="sbx-notes">
-            <li><b>Same plant and controller.</b> The page loads <code>tools/v1-proof/sim.js</code> itself: Rapier rigid bodies at 1 kHz, encoder-quantized odometry, delayed noisy attitude, the 500 Hz discrete LQR, voltage- and speed-limited motor torque, drive lag, deadband and optional backlash.</li>
-            <li><b>Fixtures.</b> The lanes are the physical protocol's fixtures: 3° grade, 3° cross-slope, 5 mm bump (both wheels and one wheel), 3 mm seam, plus the 20 mm threshold the study records as a failure. Fixture ramps have kinks and transitions; the study tilted the whole floor.</li>
-            <li><b>Leg height is a preview.</b> Pinned 15°, 30° and 45° poses were in the study and pass. Moving between them re-places the CoM and pitch trim at 10°/s; leg inertia, servo torque and its reaction on the body are not modelled. Powered height motion is unvalidated.</li>
+            <li><b>Same plant and controller.</b> The page loads <code>tools/v1-proof/sim.js</code> itself: Rapier rigid bodies at 1 kHz, encoder-quantized odometry, delayed noisy attitude and the 500 Hz discrete LQR. It also includes voltage- and speed-limited motor torque, drive lag, deadband and optional backlash.</li>
+            <li><b>Fixtures.</b> The lanes are the fixtures of the physical protocol: 3° grade, 3° cross-slope, 5 mm bump (both wheels and one wheel), 3 mm seam, plus the 20 mm threshold the study records as a failure. Fixture ramps have kinks and transitions. The study tilted the whole floor.</li>
+            <li><b>Leg height is a preview.</b> Pinned 15°, 30° and 45° poses were in the study and pass. A move between them re-places the CoM and the pitch trim at 10°/s. The leg inertia, the servo torque and its reaction on the body are not modeled. Powered height motion is unvalidated.</li>
             <li><b>Size.</b> Body, links, wheels and motors are drawn from <code>model.json</code> envelopes: 120 × 110 × 150 mm body, 110 mm links, 100 mm wheels at 230 mm track. Packaging, belts and wiring are not detailed. The dashed box is the parked STAIR-V1 envelope for scale.</li>
-            <li><b>Not modelled.</b> Raw IMU fusion, firmware timing, thermal limits, tire compliance, regeneration, servo dynamics. A good run here is a candidate for a bench test, not evidence the robot works.</li>
+            <li><b>Not modeled.</b> Raw IMU fusion, firmware timing, thermal limits, tire compliance, regeneration, servo dynamics. A good run here is a candidate for a bench test, not evidence the robot works.</li>
           </ul>
           <p class="small">Headless check: <code>node tools/v1-proof/test_sandbox.js</code>. Saved evidence: <a href="proof-simulation.html">Simulations</a>.</p>
         </aside>

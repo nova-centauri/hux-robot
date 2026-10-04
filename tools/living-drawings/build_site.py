@@ -3,8 +3,8 @@
 
 No third-party packages or network access are required. The Markdown renderer
 covers the repository's headings, tables, nested lists, checklists, blockquotes,
-fenced code, emphasis, links and images. Source documents remain the authority;
-generated pages should never be edited. Run `python3 build_site.py --help`.
+fenced code, emphasis, links and images. Source documents remain the authority.
+Do not edit the generated pages. Run `python3 build_site.py --help`.
 """
 
 from __future__ import annotations
@@ -53,7 +53,7 @@ ARCHIVE_PAGES = {"v0-genesis.html", "stairs.html", "sheet.html", "sheet2.html", 
 
 
 def slug(text: str) -> str:
-    """GitHub-style fragment IDs, including Unicode and duplicate headings."""
+    """GitHub-style fragment IDs, with Unicode and duplicate headings."""
     text = re.sub(r"!?\[([^]]+)\]\([^)]*\)", r"\1", text)
     text = re.sub(r"<[^>]*>", "", html.unescape(text)).lower()
     text = re.sub(r"[^\w\-\s]", "", text)
@@ -95,7 +95,7 @@ def source_url(url: str, source: PurePosixPath, root: Path) -> str:
 
 
 def inline(text: str, link=lambda url: url) -> str:
-    """Escape source text; emit only markup created by this renderer."""
+    """Escape the source text. Emit only the markup that this renderer creates."""
     out = []
     i = 0
     while i < len(text):
@@ -338,7 +338,7 @@ def workshop_assets(source: PurePosixPath) -> str:
 
 
 def authored_page(text: str, source: PurePosixPath, root: Path) -> str:
-    """Replace navigation without reserializing drawings or interactive code."""
+    """Replace the navigation. Do not reserialize the drawings or the interactive code."""
     text = rewrite_html(text, source, root)
     title_match = re.search(r'<title\b[^>]*>(.*?)</title>', text, flags=re.I | re.S)
     title = html.unescape(re.sub(r'<[^>]+>', '', title_match[1])).split(' · ')[0] if title_match else source.stem.replace('-', ' ').title()
@@ -507,10 +507,10 @@ def build(root: Path, output: Path) -> dict:
     if any(output.is_relative_to(root / tree) for tree in (*SOURCE_TREES, str(WEB))):
         raise ValueError("The build output must be outside the published source folders")
     if output.exists() and any(output.iterdir()):
-        if not marker.is_file(): raise ValueError(f"Refusing to replace unmarked nonempty output: {output}")
+        if not marker.is_file(): raise ValueError(f"The build does not replace an unmarked nonempty output: {output}")
         shutil.rmtree(output)
     output.mkdir(parents=True, exist_ok=True)
-    marker.write_text("Generated HUX static site; safe to rebuild.\n")
+    marker.write_text("Generated HUX static site. A rebuild can replace it.\n")
     sources = [root / "README.md", root / "NOTES.md", root / "LICENSE"]
     for directory in (*SOURCE_TREES, str(WEB)):
         base = root / directory
@@ -562,11 +562,11 @@ def build(root: Path, output: Path) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=ROOT / "dist/site", help="Generated site directory (default: repo/dist/site)")
-    parser.add_argument("--check", action="store_true", help="Check an existing build without rebuilding")
+    parser.add_argument("--check", action="store_true", help="Check a built site and do not rebuild it")
     args = parser.parse_args()
     try:
         if args.check:
-            if not (args.output / ".hux-site-build").is_file(): raise ValueError("No build found; run build_site.py first")
+            if not (args.output / ".hux-site-build").is_file(): raise ValueError("No build found. Run build_site.py first")
             errors = validate(args.output.resolve())
             report = {"output": str(args.output), "errors": errors}
         else:

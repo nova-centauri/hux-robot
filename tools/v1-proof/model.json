@@ -146,7 +146,7 @@
         "item": "Two rubber wheels, hubs and supported axle hardware",
         "unit_cap_usd": 35,
         "stage": "P1",
-        "reuse": "Approximately 90\u2013110 mm wheels; update model for actual diameter"
+        "reuse": "Approximately 90–110 mm wheels; update model for actual diameter"
       },
       {
         "id": "controller",
@@ -221,7 +221,7 @@
       "url": "https://www.pololu.com/product/4752",
       "checked": "2026-09-28",
       "listed_usd": 60.95,
-      "note": "Selected baseline. 200 g each, 1920 quadrature counts/output revolution; stall values are extrapolations."
+      "note": "Selected baseline. 200 g each, 1920 quadrature counts/output revolution. Stall values are extrapolations."
     },
     {
       "id": "wheel_driver",
@@ -229,7 +229,7 @@
       "url": "https://www.pololu.com/product/4035",
       "checked": "2026-09-28",
       "listed_usd": 11.94,
-      "note": "Selected baseline. 2.1 A carrier continuous rating in open-air tests; adjustable limit and default sleep. Backorders listed at review."
+      "note": "Selected baseline. 2.1 A carrier continuous rating in open-air tests. Adjustable limit and default sleep. The product page listed backorders at the review."
     },
     {
       "id": "leg_servo",
@@ -247,28 +247,28 @@
       "title": "Waveshare ST3215 documentation",
       "url": "https://www.waveshare.com/wiki/ST3215_Servo",
       "checked": "2026-09-28",
-      "note": "Current page specifies 6\u201312.6 V for the 12 V version. Confirm actual revision and protect against regenerative voltage rise."
+      "note": "The current page specifies 6–12.6 V for the 12 V version. Confirm the actual revision and protect against regenerative voltage rise."
     },
     {
       "id": "controller",
       "title": "Raspberry Pi Pico 2",
       "url": "https://www.raspberrypi.com/products/raspberry-pi-pico-2/",
       "checked": "2026-09-28",
-      "note": "RP2350, C/C++ SDK, PIO encoders, SPI IMU, USB logs. Board timing remains to be measured."
+      "note": "RP2350, C/C++ SDK, PIO encoders, SPI IMU, USB logs. The board timing is still not measured."
     },
     {
       "id": "imu",
       "title": "SparkFun LSM6DSO Qwiic SEN-18020",
       "url": "https://www.sparkfun.com/sparkfun-6-degrees-of-freedom-breakout-lsm6dso-qwiic.html",
       "checked": "2026-10-03",
-      "note": "Received with the Pico 2 per user confirmation October 3; individual price unconfirmed within the $30.58 combined order. Main SPI/I2C, exposed interrupts, 3.3 V supply/logic. Replaces the earlier Adafruit LSM6DSOX selection; qualify readback and timing."
+      "note": "Received with the Pico 2, per user confirmation on October 3. The individual price in the $30.58 combined order is unconfirmed. Main SPI/I2C, exposed interrupts, 3.3 V supply/logic. It replaces the earlier Adafruit LSM6DSOX selection. Qualify readback and timing."
     },
     {
       "id": "driver_datasheet",
       "title": "TI DRV8874 datasheet",
       "url": "https://www.ti.com/lit/ds/symlink/drv8874.pdf",
       "checked": "2026-09-28",
-      "note": "Use datasheet tolerances for current regulation and IPROPI sampling; verify braking and current-chopping behavior on bench."
+      "note": "Use the datasheet tolerances for current regulation and IPROPI sampling. Do a bench test of the braking and current-chopping behavior."
     }
   ],
   "hardware": {

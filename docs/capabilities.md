@@ -2,9 +2,9 @@
 
 # Shop capabilities
 
-**Status:** Steve 2026-09-20. **Docs only.** These are **tools he can use**, not parts on hand and not a buy list. **No new spend.**
+**Status:** the user, 2026-09-20. **Docs only.** These are **tools the user can use**, not parts on hand and not a buy list. **No new spend.**
 
-Hardware fab is **intentional and welcome**. Hux is allowed to be milled, turned, bent, cut, soldered, and welded — not only 3D printed. Inventory of owned / ordered *parts* stays on [`parts-on-hand.md`](parts-on-hand.md). Mechanical intent: [`mechanical.md`](mechanical.md).
+Hardware fabrication is **intentional and welcome**. The user can mill, turn, bend, cut, solder, and weld Hux parts — not only 3D print them. The inventory of owned / ordered *parts* stays on [`parts-on-hand.md`](parts-on-hand.md). Mechanical intent: [`mechanical.md`](mechanical.md).
 
 ## Metal / machine shop
 
@@ -26,10 +26,10 @@ Hardware fab is **intentional and welcome**. Hux is allowed to be milled, turned
 
 ## How this sits next to structure rules
 
-- **Customs may be machined, bent, or welded** as well as 3D printed. Do not treat “printable” as the only legal custom.
+- **The user can machine, bend, or weld custom parts**, or 3D print them. Do not treat “printable” as the only permitted custom part.
 - The **in-wheel BLDC hub** (donor Zantle rubber + custom hub) is a **natural lathe / mill part**. That is the intended first shop job, not a stretch goal.
 - Still **prefer COTS structure** (carbon rod / tube, metal stock, fasteners) where it fits. Do not mill a spar that a tube already is (R19 / R34).
-- **Carbon-fiber dust is not a toy.** Respirator and wet cut when the bandsaw hits tube. See [`research/tazer-lessons.md`](research/tazer-lessons.md).
-- **Draft-friendly print still for plastics** — joints, clamps, brackets, fairings. Print is welcome; it is not the only shop.
+- **Carbon-fiber dust is not a toy.** Use a respirator and a wet cut when the bandsaw cuts tube. Refer to [`research/tazer-lessons.md`](research/tazer-lessons.md).
+- **Draft-friendly print still for plastics** — joints, clamps, brackets, fairings. Print is welcome. It is not the only shop.
 
-Do not add a tooling shopping list here. Do not recommend machines, inserts, or stock SKUs. When a real custom exists, drop CAD / 2D in [`../cad/`](../cad/) and note it in [`../NOTES.md`](../NOTES.md).
+Do not add a list of tools to buy here. Do not recommend machines, inserts, or stock SKUs. When a real custom part exists, put the CAD / 2D files in [`../cad/`](../cad/) and note it in [`../NOTES.md`](../NOTES.md).

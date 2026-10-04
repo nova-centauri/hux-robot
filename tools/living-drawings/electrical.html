@@ -41,7 +41,7 @@
         </a>
         <figcaption><span>EL-01 / System wiring overview</span><a href="../../cad/wiring/v1-proof-el-01-overview.svg" target="_blank" rel="noopener">Open vector original ↗</a></figcaption>
       </figure>
-      <div class="atlas-scope"><strong>Build-planning issue.</strong><p>Component interfaces are checked against primary sources. GPIO assignments and harness routing are proposed; regulator, fuse, clamp, watchdog and interface selections remain open. This is not a released or bench-tested assembly schematic. <a href="../../docs/wiring-atlas.md">Read the source audit and open checks ↗</a></p></div>
+      <div class="atlas-scope"><strong>Build-planning issue.</strong><p>Component interfaces are checked against primary sources. GPIO assignments and harness routing are proposed. The regulator, fuse, clamp, watchdog and interface selections remain open. This is not a released or bench-tested assembly schematic. <a href="../../docs/wiring-atlas.md">Read the source audit and open checks ↗</a></p></div>
     </section>
 
     <section class="section" id="harnesses" aria-labelledby="harness-title">
@@ -61,8 +61,8 @@
           <div class="detail-body">
             <p class="eyebrow">EL-02 / Controller &amp; sensor</p>
             <h3>Pico 2 &amp; SPI IMU</h3>
-            <p>Physical header pins and the seven-wire 3.3 V main SPI harness for the SparkFun LSM6DSO.</p>
-            <p class="small">Open the address jumper for SPI. Inspect the received breakout pads and board revision before soldering.</p>
+            <p>Physical header pins and the seven-wire 3.3 V main SPI harness for the LSM6DSO IMU.</p>
+            <p class="small">Open the address jumper for SPI. Inspect the received breakout pads and board revision before you solder.</p>
             <a class="atlas-sheet-link" href="../../cad/wiring/v1-proof-el-02-pico-imu.svg" target="_blank" rel="noopener">Open full-size vector <span aria-hidden="true">↗</span></a>
           </div>
         </article>
@@ -74,8 +74,8 @@
           <div class="detail-body">
             <p class="eyebrow">EL-03 / Drive &amp; feedback</p>
             <h3>Wheel motor &amp; encoder harnesses</h3>
-            <p>One six-position motor/encoder connector per Pololu 4752. Split motor power to the DRV8874 and encoder feedback through level conversion to the Pico.</p>
-            <p class="small">Wire colors describe the supplied motor cable. Black is a switched motor lead; green is encoder ground.</p>
+            <p>One six-position motor/encoder connector per Pololu 4752. Split motor power to the DRV8874 and encoder feedback through level conversion to the Pico 2.</p>
+            <p class="small">Wire colors describe the supplied motor cable. Black is a switched motor lead. Green is the encoder ground.</p>
             <a class="atlas-sheet-link" href="../../cad/wiring/v1-proof-el-03-wheel-harness.svg" target="_blank" rel="noopener">Open full-size vector <span aria-hidden="true">↗</span></a>
           </div>
         </article>
@@ -106,7 +106,7 @@
       </div>
       <ol class="connection-path" aria-label="Proposed wheel command and drive path">
         <li><span class="eyebrow">Wheel command</span><strong>Pico 2</strong><p>3.3 V PWM, direction and watchdog/kill-gated SLEEP.</p></li>
-        <li><span class="eyebrow">Wheel power stage</span><strong>DRV8874</strong><p>One Pololu 4035 carrier per wheel; fused actuator power feeds the driver.</p></li>
+        <li><span class="eyebrow">Wheel power stage</span><strong>DRV8874</strong><p>One Pololu 4035 carrier per wheel. Fused actuator power feeds the driver.</p></li>
         <li><span class="eyebrow">Wheel actuator</span><strong>Pololu 4752</strong><p>Motor leads connect to driver outputs. Encoder signals return through level conversion.</p></li>
       </ol>
       <div class="table-wrap">
@@ -137,10 +137,10 @@
           <ul>
             <li>Verified received-part pinouts, connector orientation and mating connector part numbers.</li>
             <li>Harness identifiers, wire labels, branch routing, lengths and strain relief.</li>
-            <li>Conductor sizes, connector current ratings and measured fuse sizing.</li>
+            <li>Conductor sizes, connector current ratings and measured fuse size.</li>
             <li>Grounding and common signal-reference arrangement.</li>
             <li>Regulator, power-cut, watchdog and regenerated-energy protection circuits.</li>
-            <li>ADC input limits and behavior while the controller is unpowered; servo disable on controller/watchdog failure.</li>
+            <li>ADC input limits and behavior while the controller is unpowered. Servo disable on controller/watchdog failure.</li>
           </ul>
         </article>
         <article class="panel detail-body">
@@ -170,7 +170,7 @@
       <button type="button" data-zoom="fit">Fit sheet</button>
       <a id="wiring-vector-link" target="_blank" rel="noopener">Open vector original ↗</a>
     </div>
-    <p id="wiring-viewer-help" class="atlas-viewer-help">Zoom for pin labels. Drag or scroll to pan; use arrow keys in the drawing area. Escape closes the sheet.</p>
+    <p id="wiring-viewer-help" class="atlas-viewer-help">Zoom for pin labels. Drag or scroll to pan. Use the arrow keys in the drawing area. Escape closes the sheet.</p>
     <div class="atlas-viewer-canvas" tabindex="0" aria-label="Scrollable wiring drawing">
       <img id="wiring-viewer-image" alt="">
     </div>
