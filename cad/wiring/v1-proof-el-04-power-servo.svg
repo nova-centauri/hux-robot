@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="1120" viewBox="0 0 1680 1120" role="img" aria-labelledby="title desc">
+<title id="title">Hux V1-PROOF Power distribution + servo bus</title><desc id="desc">Functional interface drawing: regulator, clamp, fuse, enable-gate and bus-adapter circuits remain to select. Source-checked planning drawing; proposed harnesses and unresolved interfaces require physical verification.</desc>
+<defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r=".7" fill="#c9d5d1"/></pattern></defs>
+<rect x="0" y="0" width="1680" height="1120" rx="0" fill="#f7f5ee" stroke="#ced8d7" stroke-width="1.4"/>
+<rect x="32" y="32" width="1616" height="1056" fill="url(#grid)" stroke="#ced8d7"/>
+<text x="64" y="72" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" text-anchor="start" letter-spacing="2" fill="#387b65">HUX  /  V1-PROOF  /  ELECTRICAL</text>
+<text x="64" y="119" font-family="Arial,Helvetica,sans-serif" font-size="38" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">Power distribution + servo bus</text>
+<text x="64" y="150" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Functional interface drawing: regulator, clamp, fuse, enable-gate and bus-adapter circuits remain to select.</text>
+<rect x="1350" y="58" width="266" height="58" rx="8" fill="#ece7d7" stroke="#ced8d7" stroke-width="1.4"/>
+<text x="1483" y="82" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" text-anchor="middle" letter-spacing="1" fill="#20343e">SOURCE-CHECKED PLAN</text>
+<text x="1483" y="103" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="1" fill="#647780">HARNESS / BENCH RELEASE OPEN</text>
+<polyline points="64,174 1616,174" fill="none" stroke="#ced8d7" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="64,1030 1616,1030" fill="none" stroke="#ced8d7" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="64" y="1060" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Rev A  |  03 OCT 2026  |  Drawn from vendor pinouts + Hux GPIO proposal</text>
+<text x="64" y="1082" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">See docs/wiring-atlas.md for source links, interface decisions and verification boundaries.</text>
+<text x="1614" y="1064" font-family="Arial,Helvetica,sans-serif" font-size="25" font-weight="700" text-anchor="end" letter-spacing="0" fill="#387b65">EL-04</text>
+<rect x="64" y="216" width="290" height="108" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4" stroke-dasharray="7 5"/>
+<rect x="64" y="216" width="6" height="108" rx="3" fill="#db5a4a" stroke="#db5a4a" stroke-width="1.4"/>
+<text x="86" y="242" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1" fill="#db5a4a">BATTERY / UNCONFIRMED</text>
+<text x="86" y="272" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">3S pack</text>
+<text x="86" y="298" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Up to 12.6 V charged</text>
+<rect x="416" y="216" width="285" height="108" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4" stroke-dasharray="7 5"/>
+<rect x="416" y="216" width="6" height="108" rx="3" fill="#db5a4a" stroke="#db5a4a" stroke-width="1.4"/>
+<text x="438" y="242" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1" fill="#db5a4a">PROTECTION / TBD</text>
+<text x="438" y="272" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">Main fuse</text>
+<text x="438" y="298" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Fuse / wire / connector sizing</text>
+<rect x="833" y="216" width="360" height="108" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4" stroke-dasharray="7 5"/>
+<rect x="833" y="216" width="6" height="108" rx="3" fill="#db5a4a" stroke="#db5a4a" stroke-width="1.4"/>
+<text x="855" y="242" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1" fill="#db5a4a">PHYSICAL CUT / TBD</text>
+<text x="855" y="272" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">Actuator power cut</text>
+<text x="855" y="298" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Opens positive feed to all actuators</text>
+<rect x="1281" y="216" width="335" height="108" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4"/>
+<rect x="1281" y="216" width="6" height="108" rx="3" fill="#db5a4a" stroke="#db5a4a" stroke-width="1.4"/>
+<text x="1303" y="242" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1" fill="#db5a4a">WHEELS / ×2</text>
+<text x="1303" y="272" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">DRV8874 VIN</text>
+<text x="1303" y="298" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Use VIN; VM is protected bus access</text>
+<polyline points="354,270 416,270" fill="none" stroke="#db5a4a" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="701,270 833,270" fill="none" stroke="#db5a4a" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1193,270 1281,270" fill="none" stroke="#db5a4a" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="756" cy="270" r="4" fill="#db5a4a"/>
+<circle cx="1234" cy="270" r="4" fill="#db5a4a"/>
+<rect x="64" y="400" width="440" height="125" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4" stroke-dasharray="7 5"/>
+<rect x="64" y="400" width="6" height="125" rx="3" fill="#c77822" stroke="#c77822" stroke-width="1.4"/>
+<text x="86" y="426" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1" fill="#c77822">UNSWITCHED LOGIC BRANCH / TBD</text>
+<text x="86" y="456" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">Protected 5 V regulator</text>
+<text x="86" y="482" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Branch protection + return-energy handling</text>
+<text x="86" y="505" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Feeds both encoder BLUE leads at 5 V</text>
+<polyline points="756,270 756,367 284,367 284,400" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="64" y="605" width="440" height="127" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4" stroke-dasharray="7 5"/>
+<rect x="64" y="605" width="6" height="127" rx="3" fill="#c77822" stroke="#c77822" stroke-width="1.4"/>
+<text x="86" y="631" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1" fill="#c77822">USB + EXTERNAL POWER / TBD</text>
+<text x="86" y="661" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">Schottky diode / power ORing</text>
+<text x="86" y="687" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">External 5 V → isolation → VSYS p39</text>
+<text x="86" y="710" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Check loaded voltage and USB backfeed</text>
+<polyline points="284,525 284,605" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="644" y="605" width="447" height="127" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4"/>
+<rect x="644" y="605" width="6" height="127" rx="3" fill="#218ca0" stroke="#218ca0" stroke-width="1.4"/>
+<text x="666" y="631" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1" fill="#218ca0">CONTROLLER / LOGIC ONLY</text>
+<text x="666" y="661" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">Pico 2 power + ADC</text>
+<text x="666" y="687" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">3V3(OUT) p36 → IMU + interface logic</text>
+<text x="666" y="710" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">GP28 p34 ← protected pack divider</text>
+<polyline points="504,669 644,669" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="525" y="640" width="64.80000000000001" height="21" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="531" y="654" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="start" letter-spacing="0" fill="#c77822">VSYS p39</text>
+<rect x="1281" y="400" width="335" height="148" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4" stroke-dasharray="7 5"/>
+<rect x="1281" y="400" width="6" height="148" rx="3" fill="#8260a9" stroke="#8260a9" stroke-width="1.4"/>
+<text x="1303" y="426" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1" fill="#8260a9">SWITCHED SERVO BRANCH / TBD</text>
+<text x="1303" y="456" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">9 V regulator + protection</text>
+<text x="1303" y="482" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">About 6 A short-peak sizing target</text>
+<text x="1303" y="505" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Define an energy sink / clamp</text>
+<text x="1303" y="528" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Qualify voltage / heat at load.</text>
+<polyline points="1234,270 1234,365 1448,365 1448,400" fill="none" stroke="#db5a4a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="1281" y="638" width="335" height="217" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4"/>
+<rect x="1281" y="638" width="6" height="217" rx="3" fill="#8260a9" stroke="#8260a9" stroke-width="1.4"/>
+<text x="1303" y="664" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1" fill="#8260a9">TWO ST3215 / 12 V VARIANT</text>
+<text x="1303" y="694" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">Shared half-duplex bus</text>
+<text x="1303" y="720" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Supply: protected regulated 9 V</text>
+<text x="1303" y="743" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">GND: common return</text>
+<text x="1303" y="766" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">DATA: single TTL bus</text>
+<text x="1303" y="789" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Assign different servo IDs.</text>
+<text x="1303" y="812" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Confirm cable contact order.</text>
+<polyline points="1448,548 1448,638" fill="none" stroke="#8260a9" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="1456" y="575" width="33.45" height="22" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="1462" y="590" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="600" text-anchor="start" letter-spacing="0" fill="#8260a9">9 V</text>
+<rect x="644" y="803" width="447" height="144" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4" stroke-dasharray="7 5"/>
+<rect x="644" y="803" width="6" height="144" rx="3" fill="#218ca0" stroke="#218ca0" stroke-width="1.4"/>
+<text x="666" y="829" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1" fill="#218ca0">SERVO INTERFACE / ADAPTER TBD</text>
+<text x="666" y="859" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">3.3 V-compatible transceiver</text>
+<text x="666" y="885" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">GP20 p26 TX → interface TX input</text>
+<text x="666" y="908" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">GP21 p27 RX ← interface RX output</text>
+<text x="666" y="931" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">GP17 p22 → direction (if supported)</text>
+<polyline points="868,732 868,803" fill="none" stroke="#218ca0" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1091,876 1188,876 1188,755 1281,755" fill="none" stroke="#218ca0" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="1114" y="894" width="69.2" height="22" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="1120" y="909" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="600" text-anchor="start" letter-spacing="0" fill="#218ca0">TTL DATA</text>
+<rect x="64" y="803" width="440" height="150" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4"/>
+<rect x="64" y="803" width="6" height="150" rx="3" fill="#db5a4a" stroke="#db5a4a" stroke-width="1.4"/>
+<text x="86" y="829" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1" fill="#db5a4a">ENABLE + WATCHDOG BOUNDARY</text>
+<text x="86" y="859" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e"></text>
+<text x="86" y="858" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">GP10 p14 + GP22 p29 → hardware gate</text>
+<text x="86" y="881" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Gate output → BOTH wheel SLEEP pins.</text>
+<text x="86" y="904" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Servo watchdog shutoff remains unresolved.</text>
+<text x="86" y="927" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Physical cut must remove wheel + servo power.</text>
+<polyline points="84,988 1594,988" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="310,324 310,338" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="300.0,338 320.0,338" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="303.5,344 316.5,344" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="307.5,350 312.5,350" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1594,324 1594,338" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1584.0,338 1604.0,338" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1587.5,344 1600.5,344" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1591.5,350 1596.5,350" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="483,525 483,539" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="473.0,539 493.0,539" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="476.5,545 489.5,545" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="480.5,551 485.5,551" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1080,732 1080,746" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1070.0,746 1090.0,746" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1073.5,752 1086.5,752" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1077.5,758 1082.5,758" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1594,855 1594,869" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1584.0,869 1604.0,869" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1587.5,875 1600.5,875" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1591.5,881 1596.5,881" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1080,947 1080,961" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1070.0,961 1090.0,961" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1073.5,967 1086.5,967" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1077.5,973 1082.5,973" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="1171" y="967" width="155.0" height="22" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="1177" y="982" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="600" text-anchor="start" letter-spacing="0" fill="#52676d">COMMON GND / RETURNS</text>
+<text x="64" y="1012" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">All GND symbols join this reference. Route high-current returns away from sensor / MCU wiring.</text>
+<rect x="833" y="391" width="360" height="127" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4"/>
+<rect x="833" y="391" width="6" height="127" rx="3" fill="#c77822" stroke="#c77822" stroke-width="1.4"/>
+<text x="855" y="417" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1" fill="#c77822">MEASUREMENT INTERFACES / TBD</text>
+<text x="855" y="447" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e"></text>
+<text x="855" y="446" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Pack divider + ADC protection → GP28.</text>
+<text x="855" y="469" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Both CS inputs need ADC protection.</text>
+<text x="855" y="492" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Check input range and power-off injection.</text>
+</svg>

@@ -4,9 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Electrical &amp; wiring — Hux V1-PROOF</title>
-  <meta name="description" content="Hux V1-PROOF electrical architecture, pending wiring drawings, harness documentation and bench qualification references.">
+  <meta name="description" content="Source-checked Hux V1-PROOF wiring atlas: power, Pico 2 and IMU, wheel harnesses and TTL servo bus, with proposed circuits and open bench checks identified.">
   <link rel="stylesheet" href="proof.css">
   <link rel="stylesheet" href="workshop.css">
+  <link rel="stylesheet" href="wiring.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to electrical drawings</a>
@@ -15,7 +16,7 @@
       <div>
         <p class="eyebrow">V1-PROOF / Electrical engineering</p>
         <h1>Electrical &amp; wiring</h1>
-        <p class="intro">Power distribution, controller interfaces and harness drawings for the four-actuator proof chassis.</p>
+        <p class="intro">A coordinated wiring atlas for the four-actuator proof chassis. Follow each power rail, controller signal and feedback path from the selected hardware to the proposed harness.</p>
       </div>
       <p class="document-code">EL / V1-PROOF</p>
     </div>
@@ -24,35 +25,23 @@
       <div class="section-head">
         <div>
           <p class="eyebrow">EL-01 / Wiring overview</p>
-          <h2 id="wiring-title">Wiring diagram — pending</h2>
-          <p>The component architecture is selected. A verified, connector-level schematic has not yet been issued.</p>
+          <h2 id="wiring-title">Wiring overview</h2>
+          <p>Source-checked component interfaces, with the proposed GPIO map and unfinished protection circuits kept visible.</p>
         </div>
-        <span class="status-tag is-pending">Drawing pending</span>
+        <span class="status-tag is-pending">Proposed harness / untested</span>
       </div>
-      <figure class="panel detail-figure diagram-placeholder">
-        <svg viewBox="0 0 1120 520" role="img" aria-labelledby="wiring-svg-title wiring-svg-desc" xmlns="http://www.w3.org/2000/svg">
-          <title id="wiring-svg-title">Wiring diagram placeholder, sheet EL-01</title>
-          <desc id="wiring-svg-desc">An empty engineering drawing frame reserved for a verified wiring schematic. Power distribution, connectors, conductor sizing, grounding and protective devices remain pending.</desc>
-          <defs>
-            <pattern id="wiring-grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M 32 0 H 0 V 32" fill="none" stroke="#dce4dd" stroke-width="0.7"/></pattern>
-          </defs>
-          <rect width="1120" height="520" fill="#f9faf5"/>
-          <rect x="24" y="24" width="1072" height="472" fill="url(#wiring-grid)" stroke="#8da597"/>
-          <rect x="54" y="54" width="1012" height="335" rx="2" fill="#f9faf5" fill-opacity="0.9" stroke="#9aada0" stroke-dasharray="6 6"/>
-          <text x="560" y="156" text-anchor="middle" fill="#62786b" font-family="ui-monospace,monospace" font-size="12" letter-spacing="2">RESERVED DRAWING AREA</text>
-          <text x="560" y="211" text-anchor="middle" fill="#203830" font-family="system-ui,sans-serif" font-size="32" font-weight="650">Wiring diagram — pending</text>
-          <text x="560" y="251" text-anchor="middle" fill="#62786b" font-family="system-ui,sans-serif" font-size="15">Awaiting received-part pinouts, harness definitions and protection sizing</text>
-          <text x="560" y="313" text-anchor="middle" fill="#a65431" font-family="ui-monospace,monospace" font-size="12">DO NOT USE AS AN ASSEMBLY SCHEMATIC</text>
-          <path d="M24 422 H1096 M738 422 V496 M952 422 V496" stroke="#8da597" fill="none"/>
-          <text x="44" y="449" fill="#62786b" font-family="ui-monospace,monospace" font-size="10">HUX / V1-PROOF</text>
-          <text x="44" y="477" fill="#203830" font-family="system-ui,sans-serif" font-size="16">Electrical wiring overview</text>
-          <text x="758" y="449" fill="#62786b" font-family="ui-monospace,monospace" font-size="10">ISSUE STATUS</text>
-          <text x="758" y="477" fill="#a65431" font-family="system-ui,sans-serif" font-size="16">Pending verification</text>
-          <text x="972" y="449" fill="#62786b" font-family="ui-monospace,monospace" font-size="10">SHEET</text>
-          <text x="972" y="477" fill="#203830" font-family="ui-monospace,monospace" font-size="18">EL-01</text>
-        </svg>
-        <figcaption>Reserved for the complete power and signal schematic. Connector views and harness drawings below will reference this sheet when verified.</figcaption>
+      <div class="atlas-toolbar">
+        <p class="atlas-issue"><span class="atlas-dot" aria-hidden="true"></span>V1-PROOF · EL-01–04 · source review 2026-10-03</p>
+        <a class="atlas-download" href="../../cad/wiring/v1-proof-wiring-atlas.pdf" download>Download printable atlas <span aria-hidden="true">↓</span></a>
+      </div>
+      <figure class="atlas-overview">
+        <a class="atlas-preview atlas-preview-overview" href="../../cad/wiring/v1-proof-el-01-overview.svg" data-wiring-viewer data-title="EL-01 · System wiring overview" aria-label="Enlarge EL-01 system wiring overview">
+          <img src="../../cad/wiring/v1-proof-el-01-overview.svg" alt="Hux V1-PROOF wiring overview: 3S battery and actuator-power cut, two DRV8874 wheel drivers and encoders, protected 9 V ST3215 servo branch, separate 5 V logic supply, Pico 2 and LSM6DSO SPI IMU.">
+          <span class="atlas-enlarge"><span aria-hidden="true">↗</span> Explore full sheet</span>
+        </a>
+        <figcaption><span>EL-01 / System wiring overview</span><a href="../../cad/wiring/v1-proof-el-01-overview.svg" target="_blank" rel="noopener">Open vector original ↗</a></figcaption>
       </figure>
+      <div class="atlas-scope"><strong>Build-planning issue.</strong><p>Component interfaces are checked against primary sources. GPIO assignments and harness routing are proposed; regulator, fuse, clamp, watchdog and interface selections remain open. This is not a released or bench-tested assembly schematic. <a href="../../docs/wiring-atlas.md">Read the source audit and open checks ↗</a></p></div>
     </section>
 
     <section class="section" id="harnesses" aria-labelledby="harness-title">
@@ -60,60 +49,47 @@
         <div>
           <p class="eyebrow">EL-02–04 / Detail drawings</p>
           <h2 id="harness-title">Power and harness sheets</h2>
-          <p>Drawing slots keep the electrical documentation together as the bench build develops.</p>
+          <p>Three focused sheets make small pin labels and each electrical boundary easier to inspect.</p>
         </div>
       </div>
-      <div class="detail-grid">
-        <article class="detail-card">
-          <div class="detail-figure drawing-slot">
-            <svg viewBox="0 0 480 220" role="img" aria-labelledby="power-slot-title" xmlns="http://www.w3.org/2000/svg">
-              <title id="power-slot-title">Power distribution drawing placeholder</title>
-              <rect x="16" y="16" width="448" height="188" fill="#f2f5ef" stroke="#9aada0" stroke-dasharray="5 5"/>
-              <path d="M210 70 H270 V130 H210 Z M185 100 H210 M270 100 H295 M240 45 V70 M240 130 V155" fill="none" stroke="#8da597" stroke-width="2"/>
-              <text x="240" y="183" text-anchor="middle" fill="#62786b" font-family="ui-monospace,monospace" font-size="11">EL-02 / DRAWING PENDING</text>
-            </svg>
-          </div>
+      <div class="detail-grid atlas-details">
+        <article class="detail-card atlas-card">
+          <a class="atlas-preview" href="../../cad/wiring/v1-proof-el-02-pico-imu.svg" data-wiring-viewer data-title="EL-02 · Pico 2 and SPI IMU" aria-label="Enlarge EL-02 Pico 2 and SPI IMU sheet">
+            <img src="../../cad/wiring/v1-proof-el-02-pico-imu.svg" loading="lazy" alt="Pico 2 component-side physical pin map and seven main SPI connections to the SparkFun LSM6DSO, with required SPI jumper setup.">
+            <span class="atlas-enlarge"><span aria-hidden="true">↗</span> Enlarge</span>
+          </a>
           <div class="detail-body">
-            <span class="status-tag is-pending">Pending</span>
-            <h3>Power distribution</h3>
-            <p>Pack, fuse, physical actuator-power cut, wheel bus, regulated 9 V servo branch and separate 5 V logic branch.</p>
-            <p class="small">Needs regulator and clamp selection, fuse ratings, conductor sizes, grounding and connector ratings.</p>
+            <p class="eyebrow">EL-02 / Controller &amp; sensor</p>
+            <h3>Pico 2 &amp; SPI IMU</h3>
+            <p>Physical header pins and the seven-wire 3.3 V main SPI harness for the SparkFun LSM6DSO.</p>
+            <p class="small">Open the address jumper for SPI. Inspect the received breakout pads and board revision before soldering.</p>
+            <a class="atlas-sheet-link" href="../../cad/wiring/v1-proof-el-02-pico-imu.svg" target="_blank" rel="noopener">Open full-size vector <span aria-hidden="true">↗</span></a>
           </div>
         </article>
-        <article class="detail-card">
-          <div class="detail-figure drawing-slot">
-            <svg viewBox="0 0 480 220" role="img" aria-labelledby="motor-slot-title" xmlns="http://www.w3.org/2000/svg">
-              <title id="motor-slot-title">Wheel motor and encoder harness drawing placeholder</title>
-              <rect x="16" y="16" width="448" height="188" fill="#f2f5ef" stroke="#9aada0" stroke-dasharray="5 5"/>
-              <rect x="198" y="59" width="84" height="86" rx="3" fill="none" stroke="#8da597" stroke-width="2"/>
-              <path d="M212 76 H268 M212 90 H268 M212 104 H268 M212 118 H268 M212 132 H268" stroke="#8da597" stroke-width="2"/>
-              <text x="240" y="183" text-anchor="middle" fill="#62786b" font-family="ui-monospace,monospace" font-size="11">EL-03 / DRAWING PENDING</text>
-            </svg>
-          </div>
+        <article class="detail-card atlas-card">
+          <a class="atlas-preview" href="../../cad/wiring/v1-proof-el-03-wheel-harness.svg" data-wiring-viewer data-title="EL-03 · Wheel motor and encoder harness" aria-label="Enlarge EL-03 wheel motor and encoder harness sheet">
+            <img src="../../cad/wiring/v1-proof-el-03-wheel-harness.svg" loading="lazy" alt="Pololu 4752 six-wire motor and encoder harness connected to a Pololu 4035 DRV8874 carrier and the Pico through 5 V-to-3.3 V encoder conversion.">
+            <span class="atlas-enlarge"><span aria-hidden="true">↗</span> Enlarge</span>
+          </a>
           <div class="detail-body">
-            <span class="status-tag is-pending">Pending</span>
+            <p class="eyebrow">EL-03 / Drive &amp; feedback</p>
             <h3>Wheel motor &amp; encoder harnesses</h3>
             <p>One six-position motor/encoder connector per Pololu 4752. Split motor power to the DRV8874 and encoder feedback through level conversion to the Pico.</p>
-            <p class="small">Needs verified connector orientation, mating parts, harness identifiers, lengths and strain relief for both wheels.</p>
+            <p class="small">Wire colors describe the supplied motor cable. Black is a switched motor lead; green is encoder ground.</p>
+            <a class="atlas-sheet-link" href="../../cad/wiring/v1-proof-el-03-wheel-harness.svg" target="_blank" rel="noopener">Open full-size vector <span aria-hidden="true">↗</span></a>
           </div>
         </article>
-        <article class="detail-card">
-          <div class="detail-figure drawing-slot">
-            <svg viewBox="0 0 480 220" role="img" aria-labelledby="servo-slot-title" xmlns="http://www.w3.org/2000/svg">
-              <title id="servo-slot-title">Servo bus harness drawing placeholder</title>
-              <rect x="16" y="16" width="448" height="188" fill="#f2f5ef" stroke="#9aada0" stroke-dasharray="5 5"/>
-              <rect x="185" y="79" width="110" height="45" rx="3" fill="none" stroke="#8da597" stroke-width="2"/>
-              <circle cx="215" cy="102" r="5" fill="none" stroke="#8da597" stroke-width="2"/>
-              <circle cx="240" cy="102" r="5" fill="none" stroke="#8da597" stroke-width="2"/>
-              <circle cx="265" cy="102" r="5" fill="none" stroke="#8da597" stroke-width="2"/>
-              <text x="240" y="183" text-anchor="middle" fill="#62786b" font-family="ui-monospace,monospace" font-size="11">EL-04 / DRAWING PENDING</text>
-            </svg>
-          </div>
+        <article class="detail-card atlas-card">
+          <a class="atlas-preview" href="../../cad/wiring/v1-proof-el-04-power-servo.svg" data-wiring-viewer data-title="EL-04 · Power distribution and servo bus" aria-label="Enlarge EL-04 power distribution and servo bus sheet">
+            <img src="../../cad/wiring/v1-proof-el-04-power-servo.svg" loading="lazy" alt="Separate actuator and logic power branches, physical power cut, protected 9 V servo rail, half-duplex TTL interface and two ST3215 leg servos with distinct bus IDs.">
+            <span class="atlas-enlarge"><span aria-hidden="true">↗</span> Enlarge</span>
+          </a>
           <div class="detail-body">
-            <span class="status-tag is-pending">Pending</span>
-            <h3>Leg servo bus &amp; harnesses</h3>
+            <p class="eyebrow">EL-04 / Power &amp; serial bus</p>
+            <h3>Power distribution &amp; leg servos</h3>
             <p>Protected 9 V power and a half-duplex TTL bus for the two ST3215 12 V variant servos, each with its own internal driver.</p>
             <p class="small">Needs received cable pinouts, transceiver selection, distinct servo IDs and labeled harness routing.</p>
+            <a class="atlas-sheet-link" href="../../cad/wiring/v1-proof-el-04-power-servo.svg" target="_blank" rel="noopener">Open full-size vector <span aria-hidden="true">↗</span></a>
           </div>
         </article>
       </div>
@@ -139,7 +115,7 @@
           <tbody>
             <tr><th scope="row">Wheel encoders</th><td>Regulated 5 V supply; encoder A/B → 5 V-to-3.3 V level conversion → Pico.</td><td>Confirm orientation, signal levels and direction/count sign with each wheel lifted.</td></tr>
             <tr><th scope="row">Leg servos</th><td>Pico UART ↔ compatible 3.3 V half-duplex TTL transceiver ↔ two ST3215 servos. Protected, regulated 9 V branch.</td><td>Confirm bus adapter and cable pinout; measure simultaneous demand, rail protection and mounted holding duty at 9 V.</td></tr>
-            <tr><th scope="row">Logic &amp; IMU</th><td>Separate 5 V logic branch for the Pico; SparkFun LSM6DSO uses 3.3 V power/logic and SPI with a data-ready interrupt.</td><td>Inspect received breakout pads/jumpers; complete board-only USB and sensor checks.</td></tr>
+            <tr><th scope="row">Logic &amp; IMU</th><td>Separate 5 V logic branch → supply isolation → Pico VSYS (pin 39); SparkFun LSM6DSO uses Pico 3V3(OUT), SPI and a data-ready interrupt.</td><td>Inspect received breakout pads/jumpers; verify external/USB power isolation, then complete board-only USB and sensor checks.</td></tr>
             <tr><th scope="row">Protection &amp; monitoring</th><td>Physical actuator-power cut, watchdog enable gate, driver current/fault inputs and divided pack-voltage input.</td><td>Verify default-disabled startup, measured current limits, fault latching, deliberate rearm and return-energy protection.</td></tr>
           </tbody>
         </table>
@@ -151,24 +127,26 @@
       <div class="section-head">
         <div>
           <p class="eyebrow">Documentation / Open work</p>
-          <h2 id="release-title">Before the drawings can be issued</h2>
+          <h2 id="release-title">Before the harness can be released</h2>
           <p>Record actual build details and bench results in the source documents.</p>
         </div>
       </div>
       <div class="detail-grid">
         <article class="panel detail-body">
-          <h3>Pending drawing information</h3>
+          <h3>Open assembly details</h3>
           <ul>
             <li>Verified received-part pinouts, connector orientation and mating connector part numbers.</li>
             <li>Harness identifiers, wire labels, branch routing, lengths and strain relief.</li>
             <li>Conductor sizes, connector current ratings and measured fuse sizing.</li>
             <li>Grounding and common signal-reference arrangement.</li>
             <li>Regulator, power-cut, watchdog and regenerated-energy protection circuits.</li>
+            <li>ADC input limits and behavior while the controller is unpowered; servo disable on controller/watchdog failure.</li>
           </ul>
         </article>
         <article class="panel detail-body">
           <h3>Build references</h3>
           <ul class="link-list">
+            <li><a href="../../docs/wiring-atlas.md">Wiring atlas, source audit and verification record ↗</a></li>
             <li><a href="../../docs/electronics.md">Electronics plan and motor connections ↗</a></li>
             <li><a href="../../docs/v1-proof-hardware.md">Selected hardware and proposed GPIO allocation ↗</a></li>
             <li><a href="../../docs/electronics-minimum.md">Minimum electronics for the proof chassis ↗</a></li>
@@ -180,5 +158,23 @@
       </div>
     </section>
   </main>
+  <dialog id="wiring-viewer" class="atlas-viewer" aria-labelledby="wiring-viewer-title" aria-describedby="wiring-viewer-help">
+    <div class="atlas-viewer-header">
+      <div><p class="eyebrow">V1-PROOF / Wiring atlas</p><h2 id="wiring-viewer-title">Wiring sheet</h2></div>
+      <button class="atlas-viewer-close" type="button" aria-label="Close wiring sheet">Close <span aria-hidden="true">×</span></button>
+    </div>
+    <div class="atlas-viewer-controls" role="group" aria-label="Sheet viewing controls">
+      <button type="button" data-zoom="out" aria-label="Zoom out">−</button>
+      <output id="wiring-zoom" aria-live="polite">100%</output>
+      <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
+      <button type="button" data-zoom="fit">Fit sheet</button>
+      <a id="wiring-vector-link" target="_blank" rel="noopener">Open vector original ↗</a>
+    </div>
+    <p id="wiring-viewer-help" class="atlas-viewer-help">Zoom for pin labels. Drag or scroll to pan; use arrow keys in the drawing area. Escape closes the sheet.</p>
+    <div class="atlas-viewer-canvas" tabindex="0" aria-label="Scrollable wiring drawing">
+      <img id="wiring-viewer-image" alt="">
+    </div>
+  </dialog>
+  <script src="wiring.js" defer></script>
 </body>
 </html>

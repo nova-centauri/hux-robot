@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="1120" viewBox="0 0 1680 1120" role="img" aria-labelledby="title desc">
+<title id="title">Hux V1-PROOF Wheel motor + encoder harness</title><desc id="desc">One channel shown; repeat for the other wheel using the assignment table. Colors match the motor leads. Source-checked planning drawing; proposed harnesses and unresolved interfaces require physical verification.</desc>
+<defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r=".7" fill="#c9d5d1"/></pattern></defs>
+<rect x="0" y="0" width="1680" height="1120" rx="0" fill="#f7f5ee" stroke="#ced8d7" stroke-width="1.4"/>
+<rect x="32" y="32" width="1616" height="1056" fill="url(#grid)" stroke="#ced8d7"/>
+<text x="64" y="72" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" text-anchor="start" letter-spacing="2" fill="#387b65">HUX  /  V1-PROOF  /  ELECTRICAL</text>
+<text x="64" y="119" font-family="Arial,Helvetica,sans-serif" font-size="38" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">Wheel motor + encoder harness</text>
+<text x="64" y="150" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">One channel shown; repeat for the other wheel using the assignment table. Colors match the motor leads.</text>
+<rect x="1350" y="58" width="266" height="58" rx="8" fill="#ece7d7" stroke="#ced8d7" stroke-width="1.4"/>
+<text x="1483" y="82" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" text-anchor="middle" letter-spacing="1" fill="#20343e">SOURCE-CHECKED PLAN</text>
+<text x="1483" y="103" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="1" fill="#647780">HARNESS / BENCH RELEASE OPEN</text>
+<polyline points="64,174 1616,174" fill="none" stroke="#ced8d7" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="64,1030 1616,1030" fill="none" stroke="#ced8d7" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="64" y="1060" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Rev A  |  03 OCT 2026  |  Drawn from vendor pinouts + Hux GPIO proposal</text>
+<text x="64" y="1082" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">See docs/wiring-atlas.md for source links, interface decisions and verification boundaries.</text>
+<text x="1614" y="1064" font-family="Arial,Helvetica,sans-serif" font-size="25" font-weight="700" text-anchor="end" letter-spacing="0" fill="#387b65">EL-03</text>
+<rect x="64" y="212" width="434" height="114" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4"/>
+<rect x="64" y="212" width="6" height="114" rx="3" fill="#218ca0" stroke="#218ca0" stroke-width="1.4"/>
+<text x="86" y="238" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1" fill="#218ca0">PICO / PROPOSED OUTPUTS</text>
+<text x="86" y="268" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">3.3 V command signals</text>
+<text x="86" y="294" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Use the left / right GPIO table below.</text>
+<rect x="663" y="246" width="292" height="337" rx="8" fill="#254d78" stroke="#254d78" stroke-width="1.4"/>
+<text x="809" y="222" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" text-anchor="middle" letter-spacing="1" fill="#437fb4">POLOLU 4035 / TOP VIEW</text>
+<rect x="778" y="354" width="65" height="102" rx="3" fill="#253442" stroke="#253442" stroke-width="1.4"/>
+<text x="811" y="393" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#e5edf2">DRV</text>
+<text x="811" y="413" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#e5edf2">8874</text>
+<rect x="673" y="273" width="10" height="12" rx="2" fill="#dfce85" stroke="#dfce85" stroke-width="1.4"/>
+<text x="693" y="283" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f0f4ee">VM</text>
+<rect x="935" y="273" width="10" height="12" rx="2" fill="#dfce85" stroke="#dfce85" stroke-width="1.4"/>
+<text x="925" y="283" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f0f4ee">VIN</text>
+<rect x="673" y="317" width="10" height="12" rx="2" fill="#dfce85" stroke="#dfce85" stroke-width="1.4"/>
+<text x="693" y="327" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f0f4ee">GND</text>
+<rect x="935" y="317" width="10" height="12" rx="2" fill="#dfce85" stroke="#dfce85" stroke-width="1.4"/>
+<text x="925" y="327" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f0f4ee">GND</text>
+<rect x="673" y="361" width="10" height="12" rx="2" fill="#dfce85" stroke="#dfce85" stroke-width="1.4"/>
+<text x="693" y="371" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f0f4ee">EN / IN1</text>
+<rect x="935" y="361" width="10" height="12" rx="2" fill="#dfce85" stroke="#dfce85" stroke-width="1.4"/>
+<text x="925" y="371" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f0f4ee">OUT1</text>
+<rect x="673" y="405" width="10" height="12" rx="2" fill="#dfce85" stroke="#dfce85" stroke-width="1.4"/>
+<text x="693" y="415" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f0f4ee">PH / IN2</text>
+<rect x="935" y="405" width="10" height="12" rx="2" fill="#dfce85" stroke="#dfce85" stroke-width="1.4"/>
+<text x="925" y="415" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f0f4ee">OUT2</text>
+<rect x="673" y="449" width="10" height="12" rx="2" fill="#dfce85" stroke="#dfce85" stroke-width="1.4"/>
+<text x="693" y="459" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f0f4ee">PMODE</text>
+<rect x="935" y="449" width="10" height="12" rx="2" fill="#dfce85" stroke="#dfce85" stroke-width="1.4"/>
+<text x="925" y="459" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f0f4ee">IMODE</text>
+<rect x="673" y="493" width="10" height="12" rx="2" fill="#dfce85" stroke="#dfce85" stroke-width="1.4"/>
+<text x="693" y="503" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f0f4ee">SLEEP</text>
+<rect x="935" y="493" width="10" height="12" rx="2" fill="#dfce85" stroke="#dfce85" stroke-width="1.4"/>
+<text x="925" y="503" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f0f4ee">FAULT</text>
+<rect x="673" y="537" width="10" height="12" rx="2" fill="#dfce85" stroke="#dfce85" stroke-width="1.4"/>
+<text x="693" y="547" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f0f4ee">VREF</text>
+<rect x="935" y="537" width="10" height="12" rx="2" fill="#dfce85" stroke="#dfce85" stroke-width="1.4"/>
+<text x="925" y="547" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f0f4ee">CS</text>
+<text x="86" y="372" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0" fill="#218ca0">EN / PWM</text>
+<polyline points="296,367 678,367" fill="none" stroke="#218ca0" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="296" cy="367" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="86" y="416" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0" fill="#218ca0">PH / direction</text>
+<polyline points="296,411 678,411" fill="none" stroke="#218ca0" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="296" cy="411" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="86" y="504" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0" fill="#218ca0">Gated SLEEP</text>
+<polyline points="296,499 678,499" fill="none" stroke="#db5a4a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="296" cy="499" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5"/>
+<text x="521" y="263" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">VM: leave unused</text>
+<polyline points="678,279 570,279" fill="none" stroke="#647780" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="678,323 634,323" fill="none" stroke="#52676d" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="634,323 634,337" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="624.0,337 644.0,337" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="627.5,343 640.5,343" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="631.5,349 636.5,349" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="940,323 984,323" fill="none" stroke="#52676d" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="984,323 984,337" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="974.0,337 994.0,337" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="977.5,343 990.5,343" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="981.5,349 986.5,349" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="678,455 598,455" fill="none" stroke="#52676d" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="598,455 598,469" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="588.0,469 608.0,469" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="591.5,475 604.5,475" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="595.5,481 600.5,481" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="940,455 1024,455" fill="none" stroke="#52676d" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1024,455 1024,469" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1014.0,469 1034.0,469" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1017.5,475 1030.5,475" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1021.5,481 1026.5,481" fill="none" stroke="#52676d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="503" y="608" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#52676d">PMODE + IMODE directly to GND</text>
+<polyline points="940,279 1123,279 1123,221" fill="none" stroke="#db5a4a" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="1131" y="232" width="112.10000000000001" height="22" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="1137" y="247" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">Switched bus +</text>
+<rect x="1232" y="320" width="384" height="163" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4"/>
+<rect x="1232" y="320" width="6" height="163" rx="3" fill="#437fb4" stroke="#437fb4" stroke-width="1.4"/>
+<text x="1254" y="346" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1" fill="#437fb4">POLOLU 4752 / MOTOR LEADS</text>
+<text x="1254" y="376" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">12 V, 30:1 gearmotor</text>
+<text x="1254" y="402" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">RED lead  →  OUT1</text>
+<text x="1254" y="425" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">BLACK lead  →  OUT2</text>
+<text x="1254" y="448" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Both motor leads are switched.</text>
+<polyline points="940,367 1232,367" fill="none" stroke="#db5a4a" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="940,411 1232,411" fill="none" stroke="#20343e" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="1032" y="340" width="33.45" height="22" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="1038" y="355" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">RED</text>
+<rect x="1032" y="384" width="90.65" height="22" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="1038" y="399" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">BLACK ≠ GND</text>
+<polyline points="940,499 1086,499 1086,610 1232,610" fill="none" stroke="#bd9221" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="1232" y="533" width="384" height="135" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4" stroke-dasharray="7 5"/>
+<rect x="1232" y="533" width="6" height="135" rx="3" fill="#bd9221" stroke="#bd9221" stroke-width="1.4"/>
+<text x="1254" y="559" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1" fill="#bd9221">FAULT / CURRENT INPUTS</text>
+<text x="1254" y="589" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">Return to Pico via protection</text>
+<text x="1254" y="615" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">FAULT → GP11 / GP18; 3.3 V pull-ups</text>
+<text x="1254" y="638" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">CS → GP26 / GP27 via protection TBD</text>
+<text x="1254" y="661" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Latch faults; deliberate rearm required.</text>
+<polyline points="940,543 1062,543 1062,644 1232,644" fill="none" stroke="#437fb4" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="678,543 542,543 542,638" fill="none" stroke="#c77822" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="498" y="638" width="463" height="38" rx="5" fill="#fffef9" stroke="#c77822" stroke-width="1.4" stroke-dasharray="7 5"/>
+<text x="518" y="662" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="600" text-anchor="start" letter-spacing="0" fill="#c77822">VREF network TBD: set + measure 2.5 A peak</text>
+<rect x="1232" y="715" width="384" height="228" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4"/>
+<rect x="1232" y="715" width="6" height="228" rx="3" fill="#387b65" stroke="#387b65" stroke-width="1.4"/>
+<text x="1254" y="741" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1" fill="#387b65">4752 / ENCODER LEADS</text>
+<text x="1254" y="771" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">Four-wire feedback harness</text>
+<text x="1254" y="797" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">GREEN  →  common GND</text>
+<text x="1254" y="820" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">BLUE  →  regulated 5 V</text>
+<text x="1254" y="843" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">YELLOW  →  channel A</text>
+<text x="1254" y="866" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">WHITE  →  channel B</text>
+<text x="1254" y="889" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Connector orientation: verify by color.</text>
+<rect x="649" y="731" width="414" height="196" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4" stroke-dasharray="7 5"/>
+<rect x="649" y="731" width="6" height="196" rx="3" fill="#387b65" stroke="#387b65" stroke-width="1.4"/>
+<text x="671" y="757" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1" fill="#387b65">REQUIRED INTERFACE / PART TBD</text>
+<text x="671" y="787" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">5 V → 3.3 V level conversion</text>
+<text x="671" y="813" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Four input channels for both wheels</text>
+<text x="671" y="836" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Use a translator suitable for push-pull</text>
+<text x="671" y="859" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">quadrature outputs; check power-off state.</text>
+<text x="671" y="882" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">No direct 5 V signals into Pico GPIO.</text>
+<polyline points="1090,797 1232,797" fill="none" stroke="#387b65" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1090" cy="797" r="5" fill="#fffef9" stroke="#387b65" stroke-width="2.5"/>
+<rect x="1086" y="771" width="84.60000000000001" height="21" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="1092" y="785" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="start" letter-spacing="0" fill="#387b65">GND / GREEN</text>
+<polyline points="1090,820 1232,820" fill="none" stroke="#437fb4" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1090" cy="820" r="5" fill="#fffef9" stroke="#437fb4" stroke-width="2.5"/>
+<rect x="1086" y="797" width="78.0" height="21" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="1092" y="811" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="start" letter-spacing="0" fill="#437fb4">5 V / BLUE</text>
+<polyline points="1232,851 1063,851" fill="none" stroke="#bd9221" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="1086" y="827" width="78.0" height="21" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="1092" y="841" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="start" letter-spacing="0" fill="#bd9221">A / YELLOW</text>
+<polyline points="1232,891 1063,891" fill="none" stroke="#52676d" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="1232,891 1063,891" fill="none" stroke="#fffef9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="1086" y="867" width="71.4" height="21" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="1092" y="881" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="start" letter-spacing="0" fill="#52676d">B / WHITE</text>
+<polyline points="649,799 498,799" fill="none" stroke="#218ca0" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="649,834 498,834" fill="none" stroke="#218ca0" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="64" y="684" width="434" height="283" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4"/>
+<rect x="64" y="684" width="6" height="283" rx="3" fill="#218ca0" stroke="#218ca0" stroke-width="1.4"/>
+<text x="86" y="710" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1" fill="#218ca0">PICO / LEFT AND RIGHT CHANNELS</text>
+<text x="86" y="740" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">Proposed pin assignments</text>
+<text x="86" y="779" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">Function</text>
+<text x="256" y="779" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">Left</text>
+<text x="369" y="779" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">Right</text>
+<text x="86" y="810" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#20343e">Encoder A</text>
+<text x="256" y="810" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0" fill="#218ca0">GP2</text>
+<text x="369" y="810" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0" fill="#218ca0">GP4</text>
+<text x="86" y="839" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#20343e">Encoder B</text>
+<text x="256" y="839" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0" fill="#218ca0">GP3</text>
+<text x="369" y="839" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0" fill="#218ca0">GP5</text>
+<text x="86" y="868" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#20343e">EN / PH</text>
+<text x="256" y="868" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0" fill="#218ca0">GP6/7</text>
+<text x="369" y="868" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0" fill="#218ca0">GP8/9</text>
+<text x="86" y="897" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#20343e">FAULT</text>
+<text x="256" y="897" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0" fill="#218ca0">GP11</text>
+<text x="369" y="897" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0" fill="#218ca0">GP18</text>
+<text x="86" y="926" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#20343e">CS / ADC</text>
+<text x="256" y="926" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0" fill="#218ca0">GP26</text>
+<text x="369" y="926" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0" fill="#218ca0">GP27</text>
+<text x="649" y="979" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#db5a4a">EN low = brake. SLEEP low = outputs off / coast.</text>
+<text x="649" y="1002" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">2.5 A peak / 1.2 A RMS are Hux qualification targets, not tested settings.</text>
+</svg>

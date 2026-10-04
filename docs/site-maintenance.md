@@ -38,7 +38,7 @@ The current project has six primary sections, with the same navigation on drawin
 | --- | --- | --- |
 | Overview | `/` (also `/v1-proof.html`) | Active scope, assembly rendering, design targets and current status |
 | Mechanical | `/mechanical.html` | Assembly, interactive general arrangement and drawing register |
-| Electrical | `/electrical.html` | Wiring diagram placeholders, harness sheets and architecture |
+| Electrical | `/electrical.html` | EL-01–04 wiring atlas, enlarged vector viewer, printable PDF and architecture |
 | Build & test | `/build.html` | Workbench, milestones, updates and local session notebook |
 | Parts & budget | `/parts.html` | Paid orders, shopping list, component register and allowances |
 | Documents | `/documents.html` | Discipline-grouped source register and historical archive |
@@ -47,7 +47,7 @@ Mechanical includes `/joints.html` for close-up detail studies and links to `/me
 
 The builder supplies the shared header, breadcrumbs, section navigation and footer. New authored pages use `workshop.css` after their page styles; edit navigation in `build_site.py` rather than adding a competing header. `workshop.js` preserves old homepage bookmarks such as `/#build`, `/#model`, `/#connections` and `/#budget` by forwarding them to the dedicated page. Repository links to these old fragments are also relocated during publication. Keep the local notebook storage keys intact when reorganizing pages.
 
-Joint studies and wiring sheets are explicitly pending. Replace a placeholder with measured photographs or reviewed drawings only when its evidence exists; retain its sheet identifier and release status. The source Markdown remains editable in the repository; the site links to rendered pages.
+Joint studies remain pending. The source-checked EL-01–04 wiring atlas replaces the electrical placeholders; its [verification record](wiring-atlas.md) keeps unresolved circuits and physical harness release visible. Replace placeholders with measured photographs or reviewed drawings only when their evidence exists; retain sheet identifiers and release status. The source Markdown remains editable in the repository; the site links to rendered pages.
 
 ## Live publishing and freshness
 

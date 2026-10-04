@@ -20,6 +20,8 @@ The received sensor is **SparkFun LSM6DSO Qwiic (manufacturer model SEN-18020)**
 
 SparkFun specifies **3.3 V operation**, SPI and I2C support, with interrupt pins exposed. Power this breakout from Pico **3V3(OUT)** and GND; keep its power and logic at 3.3 V. The Qwiic connectors carry I2C. Hux's proposed SPI connection uses the breakout's main SPI pads and a separate interrupt wire, with the exact pad/jumper configuration checked against the received board and [SparkFun schematic](https://cdn.sparkfun.com/assets/3/1/6/b/c/SparkFun_Qwiic_6DoF_LSM6DSO_Schematic.pdf) before soldering.
 
+The [source-checked EL-02 wiring sheet](../../cad/wiring/v1-proof-el-02-pico-imu.svg) adds physical Pico pin numbers and the component-side pad view. **Open the 0x6B/0x6A address jumper before SPI**, leaving SDO address-selection pads unbridged; opening both separate I2C pull-up traces is recommended. Keep SCX/SDIX ground jumpers intact. The main MOSI pad is labeled **SDA / SDI**, and main clock is **SCL**. Inspect the received revision first. [SparkFun jumper instructions](https://learn.sparkfun.com/tutorials/qwiic-6dof-lsm6dso-breakout-hookup-guide/hardware-overview) · [Wiring verification record](../wiring-atlas.md).
+
 | Proposed Pico signal | IMU function |
 | --- | --- |
 | GP12 | Main SPI MISO / SDO |

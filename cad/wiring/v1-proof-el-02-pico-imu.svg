@@ -1,0 +1,271 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="1120" viewBox="0 0 1680 1120" role="img" aria-labelledby="title desc">
+<title id="title">Hux V1-PROOF Pico 2 + IMU connections</title><desc id="desc">Component-side views, USB at the top of the Pico. Physical pins and GPIO numbers are distinct. Source-checked planning drawing; proposed harnesses and unresolved interfaces require physical verification.</desc>
+<defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r=".7" fill="#c9d5d1"/></pattern></defs>
+<rect x="0" y="0" width="1680" height="1120" rx="0" fill="#f7f5ee" stroke="#ced8d7" stroke-width="1.4"/>
+<rect x="32" y="32" width="1616" height="1056" fill="url(#grid)" stroke="#ced8d7"/>
+<text x="64" y="72" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" text-anchor="start" letter-spacing="2" fill="#387b65">HUX  /  V1-PROOF  /  ELECTRICAL</text>
+<text x="64" y="119" font-family="Arial,Helvetica,sans-serif" font-size="38" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">Pico 2 + IMU connections</text>
+<text x="64" y="150" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Component-side views, USB at the top of the Pico. Physical pins and GPIO numbers are distinct.</text>
+<rect x="1350" y="58" width="266" height="58" rx="8" fill="#ece7d7" stroke="#ced8d7" stroke-width="1.4"/>
+<text x="1483" y="82" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" text-anchor="middle" letter-spacing="1" fill="#20343e">SOURCE-CHECKED PLAN</text>
+<text x="1483" y="103" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="1" fill="#647780">HARNESS / BENCH RELEASE OPEN</text>
+<polyline points="64,174 1616,174" fill="none" stroke="#ced8d7" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="64,1030 1616,1030" fill="none" stroke="#ced8d7" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="64" y="1060" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Rev A  |  03 OCT 2026  |  Drawn from vendor pinouts + Hux GPIO proposal</text>
+<text x="64" y="1082" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">See docs/wiring-atlas.md for source links, interface decisions and verification boundaries.</text>
+<text x="1614" y="1064" font-family="Arial,Helvetica,sans-serif" font-size="25" font-weight="700" text-anchor="end" letter-spacing="0" fill="#387b65">EL-02</text>
+<rect x="220" y="246" width="290" height="704" rx="13" fill="#2e6756" stroke="#245445" stroke-width="1.4"/>
+<rect x="328" y="228" width="74" height="47" rx="5" fill="#bac8c7" stroke="#7f9391" stroke-width="1.4"/>
+<text x="365" y="294" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#f6f9ec">USB</text>
+<rect x="303" y="548" width="123" height="92" rx="6" fill="#26343d" stroke="#26343d" stroke-width="1.4"/>
+<text x="365" y="589" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#f6f9ec">RP2350</text>
+<text x="365" y="617" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="middle" letter-spacing="0" fill="#c6d5d0">PICO 2</text>
+<text x="365" y="912" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="middle" letter-spacing="1" fill="#d7e4d8">TOP VIEW</text>
+<rect x="231.5" y="257" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="237.5" cy="264" r="2" fill="#20343e"/>
+<text x="257" y="268" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f5f7e8">1</text>
+<text x="207" y="269" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="end" letter-spacing="0" fill="#218ca0">GP0</text>
+<rect x="231.5" y="292" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="237.5" cy="299" r="2" fill="#20343e"/>
+<text x="257" y="303" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f5f7e8">2</text>
+<text x="207" y="304" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="end" letter-spacing="0" fill="#218ca0">GP1</text>
+<rect x="231.5" y="327" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="237.5" cy="334" r="2" fill="#20343e"/>
+<text x="257" y="338" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f5f7e8">3</text>
+<text x="207" y="339" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="end" letter-spacing="0" fill="#52676d">GND</text>
+<rect x="231.5" y="362" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="237.5" cy="369" r="2" fill="#20343e"/>
+<text x="257" y="373" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f5f7e8">4</text>
+<text x="207" y="374" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="end" letter-spacing="0" fill="#218ca0">GP2</text>
+<rect x="231.5" y="397" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="237.5" cy="404" r="2" fill="#20343e"/>
+<text x="257" y="408" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f5f7e8">5</text>
+<text x="207" y="409" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="end" letter-spacing="0" fill="#218ca0">GP3</text>
+<rect x="231.5" y="432" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="237.5" cy="439" r="2" fill="#20343e"/>
+<text x="257" y="443" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f5f7e8">6</text>
+<text x="207" y="444" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="end" letter-spacing="0" fill="#218ca0">GP4</text>
+<rect x="231.5" y="467" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="237.5" cy="474" r="2" fill="#20343e"/>
+<text x="257" y="478" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f5f7e8">7</text>
+<text x="207" y="479" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="end" letter-spacing="0" fill="#218ca0">GP5</text>
+<rect x="231.5" y="502" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="237.5" cy="509" r="2" fill="#20343e"/>
+<text x="257" y="513" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f5f7e8">8</text>
+<text x="207" y="514" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="end" letter-spacing="0" fill="#52676d">GND</text>
+<rect x="231.5" y="537" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="237.5" cy="544" r="2" fill="#20343e"/>
+<text x="257" y="548" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f5f7e8">9</text>
+<text x="207" y="549" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="end" letter-spacing="0" fill="#218ca0">GP6</text>
+<rect x="231.5" y="572" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="237.5" cy="579" r="2" fill="#20343e"/>
+<text x="257" y="583" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f5f7e8">10</text>
+<text x="207" y="584" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="end" letter-spacing="0" fill="#218ca0">GP7</text>
+<rect x="231.5" y="607" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="237.5" cy="614" r="2" fill="#20343e"/>
+<text x="257" y="618" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f5f7e8">11</text>
+<text x="207" y="619" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="end" letter-spacing="0" fill="#218ca0">GP8</text>
+<rect x="231.5" y="642" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="237.5" cy="649" r="2" fill="#20343e"/>
+<text x="257" y="653" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f5f7e8">12</text>
+<text x="207" y="654" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="end" letter-spacing="0" fill="#218ca0">GP9</text>
+<rect x="231.5" y="677" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="237.5" cy="684" r="2" fill="#20343e"/>
+<text x="257" y="688" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f5f7e8">13</text>
+<text x="207" y="689" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="end" letter-spacing="0" fill="#52676d">GND</text>
+<rect x="231.5" y="712" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="237.5" cy="719" r="2" fill="#20343e"/>
+<text x="257" y="723" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f5f7e8">14</text>
+<text x="207" y="724" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="end" letter-spacing="0" fill="#218ca0">GP10</text>
+<rect x="231.5" y="747" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="237.5" cy="754" r="2" fill="#20343e"/>
+<text x="257" y="758" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f5f7e8">15</text>
+<text x="207" y="759" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="end" letter-spacing="0" fill="#218ca0">GP11</text>
+<rect x="231.5" y="782" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="237.5" cy="789" r="2" fill="#20343e"/>
+<text x="257" y="793" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f5f7e8">16</text>
+<text x="207" y="794" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="end" letter-spacing="0" fill="#218ca0">GP12</text>
+<rect x="231.5" y="817" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="237.5" cy="824" r="2" fill="#20343e"/>
+<text x="257" y="828" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f5f7e8">17</text>
+<text x="207" y="829" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="end" letter-spacing="0" fill="#218ca0">GP13</text>
+<rect x="231.5" y="852" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="237.5" cy="859" r="2" fill="#20343e"/>
+<text x="257" y="863" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f5f7e8">18</text>
+<text x="207" y="864" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="end" letter-spacing="0" fill="#52676d">GND</text>
+<rect x="231.5" y="887" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="237.5" cy="894" r="2" fill="#20343e"/>
+<text x="257" y="898" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f5f7e8">19</text>
+<text x="207" y="899" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="end" letter-spacing="0" fill="#218ca0">GP14</text>
+<rect x="231.5" y="922" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="237.5" cy="929" r="2" fill="#20343e"/>
+<text x="257" y="933" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="start" letter-spacing="0" fill="#f5f7e8">20</text>
+<text x="207" y="934" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="end" letter-spacing="0" fill="#218ca0">GP15</text>
+<rect x="486.5" y="257" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="492.5" cy="264" r="2" fill="#20343e"/>
+<text x="473" y="268" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f5f7e8">40</text>
+<text x="531" y="269" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#52676d">VBUS</text>
+<rect x="486.5" y="292" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="492.5" cy="299" r="2" fill="#20343e"/>
+<text x="473" y="303" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f5f7e8">39</text>
+<text x="531" y="304" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#c77822">VSYS</text>
+<rect x="486.5" y="327" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="492.5" cy="334" r="2" fill="#20343e"/>
+<text x="473" y="338" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f5f7e8">38</text>
+<text x="531" y="339" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#52676d">GND</text>
+<rect x="486.5" y="362" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="492.5" cy="369" r="2" fill="#20343e"/>
+<text x="473" y="373" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f5f7e8">37</text>
+<text x="531" y="374" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#52676d">3V3_EN</text>
+<rect x="486.5" y="397" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="492.5" cy="404" r="2" fill="#20343e"/>
+<text x="473" y="408" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f5f7e8">36</text>
+<text x="531" y="409" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#8260a9">3V3(OUT)</text>
+<rect x="486.5" y="432" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="492.5" cy="439" r="2" fill="#20343e"/>
+<text x="473" y="443" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f5f7e8">35</text>
+<text x="531" y="444" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#52676d">ADC_VREF</text>
+<rect x="486.5" y="467" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="492.5" cy="474" r="2" fill="#20343e"/>
+<text x="473" y="478" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f5f7e8">34</text>
+<text x="531" y="479" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#218ca0">GP28</text>
+<rect x="486.5" y="502" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="492.5" cy="509" r="2" fill="#20343e"/>
+<text x="473" y="513" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f5f7e8">33</text>
+<text x="531" y="514" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#52676d">AGND</text>
+<rect x="486.5" y="537" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="492.5" cy="544" r="2" fill="#20343e"/>
+<text x="473" y="548" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f5f7e8">32</text>
+<text x="531" y="549" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#218ca0">GP27</text>
+<rect x="486.5" y="572" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="492.5" cy="579" r="2" fill="#20343e"/>
+<text x="473" y="583" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f5f7e8">31</text>
+<text x="531" y="584" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#218ca0">GP26</text>
+<rect x="486.5" y="607" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="492.5" cy="614" r="2" fill="#20343e"/>
+<text x="473" y="618" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f5f7e8">30</text>
+<text x="531" y="619" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#52676d">RUN</text>
+<rect x="486.5" y="642" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="492.5" cy="649" r="2" fill="#20343e"/>
+<text x="473" y="653" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f5f7e8">29</text>
+<text x="531" y="654" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#218ca0">GP22</text>
+<rect x="486.5" y="677" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="492.5" cy="684" r="2" fill="#20343e"/>
+<text x="473" y="688" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f5f7e8">28</text>
+<text x="531" y="689" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#52676d">GND</text>
+<rect x="486.5" y="712" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="492.5" cy="719" r="2" fill="#20343e"/>
+<text x="473" y="723" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f5f7e8">27</text>
+<text x="531" y="724" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#218ca0">GP21</text>
+<rect x="486.5" y="747" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="492.5" cy="754" r="2" fill="#20343e"/>
+<text x="473" y="758" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f5f7e8">26</text>
+<text x="531" y="759" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#218ca0">GP20</text>
+<rect x="486.5" y="782" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="492.5" cy="789" r="2" fill="#20343e"/>
+<text x="473" y="793" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f5f7e8">25</text>
+<text x="531" y="794" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#218ca0">GP19</text>
+<rect x="486.5" y="817" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="492.5" cy="824" r="2" fill="#20343e"/>
+<text x="473" y="828" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f5f7e8">24</text>
+<text x="531" y="829" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#218ca0">GP18</text>
+<rect x="486.5" y="852" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="492.5" cy="859" r="2" fill="#20343e"/>
+<text x="473" y="863" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f5f7e8">23</text>
+<text x="531" y="864" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#52676d">GND</text>
+<rect x="486.5" y="887" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="492.5" cy="894" r="2" fill="#20343e"/>
+<text x="473" y="898" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f5f7e8">22</text>
+<text x="531" y="899" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#218ca0">GP17</text>
+<rect x="486.5" y="922" width="12" height="14" rx="2" fill="#dbc577" stroke="#e8d895" stroke-width="1.4"/>
+<circle cx="492.5" cy="929" r="2" fill="#20343e"/>
+<text x="473" y="933" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="600" text-anchor="end" letter-spacing="0" fill="#f5f7e8">21</text>
+<text x="531" y="934" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#218ca0">GP16</text>
+<text x="64" y="217" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" text-anchor="start" letter-spacing="1" fill="#387b65">PHYSICAL PIN MAP</text>
+<text x="64" y="990" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">p1 is upper left; p40 is upper right.</text>
+<text x="642" y="217" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" text-anchor="start" letter-spacing="1" fill="#387b65">SEVEN-WIRE SENSOR HARNESS</text>
+<rect x="1240" y="300" width="360" height="360" rx="8" fill="#bb343e" stroke="#9d2932" stroke-width="1.4"/>
+<rect x="1374" y="282" width="92" height="38" rx="4" fill="#e5dfd4" stroke="#b4aca1" stroke-width="1.4"/>
+<rect x="1374" y="641" width="92" height="38" rx="4" fill="#e5dfd4" stroke="#b4aca1" stroke-width="1.4"/>
+<text x="1420" y="308" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#3a4141">QWIIC</text>
+<text x="1420" y="666" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#3a4141">QWIIC</text>
+<rect x="1373" y="443" width="94" height="82" rx="5" fill="#26343d" stroke="#26343d" stroke-width="1.4"/>
+<text x="1420" y="473" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#f5f5ed">LSM6</text>
+<text x="1420" y="495" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#f5f5ed">DSO</text>
+<text x="1420" y="618" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#fff6e9">SEN-18020</text>
+<rect x="650" y="374" width="402" height="31" rx="5" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4"/>
+<text x="670" y="395" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">GND p18</text>
+<polyline points="1052,390 1258,390" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1052" cy="390" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5"/>
+<rect x="1252" y="384" width="12" height="12" rx="2" fill="#ebc976" stroke="#ebc976" stroke-width="1.4"/>
+<circle cx="1258" cy="390" r="2" fill="#20343e"/>
+<text x="1270" y="395" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="600" text-anchor="start" letter-spacing="0" fill="#fff6e9">GND</text>
+<rect x="1576" y="384" width="12" height="12" rx="2" fill="#ebc976" stroke="#ebc976" stroke-width="1.4"/>
+<circle cx="1582" cy="390" r="2" fill="#20343e"/>
+<text x="1563" y="395" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="end" letter-spacing="0" fill="#fff6e9">INT2</text>
+<rect x="650" y="410" width="402" height="31" rx="5" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4"/>
+<text x="670" y="431" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">3V3(OUT) p36</text>
+<polyline points="1052,426 1258,426" fill="none" stroke="#8260a9" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1052" cy="426" r="5" fill="#fffef9" stroke="#8260a9" stroke-width="2.5"/>
+<rect x="1252" y="420" width="12" height="12" rx="2" fill="#ebc976" stroke="#ebc976" stroke-width="1.4"/>
+<circle cx="1258" cy="426" r="2" fill="#20343e"/>
+<text x="1270" y="431" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="600" text-anchor="start" letter-spacing="0" fill="#fff6e9">3V3</text>
+<rect x="1576" y="420" width="12" height="12" rx="2" fill="#ebc976" stroke="#ebc976" stroke-width="1.4"/>
+<circle cx="1582" cy="426" r="2" fill="#20343e"/>
+<text x="1563" y="431" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="end" letter-spacing="0" fill="#fff6e9">INT1</text>
+<rect x="650" y="446" width="402" height="31" rx="5" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4"/>
+<text x="670" y="467" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">GP15 p20 · MOSI</text>
+<polyline points="1052,462 1258,462" fill="none" stroke="#218ca0" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1052" cy="462" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<rect x="1252" y="456" width="12" height="12" rx="2" fill="#ebc976" stroke="#ebc976" stroke-width="1.4"/>
+<circle cx="1258" cy="462" r="2" fill="#20343e"/>
+<text x="1270" y="467" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="600" text-anchor="start" letter-spacing="0" fill="#fff6e9">SDA / SDI</text>
+<rect x="1576" y="456" width="12" height="12" rx="2" fill="#ebc976" stroke="#ebc976" stroke-width="1.4"/>
+<circle cx="1582" cy="462" r="2" fill="#20343e"/>
+<text x="1563" y="467" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="end" letter-spacing="0" fill="#fff6e9">OCS</text>
+<rect x="650" y="482" width="402" height="31" rx="5" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4"/>
+<text x="670" y="503" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">GP14 p19 · SCK</text>
+<polyline points="1052,498 1258,498" fill="none" stroke="#437fb4" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1052" cy="498" r="5" fill="#fffef9" stroke="#437fb4" stroke-width="2.5"/>
+<rect x="1252" y="492" width="12" height="12" rx="2" fill="#ebc976" stroke="#ebc976" stroke-width="1.4"/>
+<circle cx="1258" cy="498" r="2" fill="#20343e"/>
+<text x="1270" y="503" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="600" text-anchor="start" letter-spacing="0" fill="#fff6e9">SCL</text>
+<rect x="1576" y="492" width="12" height="12" rx="2" fill="#ebc976" stroke="#ebc976" stroke-width="1.4"/>
+<circle cx="1582" cy="498" r="2" fill="#20343e"/>
+<text x="1563" y="503" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="end" letter-spacing="0" fill="#fff6e9">SCX</text>
+<rect x="650" y="518" width="402" height="31" rx="5" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4"/>
+<text x="670" y="539" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">GP12 p16 · MISO</text>
+<polyline points="1052,534 1258,534" fill="none" stroke="#387b65" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1052" cy="534" r="5" fill="#fffef9" stroke="#387b65" stroke-width="2.5"/>
+<rect x="1252" y="528" width="12" height="12" rx="2" fill="#ebc976" stroke="#ebc976" stroke-width="1.4"/>
+<circle cx="1258" cy="534" r="2" fill="#20343e"/>
+<text x="1270" y="539" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="600" text-anchor="start" letter-spacing="0" fill="#fff6e9">SDO</text>
+<rect x="1576" y="528" width="12" height="12" rx="2" fill="#ebc976" stroke="#ebc976" stroke-width="1.4"/>
+<circle cx="1582" cy="534" r="2" fill="#20343e"/>
+<text x="1563" y="539" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="end" letter-spacing="0" fill="#fff6e9">SDIX</text>
+<rect x="650" y="554" width="402" height="31" rx="5" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4"/>
+<text x="670" y="575" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">GP13 p17 · CS</text>
+<polyline points="1052,570 1258,570" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1052" cy="570" r="5" fill="#fffef9" stroke="#c77822" stroke-width="2.5"/>
+<rect x="1252" y="564" width="12" height="12" rx="2" fill="#ebc976" stroke="#ebc976" stroke-width="1.4"/>
+<circle cx="1258" cy="570" r="2" fill="#20343e"/>
+<text x="1270" y="575" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="600" text-anchor="start" letter-spacing="0" fill="#fff6e9">CS</text>
+<rect x="1576" y="564" width="12" height="12" rx="2" fill="#ebc976" stroke="#ebc976" stroke-width="1.4"/>
+<circle cx="1582" cy="570" r="2" fill="#20343e"/>
+<text x="1563" y="575" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="end" letter-spacing="0" fill="#fff6e9">SDOX</text>
+<rect x="650" y="709" width="402" height="43" rx="5" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4"/>
+<text x="670" y="737" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">GP16 p21 · INT1 / DRDY</text>
+<polyline points="1052,731 1620,731 1620,426 1582,426" fill="none" stroke="#bd9221" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1052" cy="731" r="5" fill="#fffef9" stroke="#bd9221" stroke-width="2.5"/>
+<circle cx="1582" cy="426" r="5" fill="#fffef9" stroke="#bd9221" stroke-width="2.5"/>
+<text x="1240" y="259" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" text-anchor="start" letter-spacing="1" fill="#387b65">SPARKFUN / COMPONENT SIDE</text>
+<text x="1240" y="282" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Rotated 90° clockwise from vendor view</text>
+<rect x="642" y="805" width="974" height="150" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4"/>
+<rect x="642" y="805" width="6" height="150" rx="3" fill="#c77822" stroke="#c77822" stroke-width="1.4"/>
+<text x="664" y="831" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1" fill="#c77822">SPI JUMPER SETUP / CHECK RECEIVED BOARD</text>
+<text x="664" y="861" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e"></text>
+<text x="664" y="860" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Open the 0x6B / 0x6A address jumper so SDO can drive MISO.</text>
+<text x="664" y="883" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Recommended: open both I2C pull-up traces. Keep SCX / SDIX ground jumpers intact.</text>
+<text x="664" y="906" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Qwiic sockets carry I2C and are unused here. Wire the main SPI pads, not SCX / SDIX.</text>
+<text x="664" y="929" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Power and signal logic are 3.3 V. Inspect board revision and check sensor identity before use.</text>
+</svg>

@@ -539,6 +539,11 @@
       },
       "documents": [
         {
+          "title": "Wiring atlas \u00b7 EL-01\u201304",
+          "path": "docs/wiring-atlas.md",
+          "kind": "source-checked planning drawing"
+        },
+        {
           "title": "Pico 2 USB bring-up \u00b7 3 October",
           "path": "docs/checklists/2026-10-03-pico-bringup.md",
           "kind": "session checklist"
@@ -635,6 +640,16 @@
         }
       ],
       "updates": [
+        {
+          "date": "2026-10-03",
+          "title": "Wiring atlas added to Electrical",
+          "summary": "Four coordinated source-checked sheets cover the architecture, Pico/LSM6DSO main SPI wiring, DRV8874 wheel harness and power/servo interfaces. The Electrical page adds an enlarged vector viewer and printable PDF. Vendor pinouts and motor lead colors were independently reviewed; SPI requires opening the IMU address jumper. Fuse, regulator, protection, translator, adapter and watchdog circuits remain unresolved. No physical test or release gate is closed.",
+          "sourcePaths": [
+            "docs/wiring-atlas.md",
+            "tools/living-drawings/electrical.html",
+            "cad/wiring/v1-proof-netlist.json"
+          ]
+        },
         {
           "date": "2026-10-03",
           "title": "Pico and IMU received; remaining shopping list updated",

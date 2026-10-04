@@ -1,0 +1,189 @@
+{
+  "revision": "A",
+  "source_checked": "2026-10-03",
+  "status": "build-planning; physical verification pending",
+  "pico_endpoints": [
+    {
+      "gpio": 0,
+      "physical_pin": 1,
+      "function": "Manual TX (optional)"
+    },
+    {
+      "gpio": 1,
+      "physical_pin": 2,
+      "function": "Manual RX (optional)"
+    },
+    {
+      "gpio": 2,
+      "physical_pin": 4,
+      "function": "Left encoder A"
+    },
+    {
+      "gpio": 3,
+      "physical_pin": 5,
+      "function": "Left encoder B"
+    },
+    {
+      "gpio": 4,
+      "physical_pin": 6,
+      "function": "Right encoder A"
+    },
+    {
+      "gpio": 5,
+      "physical_pin": 7,
+      "function": "Right encoder B"
+    },
+    {
+      "gpio": 6,
+      "physical_pin": 9,
+      "function": "Left EN / PWM"
+    },
+    {
+      "gpio": 7,
+      "physical_pin": 10,
+      "function": "Left PH / direction"
+    },
+    {
+      "gpio": 8,
+      "physical_pin": 11,
+      "function": "Right EN / PWM"
+    },
+    {
+      "gpio": 9,
+      "physical_pin": 12,
+      "function": "Right PH / direction"
+    },
+    {
+      "gpio": 10,
+      "physical_pin": 14,
+      "function": "Wheel enable request"
+    },
+    {
+      "gpio": 11,
+      "physical_pin": 15,
+      "function": "Left FAULT"
+    },
+    {
+      "gpio": 12,
+      "physical_pin": 16,
+      "function": "SPI1 MISO"
+    },
+    {
+      "gpio": 13,
+      "physical_pin": 17,
+      "function": "SPI1 chip select"
+    },
+    {
+      "gpio": 14,
+      "physical_pin": 19,
+      "function": "SPI1 clock"
+    },
+    {
+      "gpio": 15,
+      "physical_pin": 20,
+      "function": "SPI1 MOSI"
+    },
+    {
+      "gpio": 16,
+      "physical_pin": 21,
+      "function": "IMU INT1 / DRDY"
+    },
+    {
+      "gpio": 17,
+      "physical_pin": 22,
+      "function": "Servo bus direction"
+    },
+    {
+      "gpio": 18,
+      "physical_pin": 24,
+      "function": "Right FAULT"
+    },
+    {
+      "gpio": 19,
+      "physical_pin": 25,
+      "function": "Deliberate arm input"
+    },
+    {
+      "gpio": 20,
+      "physical_pin": 26,
+      "function": "UART1 servo TX"
+    },
+    {
+      "gpio": 21,
+      "physical_pin": 27,
+      "function": "UART1 servo RX"
+    },
+    {
+      "gpio": 22,
+      "physical_pin": 29,
+      "function": "Watchdog heartbeat"
+    },
+    {
+      "gpio": 26,
+      "physical_pin": 31,
+      "function": "Left CS via conditioning"
+    },
+    {
+      "gpio": 27,
+      "physical_pin": 32,
+      "function": "Right CS via conditioning"
+    },
+    {
+      "gpio": 28,
+      "physical_pin": 34,
+      "function": "Pack voltage via divider"
+    }
+  ],
+  "imu": [
+    {
+      "pico": "GND p18",
+      "pad": "GND"
+    },
+    {
+      "pico": "3V3(OUT) p36",
+      "pad": "3V3"
+    },
+    {
+      "gpio": 15,
+      "physical_pin": 20,
+      "pad": "SDA/SDI"
+    },
+    {
+      "gpio": 14,
+      "physical_pin": 19,
+      "pad": "SCL"
+    },
+    {
+      "gpio": 12,
+      "physical_pin": 16,
+      "pad": "SDO"
+    },
+    {
+      "gpio": 13,
+      "physical_pin": 17,
+      "pad": "CS"
+    },
+    {
+      "gpio": 16,
+      "physical_pin": 21,
+      "pad": "INT1"
+    }
+  ],
+  "motor_leads": {
+    "red": "DRV8874 OUT1",
+    "black": "DRV8874 OUT2 (switched, not GND)",
+    "green": "common GND",
+    "blue": "regulated 5 V",
+    "yellow": "encoder A via 5 V to 3.3 V conversion",
+    "white": "encoder B via 5 V to 3.3 V conversion"
+  },
+  "unresolved": [
+    "Regulators and return-energy protection",
+    "Fuse and conductor sizing",
+    "Encoder translator",
+    "Servo bus interface and cable pinout",
+    "Hardware watchdog / kill implementation",
+    "ADC conditioning and protection",
+    "Received component revisions and harness orientation"
+  ]
+}
