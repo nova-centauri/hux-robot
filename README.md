@@ -29,7 +29,7 @@ No stairs, one-wheel stance, jumping, rough terrain, onboard cameras, autonomy o
 
 ## Living website
 
-The website routes **V1-PROOF** to the current build and **V0-GENESIS** to the original planning archive. The current workbench tracks actuator orders, the supported single-leg exercise, milestone gates and dated updates. A third version remains future and unscoped. Browser bench notes are local drafts; the shared plan is maintained in `tools/living-drawings/plan-data.json` alongside its referenced documents.
+The website organizes **V1-PROOF** into Overview, Mechanical, Electrical, Build & test, Parts & budget, and Documents, with consistent navigation on the interactive tools and rendered guides. Mechanical includes [joint close-up studies](tools/living-drawings/joints.html); Electrical reserves [wiring and harness sheets](tools/living-drawings/electrical.html). Unverified details remain labeled placeholders. The [build board](tools/living-drawings/build.html) tracks the supported single-leg exercise, milestone gates and dated updates; [parts and budget](tools/living-drawings/parts.html) keeps procurement separate. **V0-GENESIS** remains the original planning archive. Browser bench notes are local drafts; the shared plan is maintained in `tools/living-drawings/plan-data.json` alongside its referenced documents.
 
 Run `npm run build` and `npm run test:site` from `tools/living-drawings`; serve or publish `dist/site`. Markdown guides become real HTML pages with version navigation. See [website maintenance](docs/site-maintenance.md) for the update and preview workflow.
 

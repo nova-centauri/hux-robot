@@ -2,7 +2,34 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
+const vm = require('node:vm');
 const { Notebook, sourceURL, escape, purchaseQuantities, quantitySummary, remainingShoppingList } = require('./plan.js');
+const siteRoot = path.resolve(__dirname, '../../dist/site');
+
+function publishedRoute(href, base = 'https://hux.xer0.io/') {
+  const url = new URL(href);
+  const prefix = new URL(base).pathname;
+  assert.ok(url.pathname.startsWith(prefix), `Route escaped the published base: ${href}`);
+  const target = path.join(siteRoot, decodeURIComponent(url.pathname.slice(prefix.length)));
+  assert.ok(fs.existsSync(target) && fs.statSync(target).isFile(), `Missing published target: ${href}`);
+  if (url.hash) {
+    const ids = new Set([...fs.readFileSync(target, 'utf8').matchAll(/\s(?:id|name)\s*=\s*(["'])(.*?)\1/g)].map((match) => match[2]));
+    assert.ok(ids.has(decodeURIComponent(url.hash.slice(1))), `Missing published fragment: ${href}`);
+  }
+}
+
+function runWorkshop(script, href) {
+  const url = new URL(href);
+  let redirected;
+  vm.runInNewContext(script, {
+    URL,
+    location: {
+      href: url.href, pathname: url.pathname, hash: url.hash, search: url.search,
+      replace(destination) { redirected = String(destination); },
+    },
+  }, { timeout: 1000 });
+  return redirected;
+}
 
 function memoryStorage() {
   const values = new Map();
@@ -125,8 +152,7 @@ test('document routing preserves nested paths and anchors without allowing execu
   assert.equal(escape('<img src=x onerror="oops">'), '&lt;img src=x onerror=&quot;oops&quot;&gt;');
 });
 
-test('every published plan document and source route resolves in the built site', () => {
-  const siteRoot = path.resolve(__dirname, '../../dist/site');
+test('every published plan document and source route resolves with its fragment in the built site', () => {
   assert.ok(fs.existsSync(siteRoot), 'Build the website before checking published plan links.');
   const data = JSON.parse(fs.readFileSync(path.join(__dirname, 'plan-data.json'), 'utf8'));
   const sources = new Set();
@@ -143,7 +169,44 @@ test('every published plan document and source route resolves in the built site'
   for (const source of sources) {
     const href = sourceURL(source, 'https://hux.xer0.io/');
     assert.ok(href, `Invalid source: ${source}`);
-    const target = path.join(siteRoot, decodeURIComponent(new URL(href).pathname));
-    assert.ok(fs.statSync(target).isFile(), `Missing published target: ${source}`);
+    publishedRoute(href);
+  }
+});
+
+test('old workshop bookmarks preserve destination, query and deployment base before and after publishing', () => {
+  const destinations = {
+    build: 'build.html#build', model: 'mechanical.html#model',
+    connections: 'electrical.html#wiring', intelligence: 'controls.html#intelligence',
+    budget: 'parts.html#budget', archive: 'documents.html#archive',
+    'next-version': 'documents.html#next-version',
+    'plan-panel-workbench': 'build.html#build',
+    'plan-panel-milestones': 'build.html#plan-panel-milestones',
+    'plan-panel-updates': 'build.html#plan-panel-updates',
+    'plan-panel-parts': 'parts.html', 'plan-panel-library': 'documents.html',
+  };
+  for (const scriptPath of [path.join(__dirname, 'workshop.js'), path.join(siteRoot, 'workshop.js')]) {
+    const script = fs.readFileSync(scriptPath, 'utf8');
+    for (const base of ['https://hux.xer0.io/', 'https://hux.xer0.io/project/']) {
+      for (const alias of ['', 'index.html', 'v1-proof.html']) {
+        for (const query of ['', '?print=1&view=fit']) {
+          for (const [fragment, route] of Object.entries(destinations)) {
+            const original = new URL(alias + query + '#' + fragment, base).href;
+            const expected = new URL(route, base);
+            expected.search = query;
+            assert.equal(runWorkshop(script, original), expected.href, `${path.relative(__dirname, scriptPath)}: ${original}`);
+            // Plan tab panels are rendered from fetched data. The matrix still
+            // checks their exact hash, while static destinations verify anchors.
+            if (fragment === 'plan-panel-milestones' || fragment === 'plan-panel-updates') {
+              expected.hash = 'build';
+            }
+            publishedRoute(expected.href, base);
+          }
+        }
+      }
+      assert.equal(runWorkshop(script, new URL('index.html#unknown-section', base).href), undefined);
+      for (const route of ['mechanical.html#model', 'build.html#build', 'parts.html#budget', 'documents.html#archive']) {
+        assert.equal(runWorkshop(script, new URL(route, base).href), undefined, `New route must stay in place: ${route}`);
+      }
+    }
   }
 });

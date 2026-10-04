@@ -71,9 +71,19 @@ class RoutingTests(unittest.TestCase):
 
     def test_document_routes_and_local_fragment_queries_survive(self):
         source = PurePosixPath('docs/checklists/session.md')
-        self.assertEqual(site.source_url('../../tools/living-drawings/index.html#build', source, self.root), '../../index.html#build')
+        self.assertEqual(site.source_url('../../tools/living-drawings/index.html#build', source, self.root), '../../build.html')
         self.assertEqual(site.source_url('../v1-proof.md?print=1#finish-line', source, self.root), '../v1-proof.html?print=1#finish-line')
         self.assertEqual(site.source_url('#outcome', source, self.root), '#outcome')
+
+    def test_old_section_links_follow_the_organized_project_routes(self):
+        source = PurePosixPath('tools/living-drawings/proof-sandbox.html')
+        for fragment, (route, anchor) in site.OLD_SECTIONS.items():
+            suffix = ('#' + anchor) if anchor else ''
+            for old_route in ('index.html', 'v1-proof.html', '/index.html'):
+                with self.subTest(fragment=fragment, old_route=old_route):
+                    self.assertEqual(site.source_url(old_route + '?print=1#' + fragment, source, self.root), route + '?print=1' + suffix)
+        self.assertEqual(site.source_url('v1-proof.html#next-version', source, self.root), 'v1-proof.html#next-version')
+        self.assertEqual(site.source_url('#build', source, self.root), '#build')
 
     def test_html_entities_do_not_corrupt_external_urls(self):
         output = site.rewrite_html('<a href="https://example.org/?a=1&amp;b=2">source</a>', PurePosixPath('tools/living-drawings/index.html'), self.root)
@@ -98,7 +108,12 @@ class BuildTests(unittest.TestCase):
         web.mkdir(parents=True)
         (web / 'index.html').write_text('<html><head><link href="docs.css" rel="stylesheet"></head><body><h1 id="build">Build</h1><h2 id="next-version">Later</h2><a href="../../docs/one-leg-bench.md#setup">Bench</a><script src="../v1-proof/sim.js"></script></body></html>')
         (web / 'v0-genesis.html').write_text('<html><body>Archive</body></html>')
+        for route in ('mechanical', 'electrical', 'controls', 'joints', 'build', 'parts', 'documents',
+                      'mechanical-tests', 'proof-simulation', 'proof-sandbox'):
+            (web / f'{route}.html').write_text(f'<html><head><title>{route}</title></head><body><main><h1 id="archive">{route}</h1></main></body></html>')
         (web / 'docs.css').write_text('body{color:#203830}')
+        (web / 'workshop.css').write_text('.workshop-nav{display:flex}')
+        (web / 'workshop.js').write_text('window.workshop = {};')
         (web / '.git').mkdir(); (web / '.git/config').write_text('private')
         (web / 'node_modules').mkdir(); (web / 'node_modules/private.js').write_text('private')
         (web / 'assets').mkdir(); (web / 'assets/part.glb').write_bytes(b'model')
@@ -124,6 +139,68 @@ class BuildTests(unittest.TestCase):
         self.assertIn('V0-GENESIS · historical planning.', archive)
         self.assertIn('Edit this document on GitHub', archive)
         self.assertNotIn('href="README.md"', archive)
+
+    def test_shared_navigation_active_sections_and_contextual_routes(self):
+        site.build(self.root, self.output)
+        for route in ('index', 'mechanical', 'electrical', 'build', 'parts', 'documents',
+                      'joints', 'controls', 'mechanical-tests', 'proof-simulation', 'proof-sandbox'):
+            page = (self.output / f'{route}.html').read_text()
+            self.assertEqual(page.count('class="workshop-header"'), 1)
+            self.assertEqual(page.count('class="workshop-footer"'), 1)
+            self.assertIn('aria-label="Project navigation"', page)
+            self.assertIn('workshop.css?v=', page)
+            self.assertIn('workshop.js?v=', page)
+            section = site.route_section(PurePosixPath(str(site.WEB / f'{route}.html')))
+            self.assertIn(f'href="{section}" aria-current="page"', page)
+        joints = (self.output / 'joints.html').read_text()
+        self.assertIn('aria-label="Mechanical pages"', joints)
+        self.assertIn('href="joints.html" aria-current="page">Joint details', joints)
+        controls = (self.output / 'controls.html').read_text()
+        self.assertIn('href="controls.html" aria-current="page">Control software', controls)
+        sandbox = (self.output / 'proof-sandbox.html').read_text()
+        self.assertIn('href="proof-sandbox.html" aria-current="page">3D sandbox', sandbox)
+        self.assertIn('href="docs/one-leg-bench.html">Bench testing', sandbox)
+
+    def test_old_headers_are_removed_and_interactive_markup_stays_intact(self):
+        source = PurePosixPath(str(site.WEB / 'proof-sandbox.html'))
+        text = '''<html><head><title>Sandbox</title></head><body>
+<header><div class="topbar"><a href="index.html">Old brand</a><nav><a href="v1-proof.html#build">Old menu</a></nav></div></header>
+<main><nav class="version-rail"><a href="v0-genesis.html">Old versions</a></nav>
+<canvas id="scene"></canvas><button id="reset">Reset</button><script>window.scene = "<canvas>";</script></main>
+<footer>Recorded evidence only.</footer><script src="proof-sandbox.js"></script></body></html>'''
+        page = site.authored_page(text, source, self.root)
+        self.assertNotIn('Old brand', page)
+        self.assertNotIn('Old menu', page)
+        self.assertNotIn('version-rail', page)
+        self.assertIn('<canvas id="scene"></canvas><button id="reset">Reset</button>', page)
+        self.assertIn('<script>window.scene = "<canvas>";</script>', page)
+        self.assertIn('<script src="proof-sandbox.js"></script>', page)
+        self.assertIn('<aside class="workshop-page-note">Recorded evidence only.</aside>', page)
+
+    def test_archived_masthead_keeps_title_without_competing_navigation(self):
+        source = PurePosixPath(str(site.WEB / 'sheet.html'))
+        text = '<html><body><main class="page"><header class="mast"><div><h1 id="drawing">Joint study</h1><p>Revision dimensions.</p><nav class="pages"><a href="sheet.html">Old sheets</a></nav></div></header><svg id="joint"></svg></main></body></html>'
+        page = site.authored_page(text, source, self.root)
+        self.assertIn('<h1 id="drawing">Joint study</h1>', page)
+        self.assertIn('<p>Revision dimensions.</p>', page)
+        self.assertIn('<svg id="joint"></svg>', page)
+        self.assertNotIn('Old sheets', page)
+        self.assertIn('V0-GENESIS · archive', page)
+        self.assertIn('href="documents.html" aria-current="page"', page)
+        self.assertIn('<head><link rel="stylesheet" href="workshop.css">', page)
+
+    def test_generated_documents_and_file_indexes_share_project_navigation(self):
+        site.build(self.root, self.output)
+        document = (self.output / 'docs/checklists/README.html').read_text()
+        self.assertIn('href="../../documents.html" aria-current="page"', document)
+        self.assertIn('<strong>Mechanical</strong>', document)
+        self.assertIn('<strong>Electrical &amp; controls</strong>', document)
+        self.assertIn('href="../../build.html">Build board', document)
+        self.assertNotIn('Next version', document)
+        files = (self.output / 'assets/index.html').read_text()
+        self.assertIn('class="workshop-header"', files)
+        self.assertIn('href="../index.html">Overview', files)
+        self.assertIn('href="../documents.html" aria-current="page"', files)
 
     def test_local_vendor_downloads_are_not_published(self):
         for folder in site.LOCAL_ONLY:

@@ -279,10 +279,10 @@
     const notebook = new Notebook(storage, version, data.updatedAt);
     const tabs = [
       ['workbench', version.role === 'archive' ? 'Overview' : 'Workbench', workbench(version)],
-      ['parts', 'Parts', parts(version)],
+      ...(version.role === 'archive' ? [['parts', 'Parts', parts(version)]] : []),
       ['milestones', 'Milestones', milestones(version)],
       ['updates', 'Updates', updates(version, data)],
-      ['library', 'Library', documents(version)],
+      ...(version.role === 'archive' ? [['library', 'Library', documents(version)]] : []),
     ];
     container.classList.add('living-plan');
     container.innerHTML = `<div class="plan-meta"><span><span class="plan-live-dot" aria-hidden="true"></span>${escape(version.id)} · ${escape(version.role === 'archive' ? 'Archived planning record' : 'Working plan')}</span><span>Published ${escape(data.updatedAt)}</span></div><div class="plan-tabs" role="tablist" aria-label="${escape(version.id)} project plan">${tabs.map(([id, name], index) => `<button type="button" role="tab" id="plan-tab-${id}" aria-controls="plan-panel-${id}" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}" data-plan-tab="${id}">${name}</button>`).join('')}</div>${tabs.map(([id, name, content], index) => `<section class="plan-panel" id="plan-panel-${id}" role="tabpanel" aria-labelledby="plan-tab-${id}" tabindex="0"${index === 0 ? '' : ' hidden'}>${content}</section>`).join('')}${version.role === 'current' ? notebookMarkup(notebook) : ''}`;
@@ -307,23 +307,33 @@
         if (next !== undefined) { event.preventDefault(); activate(buttons[next], true); }
       });
     });
+    const openLinkedTab = () => {
+      const button = buttons.find((item) => `#${item.getAttribute('aria-controls')}` === root.location.hash);
+      if (button) activate(button, false);
+    };
+    openLinkedTab();
+    root.addEventListener('hashchange', openLinkedTab);
     if (version.role === 'current') attachNotebook(container, notebook);
   }
 
   async function boot() {
     const container = document.getElementById('living-plan');
-    if (!container) return;
-    container.innerHTML = '<p class="plan-loading" role="status">Loading the working plan…</p>';
+    const ledger = document.getElementById('purchase-ledger');
+    if (!container && !ledger) return;
+    if (container) container.innerHTML = '<p class="plan-loading" role="status">Loading the working plan…</p>';
     try {
       const response = await fetch(new URL('plan-data.json', scriptBase), { cache: 'no-cache' });
       if (!response.ok) throw new Error(`Plan request failed: ${response.status}`);
       const data = await response.json();
       if (data.schemaVersion !== 1) throw new Error('Unsupported plan format.');
       const versions = Array.isArray(data.versions) ? data.versions : Object.values(data.versions || {});
-      const version = versions.find((item) => item.slug === container.dataset.version);
+      const version = versions.find((item) => item.slug === (container ? container.dataset.version : 'v1-proof'));
       if (!version) throw new Error('Version not found.');
-      render(container, data, version);
+      statusLabels = data.statusLabels || {};
+      if (container) render(container, data, version);
       purchaseLedger(version);
+      const inventory = document.getElementById('parts-inventory');
+      if (inventory) inventory.innerHTML = parts(version);
       // The asynchronous board changes section positions after native hash
       // navigation. Land deep links on their section after the content exists.
       if (root.location.hash) {
@@ -331,8 +341,8 @@
         if (anchor) anchor.scrollIntoView({ behavior: 'instant', block: 'start' });
       }
     } catch (error) {
-      const path = container.dataset.version === 'v0-genesis' ? 'docs/archive/stair-v1/README.md' : 'docs/v1-proof.md';
-      container.innerHTML = `<p class="plan-error" role="alert">The working plan could not load. <a href="${escape(sourceURL(path, scriptBase))}">Read the published plan</a> or reload this page.</p>`;
+      const path = container && container.dataset.version === 'v0-genesis' ? 'docs/archive/stair-v1/README.md' : ledger ? 'docs/bom.md' : 'docs/v1-proof.md';
+      (container || ledger).innerHTML = `<p class="plan-error" role="alert">The working plan could not load. <a href="${escape(sourceURL(path, scriptBase))}">Read the published plan</a> or reload this page.</p>`;
     }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });

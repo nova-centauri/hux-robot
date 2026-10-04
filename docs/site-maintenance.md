@@ -32,7 +32,22 @@ Open `http://localhost:8080/`. The output is a self-contained static site in `di
 
 Local vendor downloads in `cad/vendor`, optional derived meshes in `tools/living-drawings/models`, and the locally extracted duplicate `cad/prints/v1-proof-r01/hux-v1-proof-r01` stay out of the published bundle. The canonical print-kit folder and ZIP remain published. The archived sandbox supports its existing envelope-geometry fallback. Styles and direct script assets receive content-based cache keys so rebuilt pages load updated files.
 
-The main routes are `/` and `/v1-proof.html` for the current build, `/v0-genesis.html` for the old planning model, and `/docs/…html` for readable guides. Existing `/#build` bookmarks continue to open the active plan. The source Markdown remains editable in the repository; the site links to rendered pages.
+The current project has six primary sections, with the same navigation on drawings, simulations and rendered documents:
+
+| Section | Published route | Contents |
+| --- | --- | --- |
+| Overview | `/` (also `/v1-proof.html`) | Active scope, assembly rendering, design targets and current status |
+| Mechanical | `/mechanical.html` | Assembly, interactive general arrangement and drawing register |
+| Electrical | `/electrical.html` | Wiring diagram placeholders, harness sheets and architecture |
+| Build & test | `/build.html` | Workbench, milestones, updates and local session notebook |
+| Parts & budget | `/parts.html` | Paid orders, shopping list, component register and allowances |
+| Documents | `/documents.html` | Discipline-grouped source register and historical archive |
+
+Mechanical includes `/joints.html` for close-up detail studies and links to `/mechanical-tests.html`. Electrical includes `/controls.html`. Build & test links to the existing simulation evidence and 3D sandbox. `/v0-genesis.html` preserves the old planning model. `/docs/…html` remains the readable route for each source guide.
+
+The builder supplies the shared header, breadcrumbs, section navigation and footer. New authored pages use `workshop.css` after their page styles; edit navigation in `build_site.py` rather than adding a competing header. `workshop.js` preserves old homepage bookmarks such as `/#build`, `/#model`, `/#connections` and `/#budget` by forwarding them to the dedicated page. Repository links to these old fragments are also relocated during publication. Keep the local notebook storage keys intact when reorganizing pages.
+
+Joint studies and wiring sheets are explicitly pending. Replace a placeholder with measured photographs or reviewed drawings only when its evidence exists; retain its sheet identifier and release status. The source Markdown remains editable in the repository; the site links to rendered pages.
 
 ## Live publishing and freshness
 

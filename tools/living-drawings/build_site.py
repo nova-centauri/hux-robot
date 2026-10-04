@@ -31,6 +31,25 @@ LOCAL_ONLY = (PurePosixPath("cad/vendor"), WEB / "models",
               PurePosixPath("cad/prints/v1-proof-r01/hux-v1-proof-r01"))
 URL_ATTRS = {"href", "src", "poster", "data-mesh", "data-poster"}
 LIST = re.compile(r"^( *)([-+*]|\d+[.)]) +(.*)$")
+MAIN_ROUTES = (
+    ("index.html", "Overview"), ("mechanical.html", "Mechanical"),
+    ("electrical.html", "Electrical"), ("build.html", "Build & test"),
+    ("parts.html", "Parts & budget"), ("documents.html", "Documents"),
+)
+SUB_ROUTES = {
+    "mechanical.html": (("mechanical.html", "Assembly"), ("joints.html", "Joint details"),
+                        ("mechanical-tests.html", "Mechanical tests")),
+    "electrical.html": (("electrical.html", "Wiring"), ("controls.html", "Control software")),
+    "build.html": (("build.html", "Build plan"), ("docs/one-leg-bench.html", "Bench testing"),
+                   ("proof-simulation.html", "Simulation evidence"), ("proof-sandbox.html", "3D sandbox")),
+}
+OLD_SECTIONS = {
+    "build": ("build.html", ""), "model": ("mechanical.html", ""),
+    "connections": ("electrical.html", ""), "intelligence": ("controls.html", ""),
+    "budget": ("parts.html", ""), "archive": ("documents.html", "archive"),
+}
+ARCHIVE_PAGES = {"v0-genesis.html", "stairs.html", "sheet.html", "sheet2.html", "sim.html",
+                 "flow.html", "software.html", "hardware.html", "media.html", "engineering.html"}
 
 
 def slug(text: str) -> str:
@@ -65,8 +84,14 @@ def source_url(url: str, source: PurePosixPath, root: Path) -> str:
         if directory.is_dir() and (directory / "README.md").is_file():
             target_source /= "README.md"
         target = site_path(target_source)
+    fragment = parsed.fragment
+    # Published links follow the new project sections. Direct old bookmarks are
+    # still accepted by workshop.js on the index/v1-proof alias.
+    if str(target) in {"index.html", "v1-proof.html"} and fragment in OLD_SECTIONS:
+        route, fragment = OLD_SECTIONS[fragment]
+        target = PurePosixPath(route)
     relocated = os.path.relpath(str(target), str(site_path(source).parent)).replace(os.sep, "/")
-    return urlunsplit(("", "", quote(relocated, safe="/.-_~"), parsed.query, parsed.fragment))
+    return urlunsplit(("", "", quote(relocated, safe="/.-_~"), parsed.query, fragment))
 
 
 def inline(text: str, link=lambda url: url) -> str:
@@ -259,7 +284,113 @@ class Markdown:
 
 
 def legacy(source: PurePosixPath) -> bool:
-    return str(source).startswith(("docs/archive/", "docs/research/", "tools/engineering/", "art/", "cad/vendor/")) or str(source) == "docs/head-and-leg-review.md"
+    return (str(source).startswith(("docs/archive/", "docs/research/", "tools/engineering/", "art/", "cad/vendor/"))
+            or str(source) == "docs/head-and-leg-review.md" or str(site_path(source)) in ARCHIVE_PAGES)
+
+
+def published_url(source: PurePosixPath, path: str) -> str:
+    """A root-site route relative to a published page, escaped for HTML."""
+    parsed = urlsplit(path)
+    relative = os.path.relpath(parsed.path, str(site_path(source).parent)).replace(os.sep, "/")
+    return html.escape(urlunsplit(("", "", relative, parsed.query, parsed.fragment)), quote=True)
+
+
+def route_section(source: PurePosixPath) -> str:
+    route = str(site_path(source))
+    if route == "v1-proof.html": return "index.html"
+    for section, entries in SUB_ROUTES.items():
+        if route in {path for path, _ in entries} and source.suffix.lower() == ".html": return section
+    return route if route in dict(MAIN_ROUTES) else "documents.html"
+
+
+def workshop_header(source: PurePosixPath, title: str) -> str:
+    """One project navigation and revision context for every published page."""
+    section = route_section(source)
+    route = str(site_path(source))
+    at = lambda path: published_url(source, path)
+    historical = legacy(source)
+    links = "".join(f'<a href="{at(path)}"' + (' aria-current="page"' if section == path else '') +
+                    f'>{html.escape(label)}</a>' for path, label in MAIN_ROUTES)
+    section_label = dict(MAIN_ROUTES)[section]
+    breadcrumb = f'<a href="{at("index.html")}">Workshop</a>'
+    if section != "index.html":
+        breadcrumb += f'<span aria-hidden="true">/</span><a href="{at(section)}">{html.escape(section_label)}</a>'
+    if route != section and route != "v1-proof.html":
+        breadcrumb += f'<span aria-hidden="true">/</span><span>{html.escape(title)}</span>'
+    revision = "V0-GENESIS · archive" if historical else "V1-PROOF · current build"
+    subnav = ""
+    if section in SUB_ROUTES:
+        sublinks = "".join(f'<a href="{at(path)}"' + (' aria-current="page"' if route == path else '') +
+                           f'>{html.escape(label)}</a>' for path, label in SUB_ROUTES[section])
+        subnav = f'<nav class="workshop-subnav" aria-label="{html.escape(section_label)} pages">{sublinks}</nav>'
+    return f'''<header class="workshop-header"><div class="workshop-header-inner"><a class="workshop-brand" href="{at('index.html')}">HUX<span>Mechanical project</span></a><nav class="workshop-nav" aria-label="Project navigation">{links}</nav></div></header>
+<div class="workshop-routebar"><div class="workshop-breadcrumb" aria-label="Breadcrumb">{breadcrumb}<span class="workshop-revision">{revision}</span></div>{subnav}</div>'''
+
+
+def workshop_footer(source: PurePosixPath) -> str:
+    at = lambda path: published_url(source, path)
+    context = "V0-GENESIS · archived studies" if legacy(source) else "V1-PROOF · engineering work in progress"
+    return f'''<footer class="workshop-footer"><div class="workshop-footer-inner"><span>HUX / {context}</span><nav aria-label="Project references"><a href="{at('documents.html')}">Document library</a><a href="{at('v0-genesis.html')}">Archive</a></nav><p>Design references and recorded evidence. Physical qualification remains open.</p></div></footer>'''
+
+
+def workshop_assets(source: PurePosixPath) -> str:
+    return f'<link rel="stylesheet" href="{published_url(source, "workshop.css")}"><script src="{published_url(source, "workshop.js")}" defer></script>'
+
+
+def authored_page(text: str, source: PurePosixPath, root: Path) -> str:
+    """Replace navigation without reserializing drawings or interactive code."""
+    text = rewrite_html(text, source, root)
+    title_match = re.search(r'<title\b[^>]*>(.*?)</title>', text, flags=re.I | re.S)
+    title = html.unescape(re.sub(r'<[^>]+>', '', title_match[1])).split(' · ')[0] if title_match else source.stem.replace('-', ' ').title()
+    # The old mastheads contain useful H1/engineering context. Keep those
+    # headings, while removing their competing site navigation.
+    header = re.search(r'<header\b[^>]*>.*?</header\s*>', text, flags=re.I | re.S)
+    if header:
+        replacement = header[0] if re.search(r'<h[1-6]\b', header[0], flags=re.I) else ''
+        replacement = re.sub(r'<nav\b[^>]*>.*?</nav\s*>', '', replacement, flags=re.I | re.S)
+        text = text[:header.start()] + replacement + text[header.end():]
+    text = re.sub(r'<nav\b[^>]*\bclass\s*=\s*(["\x27])[^"\x27]*\bversion-rail\b[^"\x27]*\1[^>]*>.*?</nav\s*>', '', text, flags=re.I | re.S)
+    # Retain page-specific evidence statements, but make the shared footer the
+    # only site footer. Nested archival notes and document edit links are content.
+    text = re.sub(r'<footer\b(?![^>]*\bclass\s*=)[^>]*>(.*?)</footer\s*>',
+                  r'<aside class="workshop-page-note">\1</aside>', text, flags=re.I | re.S)
+    assets = ''
+    if not re.search(r'\bhref\s*=\s*(["\x27])[^"\x27]*workshop\.css(?:[?][^"\x27]*)?\1', text, flags=re.I):
+        assets += f'<link rel="stylesheet" href="{published_url(source, "workshop.css")}">'
+    if not re.search(r'\bsrc\s*=\s*(["\x27])[^"\x27]*workshop\.js(?:[?][^"\x27]*)?\1', text, flags=re.I):
+        assets += f'<script src="{published_url(source, "workshop.js")}" defer></script>'
+    if re.search(r'</head\s*>', text, flags=re.I):
+        text = re.sub(r'</head\s*>', assets + '</head>', text, count=1, flags=re.I)
+    else:
+        text = re.sub(r'(<html\b[^>]*>)', lambda match: match[0] + '<head>' + assets + '</head>', text, count=1, flags=re.I)
+    text = re.sub(r'(<body\b[^>]*>)', lambda match: match[0] + '\n' + workshop_header(source, title), text, count=1, flags=re.I)
+    text = re.sub(r'</body\s*>', workshop_footer(source) + '\n</body>', text, count=1, flags=re.I)
+    return text
+
+
+def document_sidebar(source: PurePosixPath, root: Path) -> str:
+    groups = (
+        ("Project", (("documents.html", "Document library"), ("docs/v1-proof.html", "Project brief"),
+                     ("docs/decisions.html", "Decision history"))),
+        ("Mechanical", (("mechanical.html", "Assembly overview"), ("joints.html", "Joint details"),
+                        ("docs/mechanical-testing.html", "Mechanical test plan"))),
+        ("Electrical & controls", (("electrical.html", "Wiring diagrams"), ("controls.html", "Control software"))),
+        ("Build & test", (("build.html", "Build board"), ("docs/one-leg-bench.html", "Single-leg bench guide"),
+                          ("docs/checklists/README.html", "Build checklists"))),
+        ("Parts & records", (("parts.html", "Parts & budget"), ("docs/parts-on-hand.html", "Inventory & orders"),
+                             ("v0-genesis.html", "Archived studies"))),
+    )
+    rendered = []
+    for label, entries in groups:
+        links = []
+        for route, title in entries:
+            original = (WEB / route) if "/" not in route else PurePosixPath(route).with_suffix('.md')
+            if not (root / original).is_file(): continue
+            current = ' aria-current="page"' if str(site_path(source)) == route else ''
+            links.append(f'<a href="{published_url(source, route)}"{current}>{html.escape(title)}</a>')
+        if links:
+            rendered.append(f'<div class="doc-sidebar-group"><strong>{html.escape(label)}</strong>{"".join(links)}</div>')
+    return '<nav aria-label="Workshop documents">' + ''.join(rendered) + '</nav>'
 
 
 def document_page(source: PurePosixPath, text: str, root: Path) -> str:
@@ -274,15 +405,15 @@ def document_page(source: PurePosixPath, text: str, root: Path) -> str:
     at = lambda path: html.escape(f"{depth}/{path}", quote=True)
     historical = legacy(source)
     label = "V0-GENESIS / ARCHIVE" if historical else "V1-PROOF / WORKING PLAN"
-    notice = ('<strong>V0-GENESIS · historical planning.</strong> This earlier model is archived. Its requirements and purchase statements describe that revision. <a href="' + at("v1-proof.html") + '">V1-PROOF is the current build.</a>') if historical else ('<strong>Living work in progress.</strong> Plans and checklists are not test results. Progress is recorded in the <a href="' + at("v1-proof.html#build") + '">build board</a> and linked evidence.')
+    notice = ('<strong>V0-GENESIS · historical planning.</strong> This earlier model is archived. Its requirements and purchase statements describe that revision. <a href="' + at("index.html") + '">V1-PROOF is the current build.</a>') if historical else ('<strong>Living work in progress.</strong> Plans and checklists are not test results. Progress is recorded in the <a href="' + at("build.html") + '">build board</a> and linked evidence.')
     toc = "".join(f'<li class="toc-level-{level}"><a href="#{anchor}">{inline(label)}</a></li>' for level, label, anchor in markdown.headings if level in (2, 3))
     # Link to the editable repository source, never back into a raw-file dead end.
     github = "https://github.com/nova-centauri/hux-robot/blob/main/" + quote(str(source), safe="/")
     return f'''<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title_text} · HUX</title><meta name="description" content="{html.escape(label + ': ' + html.unescape(title_text), quote=True)}"><link rel="stylesheet" href="{at('docs.css')}"></head>
-<body><a class="skip-link" href="#content">Skip to document</a><header class="doc-topbar"><a class="doc-wordmark" href="{at('index.html')}">HUX <span>WORKSHOP</span></a><nav aria-label="Versions"><a href="{at('v1-proof.html')}"{' aria-current="true"' if not historical else ''}>V1-PROOF <span>Current</span></a><a href="{at('v0-genesis.html')}"{' aria-current="true"' if historical else ''}>V0-GENESIS <span>Archive</span></a><a href="{at('v1-proof.html#next-version')}">Next version</a></nav></header>
-<div class="doc-layout"><aside class="doc-sidebar"><p class="doc-eyebrow">{label}</p><nav aria-label="Workshop documents"><a href="{at('v1-proof.html#build')}">Build board</a><a href="{at('docs/one-leg-bench.html')}">Single-leg exercise</a><a href="{at('docs/parts-on-hand.html')}">Parts &amp; orders</a><a href="{at('docs/checklists/README.html')}">Build checklists</a><a href="{at('docs/decisions.html')}">Decision history</a><a href="{at('v0-genesis.html')}">Archived studies</a></nav>{'<details open><summary>On this page</summary><ol>' + toc + '</ol></details>' if toc else ''}</aside>
-<main id="content" class="doc-main"><p class="doc-breadcrumb"><a href="{at('v0-genesis.html' if historical else 'v1-proof.html')}">{'V0-GENESIS' if historical else 'V1-PROOF'}</a> / {html.escape(source.stem.replace('-', ' '))}</p><aside class="doc-notice{' doc-notice-archive' if historical else ''}" role="note">{notice}</aside><article class="doc-content">{content}</article><footer class="doc-footer"><a href="{github}">Edit this document on GitHub ↗</a><span>Published from {html.escape(str(source))}</span><a href="#content">Back to top ↑</a></footer></main></div></body></html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title_text} · HUX</title><meta name="description" content="{html.escape(label + ': ' + html.unescape(title_text), quote=True)}"><link rel="stylesheet" href="{at('docs.css')}">{workshop_assets(source)}</head>
+<body><a class="skip-link" href="#content">Skip to document</a>{workshop_header(source, html.unescape(title_text))}
+<div class="doc-layout"><aside class="doc-sidebar"><p class="doc-eyebrow">{label}</p>{document_sidebar(source, root)}{'<details open><summary>On this page</summary><ol>' + toc + '</ol></details>' if toc else ''}</aside>
+<main id="content" class="doc-main"><aside class="doc-notice{' doc-notice-archive' if historical else ''}" role="note">{notice}</aside><article class="doc-content">{content}</article><footer class="doc-footer"><a href="{github}">Edit this document on GitHub ↗</a><span>Published from {html.escape(str(source))}</span><a href="#content">Back to top ↑</a></footer></main></div>{workshop_footer(source)}</body></html>
 '''
 
 
@@ -396,7 +527,7 @@ def build(root: Path, output: Path) -> dict:
         if path.suffix.lower() == ".md":
             destination.write_text(document_page(source, path.read_text(), root)); documents += 1
         elif path.suffix == ".html":
-            destination.write_text(rewrite_html(path.read_text(), source, root))
+            destination.write_text(authored_page(path.read_text(), source, root))
         elif path.suffix == ".js" and source.is_relative_to(WEB):
             destination.write_text(rewrite_js(path.read_text(), source, root))
         else:
@@ -419,7 +550,8 @@ def build(root: Path, output: Path) -> dict:
             name = path.name + ("/" if path.is_dir() else "")
             entries.append(f'<li><a href="{quote(name)}">{html.escape(name)}</a></li>')
         title = html.escape(str(rel))
-        (directory / "index.html").write_text(f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title} · HUX files</title><link rel="stylesheet" href="{depth}/docs.css"></head><body><header class="doc-topbar"><a class="doc-wordmark" href="{depth}/v1-proof.html">HUX</a><nav aria-label="Versions"><a href="{depth}/v1-proof.html">V1-PROOF · Current</a><a href="{depth}/v0-genesis.html">V0-GENESIS · Archive</a></nav></header><main class="doc-main" style="margin:40px auto;padding:0 24px"><article class="doc-content"><h1>{title}</h1><p>Project files and references. Model files are reference geometry, not released fabrication drawings.</p><ul>{"".join(entries)}</ul></article></main></body></html>')
+        directory_source = PurePosixPath(str(rel)) / "index.html"
+        (directory / "index.html").write_text(f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title} · HUX files</title><link rel="stylesheet" href="{depth}/docs.css">{workshop_assets(directory_source)}</head><body>{workshop_header(directory_source, str(rel))}<main class="doc-main" style="margin:40px auto;padding:0 24px"><article class="doc-content"><h1>{title}</h1><p>Project files and references. Model files are reference geometry, not released fabrication drawings.</p><ul>{"".join(entries)}</ul></article></main>{workshop_footer(directory_source)}</body></html>')
     # Hash the published bytes after rewrites and all directory pages exist.
     version_assets(output)
     report = {"documents": documents, "html_pages": len(list(output.rglob("*.html"))), "output": str(output), "errors": validate(output)}

@@ -4,15 +4,17 @@
   const {model: c, results: r} = window.HuxProof;
   const g = c.geometry;
   const byId = id => document.getElementById(id);
+  const write = (id, value) => { if (byId(id)) byId(id).textContent = value; };
   const money = value => new Intl.NumberFormat("en-US", {style: "currency", currency: "USD", maximumFractionDigits: 0}).format(value);
-  byId("total-budget").textContent = money(r.total_cap_usd);
-  byId("target-mass").textContent = `${c.limits.mass_target_kg.toFixed(1)} kg`;
-  byId("axis-count").textContent = r.actuator_count;
-  byId("height-travel").textContent = `${r.height_travel_mm.toFixed(0)} mm`;
-  byId("parts-total").textContent = money(r.parts_cap_usd);
-  byId("reserve-total").textContent = money(c.budget.shipping_tax_usd + c.budget.repair_contingency_usd);
+  write("total-budget", money(r.total_cap_usd));
+  write("target-mass", `${c.limits.mass_target_kg.toFixed(1)} kg`);
+  write("axis-count", r.actuator_count);
+  write("height-travel", `${r.height_travel_mm.toFixed(0)} mm`);
+  write("parts-total", money(r.parts_cap_usd));
+  write("reserve-total", money(c.budget.shipping_tax_usd + c.budget.repair_contingency_usd));
   const table = byId("budget-rows");
   function budgetRow(label, amount) {
+    if (!table) return;
     const tr = document.createElement("tr");
     const name = document.createElement("td");
     const cost = document.createElement("td");
@@ -22,9 +24,10 @@
   c.budget.rows.forEach(row => budgetRow(`${row.qty > 1 ? row.qty + " × " : ""}${row.item}`, row.qty * row.unit_cap_usd));
   budgetRow("Shipping, tax and import allowance", c.budget.shipping_tax_usd);
   budgetRow("Repairs and overrun reserve", c.budget.repair_contingency_usd);
-  byId("budget-sum").textContent = money(r.total_cap_usd);
+  write("budget-sum", money(r.total_cap_usd));
 
   const angle = byId("leg-angle"), mass = byId("mass");
+  if (!angle || !mass || !byId("proof-drawing")) return;
   angle.min = g.leg_angle_deg[0]; angle.max = g.leg_angle_deg[1]; angle.value = g.neutral_angle_deg;
   mass.value = c.limits.mass_target_kg; mass.max = c.limits.mass_max_kg;
   function draw() {
