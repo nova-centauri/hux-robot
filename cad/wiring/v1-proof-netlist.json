@@ -192,9 +192,9 @@
       "title": "Pico 2",
       "rect": [
         1410,
-        450,
+        398.315,
         380,
-        1130
+        918.389
       ],
       "pending": false
     },
@@ -203,9 +203,9 @@
       "title": "SparkFun LSM6DSO",
       "rect": [
         1420,
-        210,
+        203.258,
         360,
-        190
+        154.42
       ],
       "pending": false
     },
@@ -214,9 +214,9 @@
       "title": "Laptop USB cable",
       "rect": [
         64,
-        210,
+        203.258,
         390,
-        180
+        146.293
       ],
       "pending": false
     },
@@ -225,9 +225,9 @@
       "title": "Pico 2 USB",
       "rect": [
         740,
-        210,
+        203.258,
         300,
-        180
+        146.293
       ],
       "pending": false
     },
@@ -236,9 +236,9 @@
       "title": "Pololu 4752 wheel motor",
       "rect": [
         64,
-        440,
+        390.187,
         390,
-        640
+        520.15
       ],
       "pending": false
     },
@@ -247,9 +247,9 @@
       "title": "Pololu 4035 / DRV8874",
       "rect": [
         820,
-        440,
+        390.187,
         390,
-        570
+        463.259
       ],
       "pending": false
     },
@@ -258,9 +258,9 @@
       "title": "ADC",
       "rect": [
         1240,
-        860,
+        731.536,
         130,
-        170
+        138.164
       ],
       "pending": true
     },
@@ -269,9 +269,9 @@
       "title": "pull-up TBD",
       "rect": [
         1282,
-        735,
+        629.944,
         16,
-        46
+        37.386
       ],
       "pending": true
     },
@@ -280,9 +280,9 @@
       "title": "TBD: calibrate",
       "rect": [
         1142,
-        1024,
+        864.824,
         16,
-        46
+        37.386
       ],
       "pending": true
     },
@@ -291,9 +291,9 @@
       "title": "Encoder input buffer",
       "rect": [
         820,
-        1100,
+        926.592,
         390,
-        260
+        211.311
       ],
       "pending": true
     },
@@ -302,9 +302,9 @@
       "title": "Pololu 4752 wheel motor",
       "rect": [
         2746,
-        440,
+        390.187,
         390,
-        640
+        520.15
       ],
       "pending": false
     },
@@ -313,9 +313,9 @@
       "title": "Pololu 4035 / DRV8874",
       "rect": [
         1990,
-        440,
+        390.187,
         390,
-        570
+        463.259
       ],
       "pending": false
     },
@@ -324,9 +324,9 @@
       "title": "ADC",
       "rect": [
         1830,
-        860,
+        731.536,
         130,
-        170
+        138.164
       ],
       "pending": true
     },
@@ -335,9 +335,9 @@
       "title": "pull-up TBD",
       "rect": [
         1902,
-        735,
+        629.944,
         16,
-        46
+        37.386
       ],
       "pending": true
     },
@@ -346,9 +346,9 @@
       "title": "TBD: calibrate",
       "rect": [
         2042,
-        1024,
+        864.824,
         16,
-        46
+        37.386
       ],
       "pending": true
     },
@@ -357,9 +357,9 @@
       "title": "Encoder input buffer",
       "rect": [
         1990,
-        1100,
+        926.592,
         390,
-        260
+        211.311
       ],
       "pending": true
     },
@@ -368,9 +368,9 @@
       "title": "Optional UART0 port",
       "rect": [
         64,
-        1260,
+        1056.629,
         390,
-        310
+        251.948
       ],
       "pending": true
     },
@@ -379,9 +379,9 @@
       "title": "10k proposed",
       "rect": [
         1292,
-        1408,
+        1176.914,
         16,
-        46
+        37.386
       ],
       "pending": false
     },
@@ -390,9 +390,9 @@
       "title": "ARM",
       "rect": [
         1180,
-        1515,
+        1263.876,
         180,
-        90
+        73.146
       ],
       "pending": false
     },
@@ -401,9 +401,9 @@
       "title": "Hardware watchdog",
       "rect": [
         640,
-        1670,
+        1389.85,
         330,
-        250
+        203.184
       ],
       "pending": true
     },
@@ -412,9 +412,9 @@
       "title": "Latching gate",
       "rect": [
         1080,
-        1670,
+        1389.85,
         280,
-        250
+        203.184
       ],
       "pending": true
     },
@@ -423,9 +423,9 @@
       "title": "Diode",
       "rect": [
         1530,
-        1645,
+        1369.532,
         140,
-        70
+        56.891
       ],
       "pending": true
     },
@@ -434,9 +434,9 @@
       "title": "TTL half-duplex interface",
       "rect": [
         2000,
-        1700,
+        1414.232,
         390,
-        250
+        203.184
       ],
       "pending": true
     },
@@ -445,9 +445,9 @@
       "title": "ST3215 leg servo",
       "rect": [
         64,
-        1780,
+        1479.251,
         390,
-        260
+        211.311
       ],
       "pending": false
     },
@@ -456,9 +456,9 @@
       "title": "ST3215 leg servo",
       "rect": [
         2746,
-        1780,
+        1479.251,
         390,
-        260
+        211.311
       ],
       "pending": false
     },
@@ -467,9 +467,9 @@
       "title": "3S pack",
       "rect": [
         64,
-        2110,
+        1747.453,
         240,
-        125
+        101.592
       ],
       "pending": true
     },
@@ -478,9 +478,9 @@
       "title": "Fuse",
       "rect": [
         380,
-        2110,
+        1747.453,
         160,
-        125
+        101.592
       ],
       "pending": true
     },
@@ -489,9 +489,9 @@
       "title": "5 V regulator",
       "rect": [
         630,
-        2110,
+        1747.453,
         350,
-        125
+        101.592
       ],
       "pending": true
     },
@@ -500,9 +500,9 @@
       "title": "Physical actuator cut",
       "rect": [
         1100,
-        2110,
+        1747.453,
         400,
-        125
+        101.592
       ],
       "pending": true
     },
@@ -511,9 +511,9 @@
       "title": "Pack ADC network",
       "rect": [
         1640,
-        2110,
+        1747.453,
         380,
-        125
+        101.592
       ],
       "pending": true
     },
@@ -522,9 +522,9 @@
       "title": "9 V regulator",
       "rect": [
         2140,
-        2110,
+        1747.453,
         350,
-        125
+        101.592
       ],
       "pending": true
     },
@@ -533,9 +533,9 @@
       "title": "Servo torque-cut switch",
       "rect": [
         2580,
-        2110,
+        1747.453,
         530,
-        125
+        101.592
       ],
       "pending": true
     },
@@ -544,9 +544,9 @@
       "title": "pull-down TBD",
       "rect": [
         1022,
-        1880,
+        1560.524,
         16,
-        46
+        37.386
       ],
       "pending": true
     }
@@ -557,7 +557,7 @@
       "pin": "GP6",
       "position": [
         1410,
-        650
+        560.861
       ],
       "label": "GP6 / p9",
       "gpio": 6,
@@ -568,7 +568,7 @@
       "pin": "GP7",
       "position": [
         1410,
-        710
+        609.625
       ],
       "label": "GP7 / p10",
       "gpio": 7,
@@ -579,7 +579,7 @@
       "pin": "GP11",
       "position": [
         1410,
-        830
+        707.154
       ],
       "label": "GP11 / p15",
       "gpio": 11,
@@ -590,7 +590,7 @@
       "pin": "GP26",
       "position": [
         1410,
-        890
+        755.918
       ],
       "label": "GP26 / p31",
       "gpio": 26,
@@ -601,7 +601,7 @@
       "pin": "GP2",
       "position": [
         1410,
-        1170
+        983.483
       ],
       "label": "GP2 / p4",
       "gpio": 2,
@@ -612,7 +612,7 @@
       "pin": "GP3",
       "position": [
         1410,
-        1230
+        1032.247
       ],
       "label": "GP3 / p5",
       "gpio": 3,
@@ -623,7 +623,7 @@
       "pin": "GP10",
       "position": [
         1410,
-        1280
+        1072.884
       ],
       "label": "GP10 / p14",
       "gpio": 10,
@@ -634,7 +634,7 @@
       "pin": "GP22",
       "position": [
         1410,
-        1320
+        1105.393
       ],
       "label": "GP22 / p29",
       "gpio": 22,
@@ -645,7 +645,7 @@
       "pin": "GP0",
       "position": [
         1410,
-        1380
+        1154.157
       ],
       "label": "GP0 / p1",
       "gpio": 0,
@@ -656,7 +656,7 @@
       "pin": "GP1",
       "position": [
         1410,
-        1420
+        1186.667
       ],
       "label": "GP1 / p2",
       "gpio": 1,
@@ -667,7 +667,7 @@
       "pin": "GP19",
       "position": [
         1410,
-        1480
+        1235.431
       ],
       "label": "GP19 / p25",
       "gpio": 19,
@@ -678,7 +678,7 @@
       "pin": "GP8",
       "position": [
         1790,
-        650
+        560.861
       ],
       "label": "GP8 / p11",
       "gpio": 8,
@@ -689,7 +689,7 @@
       "pin": "GP9",
       "position": [
         1790,
-        710
+        609.625
       ],
       "label": "GP9 / p12",
       "gpio": 9,
@@ -700,7 +700,7 @@
       "pin": "GP18",
       "position": [
         1790,
-        830
+        707.154
       ],
       "label": "GP18 / p24",
       "gpio": 18,
@@ -711,7 +711,7 @@
       "pin": "GP27",
       "position": [
         1790,
-        890
+        755.918
       ],
       "label": "GP27 / p32",
       "gpio": 27,
@@ -722,7 +722,7 @@
       "pin": "GP4",
       "position": [
         1790,
-        1170
+        983.483
       ],
       "label": "GP4 / p6",
       "gpio": 4,
@@ -733,7 +733,7 @@
       "pin": "GP5",
       "position": [
         1790,
-        1230
+        1032.247
       ],
       "label": "GP5 / p7",
       "gpio": 5,
@@ -744,7 +744,7 @@
       "pin": "GP20",
       "position": [
         1790,
-        1270
+        1064.757
       ],
       "label": "GP20 / p26",
       "gpio": 20,
@@ -755,7 +755,7 @@
       "pin": "GP21",
       "position": [
         1790,
-        1310
+        1097.266
       ],
       "label": "GP21 / p27",
       "gpio": 21,
@@ -766,7 +766,7 @@
       "pin": "GP17",
       "position": [
         1790,
-        1350
+        1129.775
       ],
       "label": "GP17 / p22",
       "gpio": 17,
@@ -777,7 +777,7 @@
       "pin": "GP28",
       "position": [
         1790,
-        1550
+        1292.322
       ],
       "label": "GP28 / p34",
       "gpio": 28,
@@ -788,7 +788,7 @@
       "pin": "VSYS",
       "position": [
         1790,
-        1390
+        1162.285
       ],
       "label": "VSYS / p39"
     },
@@ -797,7 +797,7 @@
       "pin": "3V3",
       "position": [
         1790,
-        1430
+        1194.794
       ],
       "label": "3V3 OUT / p36"
     },
@@ -806,7 +806,7 @@
       "pin": "GND",
       "position": [
         1790,
-        1470
+        1227.303
       ],
       "label": "GND / p38"
     },
@@ -815,7 +815,7 @@
       "pin": "AGND",
       "position": [
         1790,
-        1510
+        1259.813
       ],
       "label": "AGND / p33"
     },
@@ -824,7 +824,7 @@
       "pin": "SDO",
       "position": [
         1470,
-        400
+        357.678
       ],
       "label": "SDO"
     },
@@ -833,7 +833,7 @@
       "pin": "GP12",
       "position": [
         1470,
-        450
+        398.315
       ],
       "label": "GP12 / p16",
       "gpio": 12,
@@ -844,7 +844,7 @@
       "pin": "CS",
       "position": [
         1530,
-        400
+        357.678
       ],
       "label": "CS"
     },
@@ -853,7 +853,7 @@
       "pin": "GP13",
       "position": [
         1530,
-        450
+        398.315
       ],
       "label": "GP13 / p17",
       "gpio": 13,
@@ -864,7 +864,7 @@
       "pin": "SCL",
       "position": [
         1590,
-        400
+        357.678
       ],
       "label": "SCL"
     },
@@ -873,7 +873,7 @@
       "pin": "GP14",
       "position": [
         1590,
-        450
+        398.315
       ],
       "label": "GP14 / p19",
       "gpio": 14,
@@ -884,7 +884,7 @@
       "pin": "SDI",
       "position": [
         1650,
-        400
+        357.678
       ],
       "label": "SDI"
     },
@@ -893,7 +893,7 @@
       "pin": "GP15",
       "position": [
         1650,
-        450
+        398.315
       ],
       "label": "GP15 / p20",
       "gpio": 15,
@@ -904,7 +904,7 @@
       "pin": "INT1",
       "position": [
         1710,
-        400
+        357.678
       ],
       "label": "INT1"
     },
@@ -913,7 +913,7 @@
       "pin": "GP16",
       "position": [
         1710,
-        450
+        398.315
       ],
       "label": "GP16 / p21",
       "gpio": 16,
@@ -924,7 +924,7 @@
       "pin": "3V3",
       "position": [
         1420,
-        280
+        260.15
       ],
       "label": "3V3"
     },
@@ -933,7 +933,7 @@
       "pin": "GND",
       "position": [
         1780,
-        280
+        260.15
       ],
       "label": "GND"
     },
@@ -942,7 +942,7 @@
       "pin": "VBUS",
       "position": [
         454,
-        245
+        231.704
       ],
       "label": "VBUS"
     },
@@ -951,7 +951,7 @@
       "pin": "USB_VBUS",
       "position": [
         740,
-        245
+        231.704
       ],
       "label": "VBUS"
     },
@@ -960,7 +960,7 @@
       "pin": "D+",
       "position": [
         454,
-        281
+        260.963
       ],
       "label": "D+"
     },
@@ -969,7 +969,7 @@
       "pin": "USB_D+",
       "position": [
         740,
-        281
+        260.963
       ],
       "label": "D+"
     },
@@ -978,7 +978,7 @@
       "pin": "D-",
       "position": [
         454,
-        317
+        290.221
       ],
       "label": "D-"
     },
@@ -987,7 +987,7 @@
       "pin": "USB_D-",
       "position": [
         740,
-        317
+        290.221
       ],
       "label": "D-"
     },
@@ -996,7 +996,7 @@
       "pin": "GND",
       "position": [
         454,
-        353
+        319.479
       ],
       "label": "GND"
     },
@@ -1005,7 +1005,7 @@
       "pin": "USB_GND",
       "position": [
         740,
-        353
+        319.479
       ],
       "label": "GND"
     },
@@ -1014,7 +1014,7 @@
       "pin": "G_L",
       "position": [
         490,
-        1460
+        1219.176
       ],
       "label": "G_L",
       "net": "GND"
@@ -1024,7 +1024,7 @@
       "pin": "G_R",
       "position": [
         2710,
-        1460
+        1219.176
       ],
       "label": "G_R",
       "net": "GND"
@@ -1034,7 +1034,7 @@
       "pin": "GL1",
       "position": [
         770,
-        1460
+        1219.176
       ],
       "label": "GL1",
       "net": "GND"
@@ -1044,7 +1044,7 @@
       "pin": "GL2",
       "position": [
         1370,
-        1460
+        1219.176
       ],
       "label": "GL2",
       "net": "GND"
@@ -1054,7 +1054,7 @@
       "pin": "GR1",
       "position": [
         1830,
-        1460
+        1219.176
       ],
       "label": "GR1",
       "net": "GND"
@@ -1064,7 +1064,7 @@
       "pin": "GR2",
       "position": [
         2430,
-        1460
+        1219.176
       ],
       "label": "GR2",
       "net": "GND"
@@ -1074,7 +1074,7 @@
       "pin": "G0",
       "position": [
         64,
-        2300
+        1901.873
       ],
       "label": "G0",
       "net": "GND"
@@ -1084,7 +1084,7 @@
       "pin": "G1",
       "position": [
         3136,
-        2300
+        1901.873
       ],
       "label": "G1",
       "net": "GND"
@@ -1094,7 +1094,7 @@
       "pin": "3L",
       "position": [
         610,
-        330
+        300.787
       ],
       "label": "3L",
       "net": "3V3"
@@ -1104,7 +1104,7 @@
       "pin": "3M",
       "position": [
         1390,
-        330
+        300.787
       ],
       "label": "3M",
       "net": "3V3"
@@ -1114,7 +1114,7 @@
       "pin": "3R",
       "position": [
         1810,
-        330
+        300.787
       ],
       "label": "3R",
       "net": "3V3"
@@ -1124,7 +1124,7 @@
       "pin": "3E",
       "position": [
         2500,
-        330
+        300.787
       ],
       "label": "3E",
       "net": "3V3"
@@ -1134,7 +1134,7 @@
       "pin": "5L",
       "position": [
         550,
-        2020
+        1674.307
       ],
       "label": "5L",
       "net": "5V"
@@ -1144,7 +1144,7 @@
       "pin": "5R",
       "position": [
         2650,
-        2020
+        1674.307
       ],
       "label": "5R",
       "net": "5V"
@@ -1154,7 +1154,7 @@
       "pin": "9L",
       "position": [
         520,
-        2090
+        1731.199
       ],
       "label": "9L",
       "net": "9V"
@@ -1164,7 +1164,7 @@
       "pin": "9R",
       "position": [
         2670,
-        2090
+        1731.199
       ],
       "label": "9R",
       "net": "9V"
@@ -1174,7 +1174,7 @@
       "pin": "ACT_L",
       "position": [
         780,
-        420
+        373.933
       ],
       "label": "ACT_L",
       "net": "ACT_BUS"
@@ -1184,7 +1184,7 @@
       "pin": "ACT_R",
       "position": [
         2525,
-        420
+        373.933
       ],
       "label": "ACT_R",
       "net": "ACT_BUS"
@@ -1194,7 +1194,7 @@
       "pin": "ACT_LOW",
       "position": [
         2525,
-        2060
+        1706.816
       ],
       "label": "ACT_LOW",
       "net": "ACT_BUS"
@@ -1204,7 +1204,7 @@
       "pin": "FUSED",
       "position": [
         580,
-        2150
+        1779.963
       ],
       "label": "FUSED",
       "net": "PACK_FUSED"
@@ -1214,7 +1214,7 @@
       "pin": "Gbottom_L",
       "position": [
         565,
-        2300
+        1901.873
       ],
       "label": "Gbottom_L",
       "net": "GND"
@@ -1224,7 +1224,7 @@
       "pin": "Gbottom_R",
       "position": [
         3125,
-        2300
+        1901.873
       ],
       "label": "Gbottom_R",
       "net": "GND"
@@ -1234,7 +1234,7 @@
       "pin": "Gimu",
       "position": [
         3136,
-        2300
+        1901.873
       ],
       "label": "Gimu",
       "net": "GND"
@@ -1244,7 +1244,7 @@
       "pin": "Gpi",
       "position": [
         1875,
-        1460
+        1219.176
       ],
       "label": "Gpi",
       "net": "GND"
@@ -1254,7 +1254,7 @@
       "pin": "RED",
       "position": [
         454,
-        540
+        471.461
       ],
       "label": "RED / OUT1"
     },
@@ -1263,7 +1263,7 @@
       "pin": "BLACK",
       "position": [
         454,
-        600
+        520.225
       ],
       "label": "BLACK / OUT2"
     },
@@ -1272,7 +1272,7 @@
       "pin": "GREEN",
       "position": [
         454,
-        760
+        650.262
       ],
       "label": "GREEN / GND"
     },
@@ -1281,7 +1281,7 @@
       "pin": "BLUE",
       "position": [
         454,
-        820
+        699.026
       ],
       "label": "BLUE / 5V"
     },
@@ -1290,7 +1290,7 @@
       "pin": "YELLOW",
       "position": [
         454,
-        880
+        747.79
       ],
       "label": "YELLOW / A"
     },
@@ -1299,7 +1299,7 @@
       "pin": "WHITE",
       "position": [
         454,
-        940
+        796.554
       ],
       "label": "WHITE / B"
     },
@@ -1308,7 +1308,7 @@
       "pin": "OUT1",
       "position": [
         820,
-        540
+        471.461
       ],
       "label": "OUT1"
     },
@@ -1317,7 +1317,7 @@
       "pin": "OUT2",
       "position": [
         820,
-        600
+        520.225
       ],
       "label": "OUT2"
     },
@@ -1326,7 +1326,7 @@
       "pin": "EN",
       "position": [
         1210,
-        650
+        560.861
       ],
       "label": "EN"
     },
@@ -1335,7 +1335,7 @@
       "pin": "PH",
       "position": [
         1210,
-        710
+        609.625
       ],
       "label": "PH"
     },
@@ -1344,7 +1344,7 @@
       "pin": "SLEEP",
       "position": [
         1210,
-        770
+        658.39
       ],
       "label": "SLEEP"
     },
@@ -1353,7 +1353,7 @@
       "pin": "FAULT",
       "position": [
         1210,
-        830
+        707.154
       ],
       "label": "FAULT"
     },
@@ -1362,7 +1362,7 @@
       "pin": "CS",
       "position": [
         1210,
-        890
+        755.918
       ],
       "label": "CS"
     },
@@ -1371,7 +1371,7 @@
       "pin": "VIN",
       "position": [
         880,
-        440
+        390.187
       ],
       "label": "VIN"
     },
@@ -1380,7 +1380,7 @@
       "pin": "GND",
       "position": [
         880,
-        1010
+        853.446
       ],
       "label": "GND"
     },
@@ -1389,7 +1389,7 @@
       "pin": "PMODE",
       "position": [
         990,
-        1010
+        853.446
       ],
       "label": "PMODE"
     },
@@ -1398,7 +1398,7 @@
       "pin": "IMODE",
       "position": [
         1070,
-        1010
+        853.446
       ],
       "label": "IMODE"
     },
@@ -1407,7 +1407,7 @@
       "pin": "VREF",
       "position": [
         1150,
-        1010
+        853.446
       ],
       "label": "VREF"
     },
@@ -1416,7 +1416,7 @@
       "pin": "VIN_L",
       "position": [
         880,
-        420
+        373.933
       ],
       "label": "VIN_L",
       "net": "ACT_BUS"
@@ -1426,7 +1426,7 @@
       "pin": "IN",
       "position": [
         1240,
-        940
+        796.554
       ],
       "label": "IN"
     },
@@ -1435,7 +1435,7 @@
       "pin": "OUT",
       "position": [
         1370,
-        940
+        796.554
       ],
       "label": "OUT"
     },
@@ -1444,7 +1444,7 @@
       "pin": "REF",
       "position": [
         1310,
-        860
+        731.536
       ],
       "label": "3V3 ref"
     },
@@ -1453,7 +1453,7 @@
       "pin": "GND",
       "position": [
         1310,
-        1030
+        869.7
       ],
       "label": "GND"
     },
@@ -1462,7 +1462,7 @@
       "pin": "ADCref_L",
       "position": [
         1310,
-        330
+        300.787
       ],
       "label": "ADCref_L",
       "net": "3V3"
@@ -1472,7 +1472,7 @@
       "pin": "ADCg_L",
       "position": [
         1310,
-        1460
+        1219.176
       ],
       "label": "ADCg_L",
       "net": "GND"
@@ -1482,7 +1482,7 @@
       "pin": "1",
       "position": [
         1290,
-        735
+        629.944
       ],
       "label": "pull-up TBD"
     },
@@ -1491,7 +1491,7 @@
       "pin": "2",
       "position": [
         1290,
-        781
+        667.33
       ],
       "label": "pull-up TBD"
     },
@@ -1500,7 +1500,7 @@
       "pin": "FAULT_L",
       "position": [
         1290,
-        830
+        707.154
       ],
       "label": "FAULT_L",
       "net": "L_FAULT"
@@ -1510,7 +1510,7 @@
       "pin": "RF3_L",
       "position": [
         1290,
-        330
+        300.787
       ],
       "label": "RF3_L",
       "net": "3V3"
@@ -1520,7 +1520,7 @@
       "pin": "DG_L",
       "position": [
         770,
-        1080
+        910.337
       ],
       "label": "DG_L",
       "net": "GND"
@@ -1530,7 +1530,7 @@
       "pin": "DGend_L",
       "position": [
         1150,
-        1080
+        910.337
       ],
       "label": "DGend_L",
       "net": "GND"
@@ -1540,7 +1540,7 @@
       "pin": "DGGND_L",
       "position": [
         880,
-        1080
+        910.337
       ],
       "label": "DGGND_L",
       "net": "GND"
@@ -1550,7 +1550,7 @@
       "pin": "DGPMODE_L",
       "position": [
         990,
-        1080
+        910.337
       ],
       "label": "DGPMODE_L",
       "net": "GND"
@@ -1560,7 +1560,7 @@
       "pin": "DGIMODE_L",
       "position": [
         1070,
-        1080
+        910.337
       ],
       "label": "DGIMODE_L",
       "net": "GND"
@@ -1570,7 +1570,7 @@
       "pin": "1",
       "position": [
         1150,
-        1024
+        864.824
       ],
       "label": "TBD: calibrate"
     },
@@ -1579,7 +1579,7 @@
       "pin": "2",
       "position": [
         1150,
-        1070
+        902.21
       ],
       "label": "TBD: calibrate"
     },
@@ -1588,7 +1588,7 @@
       "pin": "A_IN",
       "position": [
         820,
-        1170
+        983.483
       ],
       "label": "A_IN"
     },
@@ -1597,7 +1597,7 @@
       "pin": "B_IN",
       "position": [
         820,
-        1230
+        1032.247
       ],
       "label": "B_IN"
     },
@@ -1606,7 +1606,7 @@
       "pin": "A_OUT",
       "position": [
         1210,
-        1170
+        983.483
       ],
       "label": "A_OUT"
     },
@@ -1615,7 +1615,7 @@
       "pin": "B_OUT",
       "position": [
         1210,
-        1230
+        1032.247
       ],
       "label": "B_OUT"
     },
@@ -1624,7 +1624,7 @@
       "pin": "3V3",
       "position": [
         1060,
-        1100
+        926.592
       ],
       "label": "3V3"
     },
@@ -1633,7 +1633,7 @@
       "pin": "GND",
       "position": [
         1000,
-        1360
+        1137.903
       ],
       "label": "GND"
     },
@@ -1642,7 +1642,7 @@
       "pin": "B3_L",
       "position": [
         1230,
-        330
+        300.787
       ],
       "label": "B3_L",
       "net": "3V3"
@@ -1652,7 +1652,7 @@
       "pin": "BG_L",
       "position": [
         1000,
-        1460
+        1219.176
       ],
       "label": "BG_L",
       "net": "GND"
@@ -1662,7 +1662,7 @@
       "pin": "RED",
       "position": [
         2746,
-        540
+        471.461
       ],
       "label": "RED / OUT1"
     },
@@ -1671,7 +1671,7 @@
       "pin": "BLACK",
       "position": [
         2746,
-        600
+        520.225
       ],
       "label": "BLACK / OUT2"
     },
@@ -1680,7 +1680,7 @@
       "pin": "GREEN",
       "position": [
         2746,
-        760
+        650.262
       ],
       "label": "GREEN / GND"
     },
@@ -1689,7 +1689,7 @@
       "pin": "BLUE",
       "position": [
         2746,
-        820
+        699.026
       ],
       "label": "BLUE / 5V"
     },
@@ -1698,7 +1698,7 @@
       "pin": "YELLOW",
       "position": [
         2746,
-        880
+        747.79
       ],
       "label": "YELLOW / A"
     },
@@ -1707,7 +1707,7 @@
       "pin": "WHITE",
       "position": [
         2746,
-        940
+        796.554
       ],
       "label": "WHITE / B"
     },
@@ -1716,7 +1716,7 @@
       "pin": "OUT1",
       "position": [
         2380,
-        540
+        471.461
       ],
       "label": "OUT1"
     },
@@ -1725,7 +1725,7 @@
       "pin": "OUT2",
       "position": [
         2380,
-        600
+        520.225
       ],
       "label": "OUT2"
     },
@@ -1734,7 +1734,7 @@
       "pin": "EN",
       "position": [
         1990,
-        650
+        560.861
       ],
       "label": "EN"
     },
@@ -1743,7 +1743,7 @@
       "pin": "PH",
       "position": [
         1990,
-        710
+        609.625
       ],
       "label": "PH"
     },
@@ -1752,7 +1752,7 @@
       "pin": "SLEEP",
       "position": [
         1990,
-        770
+        658.39
       ],
       "label": "SLEEP"
     },
@@ -1761,7 +1761,7 @@
       "pin": "FAULT",
       "position": [
         1990,
-        830
+        707.154
       ],
       "label": "FAULT"
     },
@@ -1770,7 +1770,7 @@
       "pin": "CS",
       "position": [
         1990,
-        890
+        755.918
       ],
       "label": "CS"
     },
@@ -1779,7 +1779,7 @@
       "pin": "VIN",
       "position": [
         2320,
-        440
+        390.187
       ],
       "label": "VIN"
     },
@@ -1788,7 +1788,7 @@
       "pin": "GND",
       "position": [
         2320,
-        1010
+        853.446
       ],
       "label": "GND"
     },
@@ -1797,7 +1797,7 @@
       "pin": "PMODE",
       "position": [
         2210,
-        1010
+        853.446
       ],
       "label": "PMODE"
     },
@@ -1806,7 +1806,7 @@
       "pin": "IMODE",
       "position": [
         2130,
-        1010
+        853.446
       ],
       "label": "IMODE"
     },
@@ -1815,7 +1815,7 @@
       "pin": "VREF",
       "position": [
         2050,
-        1010
+        853.446
       ],
       "label": "VREF"
     },
@@ -1824,7 +1824,7 @@
       "pin": "VIN_R",
       "position": [
         2320,
-        420
+        373.933
       ],
       "label": "VIN_R",
       "net": "ACT_BUS"
@@ -1834,7 +1834,7 @@
       "pin": "IN",
       "position": [
         1960,
-        940
+        796.554
       ],
       "label": "IN"
     },
@@ -1843,7 +1843,7 @@
       "pin": "OUT",
       "position": [
         1830,
-        940
+        796.554
       ],
       "label": "OUT"
     },
@@ -1852,7 +1852,7 @@
       "pin": "REF",
       "position": [
         1890,
-        860
+        731.536
       ],
       "label": "3V3 ref"
     },
@@ -1861,7 +1861,7 @@
       "pin": "GND",
       "position": [
         1890,
-        1030
+        869.7
       ],
       "label": "GND"
     },
@@ -1870,7 +1870,7 @@
       "pin": "ADCref_R",
       "position": [
         1890,
-        330
+        300.787
       ],
       "label": "ADCref_R",
       "net": "3V3"
@@ -1880,7 +1880,7 @@
       "pin": "ADCg_R",
       "position": [
         1890,
-        1460
+        1219.176
       ],
       "label": "ADCg_R",
       "net": "GND"
@@ -1890,7 +1890,7 @@
       "pin": "1",
       "position": [
         1910,
-        735
+        629.944
       ],
       "label": "pull-up TBD"
     },
@@ -1899,7 +1899,7 @@
       "pin": "2",
       "position": [
         1910,
-        781
+        667.33
       ],
       "label": "pull-up TBD"
     },
@@ -1908,7 +1908,7 @@
       "pin": "FAULT_R",
       "position": [
         1910,
-        830
+        707.154
       ],
       "label": "FAULT_R",
       "net": "R_FAULT"
@@ -1918,7 +1918,7 @@
       "pin": "RF3_R",
       "position": [
         1910,
-        330
+        300.787
       ],
       "label": "RF3_R",
       "net": "3V3"
@@ -1928,7 +1928,7 @@
       "pin": "DG_R",
       "position": [
         2430,
-        1080
+        910.337
       ],
       "label": "DG_R",
       "net": "GND"
@@ -1938,7 +1938,7 @@
       "pin": "DGend_R",
       "position": [
         2050,
-        1080
+        910.337
       ],
       "label": "DGend_R",
       "net": "GND"
@@ -1948,7 +1948,7 @@
       "pin": "DGGND_R",
       "position": [
         2320,
-        1080
+        910.337
       ],
       "label": "DGGND_R",
       "net": "GND"
@@ -1958,7 +1958,7 @@
       "pin": "DGPMODE_R",
       "position": [
         2210,
-        1080
+        910.337
       ],
       "label": "DGPMODE_R",
       "net": "GND"
@@ -1968,7 +1968,7 @@
       "pin": "DGIMODE_R",
       "position": [
         2130,
-        1080
+        910.337
       ],
       "label": "DGIMODE_R",
       "net": "GND"
@@ -1978,7 +1978,7 @@
       "pin": "1",
       "position": [
         2050,
-        1024
+        864.824
       ],
       "label": "TBD: calibrate"
     },
@@ -1987,7 +1987,7 @@
       "pin": "2",
       "position": [
         2050,
-        1070
+        902.21
       ],
       "label": "TBD: calibrate"
     },
@@ -1996,7 +1996,7 @@
       "pin": "A_IN",
       "position": [
         2380,
-        1170
+        983.483
       ],
       "label": "A_IN"
     },
@@ -2005,7 +2005,7 @@
       "pin": "B_IN",
       "position": [
         2380,
-        1230
+        1032.247
       ],
       "label": "B_IN"
     },
@@ -2014,7 +2014,7 @@
       "pin": "A_OUT",
       "position": [
         1990,
-        1170
+        983.483
       ],
       "label": "A_OUT"
     },
@@ -2023,7 +2023,7 @@
       "pin": "B_OUT",
       "position": [
         1990,
-        1230
+        1032.247
       ],
       "label": "B_OUT"
     },
@@ -2032,7 +2032,7 @@
       "pin": "3V3",
       "position": [
         2140,
-        1100
+        926.592
       ],
       "label": "3V3"
     },
@@ -2041,7 +2041,7 @@
       "pin": "GND",
       "position": [
         2200,
-        1360
+        1137.903
       ],
       "label": "GND"
     },
@@ -2050,7 +2050,7 @@
       "pin": "B3_R",
       "position": [
         1970,
-        330
+        300.787
       ],
       "label": "B3_R",
       "net": "3V3"
@@ -2060,7 +2060,7 @@
       "pin": "BG_R",
       "position": [
         2200,
-        1460
+        1219.176
       ],
       "label": "BG_R",
       "net": "GND"
@@ -2070,7 +2070,7 @@
       "pin": "TX",
       "position": [
         454,
-        1340
+        1121.648
       ],
       "label": "TX"
     },
@@ -2079,7 +2079,7 @@
       "pin": "RX",
       "position": [
         454,
-        1400
+        1170.412
       ],
       "label": "RX"
     },
@@ -2088,7 +2088,7 @@
       "pin": "GND",
       "position": [
         454,
-        1460
+        1219.176
       ],
       "label": "GND"
     },
@@ -2097,7 +2097,7 @@
       "pin": "3V3",
       "position": [
         454,
-        1520
+        1267.94
       ],
       "label": "3V3"
     },
@@ -2106,7 +2106,7 @@
       "pin": "J7V",
       "position": [
         610,
-        1520
+        1267.94
       ],
       "label": "J7V",
       "net": "3V3"
@@ -2116,7 +2116,7 @@
       "pin": "ARM",
       "position": [
         1300,
-        1480
+        1235.431
       ],
       "label": "ARM",
       "net": "ARM_N"
@@ -2126,7 +2126,7 @@
       "pin": "1",
       "position": [
         1300,
-        1408
+        1176.914
       ],
       "label": "10k proposed"
     },
@@ -2135,7 +2135,7 @@
       "pin": "2",
       "position": [
         1300,
-        1454
+        1214.3
       ],
       "label": "10k proposed"
     },
@@ -2144,7 +2144,7 @@
       "pin": "RA3",
       "position": [
         1390,
-        330
+        300.787
       ],
       "label": "RA3",
       "net": "3V3"
@@ -2154,7 +2154,7 @@
       "pin": "IN",
       "position": [
         1300,
-        1515
+        1263.876
       ],
       "label": "IN"
     },
@@ -2163,7 +2163,7 @@
       "pin": "GND",
       "position": [
         1260,
-        1605
+        1337.022
       ],
       "label": "GND"
     },
@@ -2172,7 +2172,7 @@
       "pin": "SWG",
       "position": [
         1260,
-        1460
+        1219.176
       ],
       "label": "SWG",
       "net": "GND"
@@ -2182,7 +2182,7 @@
       "pin": "HB",
       "position": [
         970,
-        1740
+        1446.742
       ],
       "label": "HB"
     },
@@ -2191,7 +2191,7 @@
       "pin": "HEALTH",
       "position": [
         970,
-        1800
+        1495.506
       ],
       "label": "HEALTH"
     },
@@ -2200,7 +2200,7 @@
       "pin": "3V3",
       "position": [
         800,
-        1670
+        1389.85
       ],
       "label": "3V3"
     },
@@ -2209,7 +2209,7 @@
       "pin": "GND",
       "position": [
         900,
-        1920
+        1593.034
       ],
       "label": "GND"
     },
@@ -2218,7 +2218,7 @@
       "pin": "REQUEST",
       "position": [
         1360,
-        1740
+        1446.742
       ],
       "label": "REQUEST"
     },
@@ -2227,7 +2227,7 @@
       "pin": "HEALTH",
       "position": [
         1080,
-        1800
+        1495.506
       ],
       "label": "HEALTH"
     },
@@ -2236,7 +2236,7 @@
       "pin": "KILL_OK",
       "position": [
         1080,
-        1850
+        1536.142
       ],
       "label": "KILL_OK"
     },
@@ -2245,7 +2245,7 @@
       "pin": "3V3",
       "position": [
         1150,
-        1670
+        1389.85
       ],
       "label": "3V3"
     },
@@ -2254,7 +2254,7 @@
       "pin": "OUT",
       "position": [
         1210,
-        1670
+        1389.85
       ],
       "label": "OUT"
     },
@@ -2263,7 +2263,7 @@
       "pin": "GND",
       "position": [
         1260,
-        1920
+        1593.034
       ],
       "label": "GND"
     },
@@ -2272,7 +2272,7 @@
       "pin": "CTRL3",
       "position": [
         610,
-        1600
+        1332.959
       ],
       "label": "CTRL3",
       "net": "3V3"
@@ -2282,7 +2282,7 @@
       "pin": "GWD",
       "position": [
         1020,
-        2300
+        1901.873
       ],
       "label": "GWD",
       "net": "GND"
@@ -2292,7 +2292,7 @@
       "pin": "GG",
       "position": [
         1560,
-        2300
+        1901.873
       ],
       "label": "GG",
       "net": "GND"
@@ -2302,7 +2302,7 @@
       "pin": "EN",
       "position": [
         1385,
-        1630
+        1357.341
       ],
       "label": "EN",
       "net": "HW_ENABLE"
@@ -2312,7 +2312,7 @@
       "pin": "ENR",
       "position": [
         1975,
-        1630
+        1357.341
       ],
       "label": "ENR",
       "net": "HW_ENABLE"
@@ -2322,7 +2322,7 @@
       "pin": "K",
       "position": [
         1600,
-        1645
+        1369.532
       ],
       "label": "K \u2192 VSYS"
     },
@@ -2331,7 +2331,7 @@
       "pin": "A",
       "position": [
         1600,
-        1715
+        1426.423
       ],
       "label": "A \u2190 5V"
     },
@@ -2340,7 +2340,7 @@
       "pin": "5D",
       "position": [
         1600,
-        2020
+        1674.307
       ],
       "label": "5D",
       "net": "5V"
@@ -2350,7 +2350,7 @@
       "pin": "TX_IN",
       "position": [
         2000,
-        1780
+        1479.251
       ],
       "label": "TX_IN"
     },
@@ -2359,7 +2359,7 @@
       "pin": "RX_OUT",
       "position": [
         2000,
-        1830
+        1519.888
       ],
       "label": "RX_OUT"
     },
@@ -2368,7 +2368,7 @@
       "pin": "DIR",
       "position": [
         2000,
-        1880
+        1560.524
       ],
       "label": "DIR"
     },
@@ -2377,7 +2377,7 @@
       "pin": "DATA",
       "position": [
         2390,
-        1830
+        1519.888
       ],
       "label": "DATA"
     },
@@ -2386,7 +2386,7 @@
       "pin": "3V3",
       "position": [
         2180,
-        1700
+        1414.232
       ],
       "label": "3V3"
     },
@@ -2395,7 +2395,7 @@
       "pin": "GND",
       "position": [
         2180,
-        1950
+        1617.416
       ],
       "label": "GND"
     },
@@ -2404,7 +2404,7 @@
       "pin": "T3",
       "position": [
         2500,
-        1620
+        1349.213
       ],
       "label": "T3",
       "net": "3V3"
@@ -2414,7 +2414,7 @@
       "pin": "TG",
       "position": [
         2050,
-        2300
+        1901.873
       ],
       "label": "TG",
       "net": "GND"
@@ -2424,7 +2424,7 @@
       "pin": "DATA",
       "position": [
         2590,
-        1980
+        1641.798
       ],
       "label": "DATA",
       "net": "SERVO_DATA"
@@ -2434,7 +2434,7 @@
       "pin": "V+",
       "position": [
         454,
-        1840
+        1528.015
       ],
       "label": "V+"
     },
@@ -2443,7 +2443,7 @@
       "pin": "DATA",
       "position": [
         454,
-        1900
+        1576.779
       ],
       "label": "DATA"
     },
@@ -2452,7 +2452,7 @@
       "pin": "GND",
       "position": [
         454,
-        1960
+        1625.543
       ],
       "label": "GND"
     },
@@ -2461,7 +2461,7 @@
       "pin": "SG_L",
       "position": [
         490,
-        1960
+        1625.543
       ],
       "label": "SG_L",
       "net": "GND"
@@ -2471,7 +2471,7 @@
       "pin": "V+",
       "position": [
         2746,
-        1840
+        1528.015
       ],
       "label": "V+"
     },
@@ -2480,7 +2480,7 @@
       "pin": "DATA",
       "position": [
         2746,
-        1900
+        1576.779
       ],
       "label": "DATA"
     },
@@ -2489,7 +2489,7 @@
       "pin": "GND",
       "position": [
         2746,
-        1960
+        1625.543
       ],
       "label": "GND"
     },
@@ -2498,7 +2498,7 @@
       "pin": "SG_R",
       "position": [
         2710,
-        1960
+        1625.543
       ],
       "label": "SG_R",
       "net": "GND"
@@ -2508,7 +2508,7 @@
       "pin": "+",
       "position": [
         304,
-        2150
+        1779.963
       ],
       "label": "+"
     },
@@ -2517,7 +2517,7 @@
       "pin": "-",
       "position": [
         184,
-        2235
+        1849.045
       ],
       "label": "-"
     },
@@ -2526,7 +2526,7 @@
       "pin": "IN",
       "position": [
         380,
-        2150
+        1779.963
       ],
       "label": "IN"
     },
@@ -2535,7 +2535,7 @@
       "pin": "OUT",
       "position": [
         540,
-        2150
+        1779.963
       ],
       "label": "OUT"
     },
@@ -2544,7 +2544,7 @@
       "pin": "IN+",
       "position": [
         630,
-        2150
+        1779.963
       ],
       "label": "IN+"
     },
@@ -2553,7 +2553,7 @@
       "pin": "OUT+",
       "position": [
         800,
-        2110
+        1747.453
       ],
       "label": "OUT+"
     },
@@ -2562,7 +2562,7 @@
       "pin": "IN-",
       "position": [
         700,
-        2235
+        1849.045
       ],
       "label": "IN-"
     },
@@ -2571,7 +2571,7 @@
       "pin": "OUT-",
       "position": [
         910,
-        2235
+        1849.045
       ],
       "label": "OUT-"
     },
@@ -2580,7 +2580,7 @@
       "pin": "IN+",
       "position": [
         1100,
-        2150
+        1779.963
       ],
       "label": "IN+"
     },
@@ -2589,7 +2589,7 @@
       "pin": "OUT+",
       "position": [
         1500,
-        2150
+        1779.963
       ],
       "label": "OUT+"
     },
@@ -2598,7 +2598,7 @@
       "pin": "AUX_IN",
       "position": [
         1200,
-        2110
+        1747.453
       ],
       "label": "AUX_IN"
     },
@@ -2607,7 +2607,7 @@
       "pin": "AUX_OUT",
       "position": [
         1390,
-        2110
+        1747.453
       ],
       "label": "AUX_OUT"
     },
@@ -2616,7 +2616,7 @@
       "pin": "IN",
       "position": [
         1640,
-        2150
+        1779.963
       ],
       "label": "IN"
     },
@@ -2625,7 +2625,7 @@
       "pin": "OUT",
       "position": [
         1970,
-        2110
+        1747.453
       ],
       "label": "OUT"
     },
@@ -2634,7 +2634,7 @@
       "pin": "AGND",
       "position": [
         1840,
-        2110
+        1747.453
       ],
       "label": "AGND"
     },
@@ -2643,7 +2643,7 @@
       "pin": "REF",
       "position": [
         1720,
-        2110
+        1747.453
       ],
       "label": "REF"
     },
@@ -2652,7 +2652,7 @@
       "pin": "GND",
       "position": [
         1840,
-        2235
+        1849.045
       ],
       "label": "GND"
     },
@@ -2661,7 +2661,7 @@
       "pin": "IN+",
       "position": [
         2140,
-        2150
+        1779.963
       ],
       "label": "IN+"
     },
@@ -2670,7 +2670,7 @@
       "pin": "OUT+",
       "position": [
         2390,
-        2110
+        1747.453
       ],
       "label": "OUT+"
     },
@@ -2679,7 +2679,7 @@
       "pin": "IN-",
       "position": [
         2200,
-        2235
+        1849.045
       ],
       "label": "IN-"
     },
@@ -2688,7 +2688,7 @@
       "pin": "OUT-",
       "position": [
         2450,
-        2235
+        1849.045
       ],
       "label": "OUT-"
     },
@@ -2697,7 +2697,7 @@
       "pin": "IN+",
       "position": [
         2580,
-        2150
+        1779.963
       ],
       "label": "IN+"
     },
@@ -2706,7 +2706,7 @@
       "pin": "OUT+",
       "position": [
         2990,
-        2110
+        1747.453
       ],
       "label": "OUT+"
     },
@@ -2715,7 +2715,7 @@
       "pin": "ENABLE",
       "position": [
         2730,
-        2110
+        1747.453
       ],
       "label": "ENABLE"
     },
@@ -2724,7 +2724,7 @@
       "pin": "3V3",
       "position": [
         2850,
-        2110
+        1747.453
       ],
       "label": "3V3"
     },
@@ -2733,7 +2733,7 @@
       "pin": "GND",
       "position": [
         3090,
-        2235
+        1849.045
       ],
       "label": "GND"
     },
@@ -2742,7 +2742,7 @@
       "pin": "5REG",
       "position": [
         800,
-        2020
+        1674.307
       ],
       "label": "5REG",
       "net": "5V"
@@ -2752,7 +2752,7 @@
       "pin": "APREF",
       "position": [
         1810,
-        1430
+        1194.794
       ],
       "label": "APREF",
       "net": "3V3"
@@ -2762,7 +2762,7 @@
       "pin": "KILL",
       "position": [
         1030,
-        1850
+        1536.142
       ],
       "label": "KILL",
       "net": "KILL_OK"
@@ -2772,7 +2772,7 @@
       "pin": "1",
       "position": [
         1030,
-        1880
+        1560.524
       ],
       "label": "pull-down TBD"
     },
@@ -2781,7 +2781,7 @@
       "pin": "2",
       "position": [
         1030,
-        1926
+        1597.91
       ],
       "label": "pull-down TBD"
     },
@@ -2790,7 +2790,7 @@
       "pin": "RKG",
       "position": [
         1020,
-        1960
+        1625.543
       ],
       "label": "RKG",
       "net": "GND"
@@ -2800,7 +2800,7 @@
       "pin": "BAT-G",
       "position": [
         184,
-        2300
+        1901.873
       ],
       "label": "BAT-G",
       "net": "GND"
@@ -2810,7 +2810,7 @@
       "pin": "V5IN-G",
       "position": [
         700,
-        2300
+        1901.873
       ],
       "label": "V5IN-G",
       "net": "GND"
@@ -2820,7 +2820,7 @@
       "pin": "V5OUT-G",
       "position": [
         910,
-        2300
+        1901.873
       ],
       "label": "V5OUT-G",
       "net": "GND"
@@ -2830,7 +2830,7 @@
       "pin": "APGNDG",
       "position": [
         1840,
-        2300
+        1901.873
       ],
       "label": "APGNDG",
       "net": "GND"
@@ -2840,7 +2840,7 @@
       "pin": "V9IN-G",
       "position": [
         2200,
-        2300
+        1901.873
       ],
       "label": "V9IN-G",
       "net": "GND"
@@ -2850,7 +2850,7 @@
       "pin": "V9OUT-G",
       "position": [
         2450,
-        2300
+        1901.873
       ],
       "label": "V9OUT-G",
       "net": "GND"
@@ -2860,7 +2860,7 @@
       "pin": "QSGNDG",
       "position": [
         3090,
-        2300
+        1901.873
       ],
       "label": "QSGNDG",
       "net": "GND"
@@ -2876,11 +2876,11 @@
       "route": [
         [
           1470,
-          400
+          357.678
         ],
         [
           1470,
-          450
+          398.315
         ]
       ],
       "show_id": false
@@ -2894,11 +2894,11 @@
       "route": [
         [
           1530,
-          400
+          357.678
         ],
         [
           1530,
-          450
+          398.315
         ]
       ],
       "show_id": false
@@ -2912,11 +2912,11 @@
       "route": [
         [
           1590,
-          400
+          357.678
         ],
         [
           1590,
-          450
+          398.315
         ]
       ],
       "show_id": false
@@ -2930,11 +2930,11 @@
       "route": [
         [
           1650,
-          400
+          357.678
         ],
         [
           1650,
-          450
+          398.315
         ]
       ],
       "show_id": false
@@ -2948,11 +2948,11 @@
       "route": [
         [
           1710,
-          400
+          357.678
         ],
         [
           1710,
-          450
+          398.315
         ]
       ],
       "show_id": false
@@ -2966,11 +2966,11 @@
       "route": [
         [
           454,
-          245
+          231.704
         ],
         [
           740,
-          245
+          231.704
         ]
       ],
       "show_id": true
@@ -2984,11 +2984,11 @@
       "route": [
         [
           454,
-          281
+          260.963
         ],
         [
           740,
-          281
+          260.963
         ]
       ],
       "show_id": true
@@ -3002,11 +3002,11 @@
       "route": [
         [
           454,
-          317
+          290.221
         ],
         [
           740,
-          317
+          290.221
         ]
       ],
       "show_id": true
@@ -3020,11 +3020,11 @@
       "route": [
         [
           454,
-          353
+          319.479
         ],
         [
           740,
-          353
+          319.479
         ]
       ],
       "show_id": true
@@ -3038,11 +3038,11 @@
       "route": [
         [
           64,
-          2300
+          1901.873
         ],
         [
           3136,
-          2300
+          1901.873
         ]
       ],
       "show_id": false
@@ -3056,11 +3056,11 @@
       "route": [
         [
           770,
-          1460
+          1219.176
         ],
         [
           1370,
-          1460
+          1219.176
         ]
       ],
       "show_id": false
@@ -3074,11 +3074,11 @@
       "route": [
         [
           1830,
-          1460
+          1219.176
         ],
         [
           2430,
-          1460
+          1219.176
         ]
       ],
       "show_id": false
@@ -3092,11 +3092,11 @@
       "route": [
         [
           1810,
-          330
+          300.787
         ],
         [
           2500,
-          330
+          300.787
         ]
       ],
       "show_id": false
@@ -3110,11 +3110,11 @@
       "route": [
         [
           550,
-          2020
+          1674.307
         ],
         [
           2650,
-          2020
+          1674.307
         ]
       ],
       "show_id": false
@@ -3128,11 +3128,11 @@
       "route": [
         [
           520,
-          2090
+          1731.199
         ],
         [
           2670,
-          2090
+          1731.199
         ]
       ],
       "show_id": false
@@ -3146,11 +3146,11 @@
       "route": [
         [
           780,
-          420
+          373.933
         ],
         [
           2525,
-          420
+          373.933
         ]
       ],
       "show_id": false
@@ -3164,11 +3164,11 @@
       "route": [
         [
           2525,
-          420
+          373.933
         ],
         [
           2525,
-          2060
+          1706.816
         ]
       ],
       "show_id": false
@@ -3182,27 +3182,27 @@
       "route": [
         [
           610,
-          330
+          300.787
         ],
         [
           710,
-          330
+          300.787
         ],
         [
           710,
-          400
+          357.678
         ],
         [
           1100,
-          400
+          357.678
         ],
         [
           1100,
-          330
+          300.787
         ],
         [
           1390,
-          330
+          300.787
         ]
       ],
       "show_id": false
@@ -3216,19 +3216,19 @@
       "route": [
         [
           1390,
-          330
+          300.787
         ],
         [
           1390,
-          190
+          187.004
         ],
         [
           1810,
-          190
+          187.004
         ],
         [
           1810,
-          330
+          300.787
         ]
       ],
       "show_id": false
@@ -3242,11 +3242,11 @@
       "route": [
         [
           490,
-          1460
+          1219.176
         ],
         [
           770,
-          1460
+          1219.176
         ]
       ],
       "show_id": false
@@ -3260,11 +3260,11 @@
       "route": [
         [
           2430,
-          1460
+          1219.176
         ],
         [
           2710,
-          1460
+          1219.176
         ]
       ],
       "show_id": false
@@ -3278,19 +3278,19 @@
       "route": [
         [
           490,
-          1460
+          1219.176
         ],
         [
           490,
-          2080
+          1723.071
         ],
         [
           565,
-          2080
+          1723.071
         ],
         [
           565,
-          2300
+          1901.873
         ]
       ],
       "show_id": false
@@ -3304,19 +3304,19 @@
       "route": [
         [
           2710,
-          1460
+          1219.176
         ],
         [
           2710,
-          2080
+          1723.071
         ],
         [
           3125,
-          2080
+          1723.071
         ],
         [
           3125,
-          2300
+          1901.873
         ]
       ],
       "show_id": false
@@ -3330,15 +3330,15 @@
       "route": [
         [
           1790,
-          1430
+          1194.794
         ],
         [
           1810,
-          1430
+          1194.794
         ],
         [
           1810,
-          330
+          300.787
         ]
       ],
       "show_id": true
@@ -3352,19 +3352,19 @@
       "route": [
         [
           1420,
-          280
+          260.15
         ],
         [
           1380,
-          280
+          260.15
         ],
         [
           1380,
-          330
+          300.787
         ],
         [
           1390,
-          330
+          300.787
         ]
       ],
       "show_id": true
@@ -3378,15 +3378,15 @@
       "route": [
         [
           1780,
-          280
+          260.15
         ],
         [
           3136,
-          280
+          260.15
         ],
         [
           3136,
-          2300
+          1901.873
         ]
       ],
       "show_id": true
@@ -3400,15 +3400,15 @@
       "route": [
         [
           1790,
-          1470
+          1227.303
         ],
         [
           1875,
-          1470
+          1227.303
         ],
         [
           1875,
-          1460
+          1219.176
         ]
       ],
       "show_id": true
@@ -3422,11 +3422,11 @@
       "route": [
         [
           880,
-          440
+          390.187
         ],
         [
           880,
-          420
+          373.933
         ]
       ],
       "show_id": true
@@ -3440,11 +3440,11 @@
       "route": [
         [
           820,
-          540
+          471.461
         ],
         [
           454,
-          540
+          471.461
         ]
       ],
       "show_id": true
@@ -3458,11 +3458,11 @@
       "route": [
         [
           820,
-          600
+          520.225
         ],
         [
           454,
-          600
+          520.225
         ]
       ],
       "show_id": true
@@ -3476,11 +3476,11 @@
       "route": [
         [
           1410,
-          650
+          560.861
         ],
         [
           1210,
-          650
+          560.861
         ]
       ],
       "show_id": true
@@ -3494,11 +3494,11 @@
       "route": [
         [
           1410,
-          710
+          609.625
         ],
         [
           1210,
-          710
+          609.625
         ]
       ],
       "show_id": true
@@ -3512,11 +3512,11 @@
       "route": [
         [
           1410,
-          830
+          707.154
         ],
         [
           1210,
-          830
+          707.154
         ]
       ],
       "show_id": true
@@ -3530,19 +3530,19 @@
       "route": [
         [
           1210,
-          890
+          755.918
         ],
         [
           1235,
-          890
+          755.918
         ],
         [
           1235,
-          940
+          796.554
         ],
         [
           1240,
-          940
+          796.554
         ]
       ],
       "show_id": true
@@ -3556,19 +3556,19 @@
       "route": [
         [
           1370,
-          940
+          796.554
         ],
         [
           1380,
-          940
+          796.554
         ],
         [
           1380,
-          890
+          755.918
         ],
         [
           1410,
-          890
+          755.918
         ]
       ],
       "show_id": true
@@ -3582,11 +3582,11 @@
       "route": [
         [
           1310,
-          860
+          731.536
         ],
         [
           1310,
-          330
+          300.787
         ]
       ],
       "show_id": true
@@ -3600,11 +3600,11 @@
       "route": [
         [
           1310,
-          1030
+          869.7
         ],
         [
           1310,
-          1460
+          1219.176
         ]
       ],
       "show_id": true
@@ -3618,11 +3618,11 @@
       "route": [
         [
           1290,
-          735
+          629.944
         ],
         [
           1290,
-          330
+          300.787
         ]
       ],
       "show_id": true
@@ -3636,11 +3636,11 @@
       "route": [
         [
           1290,
-          781
+          667.33
         ],
         [
           1290,
-          830
+          707.154
         ]
       ],
       "show_id": true
@@ -3654,11 +3654,11 @@
       "route": [
         [
           770,
-          1080
+          910.337
         ],
         [
           1150,
-          1080
+          910.337
         ]
       ],
       "show_id": false
@@ -3672,11 +3672,11 @@
       "route": [
         [
           880,
-          1010
+          853.446
         ],
         [
           880,
-          1080
+          910.337
         ]
       ],
       "show_id": false
@@ -3690,11 +3690,11 @@
       "route": [
         [
           990,
-          1010
+          853.446
         ],
         [
           990,
-          1080
+          910.337
         ]
       ],
       "show_id": false
@@ -3708,11 +3708,11 @@
       "route": [
         [
           1070,
-          1010
+          853.446
         ],
         [
           1070,
-          1080
+          910.337
         ]
       ],
       "show_id": false
@@ -3726,11 +3726,11 @@
       "route": [
         [
           1150,
-          1010
+          853.446
         ],
         [
           1150,
-          1024
+          864.824
         ]
       ],
       "show_id": false
@@ -3744,11 +3744,11 @@
       "route": [
         [
           1150,
-          1070
+          902.21
         ],
         [
           1150,
-          1080
+          910.337
         ]
       ],
       "show_id": false
@@ -3762,11 +3762,11 @@
       "route": [
         [
           770,
-          1080
+          910.337
         ],
         [
           770,
-          1460
+          1219.176
         ]
       ],
       "show_id": false
@@ -3780,15 +3780,15 @@
       "route": [
         [
           454,
-          760
+          650.262
         ],
         [
           490,
-          760
+          650.262
         ],
         [
           490,
-          1460
+          1219.176
         ]
       ],
       "show_id": true
@@ -3802,15 +3802,15 @@
       "route": [
         [
           454,
-          820
+          699.026
         ],
         [
           550,
-          820
+          699.026
         ],
         [
           550,
-          2020
+          1674.307
         ]
       ],
       "show_id": true
@@ -3824,19 +3824,19 @@
       "route": [
         [
           454,
-          880
+          747.79
         ],
         [
           600,
-          880
+          747.79
         ],
         [
           600,
-          1170
+          983.483
         ],
         [
           820,
-          1170
+          983.483
         ]
       ],
       "show_id": true
@@ -3850,19 +3850,19 @@
       "route": [
         [
           454,
-          940
+          796.554
         ],
         [
           640,
-          940
+          796.554
         ],
         [
           640,
-          1230
+          1032.247
         ],
         [
           820,
-          1230
+          1032.247
         ]
       ],
       "show_id": true
@@ -3876,11 +3876,11 @@
       "route": [
         [
           1210,
-          1170
+          983.483
         ],
         [
           1410,
-          1170
+          983.483
         ]
       ],
       "show_id": true
@@ -3894,11 +3894,11 @@
       "route": [
         [
           1210,
-          1230
+          1032.247
         ],
         [
           1410,
-          1230
+          1032.247
         ]
       ],
       "show_id": true
@@ -3912,19 +3912,19 @@
       "route": [
         [
           1060,
-          1100
+          926.592
         ],
         [
           1060,
-          1090
+          918.464
         ],
         [
           1230,
-          1090
+          918.464
         ],
         [
           1230,
-          330
+          300.787
         ]
       ],
       "show_id": true
@@ -3938,11 +3938,11 @@
       "route": [
         [
           1000,
-          1360
+          1137.903
         ],
         [
           1000,
-          1460
+          1219.176
         ]
       ],
       "show_id": true
@@ -3956,11 +3956,11 @@
       "route": [
         [
           2320,
-          440
+          390.187
         ],
         [
           2320,
-          420
+          373.933
         ]
       ],
       "show_id": true
@@ -3974,11 +3974,11 @@
       "route": [
         [
           2380,
-          540
+          471.461
         ],
         [
           2746,
-          540
+          471.461
         ]
       ],
       "show_id": true
@@ -3992,11 +3992,11 @@
       "route": [
         [
           2380,
-          600
+          520.225
         ],
         [
           2746,
-          600
+          520.225
         ]
       ],
       "show_id": true
@@ -4010,11 +4010,11 @@
       "route": [
         [
           1790,
-          650
+          560.861
         ],
         [
           1990,
-          650
+          560.861
         ]
       ],
       "show_id": true
@@ -4028,11 +4028,11 @@
       "route": [
         [
           1790,
-          710
+          609.625
         ],
         [
           1990,
-          710
+          609.625
         ]
       ],
       "show_id": true
@@ -4046,11 +4046,11 @@
       "route": [
         [
           1790,
-          830
+          707.154
         ],
         [
           1990,
-          830
+          707.154
         ]
       ],
       "show_id": true
@@ -4064,19 +4064,19 @@
       "route": [
         [
           1990,
-          890
+          755.918
         ],
         [
           1965,
-          890
+          755.918
         ],
         [
           1965,
-          940
+          796.554
         ],
         [
           1960,
-          940
+          796.554
         ]
       ],
       "show_id": true
@@ -4090,19 +4090,19 @@
       "route": [
         [
           1830,
-          940
+          796.554
         ],
         [
           1820,
-          940
+          796.554
         ],
         [
           1820,
-          890
+          755.918
         ],
         [
           1790,
-          890
+          755.918
         ]
       ],
       "show_id": true
@@ -4116,11 +4116,11 @@
       "route": [
         [
           1890,
-          860
+          731.536
         ],
         [
           1890,
-          330
+          300.787
         ]
       ],
       "show_id": true
@@ -4134,11 +4134,11 @@
       "route": [
         [
           1890,
-          1030
+          869.7
         ],
         [
           1890,
-          1460
+          1219.176
         ]
       ],
       "show_id": true
@@ -4152,11 +4152,11 @@
       "route": [
         [
           1910,
-          735
+          629.944
         ],
         [
           1910,
-          330
+          300.787
         ]
       ],
       "show_id": true
@@ -4170,11 +4170,11 @@
       "route": [
         [
           1910,
-          781
+          667.33
         ],
         [
           1910,
-          830
+          707.154
         ]
       ],
       "show_id": true
@@ -4188,11 +4188,11 @@
       "route": [
         [
           2430,
-          1080
+          910.337
         ],
         [
           2050,
-          1080
+          910.337
         ]
       ],
       "show_id": false
@@ -4206,11 +4206,11 @@
       "route": [
         [
           2320,
-          1010
+          853.446
         ],
         [
           2320,
-          1080
+          910.337
         ]
       ],
       "show_id": false
@@ -4224,11 +4224,11 @@
       "route": [
         [
           2210,
-          1010
+          853.446
         ],
         [
           2210,
-          1080
+          910.337
         ]
       ],
       "show_id": false
@@ -4242,11 +4242,11 @@
       "route": [
         [
           2130,
-          1010
+          853.446
         ],
         [
           2130,
-          1080
+          910.337
         ]
       ],
       "show_id": false
@@ -4260,11 +4260,11 @@
       "route": [
         [
           2050,
-          1010
+          853.446
         ],
         [
           2050,
-          1024
+          864.824
         ]
       ],
       "show_id": false
@@ -4278,11 +4278,11 @@
       "route": [
         [
           2050,
-          1070
+          902.21
         ],
         [
           2050,
-          1080
+          910.337
         ]
       ],
       "show_id": false
@@ -4296,11 +4296,11 @@
       "route": [
         [
           2430,
-          1080
+          910.337
         ],
         [
           2430,
-          1460
+          1219.176
         ]
       ],
       "show_id": false
@@ -4314,15 +4314,15 @@
       "route": [
         [
           2746,
-          760
+          650.262
         ],
         [
           2710,
-          760
+          650.262
         ],
         [
           2710,
-          1460
+          1219.176
         ]
       ],
       "show_id": true
@@ -4336,15 +4336,15 @@
       "route": [
         [
           2746,
-          820
+          699.026
         ],
         [
           2650,
-          820
+          699.026
         ],
         [
           2650,
-          2020
+          1674.307
         ]
       ],
       "show_id": true
@@ -4358,19 +4358,19 @@
       "route": [
         [
           2746,
-          880
+          747.79
         ],
         [
           2600,
-          880
+          747.79
         ],
         [
           2600,
-          1170
+          983.483
         ],
         [
           2380,
-          1170
+          983.483
         ]
       ],
       "show_id": true
@@ -4384,19 +4384,19 @@
       "route": [
         [
           2746,
-          940
+          796.554
         ],
         [
           2560,
-          940
+          796.554
         ],
         [
           2560,
-          1230
+          1032.247
         ],
         [
           2380,
-          1230
+          1032.247
         ]
       ],
       "show_id": true
@@ -4410,11 +4410,11 @@
       "route": [
         [
           1990,
-          1170
+          983.483
         ],
         [
           1790,
-          1170
+          983.483
         ]
       ],
       "show_id": true
@@ -4428,11 +4428,11 @@
       "route": [
         [
           1990,
-          1230
+          1032.247
         ],
         [
           1790,
-          1230
+          1032.247
         ]
       ],
       "show_id": true
@@ -4446,19 +4446,19 @@
       "route": [
         [
           2140,
-          1100
+          926.592
         ],
         [
           2140,
-          1090
+          918.464
         ],
         [
           1970,
-          1090
+          918.464
         ],
         [
           1970,
-          330
+          300.787
         ]
       ],
       "show_id": true
@@ -4472,11 +4472,11 @@
       "route": [
         [
           2200,
-          1360
+          1137.903
         ],
         [
           2200,
-          1460
+          1219.176
         ]
       ],
       "show_id": true
@@ -4490,19 +4490,19 @@
       "route": [
         [
           1410,
-          1380
+          1154.157
         ],
         [
           580,
-          1380
+          1154.157
         ],
         [
           580,
-          1400
+          1170.412
         ],
         [
           454,
-          1400
+          1170.412
         ]
       ],
       "show_id": true
@@ -4516,27 +4516,27 @@
       "route": [
         [
           454,
-          1340
+          1121.648
         ],
         [
           560,
-          1340
+          1121.648
         ],
         [
           560,
-          1390
+          1162.285
         ],
         [
           1380,
-          1390
+          1162.285
         ],
         [
           1380,
-          1420
+          1186.667
         ],
         [
           1410,
-          1420
+          1186.667
         ]
       ],
       "show_id": true
@@ -4550,11 +4550,11 @@
       "route": [
         [
           454,
-          1460
+          1219.176
         ],
         [
           490,
-          1460
+          1219.176
         ]
       ],
       "show_id": true
@@ -4568,11 +4568,11 @@
       "route": [
         [
           454,
-          1520
+          1267.94
         ],
         [
           610,
-          1520
+          1267.94
         ]
       ],
       "show_id": true
@@ -4586,11 +4586,11 @@
       "route": [
         [
           1410,
-          1480
+          1235.431
         ],
         [
           1300,
-          1480
+          1235.431
         ]
       ],
       "show_id": true
@@ -4604,11 +4604,11 @@
       "route": [
         [
           1300,
-          1454
+          1214.3
         ],
         [
           1300,
-          1480
+          1235.431
         ]
       ],
       "show_id": false
@@ -4622,15 +4622,15 @@
       "route": [
         [
           1300,
-          1408
+          1176.914
         ],
         [
           1390,
-          1408
+          1176.914
         ],
         [
           1390,
-          330
+          300.787
         ]
       ],
       "show_id": true
@@ -4644,11 +4644,11 @@
       "route": [
         [
           1300,
-          1480
+          1235.431
         ],
         [
           1300,
-          1515
+          1263.876
         ]
       ],
       "show_id": false
@@ -4662,19 +4662,19 @@
       "route": [
         [
           1260,
-          1605
+          1337.022
         ],
         [
           1160,
-          1605
+          1337.022
         ],
         [
           1160,
-          1460
+          1219.176
         ],
         [
           1260,
-          1460
+          1219.176
         ]
       ],
       "show_id": true
@@ -4688,19 +4688,19 @@
       "route": [
         [
           1410,
-          1280
+          1072.884
         ],
         [
           1375,
-          1280
+          1072.884
         ],
         [
           1375,
-          1740
+          1446.742
         ],
         [
           1360,
-          1740
+          1446.742
         ]
       ],
       "show_id": true
@@ -4714,27 +4714,27 @@
       "route": [
         [
           1410,
-          1320
+          1105.393
         ],
         [
           1400,
-          1320
+          1105.393
         ],
         [
           1400,
-          1638
+          1363.843
         ],
         [
           1010,
-          1638
+          1363.843
         ],
         [
           1010,
-          1740
+          1446.742
         ],
         [
           970,
-          1740
+          1446.742
         ]
       ],
       "show_id": true
@@ -4748,11 +4748,11 @@
       "route": [
         [
           970,
-          1800
+          1495.506
         ],
         [
           1080,
-          1800
+          1495.506
         ]
       ],
       "show_id": true
@@ -4766,11 +4766,11 @@
       "route": [
         [
           610,
-          330
+          300.787
         ],
         [
           610,
-          1600
+          1332.959
         ]
       ],
       "show_id": false
@@ -4784,15 +4784,15 @@
       "route": [
         [
           610,
-          1600
+          1332.959
         ],
         [
           800,
-          1600
+          1332.959
         ],
         [
           800,
-          1670
+          1389.85
         ]
       ],
       "show_id": true
@@ -4806,15 +4806,15 @@
       "route": [
         [
           610,
-          1600
+          1332.959
         ],
         [
           1150,
-          1600
+          1332.959
         ],
         [
           1150,
-          1670
+          1389.85
         ]
       ],
       "show_id": true
@@ -4828,19 +4828,19 @@
       "route": [
         [
           900,
-          1920
+          1593.034
         ],
         [
           900,
-          1960
+          1625.543
         ],
         [
           1020,
-          1960
+          1625.543
         ],
         [
           1020,
-          2300
+          1901.873
         ]
       ],
       "show_id": true
@@ -4854,19 +4854,19 @@
       "route": [
         [
           1260,
-          1920
+          1593.034
         ],
         [
           1260,
-          1950
+          1617.416
         ],
         [
           1560,
-          1950
+          1617.416
         ],
         [
           1560,
-          2300
+          1901.873
         ]
       ],
       "show_id": true
@@ -4880,15 +4880,15 @@
       "route": [
         [
           1210,
-          1670
+          1389.85
         ],
         [
           1210,
-          1630
+          1357.341
         ],
         [
           1385,
-          1630
+          1357.341
         ]
       ],
       "show_id": true
@@ -4902,23 +4902,23 @@
       "route": [
         [
           1385,
-          1630
+          1357.341
         ],
         [
           1385,
-          790
+          674.644
         ],
         [
           1225,
-          790
+          674.644
         ],
         [
           1225,
-          770
+          658.39
         ],
         [
           1210,
-          770
+          658.39
         ]
       ],
       "show_id": true
@@ -4932,11 +4932,11 @@
       "route": [
         [
           1385,
-          1630
+          1357.341
         ],
         [
           1975,
-          1630
+          1357.341
         ]
       ],
       "show_id": false
@@ -4950,15 +4950,15 @@
       "route": [
         [
           1975,
-          1630
+          1357.341
         ],
         [
           1975,
-          770
+          658.39
         ],
         [
           1990,
-          770
+          658.39
         ]
       ],
       "show_id": true
@@ -4972,11 +4972,11 @@
       "route": [
         [
           1600,
-          1715
+          1426.423
         ],
         [
           1600,
-          2020
+          1674.307
         ]
       ],
       "show_id": true
@@ -4990,19 +4990,19 @@
       "route": [
         [
           1600,
-          1645
+          1369.532
         ],
         [
           1800,
-          1645
+          1369.532
         ],
         [
           1800,
-          1390
+          1162.285
         ],
         [
           1790,
-          1390
+          1162.285
         ]
       ],
       "show_id": true
@@ -5016,19 +5016,19 @@
       "route": [
         [
           1790,
-          1270
+          1064.757
         ],
         [
           1820,
-          1270
+          1064.757
         ],
         [
           1820,
-          1780
+          1479.251
         ],
         [
           2000,
-          1780
+          1479.251
         ]
       ],
       "show_id": true
@@ -5042,19 +5042,19 @@
       "route": [
         [
           1790,
-          1310
+          1097.266
         ],
         [
           1850,
-          1310
+          1097.266
         ],
         [
           1850,
-          1830
+          1519.888
         ],
         [
           2000,
-          1830
+          1519.888
         ]
       ],
       "show_id": true
@@ -5068,19 +5068,19 @@
       "route": [
         [
           1790,
-          1350
+          1129.775
         ],
         [
           1880,
-          1350
+          1129.775
         ],
         [
           1880,
-          1880
+          1560.524
         ],
         [
           2000,
-          1880
+          1560.524
         ]
       ],
       "show_id": true
@@ -5094,11 +5094,11 @@
       "route": [
         [
           2500,
-          330
+          300.787
         ],
         [
           2500,
-          1620
+          1349.213
         ]
       ],
       "show_id": false
@@ -5112,15 +5112,15 @@
       "route": [
         [
           2500,
-          1620
+          1349.213
         ],
         [
           2180,
-          1620
+          1349.213
         ],
         [
           2180,
-          1700
+          1414.232
         ]
       ],
       "show_id": true
@@ -5134,19 +5134,19 @@
       "route": [
         [
           2180,
-          1950
+          1617.416
         ],
         [
           2180,
-          2010
+          1666.18
         ],
         [
           2050,
-          2010
+          1666.18
         ],
         [
           2050,
-          2300
+          1901.873
         ]
       ],
       "show_id": true
@@ -5160,15 +5160,15 @@
       "route": [
         [
           2390,
-          1830
+          1519.888
         ],
         [
           2590,
-          1830
+          1519.888
         ],
         [
           2590,
-          1980
+          1641.798
         ]
       ],
       "show_id": true
@@ -5182,15 +5182,15 @@
       "route": [
         [
           454,
-          1840
+          1528.015
         ],
         [
           520,
-          1840
+          1528.015
         ],
         [
           520,
-          2090
+          1731.199
         ]
       ],
       "show_id": true
@@ -5204,19 +5204,19 @@
       "route": [
         [
           454,
-          1900
+          1576.779
         ],
         [
           560,
-          1900
+          1576.779
         ],
         [
           560,
-          1980
+          1641.798
         ],
         [
           2590,
-          1980
+          1641.798
         ]
       ],
       "show_id": true
@@ -5230,11 +5230,11 @@
       "route": [
         [
           454,
-          1960
+          1625.543
         ],
         [
           490,
-          1960
+          1625.543
         ]
       ],
       "show_id": true
@@ -5248,15 +5248,15 @@
       "route": [
         [
           2746,
-          1840
+          1528.015
         ],
         [
           2670,
-          1840
+          1528.015
         ],
         [
           2670,
-          2090
+          1731.199
         ]
       ],
       "show_id": true
@@ -5270,15 +5270,15 @@
       "route": [
         [
           2746,
-          1900
+          1576.779
         ],
         [
           2590,
-          1900
+          1576.779
         ],
         [
           2590,
-          1980
+          1641.798
         ]
       ],
       "show_id": true
@@ -5292,11 +5292,11 @@
       "route": [
         [
           2746,
-          1960
+          1625.543
         ],
         [
           2710,
-          1960
+          1625.543
         ]
       ],
       "show_id": true
@@ -5310,11 +5310,11 @@
       "route": [
         [
           304,
-          2150
+          1779.963
         ],
         [
           380,
-          2150
+          1779.963
         ]
       ],
       "show_id": true
@@ -5328,11 +5328,11 @@
       "route": [
         [
           540,
-          2150
+          1779.963
         ],
         [
           580,
-          2150
+          1779.963
         ]
       ],
       "show_id": true
@@ -5346,11 +5346,11 @@
       "route": [
         [
           580,
-          2150
+          1779.963
         ],
         [
           630,
-          2150
+          1779.963
         ]
       ],
       "show_id": true
@@ -5364,23 +5364,23 @@
       "route": [
         [
           580,
-          2150
+          1779.963
         ],
         [
           580,
-          2060
+          1706.816
         ],
         [
           1080,
-          2060
+          1706.816
         ],
         [
           1080,
-          2150
+          1779.963
         ],
         [
           1100,
-          2150
+          1779.963
         ]
       ],
       "show_id": true
@@ -5394,23 +5394,23 @@
       "route": [
         [
           580,
-          2150
+          1779.963
         ],
         [
           580,
-          2080
+          1723.071
         ],
         [
           1600,
-          2080
+          1723.071
         ],
         [
           1600,
-          2150
+          1779.963
         ],
         [
           1640,
-          2150
+          1779.963
         ]
       ],
       "show_id": true
@@ -5424,19 +5424,19 @@
       "route": [
         [
           1500,
-          2150
+          1779.963
         ],
         [
           1540,
-          2150
+          1779.963
         ],
         [
           1540,
-          2060
+          1706.816
         ],
         [
           2525,
-          2060
+          1706.816
         ]
       ],
       "show_id": true
@@ -5450,19 +5450,19 @@
       "route": [
         [
           2525,
-          2060
+          1706.816
         ],
         [
           2100,
-          2060
+          1706.816
         ],
         [
           2100,
-          2150
+          1779.963
         ],
         [
           2140,
-          2150
+          1779.963
         ]
       ],
       "show_id": true
@@ -5476,11 +5476,11 @@
       "route": [
         [
           800,
-          2110
+          1747.453
         ],
         [
           800,
-          2020
+          1674.307
         ]
       ],
       "show_id": true
@@ -5494,23 +5494,23 @@
       "route": [
         [
           2390,
-          2110
+          1747.453
         ],
         [
           2390,
-          2050
+          1698.689
         ],
         [
           2540,
-          2050
+          1698.689
         ],
         [
           2540,
-          2150
+          1779.963
         ],
         [
           2580,
-          2150
+          1779.963
         ]
       ],
       "show_id": true
@@ -5524,15 +5524,15 @@
       "route": [
         [
           2990,
-          2110
+          1747.453
         ],
         [
           2990,
-          2090
+          1731.199
         ],
         [
           2670,
-          2090
+          1731.199
         ]
       ],
       "show_id": true
@@ -5546,23 +5546,23 @@
       "route": [
         [
           1975,
-          1630
+          1357.341
         ],
         [
           2485,
-          1630
+          1357.341
         ],
         [
           2485,
-          2055
+          1702.753
         ],
         [
           2730,
-          2055
+          1702.753
         ],
         [
           2730,
-          2110
+          1747.453
         ]
       ],
       "show_id": true
@@ -5576,19 +5576,19 @@
       "route": [
         [
           2500,
-          1620
+          1349.213
         ],
         [
           2500,
-          2070
+          1714.944
         ],
         [
           2850,
-          2070
+          1714.944
         ],
         [
           2850,
-          2110
+          1747.453
         ]
       ],
       "show_id": true
@@ -5602,19 +5602,19 @@
       "route": [
         [
           1720,
-          2110
+          1747.453
         ],
         [
           1720,
-          2070
+          1714.944
         ],
         [
           1810,
-          2070
+          1714.944
         ],
         [
           1810,
-          1430
+          1194.794
         ]
       ],
       "show_id": true
@@ -5628,15 +5628,15 @@
       "route": [
         [
           1790,
-          1510
+          1259.813
         ],
         [
           1840,
-          1510
+          1259.813
         ],
         [
           1840,
-          2110
+          1747.453
         ]
       ],
       "show_id": true
@@ -5650,23 +5650,23 @@
       "route": [
         [
           1970,
-          2110
+          1747.453
         ],
         [
           1970,
-          2010
+          1666.18
         ],
         [
           1950,
-          2010
+          1666.18
         ],
         [
           1950,
-          1550
+          1292.322
         ],
         [
           1790,
-          1550
+          1292.322
         ]
       ],
       "show_id": true
@@ -5680,19 +5680,19 @@
       "route": [
         [
           610,
-          1600
+          1332.959
         ],
         [
           610,
-          2040
+          1690.562
         ],
         [
           1200,
-          2040
+          1690.562
         ],
         [
           1200,
-          2110
+          1747.453
         ]
       ],
       "show_id": true
@@ -5706,23 +5706,23 @@
       "route": [
         [
           1390,
-          2110
+          1747.453
         ],
         [
           1390,
-          2000
+          1658.052
         ],
         [
           1005,
-          2000
+          1658.052
         ],
         [
           1005,
-          1850
+          1536.142
         ],
         [
           1030,
-          1850
+          1536.142
         ]
       ],
       "show_id": true
@@ -5736,11 +5736,11 @@
       "route": [
         [
           1030,
-          1850
+          1536.142
         ],
         [
           1080,
-          1850
+          1536.142
         ]
       ],
       "show_id": true
@@ -5754,11 +5754,11 @@
       "route": [
         [
           1030,
-          1850
+          1536.142
         ],
         [
           1030,
-          1880
+          1560.524
         ]
       ],
       "show_id": false
@@ -5772,15 +5772,15 @@
       "route": [
         [
           1030,
-          1926
+          1597.91
         ],
         [
           1030,
-          1960
+          1625.543
         ],
         [
           1020,
-          1960
+          1625.543
         ]
       ],
       "show_id": false
@@ -5794,11 +5794,11 @@
       "route": [
         [
           184,
-          2235
+          1849.045
         ],
         [
           184,
-          2300
+          1901.873
         ]
       ],
       "show_id": false
@@ -5812,11 +5812,11 @@
       "route": [
         [
           700,
-          2235
+          1849.045
         ],
         [
           700,
-          2300
+          1901.873
         ]
       ],
       "show_id": false
@@ -5830,11 +5830,11 @@
       "route": [
         [
           910,
-          2235
+          1849.045
         ],
         [
           910,
-          2300
+          1901.873
         ]
       ],
       "show_id": false
@@ -5848,11 +5848,11 @@
       "route": [
         [
           1840,
-          2235
+          1849.045
         ],
         [
           1840,
-          2300
+          1901.873
         ]
       ],
       "show_id": false
@@ -5866,11 +5866,11 @@
       "route": [
         [
           2200,
-          2235
+          1849.045
         ],
         [
           2200,
-          2300
+          1901.873
         ]
       ],
       "show_id": false
@@ -5884,11 +5884,11 @@
       "route": [
         [
           2450,
-          2235
+          1849.045
         ],
         [
           2450,
-          2300
+          1901.873
         ]
       ],
       "show_id": false
@@ -5902,16 +5902,28 @@
       "route": [
         [
           3090,
-          2235
+          1849.045
         ],
         [
           3090,
-          2300
+          1901.873
         ]
       ],
       "show_id": false
     }
   ],
+  "drawing_layout": {
+    "view_box": [
+      3200,
+      2000
+    ],
+    "paper_inches": [
+      17,
+      11
+    ],
+    "margin_inches": 0.5,
+    "layout_date": "2026-10-05"
+  },
   "external_nc": [
     "P1.ADC_VREF p35",
     "P1.3V3_EN p37",

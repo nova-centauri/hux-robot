@@ -1,4 +1,4 @@
-# Working notes — V1-PROOF, updated 2026-10-04
+# Working notes — V1-PROOF, updated 2026-10-05
 
 The active objective is a useful, inexpensive proof robot. **Under $1,000. Reuse first. 2.5 kg target. Four actuators. Indoor mobility with bounded disturbance tests.** The previous stair work is [parked](docs/archive/stair-v1/README.md).
 
@@ -14,6 +14,10 @@ The active objective is a useful, inexpensive proof robot. **Under $1,000. Reuse
 - [x] Drivable [3D sandbox](tools/living-drawings/proof-sandbox.html) on the simulator of the study and the protocol fixtures, with size references. Leg-height motion there is a preview only.
 
 ## Next physical work
+
+**2026-10-05 electrical print views:** EL-01 and EL-05 now use separate 11 x 17 inch landscape PDFs with 0.5 inch margins. The Electrical page includes a PDF view and a download link for each sheet. The five-sheet atlas uses the same paper size. The SVGs supply both the screen diagrams and the PDFs.
+
+The [export procedure](cad/wiring/README.md) describes the update command and visual checks. A source or export change stops the site build until the PDFs match. The source audit remains Rev B. No physical test result changed.
 
 **2026-10-04 writing standard:** all active text now obeys [Simplified Technical English](docs/writing-standard.md). Read `CLAUDE.md` and `tools/ste/SKILL.md` before you write. Run `python3 tools/ste/check_repo.py` before you finish. The gate is part of `npm run test:site`. The archive and the research notes keep their original text. No hardware status changed in this update.
 

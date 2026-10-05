@@ -18,6 +18,16 @@
 .atlas-scope{display:grid;grid-template-columns:180px 1fr;align-items:start;gap:22px;margin-top:18px;padding:19px 22px;background:#e8eeea;border-left:3px solid var(--atlas-teal)}
 .atlas-scope strong{font-size:13px;font-weight:650;line-height:1.65}.atlas-scope p{font-size:12px;line-height:1.8;color:#596b70;margin:0}.atlas-scope a{white-space:nowrap}
 .atlas-wheel-sheet{border-top:3px solid var(--atlas-coral)}
+.atlas-motor-toolbar{border-top:3px solid var(--atlas-coral)}
+.atlas-motor-toolbar+.atlas-wheel-sheet{border-top:0}
+.atlas-pdf-view{border:1px solid #ccd4d0;border-top:0;background:#fffefa}
+.atlas-pdf-view summary{display:list-item;padding:16px 20px;color:var(--atlas-teal);font-size:13px;font-weight:650;cursor:pointer}
+.atlas-pdf-size{float:right;margin-left:20px;font:10px/1.8 var(--mono);color:var(--muted)}
+.atlas-pdf-view summary:focus-visible{outline:3px solid var(--atlas-teal);outline-offset:-4px}
+.atlas-pdf-view[open] summary{border-bottom:1px solid #ccd4d0}
+.atlas-pdf-content{padding:16px 20px 20px}.atlas-pdf-content p{font-size:12px;margin:0 0 9px}.atlas-pdf-content>a{display:inline-block;font-size:12px;margin-bottom:16px}
+.atlas-pdf-content iframe{display:block;width:100%;height:70vh;min-height:360px;max-height:850px;border:1px solid #ccd4d0;background:#eef0e9}
+@media(max-width:600px){.atlas-pdf-view summary{padding:15px}.atlas-pdf-size{float:none;display:block;margin:7px 0 0}.atlas-pdf-content{padding:15px}.atlas-pdf-content iframe{min-height:300px}}
 .atlas-wire-note{margin:15px 0 0;padding:17px 20px;border-left:3px solid var(--atlas-coral);background:#f0ede3;font-size:12px;line-height:1.8;color:#596b70}
 .atlas-subhead{margin:34px 0 18px}.atlas-subhead .eyebrow{margin-bottom:9px}.atlas-subhead h3{font-size:22px;margin-bottom:9px}.atlas-subhead>p:last-child{font-size:13px;color:var(--muted);margin:0}
 .atlas-details{gap:18px}.atlas-details .atlas-card{display:flex;flex-direction:column;border-top:3px solid var(--atlas-teal);box-shadow:0 5px 16px #24323905}
@@ -46,4 +56,15 @@
 @media(max-width:850px){.atlas-details{grid-template-columns:1fr}.atlas-details .atlas-card{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}.atlas-card>.atlas-preview{display:flex;align-items:center;border-bottom:0;border-right:1px solid var(--line)}.atlas-card .detail-body{padding:22px}.atlas-card .detail-body h3{font-size:22px}.atlas-card .detail-body p{font-size:13px}}
 @media(max-width:600px){.atlas-toolbar{display:block;padding:15px}.atlas-issue{font-size:9px;letter-spacing:0;margin-bottom:12px}.atlas-download{width:100%;justify-content:space-between;padding:8px 11px}.atlas-preview-overview{padding:5px}.atlas-overview figcaption{display:block;padding:12px 15px;font-size:9px}.atlas-overview figcaption>span{display:block}.atlas-overview figcaption a{display:inline-block;margin-top:8px}.atlas-scope{grid-template-columns:1fr;gap:7px;padding:16px 18px}.atlas-scope a{white-space:normal}.atlas-details .atlas-card{display:flex}.atlas-card>.atlas-preview{border-right:0;border-bottom:1px solid var(--line)}#drawing-release .detail-grid{grid-template-columns:1fr}.atlas-viewer{width:calc(100vw - 16px);height:calc(100dvh - 16px);max-height:none}.atlas-viewer-header{padding:15px;gap:10px}.atlas-viewer-header h2{font-size:17px}.atlas-viewer-close{padding:4px 8px;gap:8px;font-size:10px}.atlas-viewer-controls{padding:10px 15px;gap:6px}.atlas-viewer-controls a{margin-left:0;padding-top:4px;flex-basis:100%;font-size:10px}.atlas-viewer-help{padding:9px 15px;font-size:10px}.atlas-viewer-canvas{padding:12px}}
 @media(max-width:600px){.atlas-toolbar-links{display:grid;grid-template-columns:1fr;gap:8px}.atlas-register-link{width:100%;justify-content:space-between;padding:8px 11px}}
-@media print{.atlas-toolbar,.atlas-enlarge,.atlas-viewer,.atlas-sheet-link{display:none}.atlas-overview,.atlas-details .atlas-card{break-inside:avoid;box-shadow:none}.atlas-preview-overview{padding:0}.atlas-scope{background:#f2f4ef}.atlas-details{display:block}.atlas-details .atlas-card{display:grid;grid-template-columns:1fr 1fr}.atlas-overview figcaption a{display:none}}
+@page{size:17in 11in;margin:0.5in}
+@media print{
+  .electrical-main{width:auto!important;max-width:none!important;margin:0!important;padding:0!important}
+  .electrical-main>*,.electrical-main #wiring>*,.electrical-main #harnesses>*{display:none!important}
+  .workshop-routebar{display:none!important}
+  .electrical-main #wiring,.electrical-main #harnesses,.electrical-main #wiring>.atlas-overview,.electrical-main #harnesses>.atlas-overview{display:block!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important}
+  .electrical-main #wiring{break-after:page}
+  .electrical-main .atlas-overview{width:16in;height:10in;break-inside:avoid}
+  .electrical-main .atlas-preview{display:block;padding:0;background:white}
+  .electrical-main .atlas-preview img{width:16in;height:10in;object-fit:contain}
+  .atlas-overview figcaption,.atlas-toolbar,.atlas-enlarge,.atlas-viewer,.atlas-pdf-view{display:none!important}
+}

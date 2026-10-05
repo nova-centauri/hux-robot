@@ -7,6 +7,7 @@ and Pololu carrier pad arrangements are presented as component-side views.
 from pathlib import Path
 from html import escape
 import json
+import xml.etree.ElementTree as ET
 
 HERE = Path(__file__).resolve().parent
 W, H = 1680, 1120
@@ -25,25 +26,52 @@ FUNCTION = {0:'Manual TX (optional)',1:'Manual RX (optional)',2:'Left encoder A'
             27:'Right CS via conditioning',28:'Pack voltage via divider'}
 
 class Sheet:
-    def __init__(self, number, name, subtitle, width=W, height=H):
+    def __init__(self, number, name, subtitle, width=W, height=H, tabloid=False):
         self.number, self.name = number, name
         self.width,self.height=width,height
-        self.p = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
+        self.tabloid=tabloid
+        self.output_height=2000 if tabloid else height
+        page_height=self.output_height
+        self.p = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{page_height}" viewBox="0 0 {width} {page_height}" role="img" aria-labelledby="title desc">',
                   f'<title id="title">Hux V1-PROOF {escape(name)}</title><desc id="desc">{escape(subtitle)} Source-checked planning drawing; proposed harnesses and unresolved interfaces require physical verification.</desc>',
                   '<defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r=".7" fill="#c9d5d1"/></pattern></defs>']
-        self.rect(0,0,width,height,C['paper'])
-        self.p.append(f'<rect x="32" y="32" width="{width-64}" height="{height-64}" fill="url(#grid)" stroke="{C["line"]}"/>')
-        self.text(64,72,'HUX  /  V1-PROOF  /  ELECTRICAL',13,C['green'],700,spacing=2)
-        self.text(64,119,name,38,C['ink'],700)
-        self.text(64,150,subtitle,16,C['muted'])
-        self.rect(width-330,58,266,58,'#ece7d7',8)
-        self.text(width-197,82,'SOURCE-CHECKED PLAN',12,C['ink'],700,'middle',1)
-        self.text(width-197,103,'HARNESS / BENCH RELEASE OPEN',10,C['muted'],500,'middle',1)
+        self.rect(0,0,width,page_height,'#ffffff' if tabloid else C['paper'])
+        self.p.append(f'<rect x="32" y="32" width="{width-64}" height="{page_height-64}" fill="{ "none" if tabloid else "url(#grid)"}" stroke="{C["line"]}"/>')
+        self.text(64,72,'HUX  /  V1-PROOF  /  ELECTRICAL',20 if tabloid else 13,C['green'],700,spacing=2)
+        self.text(64,119,name,44 if tabloid else 38,C['ink'],700)
+        self.text(64,150,subtitle,20 if tabloid else 16,C['muted'])
+        self.rect(width-(610 if tabloid else 330),58,546 if tabloid else 266,65 if tabloid else 58,'#ece7d7',8)
+        self.text(width-(337 if tabloid else 197),86 if tabloid else 82,'SOURCE-CHECKED PLAN',20 if tabloid else 12,C['ink'],700,'middle',1)
+        self.text(width-(337 if tabloid else 197),112 if tabloid else 103,'HARNESS / BENCH RELEASE OPEN',18 if tabloid else 10,C['muted'],500,'middle',1)
         self.line([(64,174),(width-64,174)],C['line'],1)
-        self.line([(64,height-90),(width-64,height-90)],C['line'],1)
-        self.text(64,height-60,'Rev B  |  04 OCT 2026  |  Vendor pinouts + proposed Hux circuits',12,C['muted'])
-        self.text(64,height-38,'See docs/wiring-atlas.md and the wire register for sources and open circuit decisions.',11,C['muted'])
-        self.text(width-66,height-56,number,25,C['green'],700,'end')
+        self.line([(64,page_height-90),(width-64,page_height-90)],C['line'],1)
+        self.text(64,page_height-60,'Rev B  |  Source: 04 OCT 2026  |  Print layout: 05 OCT 2026' if tabloid else 'Rev B  |  04 OCT 2026  |  Vendor pinouts + proposed Hux circuits',20 if tabloid else 12,C['muted'])
+        self.text(64,page_height-34 if tabloid else page_height-38,'17 x 11 in / landscape / 0.5 in margins / print at 100%. Sources and open checks: docs/wiring-atlas.md.' if tabloid else 'See docs/wiring-atlas.md and the wire register for sources and open circuit decisions.',18 if tabloid else 11,C['muted'])
+        self.text(width-66,page_height-56,number,30 if tabloid else 25,C['green'],700,'end')
+
+    def layout_y(self,y):
+        # Reflow coordinates, not glyphs or circular symbols. The same vector
+        # layout supplies the screen drawing, PDF, and endpoint register.
+        if not self.tabloid:return y
+        return round(174+(y-174)*(self.output_height-264)/(self.height-264),3)
+
+    def layout_point(self,point):
+        return [point[0],self.layout_y(point[1])]
+
+    def layout_body(self,markup):
+        body=ET.fromstring('<g id="circuit">'+markup+'</g>')
+        if self.tabloid:
+            for element in body.iter():
+                if 'y' in element.attrib:
+                    y=float(element.attrib['y'])
+                    element.set('y',str(self.layout_y(y)))
+                    if 'height' in element.attrib:
+                        element.set('height',str(round(self.layout_y(y+float(element.attrib['height']))-self.layout_y(y),3)))
+                if 'cy' in element.attrib:element.set('cy',str(self.layout_y(float(element.attrib['cy']))))
+                if 'points' in element.attrib:
+                    element.set('points',' '.join(f'{x},{self.layout_y(float(y))}' for x,y in (p.split(',') for p in element.attrib['points'].split())))
+                if element.tag=='text':element.set('font-size',str(max(18,float(element.attrib['font-size']))))
+        return ET.tostring(body,encoding='unicode')
     def rect(self,x,y,w,h,fill=None,r=0,stroke=None,dash=False):
         self.p.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{r}" fill="{fill or C["white"]}" stroke="{stroke or C["line"]}" stroke-width="1.4"'+(' stroke-dasharray="7 5"' if dash else '')+'/>')
     def text(self,x,y,t,size=16,color=None,weight=400,anchor='start',spacing=0):

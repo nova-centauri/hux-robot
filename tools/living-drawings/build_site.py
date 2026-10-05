@@ -19,6 +19,7 @@ from pathlib import Path, PurePosixPath
 import re
 import shutil
 import sys
+import importlib.util
 from urllib.parse import parse_qsl, quote, unquote, urlencode, urlsplit, urlunsplit
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -500,6 +501,18 @@ def validate(output: Path) -> list[str]:
 
 def build(root: Path, output: Path) -> dict:
     root, output = root.resolve(), output.resolve()
+    # The production publisher uses this function directly. Stale electrical
+    # PDFs must fail before the output directory or live release can change.
+    wiring = root / 'cad/wiring'
+    if (wiring / 'build.py').is_file():
+        spec = importlib.util.spec_from_file_location('hux_wiring_exports', wiring / 'exports.py')
+        if spec is None or spec.loader is None or not (wiring / 'exports.py').is_file():
+            raise ValueError('The electrical export check is missing. Run node cad/wiring/render.mjs.')
+        exports = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(exports)
+        errors = exports.check_exports(wiring)
+        if errors:
+            raise ValueError('\n'.join(errors))
     # A marker ensures rebuilding cannot silently erase an unrelated directory.
     marker = output / ".hux-site-build"
     if output == root or root.is_relative_to(output):

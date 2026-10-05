@@ -10,6 +10,16 @@
 | EL-04 | [Power + servo bus](../cad/wiring/v1-proof-el-04-power-servo.svg) | Power-cut boundary, VSYS isolation, TTL interface and unresolved protection circuits |
 | EL-05 | [Both wheel motors — every wire](../cad/wiring/v1-proof-el-05-both-wheels.svg) | Separate left and right motor leads, encoder supply and feedback, driver command and monitoring, and gated enable |
 
+## 11 x 17 inch print views
+
+The [system PDF](../cad/wiring/v1-proof-el-01-overview-11x17.pdf) and the [motor PDF](../cad/wiring/v1-proof-el-05-both-wheels-11x17.pdf) each contain one sheet. Both use landscape orientation and 0.5 inch margins. Select 11 x 17 inch paper and print at 100% scale. The five-sheet atlas uses the same page size.
+
+The print layout date is October 5, 2026. The source audit remains Rev B. EL-01 uses less vertical space. Text and circular symbols keep their proportions. EL-01 and EL-05 omit the dot grid for clear print output. Their website diagrams and PDFs use the same generated SVGs.
+
+Follow the [export procedure](../cad/wiring/README.md) after each electrical change. The site build rejects exports that do not match their recorded source hashes.
+
+## Diagram conventions
+
 Colors identify the rail families or the signal families. The motor lead colors keep their documented function, and outlined white is encoder B. Dots show connected branches. Crossings without dots do not connect. Ground symbols share the common reference. Dashed component frames mark circuits or interfaces whose implementation remains undecided.
 
 EL-01 shows individual conductors with global IDs and named endpoints. Those IDs refer to the searchable wire register. EL-05 labels wheel terminals without separate wire IDs. Search those terminal names in the same register.

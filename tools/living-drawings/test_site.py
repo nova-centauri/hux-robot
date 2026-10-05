@@ -2,6 +2,7 @@
 """Regression checks for portable routes and readable published documents."""
 
 from pathlib import Path, PurePosixPath
+import importlib.util
 import re
 import tempfile
 import unittest
@@ -211,6 +212,35 @@ class BuildTests(unittest.TestCase):
         for folder in site.LOCAL_ONLY:
             self.assertFalse((self.output / site.site_path(folder)).exists())
             self.assertTrue((self.root / folder / "local-model.glb").exists())
+
+    def test_stale_electrical_sources_or_outputs_keep_the_prior_build(self):
+        wiring = self.root / 'cad/wiring'
+        wiring.mkdir(parents=True)
+        checker = site.ROOT / 'cad/wiring/exports.py'
+        spec = importlib.util.spec_from_file_location('test_wiring_exports', checker)
+        exports = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(exports)
+        for name in (*exports.INPUTS, *exports.OUTPUTS):
+            (wiring / name).write_text('original bytes')
+        (wiring / 'exports.py').write_text(checker.read_text())
+        exports.write_manifest(wiring)
+        self.assertEqual(site.build(self.root, self.output)['errors'], [])
+        prior = (self.output / 'electrical.html').read_bytes()
+        for name in ('complete.py', 'v1-proof-el-01-overview.svg',
+                     'v1-proof-el-05-both-wheels-11x17.pdf',
+                     'v1-proof-el-01-overview.png'):
+            with self.subTest(name=name):
+                path = wiring / name
+                original = path.read_bytes()
+                path.write_bytes(original + b' changed')
+                with self.assertRaisesRegex(ValueError, 'electrical export is stale'):
+                    site.build(self.root, self.output)
+                self.assertEqual((self.output / 'electrical.html').read_bytes(), prior)
+                path.write_bytes(original)
+        (wiring / exports.MANIFEST).unlink()
+        with self.assertRaisesRegex(ValueError, 'manifest is missing'):
+            site.build(self.root, self.output)
+        self.assertEqual((self.output / 'electrical.html').read_bytes(), prior)
 
     def test_rebuild_removes_stale_pages_but_protects_unrelated_directories(self):
         site.build(self.root, self.output)

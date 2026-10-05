@@ -11,7 +11,7 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to electrical drawings</a>
-  <main id="main" class="engineering-main">
+  <main id="main" class="engineering-main electrical-main">
     <div class="page-heading">
       <div>
         <p class="eyebrow">V1-PROOF / Electrical engineering</p>
@@ -32,7 +32,7 @@
       </div>
       <div class="atlas-toolbar">
         <p class="atlas-issue"><span class="atlas-dot" aria-hidden="true"></span>V1-PROOF · Rev B · EL-01–05 · 2026-10-04</p>
-        <div class="atlas-toolbar-links"><a class="atlas-register-link" href="../../cad/wiring/v1-proof-wire-register.html">Search wire register <span aria-hidden="true">↗</span></a><a class="atlas-download" href="../../cad/wiring/v1-proof-wiring-atlas.pdf" download>Download five-sheet atlas <span aria-hidden="true">↓</span></a></div>
+        <div class="atlas-toolbar-links"><a class="atlas-download" href="../../cad/wiring/v1-proof-el-01-overview-11x17.pdf" download>Download EL-01 / 11 x 17 PDF <span aria-hidden="true">↓</span></a><a class="atlas-register-link" href="../../cad/wiring/v1-proof-wire-register.html">Search wire register <span aria-hidden="true">↗</span></a><a class="atlas-download" href="../../cad/wiring/v1-proof-wiring-atlas.pdf" download>Download five-sheet atlas <span aria-hidden="true">↓</span></a></div>
       </div>
       <figure class="atlas-overview">
         <a class="atlas-preview atlas-preview-overview" href="../../cad/wiring/v1-proof-el-01-overview.svg" data-wiring-viewer data-title="EL-01 · Complete system wiring" aria-label="Enlarge EL-01 complete system wiring schematic">
@@ -41,6 +41,14 @@
         </a>
         <figcaption><span>EL-01 / Complete system wiring · individual conductors</span><a href="../../cad/wiring/v1-proof-el-01-overview.svg" target="_blank" rel="noopener">Open vector original ↗</a></figcaption>
       </figure>
+      <details class="atlas-pdf-view" id="system-pdf">
+        <summary><span>View EL-01 PDF</span><span class="atlas-pdf-size">11 x 17 in / landscape / 0.5 in margins</span></summary>
+        <div class="atlas-pdf-content">
+          <p>Print on 11 x 17 inch paper at 100% scale. The PDF includes 0.5 inch margins.</p>
+          <a href="../../cad/wiring/v1-proof-el-01-overview-11x17.pdf" target="_blank" rel="noopener">Open system PDF in a new tab ↗</a>
+          <iframe src="../../cad/wiring/v1-proof-el-01-overview-11x17.pdf#view=Fit" title="EL-01 complete system PDF, 11 x 17 inches" loading="lazy"></iframe>
+        </div>
+      </details>
       <div class="atlas-scope"><strong>Proposed external wiring.</strong><p>EL-01 wire IDs refer to the global register, and named terminals let you follow the external wiring. Vendor pinouts are source checked. GPIO assignments and routing are proposed. Internal regulator, clamp, watchdog, ADC and interface circuits still need selection and qualification. This is not a released or bench-tested assembly schematic. <a href="../../docs/wiring-atlas.md">Read the source audit and open checks ↗</a></p></div>
     </section>
 
@@ -52,6 +60,10 @@
           <p>Left and right motor power, encoder supplies, both A/B feedback pairs, PWM, direction, SLEEP, faults and current sensing are shown separately.</p>
         </div>
       </div>
+      <div class="atlas-toolbar atlas-motor-toolbar">
+        <p class="atlas-issue"><span class="atlas-dot" aria-hidden="true"></span>EL-05 / Separate left and right channels</p>
+        <div class="atlas-toolbar-links"><a class="atlas-download" href="../../cad/wiring/v1-proof-el-05-both-wheels-11x17.pdf" download>Download EL-05 / 11 x 17 PDF <span aria-hidden="true">↓</span></a></div>
+      </div>
       <figure class="atlas-overview atlas-wheel-sheet">
         <a class="atlas-preview atlas-preview-overview" href="../../cad/wiring/v1-proof-el-05-both-wheels.svg" data-wiring-viewer data-title="EL-05 · Both wheel motors — every wire" aria-label="Enlarge EL-05 both wheel motors and every wire">
           <img src="../../cad/wiring/v1-proof-el-05-both-wheels.svg" loading="lazy" alt="Both left and right Pololu 4752 motors and DRV8874 carriers with all six motor cable wires, separate Pico PWM and direction signals, gated SLEEP, fault and current feedback, and both encoder level-conversion paths.">
@@ -59,6 +71,14 @@
         </a>
         <figcaption><span>EL-05 / Both wheel motors — every wire</span><a href="../../cad/wiring/v1-proof-el-05-both-wheels.svg" target="_blank" rel="noopener">Open vector original ↗</a></figcaption>
       </figure>
+      <details class="atlas-pdf-view" id="motors-pdf">
+        <summary><span>View EL-05 PDF</span><span class="atlas-pdf-size">11 x 17 in / landscape / 0.5 in margins</span></summary>
+        <div class="atlas-pdf-content">
+          <p>Print on 11 x 17 inch paper at 100% scale. The PDF includes 0.5 inch margins.</p>
+          <a href="../../cad/wiring/v1-proof-el-05-both-wheels-11x17.pdf" target="_blank" rel="noopener">Open motor PDF in a new tab ↗</a>
+          <iframe src="../../cad/wiring/v1-proof-el-05-both-wheels-11x17.pdf#view=Fit" title="EL-05 both wheel motors PDF, 11 x 17 inches" loading="lazy"></iframe>
+        </div>
+      </details>
       <p class="atlas-wire-note">Search terminal names from this sheet in the <a href="../../cad/wiring/v1-proof-wire-register.html">wire register</a>. EL-01 uses the register's global conductor IDs. Motor cable colors retain their vendor functions. Black is a switched motor lead and green is encoder ground. Both channels are planned, with received quantities and physical checks tracked in the <a href="../../docs/parts-on-hand.md">inventory</a>.</p>
       <div class="atlas-subhead"><p class="eyebrow">EL-02–04 / Component details</p><h3>Pin maps, driver pads and power boundaries</h3><p>Use these closer views alongside the complete schematic and conductor register.</p></div>
       <div class="detail-grid atlas-details">

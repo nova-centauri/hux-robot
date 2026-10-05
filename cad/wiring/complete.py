@@ -3,6 +3,7 @@ views, not invented connector face views. Every external wire has two recorded
 endpoints; power rails and junctions are explicit graph nodes.
 """
 import json
+import xml.etree.ElementTree as ET
 from html import escape
 from build import Sheet, C, PIN, HERE
 
@@ -21,26 +22,26 @@ def intersections(a,b,c,d):
 
 class Circuit:
     def __init__(self,number,title,subtitle,width=3200,height=2400,show_ids=True):
-        self.s=Sheet(number,title,subtitle,width,height)
+        self.s=Sheet(number,title,subtitle,width,height,tabloid=True)
         self.header=list(self.s.p); self.s.p=[]
         self.parts={};self.ports={};self.wires=[];self.nodes={};self.show_ids=show_ids
-    def box(self,ref,x,y,w,h,title,sub='',pending=False,color=None,header=True):
+    def box(self,ref,x,y,w,h,title,sub='',pending=False,color=None,header=True,sub_bottom=False):
         self.parts[ref]=dict(ref=ref,title=title,rect=[x,y,w,h],pending=pending)
         self.s.rect(x,y,w,h,C['white'],8,color or C['line'],pending)
         if header:
             heading=ref+' / '+title
             compact=h<=180
             font=min(22 if not compact else 20,(w-36)/(len(heading)*.55))
-            self.s.text(x+18,y+(25 if compact else 30),heading,font,color or C['ink'],700)
-            if sub:self.s.text(x+18,y+(h-25 if compact else 57),sub,min(18,(w-36)/(len(sub)*.51)),C['muted'])
-    def port(self,ref,pin,x,y,label=None,side='left',color=None,gpio=None):
+            self.s.text(x+18,y+(20 if compact else 30),heading,font,color or C['ink'],700)
+            if sub:self.s.text(x+18,y+(h-15 if compact else h-25 if sub_bottom else 57),sub,min(18,(w-36)/(len(sub)*.51)),C['muted'])
+    def port(self,ref,pin,x,y,label=None,side='left',color=None,gpio=None,label_offset=6):
         key=ref+'.'+pin
         assert key not in self.ports
         self.ports[key]=dict(component=ref,pin=pin,position=[x,y],label=label or pin)
         if gpio is not None:self.ports[key].update(gpio=gpio,physical_pin=PIN[gpio])
         self.s.port(x,y,color or C['cyan'])
-        if side=='left':self.s.text(x+14,y+6,label or pin,20,color or C['ink'],600)
-        elif side=='right':self.s.text(x-14,y+6,label or pin,20,color or C['ink'],600,'end')
+        if side=='left':self.s.text(x+14,y+label_offset,label or pin,20,color or C['ink'],600)
+        elif side=='right':self.s.text(x-14,y+label_offset,label or pin,20,color or C['ink'],600,'end')
         elif side=='top':self.s.text(x+12,y-12,label or pin,17,color or C['ink'],600)
         elif side=='bottom':
             self.s.text(x-12,y+24,label or pin,17,color or C['ink'],600,'end')
@@ -58,16 +59,28 @@ class Circuit:
         wid=f'W{len(self.wires)+1:03d}'
         self.wires.append(dict(id=wid,source=a,destination=b,net=net,color=color or C['cyan'],route=pts,show_id=label))
         return wid
-    def resistor(self,ref,x,y,value,vertical=True,pending=False):
+    def resistor(self,ref,x,y,value,vertical=True,pending=False,label_side='right',label_offsets=(22,49)):
         self.parts[ref]=dict(ref=ref,title=value,rect=[x-8,y,16,46],pending=pending)
         self.s.rect(x-8,y,16,46,C['white'],0,C['ink'],pending)
-        self.s.text(x+15,y+22,ref,17,C['ink'],600)
-        self.s.text(x+15,y+43,value,15,C['muted'])
+        label_x=x-15 if label_side=='left' else x+15
+        anchor='end' if label_side=='left' else 'start'
+        self.s.text(label_x,y+label_offsets[0],ref,17,C['ink'],600,anchor)
+        self.s.text(label_x,y+label_offsets[1],value,15,C['muted'],400,anchor)
         self.ports[ref+'.1']=dict(component=ref,pin='1',position=[x,y],label=value)
         self.ports[ref+'.2']=dict(component=ref,pin='2',position=[x,y+46],label=value)
     def finish(self,stem):
         self.validate_geometry(connected=self.show_ids)
         body=list(self.s.p);self.s.p=[]
+        # Reserve space around terminal and component text for conductor IDs.
+        # Conservative font bounds keep this standard-library build portable.
+        text_bounds=[]
+        for element in ET.fromstring('<g>'+''.join(body)+'</g>').iter('text'):
+            size=max(18,float(element.attrib['font-size']))
+            width=len(element.text or '')*size*.62
+            x=float(element.attrib['x']);y=self.s.layout_y(float(element.attrib['y']))
+            anchor=element.attrib.get('text-anchor','start')
+            left=x-width if anchor=='end' else x-width/2 if anchor=='middle' else x
+            text_bounds.append((left,y-size,left+width,y+size*.25))
         # Crossings on different nets have a visible break. Junction nodes have
         # filled dots. Break horizontal segments; never infer a junction by color.
         segments=[]
@@ -100,6 +113,8 @@ class Circuit:
                     px,py,pw,ph=part['rect']
                     if pw==16:pw+=105
                     if x+24>px-5 and x-24<px+pw+5 and y>py-5 and y-17<py+ph+5:blocked=True;break
+                label_y=self.s.layout_y(y)
+                if any(x+25>left-3 and x-25<right+3 and label_y+5>top-3 and label_y-18<bottom+3 for left,top,right,bottom in text_bounds):blocked=True
                 if not blocked:id_labels.append((x,y,w['id'],C['ground'] if w['color']=='white' else w['color']))
         self.s.p=self.header+self.s.p+body
         junctions={(tuple(self.ports[key]['position']),net) for key,net in self.nodes.items()}
@@ -111,6 +126,7 @@ class Circuit:
                     if point not in terminal_positions:junctions.add((point,w['net']))
         for (x,y),net in sorted(junctions,key=lambda item:(item[0][1],item[0][0],item[1])):self.s.dot(x,y,C['ground'] if net=='GND' else C['ink'],4)
         for x,y,label,col in id_labels:self.s.label(x-22,y,label,col,15)
+        self.s.p=self.header+[self.s.layout_body('\n'.join(self.s.p[len(self.header):]))]
         return self.s.save(stem)
     def validate_geometry(self,connected=False):
         """Check the actual drawn paths, including branch taps within a rail."""
@@ -161,7 +177,7 @@ def full_system():
     s.text(1600,1010,'RP2350',40,C['green'],700,'middle')
     s.text(1600,1050,'3.3 V GPIO',24,C['muted'],600,'middle')
     s.text(1600,1090,'ADC_VREF p35: external NC',18,C['muted'],400,'middle')
-    s.text(1600,1130,'USB D1 → VSYS is onboard',18,C['muted'],400,'middle')
+    s.text(1600,1120,'USB D1 → VSYS is onboard',18,C['muted'],400,'middle')
     s.text(1600,1150,'EL-02 shows the physical board.',16,C['muted'],400,'middle')
     for side,gps in [('left',[(6,650),(7,710),(11,830),(26,890),(2,1170),(3,1230),(10,1280),(22,1320),(0,1380),(1,1420),(19,1480)]),('right',[(8,650),(9,710),(18,830),(27,890),(4,1170),(5,1230),(20,1270),(21,1310),(17,1350),(28,1550)])]:
         for gp,y in gps:d.port('P1','GP'+str(gp),1410 if side=='left' else 1790,y,f'GP{gp} / p{PIN[gp]}',side,gpio=gp)
@@ -174,7 +190,7 @@ def full_system():
         d.port('P1','GP'+str(gp),x,450,f'GP{gp} / p{PIN[gp]}','none',gpio=gp)
         s.text(x,480,f'GP{gp}',17,C['ink'],600,'middle');s.text(x,504,f'pin {PIN[gp]}',14,C['muted'],400,'middle')
         d.wire('U1.'+pad,'P1.GP'+str(gp),'SPI_'+pad,color=[C['green'],C['orange'],C['blue'],C['cyan'],C['yellow']][i],label=False)
-    d.port('U1','3V3',1420,280,'3V3','left',C['purple']);d.port('U1','GND',1780,280,'GND','right',C['ground'])
+    d.port('U1','3V3',1420,280,'3V3','left',C['purple'],label_offset=15);d.port('U1','GND',1780,280,'GND','right',C['ground'],label_offset=15)
     d.box('JUSB',64,210,390,180,'Laptop USB cable','Micro-USB cable; connector signals',color=C['cyan'])
     d.box('PUSB',740,210,300,180,'Pico 2 USB','Onboard P1 connector',color=C['green'],header=False)
     s.text(1020,235,'P1 USB',22,C['green'],700,'end');s.text(1020,380,'Onboard connector',17,C['muted'],400,'end')
@@ -224,21 +240,21 @@ def full_system():
         d.wire(adc+'.OUT','P1.GP'+str(gps[3]),side+'_ADC_SAFE',[(X(1380),940),(X(1380),890)])
         d.node('ADCref_'+side,X(1310),330,'3V3');d.wire(adc+'.REF','ADCref_'+side,'3V3',color=C['purple'])
         d.node('ADCg_'+side,X(1310),1460,'GND');d.wire(adc+'.GND','ADCg_'+side,'GND',color=C['ground'])
-        d.resistor('RF'+side,X(1290),735,'pull-up TBD',pending=True)
+        d.resistor('RF'+side,X(1290),735,'pull-up TBD',pending=True,label_side='left' if mirror else 'right')
         d.node('FAULT_'+side,X(1290),830,side+'_FAULT');d.node('RF3_'+side,X(1290),330,'3V3')
         d.wire('RF'+side+'.1','RF3_'+side,'3V3',color=C['purple']);d.wire('RF'+side+'.2','FAULT_'+side,side+'_FAULT')
         d.node('DG_'+side,X(770),1080,'GND');d.node('DGend_'+side,X(1150),1080,'GND')
         d.wire('DG_'+side,'DGend_'+side,'GND',color=C['ground'],label=False)
         for pin,x in [('GND',880),('PMODE',990),('IMODE',1070)]:
             d.node('DG'+pin+'_'+side,X(x),1080,'GND');d.wire(drv+'.'+pin,'DG'+pin+'_'+side,'GND',color=C['ground'],label=False)
-        d.resistor('RV'+side,X(1150),1024,'TBD: calibrate',pending=True)
+        d.resistor('RV'+side,X(1150),1024,'TBD: calibrate',pending=True,label_side='left' if mirror else 'right',label_offsets=(35,61))
         d.wire(drv+'.VREF','RV'+side+'.1',side+'_VREF',color=C['orange'],label=False);d.wire('RV'+side+'.2','DGend_'+side,'GND',color=C['ground'],label=False)
         d.wire('DG_'+side,'GL1' if side=='L' else 'GR2','GND',color=C['ground'],label=False)
         d.wire(m+'.GREEN','G_'+side,'GND',[(X(490),760)],C['green'])
         d.wire(m+'.BLUE','5L' if side=='L' else '5R','5V',[(X(550),820)],C['blue'])
         d.box(buf,X(1210) if mirror else 820,1100,390,260,'Encoder input buffer','5 V-tolerant inputs / 3.3 V outputs',True,C['green'])
-        for pin,y in [('A_IN',1170),('B_IN',1230)]:d.port(buf,pin,X(820),y,pin,inside)
-        for pin,y in [('A_OUT',1170),('B_OUT',1230)]:d.port(buf,pin,X(1210),y,pin,edge)
+        for pin,y in [('A_IN',1170),('B_IN',1230)]:d.port(buf,pin,X(820),y,pin,inside,label_offset=15 if y==1170 else 6)
+        for pin,y in [('A_OUT',1170),('B_OUT',1230)]:d.port(buf,pin,X(1210),y,pin,edge,label_offset=15 if y==1170 else 6)
         d.port(buf,'3V3',X(1060),1100,'3V3','top',C['purple']);d.port(buf,'GND',X(1000),1360,'GND','bottom',C['ground'])
         s.text(X(1015),1325,'Non-inverting / enable defined in circuit',16,C['muted'],400,'middle')
         d.wire(m+'.YELLOW',buf+'.A_IN',side+'_ENC_A5',[(X(600),880),(X(600),1170)],C['yellow'])
@@ -263,7 +279,7 @@ def full_system():
     d.box('WD',640,1670,330,250,'Hardware watchdog','No heartbeat → unhealthy',True,C['red'])
     d.box('G1',1080,1670,280,250,'Latching gate','Request + health + cut OK',True,C['red'])
     s.text(1100,1900,'Fault latch / deliberate rearm',16,C['red'],700)
-    for ref,pin,x,y,side in [('WD','HB',970,1740,'right'),('WD','HEALTH',970,1800,'right'),('WD','3V3',800,1670,'top'),('WD','GND',900,1920,'bottom'),('G1','REQUEST',1360,1740,'right'),('G1','HEALTH',1080,1800,'left'),('G1','KILL_OK',1080,1850,'left'),('G1','3V3',1150,1670,'top'),('G1','OUT',1210,1670,'top'),('G1','GND',1260,1920,'bottom')]:d.port(ref,pin,x,y,pin,side)
+    for ref,pin,x,y,side in [('WD','HB',970,1740,'right'),('WD','HEALTH',970,1800,'right'),('WD','3V3',800,1670,'top'),('WD','GND',900,1920,'bottom'),('G1','REQUEST',1360,1740,'right'),('G1','HEALTH',1080,1800,'left'),('G1','KILL_OK',1080,1850,'left'),('G1','3V3',1150,1670,'top'),('G1','OUT',1210,1670,'top'),('G1','GND',1260,1920,'bottom')]:d.port(ref,pin,x,y,pin,side,label_offset=15 if pin=='REQUEST' else 6)
     d.wire('P1.GP10','G1.REQUEST','ENABLE_REQUEST',[(1375,1280),(1375,1740)])
     d.wire('P1.GP22','WD.HB','HEARTBEAT',[(1400,1320),(1400,1638),(1010,1638),(1010,1740)])
     d.wire('WD.HEALTH','G1.HEALTH','WD_HEALTH')
@@ -289,7 +305,7 @@ def full_system():
     d.node('DATA',2590,1980,'SERVO_DATA');d.wire('T1.DATA','DATA','SERVO_DATA',[(2590,1830)])
     for side,x,edge in [('L',64,'right'),('R',2746,'left')]:
         ref='S'+side;xp=x+390 if side=='L' else x
-        d.box(ref,x,1780,390,260,'ST3215 leg servo','12 V variant / test at 9 V',False,C['purple'])
+        d.box(ref,x,1780,390,260,'ST3215 leg servo','12 V variant / test at 9 V',False,C['purple'],sub_bottom=True)
         s.p.append(f'<circle cx="{x+180}" cy="1920" r="46" fill="#eeebf5" stroke="{C["purple"]}" stroke-width="3"/>');s.text(x+180,1931,ref,26,C['purple'],700,'middle')
         for pin,y,col in [('V+',1840,C['purple']),('DATA',1900,C['cyan']),('GND',1960,C['ground'])]:d.port(ref,pin,xp,y,pin,edge,col)
         d.wire(ref+'.V+','9L' if side=='L' else '9R','9V',[(520 if side=='L' else 2670,1840)],C['purple'])
@@ -365,7 +381,7 @@ def both_wheels():
             yy=next(y for n,y,c in rails if n==net);node=d.node(side+lead,x,yy,net);d.wire(m+'.'+lead,node,net,[(x,d.ports[m+'.'+lead]['position'][1])],col)
         # Enable is a distinct conductor, never a direct Pico GPIO-to-SLEEP wire.
         d.port(drv,'SLEEP',1080,ybase+205,'SLEEP','left',C['red']);n=d.node('EN'+side,640,ybase+205,'HW_ENABLE');d.wire(n,drv+'.SLEEP','HW_ENABLE',color=C['red']);s.label(650,ybase+195,'HW_ENABLE / EL-01',C['red'],20)
-        d.resistor('RF'+side,990,ybase+310,'pull-up TBD',pending=True);d.node('F'+side,990,ybase+360,side+'_FAULT');d.node('RF'+side+'3',990,ybase+80,'3V3')
+        d.resistor('RF'+side,990,ybase+310,'pull-up TBD',pending=True,label_side='left');d.node('F'+side,990,ybase+360,side+'_FAULT');d.node('RF'+side+'3',990,ybase+80,'3V3')
         d.wire('RF'+side+'.1','RF'+side+'3','3V3',color=C['purple']);d.wire('RF'+side+'.2','F'+side,side+'_FAULT')
         d.port(drv,'VREF',1480,ybase+490,'VREF','bottom',C['orange']);d.resistor('RV'+side,1480,ybase+645,'limit TBD',pending=True);d.node('RV'+side+'g',1480,ybase+785,'GND')
         d.wire(drv+'.VREF','RV'+side+'.1',side+'_VREF',color=C['orange'],label=False);d.wire('RV'+side+'.2','RV'+side+'g','GND',color=C['ground'])
@@ -376,7 +392,11 @@ def both_wheels():
 
 def register(master):
     p=HERE/'v1-proof-netlist.json';data=json.loads(p.read_text())
-    data.update(revision='B',source_checked='2026-10-04',components=master.parts,ports=master.ports,connections=master.wires,
+    components={key:{**part,'rect':[part['rect'][0],master.s.layout_y(part['rect'][1]),part['rect'][2],round(master.s.layout_y(part['rect'][1]+part['rect'][3])-master.s.layout_y(part['rect'][1]),3)]} for key,part in master.parts.items()}
+    ports={key:{**port,'position':master.s.layout_point(port['position'])} for key,port in master.ports.items()}
+    connections=[{**wire,'route':[master.s.layout_point(point) for point in wire['route']]} for wire in master.wires]
+    data.update(revision='B',source_checked='2026-10-04',components=components,ports=ports,connections=connections,
+                drawing_layout=dict(view_box=[3200,2000],paper_inches=[17,11],margin_inches=0.5,layout_date='2026-10-05'),
                 external_nc=['P1.ADC_VREF p35','P1.3V3_EN p37','P1.RUN p30','DL.VM','DR.VM','U1.INT2','U1.auxiliary SPI','U1.Qwiic'])
     # A graph check catches omitted GPIO wires and accidental shorts, independent
     # of the visual layout. Wire intersections are not graph connections.

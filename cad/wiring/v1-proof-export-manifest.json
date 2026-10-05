@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "layout": {
+    "paper_inches": [
+      17,
+      11
+    ],
+    "margin_inches": 0.5
+  },
+  "sources": {
+    "build.py": "8d1f7bbae9c02b20a65365d74365360ec1d619015079d23133f3f3ffccfbfbc9",
+    "complete.py": "2fb225ac1c13473daeafe85c04a9418b2579a346b4fd6ee69f0781c377683dc8",
+    "render.mjs": "501548da93194de032f49c428eb769da0d4d378001237c1df6abb60fa8806727",
+    "exports.py": "3a10241ad0327bbee35ee1ba95529fcc15361f86dcbcb6d7996ae61b41ea29f4",
+    "v1-proof-el-01-overview.svg": "b167319942b4f79300d6079241236448c63b8ace6f286f1fb84c1edc86dce5ff",
+    "v1-proof-el-02-pico-imu.svg": "969dc982601deaba1f07f895f6456815c75add9e90046cc23d7263a5e2d56b49",
+    "v1-proof-el-03-wheel-harness.svg": "478bfefe0f611539da22adcc653391f3d189a8e25bae049a5a36401f4fb7884f",
+    "v1-proof-el-04-power-servo.svg": "520acabc1d1ac98faa9688cfe8ee54c38367be8d9b17e9922124f7e1082423d3",
+    "v1-proof-el-05-both-wheels.svg": "d29aa954b654754111cdaf75be0c23ab4f584d5cfc8ba39be8733827be69f0d4"
+  },
+  "outputs": {
+    "v1-proof-el-01-overview-11x17.pdf": "7a1f2e9df0248a190be77ecaf9e2c421f20bf51e77948858137c2dc1c289bdbd",
+    "v1-proof-el-05-both-wheels-11x17.pdf": "d6b1a759595895423e098c3c984a838aac54da143e302ccd713ecd0f573de50a",
+    "v1-proof-wiring-atlas.pdf": "30b56700d5fffd788700480fd2096e714f1806cf4b5a5cf0fcf3054e2ae3a8e8",
+    "v1-proof-el-01-overview.png": "85d03992b7b8b4bd4390c3a5b0a4749099bbe80d7b868b1287c0bc639fc3cbf8",
+    "v1-proof-el-02-pico-imu.png": "32a38fdee4670a398b627a637738321fa596040c5e39bcd0ef3b4c7a510c9bfd",
+    "v1-proof-el-03-wheel-harness.png": "4ef90987c66fcd06837c8e5bbb07179e808451760e90b2e477a067946017155d",
+    "v1-proof-el-04-power-servo.png": "57eb83e9825e17439c2ce261f37a77f0bd096e2bbad06599d57fcf972c45eb6f",
+    "v1-proof-el-05-both-wheels.png": "8aab968ccfe59e6912233da61b0d57b1311ab2e5d842b95d2282f83eab3bc8af"
+  }
+}

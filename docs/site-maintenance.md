@@ -32,6 +32,16 @@ python3 -m http.server 8080 --directory ../../dist/site
 
 Open `http://localhost:8080/`. The output is a self-contained static site in `dist/site`. Publish that directory, not the repository checkout or only the original HTML folder. The build renders Markdown into HTML with document navigation and section links. It resolves links against their source files, and it keeps the current interactive drawings and simulations. No browser Markdown renderer or remote document service is necessary.
 
+## Electrical PDFs
+
+The Electrical page includes separate PDF views for EL-01 and EL-05. Each PDF contains one 11 x 17 inch landscape sheet with 0.5 inch margins. The five-sheet atlas uses the same paper size. Print at 100% scale.
+
+After a change to an electrical diagram, regenerate its SVG and PDF in the same commit. Run `node cad/wiring/render.mjs` from the repository root. This command rebuilds all electrical SVGs, registers, PNGs and PDFs from their shared sources. Refer to the [electrical export procedure](../cad/wiring/README.md) for the runtime requirements and visual checks.
+
+The export manifest records hashes of the source files and outputs. The site build rejects missing or stale exports before it changes the output directory. The production publisher uses the same check. Do not change the manifest by hand to bypass a failed check.
+
+## Published assets
+
 Local vendor downloads in `cad/vendor`, optional derived meshes in `tools/living-drawings/models`, and the locally extracted duplicate `cad/prints/v1-proof-r01/hux-v1-proof-r01` stay out of the published bundle. The canonical print-kit folder and ZIP remain published. The archived sandbox supports its current envelope-geometry fallback. Styles and direct script assets receive content-based cache keys so that rebuilt pages load the updated files.
 
 The current project has six primary sections, with the same navigation on drawings, simulations and rendered documents:
