@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Electrical &amp; wiring — Hux V1-PROOF</title>
-  <meta name="description" content="Source-checked Hux V1-PROOF wiring atlas: power, Pico 2 and IMU, wheel harnesses and TTL servo bus, with proposed circuits and open bench checks identified.">
+  <meta name="description" content="Hux V1-PROOF complete proposed wiring schematic with individual conductors, both wheel motors, Pico 2 and IMU, power and servo interfaces, and a searchable wire register.">
   <link rel="stylesheet" href="proof.css">
   <link rel="stylesheet" href="workshop.css">
   <link rel="stylesheet" href="wiring.css">
@@ -16,7 +16,7 @@
       <div>
         <p class="eyebrow">V1-PROOF / Electrical engineering</p>
         <h1>Electrical &amp; wiring</h1>
-        <p class="intro">A coordinated wiring atlas for the four-actuator proof chassis. Follow each power rail, controller signal and feedback path from the selected hardware to the proposed harness.</p>
+        <p class="intro">Individual power, command and feedback wires for the four-actuator proof chassis. Trace both wheel motors, the controller, IMU and leg servos in the complete proposed wiring schematic.</p>
       </div>
       <p class="document-code">EL / V1-PROOF</p>
     </div>
@@ -24,34 +24,43 @@
     <section class="section" id="wiring" aria-labelledby="wiring-title">
       <div class="section-head">
         <div>
-          <p class="eyebrow">EL-01 / Wiring overview</p>
-          <h2 id="wiring-title">Wiring overview</h2>
-          <p>Source-checked component interfaces, with the proposed GPIO map and unfinished protection circuits kept visible.</p>
+          <p class="eyebrow">EL-01 / Complete system schematic</p>
+          <h2 id="wiring-title">Complete system wiring</h2>
+          <p>Both motor channels and every proposed external conductor, with wire IDs and named endpoints. Enlarge the sheet or search the wire register to follow a connection.</p>
         </div>
         <span class="status-tag is-pending">Proposed harness / untested</span>
       </div>
       <div class="atlas-toolbar">
-        <p class="atlas-issue"><span class="atlas-dot" aria-hidden="true"></span>V1-PROOF · EL-01–04 · source review 2026-10-03</p>
-        <a class="atlas-download" href="../../cad/wiring/v1-proof-wiring-atlas.pdf" download>Download printable atlas <span aria-hidden="true">↓</span></a>
+        <p class="atlas-issue"><span class="atlas-dot" aria-hidden="true"></span>V1-PROOF · Rev B · EL-01–05 · 2026-10-04</p>
+        <div class="atlas-toolbar-links"><a class="atlas-register-link" href="../../cad/wiring/v1-proof-wire-register.html">Search wire register <span aria-hidden="true">↗</span></a><a class="atlas-download" href="../../cad/wiring/v1-proof-wiring-atlas.pdf" download>Download five-sheet atlas <span aria-hidden="true">↓</span></a></div>
       </div>
       <figure class="atlas-overview">
-        <a class="atlas-preview atlas-preview-overview" href="../../cad/wiring/v1-proof-el-01-overview.svg" data-wiring-viewer data-title="EL-01 · System wiring overview" aria-label="Enlarge EL-01 system wiring overview">
-          <img src="../../cad/wiring/v1-proof-el-01-overview.svg" alt="Hux V1-PROOF wiring overview: 3S battery and actuator-power cut, two DRV8874 wheel drivers and encoders, protected 9 V ST3215 servo branch, separate 5 V logic supply, Pico 2 and LSM6DSO SPI IMU.">
+        <a class="atlas-preview atlas-preview-overview" href="../../cad/wiring/v1-proof-el-01-overview.svg" data-wiring-viewer data-title="EL-01 · Complete system wiring" aria-label="Enlarge EL-01 complete system wiring schematic">
+          <img src="../../cad/wiring/v1-proof-el-01-overview.svg" alt="Complete proposed Hux V1-PROOF wiring schematic showing individual labeled conductors for both Pololu 4752 wheel motors, both DRV8874 drivers, encoder conversion, Pico 2, LSM6DSO SPI IMU, power protection, watchdog and two ST3215 servos.">
           <span class="atlas-enlarge"><span aria-hidden="true">↗</span> Explore full sheet</span>
         </a>
-        <figcaption><span>EL-01 / System wiring overview</span><a href="../../cad/wiring/v1-proof-el-01-overview.svg" target="_blank" rel="noopener">Open vector original ↗</a></figcaption>
+        <figcaption><span>EL-01 / Complete system wiring · individual conductors</span><a href="../../cad/wiring/v1-proof-el-01-overview.svg" target="_blank" rel="noopener">Open vector original ↗</a></figcaption>
       </figure>
-      <div class="atlas-scope"><strong>Build-planning issue.</strong><p>Component interfaces are checked against primary sources. GPIO assignments and harness routing are proposed. The regulator, fuse, clamp, watchdog and interface selections remain open. This is not a released or bench-tested assembly schematic. <a href="../../docs/wiring-atlas.md">Read the source audit and open checks ↗</a></p></div>
+      <div class="atlas-scope"><strong>Proposed external wiring.</strong><p>EL-01 wire IDs refer to the global register, and named terminals let you follow the external wiring. Vendor pinouts are source checked. GPIO assignments and routing are proposed. Internal regulator, clamp, watchdog, ADC and interface circuits still need selection and qualification. This is not a released or bench-tested assembly schematic. <a href="../../docs/wiring-atlas.md">Read the source audit and open checks ↗</a></p></div>
     </section>
 
     <section class="section" id="harnesses" aria-labelledby="harness-title">
       <div class="section-head">
         <div>
-          <p class="eyebrow">EL-02–04 / Detail drawings</p>
-          <h2 id="harness-title">Power and harness sheets</h2>
-          <p>Three focused sheets make small pin labels and each electrical boundary easier to inspect.</p>
+          <p class="eyebrow">EL-05 / Both wheel channels</p>
+          <h2 id="harness-title">Both motors, wire by wire</h2>
+          <p>Left and right motor power, encoder supplies, both A/B feedback pairs, PWM, direction, SLEEP, faults and current sensing are shown separately.</p>
         </div>
       </div>
+      <figure class="atlas-overview atlas-wheel-sheet">
+        <a class="atlas-preview atlas-preview-overview" href="../../cad/wiring/v1-proof-el-05-both-wheels.svg" data-wiring-viewer data-title="EL-05 · Both wheel motors — every wire" aria-label="Enlarge EL-05 both wheel motors and every wire">
+          <img src="../../cad/wiring/v1-proof-el-05-both-wheels.svg" loading="lazy" alt="Both left and right Pololu 4752 motors and DRV8874 carriers with all six motor cable wires, separate Pico PWM and direction signals, gated SLEEP, fault and current feedback, and both encoder level-conversion paths.">
+          <span class="atlas-enlarge"><span aria-hidden="true">↗</span> Inspect both motors</span>
+        </a>
+        <figcaption><span>EL-05 / Both wheel motors — every wire</span><a href="../../cad/wiring/v1-proof-el-05-both-wheels.svg" target="_blank" rel="noopener">Open vector original ↗</a></figcaption>
+      </figure>
+      <p class="atlas-wire-note">Search terminal names from this sheet in the <a href="../../cad/wiring/v1-proof-wire-register.html">wire register</a>. EL-01 uses the register's global conductor IDs. Motor cable colors retain their vendor functions. Black is a switched motor lead and green is encoder ground. Both channels are planned, with received quantities and physical checks tracked in the <a href="../../docs/parts-on-hand.md">inventory</a>.</p>
+      <div class="atlas-subhead"><p class="eyebrow">EL-02–04 / Component details</p><h3>Pin maps, driver pads and power boundaries</h3><p>Use these closer views alongside the complete schematic and conductor register.</p></div>
       <div class="detail-grid atlas-details">
         <article class="detail-card atlas-card">
           <a class="atlas-preview" href="../../cad/wiring/v1-proof-el-02-pico-imu.svg" data-wiring-viewer data-title="EL-02 · Pico 2 and SPI IMU" aria-label="Enlarge EL-02 Pico 2 and SPI IMU sheet">
@@ -146,6 +155,7 @@
         <article class="panel detail-body">
           <h3>Build references</h3>
           <ul class="link-list">
+            <li><a href="../../cad/wiring/v1-proof-wire-register.html">Searchable conductor IDs and endpoints ↗</a></li>
             <li><a href="../../docs/wiring-atlas.md">Wiring atlas, source audit and verification record ↗</a></li>
             <li><a href="../../docs/electronics.md">Electronics plan and motor connections ↗</a></li>
             <li><a href="../../docs/v1-proof-hardware.md">Selected hardware and proposed GPIO allocation ↗</a></li>
@@ -168,9 +178,10 @@
       <output id="wiring-zoom" aria-live="polite">100%</output>
       <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
       <button type="button" data-zoom="fit">Fit sheet</button>
+      <button type="button" data-zoom="actual">Read labels</button>
       <a id="wiring-vector-link" target="_blank" rel="noopener">Open vector original ↗</a>
     </div>
-    <p id="wiring-viewer-help" class="atlas-viewer-help">Zoom for pin labels. Drag or scroll to pan. Use the arrow keys in the drawing area. Escape closes the sheet.</p>
+    <p id="wiring-viewer-help" class="atlas-viewer-help">Choose Read labels or zoom in. Drag or scroll to pan. Use the arrow keys in the drawing area. Escape closes the sheet.</p>
     <div class="atlas-viewer-canvas" tabindex="0" aria-label="Scrollable wiring drawing">
       <img id="wiring-viewer-image" alt="">
     </div>

@@ -1,6 +1,6 @@
 {
-  "revision": "A",
-  "source_checked": "2026-10-03",
+  "revision": "B",
+  "source_checked": "2026-10-04",
   "status": "build-planning; physical verification pending",
   "pico_endpoints": [
     {
@@ -185,5 +185,5766 @@
     "Hardware watchdog / kill implementation",
     "ADC conditioning and protection",
     "Received component revisions and harness orientation"
-  ]
+  ],
+  "components": {
+    "P1": {
+      "ref": "P1",
+      "title": "Pico 2",
+      "rect": [
+        1410,
+        450,
+        380,
+        1130
+      ],
+      "pending": false
+    },
+    "U1": {
+      "ref": "U1",
+      "title": "SparkFun LSM6DSO",
+      "rect": [
+        1420,
+        210,
+        360,
+        190
+      ],
+      "pending": false
+    },
+    "JUSB": {
+      "ref": "JUSB",
+      "title": "Laptop USB cable",
+      "rect": [
+        64,
+        210,
+        390,
+        180
+      ],
+      "pending": false
+    },
+    "PUSB": {
+      "ref": "PUSB",
+      "title": "Pico 2 USB",
+      "rect": [
+        740,
+        210,
+        300,
+        180
+      ],
+      "pending": false
+    },
+    "ML": {
+      "ref": "ML",
+      "title": "Pololu 4752 wheel motor",
+      "rect": [
+        64,
+        440,
+        390,
+        640
+      ],
+      "pending": false
+    },
+    "DL": {
+      "ref": "DL",
+      "title": "Pololu 4035 / DRV8874",
+      "rect": [
+        820,
+        440,
+        390,
+        570
+      ],
+      "pending": false
+    },
+    "AL": {
+      "ref": "AL",
+      "title": "ADC",
+      "rect": [
+        1240,
+        860,
+        130,
+        170
+      ],
+      "pending": true
+    },
+    "RFL": {
+      "ref": "RFL",
+      "title": "pull-up TBD",
+      "rect": [
+        1282,
+        735,
+        16,
+        46
+      ],
+      "pending": true
+    },
+    "RVL": {
+      "ref": "RVL",
+      "title": "TBD: calibrate",
+      "rect": [
+        1142,
+        1024,
+        16,
+        46
+      ],
+      "pending": true
+    },
+    "BL": {
+      "ref": "BL",
+      "title": "Encoder input buffer",
+      "rect": [
+        820,
+        1100,
+        390,
+        260
+      ],
+      "pending": true
+    },
+    "MR": {
+      "ref": "MR",
+      "title": "Pololu 4752 wheel motor",
+      "rect": [
+        2746,
+        440,
+        390,
+        640
+      ],
+      "pending": false
+    },
+    "DR": {
+      "ref": "DR",
+      "title": "Pololu 4035 / DRV8874",
+      "rect": [
+        1990,
+        440,
+        390,
+        570
+      ],
+      "pending": false
+    },
+    "AR": {
+      "ref": "AR",
+      "title": "ADC",
+      "rect": [
+        1830,
+        860,
+        130,
+        170
+      ],
+      "pending": true
+    },
+    "RFR": {
+      "ref": "RFR",
+      "title": "pull-up TBD",
+      "rect": [
+        1902,
+        735,
+        16,
+        46
+      ],
+      "pending": true
+    },
+    "RVR": {
+      "ref": "RVR",
+      "title": "TBD: calibrate",
+      "rect": [
+        2042,
+        1024,
+        16,
+        46
+      ],
+      "pending": true
+    },
+    "BR": {
+      "ref": "BR",
+      "title": "Encoder input buffer",
+      "rect": [
+        1990,
+        1100,
+        390,
+        260
+      ],
+      "pending": true
+    },
+    "J7": {
+      "ref": "J7",
+      "title": "Optional UART0 port",
+      "rect": [
+        64,
+        1260,
+        390,
+        310
+      ],
+      "pending": true
+    },
+    "RA": {
+      "ref": "RA",
+      "title": "10k proposed",
+      "rect": [
+        1292,
+        1408,
+        16,
+        46
+      ],
+      "pending": false
+    },
+    "SW2": {
+      "ref": "SW2",
+      "title": "ARM",
+      "rect": [
+        1180,
+        1515,
+        180,
+        90
+      ],
+      "pending": false
+    },
+    "WD": {
+      "ref": "WD",
+      "title": "Hardware watchdog",
+      "rect": [
+        640,
+        1670,
+        330,
+        250
+      ],
+      "pending": true
+    },
+    "G1": {
+      "ref": "G1",
+      "title": "Latching gate",
+      "rect": [
+        1080,
+        1670,
+        280,
+        250
+      ],
+      "pending": true
+    },
+    "D5": {
+      "ref": "D5",
+      "title": "Diode",
+      "rect": [
+        1530,
+        1645,
+        140,
+        70
+      ],
+      "pending": true
+    },
+    "T1": {
+      "ref": "T1",
+      "title": "TTL half-duplex interface",
+      "rect": [
+        2000,
+        1700,
+        390,
+        250
+      ],
+      "pending": true
+    },
+    "SL": {
+      "ref": "SL",
+      "title": "ST3215 leg servo",
+      "rect": [
+        64,
+        1780,
+        390,
+        260
+      ],
+      "pending": false
+    },
+    "SR": {
+      "ref": "SR",
+      "title": "ST3215 leg servo",
+      "rect": [
+        2746,
+        1780,
+        390,
+        260
+      ],
+      "pending": false
+    },
+    "BAT": {
+      "ref": "BAT",
+      "title": "3S pack",
+      "rect": [
+        64,
+        2110,
+        240,
+        125
+      ],
+      "pending": true
+    },
+    "F1": {
+      "ref": "F1",
+      "title": "Fuse",
+      "rect": [
+        380,
+        2110,
+        160,
+        125
+      ],
+      "pending": true
+    },
+    "V5": {
+      "ref": "V5",
+      "title": "5 V regulator",
+      "rect": [
+        630,
+        2110,
+        350,
+        125
+      ],
+      "pending": true
+    },
+    "SW1": {
+      "ref": "SW1",
+      "title": "Physical actuator cut",
+      "rect": [
+        1100,
+        2110,
+        400,
+        125
+      ],
+      "pending": true
+    },
+    "AP": {
+      "ref": "AP",
+      "title": "Pack ADC network",
+      "rect": [
+        1640,
+        2110,
+        380,
+        125
+      ],
+      "pending": true
+    },
+    "V9": {
+      "ref": "V9",
+      "title": "9 V regulator",
+      "rect": [
+        2140,
+        2110,
+        350,
+        125
+      ],
+      "pending": true
+    },
+    "QS": {
+      "ref": "QS",
+      "title": "Servo torque-cut switch",
+      "rect": [
+        2580,
+        2110,
+        530,
+        125
+      ],
+      "pending": true
+    },
+    "RK": {
+      "ref": "RK",
+      "title": "pull-down TBD",
+      "rect": [
+        1022,
+        1880,
+        16,
+        46
+      ],
+      "pending": true
+    }
+  },
+  "ports": {
+    "P1.GP6": {
+      "component": "P1",
+      "pin": "GP6",
+      "position": [
+        1410,
+        650
+      ],
+      "label": "GP6 / p9",
+      "gpio": 6,
+      "physical_pin": 9
+    },
+    "P1.GP7": {
+      "component": "P1",
+      "pin": "GP7",
+      "position": [
+        1410,
+        710
+      ],
+      "label": "GP7 / p10",
+      "gpio": 7,
+      "physical_pin": 10
+    },
+    "P1.GP11": {
+      "component": "P1",
+      "pin": "GP11",
+      "position": [
+        1410,
+        830
+      ],
+      "label": "GP11 / p15",
+      "gpio": 11,
+      "physical_pin": 15
+    },
+    "P1.GP26": {
+      "component": "P1",
+      "pin": "GP26",
+      "position": [
+        1410,
+        890
+      ],
+      "label": "GP26 / p31",
+      "gpio": 26,
+      "physical_pin": 31
+    },
+    "P1.GP2": {
+      "component": "P1",
+      "pin": "GP2",
+      "position": [
+        1410,
+        1170
+      ],
+      "label": "GP2 / p4",
+      "gpio": 2,
+      "physical_pin": 4
+    },
+    "P1.GP3": {
+      "component": "P1",
+      "pin": "GP3",
+      "position": [
+        1410,
+        1230
+      ],
+      "label": "GP3 / p5",
+      "gpio": 3,
+      "physical_pin": 5
+    },
+    "P1.GP10": {
+      "component": "P1",
+      "pin": "GP10",
+      "position": [
+        1410,
+        1280
+      ],
+      "label": "GP10 / p14",
+      "gpio": 10,
+      "physical_pin": 14
+    },
+    "P1.GP22": {
+      "component": "P1",
+      "pin": "GP22",
+      "position": [
+        1410,
+        1320
+      ],
+      "label": "GP22 / p29",
+      "gpio": 22,
+      "physical_pin": 29
+    },
+    "P1.GP0": {
+      "component": "P1",
+      "pin": "GP0",
+      "position": [
+        1410,
+        1380
+      ],
+      "label": "GP0 / p1",
+      "gpio": 0,
+      "physical_pin": 1
+    },
+    "P1.GP1": {
+      "component": "P1",
+      "pin": "GP1",
+      "position": [
+        1410,
+        1420
+      ],
+      "label": "GP1 / p2",
+      "gpio": 1,
+      "physical_pin": 2
+    },
+    "P1.GP19": {
+      "component": "P1",
+      "pin": "GP19",
+      "position": [
+        1410,
+        1480
+      ],
+      "label": "GP19 / p25",
+      "gpio": 19,
+      "physical_pin": 25
+    },
+    "P1.GP8": {
+      "component": "P1",
+      "pin": "GP8",
+      "position": [
+        1790,
+        650
+      ],
+      "label": "GP8 / p11",
+      "gpio": 8,
+      "physical_pin": 11
+    },
+    "P1.GP9": {
+      "component": "P1",
+      "pin": "GP9",
+      "position": [
+        1790,
+        710
+      ],
+      "label": "GP9 / p12",
+      "gpio": 9,
+      "physical_pin": 12
+    },
+    "P1.GP18": {
+      "component": "P1",
+      "pin": "GP18",
+      "position": [
+        1790,
+        830
+      ],
+      "label": "GP18 / p24",
+      "gpio": 18,
+      "physical_pin": 24
+    },
+    "P1.GP27": {
+      "component": "P1",
+      "pin": "GP27",
+      "position": [
+        1790,
+        890
+      ],
+      "label": "GP27 / p32",
+      "gpio": 27,
+      "physical_pin": 32
+    },
+    "P1.GP4": {
+      "component": "P1",
+      "pin": "GP4",
+      "position": [
+        1790,
+        1170
+      ],
+      "label": "GP4 / p6",
+      "gpio": 4,
+      "physical_pin": 6
+    },
+    "P1.GP5": {
+      "component": "P1",
+      "pin": "GP5",
+      "position": [
+        1790,
+        1230
+      ],
+      "label": "GP5 / p7",
+      "gpio": 5,
+      "physical_pin": 7
+    },
+    "P1.GP20": {
+      "component": "P1",
+      "pin": "GP20",
+      "position": [
+        1790,
+        1270
+      ],
+      "label": "GP20 / p26",
+      "gpio": 20,
+      "physical_pin": 26
+    },
+    "P1.GP21": {
+      "component": "P1",
+      "pin": "GP21",
+      "position": [
+        1790,
+        1310
+      ],
+      "label": "GP21 / p27",
+      "gpio": 21,
+      "physical_pin": 27
+    },
+    "P1.GP17": {
+      "component": "P1",
+      "pin": "GP17",
+      "position": [
+        1790,
+        1350
+      ],
+      "label": "GP17 / p22",
+      "gpio": 17,
+      "physical_pin": 22
+    },
+    "P1.GP28": {
+      "component": "P1",
+      "pin": "GP28",
+      "position": [
+        1790,
+        1550
+      ],
+      "label": "GP28 / p34",
+      "gpio": 28,
+      "physical_pin": 34
+    },
+    "P1.VSYS": {
+      "component": "P1",
+      "pin": "VSYS",
+      "position": [
+        1790,
+        1390
+      ],
+      "label": "VSYS / p39"
+    },
+    "P1.3V3": {
+      "component": "P1",
+      "pin": "3V3",
+      "position": [
+        1790,
+        1430
+      ],
+      "label": "3V3 OUT / p36"
+    },
+    "P1.GND": {
+      "component": "P1",
+      "pin": "GND",
+      "position": [
+        1790,
+        1470
+      ],
+      "label": "GND / p38"
+    },
+    "P1.AGND": {
+      "component": "P1",
+      "pin": "AGND",
+      "position": [
+        1790,
+        1510
+      ],
+      "label": "AGND / p33"
+    },
+    "U1.SDO": {
+      "component": "U1",
+      "pin": "SDO",
+      "position": [
+        1470,
+        400
+      ],
+      "label": "SDO"
+    },
+    "P1.GP12": {
+      "component": "P1",
+      "pin": "GP12",
+      "position": [
+        1470,
+        450
+      ],
+      "label": "GP12 / p16",
+      "gpio": 12,
+      "physical_pin": 16
+    },
+    "U1.CS": {
+      "component": "U1",
+      "pin": "CS",
+      "position": [
+        1530,
+        400
+      ],
+      "label": "CS"
+    },
+    "P1.GP13": {
+      "component": "P1",
+      "pin": "GP13",
+      "position": [
+        1530,
+        450
+      ],
+      "label": "GP13 / p17",
+      "gpio": 13,
+      "physical_pin": 17
+    },
+    "U1.SCL": {
+      "component": "U1",
+      "pin": "SCL",
+      "position": [
+        1590,
+        400
+      ],
+      "label": "SCL"
+    },
+    "P1.GP14": {
+      "component": "P1",
+      "pin": "GP14",
+      "position": [
+        1590,
+        450
+      ],
+      "label": "GP14 / p19",
+      "gpio": 14,
+      "physical_pin": 19
+    },
+    "U1.SDI": {
+      "component": "U1",
+      "pin": "SDI",
+      "position": [
+        1650,
+        400
+      ],
+      "label": "SDI"
+    },
+    "P1.GP15": {
+      "component": "P1",
+      "pin": "GP15",
+      "position": [
+        1650,
+        450
+      ],
+      "label": "GP15 / p20",
+      "gpio": 15,
+      "physical_pin": 20
+    },
+    "U1.INT1": {
+      "component": "U1",
+      "pin": "INT1",
+      "position": [
+        1710,
+        400
+      ],
+      "label": "INT1"
+    },
+    "P1.GP16": {
+      "component": "P1",
+      "pin": "GP16",
+      "position": [
+        1710,
+        450
+      ],
+      "label": "GP16 / p21",
+      "gpio": 16,
+      "physical_pin": 21
+    },
+    "U1.3V3": {
+      "component": "U1",
+      "pin": "3V3",
+      "position": [
+        1420,
+        280
+      ],
+      "label": "3V3"
+    },
+    "U1.GND": {
+      "component": "U1",
+      "pin": "GND",
+      "position": [
+        1780,
+        280
+      ],
+      "label": "GND"
+    },
+    "JUSB.VBUS": {
+      "component": "JUSB",
+      "pin": "VBUS",
+      "position": [
+        454,
+        245
+      ],
+      "label": "VBUS"
+    },
+    "P1.USB_VBUS": {
+      "component": "P1",
+      "pin": "USB_VBUS",
+      "position": [
+        740,
+        245
+      ],
+      "label": "VBUS"
+    },
+    "JUSB.D+": {
+      "component": "JUSB",
+      "pin": "D+",
+      "position": [
+        454,
+        281
+      ],
+      "label": "D+"
+    },
+    "P1.USB_D+": {
+      "component": "P1",
+      "pin": "USB_D+",
+      "position": [
+        740,
+        281
+      ],
+      "label": "D+"
+    },
+    "JUSB.D-": {
+      "component": "JUSB",
+      "pin": "D-",
+      "position": [
+        454,
+        317
+      ],
+      "label": "D-"
+    },
+    "P1.USB_D-": {
+      "component": "P1",
+      "pin": "USB_D-",
+      "position": [
+        740,
+        317
+      ],
+      "label": "D-"
+    },
+    "JUSB.GND": {
+      "component": "JUSB",
+      "pin": "GND",
+      "position": [
+        454,
+        353
+      ],
+      "label": "GND"
+    },
+    "P1.USB_GND": {
+      "component": "P1",
+      "pin": "USB_GND",
+      "position": [
+        740,
+        353
+      ],
+      "label": "GND"
+    },
+    "G_L": {
+      "component": "Junction",
+      "pin": "G_L",
+      "position": [
+        490,
+        1460
+      ],
+      "label": "G_L",
+      "net": "GND"
+    },
+    "G_R": {
+      "component": "Junction",
+      "pin": "G_R",
+      "position": [
+        2710,
+        1460
+      ],
+      "label": "G_R",
+      "net": "GND"
+    },
+    "GL1": {
+      "component": "Junction",
+      "pin": "GL1",
+      "position": [
+        770,
+        1460
+      ],
+      "label": "GL1",
+      "net": "GND"
+    },
+    "GL2": {
+      "component": "Junction",
+      "pin": "GL2",
+      "position": [
+        1370,
+        1460
+      ],
+      "label": "GL2",
+      "net": "GND"
+    },
+    "GR1": {
+      "component": "Junction",
+      "pin": "GR1",
+      "position": [
+        1830,
+        1460
+      ],
+      "label": "GR1",
+      "net": "GND"
+    },
+    "GR2": {
+      "component": "Junction",
+      "pin": "GR2",
+      "position": [
+        2430,
+        1460
+      ],
+      "label": "GR2",
+      "net": "GND"
+    },
+    "G0": {
+      "component": "Junction",
+      "pin": "G0",
+      "position": [
+        64,
+        2300
+      ],
+      "label": "G0",
+      "net": "GND"
+    },
+    "G1": {
+      "component": "Junction",
+      "pin": "G1",
+      "position": [
+        3136,
+        2300
+      ],
+      "label": "G1",
+      "net": "GND"
+    },
+    "3L": {
+      "component": "Junction",
+      "pin": "3L",
+      "position": [
+        610,
+        330
+      ],
+      "label": "3L",
+      "net": "3V3"
+    },
+    "3M": {
+      "component": "Junction",
+      "pin": "3M",
+      "position": [
+        1390,
+        330
+      ],
+      "label": "3M",
+      "net": "3V3"
+    },
+    "3R": {
+      "component": "Junction",
+      "pin": "3R",
+      "position": [
+        1810,
+        330
+      ],
+      "label": "3R",
+      "net": "3V3"
+    },
+    "3E": {
+      "component": "Junction",
+      "pin": "3E",
+      "position": [
+        2500,
+        330
+      ],
+      "label": "3E",
+      "net": "3V3"
+    },
+    "5L": {
+      "component": "Junction",
+      "pin": "5L",
+      "position": [
+        550,
+        2020
+      ],
+      "label": "5L",
+      "net": "5V"
+    },
+    "5R": {
+      "component": "Junction",
+      "pin": "5R",
+      "position": [
+        2650,
+        2020
+      ],
+      "label": "5R",
+      "net": "5V"
+    },
+    "9L": {
+      "component": "Junction",
+      "pin": "9L",
+      "position": [
+        520,
+        2090
+      ],
+      "label": "9L",
+      "net": "9V"
+    },
+    "9R": {
+      "component": "Junction",
+      "pin": "9R",
+      "position": [
+        2670,
+        2090
+      ],
+      "label": "9R",
+      "net": "9V"
+    },
+    "ACT_L": {
+      "component": "Junction",
+      "pin": "ACT_L",
+      "position": [
+        780,
+        420
+      ],
+      "label": "ACT_L",
+      "net": "ACT_BUS"
+    },
+    "ACT_R": {
+      "component": "Junction",
+      "pin": "ACT_R",
+      "position": [
+        2525,
+        420
+      ],
+      "label": "ACT_R",
+      "net": "ACT_BUS"
+    },
+    "ACT_LOW": {
+      "component": "Junction",
+      "pin": "ACT_LOW",
+      "position": [
+        2525,
+        2060
+      ],
+      "label": "ACT_LOW",
+      "net": "ACT_BUS"
+    },
+    "FUSED": {
+      "component": "Junction",
+      "pin": "FUSED",
+      "position": [
+        580,
+        2150
+      ],
+      "label": "FUSED",
+      "net": "PACK_FUSED"
+    },
+    "Gbottom_L": {
+      "component": "Junction",
+      "pin": "Gbottom_L",
+      "position": [
+        565,
+        2300
+      ],
+      "label": "Gbottom_L",
+      "net": "GND"
+    },
+    "Gbottom_R": {
+      "component": "Junction",
+      "pin": "Gbottom_R",
+      "position": [
+        3125,
+        2300
+      ],
+      "label": "Gbottom_R",
+      "net": "GND"
+    },
+    "Gimu": {
+      "component": "Junction",
+      "pin": "Gimu",
+      "position": [
+        3136,
+        2300
+      ],
+      "label": "Gimu",
+      "net": "GND"
+    },
+    "Gpi": {
+      "component": "Junction",
+      "pin": "Gpi",
+      "position": [
+        1875,
+        1460
+      ],
+      "label": "Gpi",
+      "net": "GND"
+    },
+    "ML.RED": {
+      "component": "ML",
+      "pin": "RED",
+      "position": [
+        454,
+        540
+      ],
+      "label": "RED / OUT1"
+    },
+    "ML.BLACK": {
+      "component": "ML",
+      "pin": "BLACK",
+      "position": [
+        454,
+        600
+      ],
+      "label": "BLACK / OUT2"
+    },
+    "ML.GREEN": {
+      "component": "ML",
+      "pin": "GREEN",
+      "position": [
+        454,
+        760
+      ],
+      "label": "GREEN / GND"
+    },
+    "ML.BLUE": {
+      "component": "ML",
+      "pin": "BLUE",
+      "position": [
+        454,
+        820
+      ],
+      "label": "BLUE / 5V"
+    },
+    "ML.YELLOW": {
+      "component": "ML",
+      "pin": "YELLOW",
+      "position": [
+        454,
+        880
+      ],
+      "label": "YELLOW / A"
+    },
+    "ML.WHITE": {
+      "component": "ML",
+      "pin": "WHITE",
+      "position": [
+        454,
+        940
+      ],
+      "label": "WHITE / B"
+    },
+    "DL.OUT1": {
+      "component": "DL",
+      "pin": "OUT1",
+      "position": [
+        820,
+        540
+      ],
+      "label": "OUT1"
+    },
+    "DL.OUT2": {
+      "component": "DL",
+      "pin": "OUT2",
+      "position": [
+        820,
+        600
+      ],
+      "label": "OUT2"
+    },
+    "DL.EN": {
+      "component": "DL",
+      "pin": "EN",
+      "position": [
+        1210,
+        650
+      ],
+      "label": "EN"
+    },
+    "DL.PH": {
+      "component": "DL",
+      "pin": "PH",
+      "position": [
+        1210,
+        710
+      ],
+      "label": "PH"
+    },
+    "DL.SLEEP": {
+      "component": "DL",
+      "pin": "SLEEP",
+      "position": [
+        1210,
+        770
+      ],
+      "label": "SLEEP"
+    },
+    "DL.FAULT": {
+      "component": "DL",
+      "pin": "FAULT",
+      "position": [
+        1210,
+        830
+      ],
+      "label": "FAULT"
+    },
+    "DL.CS": {
+      "component": "DL",
+      "pin": "CS",
+      "position": [
+        1210,
+        890
+      ],
+      "label": "CS"
+    },
+    "DL.VIN": {
+      "component": "DL",
+      "pin": "VIN",
+      "position": [
+        880,
+        440
+      ],
+      "label": "VIN"
+    },
+    "DL.GND": {
+      "component": "DL",
+      "pin": "GND",
+      "position": [
+        880,
+        1010
+      ],
+      "label": "GND"
+    },
+    "DL.PMODE": {
+      "component": "DL",
+      "pin": "PMODE",
+      "position": [
+        990,
+        1010
+      ],
+      "label": "PMODE"
+    },
+    "DL.IMODE": {
+      "component": "DL",
+      "pin": "IMODE",
+      "position": [
+        1070,
+        1010
+      ],
+      "label": "IMODE"
+    },
+    "DL.VREF": {
+      "component": "DL",
+      "pin": "VREF",
+      "position": [
+        1150,
+        1010
+      ],
+      "label": "VREF"
+    },
+    "VIN_L": {
+      "component": "Junction",
+      "pin": "VIN_L",
+      "position": [
+        880,
+        420
+      ],
+      "label": "VIN_L",
+      "net": "ACT_BUS"
+    },
+    "AL.IN": {
+      "component": "AL",
+      "pin": "IN",
+      "position": [
+        1240,
+        940
+      ],
+      "label": "IN"
+    },
+    "AL.OUT": {
+      "component": "AL",
+      "pin": "OUT",
+      "position": [
+        1370,
+        940
+      ],
+      "label": "OUT"
+    },
+    "AL.REF": {
+      "component": "AL",
+      "pin": "REF",
+      "position": [
+        1310,
+        860
+      ],
+      "label": "3V3 ref"
+    },
+    "AL.GND": {
+      "component": "AL",
+      "pin": "GND",
+      "position": [
+        1310,
+        1030
+      ],
+      "label": "GND"
+    },
+    "ADCref_L": {
+      "component": "Junction",
+      "pin": "ADCref_L",
+      "position": [
+        1310,
+        330
+      ],
+      "label": "ADCref_L",
+      "net": "3V3"
+    },
+    "ADCg_L": {
+      "component": "Junction",
+      "pin": "ADCg_L",
+      "position": [
+        1310,
+        1460
+      ],
+      "label": "ADCg_L",
+      "net": "GND"
+    },
+    "RFL.1": {
+      "component": "RFL",
+      "pin": "1",
+      "position": [
+        1290,
+        735
+      ],
+      "label": "pull-up TBD"
+    },
+    "RFL.2": {
+      "component": "RFL",
+      "pin": "2",
+      "position": [
+        1290,
+        781
+      ],
+      "label": "pull-up TBD"
+    },
+    "FAULT_L": {
+      "component": "Junction",
+      "pin": "FAULT_L",
+      "position": [
+        1290,
+        830
+      ],
+      "label": "FAULT_L",
+      "net": "L_FAULT"
+    },
+    "RF3_L": {
+      "component": "Junction",
+      "pin": "RF3_L",
+      "position": [
+        1290,
+        330
+      ],
+      "label": "RF3_L",
+      "net": "3V3"
+    },
+    "DG_L": {
+      "component": "Junction",
+      "pin": "DG_L",
+      "position": [
+        770,
+        1080
+      ],
+      "label": "DG_L",
+      "net": "GND"
+    },
+    "DGend_L": {
+      "component": "Junction",
+      "pin": "DGend_L",
+      "position": [
+        1150,
+        1080
+      ],
+      "label": "DGend_L",
+      "net": "GND"
+    },
+    "DGGND_L": {
+      "component": "Junction",
+      "pin": "DGGND_L",
+      "position": [
+        880,
+        1080
+      ],
+      "label": "DGGND_L",
+      "net": "GND"
+    },
+    "DGPMODE_L": {
+      "component": "Junction",
+      "pin": "DGPMODE_L",
+      "position": [
+        990,
+        1080
+      ],
+      "label": "DGPMODE_L",
+      "net": "GND"
+    },
+    "DGIMODE_L": {
+      "component": "Junction",
+      "pin": "DGIMODE_L",
+      "position": [
+        1070,
+        1080
+      ],
+      "label": "DGIMODE_L",
+      "net": "GND"
+    },
+    "RVL.1": {
+      "component": "RVL",
+      "pin": "1",
+      "position": [
+        1150,
+        1024
+      ],
+      "label": "TBD: calibrate"
+    },
+    "RVL.2": {
+      "component": "RVL",
+      "pin": "2",
+      "position": [
+        1150,
+        1070
+      ],
+      "label": "TBD: calibrate"
+    },
+    "BL.A_IN": {
+      "component": "BL",
+      "pin": "A_IN",
+      "position": [
+        820,
+        1170
+      ],
+      "label": "A_IN"
+    },
+    "BL.B_IN": {
+      "component": "BL",
+      "pin": "B_IN",
+      "position": [
+        820,
+        1230
+      ],
+      "label": "B_IN"
+    },
+    "BL.A_OUT": {
+      "component": "BL",
+      "pin": "A_OUT",
+      "position": [
+        1210,
+        1170
+      ],
+      "label": "A_OUT"
+    },
+    "BL.B_OUT": {
+      "component": "BL",
+      "pin": "B_OUT",
+      "position": [
+        1210,
+        1230
+      ],
+      "label": "B_OUT"
+    },
+    "BL.3V3": {
+      "component": "BL",
+      "pin": "3V3",
+      "position": [
+        1060,
+        1100
+      ],
+      "label": "3V3"
+    },
+    "BL.GND": {
+      "component": "BL",
+      "pin": "GND",
+      "position": [
+        1000,
+        1360
+      ],
+      "label": "GND"
+    },
+    "B3_L": {
+      "component": "Junction",
+      "pin": "B3_L",
+      "position": [
+        1230,
+        330
+      ],
+      "label": "B3_L",
+      "net": "3V3"
+    },
+    "BG_L": {
+      "component": "Junction",
+      "pin": "BG_L",
+      "position": [
+        1000,
+        1460
+      ],
+      "label": "BG_L",
+      "net": "GND"
+    },
+    "MR.RED": {
+      "component": "MR",
+      "pin": "RED",
+      "position": [
+        2746,
+        540
+      ],
+      "label": "RED / OUT1"
+    },
+    "MR.BLACK": {
+      "component": "MR",
+      "pin": "BLACK",
+      "position": [
+        2746,
+        600
+      ],
+      "label": "BLACK / OUT2"
+    },
+    "MR.GREEN": {
+      "component": "MR",
+      "pin": "GREEN",
+      "position": [
+        2746,
+        760
+      ],
+      "label": "GREEN / GND"
+    },
+    "MR.BLUE": {
+      "component": "MR",
+      "pin": "BLUE",
+      "position": [
+        2746,
+        820
+      ],
+      "label": "BLUE / 5V"
+    },
+    "MR.YELLOW": {
+      "component": "MR",
+      "pin": "YELLOW",
+      "position": [
+        2746,
+        880
+      ],
+      "label": "YELLOW / A"
+    },
+    "MR.WHITE": {
+      "component": "MR",
+      "pin": "WHITE",
+      "position": [
+        2746,
+        940
+      ],
+      "label": "WHITE / B"
+    },
+    "DR.OUT1": {
+      "component": "DR",
+      "pin": "OUT1",
+      "position": [
+        2380,
+        540
+      ],
+      "label": "OUT1"
+    },
+    "DR.OUT2": {
+      "component": "DR",
+      "pin": "OUT2",
+      "position": [
+        2380,
+        600
+      ],
+      "label": "OUT2"
+    },
+    "DR.EN": {
+      "component": "DR",
+      "pin": "EN",
+      "position": [
+        1990,
+        650
+      ],
+      "label": "EN"
+    },
+    "DR.PH": {
+      "component": "DR",
+      "pin": "PH",
+      "position": [
+        1990,
+        710
+      ],
+      "label": "PH"
+    },
+    "DR.SLEEP": {
+      "component": "DR",
+      "pin": "SLEEP",
+      "position": [
+        1990,
+        770
+      ],
+      "label": "SLEEP"
+    },
+    "DR.FAULT": {
+      "component": "DR",
+      "pin": "FAULT",
+      "position": [
+        1990,
+        830
+      ],
+      "label": "FAULT"
+    },
+    "DR.CS": {
+      "component": "DR",
+      "pin": "CS",
+      "position": [
+        1990,
+        890
+      ],
+      "label": "CS"
+    },
+    "DR.VIN": {
+      "component": "DR",
+      "pin": "VIN",
+      "position": [
+        2320,
+        440
+      ],
+      "label": "VIN"
+    },
+    "DR.GND": {
+      "component": "DR",
+      "pin": "GND",
+      "position": [
+        2320,
+        1010
+      ],
+      "label": "GND"
+    },
+    "DR.PMODE": {
+      "component": "DR",
+      "pin": "PMODE",
+      "position": [
+        2210,
+        1010
+      ],
+      "label": "PMODE"
+    },
+    "DR.IMODE": {
+      "component": "DR",
+      "pin": "IMODE",
+      "position": [
+        2130,
+        1010
+      ],
+      "label": "IMODE"
+    },
+    "DR.VREF": {
+      "component": "DR",
+      "pin": "VREF",
+      "position": [
+        2050,
+        1010
+      ],
+      "label": "VREF"
+    },
+    "VIN_R": {
+      "component": "Junction",
+      "pin": "VIN_R",
+      "position": [
+        2320,
+        420
+      ],
+      "label": "VIN_R",
+      "net": "ACT_BUS"
+    },
+    "AR.IN": {
+      "component": "AR",
+      "pin": "IN",
+      "position": [
+        1960,
+        940
+      ],
+      "label": "IN"
+    },
+    "AR.OUT": {
+      "component": "AR",
+      "pin": "OUT",
+      "position": [
+        1830,
+        940
+      ],
+      "label": "OUT"
+    },
+    "AR.REF": {
+      "component": "AR",
+      "pin": "REF",
+      "position": [
+        1890,
+        860
+      ],
+      "label": "3V3 ref"
+    },
+    "AR.GND": {
+      "component": "AR",
+      "pin": "GND",
+      "position": [
+        1890,
+        1030
+      ],
+      "label": "GND"
+    },
+    "ADCref_R": {
+      "component": "Junction",
+      "pin": "ADCref_R",
+      "position": [
+        1890,
+        330
+      ],
+      "label": "ADCref_R",
+      "net": "3V3"
+    },
+    "ADCg_R": {
+      "component": "Junction",
+      "pin": "ADCg_R",
+      "position": [
+        1890,
+        1460
+      ],
+      "label": "ADCg_R",
+      "net": "GND"
+    },
+    "RFR.1": {
+      "component": "RFR",
+      "pin": "1",
+      "position": [
+        1910,
+        735
+      ],
+      "label": "pull-up TBD"
+    },
+    "RFR.2": {
+      "component": "RFR",
+      "pin": "2",
+      "position": [
+        1910,
+        781
+      ],
+      "label": "pull-up TBD"
+    },
+    "FAULT_R": {
+      "component": "Junction",
+      "pin": "FAULT_R",
+      "position": [
+        1910,
+        830
+      ],
+      "label": "FAULT_R",
+      "net": "R_FAULT"
+    },
+    "RF3_R": {
+      "component": "Junction",
+      "pin": "RF3_R",
+      "position": [
+        1910,
+        330
+      ],
+      "label": "RF3_R",
+      "net": "3V3"
+    },
+    "DG_R": {
+      "component": "Junction",
+      "pin": "DG_R",
+      "position": [
+        2430,
+        1080
+      ],
+      "label": "DG_R",
+      "net": "GND"
+    },
+    "DGend_R": {
+      "component": "Junction",
+      "pin": "DGend_R",
+      "position": [
+        2050,
+        1080
+      ],
+      "label": "DGend_R",
+      "net": "GND"
+    },
+    "DGGND_R": {
+      "component": "Junction",
+      "pin": "DGGND_R",
+      "position": [
+        2320,
+        1080
+      ],
+      "label": "DGGND_R",
+      "net": "GND"
+    },
+    "DGPMODE_R": {
+      "component": "Junction",
+      "pin": "DGPMODE_R",
+      "position": [
+        2210,
+        1080
+      ],
+      "label": "DGPMODE_R",
+      "net": "GND"
+    },
+    "DGIMODE_R": {
+      "component": "Junction",
+      "pin": "DGIMODE_R",
+      "position": [
+        2130,
+        1080
+      ],
+      "label": "DGIMODE_R",
+      "net": "GND"
+    },
+    "RVR.1": {
+      "component": "RVR",
+      "pin": "1",
+      "position": [
+        2050,
+        1024
+      ],
+      "label": "TBD: calibrate"
+    },
+    "RVR.2": {
+      "component": "RVR",
+      "pin": "2",
+      "position": [
+        2050,
+        1070
+      ],
+      "label": "TBD: calibrate"
+    },
+    "BR.A_IN": {
+      "component": "BR",
+      "pin": "A_IN",
+      "position": [
+        2380,
+        1170
+      ],
+      "label": "A_IN"
+    },
+    "BR.B_IN": {
+      "component": "BR",
+      "pin": "B_IN",
+      "position": [
+        2380,
+        1230
+      ],
+      "label": "B_IN"
+    },
+    "BR.A_OUT": {
+      "component": "BR",
+      "pin": "A_OUT",
+      "position": [
+        1990,
+        1170
+      ],
+      "label": "A_OUT"
+    },
+    "BR.B_OUT": {
+      "component": "BR",
+      "pin": "B_OUT",
+      "position": [
+        1990,
+        1230
+      ],
+      "label": "B_OUT"
+    },
+    "BR.3V3": {
+      "component": "BR",
+      "pin": "3V3",
+      "position": [
+        2140,
+        1100
+      ],
+      "label": "3V3"
+    },
+    "BR.GND": {
+      "component": "BR",
+      "pin": "GND",
+      "position": [
+        2200,
+        1360
+      ],
+      "label": "GND"
+    },
+    "B3_R": {
+      "component": "Junction",
+      "pin": "B3_R",
+      "position": [
+        1970,
+        330
+      ],
+      "label": "B3_R",
+      "net": "3V3"
+    },
+    "BG_R": {
+      "component": "Junction",
+      "pin": "BG_R",
+      "position": [
+        2200,
+        1460
+      ],
+      "label": "BG_R",
+      "net": "GND"
+    },
+    "J7.TX": {
+      "component": "J7",
+      "pin": "TX",
+      "position": [
+        454,
+        1340
+      ],
+      "label": "TX"
+    },
+    "J7.RX": {
+      "component": "J7",
+      "pin": "RX",
+      "position": [
+        454,
+        1400
+      ],
+      "label": "RX"
+    },
+    "J7.GND": {
+      "component": "J7",
+      "pin": "GND",
+      "position": [
+        454,
+        1460
+      ],
+      "label": "GND"
+    },
+    "J7.3V3": {
+      "component": "J7",
+      "pin": "3V3",
+      "position": [
+        454,
+        1520
+      ],
+      "label": "3V3"
+    },
+    "J7V": {
+      "component": "Junction",
+      "pin": "J7V",
+      "position": [
+        610,
+        1520
+      ],
+      "label": "J7V",
+      "net": "3V3"
+    },
+    "ARM": {
+      "component": "Junction",
+      "pin": "ARM",
+      "position": [
+        1300,
+        1480
+      ],
+      "label": "ARM",
+      "net": "ARM_N"
+    },
+    "RA.1": {
+      "component": "RA",
+      "pin": "1",
+      "position": [
+        1300,
+        1408
+      ],
+      "label": "10k proposed"
+    },
+    "RA.2": {
+      "component": "RA",
+      "pin": "2",
+      "position": [
+        1300,
+        1454
+      ],
+      "label": "10k proposed"
+    },
+    "RA3": {
+      "component": "Junction",
+      "pin": "RA3",
+      "position": [
+        1390,
+        330
+      ],
+      "label": "RA3",
+      "net": "3V3"
+    },
+    "SW2.IN": {
+      "component": "SW2",
+      "pin": "IN",
+      "position": [
+        1300,
+        1515
+      ],
+      "label": "IN"
+    },
+    "SW2.GND": {
+      "component": "SW2",
+      "pin": "GND",
+      "position": [
+        1260,
+        1605
+      ],
+      "label": "GND"
+    },
+    "SWG": {
+      "component": "Junction",
+      "pin": "SWG",
+      "position": [
+        1260,
+        1460
+      ],
+      "label": "SWG",
+      "net": "GND"
+    },
+    "WD.HB": {
+      "component": "WD",
+      "pin": "HB",
+      "position": [
+        970,
+        1740
+      ],
+      "label": "HB"
+    },
+    "WD.HEALTH": {
+      "component": "WD",
+      "pin": "HEALTH",
+      "position": [
+        970,
+        1800
+      ],
+      "label": "HEALTH"
+    },
+    "WD.3V3": {
+      "component": "WD",
+      "pin": "3V3",
+      "position": [
+        800,
+        1670
+      ],
+      "label": "3V3"
+    },
+    "WD.GND": {
+      "component": "WD",
+      "pin": "GND",
+      "position": [
+        900,
+        1920
+      ],
+      "label": "GND"
+    },
+    "G1.REQUEST": {
+      "component": "G1",
+      "pin": "REQUEST",
+      "position": [
+        1360,
+        1740
+      ],
+      "label": "REQUEST"
+    },
+    "G1.HEALTH": {
+      "component": "G1",
+      "pin": "HEALTH",
+      "position": [
+        1080,
+        1800
+      ],
+      "label": "HEALTH"
+    },
+    "G1.KILL_OK": {
+      "component": "G1",
+      "pin": "KILL_OK",
+      "position": [
+        1080,
+        1850
+      ],
+      "label": "KILL_OK"
+    },
+    "G1.3V3": {
+      "component": "G1",
+      "pin": "3V3",
+      "position": [
+        1150,
+        1670
+      ],
+      "label": "3V3"
+    },
+    "G1.OUT": {
+      "component": "G1",
+      "pin": "OUT",
+      "position": [
+        1210,
+        1670
+      ],
+      "label": "OUT"
+    },
+    "G1.GND": {
+      "component": "G1",
+      "pin": "GND",
+      "position": [
+        1260,
+        1920
+      ],
+      "label": "GND"
+    },
+    "CTRL3": {
+      "component": "Junction",
+      "pin": "CTRL3",
+      "position": [
+        610,
+        1600
+      ],
+      "label": "CTRL3",
+      "net": "3V3"
+    },
+    "GWD": {
+      "component": "Junction",
+      "pin": "GWD",
+      "position": [
+        1020,
+        2300
+      ],
+      "label": "GWD",
+      "net": "GND"
+    },
+    "GG": {
+      "component": "Junction",
+      "pin": "GG",
+      "position": [
+        1560,
+        2300
+      ],
+      "label": "GG",
+      "net": "GND"
+    },
+    "EN": {
+      "component": "Junction",
+      "pin": "EN",
+      "position": [
+        1385,
+        1630
+      ],
+      "label": "EN",
+      "net": "HW_ENABLE"
+    },
+    "ENR": {
+      "component": "Junction",
+      "pin": "ENR",
+      "position": [
+        1975,
+        1630
+      ],
+      "label": "ENR",
+      "net": "HW_ENABLE"
+    },
+    "D5.K": {
+      "component": "D5",
+      "pin": "K",
+      "position": [
+        1600,
+        1645
+      ],
+      "label": "K \u2192 VSYS"
+    },
+    "D5.A": {
+      "component": "D5",
+      "pin": "A",
+      "position": [
+        1600,
+        1715
+      ],
+      "label": "A \u2190 5V"
+    },
+    "5D": {
+      "component": "Junction",
+      "pin": "5D",
+      "position": [
+        1600,
+        2020
+      ],
+      "label": "5D",
+      "net": "5V"
+    },
+    "T1.TX_IN": {
+      "component": "T1",
+      "pin": "TX_IN",
+      "position": [
+        2000,
+        1780
+      ],
+      "label": "TX_IN"
+    },
+    "T1.RX_OUT": {
+      "component": "T1",
+      "pin": "RX_OUT",
+      "position": [
+        2000,
+        1830
+      ],
+      "label": "RX_OUT"
+    },
+    "T1.DIR": {
+      "component": "T1",
+      "pin": "DIR",
+      "position": [
+        2000,
+        1880
+      ],
+      "label": "DIR"
+    },
+    "T1.DATA": {
+      "component": "T1",
+      "pin": "DATA",
+      "position": [
+        2390,
+        1830
+      ],
+      "label": "DATA"
+    },
+    "T1.3V3": {
+      "component": "T1",
+      "pin": "3V3",
+      "position": [
+        2180,
+        1700
+      ],
+      "label": "3V3"
+    },
+    "T1.GND": {
+      "component": "T1",
+      "pin": "GND",
+      "position": [
+        2180,
+        1950
+      ],
+      "label": "GND"
+    },
+    "T3": {
+      "component": "Junction",
+      "pin": "T3",
+      "position": [
+        2500,
+        1620
+      ],
+      "label": "T3",
+      "net": "3V3"
+    },
+    "TG": {
+      "component": "Junction",
+      "pin": "TG",
+      "position": [
+        2050,
+        2300
+      ],
+      "label": "TG",
+      "net": "GND"
+    },
+    "DATA": {
+      "component": "Junction",
+      "pin": "DATA",
+      "position": [
+        2590,
+        1980
+      ],
+      "label": "DATA",
+      "net": "SERVO_DATA"
+    },
+    "SL.V+": {
+      "component": "SL",
+      "pin": "V+",
+      "position": [
+        454,
+        1840
+      ],
+      "label": "V+"
+    },
+    "SL.DATA": {
+      "component": "SL",
+      "pin": "DATA",
+      "position": [
+        454,
+        1900
+      ],
+      "label": "DATA"
+    },
+    "SL.GND": {
+      "component": "SL",
+      "pin": "GND",
+      "position": [
+        454,
+        1960
+      ],
+      "label": "GND"
+    },
+    "SG_L": {
+      "component": "Junction",
+      "pin": "SG_L",
+      "position": [
+        490,
+        1960
+      ],
+      "label": "SG_L",
+      "net": "GND"
+    },
+    "SR.V+": {
+      "component": "SR",
+      "pin": "V+",
+      "position": [
+        2746,
+        1840
+      ],
+      "label": "V+"
+    },
+    "SR.DATA": {
+      "component": "SR",
+      "pin": "DATA",
+      "position": [
+        2746,
+        1900
+      ],
+      "label": "DATA"
+    },
+    "SR.GND": {
+      "component": "SR",
+      "pin": "GND",
+      "position": [
+        2746,
+        1960
+      ],
+      "label": "GND"
+    },
+    "SG_R": {
+      "component": "Junction",
+      "pin": "SG_R",
+      "position": [
+        2710,
+        1960
+      ],
+      "label": "SG_R",
+      "net": "GND"
+    },
+    "BAT.+": {
+      "component": "BAT",
+      "pin": "+",
+      "position": [
+        304,
+        2150
+      ],
+      "label": "+"
+    },
+    "BAT.-": {
+      "component": "BAT",
+      "pin": "-",
+      "position": [
+        184,
+        2235
+      ],
+      "label": "-"
+    },
+    "F1.IN": {
+      "component": "F1",
+      "pin": "IN",
+      "position": [
+        380,
+        2150
+      ],
+      "label": "IN"
+    },
+    "F1.OUT": {
+      "component": "F1",
+      "pin": "OUT",
+      "position": [
+        540,
+        2150
+      ],
+      "label": "OUT"
+    },
+    "V5.IN+": {
+      "component": "V5",
+      "pin": "IN+",
+      "position": [
+        630,
+        2150
+      ],
+      "label": "IN+"
+    },
+    "V5.OUT+": {
+      "component": "V5",
+      "pin": "OUT+",
+      "position": [
+        800,
+        2110
+      ],
+      "label": "OUT+"
+    },
+    "V5.IN-": {
+      "component": "V5",
+      "pin": "IN-",
+      "position": [
+        700,
+        2235
+      ],
+      "label": "IN-"
+    },
+    "V5.OUT-": {
+      "component": "V5",
+      "pin": "OUT-",
+      "position": [
+        910,
+        2235
+      ],
+      "label": "OUT-"
+    },
+    "SW1.IN+": {
+      "component": "SW1",
+      "pin": "IN+",
+      "position": [
+        1100,
+        2150
+      ],
+      "label": "IN+"
+    },
+    "SW1.OUT+": {
+      "component": "SW1",
+      "pin": "OUT+",
+      "position": [
+        1500,
+        2150
+      ],
+      "label": "OUT+"
+    },
+    "SW1.AUX_IN": {
+      "component": "SW1",
+      "pin": "AUX_IN",
+      "position": [
+        1200,
+        2110
+      ],
+      "label": "AUX_IN"
+    },
+    "SW1.AUX_OUT": {
+      "component": "SW1",
+      "pin": "AUX_OUT",
+      "position": [
+        1390,
+        2110
+      ],
+      "label": "AUX_OUT"
+    },
+    "AP.IN": {
+      "component": "AP",
+      "pin": "IN",
+      "position": [
+        1640,
+        2150
+      ],
+      "label": "IN"
+    },
+    "AP.OUT": {
+      "component": "AP",
+      "pin": "OUT",
+      "position": [
+        1970,
+        2110
+      ],
+      "label": "OUT"
+    },
+    "AP.AGND": {
+      "component": "AP",
+      "pin": "AGND",
+      "position": [
+        1840,
+        2110
+      ],
+      "label": "AGND"
+    },
+    "AP.REF": {
+      "component": "AP",
+      "pin": "REF",
+      "position": [
+        1720,
+        2110
+      ],
+      "label": "REF"
+    },
+    "AP.GND": {
+      "component": "AP",
+      "pin": "GND",
+      "position": [
+        1840,
+        2235
+      ],
+      "label": "GND"
+    },
+    "V9.IN+": {
+      "component": "V9",
+      "pin": "IN+",
+      "position": [
+        2140,
+        2150
+      ],
+      "label": "IN+"
+    },
+    "V9.OUT+": {
+      "component": "V9",
+      "pin": "OUT+",
+      "position": [
+        2390,
+        2110
+      ],
+      "label": "OUT+"
+    },
+    "V9.IN-": {
+      "component": "V9",
+      "pin": "IN-",
+      "position": [
+        2200,
+        2235
+      ],
+      "label": "IN-"
+    },
+    "V9.OUT-": {
+      "component": "V9",
+      "pin": "OUT-",
+      "position": [
+        2450,
+        2235
+      ],
+      "label": "OUT-"
+    },
+    "QS.IN+": {
+      "component": "QS",
+      "pin": "IN+",
+      "position": [
+        2580,
+        2150
+      ],
+      "label": "IN+"
+    },
+    "QS.OUT+": {
+      "component": "QS",
+      "pin": "OUT+",
+      "position": [
+        2990,
+        2110
+      ],
+      "label": "OUT+"
+    },
+    "QS.ENABLE": {
+      "component": "QS",
+      "pin": "ENABLE",
+      "position": [
+        2730,
+        2110
+      ],
+      "label": "ENABLE"
+    },
+    "QS.3V3": {
+      "component": "QS",
+      "pin": "3V3",
+      "position": [
+        2850,
+        2110
+      ],
+      "label": "3V3"
+    },
+    "QS.GND": {
+      "component": "QS",
+      "pin": "GND",
+      "position": [
+        3090,
+        2235
+      ],
+      "label": "GND"
+    },
+    "5REG": {
+      "component": "Junction",
+      "pin": "5REG",
+      "position": [
+        800,
+        2020
+      ],
+      "label": "5REG",
+      "net": "5V"
+    },
+    "APREF": {
+      "component": "Junction",
+      "pin": "APREF",
+      "position": [
+        1810,
+        1430
+      ],
+      "label": "APREF",
+      "net": "3V3"
+    },
+    "KILL": {
+      "component": "Junction",
+      "pin": "KILL",
+      "position": [
+        1030,
+        1850
+      ],
+      "label": "KILL",
+      "net": "KILL_OK"
+    },
+    "RK.1": {
+      "component": "RK",
+      "pin": "1",
+      "position": [
+        1030,
+        1880
+      ],
+      "label": "pull-down TBD"
+    },
+    "RK.2": {
+      "component": "RK",
+      "pin": "2",
+      "position": [
+        1030,
+        1926
+      ],
+      "label": "pull-down TBD"
+    },
+    "RKG": {
+      "component": "Junction",
+      "pin": "RKG",
+      "position": [
+        1020,
+        1960
+      ],
+      "label": "RKG",
+      "net": "GND"
+    },
+    "BAT-G": {
+      "component": "Junction",
+      "pin": "BAT-G",
+      "position": [
+        184,
+        2300
+      ],
+      "label": "BAT-G",
+      "net": "GND"
+    },
+    "V5IN-G": {
+      "component": "Junction",
+      "pin": "V5IN-G",
+      "position": [
+        700,
+        2300
+      ],
+      "label": "V5IN-G",
+      "net": "GND"
+    },
+    "V5OUT-G": {
+      "component": "Junction",
+      "pin": "V5OUT-G",
+      "position": [
+        910,
+        2300
+      ],
+      "label": "V5OUT-G",
+      "net": "GND"
+    },
+    "APGNDG": {
+      "component": "Junction",
+      "pin": "APGNDG",
+      "position": [
+        1840,
+        2300
+      ],
+      "label": "APGNDG",
+      "net": "GND"
+    },
+    "V9IN-G": {
+      "component": "Junction",
+      "pin": "V9IN-G",
+      "position": [
+        2200,
+        2300
+      ],
+      "label": "V9IN-G",
+      "net": "GND"
+    },
+    "V9OUT-G": {
+      "component": "Junction",
+      "pin": "V9OUT-G",
+      "position": [
+        2450,
+        2300
+      ],
+      "label": "V9OUT-G",
+      "net": "GND"
+    },
+    "QSGNDG": {
+      "component": "Junction",
+      "pin": "QSGNDG",
+      "position": [
+        3090,
+        2300
+      ],
+      "label": "QSGNDG",
+      "net": "GND"
+    }
+  },
+  "connections": [
+    {
+      "id": "W001",
+      "source": "U1.SDO",
+      "destination": "P1.GP12",
+      "net": "SPI_SDO",
+      "color": "#387b65",
+      "route": [
+        [
+          1470,
+          400
+        ],
+        [
+          1470,
+          450
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W002",
+      "source": "U1.CS",
+      "destination": "P1.GP13",
+      "net": "SPI_CS",
+      "color": "#c77822",
+      "route": [
+        [
+          1530,
+          400
+        ],
+        [
+          1530,
+          450
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W003",
+      "source": "U1.SCL",
+      "destination": "P1.GP14",
+      "net": "SPI_SCL",
+      "color": "#437fb4",
+      "route": [
+        [
+          1590,
+          400
+        ],
+        [
+          1590,
+          450
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W004",
+      "source": "U1.SDI",
+      "destination": "P1.GP15",
+      "net": "SPI_SDI",
+      "color": "#218ca0",
+      "route": [
+        [
+          1650,
+          400
+        ],
+        [
+          1650,
+          450
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W005",
+      "source": "U1.INT1",
+      "destination": "P1.GP16",
+      "net": "SPI_INT1",
+      "color": "#bd9221",
+      "route": [
+        [
+          1710,
+          400
+        ],
+        [
+          1710,
+          450
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W006",
+      "source": "JUSB.VBUS",
+      "destination": "P1.USB_VBUS",
+      "net": "USB_VBUS",
+      "color": "#218ca0",
+      "route": [
+        [
+          454,
+          245
+        ],
+        [
+          740,
+          245
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W007",
+      "source": "JUSB.D+",
+      "destination": "P1.USB_D+",
+      "net": "USB_D+",
+      "color": "#218ca0",
+      "route": [
+        [
+          454,
+          281
+        ],
+        [
+          740,
+          281
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W008",
+      "source": "JUSB.D-",
+      "destination": "P1.USB_D-",
+      "net": "USB_D-",
+      "color": "#218ca0",
+      "route": [
+        [
+          454,
+          317
+        ],
+        [
+          740,
+          317
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W009",
+      "source": "JUSB.GND",
+      "destination": "P1.USB_GND",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          454,
+          353
+        ],
+        [
+          740,
+          353
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W010",
+      "source": "G0",
+      "destination": "G1",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          64,
+          2300
+        ],
+        [
+          3136,
+          2300
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W011",
+      "source": "GL1",
+      "destination": "GL2",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          770,
+          1460
+        ],
+        [
+          1370,
+          1460
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W012",
+      "source": "GR1",
+      "destination": "GR2",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          1830,
+          1460
+        ],
+        [
+          2430,
+          1460
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W013",
+      "source": "3R",
+      "destination": "3E",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          1810,
+          330
+        ],
+        [
+          2500,
+          330
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W014",
+      "source": "5L",
+      "destination": "5R",
+      "net": "5V",
+      "color": "#c77822",
+      "route": [
+        [
+          550,
+          2020
+        ],
+        [
+          2650,
+          2020
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W015",
+      "source": "9L",
+      "destination": "9R",
+      "net": "9V",
+      "color": "#8260a9",
+      "route": [
+        [
+          520,
+          2090
+        ],
+        [
+          2670,
+          2090
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W016",
+      "source": "ACT_L",
+      "destination": "ACT_R",
+      "net": "ACT_BUS",
+      "color": "#db5a4a",
+      "route": [
+        [
+          780,
+          420
+        ],
+        [
+          2525,
+          420
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W017",
+      "source": "ACT_R",
+      "destination": "ACT_LOW",
+      "net": "ACT_BUS",
+      "color": "#db5a4a",
+      "route": [
+        [
+          2525,
+          420
+        ],
+        [
+          2525,
+          2060
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W018",
+      "source": "3L",
+      "destination": "3M",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          610,
+          330
+        ],
+        [
+          710,
+          330
+        ],
+        [
+          710,
+          400
+        ],
+        [
+          1100,
+          400
+        ],
+        [
+          1100,
+          330
+        ],
+        [
+          1390,
+          330
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W019",
+      "source": "3M",
+      "destination": "3R",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          1390,
+          330
+        ],
+        [
+          1390,
+          190
+        ],
+        [
+          1810,
+          190
+        ],
+        [
+          1810,
+          330
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W020",
+      "source": "G_L",
+      "destination": "GL1",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          490,
+          1460
+        ],
+        [
+          770,
+          1460
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W021",
+      "source": "GR2",
+      "destination": "G_R",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          2430,
+          1460
+        ],
+        [
+          2710,
+          1460
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W022",
+      "source": "G_L",
+      "destination": "Gbottom_L",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          490,
+          1460
+        ],
+        [
+          490,
+          2080
+        ],
+        [
+          565,
+          2080
+        ],
+        [
+          565,
+          2300
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W023",
+      "source": "G_R",
+      "destination": "Gbottom_R",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          2710,
+          1460
+        ],
+        [
+          2710,
+          2080
+        ],
+        [
+          3125,
+          2080
+        ],
+        [
+          3125,
+          2300
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W024",
+      "source": "P1.3V3",
+      "destination": "3R",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          1790,
+          1430
+        ],
+        [
+          1810,
+          1430
+        ],
+        [
+          1810,
+          330
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W025",
+      "source": "U1.3V3",
+      "destination": "3M",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          1420,
+          280
+        ],
+        [
+          1380,
+          280
+        ],
+        [
+          1380,
+          330
+        ],
+        [
+          1390,
+          330
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W026",
+      "source": "U1.GND",
+      "destination": "Gimu",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          1780,
+          280
+        ],
+        [
+          3136,
+          280
+        ],
+        [
+          3136,
+          2300
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W027",
+      "source": "P1.GND",
+      "destination": "Gpi",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          1790,
+          1470
+        ],
+        [
+          1875,
+          1470
+        ],
+        [
+          1875,
+          1460
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W028",
+      "source": "DL.VIN",
+      "destination": "VIN_L",
+      "net": "ACT_BUS",
+      "color": "#db5a4a",
+      "route": [
+        [
+          880,
+          440
+        ],
+        [
+          880,
+          420
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W029",
+      "source": "DL.OUT1",
+      "destination": "ML.RED",
+      "net": "L_MOTOR_OUT1",
+      "color": "#db5a4a",
+      "route": [
+        [
+          820,
+          540
+        ],
+        [
+          454,
+          540
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W030",
+      "source": "DL.OUT2",
+      "destination": "ML.BLACK",
+      "net": "L_MOTOR_OUT2",
+      "color": "#20343e",
+      "route": [
+        [
+          820,
+          600
+        ],
+        [
+          454,
+          600
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W031",
+      "source": "P1.GP6",
+      "destination": "DL.EN",
+      "net": "L_EN",
+      "color": "#218ca0",
+      "route": [
+        [
+          1410,
+          650
+        ],
+        [
+          1210,
+          650
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W032",
+      "source": "P1.GP7",
+      "destination": "DL.PH",
+      "net": "L_PH",
+      "color": "#218ca0",
+      "route": [
+        [
+          1410,
+          710
+        ],
+        [
+          1210,
+          710
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W033",
+      "source": "P1.GP11",
+      "destination": "DL.FAULT",
+      "net": "L_FAULT",
+      "color": "#218ca0",
+      "route": [
+        [
+          1410,
+          830
+        ],
+        [
+          1210,
+          830
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W034",
+      "source": "DL.CS",
+      "destination": "AL.IN",
+      "net": "L_CS",
+      "color": "#218ca0",
+      "route": [
+        [
+          1210,
+          890
+        ],
+        [
+          1235,
+          890
+        ],
+        [
+          1235,
+          940
+        ],
+        [
+          1240,
+          940
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W035",
+      "source": "AL.OUT",
+      "destination": "P1.GP26",
+      "net": "L_ADC_SAFE",
+      "color": "#218ca0",
+      "route": [
+        [
+          1370,
+          940
+        ],
+        [
+          1380,
+          940
+        ],
+        [
+          1380,
+          890
+        ],
+        [
+          1410,
+          890
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W036",
+      "source": "AL.REF",
+      "destination": "ADCref_L",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          1310,
+          860
+        ],
+        [
+          1310,
+          330
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W037",
+      "source": "AL.GND",
+      "destination": "ADCg_L",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          1310,
+          1030
+        ],
+        [
+          1310,
+          1460
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W038",
+      "source": "RFL.1",
+      "destination": "RF3_L",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          1290,
+          735
+        ],
+        [
+          1290,
+          330
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W039",
+      "source": "RFL.2",
+      "destination": "FAULT_L",
+      "net": "L_FAULT",
+      "color": "#218ca0",
+      "route": [
+        [
+          1290,
+          781
+        ],
+        [
+          1290,
+          830
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W040",
+      "source": "DG_L",
+      "destination": "DGend_L",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          770,
+          1080
+        ],
+        [
+          1150,
+          1080
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W041",
+      "source": "DL.GND",
+      "destination": "DGGND_L",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          880,
+          1010
+        ],
+        [
+          880,
+          1080
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W042",
+      "source": "DL.PMODE",
+      "destination": "DGPMODE_L",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          990,
+          1010
+        ],
+        [
+          990,
+          1080
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W043",
+      "source": "DL.IMODE",
+      "destination": "DGIMODE_L",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          1070,
+          1010
+        ],
+        [
+          1070,
+          1080
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W044",
+      "source": "DL.VREF",
+      "destination": "RVL.1",
+      "net": "L_VREF",
+      "color": "#c77822",
+      "route": [
+        [
+          1150,
+          1010
+        ],
+        [
+          1150,
+          1024
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W045",
+      "source": "RVL.2",
+      "destination": "DGend_L",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          1150,
+          1070
+        ],
+        [
+          1150,
+          1080
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W046",
+      "source": "DG_L",
+      "destination": "GL1",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          770,
+          1080
+        ],
+        [
+          770,
+          1460
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W047",
+      "source": "ML.GREEN",
+      "destination": "G_L",
+      "net": "GND",
+      "color": "#387b65",
+      "route": [
+        [
+          454,
+          760
+        ],
+        [
+          490,
+          760
+        ],
+        [
+          490,
+          1460
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W048",
+      "source": "ML.BLUE",
+      "destination": "5L",
+      "net": "5V",
+      "color": "#437fb4",
+      "route": [
+        [
+          454,
+          820
+        ],
+        [
+          550,
+          820
+        ],
+        [
+          550,
+          2020
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W049",
+      "source": "ML.YELLOW",
+      "destination": "BL.A_IN",
+      "net": "L_ENC_A5",
+      "color": "#bd9221",
+      "route": [
+        [
+          454,
+          880
+        ],
+        [
+          600,
+          880
+        ],
+        [
+          600,
+          1170
+        ],
+        [
+          820,
+          1170
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W050",
+      "source": "ML.WHITE",
+      "destination": "BL.B_IN",
+      "net": "L_ENC_B5",
+      "color": "white",
+      "route": [
+        [
+          454,
+          940
+        ],
+        [
+          640,
+          940
+        ],
+        [
+          640,
+          1230
+        ],
+        [
+          820,
+          1230
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W051",
+      "source": "BL.A_OUT",
+      "destination": "P1.GP2",
+      "net": "L_ENC_A_OUT",
+      "color": "#218ca0",
+      "route": [
+        [
+          1210,
+          1170
+        ],
+        [
+          1410,
+          1170
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W052",
+      "source": "BL.B_OUT",
+      "destination": "P1.GP3",
+      "net": "L_ENC_B_OUT",
+      "color": "#218ca0",
+      "route": [
+        [
+          1210,
+          1230
+        ],
+        [
+          1410,
+          1230
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W053",
+      "source": "BL.3V3",
+      "destination": "B3_L",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          1060,
+          1100
+        ],
+        [
+          1060,
+          1090
+        ],
+        [
+          1230,
+          1090
+        ],
+        [
+          1230,
+          330
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W054",
+      "source": "BL.GND",
+      "destination": "BG_L",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          1000,
+          1360
+        ],
+        [
+          1000,
+          1460
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W055",
+      "source": "DR.VIN",
+      "destination": "VIN_R",
+      "net": "ACT_BUS",
+      "color": "#db5a4a",
+      "route": [
+        [
+          2320,
+          440
+        ],
+        [
+          2320,
+          420
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W056",
+      "source": "DR.OUT1",
+      "destination": "MR.RED",
+      "net": "R_MOTOR_OUT1",
+      "color": "#db5a4a",
+      "route": [
+        [
+          2380,
+          540
+        ],
+        [
+          2746,
+          540
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W057",
+      "source": "DR.OUT2",
+      "destination": "MR.BLACK",
+      "net": "R_MOTOR_OUT2",
+      "color": "#20343e",
+      "route": [
+        [
+          2380,
+          600
+        ],
+        [
+          2746,
+          600
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W058",
+      "source": "P1.GP8",
+      "destination": "DR.EN",
+      "net": "R_EN",
+      "color": "#218ca0",
+      "route": [
+        [
+          1790,
+          650
+        ],
+        [
+          1990,
+          650
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W059",
+      "source": "P1.GP9",
+      "destination": "DR.PH",
+      "net": "R_PH",
+      "color": "#218ca0",
+      "route": [
+        [
+          1790,
+          710
+        ],
+        [
+          1990,
+          710
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W060",
+      "source": "P1.GP18",
+      "destination": "DR.FAULT",
+      "net": "R_FAULT",
+      "color": "#218ca0",
+      "route": [
+        [
+          1790,
+          830
+        ],
+        [
+          1990,
+          830
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W061",
+      "source": "DR.CS",
+      "destination": "AR.IN",
+      "net": "R_CS",
+      "color": "#218ca0",
+      "route": [
+        [
+          1990,
+          890
+        ],
+        [
+          1965,
+          890
+        ],
+        [
+          1965,
+          940
+        ],
+        [
+          1960,
+          940
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W062",
+      "source": "AR.OUT",
+      "destination": "P1.GP27",
+      "net": "R_ADC_SAFE",
+      "color": "#218ca0",
+      "route": [
+        [
+          1830,
+          940
+        ],
+        [
+          1820,
+          940
+        ],
+        [
+          1820,
+          890
+        ],
+        [
+          1790,
+          890
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W063",
+      "source": "AR.REF",
+      "destination": "ADCref_R",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          1890,
+          860
+        ],
+        [
+          1890,
+          330
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W064",
+      "source": "AR.GND",
+      "destination": "ADCg_R",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          1890,
+          1030
+        ],
+        [
+          1890,
+          1460
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W065",
+      "source": "RFR.1",
+      "destination": "RF3_R",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          1910,
+          735
+        ],
+        [
+          1910,
+          330
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W066",
+      "source": "RFR.2",
+      "destination": "FAULT_R",
+      "net": "R_FAULT",
+      "color": "#218ca0",
+      "route": [
+        [
+          1910,
+          781
+        ],
+        [
+          1910,
+          830
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W067",
+      "source": "DG_R",
+      "destination": "DGend_R",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          2430,
+          1080
+        ],
+        [
+          2050,
+          1080
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W068",
+      "source": "DR.GND",
+      "destination": "DGGND_R",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          2320,
+          1010
+        ],
+        [
+          2320,
+          1080
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W069",
+      "source": "DR.PMODE",
+      "destination": "DGPMODE_R",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          2210,
+          1010
+        ],
+        [
+          2210,
+          1080
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W070",
+      "source": "DR.IMODE",
+      "destination": "DGIMODE_R",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          2130,
+          1010
+        ],
+        [
+          2130,
+          1080
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W071",
+      "source": "DR.VREF",
+      "destination": "RVR.1",
+      "net": "R_VREF",
+      "color": "#c77822",
+      "route": [
+        [
+          2050,
+          1010
+        ],
+        [
+          2050,
+          1024
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W072",
+      "source": "RVR.2",
+      "destination": "DGend_R",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          2050,
+          1070
+        ],
+        [
+          2050,
+          1080
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W073",
+      "source": "DG_R",
+      "destination": "GR2",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          2430,
+          1080
+        ],
+        [
+          2430,
+          1460
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W074",
+      "source": "MR.GREEN",
+      "destination": "G_R",
+      "net": "GND",
+      "color": "#387b65",
+      "route": [
+        [
+          2746,
+          760
+        ],
+        [
+          2710,
+          760
+        ],
+        [
+          2710,
+          1460
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W075",
+      "source": "MR.BLUE",
+      "destination": "5R",
+      "net": "5V",
+      "color": "#437fb4",
+      "route": [
+        [
+          2746,
+          820
+        ],
+        [
+          2650,
+          820
+        ],
+        [
+          2650,
+          2020
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W076",
+      "source": "MR.YELLOW",
+      "destination": "BR.A_IN",
+      "net": "R_ENC_A5",
+      "color": "#bd9221",
+      "route": [
+        [
+          2746,
+          880
+        ],
+        [
+          2600,
+          880
+        ],
+        [
+          2600,
+          1170
+        ],
+        [
+          2380,
+          1170
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W077",
+      "source": "MR.WHITE",
+      "destination": "BR.B_IN",
+      "net": "R_ENC_B5",
+      "color": "white",
+      "route": [
+        [
+          2746,
+          940
+        ],
+        [
+          2560,
+          940
+        ],
+        [
+          2560,
+          1230
+        ],
+        [
+          2380,
+          1230
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W078",
+      "source": "BR.A_OUT",
+      "destination": "P1.GP4",
+      "net": "R_ENC_A_OUT",
+      "color": "#218ca0",
+      "route": [
+        [
+          1990,
+          1170
+        ],
+        [
+          1790,
+          1170
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W079",
+      "source": "BR.B_OUT",
+      "destination": "P1.GP5",
+      "net": "R_ENC_B_OUT",
+      "color": "#218ca0",
+      "route": [
+        [
+          1990,
+          1230
+        ],
+        [
+          1790,
+          1230
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W080",
+      "source": "BR.3V3",
+      "destination": "B3_R",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          2140,
+          1100
+        ],
+        [
+          2140,
+          1090
+        ],
+        [
+          1970,
+          1090
+        ],
+        [
+          1970,
+          330
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W081",
+      "source": "BR.GND",
+      "destination": "BG_R",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          2200,
+          1360
+        ],
+        [
+          2200,
+          1460
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W082",
+      "source": "P1.GP0",
+      "destination": "J7.RX",
+      "net": "UART0_TX",
+      "color": "#218ca0",
+      "route": [
+        [
+          1410,
+          1380
+        ],
+        [
+          580,
+          1380
+        ],
+        [
+          580,
+          1400
+        ],
+        [
+          454,
+          1400
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W083",
+      "source": "J7.TX",
+      "destination": "P1.GP1",
+      "net": "UART0_RX",
+      "color": "#218ca0",
+      "route": [
+        [
+          454,
+          1340
+        ],
+        [
+          560,
+          1340
+        ],
+        [
+          560,
+          1390
+        ],
+        [
+          1380,
+          1390
+        ],
+        [
+          1380,
+          1420
+        ],
+        [
+          1410,
+          1420
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W084",
+      "source": "J7.GND",
+      "destination": "G_L",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          454,
+          1460
+        ],
+        [
+          490,
+          1460
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W085",
+      "source": "J7.3V3",
+      "destination": "J7V",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          454,
+          1520
+        ],
+        [
+          610,
+          1520
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W086",
+      "source": "P1.GP19",
+      "destination": "ARM",
+      "net": "ARM_N",
+      "color": "#218ca0",
+      "route": [
+        [
+          1410,
+          1480
+        ],
+        [
+          1300,
+          1480
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W087",
+      "source": "RA.2",
+      "destination": "ARM",
+      "net": "ARM_N",
+      "color": "#218ca0",
+      "route": [
+        [
+          1300,
+          1454
+        ],
+        [
+          1300,
+          1480
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W088",
+      "source": "RA.1",
+      "destination": "RA3",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          1300,
+          1408
+        ],
+        [
+          1390,
+          1408
+        ],
+        [
+          1390,
+          330
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W089",
+      "source": "ARM",
+      "destination": "SW2.IN",
+      "net": "ARM_N",
+      "color": "#218ca0",
+      "route": [
+        [
+          1300,
+          1480
+        ],
+        [
+          1300,
+          1515
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W090",
+      "source": "SW2.GND",
+      "destination": "SWG",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          1260,
+          1605
+        ],
+        [
+          1160,
+          1605
+        ],
+        [
+          1160,
+          1460
+        ],
+        [
+          1260,
+          1460
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W091",
+      "source": "P1.GP10",
+      "destination": "G1.REQUEST",
+      "net": "ENABLE_REQUEST",
+      "color": "#218ca0",
+      "route": [
+        [
+          1410,
+          1280
+        ],
+        [
+          1375,
+          1280
+        ],
+        [
+          1375,
+          1740
+        ],
+        [
+          1360,
+          1740
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W092",
+      "source": "P1.GP22",
+      "destination": "WD.HB",
+      "net": "HEARTBEAT",
+      "color": "#218ca0",
+      "route": [
+        [
+          1410,
+          1320
+        ],
+        [
+          1400,
+          1320
+        ],
+        [
+          1400,
+          1638
+        ],
+        [
+          1010,
+          1638
+        ],
+        [
+          1010,
+          1740
+        ],
+        [
+          970,
+          1740
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W093",
+      "source": "WD.HEALTH",
+      "destination": "G1.HEALTH",
+      "net": "WD_HEALTH",
+      "color": "#218ca0",
+      "route": [
+        [
+          970,
+          1800
+        ],
+        [
+          1080,
+          1800
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W094",
+      "source": "3L",
+      "destination": "CTRL3",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          610,
+          330
+        ],
+        [
+          610,
+          1600
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W095",
+      "source": "CTRL3",
+      "destination": "WD.3V3",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          610,
+          1600
+        ],
+        [
+          800,
+          1600
+        ],
+        [
+          800,
+          1670
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W096",
+      "source": "CTRL3",
+      "destination": "G1.3V3",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          610,
+          1600
+        ],
+        [
+          1150,
+          1600
+        ],
+        [
+          1150,
+          1670
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W097",
+      "source": "WD.GND",
+      "destination": "GWD",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          900,
+          1920
+        ],
+        [
+          900,
+          1960
+        ],
+        [
+          1020,
+          1960
+        ],
+        [
+          1020,
+          2300
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W098",
+      "source": "G1.GND",
+      "destination": "GG",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          1260,
+          1920
+        ],
+        [
+          1260,
+          1950
+        ],
+        [
+          1560,
+          1950
+        ],
+        [
+          1560,
+          2300
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W099",
+      "source": "G1.OUT",
+      "destination": "EN",
+      "net": "HW_ENABLE",
+      "color": "#db5a4a",
+      "route": [
+        [
+          1210,
+          1670
+        ],
+        [
+          1210,
+          1630
+        ],
+        [
+          1385,
+          1630
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W100",
+      "source": "EN",
+      "destination": "DL.SLEEP",
+      "net": "HW_ENABLE",
+      "color": "#db5a4a",
+      "route": [
+        [
+          1385,
+          1630
+        ],
+        [
+          1385,
+          790
+        ],
+        [
+          1225,
+          790
+        ],
+        [
+          1225,
+          770
+        ],
+        [
+          1210,
+          770
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W101",
+      "source": "EN",
+      "destination": "ENR",
+      "net": "HW_ENABLE",
+      "color": "#db5a4a",
+      "route": [
+        [
+          1385,
+          1630
+        ],
+        [
+          1975,
+          1630
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W102",
+      "source": "ENR",
+      "destination": "DR.SLEEP",
+      "net": "HW_ENABLE",
+      "color": "#db5a4a",
+      "route": [
+        [
+          1975,
+          1630
+        ],
+        [
+          1975,
+          770
+        ],
+        [
+          1990,
+          770
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W103",
+      "source": "D5.A",
+      "destination": "5D",
+      "net": "5V",
+      "color": "#c77822",
+      "route": [
+        [
+          1600,
+          1715
+        ],
+        [
+          1600,
+          2020
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W104",
+      "source": "D5.K",
+      "destination": "P1.VSYS",
+      "net": "VSYS",
+      "color": "#c77822",
+      "route": [
+        [
+          1600,
+          1645
+        ],
+        [
+          1800,
+          1645
+        ],
+        [
+          1800,
+          1390
+        ],
+        [
+          1790,
+          1390
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W105",
+      "source": "P1.GP20",
+      "destination": "T1.TX_IN",
+      "net": "SERVO_TX_IN",
+      "color": "#218ca0",
+      "route": [
+        [
+          1790,
+          1270
+        ],
+        [
+          1820,
+          1270
+        ],
+        [
+          1820,
+          1780
+        ],
+        [
+          2000,
+          1780
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W106",
+      "source": "P1.GP21",
+      "destination": "T1.RX_OUT",
+      "net": "SERVO_RX_OUT",
+      "color": "#218ca0",
+      "route": [
+        [
+          1790,
+          1310
+        ],
+        [
+          1850,
+          1310
+        ],
+        [
+          1850,
+          1830
+        ],
+        [
+          2000,
+          1830
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W107",
+      "source": "P1.GP17",
+      "destination": "T1.DIR",
+      "net": "SERVO_DIR",
+      "color": "#218ca0",
+      "route": [
+        [
+          1790,
+          1350
+        ],
+        [
+          1880,
+          1350
+        ],
+        [
+          1880,
+          1880
+        ],
+        [
+          2000,
+          1880
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W108",
+      "source": "3E",
+      "destination": "T3",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          2500,
+          330
+        ],
+        [
+          2500,
+          1620
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W109",
+      "source": "T3",
+      "destination": "T1.3V3",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          2500,
+          1620
+        ],
+        [
+          2180,
+          1620
+        ],
+        [
+          2180,
+          1700
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W110",
+      "source": "T1.GND",
+      "destination": "TG",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          2180,
+          1950
+        ],
+        [
+          2180,
+          2010
+        ],
+        [
+          2050,
+          2010
+        ],
+        [
+          2050,
+          2300
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W111",
+      "source": "T1.DATA",
+      "destination": "DATA",
+      "net": "SERVO_DATA",
+      "color": "#218ca0",
+      "route": [
+        [
+          2390,
+          1830
+        ],
+        [
+          2590,
+          1830
+        ],
+        [
+          2590,
+          1980
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W112",
+      "source": "SL.V+",
+      "destination": "9L",
+      "net": "9V",
+      "color": "#8260a9",
+      "route": [
+        [
+          454,
+          1840
+        ],
+        [
+          520,
+          1840
+        ],
+        [
+          520,
+          2090
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W113",
+      "source": "SL.DATA",
+      "destination": "DATA",
+      "net": "SERVO_DATA",
+      "color": "#218ca0",
+      "route": [
+        [
+          454,
+          1900
+        ],
+        [
+          560,
+          1900
+        ],
+        [
+          560,
+          1980
+        ],
+        [
+          2590,
+          1980
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W114",
+      "source": "SL.GND",
+      "destination": "SG_L",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          454,
+          1960
+        ],
+        [
+          490,
+          1960
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W115",
+      "source": "SR.V+",
+      "destination": "9R",
+      "net": "9V",
+      "color": "#8260a9",
+      "route": [
+        [
+          2746,
+          1840
+        ],
+        [
+          2670,
+          1840
+        ],
+        [
+          2670,
+          2090
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W116",
+      "source": "SR.DATA",
+      "destination": "DATA",
+      "net": "SERVO_DATA",
+      "color": "#218ca0",
+      "route": [
+        [
+          2746,
+          1900
+        ],
+        [
+          2590,
+          1900
+        ],
+        [
+          2590,
+          1980
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W117",
+      "source": "SR.GND",
+      "destination": "SG_R",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          2746,
+          1960
+        ],
+        [
+          2710,
+          1960
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W118",
+      "source": "BAT.+",
+      "destination": "F1.IN",
+      "net": "PACK",
+      "color": "#db5a4a",
+      "route": [
+        [
+          304,
+          2150
+        ],
+        [
+          380,
+          2150
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W119",
+      "source": "F1.OUT",
+      "destination": "FUSED",
+      "net": "PACK_FUSED",
+      "color": "#db5a4a",
+      "route": [
+        [
+          540,
+          2150
+        ],
+        [
+          580,
+          2150
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W120",
+      "source": "FUSED",
+      "destination": "V5.IN+",
+      "net": "PACK_FUSED",
+      "color": "#db5a4a",
+      "route": [
+        [
+          580,
+          2150
+        ],
+        [
+          630,
+          2150
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W121",
+      "source": "FUSED",
+      "destination": "SW1.IN+",
+      "net": "PACK_FUSED",
+      "color": "#db5a4a",
+      "route": [
+        [
+          580,
+          2150
+        ],
+        [
+          580,
+          2060
+        ],
+        [
+          1080,
+          2060
+        ],
+        [
+          1080,
+          2150
+        ],
+        [
+          1100,
+          2150
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W122",
+      "source": "FUSED",
+      "destination": "AP.IN",
+      "net": "PACK_FUSED",
+      "color": "#db5a4a",
+      "route": [
+        [
+          580,
+          2150
+        ],
+        [
+          580,
+          2080
+        ],
+        [
+          1600,
+          2080
+        ],
+        [
+          1600,
+          2150
+        ],
+        [
+          1640,
+          2150
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W123",
+      "source": "SW1.OUT+",
+      "destination": "ACT_LOW",
+      "net": "ACT_BUS",
+      "color": "#db5a4a",
+      "route": [
+        [
+          1500,
+          2150
+        ],
+        [
+          1540,
+          2150
+        ],
+        [
+          1540,
+          2060
+        ],
+        [
+          2525,
+          2060
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W124",
+      "source": "ACT_LOW",
+      "destination": "V9.IN+",
+      "net": "ACT_BUS",
+      "color": "#db5a4a",
+      "route": [
+        [
+          2525,
+          2060
+        ],
+        [
+          2100,
+          2060
+        ],
+        [
+          2100,
+          2150
+        ],
+        [
+          2140,
+          2150
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W125",
+      "source": "V5.OUT+",
+      "destination": "5REG",
+      "net": "5V",
+      "color": "#c77822",
+      "route": [
+        [
+          800,
+          2110
+        ],
+        [
+          800,
+          2020
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W126",
+      "source": "V9.OUT+",
+      "destination": "QS.IN+",
+      "net": "9V_RAW",
+      "color": "#8260a9",
+      "route": [
+        [
+          2390,
+          2110
+        ],
+        [
+          2390,
+          2050
+        ],
+        [
+          2540,
+          2050
+        ],
+        [
+          2540,
+          2150
+        ],
+        [
+          2580,
+          2150
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W127",
+      "source": "QS.OUT+",
+      "destination": "9R",
+      "net": "9V",
+      "color": "#8260a9",
+      "route": [
+        [
+          2990,
+          2110
+        ],
+        [
+          2990,
+          2090
+        ],
+        [
+          2670,
+          2090
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W128",
+      "source": "ENR",
+      "destination": "QS.ENABLE",
+      "net": "HW_ENABLE",
+      "color": "#db5a4a",
+      "route": [
+        [
+          1975,
+          1630
+        ],
+        [
+          2485,
+          1630
+        ],
+        [
+          2485,
+          2055
+        ],
+        [
+          2730,
+          2055
+        ],
+        [
+          2730,
+          2110
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W129",
+      "source": "T3",
+      "destination": "QS.3V3",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          2500,
+          1620
+        ],
+        [
+          2500,
+          2070
+        ],
+        [
+          2850,
+          2070
+        ],
+        [
+          2850,
+          2110
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W130",
+      "source": "AP.REF",
+      "destination": "APREF",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          1720,
+          2110
+        ],
+        [
+          1720,
+          2070
+        ],
+        [
+          1810,
+          2070
+        ],
+        [
+          1810,
+          1430
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W131",
+      "source": "P1.AGND",
+      "destination": "AP.AGND",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          1790,
+          1510
+        ],
+        [
+          1840,
+          1510
+        ],
+        [
+          1840,
+          2110
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W132",
+      "source": "AP.OUT",
+      "destination": "P1.GP28",
+      "net": "PACK_ADC_SAFE",
+      "color": "#218ca0",
+      "route": [
+        [
+          1970,
+          2110
+        ],
+        [
+          1970,
+          2010
+        ],
+        [
+          1950,
+          2010
+        ],
+        [
+          1950,
+          1550
+        ],
+        [
+          1790,
+          1550
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W133",
+      "source": "CTRL3",
+      "destination": "SW1.AUX_IN",
+      "net": "3V3",
+      "color": "#8260a9",
+      "route": [
+        [
+          610,
+          1600
+        ],
+        [
+          610,
+          2040
+        ],
+        [
+          1200,
+          2040
+        ],
+        [
+          1200,
+          2110
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W134",
+      "source": "SW1.AUX_OUT",
+      "destination": "KILL",
+      "net": "KILL_OK",
+      "color": "#218ca0",
+      "route": [
+        [
+          1390,
+          2110
+        ],
+        [
+          1390,
+          2000
+        ],
+        [
+          1005,
+          2000
+        ],
+        [
+          1005,
+          1850
+        ],
+        [
+          1030,
+          1850
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W135",
+      "source": "KILL",
+      "destination": "G1.KILL_OK",
+      "net": "KILL_OK",
+      "color": "#218ca0",
+      "route": [
+        [
+          1030,
+          1850
+        ],
+        [
+          1080,
+          1850
+        ]
+      ],
+      "show_id": true
+    },
+    {
+      "id": "W136",
+      "source": "KILL",
+      "destination": "RK.1",
+      "net": "KILL_OK",
+      "color": "#218ca0",
+      "route": [
+        [
+          1030,
+          1850
+        ],
+        [
+          1030,
+          1880
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W137",
+      "source": "RK.2",
+      "destination": "RKG",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          1030,
+          1926
+        ],
+        [
+          1030,
+          1960
+        ],
+        [
+          1020,
+          1960
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W138",
+      "source": "BAT.-",
+      "destination": "BAT-G",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          184,
+          2235
+        ],
+        [
+          184,
+          2300
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W139",
+      "source": "V5.IN-",
+      "destination": "V5IN-G",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          700,
+          2235
+        ],
+        [
+          700,
+          2300
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W140",
+      "source": "V5.OUT-",
+      "destination": "V5OUT-G",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          910,
+          2235
+        ],
+        [
+          910,
+          2300
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W141",
+      "source": "AP.GND",
+      "destination": "APGNDG",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          1840,
+          2235
+        ],
+        [
+          1840,
+          2300
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W142",
+      "source": "V9.IN-",
+      "destination": "V9IN-G",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          2200,
+          2235
+        ],
+        [
+          2200,
+          2300
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W143",
+      "source": "V9.OUT-",
+      "destination": "V9OUT-G",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          2450,
+          2235
+        ],
+        [
+          2450,
+          2300
+        ]
+      ],
+      "show_id": false
+    },
+    {
+      "id": "W144",
+      "source": "QS.GND",
+      "destination": "QSGNDG",
+      "net": "GND",
+      "color": "#52676d",
+      "route": [
+        [
+          3090,
+          2235
+        ],
+        [
+          3090,
+          2300
+        ]
+      ],
+      "show_id": false
+    }
+  ],
+  "external_nc": [
+    "P1.ADC_VREF p35",
+    "P1.3V3_EN p37",
+    "P1.RUN p30",
+    "DL.VM",
+    "DR.VM",
+    "U1.INT2",
+    "U1.auxiliary SPI",
+    "U1.Qwiic"
+  ],
+  "internal_connections": [
+    {
+      "component": "P1",
+      "net": "GND",
+      "terminals": [
+        "P1.GND",
+        "P1.AGND",
+        "P1.USB_GND"
+      ],
+      "reason": "Common return on the Pico PCB"
+    }
+  ],
+  "validation": {
+    "gpio_count": 26,
+    "wheel_motor_leads": 12,
+    "servo_leads": 6,
+    "net_count": 54,
+    "external_conductors": 144,
+    "all_drawn_ports_connected": true,
+    "no_endpoint_net_conflicts": true,
+    "all_drawn_nets_connected": true,
+    "no_different_net_collinear_overlaps": true,
+    "no_different_net_endpoint_touches": true,
+    "no_wires_hidden_inside_components": true
+  }
 }

@@ -10,8 +10,15 @@
   const zoomReadout = document.getElementById('wiring-zoom');
   const zoomIn = dialog.querySelector('[data-zoom="in"]');
   const zoomOut = dialog.querySelector('[data-zoom="out"]');
+  const maximumZoom = 12;
   let zoom = 1;
   let drag = null;
+
+  function fittedWidth() {
+    const padding = parseFloat(getComputedStyle(canvas).paddingLeft) * 2;
+    const aspect = drawing.naturalWidth / drawing.naturalHeight || Math.SQRT2;
+    return Math.max(1, Math.min(canvas.clientWidth - padding, (canvas.clientHeight - padding) * aspect));
+  }
 
   function sizeDrawing(nextZoom, preserveCenter = true) {
     const padding = parseFloat(getComputedStyle(canvas).paddingLeft) * 2;
@@ -23,14 +30,12 @@
     // to preserve the same part of the drawing when those margins disappear.
     const focusX = oldRect.width <= canvas.clientWidth - padding ? .5 : (centerX - oldRect.left) / oldRect.width;
     const focusY = oldRect.height <= canvas.clientHeight - padding ? .5 : (centerY - oldRect.top) / oldRect.height;
-    zoom = Math.max(1, Math.min(4, nextZoom));
-    const aspect = drawing.naturalWidth / drawing.naturalHeight || Math.SQRT2;
-    const fitWidth = Math.min(canvas.clientWidth - padding, (canvas.clientHeight - padding) * aspect);
-    const newWidth = Math.max(1, fitWidth) * zoom;
+    zoom = Math.max(1, Math.min(maximumZoom, nextZoom));
+    const newWidth = fittedWidth() * zoom;
     drawing.style.width = `${newWidth}px`;
     zoomReadout.value = `${Math.round(zoom * 100)}%`;
     zoomReadout.textContent = zoomReadout.value;
-    zoomIn.disabled = zoom >= 4;
+    zoomIn.disabled = zoom >= maximumZoom;
     zoomOut.disabled = zoom <= 1;
     if (preserveCenter) {
       const newRect = drawing.getBoundingClientRect();
@@ -63,6 +68,7 @@
   dialog.querySelectorAll('[data-zoom]').forEach(button => {
     button.addEventListener('click', () => {
       if (button.dataset.zoom === 'fit') sizeDrawing(1, false);
+      else if (button.dataset.zoom === 'actual') sizeDrawing(drawing.naturalWidth / fittedWidth());
       else sizeDrawing(zoom + (button.dataset.zoom === 'in' ? .5 : -.5));
     });
   });

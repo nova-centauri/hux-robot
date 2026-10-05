@@ -1,0 +1,689 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3200" height="2000" viewBox="0 0 3200 2000" role="img" aria-labelledby="title desc">
+<title id="title">Hux V1-PROOF Both wheel motors — every wire</title><desc id="desc">Two complete channels. Rails and enable come from EL-01. Use terminal names here. EL-01 has the conductor register IDs. Source-checked planning drawing; proposed harnesses and unresolved interfaces require physical verification.</desc>
+<defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r=".7" fill="#c9d5d1"/></pattern></defs>
+<rect x="0" y="0" width="3200" height="2000" rx="0" fill="#f7f5ee" stroke="#ced8d7" stroke-width="1.4"/>
+<rect x="32" y="32" width="3136" height="1936" fill="url(#grid)" stroke="#ced8d7"/>
+<text x="64" y="72" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" text-anchor="start" letter-spacing="2" fill="#387b65">HUX  /  V1-PROOF  /  ELECTRICAL</text>
+<text x="64" y="119" font-family="Arial,Helvetica,sans-serif" font-size="38" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">Both wheel motors — every wire</text>
+<text x="64" y="150" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Two complete channels. Rails and enable come from EL-01. Use terminal names here. EL-01 has the conductor register IDs.</text>
+<rect x="2870" y="58" width="266" height="58" rx="8" fill="#ece7d7" stroke="#ced8d7" stroke-width="1.4"/>
+<text x="3003" y="82" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" text-anchor="middle" letter-spacing="1" fill="#20343e">SOURCE-CHECKED PLAN</text>
+<text x="3003" y="103" font-family="Arial,Helvetica,sans-serif" font-size="10" font-weight="500" text-anchor="middle" letter-spacing="1" fill="#647780">HARNESS / BENCH RELEASE OPEN</text>
+<polyline points="64,174 3136,174" fill="none" stroke="#ced8d7" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="64,1910 3136,1910" fill="none" stroke="#ced8d7" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="64" y="1940" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Rev B  |  04 OCT 2026  |  Vendor pinouts + proposed Hux circuits</text>
+<text x="64" y="1962" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">See docs/wiring-atlas.md and the wire register for sources and open circuit decisions.</text>
+<text x="3134" y="1944" font-family="Arial,Helvetica,sans-serif" font-size="25" font-weight="700" text-anchor="end" letter-spacing="0" fill="#387b65">EL-05</text>
+<g data-wire="W001"><title>PL.GP6 → DL.EN / L_EN</title>
+<polyline points="530,460 815,460" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W001"><title>PL.GP6 → DL.EN / L_EN</title>
+<polyline points="825,460 985,460" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W001"><title>PL.GP6 → DL.EN / L_EN</title>
+<polyline points="995,460 1080,460" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W002"><title>PL.GP7 → DL.PH / L_PH</title>
+<polyline points="530,520 815,520" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W002"><title>PL.GP7 → DL.PH / L_PH</title>
+<polyline points="825,520 985,520" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W002"><title>PL.GP7 → DL.PH / L_PH</title>
+<polyline points="995,520 1080,520" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W003"><title>PL.GP11 → DL.FAULT / L_FAULT</title>
+<polyline points="530,580 815,580" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W003"><title>PL.GP11 → DL.FAULT / L_FAULT</title>
+<polyline points="825,580 1080,580" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W004"><title>DL.CS → AL.IN / L_CS</title>
+<polyline points="960,640 1080,640" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W004"><title>DL.CS → AL.IN / L_CS</title>
+<polyline points="960,640 960,670" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W004"><title>DL.CS → AL.IN / L_CS</title>
+<polyline points="920,670 960,670" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W005"><title>AL.OUT → PL.GP26 / L_CS_SAFE</title>
+<polyline points="600,670 700,670" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W005"><title>AL.OUT → PL.GP26 / L_CS_SAFE</title>
+<polyline points="600,670 600,640" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W005"><title>AL.OUT → PL.GP26 / L_CS_SAFE</title>
+<polyline points="530,640 600,640" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W006"><title>DL.OUT1 → ML.RED / L_MOTOR_OUT1</title>
+<polyline points="1560,460 1685,460" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W006"><title>DL.OUT1 → ML.RED / L_MOTOR_OUT1</title>
+<polyline points="1695,460 2600,460" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W007"><title>DL.OUT2 → ML.BLACK / L_MOTOR_OUT2</title>
+<polyline points="1560,520 1685,520" fill="none" stroke="#20343e" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W007"><title>DL.OUT2 → ML.BLACK / L_MOTOR_OUT2</title>
+<polyline points="1695,520 2600,520" fill="none" stroke="#20343e" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W008"><title>BL.A_OUT → PL.GP2 / L_ENC_A_OUT</title>
+<polyline points="530,770 815,770" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W008"><title>BL.A_OUT → PL.GP2 / L_ENC_A_OUT</title>
+<polyline points="825,770 1155,770" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W008"><title>BL.A_OUT → PL.GP2 / L_ENC_A_OUT</title>
+<polyline points="1165,770 1255,770" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W008"><title>BL.A_OUT → PL.GP2 / L_ENC_A_OUT</title>
+<polyline points="1265,770 1355,770" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W008"><title>BL.A_OUT → PL.GP2 / L_ENC_A_OUT</title>
+<polyline points="1365,770 1475,770" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W008"><title>BL.A_OUT → PL.GP2 / L_ENC_A_OUT</title>
+<polyline points="1485,770 1740,770" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W009"><title>BL.B_OUT → PL.GP3 / L_ENC_B_OUT</title>
+<polyline points="530,830 815,830" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W009"><title>BL.B_OUT → PL.GP3 / L_ENC_B_OUT</title>
+<polyline points="825,830 1155,830" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W009"><title>BL.B_OUT → PL.GP3 / L_ENC_B_OUT</title>
+<polyline points="1165,830 1255,830" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W009"><title>BL.B_OUT → PL.GP3 / L_ENC_B_OUT</title>
+<polyline points="1265,830 1355,830" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W009"><title>BL.B_OUT → PL.GP3 / L_ENC_B_OUT</title>
+<polyline points="1365,830 1475,830" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W009"><title>BL.B_OUT → PL.GP3 / L_ENC_B_OUT</title>
+<polyline points="1485,830 1740,830" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W010"><title>ML.YELLOW → BL.A_IN / L_ENC_A5</title>
+<polyline points="2210,770 2455,770" fill="none" stroke="#bd9221" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W010"><title>ML.YELLOW → BL.A_IN / L_ENC_A5</title>
+<polyline points="2465,770 2495,770" fill="none" stroke="#bd9221" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W010"><title>ML.YELLOW → BL.A_IN / L_ENC_A5</title>
+<polyline points="2505,770 2600,770" fill="none" stroke="#bd9221" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W011"><title>ML.WHITE → BL.B_IN / L_ENC_B5</title>
+<polyline points="2210,830 2455,830" fill="none" stroke="#52676d" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="2210,830 2455,830" fill="none" stroke="#fffef9" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W011"><title>ML.WHITE → BL.B_IN / L_ENC_B5</title>
+<polyline points="2465,830 2495,830" fill="none" stroke="#52676d" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="2465,830 2495,830" fill="none" stroke="#fffef9" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W011"><title>ML.WHITE → BL.B_IN / L_ENC_B5</title>
+<polyline points="2505,830 2600,830" fill="none" stroke="#52676d" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="2505,830 2600,830" fill="none" stroke="#fffef9" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W012"><title>L3V3a → L3V3b / 3V3</title>
+<polyline points="640,300 1475,300" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W012"><title>L3V3a → L3V3b / 3V3</title>
+<polyline points="1485,300 2500,300" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W013"><title>LACT_BUSa → LACT_BUSb / ACT_BUS</title>
+<polyline points="640,260 2500,260" fill="none" stroke="#db5a4a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W014"><title>L5Va → L5Vb / 5V</title>
+<polyline points="640,960 815,960" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W014"><title>L5Va → L5Vb / 5V</title>
+<polyline points="825,960 1155,960" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W014"><title>L5Va → L5Vb / 5V</title>
+<polyline points="1165,960 1255,960" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W014"><title>L5Va → L5Vb / 5V</title>
+<polyline points="1265,960 1355,960" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W014"><title>L5Va → L5Vb / 5V</title>
+<polyline points="1365,960 1475,960" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W014"><title>L5Va → L5Vb / 5V</title>
+<polyline points="1485,960 1995,960" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W014"><title>L5Va → L5Vb / 5V</title>
+<polyline points="2005,960 2455,960" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W014"><title>L5Va → L5Vb / 5V</title>
+<polyline points="2465,960 2500,960" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W015"><title>LGNDa → LGNDb / GND</title>
+<polyline points="640,1005 2500,1005" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W016"><title>DL.VIN → LDLVIN / ACT_BUS</title>
+<polyline points="1480,340 1480,260" fill="none" stroke="#db5a4a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W017"><title>DL.GND → LDLGND / GND</title>
+<polyline points="1160,710 1160,1005" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W018"><title>DL.PMODE → LDLPMODE / GND</title>
+<polyline points="1260,710 1260,1005" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W019"><title>DL.IMODE → LDLIMODE / GND</title>
+<polyline points="1360,710 1360,1005" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W020"><title>BL.3V3 → LBL3V3 / 3V3</title>
+<polyline points="2080,695 2080,670" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W020"><title>BL.3V3 → LBL3V3 / 3V3</title>
+<polyline points="1690,670 2080,670" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W020"><title>BL.3V3 → LBL3V3 / 3V3</title>
+<polyline points="1690,670 1690,300" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W021"><title>BL.GND → LBLGND / GND</title>
+<polyline points="2000,900 2000,1005" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W022"><title>AL.GND → LALGND / GND</title>
+<polyline points="820,745 820,1005" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W023"><title>AL.REF → LALREF / 3V3</title>
+<polyline points="820,610 820,300" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W024"><title>ML.GREEN → LGREEN / GND</title>
+<polyline points="2460,650 2600,650" fill="none" stroke="#387b65" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W024"><title>ML.GREEN → LGREEN / GND</title>
+<polyline points="2460,650 2460,1005" fill="none" stroke="#387b65" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W025"><title>ML.BLUE → LBLUE / 5V</title>
+<polyline points="2500,710 2600,710" fill="none" stroke="#437fb4" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W025"><title>ML.BLUE → LBLUE / 5V</title>
+<polyline points="2500,710 2500,960" fill="none" stroke="#437fb4" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W026"><title>ENL → DL.SLEEP / HW_ENABLE</title>
+<polyline points="640,425 815,425" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W026"><title>ENL → DL.SLEEP / HW_ENABLE</title>
+<polyline points="825,425 985,425" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W026"><title>ENL → DL.SLEEP / HW_ENABLE</title>
+<polyline points="995,425 1080,425" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W027"><title>RFL.1 → RFL3 / 3V3</title>
+<polyline points="990,530 990,300" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W028"><title>RFL.2 → FL / L_FAULT</title>
+<polyline points="990,576 990,580" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W029"><title>DL.VREF → RVL.1 / L_VREF</title>
+<polyline points="1480,710 1480,865" fill="none" stroke="#c77822" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W030"><title>RVL.2 → RVLg / GND</title>
+<polyline points="1480,911 1480,1005" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W031"><title>PR.GP8 → DR.EN / R_EN</title>
+<polyline points="530,1320 815,1320" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W031"><title>PR.GP8 → DR.EN / R_EN</title>
+<polyline points="825,1320 985,1320" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W031"><title>PR.GP8 → DR.EN / R_EN</title>
+<polyline points="995,1320 1080,1320" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W032"><title>PR.GP9 → DR.PH / R_PH</title>
+<polyline points="530,1380 815,1380" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W032"><title>PR.GP9 → DR.PH / R_PH</title>
+<polyline points="825,1380 985,1380" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W032"><title>PR.GP9 → DR.PH / R_PH</title>
+<polyline points="995,1380 1080,1380" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W033"><title>PR.GP18 → DR.FAULT / R_FAULT</title>
+<polyline points="530,1440 815,1440" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W033"><title>PR.GP18 → DR.FAULT / R_FAULT</title>
+<polyline points="825,1440 1080,1440" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W034"><title>DR.CS → AR.IN / R_CS</title>
+<polyline points="960,1500 1080,1500" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W034"><title>DR.CS → AR.IN / R_CS</title>
+<polyline points="960,1500 960,1530" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W034"><title>DR.CS → AR.IN / R_CS</title>
+<polyline points="920,1530 960,1530" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W035"><title>AR.OUT → PR.GP27 / R_CS_SAFE</title>
+<polyline points="600,1530 700,1530" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W035"><title>AR.OUT → PR.GP27 / R_CS_SAFE</title>
+<polyline points="600,1530 600,1500" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W035"><title>AR.OUT → PR.GP27 / R_CS_SAFE</title>
+<polyline points="530,1500 600,1500" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W036"><title>DR.OUT1 → MR.RED / R_MOTOR_OUT1</title>
+<polyline points="1560,1320 1685,1320" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W036"><title>DR.OUT1 → MR.RED / R_MOTOR_OUT1</title>
+<polyline points="1695,1320 2600,1320" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W037"><title>DR.OUT2 → MR.BLACK / R_MOTOR_OUT2</title>
+<polyline points="1560,1380 1685,1380" fill="none" stroke="#20343e" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W037"><title>DR.OUT2 → MR.BLACK / R_MOTOR_OUT2</title>
+<polyline points="1695,1380 2600,1380" fill="none" stroke="#20343e" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W038"><title>BR.A_OUT → PR.GP4 / R_ENC_A_OUT</title>
+<polyline points="530,1630 815,1630" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W038"><title>BR.A_OUT → PR.GP4 / R_ENC_A_OUT</title>
+<polyline points="825,1630 1155,1630" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W038"><title>BR.A_OUT → PR.GP4 / R_ENC_A_OUT</title>
+<polyline points="1165,1630 1255,1630" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W038"><title>BR.A_OUT → PR.GP4 / R_ENC_A_OUT</title>
+<polyline points="1265,1630 1355,1630" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W038"><title>BR.A_OUT → PR.GP4 / R_ENC_A_OUT</title>
+<polyline points="1365,1630 1475,1630" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W038"><title>BR.A_OUT → PR.GP4 / R_ENC_A_OUT</title>
+<polyline points="1485,1630 1740,1630" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W039"><title>BR.B_OUT → PR.GP5 / R_ENC_B_OUT</title>
+<polyline points="530,1690 815,1690" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W039"><title>BR.B_OUT → PR.GP5 / R_ENC_B_OUT</title>
+<polyline points="825,1690 1155,1690" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W039"><title>BR.B_OUT → PR.GP5 / R_ENC_B_OUT</title>
+<polyline points="1165,1690 1255,1690" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W039"><title>BR.B_OUT → PR.GP5 / R_ENC_B_OUT</title>
+<polyline points="1265,1690 1355,1690" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W039"><title>BR.B_OUT → PR.GP5 / R_ENC_B_OUT</title>
+<polyline points="1365,1690 1475,1690" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W039"><title>BR.B_OUT → PR.GP5 / R_ENC_B_OUT</title>
+<polyline points="1485,1690 1740,1690" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W040"><title>MR.YELLOW → BR.A_IN / R_ENC_A5</title>
+<polyline points="2210,1630 2455,1630" fill="none" stroke="#bd9221" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W040"><title>MR.YELLOW → BR.A_IN / R_ENC_A5</title>
+<polyline points="2465,1630 2495,1630" fill="none" stroke="#bd9221" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W040"><title>MR.YELLOW → BR.A_IN / R_ENC_A5</title>
+<polyline points="2505,1630 2600,1630" fill="none" stroke="#bd9221" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W041"><title>MR.WHITE → BR.B_IN / R_ENC_B5</title>
+<polyline points="2210,1690 2455,1690" fill="none" stroke="#52676d" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="2210,1690 2455,1690" fill="none" stroke="#fffef9" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W041"><title>MR.WHITE → BR.B_IN / R_ENC_B5</title>
+<polyline points="2465,1690 2495,1690" fill="none" stroke="#52676d" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="2465,1690 2495,1690" fill="none" stroke="#fffef9" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W041"><title>MR.WHITE → BR.B_IN / R_ENC_B5</title>
+<polyline points="2505,1690 2600,1690" fill="none" stroke="#52676d" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="2505,1690 2600,1690" fill="none" stroke="#fffef9" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W042"><title>R3V3a → R3V3b / 3V3</title>
+<polyline points="640,1160 1475,1160" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W042"><title>R3V3a → R3V3b / 3V3</title>
+<polyline points="1485,1160 2500,1160" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W043"><title>RACT_BUSa → RACT_BUSb / ACT_BUS</title>
+<polyline points="640,1120 2500,1120" fill="none" stroke="#db5a4a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W044"><title>R5Va → R5Vb / 5V</title>
+<polyline points="640,1820 815,1820" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W044"><title>R5Va → R5Vb / 5V</title>
+<polyline points="825,1820 1155,1820" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W044"><title>R5Va → R5Vb / 5V</title>
+<polyline points="1165,1820 1255,1820" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W044"><title>R5Va → R5Vb / 5V</title>
+<polyline points="1265,1820 1355,1820" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W044"><title>R5Va → R5Vb / 5V</title>
+<polyline points="1365,1820 1475,1820" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W044"><title>R5Va → R5Vb / 5V</title>
+<polyline points="1485,1820 1995,1820" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W044"><title>R5Va → R5Vb / 5V</title>
+<polyline points="2005,1820 2455,1820" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W044"><title>R5Va → R5Vb / 5V</title>
+<polyline points="2465,1820 2500,1820" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W045"><title>RGNDa → RGNDb / GND</title>
+<polyline points="640,1865 2500,1865" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W046"><title>DR.VIN → RDRVIN / ACT_BUS</title>
+<polyline points="1480,1200 1480,1120" fill="none" stroke="#db5a4a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W047"><title>DR.GND → RDRGND / GND</title>
+<polyline points="1160,1570 1160,1865" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W048"><title>DR.PMODE → RDRPMODE / GND</title>
+<polyline points="1260,1570 1260,1865" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W049"><title>DR.IMODE → RDRIMODE / GND</title>
+<polyline points="1360,1570 1360,1865" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W050"><title>BR.3V3 → RBR3V3 / 3V3</title>
+<polyline points="2080,1555 2080,1530" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W050"><title>BR.3V3 → RBR3V3 / 3V3</title>
+<polyline points="1690,1530 2080,1530" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W050"><title>BR.3V3 → RBR3V3 / 3V3</title>
+<polyline points="1690,1530 1690,1160" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W051"><title>BR.GND → RBRGND / GND</title>
+<polyline points="2000,1760 2000,1865" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W052"><title>AR.GND → RARGND / GND</title>
+<polyline points="820,1605 820,1865" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W053"><title>AR.REF → RARREF / 3V3</title>
+<polyline points="820,1470 820,1160" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W054"><title>MR.GREEN → RGREEN / GND</title>
+<polyline points="2460,1510 2600,1510" fill="none" stroke="#387b65" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W054"><title>MR.GREEN → RGREEN / GND</title>
+<polyline points="2460,1510 2460,1865" fill="none" stroke="#387b65" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W055"><title>MR.BLUE → RBLUE / 5V</title>
+<polyline points="2500,1570 2600,1570" fill="none" stroke="#437fb4" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W055"><title>MR.BLUE → RBLUE / 5V</title>
+<polyline points="2500,1570 2500,1820" fill="none" stroke="#437fb4" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W056"><title>ENR → DR.SLEEP / HW_ENABLE</title>
+<polyline points="640,1285 815,1285" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W056"><title>ENR → DR.SLEEP / HW_ENABLE</title>
+<polyline points="825,1285 985,1285" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W056"><title>ENR → DR.SLEEP / HW_ENABLE</title>
+<polyline points="995,1285 1080,1285" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W057"><title>RFR.1 → RFR3 / 3V3</title>
+<polyline points="990,1390 990,1160" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W058"><title>RFR.2 → FR / R_FAULT</title>
+<polyline points="990,1436 990,1440" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W059"><title>DR.VREF → RVR.1 / R_VREF</title>
+<polyline points="1480,1570 1480,1725" fill="none" stroke="#c77822" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g data-wire="W060"><title>RVR.2 → RVRg / GND</title>
+<polyline points="1480,1771 1480,1865" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<rect x="80" y="340" width="450" height="540" rx="8" fill="#fffef9" stroke="#387b65" stroke-width="1.4"/>
+<text x="98" y="370" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#387b65">PL / Pico 2 / LEFT</text>
+<text x="98" y="397" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Individual GPIO terminals</text>
+<rect x="1080" y="340" width="480" height="370" rx="8" fill="#fffef9" stroke="#437fb4" stroke-width="1.4"/>
+<text x="1098" y="370" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#437fb4">DL / DRV8874 / L</text>
+<text x="1098" y="397" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Pololu 4035 carrier</text>
+<rect x="2600" y="340" width="520" height="600" rx="8" fill="#fffef9" stroke="#437fb4" stroke-width="1.4"/>
+<text x="2618" y="370" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#437fb4">ML / 4752 / L wheel motor</text>
+<text x="2618" y="397" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">12 V / 30:1 / encoder fitted</text>
+<circle cx="2875" cy="530" r="66" fill="#fffef9" stroke="#20343e" stroke-width="4"/>
+<text x="2875" y="543" font-family="Arial,Helvetica,sans-serif" font-size="34" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#20343e">ML</text>
+<rect x="2805" y="690" width="140" height="108" rx="4" fill="#e8eeea" stroke="#ced8d7" stroke-width="1.4"/>
+<text x="2875" y="752" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#387b65">ENCODER</text>
+<circle cx="530" cy="460" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="516" y="466" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">GP6 / p9</text>
+<circle cx="1080" cy="460" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="1094" y="466" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">EN</text>
+<circle cx="530" cy="520" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="516" y="526" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">GP7 / p10</text>
+<circle cx="1080" cy="520" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="1094" y="526" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">PH</text>
+<circle cx="530" cy="580" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="516" y="586" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">GP11 / p15</text>
+<circle cx="1080" cy="580" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="1094" y="586" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">FAULT</text>
+<circle cx="530" cy="640" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="516" y="646" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">GP26 / p31</text>
+<circle cx="1080" cy="640" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="1094" y="646" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">CS</text>
+<rect x="700" y="610" width="220" height="135" rx="8" fill="#fffef9" stroke="#bd9221" stroke-width="1.4" stroke-dasharray="7 5"/>
+<text x="718" y="635" font-family="Arial,Helvetica,sans-serif" font-size="17.607655502392344" font-weight="700" text-anchor="start" letter-spacing="0" fill="#bd9221">AL / ADC protection</text>
+<text x="718" y="720" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">TBD / high impedance</text>
+<circle cx="920" cy="670" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="906" y="676" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">IN</text>
+<circle cx="700" cy="670" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="714" y="676" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">OUT</text>
+<circle cx="1560" cy="460" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5"/>
+<text x="1546" y="466" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#db5a4a">OUT1</text>
+<circle cx="1560" cy="520" r="5" fill="#fffef9" stroke="#20343e" stroke-width="2.5"/>
+<text x="1546" y="526" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">OUT2</text>
+<circle cx="2600" cy="460" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5"/>
+<text x="2614" y="466" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">RED</text>
+<circle cx="2600" cy="520" r="5" fill="#fffef9" stroke="#20343e" stroke-width="2.5"/>
+<text x="2614" y="526" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">BLACK</text>
+<circle cx="2600" cy="650" r="5" fill="#fffef9" stroke="#387b65" stroke-width="2.5"/>
+<text x="2614" y="656" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#387b65">GREEN</text>
+<circle cx="2600" cy="710" r="5" fill="#fffef9" stroke="#437fb4" stroke-width="2.5"/>
+<text x="2614" y="716" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#437fb4">BLUE</text>
+<circle cx="2600" cy="770" r="5" fill="#fffef9" stroke="#bd9221" stroke-width="2.5"/>
+<text x="2614" y="776" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#bd9221">YELLOW</text>
+<circle cx="2600" cy="830" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5"/>
+<text x="2614" y="836" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#52676d">WHITE</text>
+<rect x="1740" y="695" width="470" height="205" rx="8" fill="#fffef9" stroke="#387b65" stroke-width="1.4" stroke-dasharray="7 5"/>
+<text x="1758" y="725" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#387b65">BL / 5 V-tolerant buffer</text>
+<text x="1758" y="752" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">3.3 V / non-inverting / part TBD</text>
+<circle cx="2210" cy="770" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="2196" y="776" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">A_IN</text>
+<circle cx="2210" cy="830" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="2196" y="836" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">B_IN</text>
+<circle cx="1740" cy="770" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="1754" y="776" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">A_OUT</text>
+<circle cx="1740" cy="830" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="1754" y="836" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">B_OUT</text>
+<circle cx="530" cy="770" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="516" y="776" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">GP2 / p4</text>
+<circle cx="530" cy="830" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="516" y="836" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">GP3 / p5</text>
+<rect x="644" y="268" width="133.0" height="29" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="650" y="290" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#8260a9">3V3 / EL-01</text>
+<rect x="644" y="228" width="177.0" height="29" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="650" y="250" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">ACT_BUS / EL-01</text>
+<rect x="644" y="928" width="122.00000000000001" height="29" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="650" y="950" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#c77822">5V / EL-01</text>
+<rect x="644" y="973" width="133.0" height="29" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="650" y="995" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#52676d">GND / EL-01</text>
+<circle cx="1480" cy="340" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5"/>
+<text x="1492" y="328" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">VIN</text>
+<circle cx="1160" cy="710" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5"/>
+<text x="1148" y="734" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">GND</text>
+<circle cx="1260" cy="710" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5"/>
+<text x="1248" y="734" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">PMODE</text>
+<circle cx="1360" cy="710" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5"/>
+<text x="1348" y="734" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">IMODE</text>
+<circle cx="2080" cy="695" r="5" fill="#fffef9" stroke="#8260a9" stroke-width="2.5"/>
+<text x="2092" y="683" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0" fill="#8260a9">3V3</text>
+<circle cx="2000" cy="900" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5"/>
+<text x="1988" y="924" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">GND</text>
+<circle cx="820" cy="745" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5"/>
+<text x="808" y="769" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">GND</text>
+<circle cx="820" cy="610" r="5" fill="#fffef9" stroke="#8260a9" stroke-width="2.5"/>
+<text x="832" y="598" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0" fill="#8260a9">REF</text>
+<circle cx="1080" cy="425" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5"/>
+<text x="1094" y="431" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">SLEEP</text>
+<rect x="644" y="393" width="199.00000000000003" height="29" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="650" y="415" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">HW_ENABLE / EL-01</text>
+<rect x="982" y="530" width="16" height="46" rx="0" fill="#fffef9" stroke="#20343e" stroke-width="1.4" stroke-dasharray="7 5"/>
+<text x="1005" y="552" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">RFL</text>
+<text x="1005" y="573" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">pull-up TBD</text>
+<circle cx="1480" cy="710" r="5" fill="#fffef9" stroke="#c77822" stroke-width="2.5"/>
+<text x="1468" y="734" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="end" letter-spacing="0" fill="#c77822">VREF</text>
+<rect x="1472" y="865" width="16" height="46" rx="0" fill="#fffef9" stroke="#20343e" stroke-width="1.4" stroke-dasharray="7 5"/>
+<text x="1495" y="887" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">RVL</text>
+<text x="1495" y="908" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">limit TBD</text>
+<text x="1320" y="678" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="middle" letter-spacing="0" fill="#647780">VM: NC</text>
+<text x="2700" y="915" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">BLACK is a switched motor lead.</text>
+<rect x="80" y="1200" width="450" height="540" rx="8" fill="#fffef9" stroke="#387b65" stroke-width="1.4"/>
+<text x="98" y="1230" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#387b65">PR / Pico 2 / RIGHT</text>
+<text x="98" y="1257" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Individual GPIO terminals</text>
+<rect x="1080" y="1200" width="480" height="370" rx="8" fill="#fffef9" stroke="#437fb4" stroke-width="1.4"/>
+<text x="1098" y="1230" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#437fb4">DR / DRV8874 / R</text>
+<text x="1098" y="1257" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Pololu 4035 carrier</text>
+<rect x="2600" y="1200" width="520" height="600" rx="8" fill="#fffef9" stroke="#437fb4" stroke-width="1.4"/>
+<text x="2618" y="1230" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#437fb4">MR / 4752 / R wheel motor</text>
+<text x="2618" y="1257" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">12 V / 30:1 / encoder fitted</text>
+<circle cx="2875" cy="1390" r="66" fill="#fffef9" stroke="#20343e" stroke-width="4"/>
+<text x="2875" y="1403" font-family="Arial,Helvetica,sans-serif" font-size="34" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#20343e">MR</text>
+<rect x="2805" y="1550" width="140" height="108" rx="4" fill="#e8eeea" stroke="#ced8d7" stroke-width="1.4"/>
+<text x="2875" y="1612" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#387b65">ENCODER</text>
+<circle cx="530" cy="1320" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="516" y="1326" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">GP8 / p11</text>
+<circle cx="1080" cy="1320" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="1094" y="1326" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">EN</text>
+<circle cx="530" cy="1380" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="516" y="1386" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">GP9 / p12</text>
+<circle cx="1080" cy="1380" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="1094" y="1386" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">PH</text>
+<circle cx="530" cy="1440" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="516" y="1446" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">GP18 / p24</text>
+<circle cx="1080" cy="1440" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="1094" y="1446" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">FAULT</text>
+<circle cx="530" cy="1500" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="516" y="1506" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">GP27 / p32</text>
+<circle cx="1080" cy="1500" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="1094" y="1506" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">CS</text>
+<rect x="700" y="1470" width="220" height="135" rx="8" fill="#fffef9" stroke="#bd9221" stroke-width="1.4" stroke-dasharray="7 5"/>
+<text x="718" y="1495" font-family="Arial,Helvetica,sans-serif" font-size="17.607655502392344" font-weight="700" text-anchor="start" letter-spacing="0" fill="#bd9221">AR / ADC protection</text>
+<text x="718" y="1580" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">TBD / high impedance</text>
+<circle cx="920" cy="1530" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="906" y="1536" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">IN</text>
+<circle cx="700" cy="1530" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="714" y="1536" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">OUT</text>
+<circle cx="1560" cy="1320" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5"/>
+<text x="1546" y="1326" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#db5a4a">OUT1</text>
+<circle cx="1560" cy="1380" r="5" fill="#fffef9" stroke="#20343e" stroke-width="2.5"/>
+<text x="1546" y="1386" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">OUT2</text>
+<circle cx="2600" cy="1320" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5"/>
+<text x="2614" y="1326" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">RED</text>
+<circle cx="2600" cy="1380" r="5" fill="#fffef9" stroke="#20343e" stroke-width="2.5"/>
+<text x="2614" y="1386" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">BLACK</text>
+<circle cx="2600" cy="1510" r="5" fill="#fffef9" stroke="#387b65" stroke-width="2.5"/>
+<text x="2614" y="1516" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#387b65">GREEN</text>
+<circle cx="2600" cy="1570" r="5" fill="#fffef9" stroke="#437fb4" stroke-width="2.5"/>
+<text x="2614" y="1576" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#437fb4">BLUE</text>
+<circle cx="2600" cy="1630" r="5" fill="#fffef9" stroke="#bd9221" stroke-width="2.5"/>
+<text x="2614" y="1636" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#bd9221">YELLOW</text>
+<circle cx="2600" cy="1690" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5"/>
+<text x="2614" y="1696" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#52676d">WHITE</text>
+<rect x="1740" y="1555" width="470" height="205" rx="8" fill="#fffef9" stroke="#387b65" stroke-width="1.4" stroke-dasharray="7 5"/>
+<text x="1758" y="1585" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#387b65">BR / 5 V-tolerant buffer</text>
+<text x="1758" y="1612" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">3.3 V / non-inverting / part TBD</text>
+<circle cx="2210" cy="1630" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="2196" y="1636" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">A_IN</text>
+<circle cx="2210" cy="1690" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="2196" y="1696" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">B_IN</text>
+<circle cx="1740" cy="1630" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="1754" y="1636" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">A_OUT</text>
+<circle cx="1740" cy="1690" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="1754" y="1696" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">B_OUT</text>
+<circle cx="530" cy="1630" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="516" y="1636" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">GP4 / p6</text>
+<circle cx="530" cy="1690" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5"/>
+<text x="516" y="1696" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">GP5 / p7</text>
+<rect x="644" y="1128" width="133.0" height="29" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="650" y="1150" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#8260a9">3V3 / EL-01</text>
+<rect x="644" y="1088" width="177.0" height="29" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="650" y="1110" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">ACT_BUS / EL-01</text>
+<rect x="644" y="1788" width="122.00000000000001" height="29" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="650" y="1810" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#c77822">5V / EL-01</text>
+<rect x="644" y="1833" width="133.0" height="29" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="650" y="1855" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#52676d">GND / EL-01</text>
+<circle cx="1480" cy="1200" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5"/>
+<text x="1492" y="1188" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">VIN</text>
+<circle cx="1160" cy="1570" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5"/>
+<text x="1148" y="1594" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">GND</text>
+<circle cx="1260" cy="1570" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5"/>
+<text x="1248" y="1594" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">PMODE</text>
+<circle cx="1360" cy="1570" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5"/>
+<text x="1348" y="1594" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">IMODE</text>
+<circle cx="2080" cy="1555" r="5" fill="#fffef9" stroke="#8260a9" stroke-width="2.5"/>
+<text x="2092" y="1543" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0" fill="#8260a9">3V3</text>
+<circle cx="2000" cy="1760" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5"/>
+<text x="1988" y="1784" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">GND</text>
+<circle cx="820" cy="1605" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5"/>
+<text x="808" y="1629" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">GND</text>
+<circle cx="820" cy="1470" r="5" fill="#fffef9" stroke="#8260a9" stroke-width="2.5"/>
+<text x="832" y="1458" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0" fill="#8260a9">REF</text>
+<circle cx="1080" cy="1285" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5"/>
+<text x="1094" y="1291" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">SLEEP</text>
+<rect x="644" y="1253" width="199.00000000000003" height="29" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
+<text x="650" y="1275" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">HW_ENABLE / EL-01</text>
+<rect x="982" y="1390" width="16" height="46" rx="0" fill="#fffef9" stroke="#20343e" stroke-width="1.4" stroke-dasharray="7 5"/>
+<text x="1005" y="1412" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">RFR</text>
+<text x="1005" y="1433" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">pull-up TBD</text>
+<circle cx="1480" cy="1570" r="5" fill="#fffef9" stroke="#c77822" stroke-width="2.5"/>
+<text x="1468" y="1594" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="end" letter-spacing="0" fill="#c77822">VREF</text>
+<rect x="1472" y="1725" width="16" height="46" rx="0" fill="#fffef9" stroke="#20343e" stroke-width="1.4" stroke-dasharray="7 5"/>
+<text x="1495" y="1747" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">RVR</text>
+<text x="1495" y="1768" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">limit TBD</text>
+<text x="1320" y="1538" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="middle" letter-spacing="0" fill="#647780">VM: NC</text>
+<text x="2700" y="1775" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">BLACK is a switched motor lead.</text>
+<circle cx="640" cy="260" r="4" fill="#20343e"/>
+<circle cx="1480" cy="260" r="4" fill="#20343e"/>
+<circle cx="2500" cy="260" r="4" fill="#20343e"/>
+<circle cx="640" cy="300" r="4" fill="#20343e"/>
+<circle cx="820" cy="300" r="4" fill="#20343e"/>
+<circle cx="990" cy="300" r="4" fill="#20343e"/>
+<circle cx="1690" cy="300" r="4" fill="#20343e"/>
+<circle cx="2500" cy="300" r="4" fill="#20343e"/>
+<circle cx="640" cy="425" r="4" fill="#20343e"/>
+<circle cx="990" cy="580" r="4" fill="#20343e"/>
+<circle cx="640" cy="960" r="4" fill="#20343e"/>
+<circle cx="2500" cy="960" r="4" fill="#20343e"/>
+<circle cx="640" cy="1005" r="4" fill="#52676d"/>
+<circle cx="820" cy="1005" r="4" fill="#52676d"/>
+<circle cx="1160" cy="1005" r="4" fill="#52676d"/>
+<circle cx="1260" cy="1005" r="4" fill="#52676d"/>
+<circle cx="1360" cy="1005" r="4" fill="#52676d"/>
+<circle cx="1480" cy="1005" r="4" fill="#52676d"/>
+<circle cx="2000" cy="1005" r="4" fill="#52676d"/>
+<circle cx="2460" cy="1005" r="4" fill="#52676d"/>
+<circle cx="2500" cy="1005" r="4" fill="#52676d"/>
+<circle cx="640" cy="1120" r="4" fill="#20343e"/>
+<circle cx="1480" cy="1120" r="4" fill="#20343e"/>
+<circle cx="2500" cy="1120" r="4" fill="#20343e"/>
+<circle cx="640" cy="1160" r="4" fill="#20343e"/>
+<circle cx="820" cy="1160" r="4" fill="#20343e"/>
+<circle cx="990" cy="1160" r="4" fill="#20343e"/>
+<circle cx="1690" cy="1160" r="4" fill="#20343e"/>
+<circle cx="2500" cy="1160" r="4" fill="#20343e"/>
+<circle cx="640" cy="1285" r="4" fill="#20343e"/>
+<circle cx="990" cy="1440" r="4" fill="#20343e"/>
+<circle cx="640" cy="1820" r="4" fill="#20343e"/>
+<circle cx="2500" cy="1820" r="4" fill="#20343e"/>
+<circle cx="640" cy="1865" r="4" fill="#52676d"/>
+<circle cx="820" cy="1865" r="4" fill="#52676d"/>
+<circle cx="1160" cy="1865" r="4" fill="#52676d"/>
+<circle cx="1260" cy="1865" r="4" fill="#52676d"/>
+<circle cx="1360" cy="1865" r="4" fill="#52676d"/>
+<circle cx="1480" cy="1865" r="4" fill="#52676d"/>
+<circle cx="2000" cy="1865" r="4" fill="#52676d"/>
+<circle cx="2460" cy="1865" r="4" fill="#52676d"/>
+<circle cx="2500" cy="1865" r="4" fill="#52676d"/>
+</svg>

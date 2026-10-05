@@ -25,24 +25,25 @@ FUNCTION = {0:'Manual TX (optional)',1:'Manual RX (optional)',2:'Left encoder A'
             27:'Right CS via conditioning',28:'Pack voltage via divider'}
 
 class Sheet:
-    def __init__(self, number, name, subtitle):
+    def __init__(self, number, name, subtitle, width=W, height=H):
         self.number, self.name = number, name
-        self.p = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-labelledby="title desc">',
+        self.width,self.height=width,height
+        self.p = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
                   f'<title id="title">Hux V1-PROOF {escape(name)}</title><desc id="desc">{escape(subtitle)} Source-checked planning drawing; proposed harnesses and unresolved interfaces require physical verification.</desc>',
                   '<defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r=".7" fill="#c9d5d1"/></pattern></defs>']
-        self.rect(0,0,W,H,C['paper'])
-        self.p.append(f'<rect x="32" y="32" width="1616" height="1056" fill="url(#grid)" stroke="{C["line"]}"/>')
+        self.rect(0,0,width,height,C['paper'])
+        self.p.append(f'<rect x="32" y="32" width="{width-64}" height="{height-64}" fill="url(#grid)" stroke="{C["line"]}"/>')
         self.text(64,72,'HUX  /  V1-PROOF  /  ELECTRICAL',13,C['green'],700,spacing=2)
         self.text(64,119,name,38,C['ink'],700)
         self.text(64,150,subtitle,16,C['muted'])
-        self.rect(1350,58,266,58,'#ece7d7',8)
-        self.text(1483,82,'SOURCE-CHECKED PLAN',12,C['ink'],700,'middle',1)
-        self.text(1483,103,'HARNESS / BENCH RELEASE OPEN',10,C['muted'],500,'middle',1)
-        self.line([(64,174),(1616,174)],C['line'],1)
-        self.line([(64,1030),(1616,1030)],C['line'],1)
-        self.text(64,1060,'Rev A  |  03 OCT 2026  |  Drawn from vendor pinouts + Hux GPIO proposal',12,C['muted'])
-        self.text(64,1082,'See docs/wiring-atlas.md for source links, interface decisions and verification boundaries.',11,C['muted'])
-        self.text(1614,1064,number,25,C['green'],700,'end')
+        self.rect(width-330,58,266,58,'#ece7d7',8)
+        self.text(width-197,82,'SOURCE-CHECKED PLAN',12,C['ink'],700,'middle',1)
+        self.text(width-197,103,'HARNESS / BENCH RELEASE OPEN',10,C['muted'],500,'middle',1)
+        self.line([(64,174),(width-64,174)],C['line'],1)
+        self.line([(64,height-90),(width-64,height-90)],C['line'],1)
+        self.text(64,height-60,'Rev B  |  04 OCT 2026  |  Vendor pinouts + proposed Hux circuits',12,C['muted'])
+        self.text(64,height-38,'See docs/wiring-atlas.md and the wire register for sources and open circuit decisions.',11,C['muted'])
+        self.text(width-66,height-56,number,25,C['green'],700,'end')
     def rect(self,x,y,w,h,fill=None,r=0,stroke=None,dash=False):
         self.p.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{r}" fill="{fill or C["white"]}" stroke="{stroke or C["line"]}" stroke-width="1.4"'+(' stroke-dasharray="7 5"' if dash else '')+'/>')
     def text(self,x,y,t,size=16,color=None,weight=400,anchor='start',spacing=0):
@@ -290,7 +291,7 @@ def power_servo():
     s.note(64,803,440,'ENABLE + WATCHDOG BOUNDARY',[
         'GP10 p14 + GP22 p29 → hardware gate',
         'Gate output → BOTH wheel SLEEP pins.',
-        'Servo watchdog shutoff remains unresolved.',
+        'Servo torque-cut circuit: proposed in EL-01.',
         'Physical cut must remove wheel + servo power.'],C['red'])
     # Common reference drawn as a functional bus, with distinct return branches.
     s.line([(84,988),(1594,988)],C['ground'],4)
@@ -310,7 +311,7 @@ def netlist():
     assert len({x['physical_pin'] for x in endpoints})==len(endpoints)
     assert [PIN[x] for x in (12,13,14,15,16)]==[16,17,19,20,21]
     assert [PIN[x] for x in (20,21,26,27,28)]==[26,27,31,32,34]
-    data=dict(revision='A',source_checked='2026-10-03',status='build-planning; physical verification pending',
+    data=dict(revision='B',source_checked='2026-10-04',status='build-planning; physical verification pending',
               pico_endpoints=endpoints,
               imu=[dict(pico='GND p18',pad='GND'),dict(pico='3V3(OUT) p36',pad='3V3'),
                    *[dict(gpio=g,physical_pin=PIN[g],pad=p) for g,p in [(15,'SDA/SDI'),(14,'SCL'),(12,'SDO'),(13,'CS'),(16,'INT1')]]],
@@ -323,5 +324,9 @@ def netlist():
 
 if __name__=='__main__':
     netlist()
-    overview();pico_imu();wheel();power_servo()
-    print('Built four SVG sheets and audited endpoint register.')
+    pico_imu();wheel();power_servo()
+    from complete import full_system, both_wheels, register
+    master=full_system()
+    both_wheels()
+    register(master)
+    print('Built five SVG sheets and the complete conductor register.')

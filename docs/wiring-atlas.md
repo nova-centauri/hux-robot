@@ -1,17 +1,26 @@
-# V1-PROOF wiring atlas — Rev A
+# V1-PROOF wiring atlas — Rev B
 
-**Source checked October 3, 2026. This is a build-plan drawing. The physical harness and the circuit release remain open.** The [Electrical page](../tools/living-drawings/electrical.html) embeds the coordinated four-sheet atlas. Enlarge a sheet to zoom and pan, or download the [four-page printable atlas](../cad/wiring/v1-proof-wiring-atlas.pdf).
+**Revision dated October 4, 2026. This is a source-checked build-plan drawing. The physical harness and circuit release remain open.** The [Electrical page](../tools/living-drawings/electrical.html) leads with the full system schematic and a separate two-motor sheet. Enlarge a sheet, choose Read labels, and pan to inspect individual conductors. Download the [five-page printable atlas](../cad/wiring/v1-proof-wiring-atlas.pdf) or search the [wire register](../cad/wiring/v1-proof-wire-register.html) by conductor ID, signal or endpoint.
 
 | Sheet | Drawing | Coverage |
 | --- | --- | --- |
-| EL-01 | [Wiring overview](../cad/wiring/v1-proof-el-01-overview.svg) | Power branches, controller, sensor, wheel channels, hardware enable and servo bus |
+| EL-01 | [Complete system wiring](../cad/wiring/v1-proof-el-01-overview.svg) | Individual proposed external conductors, both wheel motors and drivers, controller, sensor, power branches, hardware enable and servo bus |
 | EL-02 | [Pico 2 + IMU](../cad/wiring/v1-proof-el-02-pico-imu.svg) | Component-side pin maps and seven-wire main SPI connection |
 | EL-03 | [Wheel harness](../cad/wiring/v1-proof-el-03-wheel-harness.svg) | Exact DRV8874 pad order, motor lead colors, encoder conversion and wheel GPIOs |
 | EL-04 | [Power + servo bus](../cad/wiring/v1-proof-el-04-power-servo.svg) | Power-cut boundary, VSYS isolation, TTL interface and unresolved protection circuits |
+| EL-05 | [Both wheel motors — every wire](../cad/wiring/v1-proof-el-05-both-wheels.svg) | Separate left and right motor leads, encoder supply and feedback, driver command and monitoring, and gated enable |
 
 Colors identify the rail families or the signal families. The motor lead colors keep their documented function, and outlined white is encoder B. Dots show connected branches. Crossings without dots do not connect. Ground symbols share the common reference. Dashed component frames mark circuits or interfaces whose implementation remains undecided.
 
-The detail sheets expand the bundled I/O paths on EL-01. Functional blocks are not connector face views.
+EL-01 shows individual conductors with global IDs and named endpoints. Those IDs refer to the searchable wire register. EL-05 labels wheel terminals without separate wire IDs. Search those terminal names in the same register.
+
+IDs are references for the proposed harness. They do not establish released wire gauges, connector contacts or internal circuit designs. Functional blocks are not connector face views. EL-02–04 provide closer pin maps and implementation notes alongside the complete system drawing.
+
+## Both motors and the wire register
+
+The [two-wheel sheet](../cad/wiring/v1-proof-el-05-both-wheels.svg) shows both planned channels independently. Each motor has two switched power leads and four encoder leads. Each driver also needs its own power and ground, command signals, fault feedback, conditioned current feedback, mode straps and a current-limit setting network (TBD). Encoder A and B need separate conversion channels. The hardware gate supplies SLEEP to both drivers.
+
+Match a conductor ID in the schematic to its source and destination in the [searchable register](../cad/wiring/v1-proof-wire-register.html). The [machine-readable endpoint and connection register](../cad/wiring/v1-proof-netlist.json) supports review and generation. These files describe proposed external wiring. They do not close any dashed internal interface or protection circuit. Both channels are planned, and the [inventory](parts-on-hand.md) records the actual received quantities.
 
 ## Sensor harness — source checked
 
@@ -70,13 +79,17 @@ External regulated 5 V enters **VSYS, physical pin 39**, through a suitable Scho
 
 The plan supplies the selected ST3215 servo (12 V variant) from a protected regulated 9 V supply. The mounted torque and duty at that voltage remain unmeasured. Both servos share a single half-duplex TTL DATA net with distinct IDs. The cable contact order, the bus voltage compatibility and the adapter remain unconfirmed. Separate Pico 2 TX/RX connect to a compatible directional interface. They are not tied together on the bus.
 
-The proposed wheel watchdog gate does not establish a servo watchdog power cut. That hardware behavior remains unresolved. The physical actuator cut covers both branches.
+The proposed wheel watchdog gate does not itself cut servo power. EL-01 adds a proposed servo torque-cut switch driven by the gated hardware enable. Its circuit and failure behavior still need selection and powered tests. The physical actuator cut covers both branches.
 
 We independently compared these sources: [Pico 2 datasheet, power and ADC guidance](https://datasheets.raspberrypi.com/pico/pico-2-datasheet.pdf), [Raspberry Pi SDK pin functions](https://www.raspberrypi.com/documentation/pico-sdk/hardware.html), [Waveshare ST3215 variants](https://www.waveshare.com/product/modules/st3215-servo.htm), and [Waveshare directional bus interface example](https://files.waveshare.com/upload/d/d3/Bus_servo_control_circuit.pdf). This example documents the interface principle and does not select a purchased adapter.
 
 ## What was double checked
 
 Independent reviews compared the vendor documents, schematics and component-side images with the repository proposal. A second review checked the generated SVGs and the endpoint register: all 40 Pico 2 pins, seven sensor connections, both wheel GPIO allocations, the DRV8874 pad order and six motor lead functions. The automated generation rejects duplicate Pico 2 pin allocations and checks the SPI/UART/ADC physical pins. The visual review covers line endpoints, ground crossings, board proportions, legibility and the enlarged viewer of the site.
+
+Rev B adds a conductor graph that checks terminal coverage and endpoint/net conflicts. It checks all 26 proposed GPIO endpoints, 12 motor cable leads and six servo leads. Geometry checks reject overlapping wires of different nets and endpoint touches between different nets. They also reject wires hidden inside component bodies. EL-01 checks that all branches of each drawn net join, including its rails and junctions.
+
+These checks verify the drawing data. They cannot prove physical wiring or the behavior of a TBD circuit.
 
 This is source verification, not a measured assembly pass. The [received inventory](parts-on-hand.md), [Pico bring-up record](checklists/2026-10-03-pico-bringup.md) and [electrical qualification checklist](checklists/electronics-bringup.md) keep their current status. Before we can release an assembly schematic, we must record these items: the fuse and wire ratings, the energy clamps, the ADC protection and the encoder conversion. We must also record the servo interface, the watchdog circuits, the harness contact orientation and the physical tests.
 
