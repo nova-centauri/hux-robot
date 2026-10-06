@@ -1,0 +1,20 @@
+{
+  "revision": "R03",
+  "date": "2026-10-06",
+  "units": "mm",
+  "scope": "Supported body, neutral lock and suspended wheel. Servo transmission remains open.",
+  "panel": {"width": 120, "bottom": -35, "top": 150, "thickness": 6, "corner_radius": 5},
+  "body": {"inside_width": 135, "deck_z": [60, 140], "deck_thickness": 4, "deck_bolt_x": 43, "deck_bolt_inset": 13},
+  "leg": {"link_centers": 110, "pivot_spacing": 40, "thickness": 5, "boss_radius": 8, "neck_width": 8, "min_deg": 15, "neutral_deg": 30, "max_deg": 45, "lock_radius": 24},
+  "fit": {"m4_clearance": 4.5, "m3_clearance": 3.4, "motor_pilot": 12.4},
+  "carrier": {"thickness": 6, "axle_offset": 25, "motor_axis_offset": 7, "motor_pad_radius": 23, "bolt_circle": 31, "hole_angles_deg": [210, 270, 330, 390, 450, 510]},
+  "stack": {"lower_link": [8, 13], "upper_link": [18, 23], "carrier": [25, 31], "wheel": [35.5, 59.5]},
+  "bracket": {"leg": 26, "width": 18, "wall": 5, "gusset": 3},
+  "fixture": {"pivot_above_base": 200, "base": [280, 230, 18], "uprights": [54, 300, 18], "upright_x": -80, "body_bolt_z": [10, 80]},
+  "sources": [
+    "../../prints/v1-proof-r01/README.md",
+    "../../../tools/living-drawings/wheel-mount.js",
+    "https://www.pololu.com/product/4752",
+    "https://www.pololu.com/product/2674"
+  ]
+}

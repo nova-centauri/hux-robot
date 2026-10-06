@@ -16,7 +16,7 @@
       <p class="document-code">JD / V1-PROOF</p>
     </div>
 
-    <div class="callout"><strong>Drawing status: placeholders.</strong> These schematic views identify the assemblies to detail. Hardware sizes, mount positions, bearing fits and load capacity await measurements and review. The R01 passive print guide is the available assembly reference.</div>
+    <div class="callout"><strong>Drawing status.</strong> JD-01 and JD-02 are schematic placeholders. JD-03 is a design proposal with exact vendor dimensions. Hardware sizes, mount positions, bearing fits and load capacity await measurements and review. The R01 passive print guide is the available assembly reference.</div>
 
     <div class="detail-grid section">
       <article id="driven-pivot" class="detail-card">
@@ -91,37 +91,15 @@
 
       <article id="wheel-axle" class="detail-card">
         <figure class="detail-figure">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 350" role="img" aria-labelledby="wheel-title wheel-desc">
-            <title id="wheel-title">Wheel carrier and axle interface schematic placeholder</title>
-            <desc id="wheel-desc">A side projection shows a vertical carrier inside the nominal wheel envelope. The kinematic axle is at the lower carrier pivot. A separate interface box reserves the motor, hub and bearing detail; their mounted geometry is not shown.</desc>
-            <rect width="600" height="350" fill="#f3f5f4"/>
-            <g fill="none" stroke="#a8b3ae" stroke-width="1"><path d="M0 70H600M0 140H600M0 210H600M0 280H600M100 0V350M200 0V350M300 0V350M400 0V350M500 0V350"/></g>
-            <circle cx="190" cy="210" r="100" fill="#e6ece8" stroke="#6d8076" stroke-width="2" stroke-dasharray="7 5"/>
-            <rect x="176" y="116" width="28" height="111" rx="12" fill="#648471" stroke="#365b48" stroke-width="2"/>
-            <path d="M190 130L104 91M190 210L77 158" stroke="#365b48" stroke-width="11" stroke-linecap="round"/>
-            <circle cx="190" cy="130" r="8" fill="#f3f5f4" stroke="#365b48" stroke-width="3"/>
-            <circle cx="190" cy="210" r="8" fill="#f3f5f4" stroke="#365b48" stroke-width="3"/>
-            <path d="M206 210H331" stroke="#365b48" stroke-width="2" stroke-dasharray="5 5"/>
-            <rect x="337" y="102" width="226" height="163" rx="4" fill="#f3f5f4" stroke="#6d8076" stroke-width="2" stroke-dasharray="7 5"/>
-            <g font-family="Arial, sans-serif" fill="#233c2f" font-size="15">
-              <text x="33" y="35" font-size="12" letter-spacing="1.5">JD-03 / CARRIER &amp; WHEEL INTERFACE</text>
-              <text x="219" y="113">Carrier</text><path d="M218 121L204 136" stroke="#233c2f"/>
-              <text x="219" y="242">Model axle</text><path d="M227 227L204 213" stroke="#233c2f"/>
-              <text x="357" y="134" font-weight="bold">Interface detail pending</text>
-              <text x="357" y="166">Pololu 4752 motor mount</text>
-              <text x="357" y="192">Wheel hub / axle bearings</text>
-              <text x="357" y="218">Cable exit / strain relief</text>
-              <text x="33" y="331" font-size="12">Schematic placeholder · projected wheel envelope, mounted fit unverified</text>
-            </g>
-          </svg>
-          <figcaption>JD-03 · Side projection only · motor and bearing detail pending</figcaption>
+          <img src="../../cad/layouts/wheel-mount-r02-side.svg" alt="JD-03 side view: carrier R02 holds the two link pivots and the Pololu 4752 gearmotor. The axle is 25 mm rearward of the lower pivot. The wheel is outboard of the carrier." width="760" height="560">
+          <figcaption>JD-03 · Carrier R02 at 30° · design proposal from vendor dimensions · unmeasured</figcaption>
         </figure>
         <div class="detail-body">
-          <p class="status-tag is-pending">Interface required</p>
+          <p class="status-tag is-pending">Design proposal R02</p>
           <h2>Wheel carrier and axle</h2>
-          <p>The kinematic model places the axle at the lower carrier pivot. The upper pivot lies within the nominal Ø100 mm wheel projection, so the real wheel and linkage need lateral clearance.</p>
-          <p><strong>Close-up still needed:</strong> measured motor envelope and mount, hub attachment, structural axle support, wheel offset and cable sweep. Robot weight needs a defined bearing path.</p>
-          <ul class="link-list"><li><a href="../../docs/mechanical.md#wheel-and-leg-arrangement">Wheel support requirements</a></li><li><a href="../../docs/one-leg-bench.md#link-lengths-and-fixture">Carrier geometry</a></li><li><a href="../../docs/checklists/2026-10-02-mechanical-fit.md">Motor packaging checklist</a></li></ul>
+          <p>The Pololu 4752 gearmotor bolts to the carrier. The wheel sits on the motor shaft, outboard of the carrier. The axle moves 25 mm rearward of the lower pivot. The lower link ends on that pivot, and the 37D shaft is 7 mm off the motor axis.</p>
+          <p><strong>Still needed:</strong> measurements of the received motor, the wheel seat depth, a printed R02 carrier, a fit check and the shaft play record. The <a href="wheel-mount.html">wheel drive mount sheet</a> has the live geometry, the hole table and the load screen.</p>
+          <ul class="link-list"><li><a href="wheel-mount.html">JD-03 wheel drive mount sheet</a></li><li><a href="../../cad/layouts/wheel-mount-r02.svg">Carrier R02 1:1 template</a></li><li><a href="../../docs/mechanical.md#wheel-drive-mount">Mechanical plan, wheel drive mount</a></li><li><a href="../../docs/checklists/2026-10-02-mechanical-fit.md">Motor packaging checklist</a></li></ul>
         </div>
       </article>
     </div>
@@ -131,7 +109,7 @@
       <div class="table-wrap"><table class="engineering-table"><thead><tr><th scope="col">Detail</th><th scope="col">Next evidence</th><th scope="col">Current source</th></tr></thead><tbody>
         <tr><td>JD-01 · Driven pivot</td><td>Supported shaft and transmission drawing; received servo measurements</td><td><a href="../../docs/one-leg-bench.md">Single-leg bench plan</a></td></tr>
         <tr><td>JD-02 · Passive pivots</td><td>Close-up photographs, measured stack and swept clearance</td><td><a href="../../cad/prints/v1-proof-r01/README.md">R01 passive kit</a></td></tr>
-        <tr><td>JD-03 · Wheel axle</td><td>Motor/hub/bearing assembly drawing and packaging measurements</td><td><a href="../../docs/mechanical.md">Mechanical plan</a></td></tr>
+        <tr><td>JD-03 · Wheel axle</td><td>Measured motor and wheel dimensions, a printed R02 carrier and the shaft play record</td><td><a href="wheel-mount.html">Wheel drive mount sheet</a></td></tr>
       </tbody></table></div>
       <p>Save the revision, setup and photographs in a <a href="../../docs/checklists/one-leg-bench-session.md">dated bench session</a>. Passive fit observations do not qualify powered motion or applied load.</p>
     </section>

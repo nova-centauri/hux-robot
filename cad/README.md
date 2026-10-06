@@ -1,5 +1,7 @@
 # Hux CAD and layouts
 
+**2026-10-06:** the [R03 one-leg body kit](prints/one-leg-body-r03/README.md) adds the supported body, neutral lock and suspended wheel carrier. It contains nine STL/STEP part types, a STEP/Blender assembly and four engineering sheets. The user reports satisfactory leg travel and sufficient adjustable bench-supply capacity. Exact travel measurements, new printed fits and powered qualification remain open.
+
 Active: [V1-PROOF envelope sketch](layouts/v1-proof.svg), generated from [model.json](../tools/v1-proof/model.json). It shows side, front and plan envelopes plus the simple parallel-link leg. It is not a fabrication drawing or a clearance validation.
 
 For bench geometry checks, use the [1:1 single-leg geometry template](layouts/one-leg-bench-template.svg) with the [bench plan](../docs/one-leg-bench.md). Print at actual size and make sure that the 100 mm scale is correct. The template marks pivot centers for a paper/scrap mockup. Shaft holes, structural sections, lateral offsets and purchased-part mounts are not released.

@@ -1,0 +1,125 @@
+{
+  "revision": "R03",
+  "status": "Export checks passed. Physical fit and strength remain unverified.",
+  "parts": [
+    {
+      "id": "01_body_side",
+      "watertight": true,
+      "single_solid": true,
+      "step_valid": true,
+      "bounds_mm": [
+        120.0,
+        185.0,
+        6.0
+      ],
+      "volume_mm3": 103829.39,
+      "stl_sha256": "c10efe826d59f7dda1d6df10f588633d683e5077a8164c9285016e88b38f1cdb"
+    },
+    {
+      "id": "02_equipment_deck",
+      "watertight": true,
+      "single_solid": true,
+      "step_valid": true,
+      "bounds_mm": [
+        120.0,
+        135.0,
+        4.0
+      ],
+      "volume_mm3": 58358.6,
+      "stl_sha256": "d944a758213641f585565c91c2c32f3fb104d3c3ba9347c78b370fe5e9c70ef0"
+    },
+    {
+      "id": "03_deck_angle",
+      "watertight": true,
+      "single_solid": true,
+      "step_valid": true,
+      "bounds_mm": [
+        26.0,
+        26.0,
+        18.0
+      ],
+      "volume_mm3": 4455.0,
+      "stl_sha256": "c9973f4ddb76a095d61f8a89cf6735391b1bff5e159991f43297c48698534451"
+    },
+    {
+      "id": "04_lower_lock_link",
+      "watertight": true,
+      "single_solid": true,
+      "step_valid": true,
+      "bounds_mm": [
+        126.0,
+        16.0,
+        5.0
+      ],
+      "volume_mm3": 6118.1,
+      "stl_sha256": "0476997a7b609bfa3cfa90a9d5d81d609f71326d51846f40cba934c43d267c95"
+    },
+    {
+      "id": "05_motor_carrier",
+      "watertight": true,
+      "single_solid": true,
+      "step_valid": true,
+      "bounds_mm": [
+        63.0,
+        71.0,
+        6.0
+      ],
+      "volume_mm3": 17127.06,
+      "stl_sha256": "9e347ae54fcb09e90c35cb6a80a452e70de908559b6d3a791e1ed6e1ebf29e7b"
+    },
+    {
+      "id": "06_upper_link",
+      "watertight": true,
+      "single_solid": true,
+      "step_valid": true,
+      "bounds_mm": [
+        126.0,
+        16.0,
+        5.0
+      ],
+      "volume_mm3": 5804.69,
+      "stl_sha256": "eab940dbb31363b867e0c2058703fe0853a4e3d34bfdfed30ffc8a2d94952bd9"
+    },
+    {
+      "id": "07_spacer_2mm",
+      "watertight": true,
+      "single_solid": true,
+      "step_valid": true,
+      "bounds_mm": [
+        9.0,
+        8.998,
+        2.0
+      ],
+      "volume_mm3": 95.4,
+      "stl_sha256": "004d29fb67aeea57bf398fc2ca937dcc1e185410ce6a0fd03c579a1779046314"
+    },
+    {
+      "id": "08_spacer_12mm",
+      "watertight": true,
+      "single_solid": true,
+      "step_valid": true,
+      "bounds_mm": [
+        9.0,
+        8.998,
+        12.0
+      ],
+      "volume_mm3": 572.4,
+      "stl_sha256": "16c813ded4f4655c879c1a902f6d3669e216437fdb1cd225217466d0207b6db5"
+    },
+    {
+      "id": "09_interface_coupon",
+      "watertight": true,
+      "single_solid": true,
+      "step_valid": true,
+      "bounds_mm": [
+        86.0,
+        30.0,
+        4.0
+      ],
+      "volume_mm3": 9578.78,
+      "stl_sha256": "6ff76f8b1e802a2a14a3bebec216b88f586cedb0c16ca37f99c925c48b2665f5"
+    }
+  ],
+  "stationary_aabb_overlap_count": 0,
+  "clearance_audit": "clearance-audit.json"
+}

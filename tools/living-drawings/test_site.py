@@ -109,7 +109,7 @@ class BuildTests(unittest.TestCase):
         web.mkdir(parents=True)
         (web / 'index.html').write_text('<html><head><link href="docs.css" rel="stylesheet"></head><body><h1 id="build">Build</h1><h2 id="next-version">Later</h2><a href="../../docs/one-leg-bench.md#setup">Bench</a><script src="../v1-proof/sim.js"></script></body></html>')
         (web / 'v0-genesis.html').write_text('<html><body>Archive</body></html>')
-        for route in ('mechanical', 'electrical', 'controls', 'joints', 'build', 'parts', 'documents',
+        for route in ('mechanical', 'electrical', 'controls', 'joints', 'wheel-mount', 'build', 'parts', 'documents',
                       'mechanical-tests', 'proof-simulation', 'proof-sandbox'):
             (web / f'{route}.html').write_text(f'<html><head><title>{route}</title></head><body><main><h1 id="archive">{route}</h1></main></body></html>')
         (web / 'docs.css').write_text('body{color:#203830}')

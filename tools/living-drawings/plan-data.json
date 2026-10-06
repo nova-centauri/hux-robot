@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-04",
+  "updatedAt": "2026-10-06",
   "currentVersion": "v1-proof",
   "description": "Source-backed HUX work-in-progress plan. Proposed and simulated work is separate from measured physical evidence. Null order quantities and costs mean unknown, not zero.",
   "statusLabels": {
@@ -51,18 +51,29 @@
         "docs/parts-on-hand.md"
       ],
       "focus": {
-        "title": "Check the received Pico, IMU and printed mechanical fit",
-        "summary": "The user confirmed on 3 October that one Pico 2 with pre-soldered headers and one LSM6DSO IMU are received, untested. Start the USB/LED checks and the sensor identification while the passive mechanical fit tests continue. The gearmotor and the drivers are received and the parts are printed, but the total driver count and the printed revision/material remain to record. Recorded spend is $173.70, with $726.30 remaining under the $900 plan. The remaining shopping list separates the second wheel gearmotor from the parts that need stock confirmation. No physical test result is recorded.",
+        "title": "Build the supported body with one leg",
+        "summary": "The user reports satisfactory leg travel and sufficient adjustable bench-supply capacity. R03 adds a bolted body, removable decks, a neutral lock and a motor carrier. Its first-stage assumption uses a fixed leg and a suspended wheel. The X1C accepted the first PLA fit plate, which still requires completion and measurement. Exact motion measurements, new printed fits and the servo transmission remain open. Recorded spend stays $173.70.",
         "sourcePaths": [
-          "docs/checklists/2026-10-03-pico-bringup.md",
-          "tools/living-drawings/mechanical-tests.html",
-          "docs/checklists/2026-10-02-mechanical-fit.md",
+          "cad/prints/one-leg-body-r03/bambu/README.md",
+          "cad/prints/one-leg-body-r03/README.md",
+          "docs/checklists/2026-10-06-leg-motion.md",
           "docs/parts-on-hand.md",
-          "docs/purchases.md",
-          "cad/prints/v1-proof-r01/README.md"
+          "docs/one-leg-bench.md"
         ]
       },
       "nextActions": [
+        {
+          "id": "fixture-mockup",
+          "title": "Print and fit the R03 body interfaces",
+          "detail": "The X1C accepted the first PLA coupon and deck angle. Check print completion, the actual fasteners and the motor pilot. Then fit one body side, the lower lock link and the motor carrier before the full batch. Keep the first wheel trial suspended in the supported fixture.",
+          "status": "in-progress",
+          "sourcePaths": [
+            "cad/prints/one-leg-body-r03/bambu/README.md",
+            "cad/prints/one-leg-body-r03/README.md",
+            "docs/checklists/2026-10-06-leg-motion.md",
+            "docs/mechanical.md"
+          ]
+        },
         {
           "id": "pico-usb",
           "title": "Check the received Pico over USB",
@@ -71,18 +82,6 @@
           "sourcePaths": [
             "docs/checklists/2026-10-03-pico-bringup.md",
             "firmware/README.md"
-          ]
-        },
-        {
-          "id": "fixture-mockup",
-          "title": "Check the printed passive linkage",
-          "detail": "The user reports that the print is complete. Confirm the printed revision and material, measure the fit coupon if it is printed, and check the actual M4 hardware. For R01, assemble the 110 mm links and the 40 mm pivots with the specified lateral spacers. Sweep 15–45° by hand and dry-fit the received gearmotor/wheel envelope with all power disconnected. Powered mounts, bearings and load capacity remain unqualified.",
-          "status": "ready",
-          "sourcePaths": [
-            "docs/checklists/2026-10-02-mechanical-fit.md",
-            "docs/one-leg-bench.md",
-            "cad/layouts/one-leg-bench-template.svg",
-            "cad/prints/v1-proof-r01/README.md"
           ]
         },
         {
@@ -97,13 +96,12 @@
         },
         {
           "id": "record-session",
-          "title": "Record the first mechanical fit session",
-          "detail": "A first fit-session checklist is open, with no results entered. Save actual dimensions, printed revision/material, photos of closest clearances, neutral free play and failed checks. Use the full bench template for later powered tests.",
+          "title": "Add measurements to the leg motion report",
+          "detail": "The user reports completed leg tests and satisfactory travel. Record the actual endpoints, closest clearances, neutral free play, printed revision and material when available. Preserve the report without an inferred load or power pass.",
           "status": "ready",
           "sourcePaths": [
-            "docs/checklists/2026-10-02-mechanical-fit.md",
-            "docs/checklists/one-leg-bench-session.md",
-            "docs/one-leg-bench.md"
+            "docs/checklists/2026-10-06-leg-motion.md",
+            "docs/checklists/one-leg-bench-session.md"
           ]
         },
         {
@@ -274,10 +272,11 @@
           "orderedQuantity": null,
           "actualCost": null,
           "currency": "USD",
-          "confirmedOn": "2026-09-29",
-          "note": "The user says that the supply is available. The model, the voltage/current ratings and the reverse-energy behavior remain to record. No reuse credit is inferred.",
+          "confirmedOn": "2026-10-06",
+          "note": "The user confirms sufficient adjustable voltage and current capacity. Use this supply for the supported body stage. The model, final settings and reverse-energy behavior remain unrecorded. No new supply purchase or reuse credit follows.",
           "sourcePaths": [
-            "docs/parts-on-hand.md"
+            "docs/parts-on-hand.md",
+            "docs/checklists/2026-10-06-leg-motion.md"
           ]
         },
         {
@@ -348,8 +347,8 @@
         {
           "id": "BENCH",
           "title": "One-leg actuator exercise",
-          "status": "ready",
-          "summary": "Start the passive mechanical fit checks now with the printed parts and the received gearmotor. Powered one-leg/one-wheel tests follow identified hardware, supported mounts and qualified interfaces. No bench stage passed.",
+          "status": "in-progress",
+          "summary": "The user reports satisfactory leg travel. The R03 kit supplies a supported body and suspended wheel as the next stage. Exact travel measurements, powered tests and the servo transmission remain open.",
           "criteria": [
             "Complete the staged session with bounded commands, measured signs and disabled startup.",
             "Record passive clearances, backlash and measured leg/wheel response.",
@@ -357,9 +356,9 @@
             "Use measured load, electrical and thermal results to inform the robot. A bench pass does not prove balance."
           ],
           "sourcePaths": [
-            "docs/checklists/2026-10-02-mechanical-fit.md",
-            "docs/one-leg-bench.md",
-            "docs/checklists/one-leg-bench-session.md"
+            "cad/prints/one-leg-body-r03/README.md",
+            "docs/checklists/2026-10-06-leg-motion.md",
+            "docs/one-leg-bench.md"
           ]
         },
         {
@@ -432,9 +431,10 @@
       "bench": {
         "title": "Single-leg bench exercise",
         "status": "ready",
-        "summary": "The user report recorded 2026-10-02 says that the gearmotor and the drivers are received and the parts are printed. Start with the identification and passive linkage checks (B0 and B3) before the powered stages. These checks need no servo and no controller. No test results are recorded. Powered motion still requires qualified mounts, interfaces and the electrical/fault gates of the guide.",
+        "summary": "The user reports satisfactory leg travel on October 6. The R03 body kit supplies the next supported frame, neutral lock and motor carrier. Exact travel measurements and powered results remain open. Use the available bench supply for the first suspended wheel stage. The servo transmission and shaft bearings remain separate interfaces.",
         "sourcePaths": [
-          "docs/checklists/2026-10-02-mechanical-fit.md",
+          "cad/prints/one-leg-body-r03/README.md",
+          "docs/checklists/2026-10-06-leg-motion.md",
           "docs/one-leg-bench.md",
           "docs/checklists/one-leg-bench-session.md"
         ],
@@ -489,8 +489,8 @@
           {
             "id": "B3",
             "title": "Passive linkage",
-            "status": "ready",
-            "action": "Disconnect all power and detach the servo/belt. Assemble the printed passive parallelogram with the spacer layout of the confirmed revision. Sweep 15–45° by hand and check the gearmotor/wheel packaging. Record the measured fits, the closest clearances and the free play.",
+            "status": "in-progress",
+            "action": "Preserve the user report of satisfactory travel. Add measured endpoints, closest clearances and neutral free play. Recheck the lateral stack after the R03 carrier and lock link replace the R01 parts.",
             "evidence": "The recorded distance between centers, the retained fastener stack, and photos that show no binding or hardware contact through the hand sweep. The powered-fixture catch and the load capacity remain separate checks."
           },
           {
@@ -538,6 +538,21 @@
         ]
       },
       "documents": [
+        {
+          "title": "One-leg body R03",
+          "path": "cad/prints/one-leg-body-r03/README.md",
+          "kind": "STL, STEP, assembly and engineering sheets"
+        },
+        {
+          "title": "Leg motion report - 6 October",
+          "path": "docs/checklists/2026-10-06-leg-motion.md",
+          "kind": "user observation, measurements open"
+        },
+        {
+          "title": "Wheel drive mount · JD-03",
+          "path": "tools/living-drawings/wheel-mount.html",
+          "kind": "living diagram, design proposal"
+        },
         {
           "title": "Wiring atlas · EL-01–04",
           "path": "docs/wiring-atlas.md",
@@ -640,6 +655,37 @@
         }
       ],
       "updates": [
+        {
+          "date": "2026-10-06",
+          "title": "R03 PLA fit print started",
+          "summary": "The user selected default PLA and authorized the print. The X1C accepted the coupon and one deck angle, then entered its heat and bed-level cycle. The first plate estimate is 29 minutes and 14.47 g. The complete kit contains 20 objects on two prepared plates. Print completion and measured fits remain unverified. No new spend is recorded.",
+          "sourcePaths": [
+            "cad/prints/one-leg-body-r03/bambu/README.md",
+            "cad/prints/one-leg-body-r03/README.md",
+            "NOTES.md"
+          ]
+        },
+        {
+          "date": "2026-10-06",
+          "title": "Leg travel reported and one-leg body R03 prepared",
+          "summary": "The user reports satisfactory leg travel and sufficient adjustable bench-supply capacity. Nine STL/STEP part types, a STEP/Blender assembly and four engineering sheets define the R03 body kit. Its first-stage assumption uses a fixed leg and a suspended wheel. Nominal geometry and export checks pass. New printed fits, exact travel measurements, the servo transmission and powered qualification remain open. No new spend is recorded.",
+          "sourcePaths": [
+            "cad/prints/one-leg-body-r03/README.md",
+            "docs/checklists/2026-10-06-leg-motion.md",
+            "docs/mechanical.md",
+            "docs/parts-on-hand.md"
+          ]
+        },
+        {
+          "date": "2026-10-04",
+          "title": "JD-03 wheel drive mount geometry proposed",
+          "summary": "The Pololu 4752 gearmotor mounts to a new carrier R02, outboard of both links. The axle moves 25 mm rearward of the lower pivot because the 37D shaft is 7 mm off the motor axis. The Ø100 wheel sits on the motor shaft with a Pololu 2674 adapter. The living sheet checks the clearances live and prints a 1:1 carrier template. Nothing is measured, printed or ordered for this proposal.",
+          "sourcePaths": [
+            "tools/living-drawings/wheel-mount.html",
+            "cad/layouts/wheel-mount-r02.svg",
+            "docs/mechanical.md#wheel-drive-mount"
+          ]
+        },
         {
           "date": "2026-10-04",
           "title": "Simplified Technical English becomes the writing standard",
@@ -891,10 +937,11 @@
           "name": "Rubber wheels, hubs and supported axle hardware",
           "status": "check-stock",
           "need": "2 wheel assemblies",
-          "note": "Approximately 100 mm wheels. The hubs and the axle support must fit the selected gearmotor and layout. No stock is reserved.",
+          "note": "Approximately 100 mm wheels. The JD-03 proposal names the Pololu 3278 scooter wheel and the Pololu 2674 adapter, $33.22 for two of each before freight. Confirm the fit session first. No stock is reserved and nothing is ordered.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
-            "docs/v1-proof-hardware.md"
+            "docs/v1-proof-hardware.md",
+            "tools/living-drawings/wheel-mount.html"
           ]
         },
         {

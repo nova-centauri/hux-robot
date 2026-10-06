@@ -39,7 +39,7 @@ MAIN_ROUTES = (
 )
 SUB_ROUTES = {
     "mechanical.html": (("mechanical.html", "Assembly"), ("joints.html", "Joint details"),
-                        ("mechanical-tests.html", "Mechanical tests")),
+                        ("wheel-mount.html", "Wheel mount"), ("mechanical-tests.html", "Mechanical tests")),
     "electrical.html": (("electrical.html", "Wiring"), ("controls.html", "Control software")),
     "build.html": (("build.html", "Build plan"), ("docs/one-leg-bench.html", "Bench testing"),
                    ("proof-simulation.html", "Simulation evidence"), ("proof-sandbox.html", "3D sandbox")),
@@ -374,7 +374,7 @@ def document_sidebar(source: PurePosixPath, root: Path) -> str:
         ("Project", (("documents.html", "Document library"), ("docs/v1-proof.html", "Project brief"),
                      ("docs/decisions.html", "Decision history"))),
         ("Mechanical", (("mechanical.html", "Assembly overview"), ("joints.html", "Joint details"),
-                        ("docs/mechanical-testing.html", "Mechanical test plan"))),
+                        ("wheel-mount.html", "Wheel drive mount"), ("docs/mechanical-testing.html", "Mechanical test plan"))),
         ("Electrical & controls", (("electrical.html", "Wiring diagrams"), ("controls.html", "Control software"))),
         ("Build & test", (("build.html", "Build board"), ("docs/one-leg-bench.html", "Single-leg bench guide"),
                           ("docs/checklists/README.html", "Build checklists"))),

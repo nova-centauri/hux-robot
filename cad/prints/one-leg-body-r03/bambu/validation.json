@@ -1,0 +1,412 @@
+{
+  "date": "2026-10-06",
+  "projects": [
+    {
+      "file": "hux-r03-first-fit-pla.3mf",
+      "sha256": "a731e6a2b93f1eb6b319511f2c6dc2c116e5dbf408250bb77ae44b16c76da1d8",
+      "objects": 2,
+      "plates": 1,
+      "quantities": {
+        "03_deck_angle.stl": 1,
+        "09_interface_coupon.stl": 1
+      },
+      "checks": "Source vertices, face count, volume, flat orientation, scale, plate bounds and profile agree.",
+      "parts": [
+        {
+          "part": "03_deck_angle.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 6.2813429481123195e-09,
+          "plate_bounds_mm": [
+            [
+              145.0,
+              130.99998,
+              0.0
+            ],
+            [
+              171.0,
+              156.99998,
+              18.0
+            ]
+          ]
+        },
+        {
+          "part": "09_interface_coupon.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 6.725233068283593e-08,
+          "plate_bounds_mm": [
+            [
+              84.99999,
+              99.00001,
+              0.0
+            ],
+            [
+              170.99999,
+              129.00001,
+              4.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "hux-r03-full-kit-pla.3mf",
+      "sha256": "49777a449dd065aef9b0b5ba3c4da9df6ffe7ca80ed95c77be6141c23d6be1b4",
+      "objects": 20,
+      "plates": 2,
+      "quantities": {
+        "01_body_side.stl": 2,
+        "02_equipment_deck.stl": 2,
+        "03_deck_angle.stl": 8,
+        "04_lower_lock_link.stl": 1,
+        "05_motor_carrier.stl": 1,
+        "06_upper_link.stl": 1,
+        "07_spacer_2mm.stl": 2,
+        "08_spacer_12mm.stl": 2,
+        "09_interface_coupon.stl": 1
+      },
+      "checks": "Source vertices, face count, volume, flat orientation, scale, plate bounds and profile agree.",
+      "parts": [
+        {
+          "part": "01_body_side.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 3.864068057485034e-06,
+          "plate_bounds_mm": [
+            [
+              128.99998,
+              62.99974,
+              0.0
+            ],
+            [
+              248.99998,
+              247.99974,
+              6.0
+            ]
+          ]
+        },
+        {
+          "part": "01_body_side.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 3.864068057485034e-06,
+          "plate_bounds_mm": [
+            [
+              7.00002,
+              62.99974,
+              0.0
+            ],
+            [
+              127.00002,
+              247.99974,
+              6.0
+            ]
+          ]
+        },
+        {
+          "part": "03_deck_angle.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 6.2813429481123195e-09,
+          "plate_bounds_mm": [
+            [
+              125.55579,
+              35.88795,
+              0.0
+            ],
+            [
+              151.55579,
+              61.88795,
+              18.0
+            ]
+          ]
+        },
+        {
+          "part": "03_deck_angle.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 6.2813429481123195e-09,
+          "plate_bounds_mm": [
+            [
+              153.55577,
+              34.99973,
+              0.0
+            ],
+            [
+              179.55577,
+              60.99973,
+              18.0
+            ]
+          ]
+        },
+        {
+          "part": "03_deck_angle.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 6.2813429481123195e-09,
+          "plate_bounds_mm": [
+            [
+              97.55581,
+              34.99975,
+              0.0
+            ],
+            [
+              123.55581,
+              60.99975,
+              18.0
+            ]
+          ]
+        },
+        {
+          "part": "03_deck_angle.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 6.2813429481123195e-09,
+          "plate_bounds_mm": [
+            [
+              181.55575,
+              34.99975,
+              0.0
+            ],
+            [
+              207.55575,
+              60.99975,
+              18.0
+            ]
+          ]
+        },
+        {
+          "part": "03_deck_angle.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 6.2813429481123195e-09,
+          "plate_bounds_mm": [
+            [
+              69.55583,
+              34.99975,
+              0.0
+            ],
+            [
+              95.55583,
+              60.99975,
+              18.0
+            ]
+          ]
+        },
+        {
+          "part": "03_deck_angle.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 6.2813429481123195e-09,
+          "plate_bounds_mm": [
+            [
+              209.55573,
+              34.99973,
+              0.0
+            ],
+            [
+              235.55573,
+              60.99973,
+              18.0
+            ]
+          ]
+        },
+        {
+          "part": "03_deck_angle.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 6.2813429481123195e-09,
+          "plate_bounds_mm": [
+            [
+              41.55585,
+              34.99975,
+              0.0
+            ],
+            [
+              67.55585,
+              60.99975,
+              18.0
+            ]
+          ]
+        },
+        {
+          "part": "03_deck_angle.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 6.2813429481123195e-09,
+          "plate_bounds_mm": [
+            [
+              13.55587,
+              34.99975,
+              0.0
+            ],
+            [
+              39.55587,
+              60.99975,
+              18.0
+            ]
+          ]
+        },
+        {
+          "part": "02_equipment_deck.stl",
+          "plate": 2,
+          "source_vertex_error_mm": 6.548753444992717e-08,
+          "plate_bounds_mm": [
+            [
+              135.00001,
+              96.99998,
+              0.0
+            ],
+            [
+              255.00001,
+              231.99998,
+              4.0
+            ]
+          ]
+        },
+        {
+          "part": "02_equipment_deck.stl",
+          "plate": 2,
+          "source_vertex_error_mm": 6.548753444992717e-08,
+          "plate_bounds_mm": [
+            [
+              13.00005,
+              96.99998,
+              0.0
+            ],
+            [
+              133.00005,
+              231.99998,
+              4.0
+            ]
+          ]
+        },
+        {
+          "part": "05_motor_carrier.stl",
+          "plate": 2,
+          "source_vertex_error_mm": 1.9224461916502816e-06,
+          "plate_bounds_mm": [
+            [
+              192.00001,
+              24.00001,
+              0.0
+            ],
+            [
+              255.00001,
+              95.00001,
+              6.0
+            ]
+          ]
+        },
+        {
+          "part": "09_interface_coupon.stl",
+          "plate": 2,
+          "source_vertex_error_mm": 6.725233068283593e-08,
+          "plate_bounds_mm": [
+            [
+              0.99999,
+              65.00001,
+              0.0
+            ],
+            [
+              86.99999,
+              95.00001,
+              4.0
+            ]
+          ]
+        },
+        {
+          "part": "04_lower_lock_link.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 1.9562744171829223e-06,
+          "plate_bounds_mm": [
+            [
+              122.99998,
+              16.99976,
+              0.0
+            ],
+            [
+              248.99998,
+              32.99976,
+              5.0
+            ]
+          ]
+        },
+        {
+          "part": "06_upper_link.stl",
+          "plate": 2,
+          "source_vertex_error_mm": 1.9030517613336885e-06,
+          "plate_bounds_mm": [
+            [
+              0.99998,
+              47.00004,
+              0.0
+            ],
+            [
+              126.99998,
+              63.00004,
+              5.0
+            ]
+          ]
+        },
+        {
+          "part": "07_spacer_2mm.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 6.446376527208277e-09,
+          "plate_bounds_mm": [
+            [
+              140.63521,
+              52.00153,
+              0.0
+            ],
+            [
+              149.63521,
+              60.99975,
+              2.0
+            ]
+          ]
+        },
+        {
+          "part": "07_spacer_2mm.stl",
+          "plate": 2,
+          "source_vertex_error_mm": 6.446376527208277e-09,
+          "plate_bounds_mm": [
+            [
+              129.50006,
+              87.26854,
+              0.0
+            ],
+            [
+              138.50006,
+              96.26676,
+              2.0
+            ]
+          ]
+        },
+        {
+          "part": "08_spacer_12mm.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 6.446376527208277e-09,
+          "plate_bounds_mm": [
+            [
+              114.55582,
+              52.00149,
+              0.0
+            ],
+            [
+              123.55582,
+              60.99971,
+              12.0
+            ]
+          ]
+        },
+        {
+          "part": "08_spacer_12mm.stl",
+          "plate": 2,
+          "source_vertex_error_mm": 6.446376527208277e-09,
+          "plate_bounds_mm": [
+            [
+              140.42648,
+              86.00178,
+              0.0
+            ],
+            [
+              149.42648,
+              95.0,
+              12.0
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

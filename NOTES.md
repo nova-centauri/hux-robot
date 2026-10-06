@@ -1,4 +1,4 @@
-# Working notes — V1-PROOF, updated 2026-10-05
+# Working notes — V1-PROOF, updated 2026-10-06
 
 The active objective is a useful, inexpensive proof robot. **Under $1,000. Reuse first. 2.5 kg target. Four actuators. Indoor mobility with bounded disturbance tests.** The previous stair work is [parked](docs/archive/stair-v1/README.md).
 
@@ -15,9 +15,21 @@ The active objective is a useful, inexpensive proof robot. **Under $1,000. Reuse
 
 ## Next physical work
 
+**2026-10-06 PLA print start:** the user selected default PLA and authorized the print. The [Bambu Studio projects](cad/prints/one-leg-body-r03/bambu/README.md) include a first fit plate and the complete kit on two plates. The X1C accepted the coupon and one deck angle, then entered its heat and bed-level cycle. The slicer estimate is 29 minutes and 14.47 g. Print completion and measured fits remain unverified. The complete kit includes the first fit parts again and requires the checks in the assembly guide before further prints.
+
+**2026-10-06 leg motion and next body:** the user reports completed leg tests and satisfactory travel. The [dated observation](docs/checklists/2026-10-06-leg-motion.md) records the report. Exact endpoints, clearances, free play and loads remain unmeasured in the shared record.
+
+The user confirms sufficient adjustable bench-supply capacity and requests a body with one leg. The [R03 body kit](cad/prints/one-leg-body-r03/README.md) supplies nine STL/STEP part types, a STEP/Blender assembly and four engineering sheets. Its first-stage assumption is a fixed leg with a suspended wheel. The kit preserves the 110 mm links and 40 mm pivots. It adds two body sides, two decks, eight angles, a neutral lock link and the JD-03 motor carrier interface.
+
+Print the interface coupon and one angle first. Confirm the actual motor, wheel, hub and fastener fits before the full batch. The ST3215 transmission, driven shaft and bearings remain open. The motor shaft does not carry body weight in this stage. The new CAD passes nominal geometry and export checks, without a physical load or power qualification. The existing simulation retains its R01 axle position.
+
 **2026-10-05 electrical print views:** EL-01 and EL-05 now use separate 11 x 17 inch landscape PDFs with 0.5 inch margins. The Electrical page includes a PDF view and a download link for each sheet. The five-sheet atlas uses the same paper size. The SVGs supply both the screen diagrams and the PDFs.
 
 The [export procedure](cad/wiring/README.md) describes the update command and visual checks. A source or export change stops the site build until the PDFs match. The source audit remains Rev B. No physical test result changed.
+
+**2026-10-04 wheel drive mount (JD-03):** we worked out how the Pololu 4752 gearmotor mounts to the wheel. The [living sheet](tools/living-drawings/wheel-mount.html) holds the side view, the lateral section, the hole table, the load screen and live clearance checks. The [1:1 carrier template](cad/layouts/wheel-mount-r02.svg) prints the proposed carrier R02. The 37D shaft is 7.0 mm off the motor axis, so the axle moves 25 mm rearward of the lower pivot. The carrier R02 goes outboard of both links. The wheel is a Pololu 3278 scooter wheel on a Pololu 2674 adapter, on the motor shaft.
+
+This is a design proposal from vendor drawings and the Pololu STEP model. Nothing is measured, printed or ordered for it. The proposal asks for an exception to the supported-axle rule in [docs/mechanical.md](docs/mechanical.md#wheel-drive-mount). The shaft play record is the release condition. The simulation still uses the R01 axle position.
 
 **2026-10-04 writing standard:** all active text now obeys [Simplified Technical English](docs/writing-standard.md). Read `CLAUDE.md` and `tools/ste/SKILL.md` before you write. Run `python3 tools/ste/check_repo.py` before you finish. The gate is part of `npm run test:site`. The archive and the research notes keep their original text. No hardware status changed in this update.
 

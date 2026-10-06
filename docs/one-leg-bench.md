@@ -1,6 +1,8 @@
 # Single-leg bench plan
 
-**Updated 2026-10-02 — motor/drivers received and parts printed, no test results recorded.** Start with the [first mechanical fit session](checklists/2026-10-02-mechanical-fit.md), with all power disconnected. Then build a restrained, two-axis test article: one leg adjustment and one driven wheel. Learn wiring, signs, position control, wheel speed control, backlash and power behavior before you try balance. These first experiments do not need an IMU, a second leg, a battery or a full chassis.
+**Updated 2026-10-06:** the user reports completed leg tests and satisfactory travel. The [dated report](checklists/2026-10-06-leg-motion.md) contains that observation, without measured endpoints or load results. The [R03 body kit](../cad/prints/one-leg-body-r03/README.md) supplies the next supported body and motor carrier. Its first-stage assumption uses a fixed leg and a suspended wheel.
+
+The user confirms sufficient adjustable bench-supply voltage and current capacity. The supply replaces the battery at this stage. The rail settings and return-energy path remain part of the power procedure below. The full two-axis exercise still requires the servo transmission, supported shaft and interface checks.
 
 ## Parts and scope
 
@@ -10,7 +12,7 @@ This note updates the controller availability and the current total in the older
 
 **Arrival reported 2026-10-02:** the user received the **30:1 metal gearmotor and DRV8874 drivers** and completed the prints. The paid baseline is **one Pololu 4752 wheel motor + one Pololu 4035 driver**. Confirm the received labels and the total driver count. **Two ST3215 servos are paid**, with arrival unreported and shipment unconfirmed in the latest vendor record. **$143.12 is recorded paid**, including shipping/tax.
 
-The user confirms the servo 12 V variant. Verify the labels on arrival. The two-wheel robot still needs a second motor, and the driver coverage is still to confirm. A bench supply is available, with ratings unconfirmed. Controller, servo interface and harness availability are still to record. Refer to [paid orders](purchases.md), [inventory](parts-on-hand.md) and [hardware selection](v1-proof-hardware.md).
+The user confirms the servo 12 V variant. Verify the labels on arrival. The two-wheel robot still needs a second motor, and the driver coverage is still to confirm. The bench supply has sufficient adjustable capacity per the October 6 user report. Its model, final settings and return-energy behavior remain unrecorded. Refer to [paid orders](purchases.md), [inventory](parts-on-hand.md) and [hardware selection](v1-proof-hardware.md).
 
 **This plan is for V1-PROOF and the confirmed Pololu/ST3215 actuators.** RobStride is the intended actuator for the future full-size Hux. The 110 mm linkage geometry applies to this test version. The final structural fits and the power circuit still need measured hardware and supply checks.
 

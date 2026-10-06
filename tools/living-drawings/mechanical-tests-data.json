@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "version": "v1-proof",
-  "updatedAt": "2026-10-02",
+  "updatedAt": "2026-10-06",
   "title": "Mechanical testing",
   "geometry": {
     "linkMm": 110,
@@ -19,7 +19,10 @@
     "docs/mechanical-testing.md",
     "docs/checklists/2026-10-02-mechanical-fit.md",
     "cad/prints/v1-proof-r01/README.md",
-    "docs/one-leg-bench.md"
+    "docs/one-leg-bench.md",
+    "tools/living-drawings/wheel-mount.html",
+    "docs/checklists/2026-10-06-leg-motion.md",
+    "cad/prints/one-leg-body-r03/README.md"
   ],
   "steps": [
     {
@@ -50,15 +53,17 @@
     },
     {
       "id": "M3",
-      "title": "Sweep 15–45° by hand",
+      "title": "Record the observed leg travel",
       "phase": "passive",
-      "status": "planned",
-      "action": "Secure the fixed plate, support the carrier and disconnect the drive. Gently approach 15°, 30° and 45° from both directions. Also check the intermediate positions.",
+      "status": "ready",
+      "action": "The user reports satisfactory travel after the leg tests. Add the measured endpoints, closest clearances and neutral free play to the dated report. Recheck these interfaces after the R03 parts replace the R01 parts.",
       "measure": "Axle x/y, closest clearance, rubbing, binding and neutral free play. Do not force a collision.",
       "evidence": "Photos at three poses and notes that identify the closest hardware clearances.",
       "sourcePaths": [
         "docs/checklists/2026-10-02-mechanical-fit.md",
-        "docs/one-leg-bench.md#link-lengths-and-fixture"
+        "docs/one-leg-bench.md#link-lengths-and-fixture",
+        "docs/checklists/2026-10-06-leg-motion.md",
+        "cad/prints/one-leg-body-r03/README.md"
       ]
     },
     {
@@ -66,12 +71,14 @@
       "title": "Check motor and wheel packaging",
       "phase": "passive",
       "status": "planned",
-      "action": "Independently support the received motor at the proposed carrier location with power disconnected. Check shaft, hub, wheel, bearing and cable envelopes across the sweep.",
-      "measure": "Motor mass and mount/shaft dimensions. Actual wheel and cable clearances. The Ø100 disc represents an envelope only.",
+      "action": "Independently support the received motor at the proposed carrier location with power disconnected. Check shaft, hub, wheel, bearing and cable envelopes across the sweep. Compare the motor with the JD-03 wheel drive mount sheet and its 1:1 carrier template.",
+      "measure": "Motor mass, boss, shaft, flat, hole spacing and shaft offset. Wheel seat depth when the wheels arrive. Actual wheel and cable clearances. The Ø100 disc represents an envelope only.",
       "evidence": "Packaging photos and a list of mount, hub and bearing details still needed.",
       "sourcePaths": [
         "docs/checklists/2026-10-02-mechanical-fit.md",
-        "docs/mechanical.md"
+        "docs/mechanical.md#wheel-drive-mount",
+        "tools/living-drawings/wheel-mount.html",
+        "cad/layouts/wheel-mount-r02.svg"
       ]
     },
     {
@@ -157,6 +164,29 @@
       "sourcePaths": [
         "docs/checklists/2026-10-02-mechanical-fit.md",
         "docs/mechanical-testing.md"
+      ]
+    },
+    {
+      "id": "wheel-mount-proposal",
+      "date": "2026-10-04",
+      "kind": "preparation",
+      "title": "JD-03 wheel drive mount geometry proposed",
+      "notes": "The axle moves 25 mm rearward of the lower carrier pivot. The carrier R02 goes outboard of both links. The wheel sits on the motor shaft with the Pololu 2674 adapter. All dimensions come from the Pololu drawings and the STEP model. No measurement and no print exist for R02.",
+      "sourcePaths": [
+        "tools/living-drawings/wheel-mount.html",
+        "cad/layouts/wheel-mount-r02.svg",
+        "docs/mechanical.md#wheel-drive-mount"
+      ]
+    },
+    {
+      "id": "leg-travel-reported",
+      "date": "2026-10-06",
+      "kind": "observation",
+      "title": "Satisfactory leg travel reported; R03 body prepared",
+      "notes": "The user reports completed leg tests and satisfactory travel. Exact endpoints, clearances, cycle count and load remain unrecorded. The user confirms sufficient adjustable bench-supply capacity. The R03 kit supplies the next supported body and suspended wheel stage. No measured load or powered pass is inferred.",
+      "sourcePaths": [
+        "docs/checklists/2026-10-06-leg-motion.md",
+        "cad/prints/one-leg-body-r03/README.md"
       ]
     }
   ]

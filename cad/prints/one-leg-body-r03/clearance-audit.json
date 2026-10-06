@@ -1,0 +1,8510 @@
+{
+  "revision": "R03",
+  "method": "Exact solid distance at 13 poses, 15 to 45 degrees. Lock removed.",
+  "scope": "Nominal parts and envelopes. Fasteners, wires, deflection and purchased fit require physical checks.",
+  "minimum_screened_clearance_mm": 2.0,
+  "checks": [
+    {
+      "angle": 15.0,
+      "a": "lower_link",
+      "b": "upper_link",
+      "distance_mm": 5.0
+    },
+    {
+      "angle": 15.0,
+      "a": "lower_link",
+      "b": "gearbox",
+      "distance_mm": 5.606
+    },
+    {
+      "angle": 15.0,
+      "a": "upper_link",
+      "b": "gearbox",
+      "distance_mm": 24.827
+    },
+    {
+      "angle": 15.0,
+      "a": "carrier",
+      "b": "wheel",
+      "distance_mm": 4.5
+    },
+    {
+      "angle": 15.0,
+      "a": "lower_link",
+      "b": "body_near",
+      "distance_mm": 2.0
+    },
+    {
+      "angle": 15.0,
+      "a": "lower_link",
+      "b": "body_far",
+      "distance_mm": 143.0
+    },
+    {
+      "angle": 15.0,
+      "a": "lower_link",
+      "b": "deck_60",
+      "distance_mm": 52.616
+    },
+    {
+      "angle": 15.0,
+      "a": "lower_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 40.879
+    },
+    {
+      "angle": 15.0,
+      "a": "lower_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 129.998
+    },
+    {
+      "angle": 15.0,
+      "a": "lower_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 40.879
+    },
+    {
+      "angle": 15.0,
+      "a": "lower_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 130.0
+    },
+    {
+      "angle": 15.0,
+      "a": "lower_link",
+      "b": "deck_140",
+      "distance_mm": 132.246
+    },
+    {
+      "angle": 15.0,
+      "a": "lower_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 111.254
+    },
+    {
+      "angle": 15.0,
+      "a": "lower_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 175.803
+    },
+    {
+      "angle": 15.0,
+      "a": "lower_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 111.256
+    },
+    {
+      "angle": 15.0,
+      "a": "lower_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 175.804
+    },
+    {
+      "angle": 15.0,
+      "a": "lower_link",
+      "b": "fixture_base",
+      "distance_mm": 85.752
+    },
+    {
+      "angle": 15.0,
+      "a": "lower_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.004
+    },
+    {
+      "angle": 15.0,
+      "a": "lower_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 150.084
+    },
+    {
+      "angle": 15.0,
+      "a": "upper_link",
+      "b": "body_near",
+      "distance_mm": 12.0
+    },
+    {
+      "angle": 15.0,
+      "a": "upper_link",
+      "b": "body_far",
+      "distance_mm": 153.0
+    },
+    {
+      "angle": 15.0,
+      "a": "upper_link",
+      "b": "deck_60",
+      "distance_mm": 21.636
+    },
+    {
+      "angle": 15.0,
+      "a": "upper_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 31.626
+    },
+    {
+      "angle": 15.0,
+      "a": "upper_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 130.305
+    },
+    {
+      "angle": 15.0,
+      "a": "upper_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 31.847
+    },
+    {
+      "angle": 15.0,
+      "a": "upper_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 130.307
+    },
+    {
+      "angle": 15.0,
+      "a": "upper_link",
+      "b": "deck_140",
+      "distance_mm": 93.749
+    },
+    {
+      "angle": 15.0,
+      "a": "upper_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 75.614
+    },
+    {
+      "angle": 15.0,
+      "a": "upper_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 157.352
+    },
+    {
+      "angle": 15.0,
+      "a": "upper_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 75.611
+    },
+    {
+      "angle": 15.0,
+      "a": "upper_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 157.352
+    },
+    {
+      "angle": 15.0,
+      "a": "upper_link",
+      "b": "fixture_base",
+      "distance_mm": 125.752
+    },
+    {
+      "angle": 15.0,
+      "a": "upper_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.004
+    },
+    {
+      "angle": 15.0,
+      "a": "upper_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 160.016
+    },
+    {
+      "angle": 15.0,
+      "a": "carrier",
+      "b": "body_near",
+      "distance_mm": 30.027
+    },
+    {
+      "angle": 15.0,
+      "a": "carrier",
+      "b": "body_far",
+      "distance_mm": 161.681
+    },
+    {
+      "angle": 15.0,
+      "a": "carrier",
+      "b": "deck_60",
+      "distance_mm": 120.866
+    },
+    {
+      "angle": 15.0,
+      "a": "carrier",
+      "b": "angle_60_-43_0",
+      "distance_mm": 112.929
+    },
+    {
+      "angle": 15.0,
+      "a": "carrier",
+      "b": "angle_60_-43_1",
+      "distance_mm": 185.591
+    },
+    {
+      "angle": 15.0,
+      "a": "carrier",
+      "b": "angle_60_43_0",
+      "distance_mm": 95.731
+    },
+    {
+      "angle": 15.0,
+      "a": "carrier",
+      "b": "angle_60_43_1",
+      "distance_mm": 175.534
+    },
+    {
+      "angle": 15.0,
+      "a": "carrier",
+      "b": "deck_140",
+      "distance_mm": 199.822
+    },
+    {
+      "angle": 15.0,
+      "a": "carrier",
+      "b": "angle_140_-43_0",
+      "distance_mm": 184.473
+    },
+    {
+      "angle": 15.0,
+      "a": "carrier",
+      "b": "angle_140_-43_1",
+      "distance_mm": 239.646
+    },
+    {
+      "angle": 15.0,
+      "a": "carrier",
+      "b": "angle_140_43_0",
+      "distance_mm": 174.144
+    },
+    {
+      "angle": 15.0,
+      "a": "carrier",
+      "b": "angle_140_43_1",
+      "distance_mm": 231.789
+    },
+    {
+      "angle": 15.0,
+      "a": "carrier",
+      "b": "fixture_base",
+      "distance_mm": 70.748
+    },
+    {
+      "angle": 15.0,
+      "a": "carrier",
+      "b": "fixture_upright_near",
+      "distance_mm": 46.481
+    },
+    {
+      "angle": 15.0,
+      "a": "carrier",
+      "b": "fixture_upright_far",
+      "distance_mm": 172.382
+    },
+    {
+      "angle": 15.0,
+      "a": "gearbox",
+      "b": "body_near",
+      "distance_mm": 53.048
+    },
+    {
+      "angle": 15.0,
+      "a": "gearbox",
+      "b": "body_far",
+      "distance_mm": 148.312
+    },
+    {
+      "angle": 15.0,
+      "a": "gearbox",
+      "b": "deck_60",
+      "distance_mm": 147.925
+    },
+    {
+      "angle": 15.0,
+      "a": "gearbox",
+      "b": "angle_60_-43_0",
+      "distance_mm": 150.742
+    },
+    {
+      "angle": 15.0,
+      "a": "gearbox",
+      "b": "angle_60_-43_1",
+      "distance_mm": 201.328
+    },
+    {
+      "angle": 15.0,
+      "a": "gearbox",
+      "b": "angle_60_43_0",
+      "distance_mm": 122.158
+    },
+    {
+      "angle": 15.0,
+      "a": "gearbox",
+      "b": "angle_60_43_1",
+      "distance_mm": 180.921
+    },
+    {
+      "angle": 15.0,
+      "a": "gearbox",
+      "b": "deck_140",
+      "distance_mm": 227.9
+    },
+    {
+      "angle": 15.0,
+      "a": "gearbox",
+      "b": "angle_140_-43_0",
+      "distance_mm": 221.285
+    },
+    {
+      "angle": 15.0,
+      "a": "gearbox",
+      "b": "angle_140_-43_1",
+      "distance_mm": 258.412
+    },
+    {
+      "angle": 15.0,
+      "a": "gearbox",
+      "b": "angle_140_43_0",
+      "distance_mm": 202.045
+    },
+    {
+      "angle": 15.0,
+      "a": "gearbox",
+      "b": "angle_140_43_1",
+      "distance_mm": 242.141
+    },
+    {
+      "angle": 15.0,
+      "a": "gearbox",
+      "b": "fixture_base",
+      "distance_mm": 75.348
+    },
+    {
+      "angle": 15.0,
+      "a": "gearbox",
+      "b": "fixture_upright_near",
+      "distance_mm": 68.07
+    },
+    {
+      "angle": 15.0,
+      "a": "gearbox",
+      "b": "fixture_upright_far",
+      "distance_mm": 159.73
+    },
+    {
+      "angle": 15.0,
+      "a": "motor",
+      "b": "body_near",
+      "distance_mm": 54.048
+    },
+    {
+      "angle": 15.0,
+      "a": "motor",
+      "b": "body_far",
+      "distance_mm": 120.59
+    },
+    {
+      "angle": 15.0,
+      "a": "motor",
+      "b": "deck_60",
+      "distance_mm": 148.853
+    },
+    {
+      "angle": 15.0,
+      "a": "motor",
+      "b": "angle_60_-43_0",
+      "distance_mm": 151.701
+    },
+    {
+      "angle": 15.0,
+      "a": "motor",
+      "b": "angle_60_-43_1",
+      "distance_mm": 183.251
+    },
+    {
+      "angle": 15.0,
+      "a": "motor",
+      "b": "angle_60_43_0",
+      "distance_mm": 123.107
+    },
+    {
+      "angle": 15.0,
+      "a": "motor",
+      "b": "angle_60_43_1",
+      "distance_mm": 160.385
+    },
+    {
+      "angle": 15.0,
+      "a": "motor",
+      "b": "deck_140",
+      "distance_mm": 228.852
+    },
+    {
+      "angle": 15.0,
+      "a": "motor",
+      "b": "angle_140_-43_0",
+      "distance_mm": 222.257
+    },
+    {
+      "angle": 15.0,
+      "a": "motor",
+      "b": "angle_140_-43_1",
+      "distance_mm": 244.88
+    },
+    {
+      "angle": 15.0,
+      "a": "motor",
+      "b": "angle_140_43_0",
+      "distance_mm": 203.015
+    },
+    {
+      "angle": 15.0,
+      "a": "motor",
+      "b": "angle_140_43_1",
+      "distance_mm": 227.558
+    },
+    {
+      "angle": 15.0,
+      "a": "motor",
+      "b": "fixture_base",
+      "distance_mm": 76.348
+    },
+    {
+      "angle": 15.0,
+      "a": "motor",
+      "b": "fixture_upright_near",
+      "distance_mm": 69.115
+    },
+    {
+      "angle": 15.0,
+      "a": "motor",
+      "b": "fixture_upright_far",
+      "distance_mm": 133.121
+    },
+    {
+      "angle": 15.0,
+      "a": "encoder",
+      "b": "body_near",
+      "distance_mm": 60.864
+    },
+    {
+      "angle": 15.0,
+      "a": "encoder",
+      "b": "body_far",
+      "distance_mm": 107.249
+    },
+    {
+      "angle": 15.0,
+      "a": "encoder",
+      "b": "deck_60",
+      "distance_mm": 149.253
+    },
+    {
+      "angle": 15.0,
+      "a": "encoder",
+      "b": "angle_60_-43_0",
+      "distance_mm": 153.713
+    },
+    {
+      "angle": 15.0,
+      "a": "encoder",
+      "b": "angle_60_-43_1",
+      "distance_mm": 175.424
+    },
+    {
+      "angle": 15.0,
+      "a": "encoder",
+      "b": "angle_60_43_0",
+      "distance_mm": 125.487
+    },
+    {
+      "angle": 15.0,
+      "a": "encoder",
+      "b": "angle_60_43_1",
+      "distance_mm": 151.304
+    },
+    {
+      "angle": 15.0,
+      "a": "encoder",
+      "b": "deck_140",
+      "distance_mm": 229.252
+    },
+    {
+      "angle": 15.0,
+      "a": "encoder",
+      "b": "angle_140_-43_0",
+      "distance_mm": 223.761
+    },
+    {
+      "angle": 15.0,
+      "a": "encoder",
+      "b": "angle_140_-43_1",
+      "distance_mm": 239.196
+    },
+    {
+      "angle": 15.0,
+      "a": "encoder",
+      "b": "angle_140_43_0",
+      "distance_mm": 204.622
+    },
+    {
+      "angle": 15.0,
+      "a": "encoder",
+      "b": "angle_140_43_1",
+      "distance_mm": 221.396
+    },
+    {
+      "angle": 15.0,
+      "a": "encoder",
+      "b": "fixture_base",
+      "distance_mm": 76.748
+    },
+    {
+      "angle": 15.0,
+      "a": "encoder",
+      "b": "fixture_upright_near",
+      "distance_mm": 76.996
+    },
+    {
+      "angle": 15.0,
+      "a": "encoder",
+      "b": "fixture_upright_far",
+      "distance_mm": 120.452
+    },
+    {
+      "angle": 15.0,
+      "a": "wheel",
+      "b": "body_near",
+      "distance_mm": 36.358
+    },
+    {
+      "angle": 15.0,
+      "a": "wheel",
+      "b": "body_far",
+      "distance_mm": 171.819
+    },
+    {
+      "angle": 15.0,
+      "a": "wheel",
+      "b": "deck_60",
+      "distance_mm": 121.551
+    },
+    {
+      "angle": 15.0,
+      "a": "wheel",
+      "b": "angle_60_-43_0",
+      "distance_mm": 120.634
+    },
+    {
+      "angle": 15.0,
+      "a": "wheel",
+      "b": "angle_60_-43_1",
+      "distance_mm": 196.694
+    },
+    {
+      "angle": 15.0,
+      "a": "wheel",
+      "b": "angle_60_43_0",
+      "distance_mm": 96.99
+    },
+    {
+      "angle": 15.0,
+      "a": "wheel",
+      "b": "angle_60_43_1",
+      "distance_mm": 182.37
+    },
+    {
+      "angle": 15.0,
+      "a": "wheel",
+      "b": "deck_140",
+      "distance_mm": 199.437
+    },
+    {
+      "angle": 15.0,
+      "a": "wheel",
+      "b": "angle_140_-43_0",
+      "distance_mm": 190.325
+    },
+    {
+      "angle": 15.0,
+      "a": "wheel",
+      "b": "angle_140_-43_1",
+      "distance_mm": 249.707
+    },
+    {
+      "angle": 15.0,
+      "a": "wheel",
+      "b": "angle_140_43_0",
+      "distance_mm": 173.918
+    },
+    {
+      "angle": 15.0,
+      "a": "wheel",
+      "b": "angle_140_43_1",
+      "distance_mm": 237.44
+    },
+    {
+      "angle": 15.0,
+      "a": "wheel",
+      "b": "fixture_base",
+      "distance_mm": 43.748
+    },
+    {
+      "angle": 15.0,
+      "a": "wheel",
+      "b": "fixture_upright_near",
+      "distance_mm": 31.634
+    },
+    {
+      "angle": 15.0,
+      "a": "wheel",
+      "b": "fixture_upright_far",
+      "distance_mm": 178.943
+    },
+    {
+      "angle": 17.5,
+      "a": "lower_link",
+      "b": "upper_link",
+      "distance_mm": 5.0
+    },
+    {
+      "angle": 17.5,
+      "a": "lower_link",
+      "b": "gearbox",
+      "distance_mm": 5.601
+    },
+    {
+      "angle": 17.5,
+      "a": "upper_link",
+      "b": "gearbox",
+      "distance_mm": 24.828
+    },
+    {
+      "angle": 17.5,
+      "a": "carrier",
+      "b": "wheel",
+      "distance_mm": 4.5
+    },
+    {
+      "angle": 17.5,
+      "a": "lower_link",
+      "b": "body_near",
+      "distance_mm": 2.0
+    },
+    {
+      "angle": 17.5,
+      "a": "lower_link",
+      "b": "body_far",
+      "distance_mm": 143.0
+    },
+    {
+      "angle": 17.5,
+      "a": "lower_link",
+      "b": "deck_60",
+      "distance_mm": 52.612
+    },
+    {
+      "angle": 17.5,
+      "a": "lower_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 40.874
+    },
+    {
+      "angle": 17.5,
+      "a": "lower_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 130.002
+    },
+    {
+      "angle": 17.5,
+      "a": "lower_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 40.874
+    },
+    {
+      "angle": 17.5,
+      "a": "lower_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 129.999
+    },
+    {
+      "angle": 17.5,
+      "a": "lower_link",
+      "b": "deck_140",
+      "distance_mm": 132.243
+    },
+    {
+      "angle": 17.5,
+      "a": "lower_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 111.251
+    },
+    {
+      "angle": 17.5,
+      "a": "lower_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 175.808
+    },
+    {
+      "angle": 17.5,
+      "a": "lower_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 111.25
+    },
+    {
+      "angle": 17.5,
+      "a": "lower_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 175.807
+    },
+    {
+      "angle": 17.5,
+      "a": "lower_link",
+      "b": "fixture_base",
+      "distance_mm": 87.092
+    },
+    {
+      "angle": 17.5,
+      "a": "lower_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.0
+    },
+    {
+      "angle": 17.5,
+      "a": "lower_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 150.083
+    },
+    {
+      "angle": 17.5,
+      "a": "upper_link",
+      "b": "body_near",
+      "distance_mm": 12.0
+    },
+    {
+      "angle": 17.5,
+      "a": "upper_link",
+      "b": "body_far",
+      "distance_mm": 153.0
+    },
+    {
+      "angle": 17.5,
+      "a": "upper_link",
+      "b": "deck_60",
+      "distance_mm": 21.634
+    },
+    {
+      "angle": 17.5,
+      "a": "upper_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 31.623
+    },
+    {
+      "angle": 17.5,
+      "a": "upper_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 130.306
+    },
+    {
+      "angle": 17.5,
+      "a": "upper_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 31.732
+    },
+    {
+      "angle": 17.5,
+      "a": "upper_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 130.305
+    },
+    {
+      "angle": 17.5,
+      "a": "upper_link",
+      "b": "deck_140",
+      "distance_mm": 93.745
+    },
+    {
+      "angle": 17.5,
+      "a": "upper_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 75.614
+    },
+    {
+      "angle": 17.5,
+      "a": "upper_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 157.356
+    },
+    {
+      "angle": 17.5,
+      "a": "upper_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 75.62
+    },
+    {
+      "angle": 17.5,
+      "a": "upper_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 157.356
+    },
+    {
+      "angle": 17.5,
+      "a": "upper_link",
+      "b": "fixture_base",
+      "distance_mm": 127.092
+    },
+    {
+      "angle": 17.5,
+      "a": "upper_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.0
+    },
+    {
+      "angle": 17.5,
+      "a": "upper_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 160.016
+    },
+    {
+      "angle": 17.5,
+      "a": "carrier",
+      "b": "body_near",
+      "distance_mm": 29.0
+    },
+    {
+      "angle": 17.5,
+      "a": "carrier",
+      "b": "body_far",
+      "distance_mm": 161.493
+    },
+    {
+      "angle": 17.5,
+      "a": "carrier",
+      "b": "deck_60",
+      "distance_mm": 119.552
+    },
+    {
+      "angle": 17.5,
+      "a": "carrier",
+      "b": "angle_60_-43_0",
+      "distance_mm": 114.278
+    },
+    {
+      "angle": 17.5,
+      "a": "carrier",
+      "b": "angle_60_-43_1",
+      "distance_mm": 186.278
+    },
+    {
+      "angle": 17.5,
+      "a": "carrier",
+      "b": "angle_60_43_0",
+      "distance_mm": 94.288
+    },
+    {
+      "angle": 17.5,
+      "a": "carrier",
+      "b": "angle_60_43_1",
+      "distance_mm": 174.586
+    },
+    {
+      "angle": 17.5,
+      "a": "carrier",
+      "b": "deck_140",
+      "distance_mm": 198.49
+    },
+    {
+      "angle": 17.5,
+      "a": "carrier",
+      "b": "angle_140_-43_0",
+      "distance_mm": 184.77
+    },
+    {
+      "angle": 17.5,
+      "a": "carrier",
+      "b": "angle_140_-43_1",
+      "distance_mm": 239.875
+    },
+    {
+      "angle": 17.5,
+      "a": "carrier",
+      "b": "angle_140_43_0",
+      "distance_mm": 172.73
+    },
+    {
+      "angle": 17.5,
+      "a": "carrier",
+      "b": "angle_140_43_1",
+      "distance_mm": 230.729
+    },
+    {
+      "angle": 17.5,
+      "a": "carrier",
+      "b": "fixture_base",
+      "distance_mm": 72.091
+    },
+    {
+      "angle": 17.5,
+      "a": "carrier",
+      "b": "fixture_upright_near",
+      "distance_mm": 51.087
+    },
+    {
+      "angle": 17.5,
+      "a": "carrier",
+      "b": "fixture_upright_far",
+      "distance_mm": 173.681
+    },
+    {
+      "angle": 17.5,
+      "a": "gearbox",
+      "b": "body_near",
+      "distance_mm": 52.184
+    },
+    {
+      "angle": 17.5,
+      "a": "gearbox",
+      "b": "body_far",
+      "distance_mm": 148.005
+    },
+    {
+      "angle": 17.5,
+      "a": "gearbox",
+      "b": "deck_60",
+      "distance_mm": 146.701
+    },
+    {
+      "angle": 17.5,
+      "a": "gearbox",
+      "b": "angle_60_-43_0",
+      "distance_mm": 152.263
+    },
+    {
+      "angle": 17.5,
+      "a": "gearbox",
+      "b": "angle_60_-43_1",
+      "distance_mm": 202.47
+    },
+    {
+      "angle": 17.5,
+      "a": "gearbox",
+      "b": "angle_60_43_0",
+      "distance_mm": 121.174
+    },
+    {
+      "angle": 17.5,
+      "a": "gearbox",
+      "b": "angle_60_43_1",
+      "distance_mm": 180.258
+    },
+    {
+      "angle": 17.5,
+      "a": "gearbox",
+      "b": "deck_140",
+      "distance_mm": 226.636
+    },
+    {
+      "angle": 17.5,
+      "a": "gearbox",
+      "b": "angle_140_-43_0",
+      "distance_mm": 221.914
+    },
+    {
+      "angle": 17.5,
+      "a": "gearbox",
+      "b": "angle_140_-43_1",
+      "distance_mm": 258.951
+    },
+    {
+      "angle": 17.5,
+      "a": "gearbox",
+      "b": "angle_140_43_0",
+      "distance_mm": 200.93
+    },
+    {
+      "angle": 17.5,
+      "a": "gearbox",
+      "b": "angle_140_43_1",
+      "distance_mm": 241.211
+    },
+    {
+      "angle": 17.5,
+      "a": "gearbox",
+      "b": "fixture_base",
+      "distance_mm": 76.691
+    },
+    {
+      "angle": 17.5,
+      "a": "gearbox",
+      "b": "fixture_upright_near",
+      "distance_mm": 72.678
+    },
+    {
+      "angle": 17.5,
+      "a": "gearbox",
+      "b": "fixture_upright_far",
+      "distance_mm": 161.748
+    },
+    {
+      "angle": 17.5,
+      "a": "motor",
+      "b": "body_near",
+      "distance_mm": 53.184
+    },
+    {
+      "angle": 17.5,
+      "a": "motor",
+      "b": "body_far",
+      "distance_mm": 120.205
+    },
+    {
+      "angle": 17.5,
+      "a": "motor",
+      "b": "deck_60",
+      "distance_mm": 147.587
+    },
+    {
+      "angle": 17.5,
+      "a": "motor",
+      "b": "angle_60_-43_0",
+      "distance_mm": 153.223
+    },
+    {
+      "angle": 17.5,
+      "a": "motor",
+      "b": "angle_60_-43_1",
+      "distance_mm": 184.513
+    },
+    {
+      "angle": 17.5,
+      "a": "motor",
+      "b": "angle_60_43_0",
+      "distance_mm": 122.123
+    },
+    {
+      "angle": 17.5,
+      "a": "motor",
+      "b": "angle_60_43_1",
+      "distance_mm": 159.63
+    },
+    {
+      "angle": 17.5,
+      "a": "motor",
+      "b": "deck_140",
+      "distance_mm": 227.561
+    },
+    {
+      "angle": 17.5,
+      "a": "motor",
+      "b": "angle_140_-43_0",
+      "distance_mm": 222.886
+    },
+    {
+      "angle": 17.5,
+      "a": "motor",
+      "b": "angle_140_-43_1",
+      "distance_mm": 245.451
+    },
+    {
+      "angle": 17.5,
+      "a": "motor",
+      "b": "angle_140_43_0",
+      "distance_mm": 201.899
+    },
+    {
+      "angle": 17.5,
+      "a": "motor",
+      "b": "angle_140_43_1",
+      "distance_mm": 226.564
+    },
+    {
+      "angle": 17.5,
+      "a": "motor",
+      "b": "fixture_base",
+      "distance_mm": 77.691
+    },
+    {
+      "angle": 17.5,
+      "a": "motor",
+      "b": "fixture_upright_near",
+      "distance_mm": 73.72
+    },
+    {
+      "angle": 17.5,
+      "a": "motor",
+      "b": "fixture_upright_far",
+      "distance_mm": 135.569
+    },
+    {
+      "angle": 17.5,
+      "a": "encoder",
+      "b": "body_near",
+      "distance_mm": 60.092
+    },
+    {
+      "angle": 17.5,
+      "a": "encoder",
+      "b": "body_far",
+      "distance_mm": 106.813
+    },
+    {
+      "angle": 17.5,
+      "a": "encoder",
+      "b": "deck_60",
+      "distance_mm": 147.987
+    },
+    {
+      "angle": 17.5,
+      "a": "encoder",
+      "b": "angle_60_-43_0",
+      "distance_mm": 155.218
+    },
+    {
+      "angle": 17.5,
+      "a": "encoder",
+      "b": "angle_60_-43_1",
+      "distance_mm": 176.745
+    },
+    {
+      "angle": 17.5,
+      "a": "encoder",
+      "b": "angle_60_43_0",
+      "distance_mm": 124.518
+    },
+    {
+      "angle": 17.5,
+      "a": "encoder",
+      "b": "angle_60_43_1",
+      "distance_mm": 150.501
+    },
+    {
+      "angle": 17.5,
+      "a": "encoder",
+      "b": "deck_140",
+      "distance_mm": 227.961
+    },
+    {
+      "angle": 17.5,
+      "a": "encoder",
+      "b": "angle_140_-43_0",
+      "distance_mm": 224.387
+    },
+    {
+      "angle": 17.5,
+      "a": "encoder",
+      "b": "angle_140_-43_1",
+      "distance_mm": 239.782
+    },
+    {
+      "angle": 17.5,
+      "a": "encoder",
+      "b": "angle_140_43_0",
+      "distance_mm": 203.514
+    },
+    {
+      "angle": 17.5,
+      "a": "encoder",
+      "b": "angle_140_43_1",
+      "distance_mm": 220.372
+    },
+    {
+      "angle": 17.5,
+      "a": "encoder",
+      "b": "fixture_base",
+      "distance_mm": 78.091
+    },
+    {
+      "angle": 17.5,
+      "a": "encoder",
+      "b": "fixture_upright_near",
+      "distance_mm": 81.177
+    },
+    {
+      "angle": 17.5,
+      "a": "encoder",
+      "b": "fixture_upright_far",
+      "distance_mm": 123.167
+    },
+    {
+      "angle": 17.5,
+      "a": "wheel",
+      "b": "body_near",
+      "distance_mm": 35.625
+    },
+    {
+      "angle": 17.5,
+      "a": "wheel",
+      "b": "body_far",
+      "distance_mm": 171.666
+    },
+    {
+      "angle": 17.5,
+      "a": "wheel",
+      "b": "deck_60",
+      "distance_mm": 120.279
+    },
+    {
+      "angle": 17.5,
+      "a": "wheel",
+      "b": "angle_60_-43_0",
+      "distance_mm": 121.937
+    },
+    {
+      "angle": 17.5,
+      "a": "wheel",
+      "b": "angle_60_-43_1",
+      "distance_mm": 197.426
+    },
+    {
+      "angle": 17.5,
+      "a": "wheel",
+      "b": "angle_60_43_0",
+      "distance_mm": 95.858
+    },
+    {
+      "angle": 17.5,
+      "a": "wheel",
+      "b": "angle_60_43_1",
+      "distance_mm": 181.619
+    },
+    {
+      "angle": 17.5,
+      "a": "wheel",
+      "b": "deck_140",
+      "distance_mm": 198.123
+    },
+    {
+      "angle": 17.5,
+      "a": "wheel",
+      "b": "angle_140_-43_0",
+      "distance_mm": 190.817
+    },
+    {
+      "angle": 17.5,
+      "a": "wheel",
+      "b": "angle_140_-43_1",
+      "distance_mm": 250.082
+    },
+    {
+      "angle": 17.5,
+      "a": "wheel",
+      "b": "angle_140_43_0",
+      "distance_mm": 172.682
+    },
+    {
+      "angle": 17.5,
+      "a": "wheel",
+      "b": "angle_140_43_1",
+      "distance_mm": 236.535
+    },
+    {
+      "angle": 17.5,
+      "a": "wheel",
+      "b": "fixture_base",
+      "distance_mm": 45.091
+    },
+    {
+      "angle": 17.5,
+      "a": "wheel",
+      "b": "fixture_upright_near",
+      "distance_mm": 35.966
+    },
+    {
+      "angle": 17.5,
+      "a": "wheel",
+      "b": "fixture_upright_far",
+      "distance_mm": 179.76
+    },
+    {
+      "angle": 20.0,
+      "a": "lower_link",
+      "b": "upper_link",
+      "distance_mm": 5.275
+    },
+    {
+      "angle": 20.0,
+      "a": "lower_link",
+      "b": "gearbox",
+      "distance_mm": 5.609
+    },
+    {
+      "angle": 20.0,
+      "a": "upper_link",
+      "b": "gearbox",
+      "distance_mm": 24.83
+    },
+    {
+      "angle": 20.0,
+      "a": "carrier",
+      "b": "wheel",
+      "distance_mm": 4.5
+    },
+    {
+      "angle": 20.0,
+      "a": "lower_link",
+      "b": "body_near",
+      "distance_mm": 2.0
+    },
+    {
+      "angle": 20.0,
+      "a": "lower_link",
+      "b": "body_far",
+      "distance_mm": 143.0
+    },
+    {
+      "angle": 20.0,
+      "a": "lower_link",
+      "b": "deck_60",
+      "distance_mm": 52.619
+    },
+    {
+      "angle": 20.0,
+      "a": "lower_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 40.883
+    },
+    {
+      "angle": 20.0,
+      "a": "lower_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 129.998
+    },
+    {
+      "angle": 20.0,
+      "a": "lower_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 40.883
+    },
+    {
+      "angle": 20.0,
+      "a": "lower_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 129.999
+    },
+    {
+      "angle": 20.0,
+      "a": "lower_link",
+      "b": "deck_140",
+      "distance_mm": 132.25
+    },
+    {
+      "angle": 20.0,
+      "a": "lower_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 111.257
+    },
+    {
+      "angle": 20.0,
+      "a": "lower_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 175.803
+    },
+    {
+      "angle": 20.0,
+      "a": "lower_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 111.26
+    },
+    {
+      "angle": 20.0,
+      "a": "lower_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 175.803
+    },
+    {
+      "angle": 20.0,
+      "a": "lower_link",
+      "b": "fixture_base",
+      "distance_mm": 88.641
+    },
+    {
+      "angle": 20.0,
+      "a": "lower_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.008
+    },
+    {
+      "angle": 20.0,
+      "a": "lower_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 150.084
+    },
+    {
+      "angle": 20.0,
+      "a": "upper_link",
+      "b": "body_near",
+      "distance_mm": 12.0
+    },
+    {
+      "angle": 20.0,
+      "a": "upper_link",
+      "b": "body_far",
+      "distance_mm": 153.0
+    },
+    {
+      "angle": 20.0,
+      "a": "upper_link",
+      "b": "deck_60",
+      "distance_mm": 21.638
+    },
+    {
+      "angle": 20.0,
+      "a": "upper_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 31.629
+    },
+    {
+      "angle": 20.0,
+      "a": "upper_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 130.306
+    },
+    {
+      "angle": 20.0,
+      "a": "upper_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 31.457
+    },
+    {
+      "angle": 20.0,
+      "a": "upper_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 130.306
+    },
+    {
+      "angle": 20.0,
+      "a": "upper_link",
+      "b": "deck_140",
+      "distance_mm": 93.752
+    },
+    {
+      "angle": 20.0,
+      "a": "upper_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 75.612
+    },
+    {
+      "angle": 20.0,
+      "a": "upper_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 157.352
+    },
+    {
+      "angle": 20.0,
+      "a": "upper_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 75.611
+    },
+    {
+      "angle": 20.0,
+      "a": "upper_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 157.352
+    },
+    {
+      "angle": 20.0,
+      "a": "upper_link",
+      "b": "fixture_base",
+      "distance_mm": 128.641
+    },
+    {
+      "angle": 20.0,
+      "a": "upper_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.008
+    },
+    {
+      "angle": 20.0,
+      "a": "upper_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 160.016
+    },
+    {
+      "angle": 20.0,
+      "a": "carrier",
+      "b": "body_near",
+      "distance_mm": 27.853
+    },
+    {
+      "angle": 20.0,
+      "a": "carrier",
+      "b": "body_far",
+      "distance_mm": 161.291
+    },
+    {
+      "angle": 20.0,
+      "a": "carrier",
+      "b": "deck_60",
+      "distance_mm": 118.044
+    },
+    {
+      "angle": 20.0,
+      "a": "carrier",
+      "b": "angle_60_-43_0",
+      "distance_mm": 115.609
+    },
+    {
+      "angle": 20.0,
+      "a": "carrier",
+      "b": "angle_60_-43_1",
+      "distance_mm": 186.942
+    },
+    {
+      "angle": 20.0,
+      "a": "carrier",
+      "b": "angle_60_43_0",
+      "distance_mm": 92.797
+    },
+    {
+      "angle": 20.0,
+      "a": "carrier",
+      "b": "angle_60_43_1",
+      "distance_mm": 173.599
+    },
+    {
+      "angle": 20.0,
+      "a": "carrier",
+      "b": "deck_140",
+      "distance_mm": 196.959
+    },
+    {
+      "angle": 20.0,
+      "a": "carrier",
+      "b": "angle_140_-43_0",
+      "distance_mm": 184.983
+    },
+    {
+      "angle": 20.0,
+      "a": "carrier",
+      "b": "angle_140_-43_1",
+      "distance_mm": 240.039
+    },
+    {
+      "angle": 20.0,
+      "a": "carrier",
+      "b": "angle_140_43_0",
+      "distance_mm": 171.201
+    },
+    {
+      "angle": 20.0,
+      "a": "carrier",
+      "b": "angle_140_43_1",
+      "distance_mm": 229.586
+    },
+    {
+      "angle": 20.0,
+      "a": "carrier",
+      "b": "fixture_base",
+      "distance_mm": 73.634
+    },
+    {
+      "angle": 20.0,
+      "a": "carrier",
+      "b": "fixture_upright_near",
+      "distance_mm": 55.631
+    },
+    {
+      "angle": 20.0,
+      "a": "carrier",
+      "b": "fixture_upright_far",
+      "distance_mm": 175.071
+    },
+    {
+      "angle": 20.0,
+      "a": "gearbox",
+      "b": "body_near",
+      "distance_mm": 51.409
+    },
+    {
+      "angle": 20.0,
+      "a": "gearbox",
+      "b": "body_far",
+      "distance_mm": 147.733
+    },
+    {
+      "angle": 20.0,
+      "a": "gearbox",
+      "b": "deck_60",
+      "distance_mm": 145.386
+    },
+    {
+      "angle": 20.0,
+      "a": "gearbox",
+      "b": "angle_60_-43_0",
+      "distance_mm": 153.707
+    },
+    {
+      "angle": 20.0,
+      "a": "gearbox",
+      "b": "angle_60_-43_1",
+      "distance_mm": 203.558
+    },
+    {
+      "angle": 20.0,
+      "a": "gearbox",
+      "b": "angle_60_43_0",
+      "distance_mm": 120.143
+    },
+    {
+      "angle": 20.0,
+      "a": "gearbox",
+      "b": "angle_60_43_1",
+      "distance_mm": 179.567
+    },
+    {
+      "angle": 20.0,
+      "a": "gearbox",
+      "b": "deck_140",
+      "distance_mm": 225.245
+    },
+    {
+      "angle": 20.0,
+      "a": "gearbox",
+      "b": "angle_140_-43_0",
+      "distance_mm": 222.43
+    },
+    {
+      "angle": 20.0,
+      "a": "gearbox",
+      "b": "angle_140_-43_1",
+      "distance_mm": 259.393
+    },
+    {
+      "angle": 20.0,
+      "a": "gearbox",
+      "b": "angle_140_43_0",
+      "distance_mm": 199.71
+    },
+    {
+      "angle": 20.0,
+      "a": "gearbox",
+      "b": "angle_140_43_1",
+      "distance_mm": 240.196
+    },
+    {
+      "angle": 20.0,
+      "a": "gearbox",
+      "b": "fixture_base",
+      "distance_mm": 78.234
+    },
+    {
+      "angle": 20.0,
+      "a": "gearbox",
+      "b": "fixture_upright_near",
+      "distance_mm": 77.222
+    },
+    {
+      "angle": 20.0,
+      "a": "gearbox",
+      "b": "fixture_upright_far",
+      "distance_mm": 163.84
+    },
+    {
+      "angle": 20.0,
+      "a": "motor",
+      "b": "body_near",
+      "distance_mm": 52.409
+    },
+    {
+      "angle": 20.0,
+      "a": "motor",
+      "b": "body_far",
+      "distance_mm": 119.865
+    },
+    {
+      "angle": 20.0,
+      "a": "motor",
+      "b": "deck_60",
+      "distance_mm": 146.249
+    },
+    {
+      "angle": 20.0,
+      "a": "motor",
+      "b": "angle_60_-43_0",
+      "distance_mm": 154.667
+    },
+    {
+      "angle": 20.0,
+      "a": "motor",
+      "b": "angle_60_-43_1",
+      "distance_mm": 185.714
+    },
+    {
+      "angle": 20.0,
+      "a": "motor",
+      "b": "angle_60_43_0",
+      "distance_mm": 121.092
+    },
+    {
+      "angle": 20.0,
+      "a": "motor",
+      "b": "angle_60_43_1",
+      "distance_mm": 158.843
+    },
+    {
+      "angle": 20.0,
+      "a": "motor",
+      "b": "deck_140",
+      "distance_mm": 226.156
+    },
+    {
+      "angle": 20.0,
+      "a": "motor",
+      "b": "angle_140_-43_0",
+      "distance_mm": 223.402
+    },
+    {
+      "angle": 20.0,
+      "a": "motor",
+      "b": "angle_140_-43_1",
+      "distance_mm": 245.919
+    },
+    {
+      "angle": 20.0,
+      "a": "motor",
+      "b": "angle_140_43_0",
+      "distance_mm": 200.679
+    },
+    {
+      "angle": 20.0,
+      "a": "motor",
+      "b": "angle_140_43_1",
+      "distance_mm": 225.477
+    },
+    {
+      "angle": 20.0,
+      "a": "motor",
+      "b": "fixture_base",
+      "distance_mm": 79.234
+    },
+    {
+      "angle": 20.0,
+      "a": "motor",
+      "b": "fixture_upright_near",
+      "distance_mm": 78.262
+    },
+    {
+      "angle": 20.0,
+      "a": "motor",
+      "b": "fixture_upright_far",
+      "distance_mm": 138.091
+    },
+    {
+      "angle": 20.0,
+      "a": "encoder",
+      "b": "body_near",
+      "distance_mm": 59.402
+    },
+    {
+      "angle": 20.0,
+      "a": "encoder",
+      "b": "body_far",
+      "distance_mm": 106.426
+    },
+    {
+      "angle": 20.0,
+      "a": "encoder",
+      "b": "deck_60",
+      "distance_mm": 146.649
+    },
+    {
+      "angle": 20.0,
+      "a": "encoder",
+      "b": "angle_60_-43_0",
+      "distance_mm": 156.648
+    },
+    {
+      "angle": 20.0,
+      "a": "encoder",
+      "b": "angle_60_-43_1",
+      "distance_mm": 178.001
+    },
+    {
+      "angle": 20.0,
+      "a": "encoder",
+      "b": "angle_60_43_0",
+      "distance_mm": 123.504
+    },
+    {
+      "angle": 20.0,
+      "a": "encoder",
+      "b": "angle_60_43_1",
+      "distance_mm": 149.663
+    },
+    {
+      "angle": 20.0,
+      "a": "encoder",
+      "b": "deck_140",
+      "distance_mm": 226.556
+    },
+    {
+      "angle": 20.0,
+      "a": "encoder",
+      "b": "angle_140_-43_0",
+      "distance_mm": 224.9
+    },
+    {
+      "angle": 20.0,
+      "a": "encoder",
+      "b": "angle_140_-43_1",
+      "distance_mm": 240.263
+    },
+    {
+      "angle": 20.0,
+      "a": "encoder",
+      "b": "angle_140_43_0",
+      "distance_mm": 202.301
+    },
+    {
+      "angle": 20.0,
+      "a": "encoder",
+      "b": "angle_140_43_1",
+      "distance_mm": 219.253
+    },
+    {
+      "angle": 20.0,
+      "a": "encoder",
+      "b": "fixture_base",
+      "distance_mm": 79.634
+    },
+    {
+      "angle": 20.0,
+      "a": "encoder",
+      "b": "fixture_upright_near",
+      "distance_mm": 85.345
+    },
+    {
+      "angle": 20.0,
+      "a": "encoder",
+      "b": "fixture_upright_far",
+      "distance_mm": 125.952
+    },
+    {
+      "angle": 20.0,
+      "a": "wheel",
+      "b": "body_near",
+      "distance_mm": 34.96
+    },
+    {
+      "angle": 20.0,
+      "a": "wheel",
+      "b": "body_far",
+      "distance_mm": 171.529
+    },
+    {
+      "angle": 20.0,
+      "a": "wheel",
+      "b": "deck_60",
+      "distance_mm": 118.913
+    },
+    {
+      "angle": 20.0,
+      "a": "wheel",
+      "b": "angle_60_-43_0",
+      "distance_mm": 123.171
+    },
+    {
+      "angle": 20.0,
+      "a": "wheel",
+      "b": "angle_60_-43_1",
+      "distance_mm": 198.102
+    },
+    {
+      "angle": 20.0,
+      "a": "wheel",
+      "b": "angle_60_43_0",
+      "distance_mm": 94.683
+    },
+    {
+      "angle": 20.0,
+      "a": "wheel",
+      "b": "angle_60_43_1",
+      "distance_mm": 180.833
+    },
+    {
+      "angle": 20.0,
+      "a": "wheel",
+      "b": "deck_140",
+      "distance_mm": 196.679
+    },
+    {
+      "angle": 20.0,
+      "a": "wheel",
+      "b": "angle_140_-43_0",
+      "distance_mm": 191.198
+    },
+    {
+      "angle": 20.0,
+      "a": "wheel",
+      "b": "angle_140_-43_1",
+      "distance_mm": 250.373
+    },
+    {
+      "angle": 20.0,
+      "a": "wheel",
+      "b": "angle_140_43_0",
+      "distance_mm": 171.343
+    },
+    {
+      "angle": 20.0,
+      "a": "wheel",
+      "b": "angle_140_43_1",
+      "distance_mm": 235.56
+    },
+    {
+      "angle": 20.0,
+      "a": "wheel",
+      "b": "fixture_base",
+      "distance_mm": 46.634
+    },
+    {
+      "angle": 20.0,
+      "a": "wheel",
+      "b": "fixture_upright_near",
+      "distance_mm": 40.298
+    },
+    {
+      "angle": 20.0,
+      "a": "wheel",
+      "b": "fixture_upright_far",
+      "distance_mm": 180.676
+    },
+    {
+      "angle": 22.5,
+      "a": "lower_link",
+      "b": "upper_link",
+      "distance_mm": 5.995
+    },
+    {
+      "angle": 22.5,
+      "a": "lower_link",
+      "b": "gearbox",
+      "distance_mm": 5.6
+    },
+    {
+      "angle": 22.5,
+      "a": "upper_link",
+      "b": "gearbox",
+      "distance_mm": 24.826
+    },
+    {
+      "angle": 22.5,
+      "a": "carrier",
+      "b": "wheel",
+      "distance_mm": 4.5
+    },
+    {
+      "angle": 22.5,
+      "a": "lower_link",
+      "b": "body_near",
+      "distance_mm": 2.0
+    },
+    {
+      "angle": 22.5,
+      "a": "lower_link",
+      "b": "body_far",
+      "distance_mm": 143.0
+    },
+    {
+      "angle": 22.5,
+      "a": "lower_link",
+      "b": "deck_60",
+      "distance_mm": 52.612
+    },
+    {
+      "angle": 22.5,
+      "a": "lower_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 40.874
+    },
+    {
+      "angle": 22.5,
+      "a": "lower_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 130.0
+    },
+    {
+      "angle": 22.5,
+      "a": "lower_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 40.874
+    },
+    {
+      "angle": 22.5,
+      "a": "lower_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 130.0
+    },
+    {
+      "angle": 22.5,
+      "a": "lower_link",
+      "b": "deck_140",
+      "distance_mm": 132.242
+    },
+    {
+      "angle": 22.5,
+      "a": "lower_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 111.25
+    },
+    {
+      "angle": 22.5,
+      "a": "lower_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 175.81
+    },
+    {
+      "angle": 22.5,
+      "a": "lower_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 111.25
+    },
+    {
+      "angle": 22.5,
+      "a": "lower_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 175.81
+    },
+    {
+      "angle": 22.5,
+      "a": "lower_link",
+      "b": "fixture_base",
+      "distance_mm": 90.373
+    },
+    {
+      "angle": 22.5,
+      "a": "lower_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.0
+    },
+    {
+      "angle": 22.5,
+      "a": "lower_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 150.083
+    },
+    {
+      "angle": 22.5,
+      "a": "upper_link",
+      "b": "body_near",
+      "distance_mm": 12.0
+    },
+    {
+      "angle": 22.5,
+      "a": "upper_link",
+      "b": "body_far",
+      "distance_mm": 153.0
+    },
+    {
+      "angle": 22.5,
+      "a": "upper_link",
+      "b": "deck_60",
+      "distance_mm": 21.633
+    },
+    {
+      "angle": 22.5,
+      "a": "upper_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 31.623
+    },
+    {
+      "angle": 22.5,
+      "a": "upper_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 130.306
+    },
+    {
+      "angle": 22.5,
+      "a": "upper_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 30.9
+    },
+    {
+      "angle": 22.5,
+      "a": "upper_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 130.306
+    },
+    {
+      "angle": 22.5,
+      "a": "upper_link",
+      "b": "deck_140",
+      "distance_mm": 93.744
+    },
+    {
+      "angle": 22.5,
+      "a": "upper_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 75.617
+    },
+    {
+      "angle": 22.5,
+      "a": "upper_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 157.357
+    },
+    {
+      "angle": 22.5,
+      "a": "upper_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 75.617
+    },
+    {
+      "angle": 22.5,
+      "a": "upper_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 157.357
+    },
+    {
+      "angle": 22.5,
+      "a": "upper_link",
+      "b": "fixture_base",
+      "distance_mm": 130.373
+    },
+    {
+      "angle": 22.5,
+      "a": "upper_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.0
+    },
+    {
+      "angle": 22.5,
+      "a": "upper_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 160.016
+    },
+    {
+      "angle": 22.5,
+      "a": "carrier",
+      "b": "body_near",
+      "distance_mm": 26.607
+    },
+    {
+      "angle": 22.5,
+      "a": "carrier",
+      "b": "body_far",
+      "distance_mm": 161.081
+    },
+    {
+      "angle": 22.5,
+      "a": "carrier",
+      "b": "deck_60",
+      "distance_mm": 116.344
+    },
+    {
+      "angle": 22.5,
+      "a": "carrier",
+      "b": "angle_60_-43_0",
+      "distance_mm": 116.916
+    },
+    {
+      "angle": 22.5,
+      "a": "carrier",
+      "b": "angle_60_-43_1",
+      "distance_mm": 187.578
+    },
+    {
+      "angle": 22.5,
+      "a": "carrier",
+      "b": "angle_60_43_0",
+      "distance_mm": 91.123
+    },
+    {
+      "angle": 22.5,
+      "a": "carrier",
+      "b": "angle_60_43_1",
+      "distance_mm": 172.499
+    },
+    {
+      "angle": 22.5,
+      "a": "carrier",
+      "b": "deck_140",
+      "distance_mm": 195.234
+    },
+    {
+      "angle": 22.5,
+      "a": "carrier",
+      "b": "angle_140_-43_0",
+      "distance_mm": 185.102
+    },
+    {
+      "angle": 22.5,
+      "a": "carrier",
+      "b": "angle_140_-43_1",
+      "distance_mm": 240.131
+    },
+    {
+      "angle": 22.5,
+      "a": "carrier",
+      "b": "angle_140_43_0",
+      "distance_mm": 169.481
+    },
+    {
+      "angle": 22.5,
+      "a": "carrier",
+      "b": "angle_140_43_1",
+      "distance_mm": 228.306
+    },
+    {
+      "angle": 22.5,
+      "a": "carrier",
+      "b": "fixture_base",
+      "distance_mm": 75.373
+    },
+    {
+      "angle": 22.5,
+      "a": "carrier",
+      "b": "fixture_upright_near",
+      "distance_mm": 60.103
+    },
+    {
+      "angle": 22.5,
+      "a": "carrier",
+      "b": "fixture_upright_far",
+      "distance_mm": 176.543
+    },
+    {
+      "angle": 22.5,
+      "a": "gearbox",
+      "b": "body_near",
+      "distance_mm": 50.728
+    },
+    {
+      "angle": 22.5,
+      "a": "gearbox",
+      "b": "body_far",
+      "distance_mm": 147.498
+    },
+    {
+      "angle": 22.5,
+      "a": "gearbox",
+      "b": "deck_60",
+      "distance_mm": 143.99
+    },
+    {
+      "angle": 22.5,
+      "a": "gearbox",
+      "b": "angle_60_-43_0",
+      "distance_mm": 155.073
+    },
+    {
+      "angle": 22.5,
+      "a": "gearbox",
+      "b": "angle_60_-43_1",
+      "distance_mm": 204.591
+    },
+    {
+      "angle": 22.5,
+      "a": "gearbox",
+      "b": "angle_60_43_0",
+      "distance_mm": 119.066
+    },
+    {
+      "angle": 22.5,
+      "a": "gearbox",
+      "b": "angle_60_43_1",
+      "distance_mm": 178.848
+    },
+    {
+      "angle": 22.5,
+      "a": "gearbox",
+      "b": "deck_140",
+      "distance_mm": 223.735
+    },
+    {
+      "angle": 22.5,
+      "a": "gearbox",
+      "b": "angle_140_-43_0",
+      "distance_mm": 222.832
+    },
+    {
+      "angle": 22.5,
+      "a": "gearbox",
+      "b": "angle_140_-43_1",
+      "distance_mm": 259.738
+    },
+    {
+      "angle": 22.5,
+      "a": "gearbox",
+      "b": "angle_140_43_0",
+      "distance_mm": 198.387
+    },
+    {
+      "angle": 22.5,
+      "a": "gearbox",
+      "b": "angle_140_43_1",
+      "distance_mm": 239.097
+    },
+    {
+      "angle": 22.5,
+      "a": "gearbox",
+      "b": "fixture_base",
+      "distance_mm": 79.973
+    },
+    {
+      "angle": 22.5,
+      "a": "gearbox",
+      "b": "fixture_upright_near",
+      "distance_mm": 81.695
+    },
+    {
+      "angle": 22.5,
+      "a": "gearbox",
+      "b": "fixture_upright_far",
+      "distance_mm": 165.995
+    },
+    {
+      "angle": 22.5,
+      "a": "motor",
+      "b": "body_near",
+      "distance_mm": 51.728
+    },
+    {
+      "angle": 22.5,
+      "a": "motor",
+      "b": "body_far",
+      "distance_mm": 119.569
+    },
+    {
+      "angle": 22.5,
+      "a": "motor",
+      "b": "deck_60",
+      "distance_mm": 144.84
+    },
+    {
+      "angle": 22.5,
+      "a": "motor",
+      "b": "angle_60_-43_0",
+      "distance_mm": 156.034
+    },
+    {
+      "angle": 22.5,
+      "a": "motor",
+      "b": "angle_60_-43_1",
+      "distance_mm": 186.854
+    },
+    {
+      "angle": 22.5,
+      "a": "motor",
+      "b": "angle_60_43_0",
+      "distance_mm": 120.015
+    },
+    {
+      "angle": 22.5,
+      "a": "motor",
+      "b": "angle_60_43_1",
+      "distance_mm": 158.023
+    },
+    {
+      "angle": 22.5,
+      "a": "motor",
+      "b": "deck_140",
+      "distance_mm": 224.638
+    },
+    {
+      "angle": 22.5,
+      "a": "motor",
+      "b": "angle_140_-43_0",
+      "distance_mm": 223.804
+    },
+    {
+      "angle": 22.5,
+      "a": "motor",
+      "b": "angle_140_-43_1",
+      "distance_mm": 246.285
+    },
+    {
+      "angle": 22.5,
+      "a": "motor",
+      "b": "angle_140_43_0",
+      "distance_mm": 199.356
+    },
+    {
+      "angle": 22.5,
+      "a": "motor",
+      "b": "angle_140_43_1",
+      "distance_mm": 224.3
+    },
+    {
+      "angle": 22.5,
+      "a": "motor",
+      "b": "fixture_base",
+      "distance_mm": 80.973
+    },
+    {
+      "angle": 22.5,
+      "a": "motor",
+      "b": "fixture_upright_near",
+      "distance_mm": 82.733
+    },
+    {
+      "angle": 22.5,
+      "a": "motor",
+      "b": "fixture_upright_far",
+      "distance_mm": 140.673
+    },
+    {
+      "angle": 22.5,
+      "a": "encoder",
+      "b": "body_near",
+      "distance_mm": 58.798
+    },
+    {
+      "angle": 22.5,
+      "a": "encoder",
+      "b": "body_far",
+      "distance_mm": 106.09
+    },
+    {
+      "angle": 22.5,
+      "a": "encoder",
+      "b": "deck_60",
+      "distance_mm": 145.24
+    },
+    {
+      "angle": 22.5,
+      "a": "encoder",
+      "b": "angle_60_-43_0",
+      "distance_mm": 158.001
+    },
+    {
+      "angle": 22.5,
+      "a": "encoder",
+      "b": "angle_60_-43_1",
+      "distance_mm": 179.193
+    },
+    {
+      "angle": 22.5,
+      "a": "encoder",
+      "b": "angle_60_43_0",
+      "distance_mm": 122.444
+    },
+    {
+      "angle": 22.5,
+      "a": "encoder",
+      "b": "angle_60_43_1",
+      "distance_mm": 148.79
+    },
+    {
+      "angle": 22.5,
+      "a": "encoder",
+      "b": "deck_140",
+      "distance_mm": 225.038
+    },
+    {
+      "angle": 22.5,
+      "a": "encoder",
+      "b": "angle_140_-43_0",
+      "distance_mm": 225.301
+    },
+    {
+      "angle": 22.5,
+      "a": "encoder",
+      "b": "angle_140_-43_1",
+      "distance_mm": 240.637
+    },
+    {
+      "angle": 22.5,
+      "a": "encoder",
+      "b": "angle_140_43_0",
+      "distance_mm": 200.986
+    },
+    {
+      "angle": 22.5,
+      "a": "encoder",
+      "b": "angle_140_43_1",
+      "distance_mm": 218.039
+    },
+    {
+      "angle": 22.5,
+      "a": "encoder",
+      "b": "fixture_base",
+      "distance_mm": 81.373
+    },
+    {
+      "angle": 22.5,
+      "a": "encoder",
+      "b": "fixture_upright_near",
+      "distance_mm": 89.482
+    },
+    {
+      "angle": 22.5,
+      "a": "encoder",
+      "b": "fixture_upright_far",
+      "distance_mm": 128.792
+    },
+    {
+      "angle": 22.5,
+      "a": "wheel",
+      "b": "body_near",
+      "distance_mm": 34.372
+    },
+    {
+      "angle": 22.5,
+      "a": "wheel",
+      "b": "body_far",
+      "distance_mm": 171.41
+    },
+    {
+      "angle": 22.5,
+      "a": "wheel",
+      "b": "deck_60",
+      "distance_mm": 117.472
+    },
+    {
+      "angle": 22.5,
+      "a": "wheel",
+      "b": "angle_60_-43_0",
+      "distance_mm": 124.335
+    },
+    {
+      "angle": 22.5,
+      "a": "wheel",
+      "b": "angle_60_-43_1",
+      "distance_mm": 198.722
+    },
+    {
+      "angle": 22.5,
+      "a": "wheel",
+      "b": "angle_60_43_0",
+      "distance_mm": 93.468
+    },
+    {
+      "angle": 22.5,
+      "a": "wheel",
+      "b": "angle_60_43_1",
+      "distance_mm": 180.013
+    },
+    {
+      "angle": 22.5,
+      "a": "wheel",
+      "b": "deck_140",
+      "distance_mm": 195.117
+    },
+    {
+      "angle": 22.5,
+      "a": "wheel",
+      "b": "angle_140_-43_0",
+      "distance_mm": 191.469
+    },
+    {
+      "angle": 22.5,
+      "a": "wheel",
+      "b": "angle_140_-43_1",
+      "distance_mm": 250.58
+    },
+    {
+      "angle": 22.5,
+      "a": "wheel",
+      "b": "angle_140_43_0",
+      "distance_mm": 169.905
+    },
+    {
+      "angle": 22.5,
+      "a": "wheel",
+      "b": "angle_140_43_1",
+      "distance_mm": 234.516
+    },
+    {
+      "angle": 22.5,
+      "a": "wheel",
+      "b": "fixture_base",
+      "distance_mm": 48.373
+    },
+    {
+      "angle": 22.5,
+      "a": "wheel",
+      "b": "fixture_upright_near",
+      "distance_mm": 44.603
+    },
+    {
+      "angle": 22.5,
+      "a": "wheel",
+      "b": "fixture_upright_far",
+      "distance_mm": 181.685
+    },
+    {
+      "angle": 25.0,
+      "a": "lower_link",
+      "b": "upper_link",
+      "distance_mm": 7.004
+    },
+    {
+      "angle": 25.0,
+      "a": "lower_link",
+      "b": "gearbox",
+      "distance_mm": 5.609
+    },
+    {
+      "angle": 25.0,
+      "a": "upper_link",
+      "b": "gearbox",
+      "distance_mm": 24.833
+    },
+    {
+      "angle": 25.0,
+      "a": "carrier",
+      "b": "wheel",
+      "distance_mm": 4.5
+    },
+    {
+      "angle": 25.0,
+      "a": "lower_link",
+      "b": "body_near",
+      "distance_mm": 2.0
+    },
+    {
+      "angle": 25.0,
+      "a": "lower_link",
+      "b": "body_far",
+      "distance_mm": 143.0
+    },
+    {
+      "angle": 25.0,
+      "a": "lower_link",
+      "b": "deck_60",
+      "distance_mm": 52.619
+    },
+    {
+      "angle": 25.0,
+      "a": "lower_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 40.883
+    },
+    {
+      "angle": 25.0,
+      "a": "lower_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 129.999
+    },
+    {
+      "angle": 25.0,
+      "a": "lower_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 40.883
+    },
+    {
+      "angle": 25.0,
+      "a": "lower_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 129.998
+    },
+    {
+      "angle": 25.0,
+      "a": "lower_link",
+      "b": "deck_140",
+      "distance_mm": 132.25
+    },
+    {
+      "angle": 25.0,
+      "a": "lower_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 111.26
+    },
+    {
+      "angle": 25.0,
+      "a": "lower_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 175.803
+    },
+    {
+      "angle": 25.0,
+      "a": "lower_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 111.257
+    },
+    {
+      "angle": 25.0,
+      "a": "lower_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 175.803
+    },
+    {
+      "angle": 25.0,
+      "a": "lower_link",
+      "b": "fixture_base",
+      "distance_mm": 92.314
+    },
+    {
+      "angle": 25.0,
+      "a": "lower_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.008
+    },
+    {
+      "angle": 25.0,
+      "a": "lower_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 150.084
+    },
+    {
+      "angle": 25.0,
+      "a": "upper_link",
+      "b": "body_near",
+      "distance_mm": 12.0
+    },
+    {
+      "angle": 25.0,
+      "a": "upper_link",
+      "b": "body_far",
+      "distance_mm": 153.0
+    },
+    {
+      "angle": 25.0,
+      "a": "upper_link",
+      "b": "deck_60",
+      "distance_mm": 21.638
+    },
+    {
+      "angle": 25.0,
+      "a": "upper_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 31.629
+    },
+    {
+      "angle": 25.0,
+      "a": "upper_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 130.306
+    },
+    {
+      "angle": 25.0,
+      "a": "upper_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 30.223
+    },
+    {
+      "angle": 25.0,
+      "a": "upper_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 130.306
+    },
+    {
+      "angle": 25.0,
+      "a": "upper_link",
+      "b": "deck_140",
+      "distance_mm": 93.752
+    },
+    {
+      "angle": 25.0,
+      "a": "upper_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 75.611
+    },
+    {
+      "angle": 25.0,
+      "a": "upper_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 157.352
+    },
+    {
+      "angle": 25.0,
+      "a": "upper_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 75.612
+    },
+    {
+      "angle": 25.0,
+      "a": "upper_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 157.352
+    },
+    {
+      "angle": 25.0,
+      "a": "upper_link",
+      "b": "fixture_base",
+      "distance_mm": 132.314
+    },
+    {
+      "angle": 25.0,
+      "a": "upper_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.008
+    },
+    {
+      "angle": 25.0,
+      "a": "upper_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 160.016
+    },
+    {
+      "angle": 25.0,
+      "a": "carrier",
+      "b": "body_near",
+      "distance_mm": 25.292
+    },
+    {
+      "angle": 25.0,
+      "a": "carrier",
+      "b": "body_far",
+      "distance_mm": 160.869
+    },
+    {
+      "angle": 25.0,
+      "a": "carrier",
+      "b": "deck_60",
+      "distance_mm": 114.457
+    },
+    {
+      "angle": 25.0,
+      "a": "carrier",
+      "b": "angle_60_-43_0",
+      "distance_mm": 118.193
+    },
+    {
+      "angle": 25.0,
+      "a": "carrier",
+      "b": "angle_60_-43_1",
+      "distance_mm": 188.178
+    },
+    {
+      "angle": 25.0,
+      "a": "carrier",
+      "b": "angle_60_43_0",
+      "distance_mm": 89.266
+    },
+    {
+      "angle": 25.0,
+      "a": "carrier",
+      "b": "angle_60_43_1",
+      "distance_mm": 171.288
+    },
+    {
+      "angle": 25.0,
+      "a": "carrier",
+      "b": "deck_140",
+      "distance_mm": 193.317
+    },
+    {
+      "angle": 25.0,
+      "a": "carrier",
+      "b": "angle_140_-43_0",
+      "distance_mm": 185.132
+    },
+    {
+      "angle": 25.0,
+      "a": "carrier",
+      "b": "angle_140_-43_1",
+      "distance_mm": 240.154
+    },
+    {
+      "angle": 25.0,
+      "a": "carrier",
+      "b": "angle_140_43_0",
+      "distance_mm": 167.569
+    },
+    {
+      "angle": 25.0,
+      "a": "carrier",
+      "b": "angle_140_43_1",
+      "distance_mm": 226.891
+    },
+    {
+      "angle": 25.0,
+      "a": "carrier",
+      "b": "fixture_base",
+      "distance_mm": 77.306
+    },
+    {
+      "angle": 25.0,
+      "a": "carrier",
+      "b": "fixture_upright_near",
+      "distance_mm": 64.496
+    },
+    {
+      "angle": 25.0,
+      "a": "carrier",
+      "b": "fixture_upright_far",
+      "distance_mm": 178.086
+    },
+    {
+      "angle": 25.0,
+      "a": "gearbox",
+      "b": "body_near",
+      "distance_mm": 50.145
+    },
+    {
+      "angle": 25.0,
+      "a": "gearbox",
+      "b": "body_far",
+      "distance_mm": 147.298
+    },
+    {
+      "angle": 25.0,
+      "a": "gearbox",
+      "b": "deck_60",
+      "distance_mm": 142.52
+    },
+    {
+      "angle": 25.0,
+      "a": "gearbox",
+      "b": "angle_60_-43_0",
+      "distance_mm": 156.361
+    },
+    {
+      "angle": 25.0,
+      "a": "gearbox",
+      "b": "angle_60_-43_1",
+      "distance_mm": 205.569
+    },
+    {
+      "angle": 25.0,
+      "a": "gearbox",
+      "b": "angle_60_43_0",
+      "distance_mm": 117.945
+    },
+    {
+      "angle": 25.0,
+      "a": "gearbox",
+      "b": "angle_60_43_1",
+      "distance_mm": 178.104
+    },
+    {
+      "angle": 25.0,
+      "a": "gearbox",
+      "b": "deck_140",
+      "distance_mm": 222.109
+    },
+    {
+      "angle": 25.0,
+      "a": "gearbox",
+      "b": "angle_140_-43_0",
+      "distance_mm": 223.12
+    },
+    {
+      "angle": 25.0,
+      "a": "gearbox",
+      "b": "angle_140_-43_1",
+      "distance_mm": 259.986
+    },
+    {
+      "angle": 25.0,
+      "a": "gearbox",
+      "b": "angle_140_43_0",
+      "distance_mm": 196.96
+    },
+    {
+      "angle": 25.0,
+      "a": "gearbox",
+      "b": "angle_140_43_1",
+      "distance_mm": 237.915
+    },
+    {
+      "angle": 25.0,
+      "a": "gearbox",
+      "b": "fixture_base",
+      "distance_mm": 81.906
+    },
+    {
+      "angle": 25.0,
+      "a": "gearbox",
+      "b": "fixture_upright_near",
+      "distance_mm": 86.088
+    },
+    {
+      "angle": 25.0,
+      "a": "gearbox",
+      "b": "fixture_upright_far",
+      "distance_mm": 168.2
+    },
+    {
+      "angle": 25.0,
+      "a": "motor",
+      "b": "body_near",
+      "distance_mm": 51.145
+    },
+    {
+      "angle": 25.0,
+      "a": "motor",
+      "b": "body_far",
+      "distance_mm": 119.318
+    },
+    {
+      "angle": 25.0,
+      "a": "motor",
+      "b": "deck_60",
+      "distance_mm": 143.36
+    },
+    {
+      "angle": 25.0,
+      "a": "motor",
+      "b": "angle_60_-43_0",
+      "distance_mm": 157.321
+    },
+    {
+      "angle": 25.0,
+      "a": "motor",
+      "b": "angle_60_-43_1",
+      "distance_mm": 187.931
+    },
+    {
+      "angle": 25.0,
+      "a": "motor",
+      "b": "angle_60_43_0",
+      "distance_mm": 118.893
+    },
+    {
+      "angle": 25.0,
+      "a": "motor",
+      "b": "angle_60_43_1",
+      "distance_mm": 157.173
+    },
+    {
+      "angle": 25.0,
+      "a": "motor",
+      "b": "deck_140",
+      "distance_mm": 223.006
+    },
+    {
+      "angle": 25.0,
+      "a": "motor",
+      "b": "angle_140_-43_0",
+      "distance_mm": 224.092
+    },
+    {
+      "angle": 25.0,
+      "a": "motor",
+      "b": "angle_140_-43_1",
+      "distance_mm": 246.547
+    },
+    {
+      "angle": 25.0,
+      "a": "motor",
+      "b": "angle_140_43_0",
+      "distance_mm": 197.929
+    },
+    {
+      "angle": 25.0,
+      "a": "motor",
+      "b": "angle_140_43_1",
+      "distance_mm": 223.033
+    },
+    {
+      "angle": 25.0,
+      "a": "motor",
+      "b": "fixture_base",
+      "distance_mm": 82.906
+    },
+    {
+      "angle": 25.0,
+      "a": "motor",
+      "b": "fixture_upright_near",
+      "distance_mm": 87.124
+    },
+    {
+      "angle": 25.0,
+      "a": "motor",
+      "b": "fixture_upright_far",
+      "distance_mm": 143.3
+    },
+    {
+      "angle": 25.0,
+      "a": "encoder",
+      "b": "body_near",
+      "distance_mm": 58.282
+    },
+    {
+      "angle": 25.0,
+      "a": "encoder",
+      "b": "body_far",
+      "distance_mm": 105.805
+    },
+    {
+      "angle": 25.0,
+      "a": "encoder",
+      "b": "deck_60",
+      "distance_mm": 143.76
+    },
+    {
+      "angle": 25.0,
+      "a": "encoder",
+      "b": "angle_60_-43_0",
+      "distance_mm": 159.276
+    },
+    {
+      "angle": 25.0,
+      "a": "encoder",
+      "b": "angle_60_-43_1",
+      "distance_mm": 180.319
+    },
+    {
+      "angle": 25.0,
+      "a": "encoder",
+      "b": "angle_60_43_0",
+      "distance_mm": 121.341
+    },
+    {
+      "angle": 25.0,
+      "a": "encoder",
+      "b": "angle_60_43_1",
+      "distance_mm": 147.883
+    },
+    {
+      "angle": 25.0,
+      "a": "encoder",
+      "b": "deck_140",
+      "distance_mm": 223.406
+    },
+    {
+      "angle": 25.0,
+      "a": "encoder",
+      "b": "angle_140_-43_0",
+      "distance_mm": 225.587
+    },
+    {
+      "angle": 25.0,
+      "a": "encoder",
+      "b": "angle_140_-43_1",
+      "distance_mm": 240.906
+    },
+    {
+      "angle": 25.0,
+      "a": "encoder",
+      "b": "angle_140_43_0",
+      "distance_mm": 199.568
+    },
+    {
+      "angle": 25.0,
+      "a": "encoder",
+      "b": "angle_140_43_1",
+      "distance_mm": 216.733
+    },
+    {
+      "angle": 25.0,
+      "a": "encoder",
+      "b": "fixture_base",
+      "distance_mm": 83.306
+    },
+    {
+      "angle": 25.0,
+      "a": "encoder",
+      "b": "fixture_upright_near",
+      "distance_mm": 93.576
+    },
+    {
+      "angle": 25.0,
+      "a": "encoder",
+      "b": "fixture_upright_far",
+      "distance_mm": 131.669
+    },
+    {
+      "angle": 25.0,
+      "a": "wheel",
+      "b": "body_near",
+      "distance_mm": 33.858
+    },
+    {
+      "angle": 25.0,
+      "a": "wheel",
+      "b": "body_far",
+      "distance_mm": 171.308
+    },
+    {
+      "angle": 25.0,
+      "a": "wheel",
+      "b": "deck_60",
+      "distance_mm": 115.958
+    },
+    {
+      "angle": 25.0,
+      "a": "wheel",
+      "b": "angle_60_-43_0",
+      "distance_mm": 125.428
+    },
+    {
+      "angle": 25.0,
+      "a": "wheel",
+      "b": "angle_60_-43_1",
+      "distance_mm": 199.285
+    },
+    {
+      "angle": 25.0,
+      "a": "wheel",
+      "b": "angle_60_43_0",
+      "distance_mm": 92.214
+    },
+    {
+      "angle": 25.0,
+      "a": "wheel",
+      "b": "angle_60_43_1",
+      "distance_mm": 179.161
+    },
+    {
+      "angle": 25.0,
+      "a": "wheel",
+      "b": "deck_140",
+      "distance_mm": 193.439
+    },
+    {
+      "angle": 25.0,
+      "a": "wheel",
+      "b": "angle_140_-43_0",
+      "distance_mm": 191.629
+    },
+    {
+      "angle": 25.0,
+      "a": "wheel",
+      "b": "angle_140_-43_1",
+      "distance_mm": 250.703
+    },
+    {
+      "angle": 25.0,
+      "a": "wheel",
+      "b": "angle_140_43_0",
+      "distance_mm": 168.366
+    },
+    {
+      "angle": 25.0,
+      "a": "wheel",
+      "b": "angle_140_43_1",
+      "distance_mm": 233.403
+    },
+    {
+      "angle": 25.0,
+      "a": "wheel",
+      "b": "fixture_base",
+      "distance_mm": 50.306
+    },
+    {
+      "angle": 25.0,
+      "a": "wheel",
+      "b": "fixture_upright_near",
+      "distance_mm": 48.861
+    },
+    {
+      "angle": 25.0,
+      "a": "wheel",
+      "b": "fixture_upright_far",
+      "distance_mm": 182.777
+    },
+    {
+      "angle": 27.5,
+      "a": "lower_link",
+      "b": "upper_link",
+      "distance_mm": 8.177
+    },
+    {
+      "angle": 27.5,
+      "a": "lower_link",
+      "b": "gearbox",
+      "distance_mm": 5.601
+    },
+    {
+      "angle": 27.5,
+      "a": "upper_link",
+      "b": "gearbox",
+      "distance_mm": 24.825
+    },
+    {
+      "angle": 27.5,
+      "a": "carrier",
+      "b": "wheel",
+      "distance_mm": 4.5
+    },
+    {
+      "angle": 27.5,
+      "a": "lower_link",
+      "b": "body_near",
+      "distance_mm": 2.0
+    },
+    {
+      "angle": 27.5,
+      "a": "lower_link",
+      "b": "body_far",
+      "distance_mm": 143.0
+    },
+    {
+      "angle": 27.5,
+      "a": "lower_link",
+      "b": "deck_60",
+      "distance_mm": 52.612
+    },
+    {
+      "angle": 27.5,
+      "a": "lower_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 40.874
+    },
+    {
+      "angle": 27.5,
+      "a": "lower_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 129.999
+    },
+    {
+      "angle": 27.5,
+      "a": "lower_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 40.874
+    },
+    {
+      "angle": 27.5,
+      "a": "lower_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 130.002
+    },
+    {
+      "angle": 27.5,
+      "a": "lower_link",
+      "b": "deck_140",
+      "distance_mm": 132.243
+    },
+    {
+      "angle": 27.5,
+      "a": "lower_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 111.25
+    },
+    {
+      "angle": 27.5,
+      "a": "lower_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 175.807
+    },
+    {
+      "angle": 27.5,
+      "a": "lower_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 111.251
+    },
+    {
+      "angle": 27.5,
+      "a": "lower_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 175.808
+    },
+    {
+      "angle": 27.5,
+      "a": "lower_link",
+      "b": "fixture_base",
+      "distance_mm": 94.429
+    },
+    {
+      "angle": 27.5,
+      "a": "lower_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.0
+    },
+    {
+      "angle": 27.5,
+      "a": "lower_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 150.083
+    },
+    {
+      "angle": 27.5,
+      "a": "upper_link",
+      "b": "body_near",
+      "distance_mm": 12.0
+    },
+    {
+      "angle": 27.5,
+      "a": "upper_link",
+      "b": "body_far",
+      "distance_mm": 153.0
+    },
+    {
+      "angle": 27.5,
+      "a": "upper_link",
+      "b": "deck_60",
+      "distance_mm": 21.634
+    },
+    {
+      "angle": 27.5,
+      "a": "upper_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 31.623
+    },
+    {
+      "angle": 27.5,
+      "a": "upper_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 130.305
+    },
+    {
+      "angle": 27.5,
+      "a": "upper_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 29.513
+    },
+    {
+      "angle": 27.5,
+      "a": "upper_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 130.31
+    },
+    {
+      "angle": 27.5,
+      "a": "upper_link",
+      "b": "deck_140",
+      "distance_mm": 93.745
+    },
+    {
+      "angle": 27.5,
+      "a": "upper_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 75.62
+    },
+    {
+      "angle": 27.5,
+      "a": "upper_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 157.356
+    },
+    {
+      "angle": 27.5,
+      "a": "upper_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 75.614
+    },
+    {
+      "angle": 27.5,
+      "a": "upper_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 157.356
+    },
+    {
+      "angle": 27.5,
+      "a": "upper_link",
+      "b": "fixture_base",
+      "distance_mm": 134.429
+    },
+    {
+      "angle": 27.5,
+      "a": "upper_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.0
+    },
+    {
+      "angle": 27.5,
+      "a": "upper_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 160.016
+    },
+    {
+      "angle": 27.5,
+      "a": "carrier",
+      "b": "body_near",
+      "distance_mm": 23.944
+    },
+    {
+      "angle": 27.5,
+      "a": "carrier",
+      "b": "body_far",
+      "distance_mm": 160.662
+    },
+    {
+      "angle": 27.5,
+      "a": "carrier",
+      "b": "deck_60",
+      "distance_mm": 112.387
+    },
+    {
+      "angle": 27.5,
+      "a": "carrier",
+      "b": "angle_60_-43_0",
+      "distance_mm": 119.452
+    },
+    {
+      "angle": 27.5,
+      "a": "carrier",
+      "b": "angle_60_-43_1",
+      "distance_mm": 188.755
+    },
+    {
+      "angle": 27.5,
+      "a": "carrier",
+      "b": "angle_60_43_0",
+      "distance_mm": 87.23
+    },
+    {
+      "angle": 27.5,
+      "a": "carrier",
+      "b": "angle_60_43_1",
+      "distance_mm": 169.974
+    },
+    {
+      "angle": 27.5,
+      "a": "carrier",
+      "b": "deck_140",
+      "distance_mm": 191.213
+    },
+    {
+      "angle": 27.5,
+      "a": "carrier",
+      "b": "angle_140_-43_0",
+      "distance_mm": 185.079
+    },
+    {
+      "angle": 27.5,
+      "a": "carrier",
+      "b": "angle_140_-43_1",
+      "distance_mm": 240.113
+    },
+    {
+      "angle": 27.5,
+      "a": "carrier",
+      "b": "angle_140_43_0",
+      "distance_mm": 165.471
+    },
+    {
+      "angle": 27.5,
+      "a": "carrier",
+      "b": "angle_140_43_1",
+      "distance_mm": 225.345
+    },
+    {
+      "angle": 27.5,
+      "a": "carrier",
+      "b": "fixture_base",
+      "distance_mm": 79.429
+    },
+    {
+      "angle": 27.5,
+      "a": "carrier",
+      "b": "fixture_upright_near",
+      "distance_mm": 68.8
+    },
+    {
+      "angle": 27.5,
+      "a": "carrier",
+      "b": "fixture_upright_far",
+      "distance_mm": 179.69
+    },
+    {
+      "angle": 27.5,
+      "a": "gearbox",
+      "b": "body_near",
+      "distance_mm": 49.664
+    },
+    {
+      "angle": 27.5,
+      "a": "gearbox",
+      "b": "body_far",
+      "distance_mm": 147.135
+    },
+    {
+      "angle": 27.5,
+      "a": "gearbox",
+      "b": "deck_60",
+      "distance_mm": 140.978
+    },
+    {
+      "angle": 27.5,
+      "a": "gearbox",
+      "b": "angle_60_-43_0",
+      "distance_mm": 157.569
+    },
+    {
+      "angle": 27.5,
+      "a": "gearbox",
+      "b": "angle_60_-43_1",
+      "distance_mm": 206.49
+    },
+    {
+      "angle": 27.5,
+      "a": "gearbox",
+      "b": "angle_60_43_0",
+      "distance_mm": 116.779
+    },
+    {
+      "angle": 27.5,
+      "a": "gearbox",
+      "b": "angle_60_43_1",
+      "distance_mm": 177.334
+    },
+    {
+      "angle": 27.5,
+      "a": "gearbox",
+      "b": "deck_140",
+      "distance_mm": 220.37
+    },
+    {
+      "angle": 27.5,
+      "a": "gearbox",
+      "b": "angle_140_-43_0",
+      "distance_mm": 223.294
+    },
+    {
+      "angle": 27.5,
+      "a": "gearbox",
+      "b": "angle_140_-43_1",
+      "distance_mm": 260.135
+    },
+    {
+      "angle": 27.5,
+      "a": "gearbox",
+      "b": "angle_140_43_0",
+      "distance_mm": 195.432
+    },
+    {
+      "angle": 27.5,
+      "a": "gearbox",
+      "b": "angle_140_43_1",
+      "distance_mm": 236.651
+    },
+    {
+      "angle": 27.5,
+      "a": "gearbox",
+      "b": "fixture_base",
+      "distance_mm": 84.029
+    },
+    {
+      "angle": 27.5,
+      "a": "gearbox",
+      "b": "fixture_upright_near",
+      "distance_mm": 90.392
+    },
+    {
+      "angle": 27.5,
+      "a": "gearbox",
+      "b": "fixture_upright_far",
+      "distance_mm": 170.444
+    },
+    {
+      "angle": 27.5,
+      "a": "motor",
+      "b": "body_near",
+      "distance_mm": 50.664
+    },
+    {
+      "angle": 27.5,
+      "a": "motor",
+      "b": "body_far",
+      "distance_mm": 119.112
+    },
+    {
+      "angle": 27.5,
+      "a": "motor",
+      "b": "deck_60",
+      "distance_mm": 141.811
+    },
+    {
+      "angle": 27.5,
+      "a": "motor",
+      "b": "angle_60_-43_0",
+      "distance_mm": 158.53
+    },
+    {
+      "angle": 27.5,
+      "a": "motor",
+      "b": "angle_60_-43_1",
+      "distance_mm": 188.944
+    },
+    {
+      "angle": 27.5,
+      "a": "motor",
+      "b": "angle_60_43_0",
+      "distance_mm": 117.726
+    },
+    {
+      "angle": 27.5,
+      "a": "motor",
+      "b": "angle_60_43_1",
+      "distance_mm": 156.293
+    },
+    {
+      "angle": 27.5,
+      "a": "motor",
+      "b": "deck_140",
+      "distance_mm": 221.262
+    },
+    {
+      "angle": 27.5,
+      "a": "motor",
+      "b": "angle_140_-43_0",
+      "distance_mm": 224.267
+    },
+    {
+      "angle": 27.5,
+      "a": "motor",
+      "b": "angle_140_-43_1",
+      "distance_mm": 246.705
+    },
+    {
+      "angle": 27.5,
+      "a": "motor",
+      "b": "angle_140_43_0",
+      "distance_mm": 196.4
+    },
+    {
+      "angle": 27.5,
+      "a": "motor",
+      "b": "angle_140_43_1",
+      "distance_mm": 221.677
+    },
+    {
+      "angle": 27.5,
+      "a": "motor",
+      "b": "fixture_base",
+      "distance_mm": 85.029
+    },
+    {
+      "angle": 27.5,
+      "a": "motor",
+      "b": "fixture_upright_near",
+      "distance_mm": 91.427
+    },
+    {
+      "angle": 27.5,
+      "a": "motor",
+      "b": "fixture_upright_far",
+      "distance_mm": 145.955
+    },
+    {
+      "angle": 27.5,
+      "a": "encoder",
+      "b": "body_near",
+      "distance_mm": 57.856
+    },
+    {
+      "angle": 27.5,
+      "a": "encoder",
+      "b": "body_far",
+      "distance_mm": 105.571
+    },
+    {
+      "angle": 27.5,
+      "a": "encoder",
+      "b": "deck_60",
+      "distance_mm": 142.211
+    },
+    {
+      "angle": 27.5,
+      "a": "encoder",
+      "b": "angle_60_-43_0",
+      "distance_mm": 160.473
+    },
+    {
+      "angle": 27.5,
+      "a": "encoder",
+      "b": "angle_60_-43_1",
+      "distance_mm": 181.377
+    },
+    {
+      "angle": 27.5,
+      "a": "encoder",
+      "b": "angle_60_43_0",
+      "distance_mm": 120.194
+    },
+    {
+      "angle": 27.5,
+      "a": "encoder",
+      "b": "angle_60_43_1",
+      "distance_mm": 146.944
+    },
+    {
+      "angle": 27.5,
+      "a": "encoder",
+      "b": "deck_140",
+      "distance_mm": 221.662
+    },
+    {
+      "angle": 27.5,
+      "a": "encoder",
+      "b": "angle_140_-43_0",
+      "distance_mm": 225.761
+    },
+    {
+      "angle": 27.5,
+      "a": "encoder",
+      "b": "angle_140_-43_1",
+      "distance_mm": 241.068
+    },
+    {
+      "angle": 27.5,
+      "a": "encoder",
+      "b": "angle_140_43_0",
+      "distance_mm": 198.048
+    },
+    {
+      "angle": 27.5,
+      "a": "encoder",
+      "b": "angle_140_43_1",
+      "distance_mm": 215.335
+    },
+    {
+      "angle": 27.5,
+      "a": "encoder",
+      "b": "fixture_base",
+      "distance_mm": 85.429
+    },
+    {
+      "angle": 27.5,
+      "a": "encoder",
+      "b": "fixture_upright_near",
+      "distance_mm": 97.612
+    },
+    {
+      "angle": 27.5,
+      "a": "encoder",
+      "b": "fixture_upright_far",
+      "distance_mm": 134.567
+    },
+    {
+      "angle": 27.5,
+      "a": "wheel",
+      "b": "body_near",
+      "distance_mm": 33.417
+    },
+    {
+      "angle": 27.5,
+      "a": "wheel",
+      "b": "body_far",
+      "distance_mm": 171.221
+    },
+    {
+      "angle": 27.5,
+      "a": "wheel",
+      "b": "deck_60",
+      "distance_mm": 114.373
+    },
+    {
+      "angle": 27.5,
+      "a": "wheel",
+      "b": "angle_60_-43_0",
+      "distance_mm": 126.449
+    },
+    {
+      "angle": 27.5,
+      "a": "wheel",
+      "b": "angle_60_-43_1",
+      "distance_mm": 199.789
+    },
+    {
+      "angle": 27.5,
+      "a": "wheel",
+      "b": "angle_60_43_0",
+      "distance_mm": 90.922
+    },
+    {
+      "angle": 27.5,
+      "a": "wheel",
+      "b": "angle_60_43_1",
+      "distance_mm": 178.277
+    },
+    {
+      "angle": 27.5,
+      "a": "wheel",
+      "b": "deck_140",
+      "distance_mm": 191.646
+    },
+    {
+      "angle": 27.5,
+      "a": "wheel",
+      "b": "angle_140_-43_0",
+      "distance_mm": 191.679
+    },
+    {
+      "angle": 27.5,
+      "a": "wheel",
+      "b": "angle_140_-43_1",
+      "distance_mm": 250.74
+    },
+    {
+      "angle": 27.5,
+      "a": "wheel",
+      "b": "angle_140_43_0",
+      "distance_mm": 166.728
+    },
+    {
+      "angle": 27.5,
+      "a": "wheel",
+      "b": "angle_140_43_1",
+      "distance_mm": 232.224
+    },
+    {
+      "angle": 27.5,
+      "a": "wheel",
+      "b": "fixture_base",
+      "distance_mm": 52.429
+    },
+    {
+      "angle": 27.5,
+      "a": "wheel",
+      "b": "fixture_upright_near",
+      "distance_mm": 53.054
+    },
+    {
+      "angle": 27.5,
+      "a": "wheel",
+      "b": "fixture_upright_far",
+      "distance_mm": 183.942
+    },
+    {
+      "angle": 30.0,
+      "a": "lower_link",
+      "b": "upper_link",
+      "distance_mm": 9.434
+    },
+    {
+      "angle": 30.0,
+      "a": "lower_link",
+      "b": "gearbox",
+      "distance_mm": 5.606
+    },
+    {
+      "angle": 30.0,
+      "a": "upper_link",
+      "b": "gearbox",
+      "distance_mm": 24.834
+    },
+    {
+      "angle": 30.0,
+      "a": "carrier",
+      "b": "wheel",
+      "distance_mm": 4.5
+    },
+    {
+      "angle": 30.0,
+      "a": "lower_link",
+      "b": "body_near",
+      "distance_mm": 2.0
+    },
+    {
+      "angle": 30.0,
+      "a": "lower_link",
+      "b": "body_far",
+      "distance_mm": 143.0
+    },
+    {
+      "angle": 30.0,
+      "a": "lower_link",
+      "b": "deck_60",
+      "distance_mm": 52.616
+    },
+    {
+      "angle": 30.0,
+      "a": "lower_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 40.879
+    },
+    {
+      "angle": 30.0,
+      "a": "lower_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 130.0
+    },
+    {
+      "angle": 30.0,
+      "a": "lower_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 40.879
+    },
+    {
+      "angle": 30.0,
+      "a": "lower_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 129.998
+    },
+    {
+      "angle": 30.0,
+      "a": "lower_link",
+      "b": "deck_140",
+      "distance_mm": 132.246
+    },
+    {
+      "angle": 30.0,
+      "a": "lower_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 111.256
+    },
+    {
+      "angle": 30.0,
+      "a": "lower_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 175.804
+    },
+    {
+      "angle": 30.0,
+      "a": "lower_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 111.254
+    },
+    {
+      "angle": 30.0,
+      "a": "lower_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 175.803
+    },
+    {
+      "angle": 30.0,
+      "a": "lower_link",
+      "b": "fixture_base",
+      "distance_mm": 96.741
+    },
+    {
+      "angle": 30.0,
+      "a": "lower_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.004
+    },
+    {
+      "angle": 30.0,
+      "a": "lower_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 150.084
+    },
+    {
+      "angle": 30.0,
+      "a": "upper_link",
+      "b": "body_near",
+      "distance_mm": 12.0
+    },
+    {
+      "angle": 30.0,
+      "a": "upper_link",
+      "b": "body_far",
+      "distance_mm": 153.0
+    },
+    {
+      "angle": 30.0,
+      "a": "upper_link",
+      "b": "deck_60",
+      "distance_mm": 21.636
+    },
+    {
+      "angle": 30.0,
+      "a": "upper_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 31.626
+    },
+    {
+      "angle": 30.0,
+      "a": "upper_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 130.307
+    },
+    {
+      "angle": 30.0,
+      "a": "upper_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 28.771
+    },
+    {
+      "angle": 30.0,
+      "a": "upper_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 130.318
+    },
+    {
+      "angle": 30.0,
+      "a": "upper_link",
+      "b": "deck_140",
+      "distance_mm": 93.749
+    },
+    {
+      "angle": 30.0,
+      "a": "upper_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 75.611
+    },
+    {
+      "angle": 30.0,
+      "a": "upper_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 157.352
+    },
+    {
+      "angle": 30.0,
+      "a": "upper_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 75.614
+    },
+    {
+      "angle": 30.0,
+      "a": "upper_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 157.352
+    },
+    {
+      "angle": 30.0,
+      "a": "upper_link",
+      "b": "fixture_base",
+      "distance_mm": 136.741
+    },
+    {
+      "angle": 30.0,
+      "a": "upper_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.004
+    },
+    {
+      "angle": 30.0,
+      "a": "upper_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 160.016
+    },
+    {
+      "angle": 30.0,
+      "a": "carrier",
+      "b": "body_near",
+      "distance_mm": 22.614
+    },
+    {
+      "angle": 30.0,
+      "a": "carrier",
+      "b": "body_far",
+      "distance_mm": 160.469
+    },
+    {
+      "angle": 30.0,
+      "a": "carrier",
+      "b": "deck_60",
+      "distance_mm": 110.138
+    },
+    {
+      "angle": 30.0,
+      "a": "carrier",
+      "b": "angle_60_-43_0",
+      "distance_mm": 120.669
+    },
+    {
+      "angle": 30.0,
+      "a": "carrier",
+      "b": "angle_60_-43_1",
+      "distance_mm": 189.294
+    },
+    {
+      "angle": 30.0,
+      "a": "carrier",
+      "b": "angle_60_43_0",
+      "distance_mm": 85.074
+    },
+    {
+      "angle": 30.0,
+      "a": "carrier",
+      "b": "angle_60_43_1",
+      "distance_mm": 168.59
+    },
+    {
+      "angle": 30.0,
+      "a": "carrier",
+      "b": "deck_140",
+      "distance_mm": 188.924
+    },
+    {
+      "angle": 30.0,
+      "a": "carrier",
+      "b": "angle_140_-43_0",
+      "distance_mm": 184.939
+    },
+    {
+      "angle": 30.0,
+      "a": "carrier",
+      "b": "angle_140_-43_1",
+      "distance_mm": 240.005
+    },
+    {
+      "angle": 30.0,
+      "a": "carrier",
+      "b": "angle_140_43_0",
+      "distance_mm": 163.217
+    },
+    {
+      "angle": 30.0,
+      "a": "carrier",
+      "b": "angle_140_43_1",
+      "distance_mm": 223.696
+    },
+    {
+      "angle": 30.0,
+      "a": "carrier",
+      "b": "fixture_base",
+      "distance_mm": 81.737
+    },
+    {
+      "angle": 30.0,
+      "a": "carrier",
+      "b": "fixture_upright_near",
+      "distance_mm": 73.007
+    },
+    {
+      "angle": 30.0,
+      "a": "carrier",
+      "b": "fixture_upright_far",
+      "distance_mm": 181.342
+    },
+    {
+      "angle": 30.0,
+      "a": "gearbox",
+      "b": "body_near",
+      "distance_mm": 49.286
+    },
+    {
+      "angle": 30.0,
+      "a": "gearbox",
+      "b": "body_far",
+      "distance_mm": 147.008
+    },
+    {
+      "angle": 30.0,
+      "a": "gearbox",
+      "b": "deck_60",
+      "distance_mm": 139.366
+    },
+    {
+      "angle": 30.0,
+      "a": "gearbox",
+      "b": "angle_60_-43_0",
+      "distance_mm": 158.698
+    },
+    {
+      "angle": 30.0,
+      "a": "gearbox",
+      "b": "angle_60_-43_1",
+      "distance_mm": 207.352
+    },
+    {
+      "angle": 30.0,
+      "a": "gearbox",
+      "b": "angle_60_43_0",
+      "distance_mm": 115.57
+    },
+    {
+      "angle": 30.0,
+      "a": "gearbox",
+      "b": "angle_60_43_1",
+      "distance_mm": 176.412
+    },
+    {
+      "angle": 30.0,
+      "a": "gearbox",
+      "b": "deck_140",
+      "distance_mm": 218.518
+    },
+    {
+      "angle": 30.0,
+      "a": "gearbox",
+      "b": "angle_140_-43_0",
+      "distance_mm": 223.354
+    },
+    {
+      "angle": 30.0,
+      "a": "gearbox",
+      "b": "angle_140_-43_1",
+      "distance_mm": 260.187
+    },
+    {
+      "angle": 30.0,
+      "a": "gearbox",
+      "b": "angle_140_43_0",
+      "distance_mm": 193.801
+    },
+    {
+      "angle": 30.0,
+      "a": "gearbox",
+      "b": "angle_140_43_1",
+      "distance_mm": 235.306
+    },
+    {
+      "angle": 30.0,
+      "a": "gearbox",
+      "b": "fixture_base",
+      "distance_mm": 86.337
+    },
+    {
+      "angle": 30.0,
+      "a": "gearbox",
+      "b": "fixture_upright_near",
+      "distance_mm": 94.6
+    },
+    {
+      "angle": 30.0,
+      "a": "gearbox",
+      "b": "fixture_upright_far",
+      "distance_mm": 172.712
+    },
+    {
+      "angle": 30.0,
+      "a": "motor",
+      "b": "body_near",
+      "distance_mm": 50.286
+    },
+    {
+      "angle": 30.0,
+      "a": "motor",
+      "b": "body_far",
+      "distance_mm": 118.952
+    },
+    {
+      "angle": 30.0,
+      "a": "motor",
+      "b": "deck_60",
+      "distance_mm": 140.193
+    },
+    {
+      "angle": 30.0,
+      "a": "motor",
+      "b": "angle_60_-43_0",
+      "distance_mm": 159.659
+    },
+    {
+      "angle": 30.0,
+      "a": "motor",
+      "b": "angle_60_-43_1",
+      "distance_mm": 189.892
+    },
+    {
+      "angle": 30.0,
+      "a": "motor",
+      "b": "angle_60_43_0",
+      "distance_mm": 116.517
+    },
+    {
+      "angle": 30.0,
+      "a": "motor",
+      "b": "angle_60_43_1",
+      "distance_mm": 155.384
+    },
+    {
+      "angle": 30.0,
+      "a": "motor",
+      "b": "deck_140",
+      "distance_mm": 219.407
+    },
+    {
+      "angle": 30.0,
+      "a": "motor",
+      "b": "angle_140_-43_0",
+      "distance_mm": 224.327
+    },
+    {
+      "angle": 30.0,
+      "a": "motor",
+      "b": "angle_140_-43_1",
+      "distance_mm": 246.76
+    },
+    {
+      "angle": 30.0,
+      "a": "motor",
+      "b": "angle_140_43_0",
+      "distance_mm": 194.77
+    },
+    {
+      "angle": 30.0,
+      "a": "motor",
+      "b": "angle_140_43_1",
+      "distance_mm": 220.234
+    },
+    {
+      "angle": 30.0,
+      "a": "motor",
+      "b": "fixture_base",
+      "distance_mm": 87.337
+    },
+    {
+      "angle": 30.0,
+      "a": "motor",
+      "b": "fixture_upright_near",
+      "distance_mm": 95.633
+    },
+    {
+      "angle": 30.0,
+      "a": "motor",
+      "b": "fixture_upright_far",
+      "distance_mm": 148.626
+    },
+    {
+      "angle": 30.0,
+      "a": "encoder",
+      "b": "body_near",
+      "distance_mm": 57.523
+    },
+    {
+      "angle": 30.0,
+      "a": "encoder",
+      "b": "body_far",
+      "distance_mm": 105.389
+    },
+    {
+      "angle": 30.0,
+      "a": "encoder",
+      "b": "deck_60",
+      "distance_mm": 140.593
+    },
+    {
+      "angle": 30.0,
+      "a": "encoder",
+      "b": "angle_60_-43_0",
+      "distance_mm": 161.591
+    },
+    {
+      "angle": 30.0,
+      "a": "encoder",
+      "b": "angle_60_-43_1",
+      "distance_mm": 182.367
+    },
+    {
+      "angle": 30.0,
+      "a": "encoder",
+      "b": "angle_60_43_0",
+      "distance_mm": 119.006
+    },
+    {
+      "angle": 30.0,
+      "a": "encoder",
+      "b": "angle_60_43_1",
+      "distance_mm": 145.974
+    },
+    {
+      "angle": 30.0,
+      "a": "encoder",
+      "b": "deck_140",
+      "distance_mm": 219.807
+    },
+    {
+      "angle": 30.0,
+      "a": "encoder",
+      "b": "angle_140_-43_0",
+      "distance_mm": 225.821
+    },
+    {
+      "angle": 30.0,
+      "a": "encoder",
+      "b": "angle_140_-43_1",
+      "distance_mm": 241.124
+    },
+    {
+      "angle": 30.0,
+      "a": "encoder",
+      "b": "angle_140_43_0",
+      "distance_mm": 196.428
+    },
+    {
+      "angle": 30.0,
+      "a": "encoder",
+      "b": "angle_140_43_1",
+      "distance_mm": 213.846
+    },
+    {
+      "angle": 30.0,
+      "a": "encoder",
+      "b": "fixture_base",
+      "distance_mm": 87.737
+    },
+    {
+      "angle": 30.0,
+      "a": "encoder",
+      "b": "fixture_upright_near",
+      "distance_mm": 101.579
+    },
+    {
+      "angle": 30.0,
+      "a": "encoder",
+      "b": "fixture_upright_far",
+      "distance_mm": 137.472
+    },
+    {
+      "angle": 30.0,
+      "a": "wheel",
+      "b": "body_near",
+      "distance_mm": 33.044
+    },
+    {
+      "angle": 30.0,
+      "a": "wheel",
+      "b": "body_far",
+      "distance_mm": 171.149
+    },
+    {
+      "angle": 30.0,
+      "a": "wheel",
+      "b": "deck_60",
+      "distance_mm": 112.718
+    },
+    {
+      "angle": 30.0,
+      "a": "wheel",
+      "b": "angle_60_-43_0",
+      "distance_mm": 127.397
+    },
+    {
+      "angle": 30.0,
+      "a": "wheel",
+      "b": "angle_60_-43_1",
+      "distance_mm": 200.234
+    },
+    {
+      "angle": 30.0,
+      "a": "wheel",
+      "b": "angle_60_43_0",
+      "distance_mm": 89.594
+    },
+    {
+      "angle": 30.0,
+      "a": "wheel",
+      "b": "angle_60_43_1",
+      "distance_mm": 177.365
+    },
+    {
+      "angle": 30.0,
+      "a": "wheel",
+      "b": "deck_140",
+      "distance_mm": 189.74
+    },
+    {
+      "angle": 30.0,
+      "a": "wheel",
+      "b": "angle_140_-43_0",
+      "distance_mm": 191.617
+    },
+    {
+      "angle": 30.0,
+      "a": "wheel",
+      "b": "angle_140_-43_1",
+      "distance_mm": 250.693
+    },
+    {
+      "angle": 30.0,
+      "a": "wheel",
+      "b": "angle_140_43_0",
+      "distance_mm": 164.992
+    },
+    {
+      "angle": 30.0,
+      "a": "wheel",
+      "b": "angle_140_43_1",
+      "distance_mm": 230.981
+    },
+    {
+      "angle": 30.0,
+      "a": "wheel",
+      "b": "fixture_base",
+      "distance_mm": 54.737
+    },
+    {
+      "angle": 30.0,
+      "a": "wheel",
+      "b": "fixture_upright_near",
+      "distance_mm": 57.169
+    },
+    {
+      "angle": 30.0,
+      "a": "wheel",
+      "b": "fixture_upright_far",
+      "distance_mm": 185.171
+    },
+    {
+      "angle": 32.5,
+      "a": "lower_link",
+      "b": "upper_link",
+      "distance_mm": 10.728
+    },
+    {
+      "angle": 32.5,
+      "a": "lower_link",
+      "b": "gearbox",
+      "distance_mm": 5.603
+    },
+    {
+      "angle": 32.5,
+      "a": "upper_link",
+      "b": "gearbox",
+      "distance_mm": 24.825
+    },
+    {
+      "angle": 32.5,
+      "a": "carrier",
+      "b": "wheel",
+      "distance_mm": 4.5
+    },
+    {
+      "angle": 32.5,
+      "a": "lower_link",
+      "b": "body_near",
+      "distance_mm": 2.0
+    },
+    {
+      "angle": 32.5,
+      "a": "lower_link",
+      "b": "body_far",
+      "distance_mm": 143.0
+    },
+    {
+      "angle": 32.5,
+      "a": "lower_link",
+      "b": "deck_60",
+      "distance_mm": 52.614
+    },
+    {
+      "angle": 32.5,
+      "a": "lower_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 40.876
+    },
+    {
+      "angle": 32.5,
+      "a": "lower_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 129.998
+    },
+    {
+      "angle": 32.5,
+      "a": "lower_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 40.876
+    },
+    {
+      "angle": 32.5,
+      "a": "lower_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 130.001
+    },
+    {
+      "angle": 32.5,
+      "a": "lower_link",
+      "b": "deck_140",
+      "distance_mm": 132.244
+    },
+    {
+      "angle": 32.5,
+      "a": "lower_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 111.251
+    },
+    {
+      "angle": 32.5,
+      "a": "lower_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 175.805
+    },
+    {
+      "angle": 32.5,
+      "a": "lower_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 111.253
+    },
+    {
+      "angle": 32.5,
+      "a": "lower_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 175.805
+    },
+    {
+      "angle": 32.5,
+      "a": "lower_link",
+      "b": "fixture_base",
+      "distance_mm": 99.229
+    },
+    {
+      "angle": 32.5,
+      "a": "lower_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.002
+    },
+    {
+      "angle": 32.5,
+      "a": "lower_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 150.084
+    },
+    {
+      "angle": 32.5,
+      "a": "upper_link",
+      "b": "body_near",
+      "distance_mm": 12.0
+    },
+    {
+      "angle": 32.5,
+      "a": "upper_link",
+      "b": "body_far",
+      "distance_mm": 153.0
+    },
+    {
+      "angle": 32.5,
+      "a": "upper_link",
+      "b": "deck_60",
+      "distance_mm": 21.634
+    },
+    {
+      "angle": 32.5,
+      "a": "upper_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 31.624
+    },
+    {
+      "angle": 32.5,
+      "a": "upper_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 130.305
+    },
+    {
+      "angle": 32.5,
+      "a": "upper_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 28.003
+    },
+    {
+      "angle": 32.5,
+      "a": "upper_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 130.331
+    },
+    {
+      "angle": 32.5,
+      "a": "upper_link",
+      "b": "deck_140",
+      "distance_mm": 93.746
+    },
+    {
+      "angle": 32.5,
+      "a": "upper_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 75.617
+    },
+    {
+      "angle": 32.5,
+      "a": "upper_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 157.354
+    },
+    {
+      "angle": 32.5,
+      "a": "upper_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 75.612
+    },
+    {
+      "angle": 32.5,
+      "a": "upper_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 157.354
+    },
+    {
+      "angle": 32.5,
+      "a": "upper_link",
+      "b": "fixture_base",
+      "distance_mm": 139.229
+    },
+    {
+      "angle": 32.5,
+      "a": "upper_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.002
+    },
+    {
+      "angle": 32.5,
+      "a": "upper_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 160.016
+    },
+    {
+      "angle": 32.5,
+      "a": "carrier",
+      "b": "body_near",
+      "distance_mm": 21.536
+    },
+    {
+      "angle": 32.5,
+      "a": "carrier",
+      "b": "body_far",
+      "distance_mm": 160.321
+    },
+    {
+      "angle": 32.5,
+      "a": "carrier",
+      "b": "deck_60",
+      "distance_mm": 107.753
+    },
+    {
+      "angle": 32.5,
+      "a": "carrier",
+      "b": "angle_60_-43_0",
+      "distance_mm": 121.867
+    },
+    {
+      "angle": 32.5,
+      "a": "carrier",
+      "b": "angle_60_-43_1",
+      "distance_mm": 189.802
+    },
+    {
+      "angle": 32.5,
+      "a": "carrier",
+      "b": "angle_60_43_0",
+      "distance_mm": 82.922
+    },
+    {
+      "angle": 32.5,
+      "a": "carrier",
+      "b": "angle_60_43_1",
+      "distance_mm": 167.206
+    },
+    {
+      "angle": 32.5,
+      "a": "carrier",
+      "b": "deck_140",
+      "distance_mm": 186.479
+    },
+    {
+      "angle": 32.5,
+      "a": "carrier",
+      "b": "angle_140_-43_0",
+      "distance_mm": 184.702
+    },
+    {
+      "angle": 32.5,
+      "a": "carrier",
+      "b": "angle_140_-43_1",
+      "distance_mm": 239.822
+    },
+    {
+      "angle": 32.5,
+      "a": "carrier",
+      "b": "angle_140_43_0",
+      "distance_mm": 160.886
+    },
+    {
+      "angle": 32.5,
+      "a": "carrier",
+      "b": "angle_140_43_1",
+      "distance_mm": 222.001
+    },
+    {
+      "angle": 32.5,
+      "a": "carrier",
+      "b": "fixture_base",
+      "distance_mm": 84.227
+    },
+    {
+      "angle": 32.5,
+      "a": "carrier",
+      "b": "fixture_upright_near",
+      "distance_mm": 77.109
+    },
+    {
+      "angle": 32.5,
+      "a": "carrier",
+      "b": "fixture_upright_far",
+      "distance_mm": 183.032
+    },
+    {
+      "angle": 32.5,
+      "a": "gearbox",
+      "b": "body_near",
+      "distance_mm": 49.015
+    },
+    {
+      "angle": 32.5,
+      "a": "gearbox",
+      "b": "body_far",
+      "distance_mm": 146.917
+    },
+    {
+      "angle": 32.5,
+      "a": "gearbox",
+      "b": "deck_60",
+      "distance_mm": 137.686
+    },
+    {
+      "angle": 32.5,
+      "a": "gearbox",
+      "b": "angle_60_-43_0",
+      "distance_mm": 159.746
+    },
+    {
+      "angle": 32.5,
+      "a": "gearbox",
+      "b": "angle_60_-43_1",
+      "distance_mm": 208.155
+    },
+    {
+      "angle": 32.5,
+      "a": "gearbox",
+      "b": "angle_60_43_0",
+      "distance_mm": 114.32
+    },
+    {
+      "angle": 32.5,
+      "a": "gearbox",
+      "b": "angle_60_43_1",
+      "distance_mm": 175.315
+    },
+    {
+      "angle": 32.5,
+      "a": "gearbox",
+      "b": "deck_140",
+      "distance_mm": 216.556
+    },
+    {
+      "angle": 32.5,
+      "a": "gearbox",
+      "b": "angle_140_-43_0",
+      "distance_mm": 223.3
+    },
+    {
+      "angle": 32.5,
+      "a": "gearbox",
+      "b": "angle_140_-43_1",
+      "distance_mm": 260.141
+    },
+    {
+      "angle": 32.5,
+      "a": "gearbox",
+      "b": "angle_140_43_0",
+      "distance_mm": 192.07
+    },
+    {
+      "angle": 32.5,
+      "a": "gearbox",
+      "b": "angle_140_43_1",
+      "distance_mm": 233.882
+    },
+    {
+      "angle": 32.5,
+      "a": "gearbox",
+      "b": "fixture_base",
+      "distance_mm": 88.827
+    },
+    {
+      "angle": 32.5,
+      "a": "gearbox",
+      "b": "fixture_upright_near",
+      "distance_mm": 98.703
+    },
+    {
+      "angle": 32.5,
+      "a": "gearbox",
+      "b": "fixture_upright_far",
+      "distance_mm": 174.993
+    },
+    {
+      "angle": 32.5,
+      "a": "motor",
+      "b": "body_near",
+      "distance_mm": 50.015
+    },
+    {
+      "angle": 32.5,
+      "a": "motor",
+      "b": "body_far",
+      "distance_mm": 118.837
+    },
+    {
+      "angle": 32.5,
+      "a": "motor",
+      "b": "deck_60",
+      "distance_mm": 138.507
+    },
+    {
+      "angle": 32.5,
+      "a": "motor",
+      "b": "angle_60_-43_0",
+      "distance_mm": 160.707
+    },
+    {
+      "angle": 32.5,
+      "a": "motor",
+      "b": "angle_60_-43_1",
+      "distance_mm": 190.774
+    },
+    {
+      "angle": 32.5,
+      "a": "motor",
+      "b": "angle_60_43_0",
+      "distance_mm": 115.267
+    },
+    {
+      "angle": 32.5,
+      "a": "motor",
+      "b": "angle_60_43_1",
+      "distance_mm": 154.448
+    },
+    {
+      "angle": 32.5,
+      "a": "motor",
+      "b": "deck_140",
+      "distance_mm": 217.442
+    },
+    {
+      "angle": 32.5,
+      "a": "motor",
+      "b": "angle_140_-43_0",
+      "distance_mm": 224.273
+    },
+    {
+      "angle": 32.5,
+      "a": "motor",
+      "b": "angle_140_-43_1",
+      "distance_mm": 246.711
+    },
+    {
+      "angle": 32.5,
+      "a": "motor",
+      "b": "angle_140_43_0",
+      "distance_mm": 193.038
+    },
+    {
+      "angle": 32.5,
+      "a": "motor",
+      "b": "angle_140_43_1",
+      "distance_mm": 218.704
+    },
+    {
+      "angle": 32.5,
+      "a": "motor",
+      "b": "fixture_base",
+      "distance_mm": 89.827
+    },
+    {
+      "angle": 32.5,
+      "a": "motor",
+      "b": "fixture_upright_near",
+      "distance_mm": 99.734
+    },
+    {
+      "angle": 32.5,
+      "a": "motor",
+      "b": "fixture_upright_far",
+      "distance_mm": 151.298
+    },
+    {
+      "angle": 32.5,
+      "a": "encoder",
+      "b": "body_near",
+      "distance_mm": 57.284
+    },
+    {
+      "angle": 32.5,
+      "a": "encoder",
+      "b": "body_far",
+      "distance_mm": 105.259
+    },
+    {
+      "angle": 32.5,
+      "a": "encoder",
+      "b": "deck_60",
+      "distance_mm": 138.907
+    },
+    {
+      "angle": 32.5,
+      "a": "encoder",
+      "b": "angle_60_-43_0",
+      "distance_mm": 162.63
+    },
+    {
+      "angle": 32.5,
+      "a": "encoder",
+      "b": "angle_60_-43_1",
+      "distance_mm": 183.287
+    },
+    {
+      "angle": 32.5,
+      "a": "encoder",
+      "b": "angle_60_43_0",
+      "distance_mm": 117.778
+    },
+    {
+      "angle": 32.5,
+      "a": "encoder",
+      "b": "angle_60_43_1",
+      "distance_mm": 144.974
+    },
+    {
+      "angle": 32.5,
+      "a": "encoder",
+      "b": "deck_140",
+      "distance_mm": 217.842
+    },
+    {
+      "angle": 32.5,
+      "a": "encoder",
+      "b": "angle_140_-43_0",
+      "distance_mm": 225.767
+    },
+    {
+      "angle": 32.5,
+      "a": "encoder",
+      "b": "angle_140_-43_1",
+      "distance_mm": 241.074
+    },
+    {
+      "angle": 32.5,
+      "a": "encoder",
+      "b": "angle_140_43_0",
+      "distance_mm": 194.708
+    },
+    {
+      "angle": 32.5,
+      "a": "encoder",
+      "b": "angle_140_43_1",
+      "distance_mm": 212.266
+    },
+    {
+      "angle": 32.5,
+      "a": "encoder",
+      "b": "fixture_base",
+      "distance_mm": 90.227
+    },
+    {
+      "angle": 32.5,
+      "a": "encoder",
+      "b": "fixture_upright_near",
+      "distance_mm": 105.465
+    },
+    {
+      "angle": 32.5,
+      "a": "encoder",
+      "b": "fixture_upright_far",
+      "distance_mm": 140.368
+    },
+    {
+      "angle": 32.5,
+      "a": "wheel",
+      "b": "body_near",
+      "distance_mm": 32.736
+    },
+    {
+      "angle": 32.5,
+      "a": "wheel",
+      "b": "body_far",
+      "distance_mm": 171.09
+    },
+    {
+      "angle": 32.5,
+      "a": "wheel",
+      "b": "deck_60",
+      "distance_mm": 110.996
+    },
+    {
+      "angle": 32.5,
+      "a": "wheel",
+      "b": "angle_60_-43_0",
+      "distance_mm": 128.272
+    },
+    {
+      "angle": 32.5,
+      "a": "wheel",
+      "b": "angle_60_-43_1",
+      "distance_mm": 200.62
+    },
+    {
+      "angle": 32.5,
+      "a": "wheel",
+      "b": "angle_60_43_0",
+      "distance_mm": 88.231
+    },
+    {
+      "angle": 32.5,
+      "a": "wheel",
+      "b": "angle_60_43_1",
+      "distance_mm": 176.425
+    },
+    {
+      "angle": 32.5,
+      "a": "wheel",
+      "b": "deck_140",
+      "distance_mm": 187.723
+    },
+    {
+      "angle": 32.5,
+      "a": "wheel",
+      "b": "angle_140_-43_0",
+      "distance_mm": 191.445
+    },
+    {
+      "angle": 32.5,
+      "a": "wheel",
+      "b": "angle_140_-43_1",
+      "distance_mm": 250.562
+    },
+    {
+      "angle": 32.5,
+      "a": "wheel",
+      "b": "angle_140_43_0",
+      "distance_mm": 163.159
+    },
+    {
+      "angle": 32.5,
+      "a": "wheel",
+      "b": "angle_140_43_1",
+      "distance_mm": 229.676
+    },
+    {
+      "angle": 32.5,
+      "a": "wheel",
+      "b": "fixture_base",
+      "distance_mm": 57.227
+    },
+    {
+      "angle": 32.5,
+      "a": "wheel",
+      "b": "fixture_upright_near",
+      "distance_mm": 61.193
+    },
+    {
+      "angle": 32.5,
+      "a": "wheel",
+      "b": "fixture_upright_far",
+      "distance_mm": 186.453
+    },
+    {
+      "angle": 35.0,
+      "a": "lower_link",
+      "b": "upper_link",
+      "distance_mm": 12.031
+    },
+    {
+      "angle": 35.0,
+      "a": "lower_link",
+      "b": "gearbox",
+      "distance_mm": 5.603
+    },
+    {
+      "angle": 35.0,
+      "a": "upper_link",
+      "b": "gearbox",
+      "distance_mm": 24.831
+    },
+    {
+      "angle": 35.0,
+      "a": "carrier",
+      "b": "wheel",
+      "distance_mm": 4.5
+    },
+    {
+      "angle": 35.0,
+      "a": "lower_link",
+      "b": "body_near",
+      "distance_mm": 2.0
+    },
+    {
+      "angle": 35.0,
+      "a": "lower_link",
+      "b": "body_far",
+      "distance_mm": 143.0
+    },
+    {
+      "angle": 35.0,
+      "a": "lower_link",
+      "b": "deck_60",
+      "distance_mm": 52.614
+    },
+    {
+      "angle": 35.0,
+      "a": "lower_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 40.876
+    },
+    {
+      "angle": 35.0,
+      "a": "lower_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 130.001
+    },
+    {
+      "angle": 35.0,
+      "a": "lower_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 40.876
+    },
+    {
+      "angle": 35.0,
+      "a": "lower_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 129.998
+    },
+    {
+      "angle": 35.0,
+      "a": "lower_link",
+      "b": "deck_140",
+      "distance_mm": 132.244
+    },
+    {
+      "angle": 35.0,
+      "a": "lower_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 111.253
+    },
+    {
+      "angle": 35.0,
+      "a": "lower_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 175.805
+    },
+    {
+      "angle": 35.0,
+      "a": "lower_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 111.251
+    },
+    {
+      "angle": 35.0,
+      "a": "lower_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 175.805
+    },
+    {
+      "angle": 35.0,
+      "a": "lower_link",
+      "b": "fixture_base",
+      "distance_mm": 101.895
+    },
+    {
+      "angle": 35.0,
+      "a": "lower_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.002
+    },
+    {
+      "angle": 35.0,
+      "a": "lower_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 150.084
+    },
+    {
+      "angle": 35.0,
+      "a": "upper_link",
+      "b": "body_near",
+      "distance_mm": 12.0
+    },
+    {
+      "angle": 35.0,
+      "a": "upper_link",
+      "b": "body_far",
+      "distance_mm": 153.0
+    },
+    {
+      "angle": 35.0,
+      "a": "upper_link",
+      "b": "deck_60",
+      "distance_mm": 21.634
+    },
+    {
+      "angle": 35.0,
+      "a": "upper_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 31.624
+    },
+    {
+      "angle": 35.0,
+      "a": "upper_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 130.307
+    },
+    {
+      "angle": 35.0,
+      "a": "upper_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 27.213
+    },
+    {
+      "angle": 35.0,
+      "a": "upper_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 130.348
+    },
+    {
+      "angle": 35.0,
+      "a": "upper_link",
+      "b": "deck_140",
+      "distance_mm": 93.746
+    },
+    {
+      "angle": 35.0,
+      "a": "upper_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 75.612
+    },
+    {
+      "angle": 35.0,
+      "a": "upper_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 157.354
+    },
+    {
+      "angle": 35.0,
+      "a": "upper_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 75.617
+    },
+    {
+      "angle": 35.0,
+      "a": "upper_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 157.354
+    },
+    {
+      "angle": 35.0,
+      "a": "upper_link",
+      "b": "fixture_base",
+      "distance_mm": 141.895
+    },
+    {
+      "angle": 35.0,
+      "a": "upper_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.002
+    },
+    {
+      "angle": 35.0,
+      "a": "upper_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 160.016
+    },
+    {
+      "angle": 35.0,
+      "a": "carrier",
+      "b": "body_near",
+      "distance_mm": 20.889
+    },
+    {
+      "angle": 35.0,
+      "a": "carrier",
+      "b": "body_far",
+      "distance_mm": 160.235
+    },
+    {
+      "angle": 35.0,
+      "a": "carrier",
+      "b": "deck_60",
+      "distance_mm": 105.32
+    },
+    {
+      "angle": 35.0,
+      "a": "carrier",
+      "b": "angle_60_-43_0",
+      "distance_mm": 123.024
+    },
+    {
+      "angle": 35.0,
+      "a": "carrier",
+      "b": "angle_60_-43_1",
+      "distance_mm": 190.281
+    },
+    {
+      "angle": 35.0,
+      "a": "carrier",
+      "b": "angle_60_43_0",
+      "distance_mm": 80.807
+    },
+    {
+      "angle": 35.0,
+      "a": "carrier",
+      "b": "angle_60_43_1",
+      "distance_mm": 165.83
+    },
+    {
+      "angle": 35.0,
+      "a": "carrier",
+      "b": "deck_140",
+      "distance_mm": 183.933
+    },
+    {
+      "angle": 35.0,
+      "a": "carrier",
+      "b": "angle_140_-43_0",
+      "distance_mm": 184.381
+    },
+    {
+      "angle": 35.0,
+      "a": "carrier",
+      "b": "angle_140_-43_1",
+      "distance_mm": 239.576
+    },
+    {
+      "angle": 35.0,
+      "a": "carrier",
+      "b": "angle_140_43_0",
+      "distance_mm": 158.467
+    },
+    {
+      "angle": 35.0,
+      "a": "carrier",
+      "b": "angle_140_43_1",
+      "distance_mm": 220.254
+    },
+    {
+      "angle": 35.0,
+      "a": "carrier",
+      "b": "fixture_base",
+      "distance_mm": 86.893
+    },
+    {
+      "angle": 35.0,
+      "a": "carrier",
+      "b": "fixture_upright_near",
+      "distance_mm": 81.1
+    },
+    {
+      "angle": 35.0,
+      "a": "carrier",
+      "b": "fixture_upright_far",
+      "distance_mm": 184.749
+    },
+    {
+      "angle": 35.0,
+      "a": "gearbox",
+      "b": "body_near",
+      "distance_mm": 48.852
+    },
+    {
+      "angle": 35.0,
+      "a": "gearbox",
+      "b": "body_far",
+      "distance_mm": 146.863
+    },
+    {
+      "angle": 35.0,
+      "a": "gearbox",
+      "b": "deck_60",
+      "distance_mm": 135.938
+    },
+    {
+      "angle": 35.0,
+      "a": "gearbox",
+      "b": "angle_60_-43_0",
+      "distance_mm": 160.712
+    },
+    {
+      "angle": 35.0,
+      "a": "gearbox",
+      "b": "angle_60_-43_1",
+      "distance_mm": 208.731
+    },
+    {
+      "angle": 35.0,
+      "a": "gearbox",
+      "b": "angle_60_43_0",
+      "distance_mm": 113.03
+    },
+    {
+      "angle": 35.0,
+      "a": "gearbox",
+      "b": "angle_60_43_1",
+      "distance_mm": 174.176
+    },
+    {
+      "angle": 35.0,
+      "a": "gearbox",
+      "b": "deck_140",
+      "distance_mm": 214.484
+    },
+    {
+      "angle": 35.0,
+      "a": "gearbox",
+      "b": "angle_140_-43_0",
+      "distance_mm": 223.132
+    },
+    {
+      "angle": 35.0,
+      "a": "gearbox",
+      "b": "angle_140_-43_1",
+      "distance_mm": 259.996
+    },
+    {
+      "angle": 35.0,
+      "a": "gearbox",
+      "b": "angle_140_43_0",
+      "distance_mm": 190.239
+    },
+    {
+      "angle": 35.0,
+      "a": "gearbox",
+      "b": "angle_140_43_1",
+      "distance_mm": 232.38
+    },
+    {
+      "angle": 35.0,
+      "a": "gearbox",
+      "b": "fixture_base",
+      "distance_mm": 91.493
+    },
+    {
+      "angle": 35.0,
+      "a": "gearbox",
+      "b": "fixture_upright_near",
+      "distance_mm": 102.693
+    },
+    {
+      "angle": 35.0,
+      "a": "gearbox",
+      "b": "fixture_upright_far",
+      "distance_mm": 177.274
+    },
+    {
+      "angle": 35.0,
+      "a": "motor",
+      "b": "body_near",
+      "distance_mm": 49.852
+    },
+    {
+      "angle": 35.0,
+      "a": "motor",
+      "b": "body_far",
+      "distance_mm": 118.769
+    },
+    {
+      "angle": 35.0,
+      "a": "motor",
+      "b": "deck_60",
+      "distance_mm": 136.754
+    },
+    {
+      "angle": 35.0,
+      "a": "motor",
+      "b": "angle_60_-43_0",
+      "distance_mm": 161.674
+    },
+    {
+      "angle": 35.0,
+      "a": "motor",
+      "b": "angle_60_-43_1",
+      "distance_mm": 191.589
+    },
+    {
+      "angle": 35.0,
+      "a": "motor",
+      "b": "angle_60_43_0",
+      "distance_mm": 113.975
+    },
+    {
+      "angle": 35.0,
+      "a": "motor",
+      "b": "angle_60_43_1",
+      "distance_mm": 153.487
+    },
+    {
+      "angle": 35.0,
+      "a": "motor",
+      "b": "deck_140",
+      "distance_mm": 215.367
+    },
+    {
+      "angle": 35.0,
+      "a": "motor",
+      "b": "angle_140_-43_0",
+      "distance_mm": 224.105
+    },
+    {
+      "angle": 35.0,
+      "a": "motor",
+      "b": "angle_140_-43_1",
+      "distance_mm": 246.558
+    },
+    {
+      "angle": 35.0,
+      "a": "motor",
+      "b": "angle_140_43_0",
+      "distance_mm": 191.206
+    },
+    {
+      "angle": 35.0,
+      "a": "motor",
+      "b": "angle_140_43_1",
+      "distance_mm": 217.089
+    },
+    {
+      "angle": 35.0,
+      "a": "motor",
+      "b": "fixture_base",
+      "distance_mm": 92.493
+    },
+    {
+      "angle": 35.0,
+      "a": "motor",
+      "b": "fixture_upright_near",
+      "distance_mm": 103.724
+    },
+    {
+      "angle": 35.0,
+      "a": "motor",
+      "b": "fixture_upright_far",
+      "distance_mm": 153.957
+    },
+    {
+      "angle": 35.0,
+      "a": "encoder",
+      "b": "body_near",
+      "distance_mm": 57.141
+    },
+    {
+      "angle": 35.0,
+      "a": "encoder",
+      "b": "body_far",
+      "distance_mm": 105.181
+    },
+    {
+      "angle": 35.0,
+      "a": "encoder",
+      "b": "deck_60",
+      "distance_mm": 137.154
+    },
+    {
+      "angle": 35.0,
+      "a": "encoder",
+      "b": "angle_60_-43_0",
+      "distance_mm": 163.588
+    },
+    {
+      "angle": 35.0,
+      "a": "encoder",
+      "b": "angle_60_-43_1",
+      "distance_mm": 184.138
+    },
+    {
+      "angle": 35.0,
+      "a": "encoder",
+      "b": "angle_60_43_0",
+      "distance_mm": 116.51
+    },
+    {
+      "angle": 35.0,
+      "a": "encoder",
+      "b": "angle_60_43_1",
+      "distance_mm": 143.946
+    },
+    {
+      "angle": 35.0,
+      "a": "encoder",
+      "b": "deck_140",
+      "distance_mm": 215.767
+    },
+    {
+      "angle": 35.0,
+      "a": "encoder",
+      "b": "angle_140_-43_0",
+      "distance_mm": 225.6
+    },
+    {
+      "angle": 35.0,
+      "a": "encoder",
+      "b": "angle_140_-43_1",
+      "distance_mm": 240.918
+    },
+    {
+      "angle": 35.0,
+      "a": "encoder",
+      "b": "angle_140_43_0",
+      "distance_mm": 192.888
+    },
+    {
+      "angle": 35.0,
+      "a": "encoder",
+      "b": "angle_140_43_1",
+      "distance_mm": 210.599
+    },
+    {
+      "angle": 35.0,
+      "a": "encoder",
+      "b": "fixture_base",
+      "distance_mm": 92.893
+    },
+    {
+      "angle": 35.0,
+      "a": "encoder",
+      "b": "fixture_upright_near",
+      "distance_mm": 109.26
+    },
+    {
+      "angle": 35.0,
+      "a": "encoder",
+      "b": "fixture_upright_far",
+      "distance_mm": 143.241
+    },
+    {
+      "angle": 35.0,
+      "a": "wheel",
+      "b": "body_near",
+      "distance_mm": 32.49
+    },
+    {
+      "angle": 35.0,
+      "a": "wheel",
+      "b": "body_far",
+      "distance_mm": 171.043
+    },
+    {
+      "angle": 35.0,
+      "a": "wheel",
+      "b": "deck_60",
+      "distance_mm": 109.21
+    },
+    {
+      "angle": 35.0,
+      "a": "wheel",
+      "b": "angle_60_-43_0",
+      "distance_mm": 129.074
+    },
+    {
+      "angle": 35.0,
+      "a": "wheel",
+      "b": "angle_60_-43_1",
+      "distance_mm": 200.946
+    },
+    {
+      "angle": 35.0,
+      "a": "wheel",
+      "b": "angle_60_43_0",
+      "distance_mm": 86.837
+    },
+    {
+      "angle": 35.0,
+      "a": "wheel",
+      "b": "angle_60_43_1",
+      "distance_mm": 175.46
+    },
+    {
+      "angle": 35.0,
+      "a": "wheel",
+      "b": "deck_140",
+      "distance_mm": 185.597
+    },
+    {
+      "angle": 35.0,
+      "a": "wheel",
+      "b": "angle_140_-43_0",
+      "distance_mm": 191.162
+    },
+    {
+      "angle": 35.0,
+      "a": "wheel",
+      "b": "angle_140_-43_1",
+      "distance_mm": 250.346
+    },
+    {
+      "angle": 35.0,
+      "a": "wheel",
+      "b": "angle_140_43_0",
+      "distance_mm": 161.23
+    },
+    {
+      "angle": 35.0,
+      "a": "wheel",
+      "b": "angle_140_43_1",
+      "distance_mm": 228.309
+    },
+    {
+      "angle": 35.0,
+      "a": "wheel",
+      "b": "fixture_base",
+      "distance_mm": 59.893
+    },
+    {
+      "angle": 35.0,
+      "a": "wheel",
+      "b": "fixture_upright_near",
+      "distance_mm": 65.117
+    },
+    {
+      "angle": 35.0,
+      "a": "wheel",
+      "b": "fixture_upright_far",
+      "distance_mm": 187.777
+    },
+    {
+      "angle": 37.5,
+      "a": "lower_link",
+      "b": "upper_link",
+      "distance_mm": 13.324
+    },
+    {
+      "angle": 37.5,
+      "a": "lower_link",
+      "b": "gearbox",
+      "distance_mm": 5.606
+    },
+    {
+      "angle": 37.5,
+      "a": "upper_link",
+      "b": "gearbox",
+      "distance_mm": 24.827
+    },
+    {
+      "angle": 37.5,
+      "a": "carrier",
+      "b": "wheel",
+      "distance_mm": 4.5
+    },
+    {
+      "angle": 37.5,
+      "a": "lower_link",
+      "b": "body_near",
+      "distance_mm": 2.0
+    },
+    {
+      "angle": 37.5,
+      "a": "lower_link",
+      "b": "body_far",
+      "distance_mm": 143.0
+    },
+    {
+      "angle": 37.5,
+      "a": "lower_link",
+      "b": "deck_60",
+      "distance_mm": 52.616
+    },
+    {
+      "angle": 37.5,
+      "a": "lower_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 40.879
+    },
+    {
+      "angle": 37.5,
+      "a": "lower_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 129.998
+    },
+    {
+      "angle": 37.5,
+      "a": "lower_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 40.879
+    },
+    {
+      "angle": 37.5,
+      "a": "lower_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 130.0
+    },
+    {
+      "angle": 37.5,
+      "a": "lower_link",
+      "b": "deck_140",
+      "distance_mm": 132.246
+    },
+    {
+      "angle": 37.5,
+      "a": "lower_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 111.254
+    },
+    {
+      "angle": 37.5,
+      "a": "lower_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 175.803
+    },
+    {
+      "angle": 37.5,
+      "a": "lower_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 111.256
+    },
+    {
+      "angle": 37.5,
+      "a": "lower_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 175.804
+    },
+    {
+      "angle": 37.5,
+      "a": "lower_link",
+      "b": "fixture_base",
+      "distance_mm": 104.735
+    },
+    {
+      "angle": 37.5,
+      "a": "lower_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.004
+    },
+    {
+      "angle": 37.5,
+      "a": "lower_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 150.084
+    },
+    {
+      "angle": 37.5,
+      "a": "upper_link",
+      "b": "body_near",
+      "distance_mm": 12.0
+    },
+    {
+      "angle": 37.5,
+      "a": "upper_link",
+      "b": "body_far",
+      "distance_mm": 153.0
+    },
+    {
+      "angle": 37.5,
+      "a": "upper_link",
+      "b": "deck_60",
+      "distance_mm": 21.636
+    },
+    {
+      "angle": 37.5,
+      "a": "upper_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 31.626
+    },
+    {
+      "angle": 37.5,
+      "a": "upper_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 130.305
+    },
+    {
+      "angle": 37.5,
+      "a": "upper_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 26.407
+    },
+    {
+      "angle": 37.5,
+      "a": "upper_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 130.368
+    },
+    {
+      "angle": 37.5,
+      "a": "upper_link",
+      "b": "deck_140",
+      "distance_mm": 93.749
+    },
+    {
+      "angle": 37.5,
+      "a": "upper_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 75.614
+    },
+    {
+      "angle": 37.5,
+      "a": "upper_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 157.352
+    },
+    {
+      "angle": 37.5,
+      "a": "upper_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 75.611
+    },
+    {
+      "angle": 37.5,
+      "a": "upper_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 157.352
+    },
+    {
+      "angle": 37.5,
+      "a": "upper_link",
+      "b": "fixture_base",
+      "distance_mm": 144.735
+    },
+    {
+      "angle": 37.5,
+      "a": "upper_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.004
+    },
+    {
+      "angle": 37.5,
+      "a": "upper_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 160.016
+    },
+    {
+      "angle": 37.5,
+      "a": "carrier",
+      "b": "body_near",
+      "distance_mm": 20.619
+    },
+    {
+      "angle": 37.5,
+      "a": "carrier",
+      "b": "body_far",
+      "distance_mm": 160.2
+    },
+    {
+      "angle": 37.5,
+      "a": "carrier",
+      "b": "deck_60",
+      "distance_mm": 102.843
+    },
+    {
+      "angle": 37.5,
+      "a": "carrier",
+      "b": "angle_60_-43_0",
+      "distance_mm": 124.153
+    },
+    {
+      "angle": 37.5,
+      "a": "carrier",
+      "b": "angle_60_-43_1",
+      "distance_mm": 190.718
+    },
+    {
+      "angle": 37.5,
+      "a": "carrier",
+      "b": "angle_60_43_0",
+      "distance_mm": 78.711
+    },
+    {
+      "angle": 37.5,
+      "a": "carrier",
+      "b": "angle_60_43_1",
+      "distance_mm": 164.468
+    },
+    {
+      "angle": 37.5,
+      "a": "carrier",
+      "b": "deck_140",
+      "distance_mm": 181.286
+    },
+    {
+      "angle": 37.5,
+      "a": "carrier",
+      "b": "angle_140_-43_0",
+      "distance_mm": 183.978
+    },
+    {
+      "angle": 37.5,
+      "a": "carrier",
+      "b": "angle_140_-43_1",
+      "distance_mm": 239.266
+    },
+    {
+      "angle": 37.5,
+      "a": "carrier",
+      "b": "angle_140_43_0",
+      "distance_mm": 155.978
+    },
+    {
+      "angle": 37.5,
+      "a": "carrier",
+      "b": "angle_140_43_1",
+      "distance_mm": 218.47
+    },
+    {
+      "angle": 37.5,
+      "a": "carrier",
+      "b": "fixture_base",
+      "distance_mm": 89.731
+    },
+    {
+      "angle": 37.5,
+      "a": "carrier",
+      "b": "fixture_upright_near",
+      "distance_mm": 84.97
+    },
+    {
+      "angle": 37.5,
+      "a": "carrier",
+      "b": "fixture_upright_far",
+      "distance_mm": 186.48
+    },
+    {
+      "angle": 37.5,
+      "a": "gearbox",
+      "b": "body_near",
+      "distance_mm": 48.798
+    },
+    {
+      "angle": 37.5,
+      "a": "gearbox",
+      "b": "body_far",
+      "distance_mm": 146.845
+    },
+    {
+      "angle": 37.5,
+      "a": "gearbox",
+      "b": "deck_60",
+      "distance_mm": 134.124
+    },
+    {
+      "angle": 37.5,
+      "a": "gearbox",
+      "b": "angle_60_-43_0",
+      "distance_mm": 161.598
+    },
+    {
+      "angle": 37.5,
+      "a": "gearbox",
+      "b": "angle_60_-43_1",
+      "distance_mm": 209.162
+    },
+    {
+      "angle": 37.5,
+      "a": "gearbox",
+      "b": "angle_60_43_0",
+      "distance_mm": 111.7
+    },
+    {
+      "angle": 37.5,
+      "a": "gearbox",
+      "b": "angle_60_43_1",
+      "distance_mm": 172.996
+    },
+    {
+      "angle": 37.5,
+      "a": "gearbox",
+      "b": "deck_140",
+      "distance_mm": 212.304
+    },
+    {
+      "angle": 37.5,
+      "a": "gearbox",
+      "b": "angle_140_-43_0",
+      "distance_mm": 222.85
+    },
+    {
+      "angle": 37.5,
+      "a": "gearbox",
+      "b": "angle_140_-43_1",
+      "distance_mm": 259.754
+    },
+    {
+      "angle": 37.5,
+      "a": "gearbox",
+      "b": "angle_140_43_0",
+      "distance_mm": 188.308
+    },
+    {
+      "angle": 37.5,
+      "a": "gearbox",
+      "b": "angle_140_43_1",
+      "distance_mm": 230.803
+    },
+    {
+      "angle": 37.5,
+      "a": "gearbox",
+      "b": "fixture_base",
+      "distance_mm": 94.331
+    },
+    {
+      "angle": 37.5,
+      "a": "gearbox",
+      "b": "fixture_upright_near",
+      "distance_mm": 106.564
+    },
+    {
+      "angle": 37.5,
+      "a": "gearbox",
+      "b": "fixture_upright_far",
+      "distance_mm": 179.544
+    },
+    {
+      "angle": 37.5,
+      "a": "motor",
+      "b": "body_near",
+      "distance_mm": 49.798
+    },
+    {
+      "angle": 37.5,
+      "a": "motor",
+      "b": "body_far",
+      "distance_mm": 118.746
+    },
+    {
+      "angle": 37.5,
+      "a": "motor",
+      "b": "deck_60",
+      "distance_mm": 134.936
+    },
+    {
+      "angle": 37.5,
+      "a": "motor",
+      "b": "angle_60_-43_0",
+      "distance_mm": 162.56
+    },
+    {
+      "angle": 37.5,
+      "a": "motor",
+      "b": "angle_60_-43_1",
+      "distance_mm": 192.337
+    },
+    {
+      "angle": 37.5,
+      "a": "motor",
+      "b": "angle_60_43_0",
+      "distance_mm": 112.645
+    },
+    {
+      "angle": 37.5,
+      "a": "motor",
+      "b": "angle_60_43_1",
+      "distance_mm": 152.502
+    },
+    {
+      "angle": 37.5,
+      "a": "motor",
+      "b": "deck_140",
+      "distance_mm": 213.185
+    },
+    {
+      "angle": 37.5,
+      "a": "motor",
+      "b": "angle_140_-43_0",
+      "distance_mm": 223.823
+    },
+    {
+      "angle": 37.5,
+      "a": "motor",
+      "b": "angle_140_-43_1",
+      "distance_mm": 246.302
+    },
+    {
+      "angle": 37.5,
+      "a": "motor",
+      "b": "angle_140_43_0",
+      "distance_mm": 189.275
+    },
+    {
+      "angle": 37.5,
+      "a": "motor",
+      "b": "angle_140_43_1",
+      "distance_mm": 215.39
+    },
+    {
+      "angle": 37.5,
+      "a": "motor",
+      "b": "fixture_base",
+      "distance_mm": 95.331
+    },
+    {
+      "angle": 37.5,
+      "a": "motor",
+      "b": "fixture_upright_near",
+      "distance_mm": 107.593
+    },
+    {
+      "angle": 37.5,
+      "a": "motor",
+      "b": "fixture_upright_far",
+      "distance_mm": 156.59
+    },
+    {
+      "angle": 37.5,
+      "a": "encoder",
+      "b": "body_near",
+      "distance_mm": 57.094
+    },
+    {
+      "angle": 37.5,
+      "a": "encoder",
+      "b": "body_far",
+      "distance_mm": 105.155
+    },
+    {
+      "angle": 37.5,
+      "a": "encoder",
+      "b": "deck_60",
+      "distance_mm": 135.336
+    },
+    {
+      "angle": 37.5,
+      "a": "encoder",
+      "b": "angle_60_-43_0",
+      "distance_mm": 164.465
+    },
+    {
+      "angle": 37.5,
+      "a": "encoder",
+      "b": "angle_60_-43_1",
+      "distance_mm": 184.918
+    },
+    {
+      "angle": 37.5,
+      "a": "encoder",
+      "b": "angle_60_43_0",
+      "distance_mm": 115.204
+    },
+    {
+      "angle": 37.5,
+      "a": "encoder",
+      "b": "angle_60_43_1",
+      "distance_mm": 142.891
+    },
+    {
+      "angle": 37.5,
+      "a": "encoder",
+      "b": "deck_140",
+      "distance_mm": 213.585
+    },
+    {
+      "angle": 37.5,
+      "a": "encoder",
+      "b": "angle_140_-43_0",
+      "distance_mm": 225.319
+    },
+    {
+      "angle": 37.5,
+      "a": "encoder",
+      "b": "angle_140_-43_1",
+      "distance_mm": 240.655
+    },
+    {
+      "angle": 37.5,
+      "a": "encoder",
+      "b": "angle_140_43_0",
+      "distance_mm": 190.97
+    },
+    {
+      "angle": 37.5,
+      "a": "encoder",
+      "b": "angle_140_43_1",
+      "distance_mm": 208.843
+    },
+    {
+      "angle": 37.5,
+      "a": "encoder",
+      "b": "fixture_base",
+      "distance_mm": 95.731
+    },
+    {
+      "angle": 37.5,
+      "a": "encoder",
+      "b": "fixture_upright_near",
+      "distance_mm": 112.953
+    },
+    {
+      "angle": 37.5,
+      "a": "encoder",
+      "b": "fixture_upright_far",
+      "distance_mm": 146.078
+    },
+    {
+      "angle": 37.5,
+      "a": "wheel",
+      "b": "body_near",
+      "distance_mm": 32.303
+    },
+    {
+      "angle": 37.5,
+      "a": "wheel",
+      "b": "body_far",
+      "distance_mm": 171.007
+    },
+    {
+      "angle": 37.5,
+      "a": "wheel",
+      "b": "deck_60",
+      "distance_mm": 107.362
+    },
+    {
+      "angle": 37.5,
+      "a": "wheel",
+      "b": "angle_60_-43_0",
+      "distance_mm": 129.8
+    },
+    {
+      "angle": 37.5,
+      "a": "wheel",
+      "b": "angle_60_-43_1",
+      "distance_mm": 201.21
+    },
+    {
+      "angle": 37.5,
+      "a": "wheel",
+      "b": "angle_60_43_0",
+      "distance_mm": 85.411
+    },
+    {
+      "angle": 37.5,
+      "a": "wheel",
+      "b": "angle_60_43_1",
+      "distance_mm": 174.471
+    },
+    {
+      "angle": 37.5,
+      "a": "wheel",
+      "b": "deck_140",
+      "distance_mm": 183.363
+    },
+    {
+      "angle": 37.5,
+      "a": "wheel",
+      "b": "angle_140_-43_0",
+      "distance_mm": 190.769
+    },
+    {
+      "angle": 37.5,
+      "a": "wheel",
+      "b": "angle_140_-43_1",
+      "distance_mm": 250.045
+    },
+    {
+      "angle": 37.5,
+      "a": "wheel",
+      "b": "angle_140_43_0",
+      "distance_mm": 159.206
+    },
+    {
+      "angle": 37.5,
+      "a": "wheel",
+      "b": "angle_140_43_1",
+      "distance_mm": 226.885
+    },
+    {
+      "angle": 37.5,
+      "a": "wheel",
+      "b": "fixture_base",
+      "distance_mm": 62.731
+    },
+    {
+      "angle": 37.5,
+      "a": "wheel",
+      "b": "fixture_upright_near",
+      "distance_mm": 68.93
+    },
+    {
+      "angle": 37.5,
+      "a": "wheel",
+      "b": "fixture_upright_far",
+      "distance_mm": 189.133
+    },
+    {
+      "angle": 40.0,
+      "a": "lower_link",
+      "b": "upper_link",
+      "distance_mm": 14.595
+    },
+    {
+      "angle": 40.0,
+      "a": "lower_link",
+      "b": "gearbox",
+      "distance_mm": 5.601
+    },
+    {
+      "angle": 40.0,
+      "a": "upper_link",
+      "b": "gearbox",
+      "distance_mm": 24.828
+    },
+    {
+      "angle": 40.0,
+      "a": "carrier",
+      "b": "wheel",
+      "distance_mm": 4.5
+    },
+    {
+      "angle": 40.0,
+      "a": "lower_link",
+      "b": "body_near",
+      "distance_mm": 2.0
+    },
+    {
+      "angle": 40.0,
+      "a": "lower_link",
+      "b": "body_far",
+      "distance_mm": 143.0
+    },
+    {
+      "angle": 40.0,
+      "a": "lower_link",
+      "b": "deck_60",
+      "distance_mm": 52.612
+    },
+    {
+      "angle": 40.0,
+      "a": "lower_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 40.874
+    },
+    {
+      "angle": 40.0,
+      "a": "lower_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 130.002
+    },
+    {
+      "angle": 40.0,
+      "a": "lower_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 40.874
+    },
+    {
+      "angle": 40.0,
+      "a": "lower_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 129.999
+    },
+    {
+      "angle": 40.0,
+      "a": "lower_link",
+      "b": "deck_140",
+      "distance_mm": 132.243
+    },
+    {
+      "angle": 40.0,
+      "a": "lower_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 111.251
+    },
+    {
+      "angle": 40.0,
+      "a": "lower_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 175.808
+    },
+    {
+      "angle": 40.0,
+      "a": "lower_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 111.25
+    },
+    {
+      "angle": 40.0,
+      "a": "lower_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 175.807
+    },
+    {
+      "angle": 40.0,
+      "a": "lower_link",
+      "b": "fixture_base",
+      "distance_mm": 107.736
+    },
+    {
+      "angle": 40.0,
+      "a": "lower_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.0
+    },
+    {
+      "angle": 40.0,
+      "a": "lower_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 150.083
+    },
+    {
+      "angle": 40.0,
+      "a": "upper_link",
+      "b": "body_near",
+      "distance_mm": 12.0
+    },
+    {
+      "angle": 40.0,
+      "a": "upper_link",
+      "b": "body_far",
+      "distance_mm": 153.0
+    },
+    {
+      "angle": 40.0,
+      "a": "upper_link",
+      "b": "deck_60",
+      "distance_mm": 21.634
+    },
+    {
+      "angle": 40.0,
+      "a": "upper_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 31.623
+    },
+    {
+      "angle": 40.0,
+      "a": "upper_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 130.306
+    },
+    {
+      "angle": 40.0,
+      "a": "upper_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 25.59
+    },
+    {
+      "angle": 40.0,
+      "a": "upper_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 130.374
+    },
+    {
+      "angle": 40.0,
+      "a": "upper_link",
+      "b": "deck_140",
+      "distance_mm": 93.745
+    },
+    {
+      "angle": 40.0,
+      "a": "upper_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 75.614
+    },
+    {
+      "angle": 40.0,
+      "a": "upper_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 157.356
+    },
+    {
+      "angle": 40.0,
+      "a": "upper_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 75.62
+    },
+    {
+      "angle": 40.0,
+      "a": "upper_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 157.356
+    },
+    {
+      "angle": 40.0,
+      "a": "upper_link",
+      "b": "fixture_base",
+      "distance_mm": 147.736
+    },
+    {
+      "angle": 40.0,
+      "a": "upper_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.0
+    },
+    {
+      "angle": 40.0,
+      "a": "upper_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 160.016
+    },
+    {
+      "angle": 40.0,
+      "a": "carrier",
+      "b": "body_near",
+      "distance_mm": 20.704
+    },
+    {
+      "angle": 40.0,
+      "a": "carrier",
+      "b": "body_far",
+      "distance_mm": 160.211
+    },
+    {
+      "angle": 40.0,
+      "a": "carrier",
+      "b": "deck_60",
+      "distance_mm": 100.341
+    },
+    {
+      "angle": 40.0,
+      "a": "carrier",
+      "b": "angle_60_-43_0",
+      "distance_mm": 125.249
+    },
+    {
+      "angle": 40.0,
+      "a": "carrier",
+      "b": "angle_60_-43_1",
+      "distance_mm": 191.126
+    },
+    {
+      "angle": 40.0,
+      "a": "carrier",
+      "b": "angle_60_43_0",
+      "distance_mm": 76.664
+    },
+    {
+      "angle": 40.0,
+      "a": "carrier",
+      "b": "angle_60_43_1",
+      "distance_mm": 163.118
+    },
+    {
+      "angle": 40.0,
+      "a": "carrier",
+      "b": "deck_140",
+      "distance_mm": 178.538
+    },
+    {
+      "angle": 40.0,
+      "a": "carrier",
+      "b": "angle_140_-43_0",
+      "distance_mm": 183.48
+    },
+    {
+      "angle": 40.0,
+      "a": "carrier",
+      "b": "angle_140_-43_1",
+      "distance_mm": 238.883
+    },
+    {
+      "angle": 40.0,
+      "a": "carrier",
+      "b": "angle_140_43_0",
+      "distance_mm": 153.421
+    },
+    {
+      "angle": 40.0,
+      "a": "carrier",
+      "b": "angle_140_43_1",
+      "distance_mm": 216.652
+    },
+    {
+      "angle": 40.0,
+      "a": "carrier",
+      "b": "fixture_base",
+      "distance_mm": 92.735
+    },
+    {
+      "angle": 40.0,
+      "a": "carrier",
+      "b": "fixture_upright_near",
+      "distance_mm": 88.712
+    },
+    {
+      "angle": 40.0,
+      "a": "carrier",
+      "b": "fixture_upright_far",
+      "distance_mm": 188.215
+    },
+    {
+      "angle": 40.0,
+      "a": "gearbox",
+      "b": "body_near",
+      "distance_mm": 48.854
+    },
+    {
+      "angle": 40.0,
+      "a": "gearbox",
+      "b": "body_far",
+      "distance_mm": 146.864
+    },
+    {
+      "angle": 40.0,
+      "a": "gearbox",
+      "b": "deck_60",
+      "distance_mm": 132.246
+    },
+    {
+      "angle": 40.0,
+      "a": "gearbox",
+      "b": "angle_60_-43_0",
+      "distance_mm": 162.401
+    },
+    {
+      "angle": 40.0,
+      "a": "gearbox",
+      "b": "angle_60_-43_1",
+      "distance_mm": 209.515
+    },
+    {
+      "angle": 40.0,
+      "a": "gearbox",
+      "b": "angle_60_43_0",
+      "distance_mm": 110.332
+    },
+    {
+      "angle": 40.0,
+      "a": "gearbox",
+      "b": "angle_60_43_1",
+      "distance_mm": 171.775
+    },
+    {
+      "angle": 40.0,
+      "a": "gearbox",
+      "b": "deck_140",
+      "distance_mm": 210.017
+    },
+    {
+      "angle": 40.0,
+      "a": "gearbox",
+      "b": "angle_140_-43_0",
+      "distance_mm": 222.455
+    },
+    {
+      "angle": 40.0,
+      "a": "gearbox",
+      "b": "angle_140_-43_1",
+      "distance_mm": 259.415
+    },
+    {
+      "angle": 40.0,
+      "a": "gearbox",
+      "b": "angle_140_43_0",
+      "distance_mm": 186.279
+    },
+    {
+      "angle": 40.0,
+      "a": "gearbox",
+      "b": "angle_140_43_1",
+      "distance_mm": 229.151
+    },
+    {
+      "angle": 40.0,
+      "a": "gearbox",
+      "b": "fixture_base",
+      "distance_mm": 97.335
+    },
+    {
+      "angle": 40.0,
+      "a": "gearbox",
+      "b": "fixture_upright_near",
+      "distance_mm": 110.307
+    },
+    {
+      "angle": 40.0,
+      "a": "gearbox",
+      "b": "fixture_upright_far",
+      "distance_mm": 181.791
+    },
+    {
+      "angle": 40.0,
+      "a": "motor",
+      "b": "body_near",
+      "distance_mm": 49.854
+    },
+    {
+      "angle": 40.0,
+      "a": "motor",
+      "b": "body_far",
+      "distance_mm": 118.77
+    },
+    {
+      "angle": 40.0,
+      "a": "motor",
+      "b": "deck_60",
+      "distance_mm": 133.053
+    },
+    {
+      "angle": 40.0,
+      "a": "motor",
+      "b": "angle_60_-43_0",
+      "distance_mm": 163.363
+    },
+    {
+      "angle": 40.0,
+      "a": "motor",
+      "b": "angle_60_-43_1",
+      "distance_mm": 193.016
+    },
+    {
+      "angle": 40.0,
+      "a": "motor",
+      "b": "angle_60_43_0",
+      "distance_mm": 111.277
+    },
+    {
+      "angle": 40.0,
+      "a": "motor",
+      "b": "angle_60_43_1",
+      "distance_mm": 151.494
+    },
+    {
+      "angle": 40.0,
+      "a": "motor",
+      "b": "deck_140",
+      "distance_mm": 210.895
+    },
+    {
+      "angle": 40.0,
+      "a": "motor",
+      "b": "angle_140_-43_0",
+      "distance_mm": 223.427
+    },
+    {
+      "angle": 40.0,
+      "a": "motor",
+      "b": "angle_140_-43_1",
+      "distance_mm": 245.942
+    },
+    {
+      "angle": 40.0,
+      "a": "motor",
+      "b": "angle_140_43_0",
+      "distance_mm": 187.246
+    },
+    {
+      "angle": 40.0,
+      "a": "motor",
+      "b": "angle_140_43_1",
+      "distance_mm": 213.61
+    },
+    {
+      "angle": 40.0,
+      "a": "motor",
+      "b": "fixture_base",
+      "distance_mm": 98.335
+    },
+    {
+      "angle": 40.0,
+      "a": "motor",
+      "b": "fixture_upright_near",
+      "distance_mm": 111.335
+    },
+    {
+      "angle": 40.0,
+      "a": "motor",
+      "b": "fixture_upright_far",
+      "distance_mm": 159.184
+    },
+    {
+      "angle": 40.0,
+      "a": "encoder",
+      "b": "body_near",
+      "distance_mm": 57.143
+    },
+    {
+      "angle": 40.0,
+      "a": "encoder",
+      "b": "body_far",
+      "distance_mm": 105.182
+    },
+    {
+      "angle": 40.0,
+      "a": "encoder",
+      "b": "deck_60",
+      "distance_mm": 133.453
+    },
+    {
+      "angle": 40.0,
+      "a": "encoder",
+      "b": "angle_60_-43_0",
+      "distance_mm": 165.261
+    },
+    {
+      "angle": 40.0,
+      "a": "encoder",
+      "b": "angle_60_-43_1",
+      "distance_mm": 185.626
+    },
+    {
+      "angle": 40.0,
+      "a": "encoder",
+      "b": "angle_60_43_0",
+      "distance_mm": 113.862
+    },
+    {
+      "angle": 40.0,
+      "a": "encoder",
+      "b": "angle_60_43_1",
+      "distance_mm": 141.811
+    },
+    {
+      "angle": 40.0,
+      "a": "encoder",
+      "b": "deck_140",
+      "distance_mm": 211.295
+    },
+    {
+      "angle": 40.0,
+      "a": "encoder",
+      "b": "angle_140_-43_0",
+      "distance_mm": 224.925
+    },
+    {
+      "angle": 40.0,
+      "a": "encoder",
+      "b": "angle_140_-43_1",
+      "distance_mm": 240.286
+    },
+    {
+      "angle": 40.0,
+      "a": "encoder",
+      "b": "angle_140_43_0",
+      "distance_mm": 188.955
+    },
+    {
+      "angle": 40.0,
+      "a": "encoder",
+      "b": "angle_140_43_1",
+      "distance_mm": 207.002
+    },
+    {
+      "angle": 40.0,
+      "a": "encoder",
+      "b": "fixture_base",
+      "distance_mm": 98.735
+    },
+    {
+      "angle": 40.0,
+      "a": "encoder",
+      "b": "fixture_upright_near",
+      "distance_mm": 116.536
+    },
+    {
+      "angle": 40.0,
+      "a": "encoder",
+      "b": "fixture_upright_far",
+      "distance_mm": 148.865
+    },
+    {
+      "angle": 40.0,
+      "a": "wheel",
+      "b": "body_near",
+      "distance_mm": 32.172
+    },
+    {
+      "angle": 40.0,
+      "a": "wheel",
+      "b": "body_far",
+      "distance_mm": 170.982
+    },
+    {
+      "angle": 40.0,
+      "a": "wheel",
+      "b": "deck_60",
+      "distance_mm": 105.454
+    },
+    {
+      "angle": 40.0,
+      "a": "wheel",
+      "b": "angle_60_-43_0",
+      "distance_mm": 130.452
+    },
+    {
+      "angle": 40.0,
+      "a": "wheel",
+      "b": "angle_60_-43_1",
+      "distance_mm": 201.414
+    },
+    {
+      "angle": 40.0,
+      "a": "wheel",
+      "b": "angle_60_43_0",
+      "distance_mm": 83.957
+    },
+    {
+      "angle": 40.0,
+      "a": "wheel",
+      "b": "angle_60_43_1",
+      "distance_mm": 173.462
+    },
+    {
+      "angle": 40.0,
+      "a": "wheel",
+      "b": "deck_140",
+      "distance_mm": 181.023
+    },
+    {
+      "angle": 40.0,
+      "a": "wheel",
+      "b": "angle_140_-43_0",
+      "distance_mm": 190.265
+    },
+    {
+      "angle": 40.0,
+      "a": "wheel",
+      "b": "angle_140_-43_1",
+      "distance_mm": 249.661
+    },
+    {
+      "angle": 40.0,
+      "a": "wheel",
+      "b": "angle_140_43_0",
+      "distance_mm": 157.089
+    },
+    {
+      "angle": 40.0,
+      "a": "wheel",
+      "b": "angle_140_43_1",
+      "distance_mm": 225.404
+    },
+    {
+      "angle": 40.0,
+      "a": "wheel",
+      "b": "fixture_base",
+      "distance_mm": 65.735
+    },
+    {
+      "angle": 40.0,
+      "a": "wheel",
+      "b": "fixture_upright_near",
+      "distance_mm": 72.623
+    },
+    {
+      "angle": 40.0,
+      "a": "wheel",
+      "b": "fixture_upright_far",
+      "distance_mm": 190.51
+    },
+    {
+      "angle": 42.5,
+      "a": "lower_link",
+      "b": "upper_link",
+      "distance_mm": 15.834
+    },
+    {
+      "angle": 42.5,
+      "a": "lower_link",
+      "b": "gearbox",
+      "distance_mm": 5.609
+    },
+    {
+      "angle": 42.5,
+      "a": "upper_link",
+      "b": "gearbox",
+      "distance_mm": 24.83
+    },
+    {
+      "angle": 42.5,
+      "a": "carrier",
+      "b": "wheel",
+      "distance_mm": 4.5
+    },
+    {
+      "angle": 42.5,
+      "a": "lower_link",
+      "b": "body_near",
+      "distance_mm": 2.0
+    },
+    {
+      "angle": 42.5,
+      "a": "lower_link",
+      "b": "body_far",
+      "distance_mm": 143.0
+    },
+    {
+      "angle": 42.5,
+      "a": "lower_link",
+      "b": "deck_60",
+      "distance_mm": 52.619
+    },
+    {
+      "angle": 42.5,
+      "a": "lower_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 40.883
+    },
+    {
+      "angle": 42.5,
+      "a": "lower_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 129.998
+    },
+    {
+      "angle": 42.5,
+      "a": "lower_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 40.883
+    },
+    {
+      "angle": 42.5,
+      "a": "lower_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 129.999
+    },
+    {
+      "angle": 42.5,
+      "a": "lower_link",
+      "b": "deck_140",
+      "distance_mm": 132.25
+    },
+    {
+      "angle": 42.5,
+      "a": "lower_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 111.257
+    },
+    {
+      "angle": 42.5,
+      "a": "lower_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 175.803
+    },
+    {
+      "angle": 42.5,
+      "a": "lower_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 111.26
+    },
+    {
+      "angle": 42.5,
+      "a": "lower_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 175.803
+    },
+    {
+      "angle": 42.5,
+      "a": "lower_link",
+      "b": "fixture_base",
+      "distance_mm": 110.907
+    },
+    {
+      "angle": 42.5,
+      "a": "lower_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.008
+    },
+    {
+      "angle": 42.5,
+      "a": "lower_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 150.084
+    },
+    {
+      "angle": 42.5,
+      "a": "upper_link",
+      "b": "body_near",
+      "distance_mm": 12.0
+    },
+    {
+      "angle": 42.5,
+      "a": "upper_link",
+      "b": "body_far",
+      "distance_mm": 153.0
+    },
+    {
+      "angle": 42.5,
+      "a": "upper_link",
+      "b": "deck_60",
+      "distance_mm": 21.638
+    },
+    {
+      "angle": 42.5,
+      "a": "upper_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 31.629
+    },
+    {
+      "angle": 42.5,
+      "a": "upper_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 130.306
+    },
+    {
+      "angle": 42.5,
+      "a": "upper_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 24.768
+    },
+    {
+      "angle": 42.5,
+      "a": "upper_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 130.365
+    },
+    {
+      "angle": 42.5,
+      "a": "upper_link",
+      "b": "deck_140",
+      "distance_mm": 93.752
+    },
+    {
+      "angle": 42.5,
+      "a": "upper_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 75.612
+    },
+    {
+      "angle": 42.5,
+      "a": "upper_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 157.352
+    },
+    {
+      "angle": 42.5,
+      "a": "upper_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 75.611
+    },
+    {
+      "angle": 42.5,
+      "a": "upper_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 157.352
+    },
+    {
+      "angle": 42.5,
+      "a": "upper_link",
+      "b": "fixture_base",
+      "distance_mm": 150.907
+    },
+    {
+      "angle": 42.5,
+      "a": "upper_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.008
+    },
+    {
+      "angle": 42.5,
+      "a": "upper_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 160.016
+    },
+    {
+      "angle": 42.5,
+      "a": "carrier",
+      "b": "body_near",
+      "distance_mm": 21.144
+    },
+    {
+      "angle": 42.5,
+      "a": "carrier",
+      "b": "body_far",
+      "distance_mm": 160.269
+    },
+    {
+      "angle": 42.5,
+      "a": "carrier",
+      "b": "deck_60",
+      "distance_mm": 97.802
+    },
+    {
+      "angle": 42.5,
+      "a": "carrier",
+      "b": "angle_60_-43_0",
+      "distance_mm": 126.303
+    },
+    {
+      "angle": 42.5,
+      "a": "carrier",
+      "b": "angle_60_-43_1",
+      "distance_mm": 191.498
+    },
+    {
+      "angle": 42.5,
+      "a": "carrier",
+      "b": "angle_60_43_0",
+      "distance_mm": 74.659
+    },
+    {
+      "angle": 42.5,
+      "a": "carrier",
+      "b": "angle_60_43_1",
+      "distance_mm": 161.789
+    },
+    {
+      "angle": 42.5,
+      "a": "carrier",
+      "b": "deck_140",
+      "distance_mm": 175.699
+    },
+    {
+      "angle": 42.5,
+      "a": "carrier",
+      "b": "angle_140_-43_0",
+      "distance_mm": 182.895
+    },
+    {
+      "angle": 42.5,
+      "a": "carrier",
+      "b": "angle_140_-43_1",
+      "distance_mm": 238.433
+    },
+    {
+      "angle": 42.5,
+      "a": "carrier",
+      "b": "angle_140_43_0",
+      "distance_mm": 150.789
+    },
+    {
+      "angle": 42.5,
+      "a": "carrier",
+      "b": "angle_140_43_1",
+      "distance_mm": 214.796
+    },
+    {
+      "angle": 42.5,
+      "a": "carrier",
+      "b": "fixture_base",
+      "distance_mm": 95.899
+    },
+    {
+      "angle": 42.5,
+      "a": "carrier",
+      "b": "fixture_upright_near",
+      "distance_mm": 92.32
+    },
+    {
+      "angle": 42.5,
+      "a": "carrier",
+      "b": "fixture_upright_far",
+      "distance_mm": 189.942
+    },
+    {
+      "angle": 42.5,
+      "a": "gearbox",
+      "b": "body_near",
+      "distance_mm": 49.019
+    },
+    {
+      "angle": 42.5,
+      "a": "gearbox",
+      "b": "body_far",
+      "distance_mm": 146.919
+    },
+    {
+      "angle": 42.5,
+      "a": "gearbox",
+      "b": "deck_60",
+      "distance_mm": 130.304
+    },
+    {
+      "angle": 42.5,
+      "a": "gearbox",
+      "b": "angle_60_-43_0",
+      "distance_mm": 163.121
+    },
+    {
+      "angle": 42.5,
+      "a": "gearbox",
+      "b": "angle_60_-43_1",
+      "distance_mm": 209.792
+    },
+    {
+      "angle": 42.5,
+      "a": "gearbox",
+      "b": "angle_60_43_0",
+      "distance_mm": 108.929
+    },
+    {
+      "angle": 42.5,
+      "a": "gearbox",
+      "b": "angle_60_43_1",
+      "distance_mm": 170.516
+    },
+    {
+      "angle": 42.5,
+      "a": "gearbox",
+      "b": "deck_140",
+      "distance_mm": 207.623
+    },
+    {
+      "angle": 42.5,
+      "a": "gearbox",
+      "b": "angle_140_-43_0",
+      "distance_mm": 221.945
+    },
+    {
+      "angle": 42.5,
+      "a": "gearbox",
+      "b": "angle_140_-43_1",
+      "distance_mm": 258.978
+    },
+    {
+      "angle": 42.5,
+      "a": "gearbox",
+      "b": "angle_140_43_0",
+      "distance_mm": 184.153
+    },
+    {
+      "angle": 42.5,
+      "a": "gearbox",
+      "b": "angle_140_43_1",
+      "distance_mm": 227.426
+    },
+    {
+      "angle": 42.5,
+      "a": "gearbox",
+      "b": "fixture_base",
+      "distance_mm": 100.499
+    },
+    {
+      "angle": 42.5,
+      "a": "gearbox",
+      "b": "fixture_upright_near",
+      "distance_mm": 113.915
+    },
+    {
+      "angle": 42.5,
+      "a": "gearbox",
+      "b": "fixture_upright_far",
+      "distance_mm": 184.002
+    },
+    {
+      "angle": 42.5,
+      "a": "motor",
+      "b": "body_near",
+      "distance_mm": 50.019
+    },
+    {
+      "angle": 42.5,
+      "a": "motor",
+      "b": "body_far",
+      "distance_mm": 118.839
+    },
+    {
+      "angle": 42.5,
+      "a": "motor",
+      "b": "deck_60",
+      "distance_mm": 131.107
+    },
+    {
+      "angle": 42.5,
+      "a": "motor",
+      "b": "angle_60_-43_0",
+      "distance_mm": 164.084
+    },
+    {
+      "angle": 42.5,
+      "a": "motor",
+      "b": "angle_60_-43_1",
+      "distance_mm": 193.627
+    },
+    {
+      "angle": 42.5,
+      "a": "motor",
+      "b": "angle_60_43_0",
+      "distance_mm": 109.872
+    },
+    {
+      "angle": 42.5,
+      "a": "motor",
+      "b": "angle_60_43_1",
+      "distance_mm": 150.465
+    },
+    {
+      "angle": 42.5,
+      "a": "motor",
+      "b": "deck_140",
+      "distance_mm": 208.499
+    },
+    {
+      "angle": 42.5,
+      "a": "motor",
+      "b": "angle_140_-43_0",
+      "distance_mm": 222.917
+    },
+    {
+      "angle": 42.5,
+      "a": "motor",
+      "b": "angle_140_-43_1",
+      "distance_mm": 245.479
+    },
+    {
+      "angle": 42.5,
+      "a": "motor",
+      "b": "angle_140_43_0",
+      "distance_mm": 185.12
+    },
+    {
+      "angle": 42.5,
+      "a": "motor",
+      "b": "angle_140_43_1",
+      "distance_mm": 211.748
+    },
+    {
+      "angle": 42.5,
+      "a": "motor",
+      "b": "fixture_base",
+      "distance_mm": 101.499
+    },
+    {
+      "angle": 42.5,
+      "a": "motor",
+      "b": "fixture_upright_near",
+      "distance_mm": 114.942
+    },
+    {
+      "angle": 42.5,
+      "a": "motor",
+      "b": "fixture_upright_far",
+      "distance_mm": 161.728
+    },
+    {
+      "angle": 42.5,
+      "a": "encoder",
+      "b": "body_near",
+      "distance_mm": 57.288
+    },
+    {
+      "angle": 42.5,
+      "a": "encoder",
+      "b": "body_far",
+      "distance_mm": 105.261
+    },
+    {
+      "angle": 42.5,
+      "a": "encoder",
+      "b": "deck_60",
+      "distance_mm": 131.507
+    },
+    {
+      "angle": 42.5,
+      "a": "encoder",
+      "b": "angle_60_-43_0",
+      "distance_mm": 165.975
+    },
+    {
+      "angle": 42.5,
+      "a": "encoder",
+      "b": "angle_60_-43_1",
+      "distance_mm": 186.262
+    },
+    {
+      "angle": 42.5,
+      "a": "encoder",
+      "b": "angle_60_43_0",
+      "distance_mm": 112.485
+    },
+    {
+      "angle": 42.5,
+      "a": "encoder",
+      "b": "angle_60_43_1",
+      "distance_mm": 140.708
+    },
+    {
+      "angle": 42.5,
+      "a": "encoder",
+      "b": "deck_140",
+      "distance_mm": 208.899
+    },
+    {
+      "angle": 42.5,
+      "a": "encoder",
+      "b": "angle_140_-43_0",
+      "distance_mm": 224.418
+    },
+    {
+      "angle": 42.5,
+      "a": "encoder",
+      "b": "angle_140_-43_1",
+      "distance_mm": 239.811
+    },
+    {
+      "angle": 42.5,
+      "a": "encoder",
+      "b": "angle_140_43_0",
+      "distance_mm": 186.843
+    },
+    {
+      "angle": 42.5,
+      "a": "encoder",
+      "b": "angle_140_43_1",
+      "distance_mm": 205.077
+    },
+    {
+      "angle": 42.5,
+      "a": "encoder",
+      "b": "fixture_base",
+      "distance_mm": 101.899
+    },
+    {
+      "angle": 42.5,
+      "a": "encoder",
+      "b": "fixture_upright_near",
+      "distance_mm": 119.999
+    },
+    {
+      "angle": 42.5,
+      "a": "encoder",
+      "b": "fixture_upright_far",
+      "distance_mm": 151.592
+    },
+    {
+      "angle": 42.5,
+      "a": "wheel",
+      "b": "body_near",
+      "distance_mm": 32.094
+    },
+    {
+      "angle": 42.5,
+      "a": "wheel",
+      "b": "body_far",
+      "distance_mm": 170.968
+    },
+    {
+      "angle": 42.5,
+      "a": "wheel",
+      "b": "deck_60",
+      "distance_mm": 103.488
+    },
+    {
+      "angle": 42.5,
+      "a": "wheel",
+      "b": "angle_60_-43_0",
+      "distance_mm": 131.028
+    },
+    {
+      "angle": 42.5,
+      "a": "wheel",
+      "b": "angle_60_-43_1",
+      "distance_mm": 201.556
+    },
+    {
+      "angle": 42.5,
+      "a": "wheel",
+      "b": "angle_60_43_0",
+      "distance_mm": 82.477
+    },
+    {
+      "angle": 42.5,
+      "a": "wheel",
+      "b": "angle_60_43_1",
+      "distance_mm": 172.433
+    },
+    {
+      "angle": 42.5,
+      "a": "wheel",
+      "b": "deck_140",
+      "distance_mm": 178.58
+    },
+    {
+      "angle": 42.5,
+      "a": "wheel",
+      "b": "angle_140_-43_0",
+      "distance_mm": 189.651
+    },
+    {
+      "angle": 42.5,
+      "a": "wheel",
+      "b": "angle_140_-43_1",
+      "distance_mm": 249.194
+    },
+    {
+      "angle": 42.5,
+      "a": "wheel",
+      "b": "angle_140_43_0",
+      "distance_mm": 154.879
+    },
+    {
+      "angle": 42.5,
+      "a": "wheel",
+      "b": "angle_140_43_1",
+      "distance_mm": 223.87
+    },
+    {
+      "angle": 42.5,
+      "a": "wheel",
+      "b": "fixture_base",
+      "distance_mm": 68.899
+    },
+    {
+      "angle": 42.5,
+      "a": "wheel",
+      "b": "fixture_upright_near",
+      "distance_mm": 76.188
+    },
+    {
+      "angle": 42.5,
+      "a": "wheel",
+      "b": "fixture_upright_far",
+      "distance_mm": 191.897
+    },
+    {
+      "angle": 45.0,
+      "a": "lower_link",
+      "b": "upper_link",
+      "distance_mm": 17.035
+    },
+    {
+      "angle": 45.0,
+      "a": "lower_link",
+      "b": "gearbox",
+      "distance_mm": 5.6
+    },
+    {
+      "angle": 45.0,
+      "a": "upper_link",
+      "b": "gearbox",
+      "distance_mm": 24.826
+    },
+    {
+      "angle": 45.0,
+      "a": "carrier",
+      "b": "wheel",
+      "distance_mm": 4.5
+    },
+    {
+      "angle": 45.0,
+      "a": "lower_link",
+      "b": "body_near",
+      "distance_mm": 2.0
+    },
+    {
+      "angle": 45.0,
+      "a": "lower_link",
+      "b": "body_far",
+      "distance_mm": 143.0
+    },
+    {
+      "angle": 45.0,
+      "a": "lower_link",
+      "b": "deck_60",
+      "distance_mm": 52.612
+    },
+    {
+      "angle": 45.0,
+      "a": "lower_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 40.874
+    },
+    {
+      "angle": 45.0,
+      "a": "lower_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 130.0
+    },
+    {
+      "angle": 45.0,
+      "a": "lower_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 40.874
+    },
+    {
+      "angle": 45.0,
+      "a": "lower_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 130.0
+    },
+    {
+      "angle": 45.0,
+      "a": "lower_link",
+      "b": "deck_140",
+      "distance_mm": 132.242
+    },
+    {
+      "angle": 45.0,
+      "a": "lower_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 111.25
+    },
+    {
+      "angle": 45.0,
+      "a": "lower_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 175.81
+    },
+    {
+      "angle": 45.0,
+      "a": "lower_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 111.25
+    },
+    {
+      "angle": 45.0,
+      "a": "lower_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 175.81
+    },
+    {
+      "angle": 45.0,
+      "a": "lower_link",
+      "b": "fixture_base",
+      "distance_mm": 114.218
+    },
+    {
+      "angle": 45.0,
+      "a": "lower_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.0
+    },
+    {
+      "angle": 45.0,
+      "a": "lower_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 150.083
+    },
+    {
+      "angle": 45.0,
+      "a": "upper_link",
+      "b": "body_near",
+      "distance_mm": 12.0
+    },
+    {
+      "angle": 45.0,
+      "a": "upper_link",
+      "b": "body_far",
+      "distance_mm": 153.0
+    },
+    {
+      "angle": 45.0,
+      "a": "upper_link",
+      "b": "deck_60",
+      "distance_mm": 21.633
+    },
+    {
+      "angle": 45.0,
+      "a": "upper_link",
+      "b": "angle_60_-43_0",
+      "distance_mm": 31.623
+    },
+    {
+      "angle": 45.0,
+      "a": "upper_link",
+      "b": "angle_60_-43_1",
+      "distance_mm": 130.306
+    },
+    {
+      "angle": 45.0,
+      "a": "upper_link",
+      "b": "angle_60_43_0",
+      "distance_mm": 23.95
+    },
+    {
+      "angle": 45.0,
+      "a": "upper_link",
+      "b": "angle_60_43_1",
+      "distance_mm": 130.339
+    },
+    {
+      "angle": 45.0,
+      "a": "upper_link",
+      "b": "deck_140",
+      "distance_mm": 93.744
+    },
+    {
+      "angle": 45.0,
+      "a": "upper_link",
+      "b": "angle_140_-43_0",
+      "distance_mm": 75.617
+    },
+    {
+      "angle": 45.0,
+      "a": "upper_link",
+      "b": "angle_140_-43_1",
+      "distance_mm": 157.357
+    },
+    {
+      "angle": 45.0,
+      "a": "upper_link",
+      "b": "angle_140_43_0",
+      "distance_mm": 75.617
+    },
+    {
+      "angle": 45.0,
+      "a": "upper_link",
+      "b": "angle_140_43_1",
+      "distance_mm": 157.357
+    },
+    {
+      "angle": 45.0,
+      "a": "upper_link",
+      "b": "fixture_base",
+      "distance_mm": 154.218
+    },
+    {
+      "angle": 45.0,
+      "a": "upper_link",
+      "b": "fixture_upright_near",
+      "distance_mm": 18.0
+    },
+    {
+      "angle": 45.0,
+      "a": "upper_link",
+      "b": "fixture_upright_far",
+      "distance_mm": 160.016
+    },
+    {
+      "angle": 45.0,
+      "a": "carrier",
+      "b": "body_near",
+      "distance_mm": 21.993
+    },
+    {
+      "angle": 45.0,
+      "a": "carrier",
+      "b": "body_far",
+      "distance_mm": 160.383
+    },
+    {
+      "angle": 45.0,
+      "a": "carrier",
+      "b": "deck_60",
+      "distance_mm": 95.246
+    },
+    {
+      "angle": 45.0,
+      "a": "carrier",
+      "b": "angle_60_-43_0",
+      "distance_mm": 127.33
+    },
+    {
+      "angle": 45.0,
+      "a": "carrier",
+      "b": "angle_60_-43_1",
+      "distance_mm": 191.831
+    },
+    {
+      "angle": 45.0,
+      "a": "carrier",
+      "b": "angle_60_43_0",
+      "distance_mm": 72.705
+    },
+    {
+      "angle": 45.0,
+      "a": "carrier",
+      "b": "angle_60_43_1",
+      "distance_mm": 160.476
+    },
+    {
+      "angle": 45.0,
+      "a": "carrier",
+      "b": "deck_140",
+      "distance_mm": 172.774
+    },
+    {
+      "angle": 45.0,
+      "a": "carrier",
+      "b": "angle_140_-43_0",
+      "distance_mm": 182.227
+    },
+    {
+      "angle": 45.0,
+      "a": "carrier",
+      "b": "angle_140_-43_1",
+      "distance_mm": 237.922
+    },
+    {
+      "angle": 45.0,
+      "a": "carrier",
+      "b": "angle_140_43_0",
+      "distance_mm": 148.082
+    },
+    {
+      "angle": 45.0,
+      "a": "carrier",
+      "b": "angle_140_43_1",
+      "distance_mm": 212.904
+    },
+    {
+      "angle": 45.0,
+      "a": "carrier",
+      "b": "fixture_base",
+      "distance_mm": 99.218
+    },
+    {
+      "angle": 45.0,
+      "a": "carrier",
+      "b": "fixture_upright_near",
+      "distance_mm": 95.787
+    },
+    {
+      "angle": 45.0,
+      "a": "carrier",
+      "b": "fixture_upright_far",
+      "distance_mm": 191.651
+    },
+    {
+      "angle": 45.0,
+      "a": "gearbox",
+      "b": "body_near",
+      "distance_mm": 49.292
+    },
+    {
+      "angle": 45.0,
+      "a": "gearbox",
+      "b": "body_far",
+      "distance_mm": 147.01
+    },
+    {
+      "angle": 45.0,
+      "a": "gearbox",
+      "b": "deck_60",
+      "distance_mm": 128.3
+    },
+    {
+      "angle": 45.0,
+      "a": "gearbox",
+      "b": "angle_60_-43_0",
+      "distance_mm": 163.759
+    },
+    {
+      "angle": 45.0,
+      "a": "gearbox",
+      "b": "angle_60_-43_1",
+      "distance_mm": 209.992
+    },
+    {
+      "angle": 45.0,
+      "a": "gearbox",
+      "b": "angle_60_43_0",
+      "distance_mm": 107.49
+    },
+    {
+      "angle": 45.0,
+      "a": "gearbox",
+      "b": "angle_60_43_1",
+      "distance_mm": 169.22
+    },
+    {
+      "angle": 45.0,
+      "a": "gearbox",
+      "b": "deck_140",
+      "distance_mm": 205.125
+    },
+    {
+      "angle": 45.0,
+      "a": "gearbox",
+      "b": "angle_140_-43_0",
+      "distance_mm": 221.322
+    },
+    {
+      "angle": 45.0,
+      "a": "gearbox",
+      "b": "angle_140_-43_1",
+      "distance_mm": 258.444
+    },
+    {
+      "angle": 45.0,
+      "a": "gearbox",
+      "b": "angle_140_43_0",
+      "distance_mm": 181.931
+    },
+    {
+      "angle": 45.0,
+      "a": "gearbox",
+      "b": "angle_140_43_1",
+      "distance_mm": 225.63
+    },
+    {
+      "angle": 45.0,
+      "a": "gearbox",
+      "b": "fixture_base",
+      "distance_mm": 103.818
+    },
+    {
+      "angle": 45.0,
+      "a": "gearbox",
+      "b": "fixture_upright_near",
+      "distance_mm": 117.382
+    },
+    {
+      "angle": 45.0,
+      "a": "gearbox",
+      "b": "fixture_upright_far",
+      "distance_mm": 186.169
+    },
+    {
+      "angle": 45.0,
+      "a": "motor",
+      "b": "body_near",
+      "distance_mm": 50.292
+    },
+    {
+      "angle": 45.0,
+      "a": "motor",
+      "b": "body_far",
+      "distance_mm": 118.954
+    },
+    {
+      "angle": 45.0,
+      "a": "motor",
+      "b": "deck_60",
+      "distance_mm": 129.099
+    },
+    {
+      "angle": 45.0,
+      "a": "motor",
+      "b": "angle_60_-43_0",
+      "distance_mm": 164.722
+    },
+    {
+      "angle": 45.0,
+      "a": "motor",
+      "b": "angle_60_-43_1",
+      "distance_mm": 194.168
+    },
+    {
+      "angle": 45.0,
+      "a": "motor",
+      "b": "angle_60_43_0",
+      "distance_mm": 108.433
+    },
+    {
+      "angle": 45.0,
+      "a": "motor",
+      "b": "angle_60_43_1",
+      "distance_mm": 149.417
+    },
+    {
+      "angle": 45.0,
+      "a": "motor",
+      "b": "deck_140",
+      "distance_mm": 205.999
+    },
+    {
+      "angle": 45.0,
+      "a": "motor",
+      "b": "angle_140_-43_0",
+      "distance_mm": 222.294
+    },
+    {
+      "angle": 45.0,
+      "a": "motor",
+      "b": "angle_140_-43_1",
+      "distance_mm": 244.914
+    },
+    {
+      "angle": 45.0,
+      "a": "motor",
+      "b": "angle_140_43_0",
+      "distance_mm": 182.897
+    },
+    {
+      "angle": 45.0,
+      "a": "motor",
+      "b": "angle_140_43_1",
+      "distance_mm": 209.808
+    },
+    {
+      "angle": 45.0,
+      "a": "motor",
+      "b": "fixture_base",
+      "distance_mm": 104.818
+    },
+    {
+      "angle": 45.0,
+      "a": "motor",
+      "b": "fixture_upright_near",
+      "distance_mm": 118.408
+    },
+    {
+      "angle": 45.0,
+      "a": "motor",
+      "b": "fixture_upright_far",
+      "distance_mm": 164.209
+    },
+    {
+      "angle": 45.0,
+      "a": "encoder",
+      "b": "body_near",
+      "distance_mm": 57.528
+    },
+    {
+      "angle": 45.0,
+      "a": "encoder",
+      "b": "body_far",
+      "distance_mm": 105.392
+    },
+    {
+      "angle": 45.0,
+      "a": "encoder",
+      "b": "deck_60",
+      "distance_mm": 129.499
+    },
+    {
+      "angle": 45.0,
+      "a": "encoder",
+      "b": "angle_60_-43_0",
+      "distance_mm": 166.607
+    },
+    {
+      "angle": 45.0,
+      "a": "encoder",
+      "b": "angle_60_-43_1",
+      "distance_mm": 186.826
+    },
+    {
+      "angle": 45.0,
+      "a": "encoder",
+      "b": "angle_60_43_0",
+      "distance_mm": 111.074
+    },
+    {
+      "angle": 45.0,
+      "a": "encoder",
+      "b": "angle_60_43_1",
+      "distance_mm": 139.583
+    },
+    {
+      "angle": 45.0,
+      "a": "encoder",
+      "b": "deck_140",
+      "distance_mm": 206.399
+    },
+    {
+      "angle": 45.0,
+      "a": "encoder",
+      "b": "angle_140_-43_0",
+      "distance_mm": 223.798
+    },
+    {
+      "angle": 45.0,
+      "a": "encoder",
+      "b": "angle_140_-43_1",
+      "distance_mm": 239.231
+    },
+    {
+      "angle": 45.0,
+      "a": "encoder",
+      "b": "angle_140_43_0",
+      "distance_mm": 184.637
+    },
+    {
+      "angle": 45.0,
+      "a": "encoder",
+      "b": "angle_140_43_1",
+      "distance_mm": 203.068
+    },
+    {
+      "angle": 45.0,
+      "a": "encoder",
+      "b": "fixture_base",
+      "distance_mm": 105.218
+    },
+    {
+      "angle": 45.0,
+      "a": "encoder",
+      "b": "fixture_upright_near",
+      "distance_mm": 123.334
+    },
+    {
+      "angle": 45.0,
+      "a": "encoder",
+      "b": "fixture_upright_far",
+      "distance_mm": 154.245
+    },
+    {
+      "angle": 45.0,
+      "a": "wheel",
+      "b": "body_near",
+      "distance_mm": 32.068
+    },
+    {
+      "angle": 45.0,
+      "a": "wheel",
+      "b": "body_far",
+      "distance_mm": 170.963
+    },
+    {
+      "angle": 45.0,
+      "a": "wheel",
+      "b": "deck_60",
+      "distance_mm": 101.468
+    },
+    {
+      "angle": 45.0,
+      "a": "wheel",
+      "b": "angle_60_-43_0",
+      "distance_mm": 131.529
+    },
+    {
+      "angle": 45.0,
+      "a": "wheel",
+      "b": "angle_60_-43_1",
+      "distance_mm": 201.637
+    },
+    {
+      "angle": 45.0,
+      "a": "wheel",
+      "b": "angle_60_43_0",
+      "distance_mm": 80.973
+    },
+    {
+      "angle": 45.0,
+      "a": "wheel",
+      "b": "angle_60_43_1",
+      "distance_mm": 171.388
+    },
+    {
+      "angle": 45.0,
+      "a": "wheel",
+      "b": "deck_140",
+      "distance_mm": 176.034
+    },
+    {
+      "angle": 45.0,
+      "a": "wheel",
+      "b": "angle_140_-43_0",
+      "distance_mm": 188.927
+    },
+    {
+      "angle": 45.0,
+      "a": "wheel",
+      "b": "angle_140_-43_1",
+      "distance_mm": 248.643
+    },
+    {
+      "angle": 45.0,
+      "a": "wheel",
+      "b": "angle_140_43_0",
+      "distance_mm": 152.578
+    },
+    {
+      "angle": 45.0,
+      "a": "wheel",
+      "b": "angle_140_43_1",
+      "distance_mm": 222.17
+    },
+    {
+      "angle": 45.0,
+      "a": "wheel",
+      "b": "fixture_base",
+      "distance_mm": 72.218
+    },
+    {
+      "angle": 45.0,
+      "a": "wheel",
+      "b": "fixture_upright_near",
+      "distance_mm": 79.617
+    },
+    {
+      "angle": 45.0,
+      "a": "wheel",
+      "b": "fixture_upright_far",
+      "distance_mm": 193.284
+    }
+  ]
+}

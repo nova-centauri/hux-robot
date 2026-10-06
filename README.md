@@ -19,6 +19,9 @@ The scope has no stairs, one-wheel stance, jumps, rough terrain, onboard cameras
 
 ## Working documents
 
+- [One-leg body R03](cad/prints/one-leg-body-r03/README.md): nine printable part types, editable STEP models and four engineering sheets.
+- [2026-10-06 leg motion report](docs/checklists/2026-10-06-leg-motion.md): satisfactory travel per the user, with exact measurements still open.
+
 - [Mechanical testing layout and timeline](tools/living-drawings/mechanical-tests.html): movable side/end views, the R01 render, test steps and dated session drafts.
 - [Single-leg bench preparation](docs/one-leg-bench.md), [printable geometry template](cad/layouts/one-leg-bench-template.svg) and [session record](docs/checklists/one-leg-bench-session.md)
 - [Requirements](docs/requirements.md) and [decision log](docs/decisions.md)

@@ -1,5 +1,7 @@
 # V1-PROOF parts and reuse inventory
 
+**2026-10-06 leg motion and bench supply:** the user reports satisfactory leg travel and sufficient adjustable bench-supply voltage and current capacity. The [dated observation](checklists/2026-10-06-leg-motion.md) preserves that report. The [R03 body kit](../cad/prints/one-leg-body-r03/README.md) uses this supply for the next supported body stage. The supply model, final setpoints and return-energy behavior remain unrecorded. No purchase or powered-test result changes.
+
 **2026-10-03 controller/IMU arrival:** the user reports that one **Pico 2 with yellow pre-soldered headers and one LSM6DSO IMU are received**. The inspection, USB and sensor tests are not yet done. The October 2 Amazon order of the user has a **$30.58 combined total**. This brings the recorded project spend to **$173.70** and leaves **$726.30** under the $900 plan. This report supersedes the screenshot arrival estimate.
 
 The item prices, the shipping/tax breakdown and the payment date remain unshown. The LSM6DSO IMU replaces the earlier Adafruit LSM6DSOX selection, subject to sensor qualification. Start the [Pico/IMU bring-up](checklists/2026-10-03-pico-bringup.md). [Remaining shopping list](bom.md#remaining-shopping-list).
@@ -31,7 +33,7 @@ Purchased parts count as new cash spend. We infer no reuse credit.
 | Pololu 4035 DRV8874 drivers | Received per user 2026-10-02, untested; total delivered count pending; receipt covers 1 at $11.94 goods | H-bridge and current limiting for each wheel motor; confirm coverage of both channels | $0 |
 | 3D-printed mechanical parts | Printed per user 2026-10-02; revision, material, quantities and fit unrecorded | Passive geometry and packaging checks; powered mounts and load capacity remain unqualified | $0 |
 | Servo interface / adapter | Purchase/availability unconfirmed | Half-duplex TTL commands and feedback | $0 |
-| Bench supply | Available per user 2026-09-29; model, voltage/current range and reverse-energy behavior pending | Sequential single-actuator tests after rating/interface checks | $0 |
+| Bench supply | Available; sufficient adjustable voltage/current capacity per user 2026-10-06; model, final settings and reverse-energy behavior unrecorded | Supported body and single-actuator tests with the existing power/interface checks | $0 |
 | Panasonic MSMD042G1A industrial servo | 1 on hand per the user 2026-10-01; two photo views; untested, drive/harness/supply unknown | Bench/future mechanism candidate; 200 V-class drive and mass conflict with current proof | $0 |
 | Stepper motors; one labeled Astrosyn 610-024 | 2 on hand per the user 2026-10-01; only one label verified; ratings and condition unknown | Positioning/fixture candidates after identification; no current axis assigned | $0 |
 | Battery and balance charger | Cell count, condition and models unknown | Compatible 3S-class system or deliberate requalification | $0 |

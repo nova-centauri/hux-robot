@@ -1,12 +1,16 @@
 # V1-PROOF mechanical plan
 
+**2026-10-06:** the user reports satisfactory leg travel and requests a body with one leg. The [R03 body kit](../cad/prints/one-leg-body-r03/README.md) supplies the next supported assembly, printable parts and engineering sheets. The [dated observation](checklists/2026-10-06-leg-motion.md) preserves the report. Exact travel measurements and powered qualification remain open.
+
+R03 keeps the 110 mm links and 40 mm pivots. It adds a removable 30 degree lock, two equipment decks and a motor carrier. Its first-stage assumption uses a suspended wheel and bench power. The servo transmission and shaft bearings remain separate interfaces. The fixture carries the body, so this stage does not apply the motor-shaft load exception below.
+
 Active: a **2.5 kg target / 3.0 kg maximum**, four-actuator robot on two approximately 100 mm rubber wheels. The [old stair mechanism](archive/stair-v1/mechanical.md) is parked. [Envelope sketch](../cad/layouts/v1-proof.svg) · [formulas and mass budget](v1-proof-sizing.md).
 
 Use a simple bolted chassis and suitable scrap/COTS stock. Aluminum flat bar, plywood body plates and tube on hand are permitted. There is no requirement for carbon, a molded shell, a large head, an in-wheel hub or an elaborate battery cassette. Keep the pack and the electronics removable. Include rest skids and a catch fixture.
 
 ## Wheel and leg arrangement
 
-One selected Pololu 4752 gearmotor with encoder at each wheel carrier. Use proper hubs, supported axles and a bearing path for the robot weight. An unqualified motor shaft is not automatically a structural axle. Inboard motors are permitted.
+One selected Pololu 4752 gearmotor with encoder at each wheel carrier. Use proper hubs, supported axles and a bearing path for the robot weight. An unqualified motor shaft is not automatically a structural axle. Inboard motors are permitted. The [wheel drive mount](#wheel-drive-mount) proposal below asks for an explicit exception to the supported-axle rule.
 
 Do a check of the complete motor length and the wire-harness sweep before you fix the track. The proposed track is 230 mm and the wheel width is 25 mm. This gives 255 mm across the tires.
 
@@ -15,6 +19,24 @@ Each leg has two 110 mm parallel links. The body pivots and the wheel-carrier pi
 Use independent bearings on the driven shaft, hard stops and removable lock pins. This is one powered leg coordinate per side, not independently commanded hip/knee joints.
 
 The upright layout gives 278–306 mm overall height with a 150 mm body allocation above the lower pivot. The nominal vertical travel is 28.5 mm, but the axle also moves 49.3 mm fore/aft. The balance control must allow for the real pose-dependent CoM/pitch trim. Do not describe this as pure vertical suspension or a finished CAD mechanism. Keep both leg commands synchronized at first. To unload one wheel independently is outside the scope.
+
+## Wheel drive mount
+
+**JD-03, design proposal R02, recorded 2026-10-04.** The [wheel drive mount sheet](../tools/living-drawings/wheel-mount.html) gives the geometry between the Pololu 4752 gearmotor, the carrier and the Ø100 wheel. The dimensions come from the Pololu 37D drawing, the Pololu STEP model and the Pololu 2674 adapter drawing. No measurement of the received motor exists yet.
+
+Three facts fix the arrangement. The 37D output shaft is 7.0 mm off the axis of the motor body. The six M3 holes sit on Ø31 around that body axis. The shaft is 16 mm long with a 12 mm flat, so the wheel must sit next to the carrier plate. The lower link ends on the R01 kinematic axle, so the real axle cannot stay there.
+
+The proposal moves the axle 25 mm rearward of the lower carrier pivot. The parallelogram keeps every carrier point on the same arc, so the leg travel and the body height do not change. The wheel contact moves 25 mm rearward. The balance line and the CoM trim move with it.
+
+The carrier R02 goes outboard of both links, at 25–31 mm in the R01 lateral convention. The R01 link planes stay at 8–13 mm and 18–23 mm. Each pivot bolt is then in double shear between the body plate and the carrier. The gearbox face sits on the inboard face of the carrier. The motor body passes the link planes with 5.6 mm between the gearbox and the lower link end at every angle.
+
+The wheel is a Pololu 3278 scooter wheel, 100 × 24 mm, on a Pololu 2674 adapter with two M4 set screws on the flat. The wheel midplane is 22.5 mm from the gearbox face. The floor clears the motor body by 31.6 mm. At a 230 mm track the two motors point at each other with 29.8 mm between the lead ends.
+
+**This proposal differs from the rule above about supported axles.** The wheel load goes through the motor shaft and the gearbox bushing. The 16 mm shaft leaves no room for an outboard bearing. Pololu publishes no radial load rating. The static shaft moment is 0.40 N·m at 3.0 kg.
+
+Record the shaft play before and after each trial. If the play grows, add an outboard support in the next revision. The user must accept or reject this change explicitly.
+
+Measure the received motor against the [1:1 carrier template](../cad/layouts/wheel-mount-r02.svg) at the fit session. Then print the R02 carrier. The simulation still uses the R01 axle position. Update the model when the R02 carrier is printed and measured.
 
 ## Size the load honestly
 

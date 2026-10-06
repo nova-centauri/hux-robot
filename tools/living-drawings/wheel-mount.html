@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Wheel drive mount · HUX / V1-PROOF</title>
+  <meta name="description" content="JD-03: how the Pololu 4752 gearmotor mounts to the carrier and drives the 100 mm wheel. Exact geometry from the vendor drawings, with live clearance checks.">
+  <link rel="stylesheet" href="proof.css">
+  <link rel="stylesheet" href="workshop.css">
+  <link rel="stylesheet" href="wheel-mount.css">
+  <script src="wheel-mount.js" defer></script>
+</head>
+<body class="wheel-mount-page">
+  <a class="skip-link" href="#content">Skip to the mount geometry</a>
+  <main id="content" class="engineering-main">
+    <div class="page-heading">
+      <div><p class="eyebrow">Mechanical / joint detail JD-03</p><h1>Wheel drive mount</h1><p class="page-intro">The Pololu 4752 gearmotor bolts to the wheel carrier and turns the Ø100 wheel on its own output shaft. This sheet gives the geometry of that mount.</p></div>
+      <p class="document-code">JD-03 / R02</p>
+    </div>
+    <div class="callout"><strong>Design proposal R02, not a measured result.</strong> The dimensions come from the Pololu drawings and the Pololu STEP model. The user did not measure the received motor yet. Measure the motor and the wheel at the fit session before you print the carrier.</div>
+
+    <nav class="page-index" aria-label="Sheet sections"><a href="#facts">01 / Three facts</a><a href="#side">02 / Side view</a><a href="#section">03 / Section</a><a href="#carrier">04 / Carrier R02</a><a href="#parts">05 / Parts</a><a href="#loads">06 / Loads</a><a href="#rejected">07 / Rejected</a><a href="#measure">08 / Measure</a></nav>
+
+    <section id="facts" class="section">
+      <div class="section-head"><div><p class="eyebrow">01 / What drives the design</p><h2>Three facts from the vendor data</h2></div></div>
+      <div class="fact-grid">
+        <article><h3>The shaft is 7 mm off the gearbox axis</h3><p>The 37D gearbox puts its output shaft 7.0 mm from the axis of the motor body. The six M3 holes sit on a Ø31 circle around the body axis, not around the shaft. The carrier must put the motor body away from the link pivots.</p></article>
+        <article><h3>The shaft is short</h3><p>The shaft is Ø6 and 16 mm long, with a 12 mm flat at the tip. The wheel must sit next to the carrier plate. No link and no bearing fits between the carrier and the wheel.</p></article>
+        <article><h3>A parallelogram keeps every carrier point on one arc</h3><p>The R01 model puts the axle on the lower carrier pivot. The lower link also ends there. The real axle moves 25 mm rearward on the carrier. The leg travel and the height do not change. Only the balance line moves.</p></article>
+      </div>
+    </section>
+
+    <section id="side" class="section">
+      <div class="section-head"><div><p class="eyebrow">02 / Side view</p><h2>Carrier R02 with the motor and the wheel</h2><p>Move the leg and the axle offset. The tool recalculates the clearance between the gearbox and the links through the full sweep.</p></div><a href="../../cad/layouts/wheel-mount-r02.svg">Print the 1:1 carrier template ↗</a></div>
+      <div class="sheet-canvas"><div id="jd3-side"></div>
+        <div class="sheet-controls">
+          <div class="control"><label for="jd3-angle">Leg angle <output id="jd3-angle-value" for="jd3-angle">30°</output></label><input type="range" id="jd3-angle" min="15" max="45" step="1" value="30"><div class="angle-presets"><button type="button" data-jd3-angle="15">15° / tall</button><button type="button" data-jd3-angle="30">30° / neutral</button><button type="button" data-jd3-angle="45">45° / low</button></div></div>
+          <div class="control"><label for="jd3-offset">Axle from the lower pivot <output id="jd3-offset-value" for="jd3-offset">25 mm</output></label><input type="range" id="jd3-offset" min="10" max="40" step="1" value="25"><fieldset class="mode-set"><legend>Axle direction</legend><label><input type="radio" name="jd3-mode" value="rearward" checked> Rearward (baseline)</label><label><input type="radio" name="jd3-mode" value="down"> Down</label><label><input type="radio" name="jd3-mode" value="forward"> Forward (rejected)</label></fieldset></div>
+          <div class="control"><label for="jd3-ring">Spacer ring on the shaft <output id="jd3-ring-value" for="jd3-ring">3 mm</output></label><input type="range" id="jd3-ring" min="0" max="5" step="0.5" value="3"><button type="button" id="jd3-reset" class="reset-button">Return to the baseline</button></div>
+        </div>
+        <dl id="jd3-readings" class="sheet-readings" aria-live="polite"></dl>
+        <p id="jd3-message" class="sheet-message" role="status" aria-live="polite"></p>
+      </div>
+      <p class="layout-note"><strong>Baseline:</strong> axle 25 mm rearward of the lower pivot, gearbox axis 32 mm rearward. The gearbox clears the lower link end by 5.6 mm at every angle. The floor clears the motor body by 31.6 mm.</p>
+      <p class="layout-note">The body height does not change. The wheel contact moves 25 mm rearward of the R01 kinematic axle. The balance trim must use the new axle.</p>
+    </section>
+
+    <section id="section" class="section">
+      <div class="section-head"><div><p class="eyebrow">03 / Section through the axles</p><h2>Lateral stack, body plate to the tire</h2><p>The R01 link planes stay. The carrier moves outboard of both links. The motor body goes inboard through the link planes. The wheel sits outboard of the carrier.</p></div></div>
+      <div class="sheet-canvas"><div id="jd3-stack"></div></div>
+      <div class="table-wrap"><table class="engineering-table"><caption>Lateral positions, outward from the inboard face of the body plate, in the R01 convention</caption><thead><tr><th scope="col">Item</th><th scope="col">From</th><th scope="col">To</th><th scope="col">Note</th></tr></thead><tbody>
+        <tr><td>Body plate (R01)</td><td>0</td><td>6</td><td>Unchanged</td></tr>
+        <tr><td>Lower link, 2 mm spacer at the body</td><td>8</td><td>13</td><td>Unchanged plane</td></tr>
+        <tr><td>Upper link, 12 mm spacer at the body</td><td>18</td><td>23</td><td>Unchanged plane</td></tr>
+        <tr><td>Carrier R02, 6 mm</td><td>25</td><td>31</td><td>12 mm spacer after the lower link, 2 mm spacer after the upper link. Each pivot bolt is now in double shear.</td></tr>
+        <tr><td>Gearbox face</td><td>25</td><td>—</td><td>Against the inboard face of the carrier</td></tr>
+        <tr><td>Boss Ø12</td><td>25</td><td>31</td><td>Fills the Ø12.4 pilot hole. The STEP model shows 6.5 mm. Measure it.</td></tr>
+        <tr><td>Shaft Ø6, D-shape</td><td>31</td><td>47</td><td>Flat from 35 to 47</td></tr>
+        <tr><td>Spacer ring, 3 mm</td><td>31</td><td>34</td><td>Printed Ø12 × Ø6.4 × 3, or two M6 washers. Permitted range 1–4 mm.</td></tr>
+        <tr><td>Adapter 2674</td><td>34</td><td>46</td><td>Set screws at 37.25 and 42.75, both on the flat</td></tr>
+        <tr><td>Wheel 3278, 24 wide</td><td>35.5</td><td>59.5</td><td>Midplane at 47.5. The seat depth is an assumption of 7.0 mm.</td></tr>
+        <tr><td>Gearbox, Ø36.8</td><td>3.5</td><td>25</td><td>Passes the plane of both links</td></tr>
+        <tr><td>Motor can, Ø34.8</td><td>−27.2</td><td>3.5</td><td>Passes the plane of the body plate</td></tr>
+        <tr><td>Encoder cap, Ø34</td><td>−42.6</td><td>−27.2</td><td>Leads exit here. Allow 10 mm.</td></tr>
+      </tbody></table></div>
+      <p class="layout-note">At a 230 mm track the inboard faces of the two body plates are 135 mm apart. The two motors point at each other. Their lead ends are 29.8 mm apart. The width across the tires is 254 mm.</p>
+    </section>
+
+    <section id="carrier" class="section">
+      <div class="section-head"><div><p class="eyebrow">04 / Carrier R02</p><h2>One printed plate holds the pivots and the motor</h2><p>Coordinates in millimetres. x is rearward, y is up. The origin is the lower carrier pivot. The table follows the controls above.</p></div></div>
+      <div class="carrier-grid">
+        <div class="table-wrap"><table class="engineering-table"><caption>Hole positions on the carrier</caption><thead><tr><th scope="col">Hole</th><th scope="col">x</th><th scope="col">y</th><th scope="col">Angle</th></tr></thead><tbody id="jd3-holes"></tbody></table></div>
+        <div class="carrier-notes">
+          <ul>
+            <li>Pivots: 2 × Ø4.5 at (0, 0) and (0, 40). Same provisional fit as R01.</li>
+            <li>Pilot: Ø12.4 at the axle for the Ø12.0 boss. Check the fit coupon result first.</li>
+            <li>Motor: 6 × Ø3.4 through holes on Ø31 around the gearbox axis. Counterbore Ø6.5 × 4.0 on the wheel side.</li>
+            <li>Thickness 6 mm, PLA, four walls. The outline is the hull of the two pivot ends and a Ø46 pad around the gearbox axis.</li>
+            <li>The wheel face is 4.5 mm from the carrier. Every head on the wheel side must be flush.</li>
+            <li>The right carrier is the drawn part. Mirror the part for the left leg.</li>
+          </ul>
+          <h3>Fasteners, provisional</h3>
+          <ul>
+            <li>Motor: 6 × M3 × 5 socket head. The remaining 2.0 mm of plate plus 5 mm gives 3.0 mm of engagement. That is the Pololu limit. Do not use a longer screw.</li>
+            <li>Pivots: 2 × M4 × 40 flat head, countersunk on the wheel side. Put the washer and the nut on the inboard face of the body plate. The stack is 31 mm.</li>
+            <li>Adapter: 2 × M4 set screws and 3 × M3 × 14 screws come with the adapter.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="parts" class="section">
+      <div class="section-head"><div><p class="eyebrow">05 / Part data</p><h2>Dimensions from the vendor documents</h2></div></div>
+      <div class="table-wrap"><table class="engineering-table"><thead><tr><th scope="col">Part</th><th scope="col">Dimension</th><th scope="col">Value</th><th scope="col">Source</th></tr></thead><tbody>
+        <tr><td rowspan="9">Pololu 4752 gearmotor</td><td>Gearbox diameter / length (30:1)</td><td>Ø36.8 / 21.5</td><td rowspan="9"><a href="https://www.pololu.com/file/0J1735/37d-metal-gearmotors-dimension-diagram.pdf">37D dimension diagram</a>, <a href="https://www.pololu.com/file/0J1868/37d-gearmotor-3d-models.zip">STEP model</a>, <a href="https://www.pololu.com/file/0J1736/pololu-37d-metal-gearmotors-rev-1-2.pdf">37D datasheet rev 1.2</a></td></tr>
+        <tr><td>Motor can diameter / length</td><td>Ø34.8 / 30.7</td></tr>
+        <tr><td>Encoder cap diameter / length</td><td>Ø34.0 / 15.4</td></tr>
+        <tr><td>Boss</td><td>Ø12.0 × 6.0 (6.5 in the STEP model)</td></tr>
+        <tr><td>Shaft</td><td>Ø6.0 × 16, flat 5.4 across, 12 long at the tip</td></tr>
+        <tr><td>Shaft offset from the body axis</td><td>7.0</td></tr>
+        <tr><td>Mount holes</td><td>6 × M3 on Ø31, 15.5 apart, 3.0 deep maximum</td></tr>
+        <tr><td>Mass with encoder</td><td>190–210 g</td></tr>
+        <tr><td>Gearbox load limit</td><td>100 kg·mm continuous, 250 kg·mm instantaneous</td></tr>
+        <tr><td rowspan="4">Pololu 2674 scooter wheel adapter</td><td>Bore</td><td>Ø6.00 +0.05 / +0.01</td><td rowspan="4"><a href="https://www.pololu.com/file/0J774/2674-dimensions.pdf">2674 dimension diagram</a></td></tr>
+        <tr><td>Body</td><td>Ø22 × 5.5 seat, Ø18 through section, 12 long</td></tr>
+        <tr><td>Set screws</td><td>2 × M4 at 3.25 from each end</td></tr>
+        <tr><td>Clamp plate</td><td>Ø21.9 × 3, 3 × Ø3.2 on R6.2</td></tr>
+        <tr><td rowspan="3">Pololu 3278 scooter wheel</td><td>Size</td><td>Ø100 × 24, polyurethane tire</td><td rowspan="3"><a href="https://www.pololu.com/product/3278">3278 product page</a></td></tr>
+        <tr><td>Bearing seats</td><td>608 size, Ø22. The depth is not published.</td></tr>
+        <tr><td>Mass</td><td>Not published</td></tr>
+      </tbody></table></div>
+      <p class="layout-note">Two adapters and two wheels cost $33.22 at the list prices of 4 October 2026, before freight. The budget line for wheels and hubs is $35. Nothing is ordered. The tire is polyurethane, not rubber. The traction test in the validation plan still applies.</p>
+    </section>
+
+    <section id="loads" class="section">
+      <div class="section-head"><div><p class="eyebrow">06 / Load screen</p><h2>What the shaft and the gearbox carry</h2></div></div>
+      <div class="fact-grid">
+        <article><h3>Radial load</h3><p>At 3.0 kg and a 60/40 split, one wheel carries 17.7 N. The wheel midplane is 22.5 mm from the gearbox face. The static moment on the shaft is 0.40 N·m. With a 3× shock allowance the bending stress in the Ø6 steel shaft is 56 MPa. The shaft is not the limit.</p></article>
+        <article><h3>Gearbox support</h3><p>Pololu publishes no radial load rating for the 37D output shaft. The wheel load goes through the gearbox bushing. Record the shaft play before the trials and after each trial. If the play grows, add an outboard support in the next revision.</p></article>
+        <article><h3>Torque</h3><p>The plan needs 0.15 N·m continuous (15 kg·mm) and 0.50 N·m short peaks (51 kg·mm). The gearbox limits are 100 kg·mm continuous and 250 kg·mm instantaneous. The maximum efficiency point of this motor is 18 kg·mm at 280 rpm.</p></article>
+      </div>
+      <div class="callout"><strong>This differs from the mechanical plan.</strong> The plan asks for a supported axle with its own bearing path. The 16 mm shaft leaves no room for an outboard bearing without a longer axle and a coupling. The proposal mounts the wheel on the motor shaft, as Pololu intends. The play measurement is the release condition for this choice.</div>
+    </section>
+
+    <section id="rejected" class="section">
+      <div class="section-head"><div><p class="eyebrow">07 / Rejected arrangements</p><h2>Why the other layouts do not work</h2></div></div>
+      <div class="table-wrap"><table class="engineering-table"><thead><tr><th scope="col">Arrangement</th><th scope="col">Result</th></tr></thead><tbody>
+        <tr><td>Axle on the lower carrier pivot (R01 model)</td><td>The lower link bolt and the shaft want the same axis.</td></tr>
+        <tr><td>Motor inboard of the R01 carrier, wheel outboard of both links</td><td>The wheel face must be 28 mm from the carrier. The shaft tip is at 22 mm.</td></tr>
+        <tr><td>Wheel inboard, motor outboard of the leg</td><td>The shaft cannot reach through the carrier and both link planes.</td></tr>
+        <tr><td>Axle forward of the lower pivot</td><td>The lower link passes over the motor body. The clearance is −3.8 mm at 45°.</td></tr>
+        <tr><td>Shaft offset toward the motor body side</td><td>The gearbox overlaps the lower link end by 8 mm. The body axis must sit further from the pivots than the shaft.</td></tr>
+        <tr><td>Axle below the lower pivot</td><td>Passes the clearance checks. It raises the body 25 mm and cuts the floor clearance under the motor to 24.6 mm. Kept as the alternative.</td></tr>
+      </tbody></table></div>
+    </section>
+
+    <section id="measure" class="section">
+      <div class="section-head"><div><p class="eyebrow">08 / Before you print</p><h2>Measure at the fit session</h2></div></div>
+      <ol class="measure-list">
+        <li>Measure the boss diameter and length, the shaft length and the start of the flat on the received motor.</li>
+        <li>Measure the distance between two neighbor mount holes. The drawing says 15.5 mm.</li>
+        <li>Measure the shaft offset from the gearbox body. The drawing says 7.0 mm.</li>
+        <li>Note the angle of the lead exit at the encoder end.</li>
+        <li>Weigh the motor. Record the mass in the inventory.</li>
+        <li>When the wheels arrive, measure the seat depth and the web width of the wheel core. Weigh one wheel and one adapter.</li>
+        <li>Print the 1:1 template. Put the motor on it. Compare the holes.</li>
+        <li>Record the results in the <a href="mechanical-tests.html#session">mechanical test journal</a> under step M4.</li>
+      </ol>
+      <p class="layout-note"><strong>This sheet does not establish:</strong> a printed fit, a load capacity, a bushing life, a tire traction value or a released drawing. The simulation still uses the R01 axle position. Update the model and the balance trim when the carrier revision is printed and measured.</p>
+    </section>
+
+    <section class="section test-references" aria-label="References"><a href="joints.html#wheel-axle">Joint detail register ↗</a><a href="mechanical-tests.html">Mechanical tests ↗</a><a href="../../cad/prints/v1-proof-r01/README.md">R01 print kit ↗</a><a href="../../docs/mechanical.md#wheel-drive-mount">Mechanical plan ↗</a><a href="../../docs/v1-proof-hardware.md">Hardware decisions ↗</a></section>
+    <noscript><p>The drawings need JavaScript. The <a href="../../cad/layouts/wheel-mount-r02.svg">1:1 carrier template</a> and the tables are available without it.</p></noscript>
+  </main>
+</body>
+</html>
