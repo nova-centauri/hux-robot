@@ -1,4 +1,42 @@
 /* V1-PROOF 3D sandbox. Builds on proof.css tokens. */
+.sbx-toolbar{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:end;padding:18px 0 14px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.sbx-toolbar .sbx-field{min-width:180px}
+.sbx-toolbar .sbx-row{padding-bottom:1px}
+.sbx-toolbar button{border:1px solid #9eafa0;background:var(--white);color:var(--ink);border-radius:4px;padding:6px 11px;font-size:13px;cursor:pointer}
+.sbx-toolbar button:hover{border-color:var(--green)}
+.sbx-toolbar button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+.sbx-toolbar button[aria-pressed="false"]{opacity:.7}
+.sbx-toolbar select{padding:7px 9px}
+[data-panel][hidden]{display:none!important}
+body.sbx-focus .sbx-stage,body.sbx-focus .sim-stage{max-height:none;aspect-ratio:auto;height:calc(100vh - 230px);min-height:420px}
+
+/* V0-GENESIS chrome, so the merged page does not load style.css. */
+.mast{display:flex;justify-content:space-between;gap:24px;align-items:end;border-bottom:1px solid var(--line);padding:18px 0 14px;margin-bottom:16px}
+.mast h1{font-size:28px;font-weight:750;letter-spacing:-.5px;margin:0 0 8px}
+.mast p{margin:0;color:var(--muted);max-width:46rem;line-height:1.45}
+.kicker{margin:0 0 6px;font-size:11px;font-weight:750;letter-spacing:.8px;text-transform:uppercase;color:var(--muted)}
+.stamp{font:12px/1.45 ui-monospace,monospace;text-align:right;white-space:nowrap}
+.card{background:var(--white);border:1px solid var(--line);padding:12px 12px 14px}
+.card h2{margin:0 0 6px;font-size:15px;letter-spacing:.04em;text-transform:uppercase}
+.card .hint{margin:0 0 8px;color:var(--muted);font-size:13px;line-height:1.35}
+.views{display:grid;grid-template-columns:1.25fr .9fr;gap:16px}
+.controls{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:end;margin-top:10px}
+.controls label{display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--muted);min-width:140px;flex:1}
+.presets{display:flex;flex-wrap:wrap;gap:6px}
+.sim-card button,.sim-lower button{border:1px solid #9eafa0;background:var(--white);color:var(--ink);border-radius:4px;padding:5px 9px;font-size:13px;cursor:pointer}
+.sim-card button.active,.sim-card button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+#btnKill[aria-pressed="true"]{background:#b3401c;border-color:#b3401c}
+.sim-bar label{display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--muted)}
+.sim-bar select{font:inherit;padding:4px 6px;border:1px solid #9eafa0;border-radius:4px;background:#fff;color:var(--ink)}
+.knobs{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px 14px}
+.knobs .presets{grid-column:1/-1}
+.knobs label.check{flex-direction:row;align-items:center;gap:8px;color:var(--ink);font-size:13px}
+footer.note{margin-top:18px;color:var(--muted);font-size:13px;line-height:1.45}
+@media (max-width:900px){
+  .views{grid-template-columns:1fr}
+  .mast{flex-direction:column;align-items:flex-start}
+  .stamp{text-align:left;white-space:normal}
+}
 .sbx-head{display:grid;grid-template-columns:1.5fr 1fr;gap:48px;align-items:end;padding:44px 0 28px}
 .sbx-head h1{margin-bottom:14px}
 .sbx-stamp{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
