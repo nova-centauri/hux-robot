@@ -293,5 +293,30 @@ class BuildTests(unittest.TestCase):
         self.assertTrue(any('missing fragment index.html#missing' in error for error in errors))
 
 
+class SandboxMergeTests(unittest.TestCase):
+    def test_source_page_has_robot_picker_and_both_templates(self):
+        page = Path(__file__).with_name('proof-sandbox.html').read_text()
+        self.assertIn('id="robot"', page)
+        self.assertIn('id="tpl-v1-proof"', page)
+        self.assertIn('id="tpl-v0-genesis"', page)
+        self.assertIn('data-panel-toggle="intro"', page)
+        self.assertIn('src="sandbox-shell.js"', page)
+        self.assertIn('src="../v1-proof/sim.js"', page)
+        self.assertIn('src="sim-view.js"', page)
+
+    def test_sim_html_redirects_to_the_archived_robot(self):
+        page = Path(__file__).with_name('sim.html').read_text()
+        self.assertIn('proof-sandbox.html?robot=v0-genesis', page)
+        self.assertIn('http-equiv="refresh"', page)
+        self.assertIn('location.replace', page)
+
+    def test_template_script_urls_are_relocated_on_the_published_page(self):
+        source = PurePosixPath(str(site.WEB / 'proof-sandbox.html'))
+        page = site.authored_page(Path(__file__).with_name('proof-sandbox.html').read_text(), source, Path(__file__).resolve().parents[2])
+        self.assertIn('src="tools/v1-proof/sim.js"', page)
+        self.assertIn('src="sandbox-shell.js"', page)
+        self.assertIn('id="tpl-v0-genesis"', page)
+
+
 if __name__ == '__main__':
     unittest.main()

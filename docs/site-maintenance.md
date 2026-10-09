@@ -57,6 +57,8 @@ The current project has six primary sections, with the same navigation on drawin
 
 Mechanical includes `/joints.html` for close-up detail studies and links to `/mechanical-tests.html`. Electrical includes `/controls.html`. Build & test links to the current simulation evidence and the 3D sandbox. `/v0-genesis.html` keeps the old plan model. `/docs/…html` remains the readable route for each source guide.
 
+The 3D sandbox is one page for both robots. The query `?robot=` sets the robot. `/sim.html` opens V0-GENESIS.
+
 The builder supplies the shared header, the breadcrumbs, the section navigation and the footer. New authored pages use `workshop.css` after their page styles. Edit the navigation in `build_site.py`. Do not add a second header.
 
 `workshop.js` keeps old homepage bookmarks such as `/#build`, `/#model`, `/#connections` and `/#budget`. It forwards them to the dedicated page. The publication step also relocates repository links to these old fragments. Keep the local notebook storage keys intact when you reorganize pages.
