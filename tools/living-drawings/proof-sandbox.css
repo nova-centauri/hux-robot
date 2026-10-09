@@ -8,7 +8,8 @@
 .sbx-toolbar button[aria-pressed="false"]{opacity:.7}
 .sbx-toolbar select{padding:7px 9px}
 [data-panel][hidden]{display:none!important}
-body.sbx-focus .sbx-stage,body.sbx-focus .sim-stage{max-height:none;aspect-ratio:auto;height:calc(100vh - 230px);min-height:420px}
+body.sbx-focus .sbx-stage,body.sbx-focus .sim-stage{max-height:none;aspect-ratio:auto;height:calc(100vh - 380px);min-height:280px}
+body.sbx-focus .sbx-bar,body.sbx-focus .sim-bar{position:sticky;bottom:0;z-index:4}
 
 /* V0-GENESIS chrome, so the merged page does not load style.css. */
 .mast{display:flex;justify-content:space-between;gap:24px;align-items:end;border-bottom:1px solid var(--line);padding:18px 0 14px;margin-bottom:16px}

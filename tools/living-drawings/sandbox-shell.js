@@ -123,10 +123,9 @@
     applyPanels(doc, state);
     if (picker) {
       picker.addEventListener("change", function () {
-        const next = robotSearch(picker.value, search);
-        if (doc.defaultView && doc.defaultView.location) {
-          doc.defaultView.location.assign(next + (doc.defaultView.location.hash || ""));
-        }
+        const loc = doc.defaultView && doc.defaultView.location;
+        if (!loc) return;
+        loc.assign(loc.pathname + robotSearch(picker.value, loc.search) + (loc.hash || ""));
       });
     }
     doc.querySelectorAll("[data-panel-toggle]").forEach(function (btn) {
