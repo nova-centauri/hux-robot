@@ -51,6 +51,10 @@ OLD_SECTIONS = {
 }
 ARCHIVE_PAGES = {"v0-genesis.html", "stairs.html", "sheet.html", "sheet2.html", "sim.html",
                  "flow.html", "software.html", "hardware.html", "media.html", "engineering.html"}
+SITE_ORIGIN = "https://hux.xer0.io"
+INDEXNOW_KEY = "4d57d22d9d0038da36917c0d7db3bb71"
+# /sim.html is a redirect. Do not add it to the sitemap.
+SITEMAP_SKIP = {"sim.html"}
 
 
 def slug(text: str) -> str:
@@ -477,6 +481,80 @@ class Links(HTMLParser):
             if key in {"id", "name"} and value: self.ids.add(value)
 
 
+def published_loc(rel: PurePosixPath) -> str:
+    """Return the public URL of a published page."""
+    if rel == PurePosixPath("index.html"):
+        return f"{SITE_ORIGIN}/"
+    if rel.name == "index.html":
+        return f"{SITE_ORIGIN}/{rel.parent.as_posix()}/"
+    return f"{SITE_ORIGIN}/{rel.as_posix()}"
+
+
+def sitemap_pages(output: Path) -> list[PurePosixPath]:
+    """Return the HTML pages for the sitemap."""
+    pages = []
+    for path in sorted(output.rglob("*.html")):
+        rel = PurePosixPath(path.relative_to(output).as_posix())
+        if str(rel) in SITEMAP_SKIP:
+            continue
+        # A folder with README.html already has a document URL. Use the folder URL.
+        if rel.name == "README.html" and (output / rel.parent / "index.html").is_file():
+            continue
+        pages.append(rel)
+    return pages
+
+
+def write_discovery_files(output: Path) -> list[str]:
+    """Write robots.txt, sitemap.xml and the IndexNow key at the site root."""
+    (output / "robots.txt").write_text(
+        f"User-agent: *\nAllow: /\n\nSitemap: {SITE_ORIGIN}/sitemap.xml\n",
+        encoding="utf-8",
+    )
+    (output / f"{INDEXNOW_KEY}.txt").write_bytes(INDEXNOW_KEY.encode("ascii"))
+    locs = [published_loc(rel) for rel in sitemap_pages(output)]
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ]
+    for loc in locs:
+        lines.append("  <url>")
+        lines.append(f"    <loc>{html.escape(loc, quote=True)}</loc>")
+        lines.append("  </url>")
+    lines.append("</urlset>")
+    lines.append("")
+    (output / "sitemap.xml").write_text("\n".join(lines), encoding="utf-8")
+    return locs
+
+
+def check_discovery(output: Path) -> list[str]:
+    """Make sure that the crawler files are present and correct."""
+    errors = []
+    robots = output / "robots.txt"
+    if not robots.is_file():
+        errors.append("robots.txt: missing file")
+    else:
+        text = robots.read_text(encoding="utf-8")
+        if "User-agent: *" not in text or "Allow: /" not in text:
+            errors.append("robots.txt: Allow rule is missing")
+        if f"Sitemap: {SITE_ORIGIN}/sitemap.xml" not in text:
+            errors.append("robots.txt: sitemap URL is missing")
+    key = output / f"{INDEXNOW_KEY}.txt"
+    if not key.is_file():
+        errors.append(f"{INDEXNOW_KEY}.txt: missing file")
+    elif key.read_bytes() != INDEXNOW_KEY.encode("ascii"):
+        errors.append(f"{INDEXNOW_KEY}.txt: body is not the key")
+    sitemap = output / "sitemap.xml"
+    if not sitemap.is_file():
+        errors.append("sitemap.xml: missing file")
+    else:
+        text = sitemap.read_text(encoding="utf-8")
+        if f"<loc>{SITE_ORIGIN}/</loc>" not in text:
+            errors.append("sitemap.xml: home page is missing")
+        if "sim.html" in text:
+            errors.append("sitemap.xml: contains sim.html")
+    return errors
+
+
 def validate(output: Path) -> list[str]:
     """Catch broken published navigation, images, scripts and document anchors."""
     output = output.resolve()
@@ -496,7 +574,7 @@ def validate(output: Path) -> list[str]:
                 errors.append(f"{path.relative_to(output)}: raw Markdown link {url}")
             elif parsed.fragment and target in pages and unquote(parsed.fragment) not in pages[target].ids:
                 errors.append(f"{path.relative_to(output)}: missing fragment {url}")
-    return sorted(set(errors))
+    return sorted(set(errors + check_discovery(output)))
 
 
 def build(root: Path, output: Path) -> dict:
@@ -567,7 +645,9 @@ def build(root: Path, output: Path) -> dict:
         (directory / "index.html").write_text(f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title} · HUX files</title><link rel="stylesheet" href="{depth}/docs.css">{workshop_assets(directory_source)}</head><body>{workshop_header(directory_source, str(rel))}<main class="doc-main" style="margin:40px auto;padding:0 24px"><article class="doc-content"><h1>{title}</h1><p>Project files and references. Model files are reference geometry, not released fabrication drawings.</p><ul>{"".join(entries)}</ul></article></main>{workshop_footer(directory_source)}</body></html>')
     # Hash the published bytes after rewrites and all directory pages exist.
     version_assets(output)
-    report = {"documents": documents, "html_pages": len(list(output.rglob("*.html"))), "output": str(output), "errors": validate(output)}
+    locs = write_discovery_files(output)
+    report = {"documents": documents, "html_pages": len(list(output.rglob("*.html"))),
+              "sitemap_urls": len(locs), "output": str(output), "errors": validate(output)}
     (output / "build-report.json").write_text(json.dumps({key: value for key, value in report.items() if key != "output"}, indent=2) + "\n")
     return report
 

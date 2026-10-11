@@ -131,6 +131,7 @@ class BuildTests(unittest.TestCase):
     def test_complete_build_has_readable_routes_assets_and_archival_context(self):
         report = site.build(self.root, self.output)
         self.assertEqual(report['errors'], [])
+        self.assertGreater(report['sitemap_urls'], 0)
         self.assertEqual((self.output / 'v1-proof.html').read_text(), (self.output / 'index.html').read_text())
         self.assertTrue((self.output / 'tools/v1-proof/sim.js').exists())
         self.assertTrue((self.output / 'assets/index.html').exists())
@@ -282,6 +283,29 @@ class BuildTests(unittest.TestCase):
         self.assertNotEqual(changed_js, first_js)
         self.assertEqual(report['errors'], [])
         self.assertEqual(site.validate(self.output), [])
+
+    def test_discovery_files_list_public_pages_and_omit_redirects(self):
+        (self.root / site.WEB / 'sim.html').write_text(
+            '<html><head><meta http-equiv="refresh" content="0;url=proof-sandbox.html?robot=v0-genesis"></head>'
+            '<body><a href="proof-sandbox.html?robot=v0-genesis">Open the archived robot</a></body></html>'
+        )
+        (self.root / 'cad').mkdir()
+        (self.root / 'cad/README.md').write_text('# CAD files\n')
+        report = site.build(self.root, self.output)
+        self.assertEqual(report['errors'], [])
+        robots = (self.output / 'robots.txt').read_text()
+        self.assertIn('User-agent: *', robots)
+        self.assertIn('Allow: /', robots)
+        self.assertIn(f'Sitemap: {site.SITE_ORIGIN}/sitemap.xml', robots)
+        self.assertEqual((self.output / f'{site.INDEXNOW_KEY}.txt').read_bytes(), site.INDEXNOW_KEY.encode('ascii'))
+        sitemap = (self.output / 'sitemap.xml').read_text()
+        self.assertIn(f'<loc>{site.SITE_ORIGIN}/</loc>', sitemap)
+        self.assertIn(f'<loc>{site.SITE_ORIGIN}/v1-proof.html</loc>', sitemap)
+        self.assertIn(f'<loc>{site.SITE_ORIGIN}/proof-sandbox.html</loc>', sitemap)
+        self.assertIn(f'<loc>{site.SITE_ORIGIN}/docs/one-leg-bench.html</loc>', sitemap)
+        self.assertIn(f'<loc>{site.SITE_ORIGIN}/cad/</loc>', sitemap)
+        self.assertNotIn('sim.html', sitemap)
+        self.assertEqual(report['sitemap_urls'], sitemap.count('<loc>'))
 
     def test_validator_detects_raw_files_missing_files_and_bad_fragments(self):
         site.build(self.root, self.output)
