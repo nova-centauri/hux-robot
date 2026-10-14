@@ -702,7 +702,7 @@
         {
           "date": "2026-10-14",
           "title": "R05 two-leg body kit and PLA plates",
-          "summary": "R05 puts the hips near the rear, the ST3215 servos inside each wall and the battery in a tray. CAD checks pass with the leg limited to 15-40°. Five Basic PLA plates hold one set. Plate 1 is sliced. No R05 print is confirmed.",
+          "summary": "R05 puts the hips near the rear, the ST3215 servos inside each wall and the battery in a tray. CAD checks pass with the leg limited to 15-40°. Five Basic PLA plates hold one set. The X1C accepted plate 1, two walls, at 17:37 EDT. Its completion is unverified.",
           "sourcePaths": [
             "cad/prints/two-leg-body-r05/README.md",
             "cad/prints/two-leg-body-r05/bambu/README.md",

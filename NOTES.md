@@ -27,7 +27,7 @@ The "R05 proposal" layout shows the corrections. The R04 CAD and the print files
 
 The exact CAD check shows 0.23 mm between the gearmotor and the lower strut at 45°. This corrects the 2.1 mm value in the entry below, which used mesh points. R05 limits the leg to 15–40°, with 2.1 mm at 40°. The CAD checks pass. The servo transmission is not in the kit.
 
-Five Basic PLA plates hold one set. Bambu Studio sliced plate 1, two walls, at 4 hours, 4 minutes and 230.55 g. The R04 plate 2 job shows Finished. The camera view did not confirm a clear bed, so no R05 job was sent.
+Five Basic PLA plates hold one set. Bambu Studio sliced plate 1, two walls, at 4 hours, 4 minutes and 230.55 g. The R04 plate 2 job shows Finished. The camera view did not confirm a clear bed, so no R05 job was sent. At 17:37 EDT, after the user reported a clear bed, the X1C accepted plate 1. The initial finish estimate is 21:41 EDT.
 
 **2026-10-14 balanced R05 layout:** the user reports that the published page still showed the unbalanced R04 layout. The page now opens with R05. R05 puts the hips at X = +30 and keeps the R04 motor carrier without a mirror. The battery is in a tray in the body, and the CoM includes it. The estimated lean is 10° back, 0° and 10° forward at 15°, 30° and 45°. The minimum CAD clearance between the gearmotor and the struts is 2.1 mm.
 
