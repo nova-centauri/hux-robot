@@ -3,7 +3,7 @@
   "files": {
     ".gitattributes": "1aea702addfbd78f352c9d931f118c7290815d750b92cf713e11eb8cb352ed2e",
     "README.md": "0a716cd35efc4cd94116ddc048055544810f6467e9455c0659653ee26425634b",
-    "bambu/README.md": "0abac83656e4ddf00014414e6c66925deb9d27f26011b34ce7932180523f7746",
+    "bambu/README.md": "cd67ff4aaabad04c9153a01ee2b0580955ae4b579a45f3fb1907318c7aabc676",
     "bambu/build_plates.py": "78c16dc7ff15af7cc966e1e27a97f4134f6373ea25bda3260678c34bc5be000e",
     "bambu/hux-r05-plate-1-walls.3mf": "9b81a7cecfa61fb925a1e4987c7920e1075ba1c668a7cdfaab97bbf008d77b27",
     "bambu/hux-r05-plate-2-decks.3mf": "a10aa96dfa7d756373e5de2cff2dc71d2f21a555d7c00c30c7845f458467effc",
