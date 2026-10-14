@@ -23,6 +23,12 @@ The "R05 proposal" layout shows the corrections. The R04 CAD and the print files
 
 **2026-10-14 correction:** the user states that the hips go near the rear of the body. The struts slant forward to the wheel, and the servos go inside the body. The first R05 proposal is withdrawn. The corrected R05 puts the hips at X = +50 with internal servos and a 3:1 belt to the lower hip. Its estimated lean is 3-24° forward. The JD-03 axle offset causes approximately 10° of this lean.
 
+**2026-10-14 R05 two-leg body kit:** the user requested new STL files and PLA prints for this build. The [R05 kit](cad/prints/two-leg-body-r05/README.md) puts the hips at X = +30, an inner ST3215 cradle on each wall and a battery tray below the decks. The rear lower-deck angles move to X = +48, clear of the upper hip nut.
+
+The exact CAD check shows 0.23 mm between the gearmotor and the lower strut at 45°. This corrects the 2.1 mm value in the entry below, which used mesh points. R05 limits the leg to 15–40°, with 2.1 mm at 40°. The CAD checks pass. The servo transmission is not in the kit.
+
+Five Basic PLA plates hold one set. Bambu Studio sliced plate 1, two walls, at 4 hours, 4 minutes and 230.55 g. The R04 plate 2 job shows Finished. The camera view did not confirm a clear bed, so no R05 job was sent.
+
 **2026-10-14 balanced R05 layout:** the user reports that the published page still showed the unbalanced R04 layout. The page now opens with R05. R05 puts the hips at X = +30 and keeps the R04 motor carrier without a mirror. The battery is in a tray in the body, and the CoM includes it. The estimated lean is 10° back, 0° and 10° forward at 15°, 30° and 45°. The minimum CAD clearance between the gearmotor and the struts is 2.1 mm.
 
 **2026-10-13 R04 plate 2 started:** the user said, "Not checked yet. Keep printing". The live camera showed a clear bed. MSL-Bambi-X1C accepted one wall, the lower deck and three more angles in Basic PLA. The printer showed an active heat cycle at 0/110 layers. The estimate is 3 hours, 43 minutes and 190.62 g, with an initial finish time of 19:17 EDT.

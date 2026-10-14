@@ -31,7 +31,7 @@ The user then reported that the published page still showed the unbalanced R04 l
 | ID | Finding | Evidence | Correction in R05 |
 | --- | --- | --- | --- |
 | F-1 | Hips on the centre line | R04 puts the hips at X = 0 and the struts slant rearward. The axle is 54-103 mm rearward of the body centre. The estimated lean is 17° / 26° / 35° back at 15° / 30° / 45°. | Hips at X = +30. The struts slant forward. The two rear lower-deck angles go above the deck. The estimated lean is 10° back / 0° / 10° forward. At neutral, the axle is below the body centre. |
-| F-2 | Motor carrier hand | A mirrored carrier puts the axle 25 mm forward of the strut end. The lean at neutral is then 13° forward. | Keep the R04 carrier without a mirror. The axle and the gearmotor sit rearward of the strut end, toward the hip. The minimum CAD clearance between the gearmotor and the struts is 2.1 mm, at 45°. |
+| F-2 | Motor carrier hand | A mirrored carrier puts the axle 25 mm forward of the strut end. The lean at neutral is then 13° forward. | Keep the R04 carrier without a mirror. The axle and the gearmotor sit rearward of the strut end, toward the hip. The exact CAD clearance between the gearmotor and the lower strut is 2.1 mm at 40° and 0.23 mm at 45°. R05 limits the leg to 15–40°. |
 | F-3 | Height above target | R04 is 320-348 mm high to the Pico 2 board, upright. The target is 280-310 mm. | Decision for the user: accept the height, or reduce the body to two decks. |
 | F-4 | One driver position | The lower deck has one DRV8874 position. V1-PROOF needs two. | Put both 15.2 x 17.8 mm drivers on the one driver board, 3 mm apart. |
 | F-5 | No battery position | R04 uses the bench supply. The mass list includes a 0.2 kg 3S pack. | A tray at the bottom of the walls holds the pack, between the two servo belts. The CoM and the lean include the pack at X = -5, Z = -17.5. |
@@ -40,7 +40,7 @@ The user then reported that the published page still showed the unbalanced R04 l
 
 The internal servo case measures 45.2 x 35 x 24.7 mm. It occupies X = -50 to -5 and Z = 0 to +24. This is clear of the front lower-deck angles. The two belts are 45 mm apart. The hip shaft, the wall bearings and the belt tension are not designed.
 
-The gearmotor clearance comes from the R04 strut meshes at 0.5 mm resolution. The value excludes the motor screws, the cables and print errors. Check it by hand through the full sweep.
+The [R05 kit](../../cad/prints/two-leg-body-r05/README.md) checks this clearance with exact STEP distances. The value excludes the motor screws, the cables and print errors. Check it by hand through the full sweep.
 
 These checks pass in the mirrored layout:
 

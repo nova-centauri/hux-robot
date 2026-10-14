@@ -27,7 +27,7 @@ const LAYOUTS = {
   // carrier +1: the JD-03 axle and gearmotor sit rearward of the strut end (the R04 carrier, not mirrored).
   // R05 keeps the R04 carrier with forward struts. The gearmotor then sits below the strut, toward the hip.
   r04: { id: 'r04', name: 'R04 as drawn', pivotX: 0, dir: 1, carrier: 1, drivers: 1, servoInside: false, battery: BATTERY },
-  r05: { id: 'r05', name: 'R05 rear hips', pivotX: 30, dir: -1, carrier: 1, drivers: 2, servoInside: true, battery: BATTERY },
+  r05: { id: 'r05', name: 'R05 rear hips', qMax: 40, pivotX: 30, dir: -1, carrier: 1, drivers: 2, servoInside: true, battery: BATTERY },
 };
 
 /* Mass list from tools/v1-proof/model.json. Positions are assumptions for the estimate. */
@@ -619,6 +619,7 @@ function setLayout(lay) {
   pivotMarks.visible = lay.id === 'r05';
   drivers[0].visible = lay.drivers === 1; drivers[1].visible = drivers[2].visible = lay.drivers === 2;
   rebuildBelts(lay);
+  $('leg').max = String(lay.qMax ?? Q_MAX);
   servoSides.forEach((g) => { g.visible = !lay.servoInside; });
   innerServos.forEach((g) => { g.visible = lay.servoInside; });
   rearLowerAngles.scale.z = lay.id === 'r05' ? -1 : 1;           // reflect about Z = 62: below -> above the deck
@@ -874,7 +875,7 @@ function readouts(info, now) {
 }
 
 function sweepTrim(lay) {
-  const t = [Q_MIN, Q_NEU, Q_MAX].map((q) => trimDeg(legPose(q, lay), lay));
+  const t = [Q_MIN, Q_NEU, lay.qMax ?? Q_MAX].map((q) => trimDeg(legPose(q, lay), lay));
   return t;
 }
 function renderFindings() {
@@ -920,7 +921,9 @@ function frame(now) {
     tl.xray = state.manualXray; const f = state.manualXray > 0.3 ? 1 : 0;
     tl.flow = { power: f, control: f, feedback: f }; tl.labels = state.manualXray;
   }
-  const q = state.manualQ ?? tl.q;
+  // R05 limits the leg to 40 degrees (gearmotor clearance to the lower strut). Scale the scripted sweep to the range.
+  const qMax = state.layout.qMax ?? Q_MAX;
+  const q = state.manualQ != null ? Math.min(state.manualQ, qMax) : Q_MIN + (tl.q - Q_MIN) * (qMax - Q_MIN) / (Q_MAX - Q_MIN);
   const info = applyPose(q, tl.x, tl.accel, state.layout, state.balanced);
   info.tl = tl;
   setXray(tl.xray);

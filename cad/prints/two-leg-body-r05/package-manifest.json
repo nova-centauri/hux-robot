@@ -2,6 +2,8 @@
   "revision": "R05",
   "files": {
     ".gitattributes": "1aea702addfbd78f352c9d931f118c7290815d750b92cf713e11eb8cb352ed2e",
+    "README.md": "0a716cd35efc4cd94116ddc048055544810f6467e9455c0659653ee26425634b",
+    "bambu/README.md": "4debe4bb7117fee39b18507360395c7d8a204724deaa7650dca5fc8698777b56",
     "bambu/build_plates.py": "78c16dc7ff15af7cc966e1e27a97f4134f6373ea25bda3260678c34bc5be000e",
     "bambu/hux-r05-plate-1-walls.3mf": "9b81a7cecfa61fb925a1e4987c7920e1075ba1c668a7cdfaab97bbf008d77b27",
     "bambu/hux-r05-plate-2-decks.3mf": "a10aa96dfa7d756373e5de2cff2dc71d2f21a555d7c00c30c7845f458467effc",
@@ -66,6 +68,7 @@
     "stl/24_battery_tray.stl": "9add6b01ecf071153a18c27451b0aeab6a71ed936836e417572d3f3fbfed2e5f",
     "two-leg-body-r05.step": "e5ef1bf8bcc34fd5c1a811342dcfb8406a78b204da97fe66c399a2344b25219b",
     "validate.py": "85eed2beda3f2125d1a85dff2d5b1cd7437c454b07e184a06edcd830495776a3",
-    "validation.json": "0e392ebf1a3cd78c1cafbaf8d24b2beedb4223a9f9d8bb72c714caa4d29fecec"
+    "validation.json": "0e392ebf1a3cd78c1cafbaf8d24b2beedb4223a9f9d8bb72c714caa4d29fecec",
+    "views.png": "3e6073b313e887acef1a004832ff4bec60c2b31a70327ff4cf809e18347ee3bf"
   }
 }

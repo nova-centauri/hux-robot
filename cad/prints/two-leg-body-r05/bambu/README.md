@@ -16,4 +16,6 @@ The projects use the R04 profile: Bambu PLA Basic, X1 Carbon with a 0.4 mm nozzl
 
 ## Print record
 
-The dispatch record follows below. A completion record needs the printer status or a report from the user.
+**2026-10-14, plate 1 sliced.** Bambu Studio opened `hux-r05-plate-1-walls.3mf` with the X1 Carbon, textured PEI and Bambu PLA Basic profiles. It sliced the plate without an error. The estimate is 4 hours, 4 minutes and 230.55 g.
+
+MSL-Bambi-X1C shows the R04 plate 2 job at 100%, 110/110 layers and Finished. The camera view shows the bed at the bottom of its travel, and the plate surface is not clear in the image. No R05 job was sent. Remove the R04 parts and confirm a clear bed before the dispatch.
