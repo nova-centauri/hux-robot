@@ -1,0 +1,2765 @@
+{
+  "revision": "R04",
+  "date": "2026-10-13",
+  "units": "mm",
+  "status": "Fit candidate. No physical fit or powered qualification.",
+  "parts": [
+    {
+      "id": "01_body_side",
+      "quantity": 2,
+      "label": "Matched body side",
+      "features": {
+        "holes": [
+          [
+            0,
+            0,
+            4.5
+          ],
+          [
+            0,
+            40,
+            4.5
+          ],
+          [
+            12,
+            -20.784609690826528,
+            4.5
+          ],
+          [
+            -44,
+            42,
+            4.6
+          ],
+          [
+            -44,
+            102,
+            4.6
+          ],
+          [
+            -44,
+            152,
+            4.6
+          ],
+          [
+            44,
+            42,
+            4.6
+          ],
+          [
+            44,
+            102,
+            4.6
+          ],
+          [
+            44,
+            152,
+            4.6
+          ],
+          [
+            -43,
+            10,
+            4.6
+          ],
+          [
+            -43,
+            80,
+            4.6
+          ],
+          [
+            -21,
+            98,
+            7.0
+          ],
+          [
+            -21,
+            111,
+            7.0
+          ],
+          [
+            21,
+            98,
+            7.0
+          ],
+          [
+            21,
+            111,
+            7.0
+          ],
+          [
+            -27,
+            74,
+            4.6
+          ],
+          [
+            -27,
+            114,
+            4.6
+          ],
+          [
+            27,
+            74,
+            4.6
+          ],
+          [
+            27,
+            114,
+            4.6
+          ]
+        ],
+        "thickness": 6,
+        "servo_window": [
+          27,
+          47,
+          94
+        ]
+      },
+      "color": "frame",
+      "bounds_mm": [
+        120.0,
+        215.0,
+        6.0
+      ],
+      "volume_mm3": 144658.08,
+      "reuse": null
+    },
+    {
+      "id": "02_open_deck_angle",
+      "quantity": 12,
+      "label": "Open deck angle",
+      "features": {
+        "leg": 34,
+        "wall": 5,
+        "width": 22,
+        "hole_offset": 18,
+        "hole_axis_height": 11,
+        "bore": 4.6
+      },
+      "color": "deck",
+      "bounds_mm": [
+        34.0,
+        34.0,
+        22.0
+      ],
+      "volume_mm3": 7627.81,
+      "reuse": null
+    },
+    {
+      "id": "03_power_deck",
+      "quantity": 1,
+      "label": "Lower power and driver deck",
+      "features": {
+        "holes": [
+          [
+            -27.0,
+            -52.0,
+            3.5
+          ],
+          [
+            -27.0,
+            -6.0,
+            3.5
+          ],
+          [
+            27.0,
+            -52.0,
+            3.5
+          ],
+          [
+            27.0,
+            -6.0,
+            3.5
+          ],
+          [
+            -27.0,
+            6.0,
+            3.5
+          ],
+          [
+            -27.0,
+            52.0,
+            3.5
+          ],
+          [
+            27.0,
+            6.0,
+            3.5
+          ],
+          [
+            27.0,
+            52.0,
+            3.5
+          ]
+        ],
+        "slots": [
+          [
+            -44,
+            -49.5,
+            6.6,
+            4.6,
+            90
+          ],
+          [
+            -44,
+            49.5,
+            6.6,
+            4.6,
+            90
+          ],
+          [
+            44,
+            -49.5,
+            6.6,
+            4.6,
+            90
+          ],
+          [
+            44,
+            49.5,
+            6.6,
+            4.6,
+            90
+          ],
+          [
+            42,
+            -22,
+            14,
+            4,
+            90
+          ],
+          [
+            42,
+            22,
+            14,
+            4,
+            90
+          ]
+        ],
+        "thickness": 4
+      },
+      "color": "deck",
+      "bounds_mm": [
+        120.0,
+        133.8,
+        4.0
+      ],
+      "volume_mm3": 62028.239,
+      "reuse": null
+    },
+    {
+      "id": "04_interface_deck",
+      "quantity": 1,
+      "label": "Middle interface deck",
+      "features": {
+        "holes": [
+          [
+            -27.0,
+            -52.0,
+            3.5
+          ],
+          [
+            -27.0,
+            -6.0,
+            3.5
+          ],
+          [
+            27.0,
+            -52.0,
+            3.5
+          ],
+          [
+            27.0,
+            -6.0,
+            3.5
+          ],
+          [
+            -27.0,
+            6.0,
+            3.5
+          ],
+          [
+            -27.0,
+            52.0,
+            3.5
+          ],
+          [
+            27.0,
+            6.0,
+            3.5
+          ],
+          [
+            27.0,
+            52.0,
+            3.5
+          ]
+        ],
+        "slots": [
+          [
+            -44,
+            -49.5,
+            6.6,
+            4.6,
+            90
+          ],
+          [
+            -44,
+            49.5,
+            6.6,
+            4.6,
+            90
+          ],
+          [
+            44,
+            -49.5,
+            6.6,
+            4.6,
+            90
+          ],
+          [
+            44,
+            49.5,
+            6.6,
+            4.6,
+            90
+          ],
+          [
+            42,
+            -22,
+            14,
+            4,
+            90
+          ],
+          [
+            42,
+            22,
+            14,
+            4,
+            90
+          ]
+        ],
+        "thickness": 4
+      },
+      "color": "deck",
+      "bounds_mm": [
+        120.0,
+        133.8,
+        4.0
+      ],
+      "volume_mm3": 62028.874,
+      "reuse": null
+    },
+    {
+      "id": "05_control_deck",
+      "quantity": 1,
+      "label": "Upper control and sensor deck",
+      "features": {
+        "holes": [
+          [
+            -28.0,
+            -45.0,
+            3.5
+          ],
+          [
+            -28.0,
+            -15.0,
+            3.5
+          ],
+          [
+            28.0,
+            -45.0,
+            3.5
+          ],
+          [
+            28.0,
+            -15.0,
+            3.5
+          ],
+          [
+            -17.0,
+            9.0,
+            3.5
+          ],
+          [
+            -17.0,
+            43.0,
+            3.5
+          ],
+          [
+            17.0,
+            9.0,
+            3.5
+          ],
+          [
+            17.0,
+            43.0,
+            3.5
+          ]
+        ],
+        "slots": [
+          [
+            -44,
+            -49.5,
+            6.6,
+            4.6,
+            90
+          ],
+          [
+            -44,
+            49.5,
+            6.6,
+            4.6,
+            90
+          ],
+          [
+            44,
+            -49.5,
+            6.6,
+            4.6,
+            90
+          ],
+          [
+            44,
+            49.5,
+            6.6,
+            4.6,
+            90
+          ],
+          [
+            -36,
+            0,
+            10,
+            3.2,
+            0
+          ],
+          [
+            36,
+            0,
+            10,
+            3.2,
+            0
+          ]
+        ],
+        "thickness": 4
+      },
+      "color": "deck",
+      "bounds_mm": [
+        120.0,
+        133.8,
+        4.0
+      ],
+      "volume_mm3": 62210.758,
+      "reuse": null
+    },
+    {
+      "id": "06_motor_carrier",
+      "quantity": 1,
+      "label": "37D motor carrier with cable anchors",
+      "features": {
+        "outline": [
+          [
+            -8.0,
+            9.797174393178826e-16
+          ],
+          [
+            -7.969557584733964,
+            -0.6972459419812636
+          ],
+          [
+            -7.878462024097665,
+            -1.3891854213354402
+          ],
+          [
+            -7.727406610312547,
+            -2.070552360820163
+          ],
+          [
+            -7.517540966287267,
+            -2.7361611466053493
+          ],
+          [
+            -7.250462296293202,
+            -3.380946093925591
+          ],
+          [
+            -6.928203230275509,
+            -4.000000000000001
+          ],
+          [
+            -6.553216354311936,
+            -4.588611490808367
+          ],
+          [
+            -6.128355544951827,
+            -5.142300877492311
+          ],
+          [
+            -5.6568542494923815,
+            -5.65685424949238
+          ],
+          [
+            -5.142300877492316,
+            -6.128355544951823
+          ],
+          [
+            -4.588611490808365,
+            -6.553216354311937
+          ],
+          [
+            -4.0000000000000036,
+            -6.928203230275507
+          ],
+          [
+            20.49999999999999,
+            -19.918584287042084
+          ],
+          [
+            22.2797799799639,
+            -20.845079101842945
+          ],
+          [
+            24.133536703509623,
+            -21.612930278075893
+          ],
+          [
+            26.047161962642026,
+            -22.21629400464857
+          ],
+          [
+            28.0060919136606,
+            -22.650578319280786
+          ],
+          [
+            29.99541791680386,
+            -22.912478056110146
+          ],
+          [
+            31.999999999999996,
+            -23.0
+          ],
+          [
+            34.004582083196134,
+            -22.912478056110146
+          ],
+          [
+            35.99390808633939,
+            -22.650578319280786
+          ],
+          [
+            37.952838037357964,
+            -22.216294004648574
+          ],
+          [
+            39.86646329649039,
+            -21.61293027807589
+          ],
+          [
+            41.72022002003607,
+            -20.845079101842956
+          ],
+          [
+            43.499999999999986,
+            -19.918584287042098
+          ],
+          [
+            45.19225803607406,
+            -18.84049701864681
+          ],
+          [
+            46.7841150227904,
+            -17.619022191736498
+          ],
+          [
+            48.26345596729059,
+            -16.263455967290597
+          ],
+          [
+            49.61902219173649,
+            -14.784115022790411
+          ],
+          [
+            50.84049701864681,
+            -13.192258036074069
+          ],
+          [
+            51.918584287042094,
+            -11.499999999999993
+          ],
+          [
+            52.84507910184294,
+            -9.7202200200361
+          ],
+          [
+            53.61293027807589,
+            -7.866463296490378
+          ],
+          [
+            54.216294004648574,
+            -5.952838037357976
+          ],
+          [
+            54.65057831928078,
+            -3.993908086339399
+          ],
+          [
+            54.912478056110146,
+            -2.004582083196141
+          ],
+          [
+            55.0,
+            0.0
+          ],
+          [
+            54.912478056110146,
+            2.0045820831961376
+          ],
+          [
+            54.65057831928078,
+            3.9939080863393976
+          ],
+          [
+            54.216294004648574,
+            5.952838037357977
+          ],
+          [
+            53.61293027807589,
+            7.86646329649038
+          ],
+          [
+            52.84507910184295,
+            9.720220020036088
+          ],
+          [
+            51.918584287042094,
+            11.499999999999998
+          ],
+          [
+            50.840497018646815,
+            13.192258036074058
+          ],
+          [
+            49.61902219173649,
+            14.784115022790402
+          ],
+          [
+            48.2634559672906,
+            16.263455967290593
+          ],
+          [
+            46.7841150227904,
+            17.619022191736494
+          ],
+          [
+            45.192258036074065,
+            18.840497018646808
+          ],
+          [
+            4.588611490808369,
+            46.553216354311935
+          ],
+          [
+            4.000000000000001,
+            46.92820323027551
+          ],
+          [
+            3.3809460939255955,
+            47.2504622962932
+          ],
+          [
+            2.7361611466053506,
+            47.517540966287264
+          ],
+          [
+            2.0705523608201677,
+            47.72740661031254
+          ],
+          [
+            1.3891854213354433,
+            47.878462024097665
+          ],
+          [
+            0.6972459419812651,
+            47.96955758473396
+          ],
+          [
+            4.898587196589413e-16,
+            48.0
+          ],
+          [
+            -0.6972459419812641,
+            47.96955758473396
+          ],
+          [
+            -1.3891854213354424,
+            47.878462024097665
+          ],
+          [
+            -2.070552360820167,
+            47.72740661031255
+          ],
+          [
+            -2.736161146605348,
+            47.51754096628727
+          ],
+          [
+            -3.3809460939255946,
+            47.2504622962932
+          ],
+          [
+            -3.9999999999999987,
+            46.92820323027551
+          ],
+          [
+            -4.588611490808369,
+            46.553216354311935
+          ],
+          [
+            -5.142300877492315,
+            46.12835554495182
+          ],
+          [
+            -5.65685424949238,
+            45.65685424949238
+          ],
+          [
+            -6.128355544951823,
+            45.14230087749232
+          ],
+          [
+            -6.553216354311935,
+            44.58861149080837
+          ],
+          [
+            -6.928203230275508,
+            44.0
+          ],
+          [
+            -7.2504622962931995,
+            43.380946093925594
+          ],
+          [
+            -7.5175409662872665,
+            42.736161146605355
+          ],
+          [
+            -7.7274066103125465,
+            42.070552360820166
+          ],
+          [
+            -7.878462024097664,
+            41.38918542133544
+          ],
+          [
+            -7.969557584733964,
+            40.697245941981265
+          ],
+          [
+            -8.0,
+            40.0
+          ]
+        ],
+        "holes": [
+          [
+            0,
+            0,
+            4.5
+          ],
+          [
+            0,
+            40,
+            4.5
+          ],
+          [
+            25,
+            0,
+            12.4
+          ],
+          [
+            18.576606241341203,
+            -7.750000000000002,
+            3.4
+          ],
+          [
+            31.999999999999996,
+            -15.5,
+            3.4
+          ],
+          [
+            45.4233937586588,
+            -7.750000000000007,
+            3.4
+          ],
+          [
+            45.4233937586588,
+            7.75,
+            3.4
+          ],
+          [
+            32.00000000000001,
+            15.5,
+            3.4
+          ],
+          [
+            18.576606241341196,
+            7.7499999999999964,
+            3.4
+          ]
+        ],
+        "thickness": 6,
+        "datum": "Lower carrier pivot (0, 0)",
+        "axle": [
+          25,
+          0
+        ],
+        "motor_axis": [
+          32,
+          0
+        ],
+        "slots": [
+          [
+            12,
+            27,
+            8,
+            3.2,
+            0
+          ],
+          [
+            22,
+            20,
+            8,
+            3.2,
+            0
+          ]
+        ]
+      },
+      "color": "frame",
+      "bounds_mm": [
+        63.0,
+        71.0,
+        6.0
+      ],
+      "volume_mm3": 16845.903,
+      "reuse": null
+    },
+    {
+      "id": "07_lower_lock_link",
+      "quantity": 1,
+      "label": "Lower lock link",
+      "features": {
+        "holes": [
+          [
+            0,
+            0,
+            4.5
+          ],
+          [
+            110,
+            0,
+            4.5
+          ],
+          [
+            24,
+            0,
+            4.5
+          ]
+        ],
+        "thickness": 5,
+        "datum": "Body pivot (0, 0)",
+        "pivot_centers": 110,
+        "lock_radius": 24
+      },
+      "color": "mount",
+      "bounds_mm": [
+        126.0,
+        16.0,
+        5.0
+      ],
+      "volume_mm3": 6118.209,
+      "reuse": "04_lower_lock_link"
+    },
+    {
+      "id": "08_upper_link",
+      "quantity": 1,
+      "label": "Upper link",
+      "features": {
+        "holes": [
+          [
+            0,
+            0,
+            4.5
+          ],
+          [
+            110,
+            0,
+            4.5
+          ]
+        ],
+        "thickness": 5,
+        "datum": "Body pivot (0, 0)",
+        "pivot_centers": 110
+      },
+      "color": "mount",
+      "bounds_mm": [
+        126.0,
+        16.0,
+        5.0
+      ],
+      "volume_mm3": 5804.652,
+      "reuse": "06_upper_link"
+    },
+    {
+      "id": "09_spacer_2mm",
+      "quantity": 2,
+      "label": "Leg spacer 2 mm",
+      "features": {
+        "outside_diameter": 9,
+        "bore": 4.5,
+        "thickness": 2
+      },
+      "color": "mount",
+      "bounds_mm": [
+        9.0,
+        9.0,
+        2.0
+      ],
+      "volume_mm3": 95.426,
+      "reuse": "07_spacer_2mm"
+    },
+    {
+      "id": "10_spacer_12mm",
+      "quantity": 2,
+      "label": "Leg spacer 12 mm",
+      "features": {
+        "outside_diameter": 9,
+        "bore": 4.5,
+        "thickness": 12
+      },
+      "color": "mount",
+      "bounds_mm": [
+        9.0,
+        9.0,
+        12.0
+      ],
+      "volume_mm3": 572.555,
+      "reuse": "08_spacer_12mm"
+    },
+    {
+      "id": "11_pico_plate",
+      "quantity": 1,
+      "label": "Pico 2 plate",
+      "features": {
+        "holes": [
+          [
+            -23.5,
+            -5.7,
+            2.4
+          ],
+          [
+            -23.5,
+            5.7,
+            2.4
+          ],
+          [
+            23.5,
+            -5.7,
+            2.4
+          ],
+          [
+            23.5,
+            5.7,
+            2.4
+          ],
+          [
+            -28.0,
+            -15.0,
+            3.5
+          ],
+          [
+            -28.0,
+            15.0,
+            3.5
+          ],
+          [
+            28.0,
+            -15.0,
+            3.5
+          ],
+          [
+            28.0,
+            15.0,
+            3.5
+          ]
+        ],
+        "thickness": 3
+      },
+      "color": "mount",
+      "bounds_mm": [
+        66.0,
+        40.0,
+        3.0
+      ],
+      "volume_mm3": 4609.658,
+      "reuse": null
+    },
+    {
+      "id": "12_imu_plate",
+      "quantity": 1,
+      "label": "LSM6DSO rigid plate",
+      "features": {
+        "holes": [
+          [
+            -10.16,
+            -10.16,
+            3.5
+          ],
+          [
+            -10.16,
+            10.16,
+            3.5
+          ],
+          [
+            10.16,
+            -10.16,
+            3.5
+          ],
+          [
+            10.16,
+            10.16,
+            3.5
+          ],
+          [
+            -17.0,
+            -17.0,
+            3.5
+          ],
+          [
+            -17.0,
+            17.0,
+            3.5
+          ],
+          [
+            17.0,
+            -17.0,
+            3.5
+          ],
+          [
+            17.0,
+            17.0,
+            3.5
+          ]
+        ],
+        "thickness": 3
+      },
+      "color": "mount",
+      "bounds_mm": [
+        44.0,
+        44.0,
+        3.0
+      ],
+      "volume_mm3": 5553.916,
+      "reuse": null
+    },
+    {
+      "id": "13_servo_cradle",
+      "quantity": 1,
+      "label": "ST3215 open case cradle",
+      "features": {
+        "holes": [
+          [
+            -21,
+            4,
+            3.5
+          ],
+          [
+            21,
+            4,
+            3.5
+          ],
+          [
+            -21,
+            17,
+            3.5
+          ],
+          [
+            21,
+            17,
+            3.5
+          ],
+          [
+            -27.0,
+            -20.0,
+            4.6
+          ],
+          [
+            -27.0,
+            20.0,
+            4.6
+          ],
+          [
+            27.0,
+            -20.0,
+            4.6
+          ],
+          [
+            27.0,
+            20.0,
+            4.6
+          ]
+        ],
+        "thickness": 4,
+        "case_pocket": [
+          25.72,
+          46.22
+        ],
+        "cap_seat_z": 40.5,
+        "shaft_relief": [
+          0,
+          -12.5,
+          22
+        ]
+      },
+      "color": "mount",
+      "bounds_mm": [
+        68.0,
+        64.0,
+        40.5
+      ],
+      "volume_mm3": 35639.729,
+      "reuse": null
+    },
+    {
+      "id": "14_servo_cap_bar",
+      "quantity": 2,
+      "label": "ST3215 cap bar",
+      "features": {
+        "holes": [
+          [
+            -21,
+            0,
+            3.5
+          ],
+          [
+            21,
+            0,
+            3.5
+          ]
+        ],
+        "thickness": 4
+      },
+      "color": "mount",
+      "bounds_mm": [
+        50.0,
+        8.0,
+        4.0
+      ],
+      "volume_mm3": 1509.296,
+      "reuse": null
+    },
+    {
+      "id": "15_interface_cassette",
+      "quantity": 4,
+      "label": "Driver / power / bus interface cassette",
+      "features": {
+        "holes": [
+          [
+            -27.0,
+            -23.0,
+            3.5
+          ],
+          [
+            -27.0,
+            23.0,
+            3.5
+          ],
+          [
+            27.0,
+            -23.0,
+            3.5
+          ],
+          [
+            27.0,
+            23.0,
+            3.5
+          ],
+          [
+            -22.0,
+            -15.0,
+            3.5
+          ],
+          [
+            -22.0,
+            15.0,
+            3.5
+          ],
+          [
+            22.0,
+            -15.0,
+            3.5
+          ],
+          [
+            22.0,
+            15.0,
+            3.5
+          ]
+        ],
+        "thickness": 3,
+        "board_blank": [
+          52,
+          38
+        ],
+        "board_hole_pitch": [
+          44,
+          30
+        ]
+      },
+      "color": "mount",
+      "bounds_mm": [
+        62.0,
+        54.0,
+        3.0
+      ],
+      "volume_mm3": 7466.202,
+      "reuse": null
+    },
+    {
+      "id": "16_pico_standoff",
+      "quantity": 4,
+      "label": "Pico M2 standoff",
+      "features": {
+        "holes": [
+          [
+            0,
+            0,
+            2.2
+          ]
+        ],
+        "thickness": 10
+      },
+      "color": "mount",
+      "bounds_mm": [
+        3.2,
+        3.2,
+        10.0
+      ],
+      "volume_mm3": 42.412,
+      "reuse": null
+    },
+    {
+      "id": "17_board_standoff",
+      "quantity": 16,
+      "label": "Board M3 standoff",
+      "features": {
+        "holes": [
+          [
+            0,
+            0,
+            3.5
+          ]
+        ],
+        "thickness": 8
+      },
+      "color": "mount",
+      "bounds_mm": [
+        6.0,
+        6.0,
+        8.0
+      ],
+      "volume_mm3": 149.226,
+      "reuse": null
+    },
+    {
+      "id": "18_imu_standoff",
+      "quantity": 4,
+      "label": "IMU M3 standoff",
+      "features": {
+        "holes": [
+          [
+            0,
+            0,
+            3.5
+          ]
+        ],
+        "thickness": 8
+      },
+      "color": "mount",
+      "bounds_mm": [
+        6.0,
+        6.0,
+        8.0
+      ],
+      "volume_mm3": 149.226,
+      "reuse": null
+    },
+    {
+      "id": "19_fit_coupon",
+      "quantity": 1,
+      "label": "Hole and case width coupon",
+      "features": {
+        "holes": [
+          [
+            -43,
+            8,
+            2.4
+          ],
+          [
+            -31,
+            8,
+            3.3
+          ],
+          [
+            -19,
+            8,
+            3.5
+          ],
+          [
+            -7,
+            8,
+            4.4
+          ],
+          [
+            5,
+            8,
+            4.6
+          ],
+          [
+            17,
+            8,
+            4.8
+          ],
+          [
+            37,
+            8,
+            12.4
+          ]
+        ],
+        "thickness": 4
+      },
+      "color": "mount",
+      "bounds_mm": [
+        108.0,
+        40.0,
+        4.0
+      ],
+      "volume_mm3": 15566.426,
+      "reuse": null
+    },
+    {
+      "id": "20_fixture_standoff",
+      "quantity": 4,
+      "label": "Fixture clearance spacer",
+      "features": {
+        "holes": [
+          [
+            0,
+            0,
+            4.6
+          ]
+        ],
+        "thickness": 10
+      },
+      "color": "mount",
+      "bounds_mm": [
+        12.0,
+        12.0,
+        10.0
+      ],
+      "volume_mm3": 964.783,
+      "reuse": null
+    },
+    {
+      "id": "21_side_joint_sample",
+      "quantity": 1,
+      "label": "Side joint sample",
+      "features": {
+        "holes": [
+          [
+            0,
+            0,
+            4.6
+          ]
+        ],
+        "thickness": 6
+      },
+      "color": "deck",
+      "bounds_mm": [
+        32.0,
+        36.0,
+        6.0
+      ],
+      "volume_mm3": 6812.286,
+      "reuse": null
+    },
+    {
+      "id": "22_deck_joint_sample",
+      "quantity": 1,
+      "label": "Deck joint sample",
+      "features": {
+        "slots": [
+          [
+            0,
+            0,
+            6.6,
+            4.6,
+            90
+          ]
+        ],
+        "thickness": 4
+      },
+      "color": "deck",
+      "bounds_mm": [
+        32.0,
+        36.0,
+        4.0
+      ],
+      "volume_mm3": 4504.724,
+      "reuse": null
+    },
+    {
+      "id": "23_module_foot",
+      "quantity": 24,
+      "label": "Module clearance spacer",
+      "features": {
+        "holes": [
+          [
+            0,
+            0,
+            3.5
+          ]
+        ],
+        "thickness": 4
+      },
+      "color": "mount",
+      "bounds_mm": [
+        7.0,
+        7.0,
+        4.0
+      ],
+      "volume_mm3": 115.454,
+      "reuse": null
+    }
+  ],
+  "assembly": [
+    {
+      "name": "body_near",
+      "color": [
+        0.16,
+        0.35,
+        0.3
+      ],
+      "part_id": "01_body_side",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/body_near.stl"
+    },
+    {
+      "name": "body_far",
+      "color": [
+        0.16,
+        0.35,
+        0.3
+      ],
+      "part_id": "01_body_side",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/body_far.stl"
+    },
+    {
+      "name": "03_power_deck",
+      "color": [
+        0.55,
+        0.68,
+        0.6
+      ],
+      "part_id": "03_power_deck",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/03_power_deck.stl"
+    },
+    {
+      "name": "angle_60_-44_0",
+      "color": [
+        0.55,
+        0.68,
+        0.6
+      ],
+      "part_id": "02_open_deck_angle",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/angle_60_-44_0.stl"
+    },
+    {
+      "name": "angle_60_-44_1",
+      "color": [
+        0.55,
+        0.68,
+        0.6
+      ],
+      "part_id": "02_open_deck_angle",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/angle_60_-44_1.stl"
+    },
+    {
+      "name": "angle_60_44_0",
+      "color": [
+        0.55,
+        0.68,
+        0.6
+      ],
+      "part_id": "02_open_deck_angle",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/angle_60_44_0.stl"
+    },
+    {
+      "name": "angle_60_44_1",
+      "color": [
+        0.55,
+        0.68,
+        0.6
+      ],
+      "part_id": "02_open_deck_angle",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/angle_60_44_1.stl"
+    },
+    {
+      "name": "04_interface_deck",
+      "color": [
+        0.55,
+        0.68,
+        0.6
+      ],
+      "part_id": "04_interface_deck",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/04_interface_deck.stl"
+    },
+    {
+      "name": "angle_120_-44_0",
+      "color": [
+        0.55,
+        0.68,
+        0.6
+      ],
+      "part_id": "02_open_deck_angle",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/angle_120_-44_0.stl"
+    },
+    {
+      "name": "angle_120_-44_1",
+      "color": [
+        0.55,
+        0.68,
+        0.6
+      ],
+      "part_id": "02_open_deck_angle",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/angle_120_-44_1.stl"
+    },
+    {
+      "name": "angle_120_44_0",
+      "color": [
+        0.55,
+        0.68,
+        0.6
+      ],
+      "part_id": "02_open_deck_angle",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/angle_120_44_0.stl"
+    },
+    {
+      "name": "angle_120_44_1",
+      "color": [
+        0.55,
+        0.68,
+        0.6
+      ],
+      "part_id": "02_open_deck_angle",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/angle_120_44_1.stl"
+    },
+    {
+      "name": "05_control_deck",
+      "color": [
+        0.55,
+        0.68,
+        0.6
+      ],
+      "part_id": "05_control_deck",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/05_control_deck.stl"
+    },
+    {
+      "name": "angle_170_-44_0",
+      "color": [
+        0.55,
+        0.68,
+        0.6
+      ],
+      "part_id": "02_open_deck_angle",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/angle_170_-44_0.stl"
+    },
+    {
+      "name": "angle_170_-44_1",
+      "color": [
+        0.55,
+        0.68,
+        0.6
+      ],
+      "part_id": "02_open_deck_angle",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/angle_170_-44_1.stl"
+    },
+    {
+      "name": "angle_170_44_0",
+      "color": [
+        0.55,
+        0.68,
+        0.6
+      ],
+      "part_id": "02_open_deck_angle",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/angle_170_44_0.stl"
+    },
+    {
+      "name": "angle_170_44_1",
+      "color": [
+        0.55,
+        0.68,
+        0.6
+      ],
+      "part_id": "02_open_deck_angle",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/angle_170_44_1.stl"
+    },
+    {
+      "name": "lower_link",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "07_lower_lock_link",
+      "reference_only": false,
+      "group": "moving",
+      "file": "reference/lower_link.stl"
+    },
+    {
+      "name": "upper_link",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "08_upper_link",
+      "reference_only": false,
+      "group": "moving",
+      "file": "reference/upper_link.stl"
+    },
+    {
+      "name": "carrier",
+      "color": [
+        0.16,
+        0.35,
+        0.3
+      ],
+      "part_id": "06_motor_carrier",
+      "reference_only": false,
+      "group": "moving",
+      "file": "reference/carrier.stl"
+    },
+    {
+      "name": "gearbox",
+      "color": [
+        0.5,
+        0.53,
+        0.56
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "moving",
+      "file": "reference/gearbox.stl"
+    },
+    {
+      "name": "motor",
+      "color": [
+        0.5,
+        0.53,
+        0.56
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "moving",
+      "file": "reference/motor.stl"
+    },
+    {
+      "name": "encoder",
+      "color": [
+        0.5,
+        0.53,
+        0.56
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "moving",
+      "file": "reference/encoder.stl"
+    },
+    {
+      "name": "wheel",
+      "color": [
+        0.08,
+        0.09,
+        0.09
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "moving",
+      "file": "reference/wheel.stl"
+    },
+    {
+      "name": "body_lower_spacer",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "09_spacer_2mm",
+      "reference_only": false,
+      "group": "joint",
+      "file": "reference/body_lower_spacer.stl"
+    },
+    {
+      "name": "body_upper_spacer",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "10_spacer_12mm",
+      "reference_only": false,
+      "group": "joint",
+      "file": "reference/body_upper_spacer.stl"
+    },
+    {
+      "name": "carrier_lower_spacer",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "10_spacer_12mm",
+      "reference_only": false,
+      "group": "joint",
+      "file": "reference/carrier_lower_spacer.stl"
+    },
+    {
+      "name": "carrier_upper_spacer",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "09_spacer_2mm",
+      "reference_only": false,
+      "group": "joint",
+      "file": "reference/carrier_upper_spacer.stl"
+    },
+    {
+      "name": "motor_pilot",
+      "color": [
+        0.5,
+        0.53,
+        0.56
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "moving",
+      "file": "reference/motor_pilot.stl"
+    },
+    {
+      "name": "shaft",
+      "color": [
+        0.5,
+        0.53,
+        0.56
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "moving",
+      "file": "reference/shaft.stl"
+    },
+    {
+      "name": "hub",
+      "color": [
+        0.5,
+        0.53,
+        0.56
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "moving",
+      "file": "reference/hub.stl"
+    },
+    {
+      "name": "servo_cradle",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "13_servo_cradle",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/servo_cradle.stl"
+    },
+    {
+      "name": "servo_bar_4",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "14_servo_cap_bar",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/servo_bar_4.stl"
+    },
+    {
+      "name": "servo_bar_17",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "14_servo_cap_bar",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/servo_bar_17.stl"
+    },
+    {
+      "name": "ST3215_case_envelope",
+      "color": [
+        0.5,
+        0.53,
+        0.56
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "fixed",
+      "file": "reference/ST3215_case_envelope.stl"
+    },
+    {
+      "name": "ST3215_output_envelope",
+      "color": [
+        0.5,
+        0.53,
+        0.56
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "fixed",
+      "file": "reference/ST3215_output_envelope.stl"
+    },
+    {
+      "name": "11_pico_plate",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "11_pico_plate",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/11_pico_plate.stl"
+    },
+    {
+      "name": "11_pico_plate_foot_0",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/11_pico_plate_foot_0.stl"
+    },
+    {
+      "name": "11_pico_plate_foot_1",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/11_pico_plate_foot_1.stl"
+    },
+    {
+      "name": "11_pico_plate_foot_2",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/11_pico_plate_foot_2.stl"
+    },
+    {
+      "name": "11_pico_plate_foot_3",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/11_pico_plate_foot_3.stl"
+    },
+    {
+      "name": "11_pico_plate_spacer_0",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "16_pico_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/11_pico_plate_spacer_0.stl"
+    },
+    {
+      "name": "11_pico_plate_spacer_1",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "16_pico_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/11_pico_plate_spacer_1.stl"
+    },
+    {
+      "name": "11_pico_plate_spacer_2",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "16_pico_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/11_pico_plate_spacer_2.stl"
+    },
+    {
+      "name": "11_pico_plate_spacer_3",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "16_pico_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/11_pico_plate_spacer_3.stl"
+    },
+    {
+      "name": "11_pico_plate_PCB",
+      "color": [
+        0.12,
+        0.38,
+        0.52
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "fixed",
+      "file": "reference/11_pico_plate_PCB.stl"
+    },
+    {
+      "name": "12_imu_plate",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "12_imu_plate",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/12_imu_plate.stl"
+    },
+    {
+      "name": "12_imu_plate_foot_0",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/12_imu_plate_foot_0.stl"
+    },
+    {
+      "name": "12_imu_plate_foot_1",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/12_imu_plate_foot_1.stl"
+    },
+    {
+      "name": "12_imu_plate_foot_2",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/12_imu_plate_foot_2.stl"
+    },
+    {
+      "name": "12_imu_plate_foot_3",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/12_imu_plate_foot_3.stl"
+    },
+    {
+      "name": "12_imu_plate_spacer_0",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "18_imu_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/12_imu_plate_spacer_0.stl"
+    },
+    {
+      "name": "12_imu_plate_spacer_1",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "18_imu_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/12_imu_plate_spacer_1.stl"
+    },
+    {
+      "name": "12_imu_plate_spacer_2",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "18_imu_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/12_imu_plate_spacer_2.stl"
+    },
+    {
+      "name": "12_imu_plate_spacer_3",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "18_imu_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/12_imu_plate_spacer_3.stl"
+    },
+    {
+      "name": "12_imu_plate_PCB",
+      "color": [
+        0.12,
+        0.38,
+        0.52
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "fixed",
+      "file": "reference/12_imu_plate_PCB.stl"
+    },
+    {
+      "name": "pico_header_-8.89",
+      "color": [
+        0.5,
+        0.53,
+        0.56
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "keepout",
+      "file": "reference/pico_header_-8.89.stl"
+    },
+    {
+      "name": "pico_header_8.89",
+      "color": [
+        0.5,
+        0.53,
+        0.56
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "keepout",
+      "file": "reference/pico_header_8.89.stl"
+    },
+    {
+      "name": "pico_USB_access",
+      "color": [
+        0.12,
+        0.38,
+        0.52
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "keepout",
+      "file": "reference/pico_USB_access.stl"
+    },
+    {
+      "name": "DRV8874_cassette",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "15_interface_cassette",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/DRV8874_cassette.stl"
+    },
+    {
+      "name": "DRV8874_foot_0",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/DRV8874_foot_0.stl"
+    },
+    {
+      "name": "DRV8874_foot_1",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/DRV8874_foot_1.stl"
+    },
+    {
+      "name": "DRV8874_foot_2",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/DRV8874_foot_2.stl"
+    },
+    {
+      "name": "DRV8874_foot_3",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/DRV8874_foot_3.stl"
+    },
+    {
+      "name": "DRV8874_spacer_0",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "17_board_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/DRV8874_spacer_0.stl"
+    },
+    {
+      "name": "DRV8874_spacer_1",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "17_board_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/DRV8874_spacer_1.stl"
+    },
+    {
+      "name": "DRV8874_spacer_2",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "17_board_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/DRV8874_spacer_2.stl"
+    },
+    {
+      "name": "DRV8874_spacer_3",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "17_board_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/DRV8874_spacer_3.stl"
+    },
+    {
+      "name": "DRV8874_insulating_board",
+      "color": [
+        0.12,
+        0.38,
+        0.52
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "fixed",
+      "file": "reference/DRV8874_insulating_board.stl"
+    },
+    {
+      "name": "DRV8874_component_space",
+      "color": [
+        0.12,
+        0.38,
+        0.52
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "keepout",
+      "file": "reference/DRV8874_component_space.stl"
+    },
+    {
+      "name": "power_cut_fuse_cassette",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "15_interface_cassette",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/power_cut_fuse_cassette.stl"
+    },
+    {
+      "name": "power_cut_fuse_foot_0",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/power_cut_fuse_foot_0.stl"
+    },
+    {
+      "name": "power_cut_fuse_foot_1",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/power_cut_fuse_foot_1.stl"
+    },
+    {
+      "name": "power_cut_fuse_foot_2",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/power_cut_fuse_foot_2.stl"
+    },
+    {
+      "name": "power_cut_fuse_foot_3",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/power_cut_fuse_foot_3.stl"
+    },
+    {
+      "name": "power_cut_fuse_spacer_0",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "17_board_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/power_cut_fuse_spacer_0.stl"
+    },
+    {
+      "name": "power_cut_fuse_spacer_1",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "17_board_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/power_cut_fuse_spacer_1.stl"
+    },
+    {
+      "name": "power_cut_fuse_spacer_2",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "17_board_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/power_cut_fuse_spacer_2.stl"
+    },
+    {
+      "name": "power_cut_fuse_spacer_3",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "17_board_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/power_cut_fuse_spacer_3.stl"
+    },
+    {
+      "name": "power_cut_fuse_insulating_board",
+      "color": [
+        0.12,
+        0.38,
+        0.52
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "fixed",
+      "file": "reference/power_cut_fuse_insulating_board.stl"
+    },
+    {
+      "name": "power_cut_fuse_component_space",
+      "color": [
+        0.12,
+        0.38,
+        0.52
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "keepout",
+      "file": "reference/power_cut_fuse_component_space.stl"
+    },
+    {
+      "name": "servo_bus_encoder_cassette",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "15_interface_cassette",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/servo_bus_encoder_cassette.stl"
+    },
+    {
+      "name": "servo_bus_encoder_foot_0",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/servo_bus_encoder_foot_0.stl"
+    },
+    {
+      "name": "servo_bus_encoder_foot_1",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/servo_bus_encoder_foot_1.stl"
+    },
+    {
+      "name": "servo_bus_encoder_foot_2",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/servo_bus_encoder_foot_2.stl"
+    },
+    {
+      "name": "servo_bus_encoder_foot_3",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/servo_bus_encoder_foot_3.stl"
+    },
+    {
+      "name": "servo_bus_encoder_spacer_0",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "17_board_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/servo_bus_encoder_spacer_0.stl"
+    },
+    {
+      "name": "servo_bus_encoder_spacer_1",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "17_board_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/servo_bus_encoder_spacer_1.stl"
+    },
+    {
+      "name": "servo_bus_encoder_spacer_2",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "17_board_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/servo_bus_encoder_spacer_2.stl"
+    },
+    {
+      "name": "servo_bus_encoder_spacer_3",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "17_board_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/servo_bus_encoder_spacer_3.stl"
+    },
+    {
+      "name": "servo_bus_encoder_insulating_board",
+      "color": [
+        0.12,
+        0.38,
+        0.52
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "fixed",
+      "file": "reference/servo_bus_encoder_insulating_board.stl"
+    },
+    {
+      "name": "servo_bus_encoder_component_space",
+      "color": [
+        0.12,
+        0.38,
+        0.52
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "keepout",
+      "file": "reference/servo_bus_encoder_component_space.stl"
+    },
+    {
+      "name": "regulator_clamp_cassette",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "15_interface_cassette",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/regulator_clamp_cassette.stl"
+    },
+    {
+      "name": "regulator_clamp_foot_0",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/regulator_clamp_foot_0.stl"
+    },
+    {
+      "name": "regulator_clamp_foot_1",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/regulator_clamp_foot_1.stl"
+    },
+    {
+      "name": "regulator_clamp_foot_2",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/regulator_clamp_foot_2.stl"
+    },
+    {
+      "name": "regulator_clamp_foot_3",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "23_module_foot",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/regulator_clamp_foot_3.stl"
+    },
+    {
+      "name": "regulator_clamp_spacer_0",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "17_board_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/regulator_clamp_spacer_0.stl"
+    },
+    {
+      "name": "regulator_clamp_spacer_1",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "17_board_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/regulator_clamp_spacer_1.stl"
+    },
+    {
+      "name": "regulator_clamp_spacer_2",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "17_board_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/regulator_clamp_spacer_2.stl"
+    },
+    {
+      "name": "regulator_clamp_spacer_3",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "17_board_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/regulator_clamp_spacer_3.stl"
+    },
+    {
+      "name": "regulator_clamp_insulating_board",
+      "color": [
+        0.12,
+        0.38,
+        0.52
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "fixed",
+      "file": "reference/regulator_clamp_insulating_board.stl"
+    },
+    {
+      "name": "regulator_clamp_component_space",
+      "color": [
+        0.12,
+        0.38,
+        0.52
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "keepout",
+      "file": "reference/regulator_clamp_component_space.stl"
+    },
+    {
+      "name": "fixture_base",
+      "color": [
+        0.65,
+        0.51,
+        0.34
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "fixed",
+      "file": "reference/fixture_base.stl"
+    },
+    {
+      "name": "fixture_upright_near",
+      "color": [
+        0.65,
+        0.51,
+        0.34
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "fixed",
+      "file": "reference/fixture_upright_near.stl"
+    },
+    {
+      "name": "fixture_spacer_near10",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "20_fixture_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/fixture_spacer_near10.stl"
+    },
+    {
+      "name": "fixture_spacer_near80",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "20_fixture_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/fixture_spacer_near80.stl"
+    },
+    {
+      "name": "fixture_upright_far",
+      "color": [
+        0.65,
+        0.51,
+        0.34
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "fixed",
+      "file": "reference/fixture_upright_far.stl"
+    },
+    {
+      "name": "fixture_spacer_far10",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "20_fixture_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/fixture_spacer_far10.stl"
+    },
+    {
+      "name": "fixture_spacer_far80",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "20_fixture_standoff",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/fixture_spacer_far80.stl"
+    }
+  ],
+  "source_hashes": {
+    "build.py": "8030e591720ba7d6441824ed1ae3352ac219534755eb04b1085f9bb2139766bb",
+    "parameters.json": "eeb7eeb6eef75c4b0bb7dd5142143dc8e2de548502766948302e56b73820c5c1"
+  }
+}

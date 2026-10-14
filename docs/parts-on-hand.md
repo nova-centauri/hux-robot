@@ -1,5 +1,13 @@
 # V1-PROOF parts and reuse inventory
 
+**2026-10-13 body fit problem:** the user reports that the walls and horizontal layers do not fit together. The [dated evaluation](checklists/2026-10-13-r04-fit-review.md) records the report and CAD findings. Use the [R04 matched body and component mounts](../cad/prints/one-leg-body-r04/README.md) for the next fit trial. The ST3215 servos have not arrived. Physical qualification remains open.
+
+The user confirms completion of the four small R04 fit parts in Basic PLA on October 13. Bambu Studio also shows 100%, 110/110 layers and Finished. The [print record](../cad/prints/one-leg-body-r04/bambu/README.md) confirms completion only. The corner joint fit remains unverified.
+
+The user requested further prints before the joint check. The X1C accepted plate 2 with one wall, the lower deck and three more angles. Plate 2 completion remains unverified.
+
+**2026-10-07 R03 prints complete:** the user confirms that all [R03 body kit](../cad/prints/one-leg-body-r03/README.md) parts are printed. The October 6 setup uses default PLA. Start the [fit and assembly checklist](checklists/2026-10-07-r03-assembly.md). Actual dimensions, fits, mass and assembly results remain unrecorded. Recorded spend stays $173.70.
+
 **2026-10-06 leg motion and bench supply:** the user reports satisfactory leg travel and sufficient adjustable bench-supply voltage and current capacity. The [dated observation](checklists/2026-10-06-leg-motion.md) preserves that report. The [R03 body kit](../cad/prints/one-leg-body-r03/README.md) uses this supply for the next supported body stage. The supply model, final setpoints and return-energy behavior remain unrecorded. No purchase or powered-test result changes.
 
 **2026-10-03 controller/IMU arrival:** the user reports that one **Pico 2 with yellow pre-soldered headers and one LSM6DSO IMU are received**. The inspection, USB and sensor tests are not yet done. The October 2 Amazon order of the user has a **$30.58 combined total**. This brings the recorded project spend to **$173.70** and leaves **$726.30** under the $900 plan. This report supersedes the screenshot arrival estimate.
@@ -31,7 +39,7 @@ Purchased parts count as new cash spend. We infer no reuse credit.
 | Pololu 4752 encoder gearmotors | 1 received per user 2026-10-02, untested; $60.95 goods, part of the $88.34 paid Pololu order; second motor still required | Dry-fit the received motor, then qualify one restrained wheel channel | $0 |
 | ST3215 12 V servos | 2 paid; $42.38 goods + $12.40 shipping = $54.78; awaiting shipment in latest receipt; 12 V variant confirmed by user | Supported single-leg bench now; robot height adjustment after pinned-leg balance | $0 |
 | Pololu 4035 DRV8874 drivers | Received per user 2026-10-02, untested; total delivered count pending; receipt covers 1 at $11.94 goods | H-bridge and current limiting for each wheel motor; confirm coverage of both channels | $0 |
-| 3D-printed mechanical parts | Printed per user 2026-10-02; revision, material, quantities and fit unrecorded | Passive geometry and packaging checks; powered mounts and load capacity remain unqualified | $0 |
+| 3D-printed mechanical parts | R03 kit complete per user 2026-10-07; default PLA setup. Earlier prints reported 2026-10-02. Actual count, dimensions and fits unrecorded | R03 frame and leg fit checks, then supported assembly. Powered mounts and load capacity remain unqualified | $0 |
 | Servo interface / adapter | Purchase/availability unconfirmed | Half-duplex TTL commands and feedback | $0 |
 | Bench supply | Available; sufficient adjustable voltage/current capacity per user 2026-10-06; model, final settings and reverse-energy behavior unrecorded | Supported body and single-actuator tests with the existing power/interface checks | $0 |
 | Panasonic MSMD042G1A industrial servo | 1 on hand per the user 2026-10-01; two photo views; untested, drive/harness/supply unknown | Bench/future mechanism candidate; 200 V-class drive and mass conflict with current proof | $0 |

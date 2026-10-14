@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "version": "v1-proof",
-  "updatedAt": "2026-10-06",
+  "updatedAt": "2026-10-13",
   "title": "Mechanical testing",
   "geometry": {
     "linkMm": 110,
@@ -22,7 +22,10 @@
     "docs/one-leg-bench.md",
     "tools/living-drawings/wheel-mount.html",
     "docs/checklists/2026-10-06-leg-motion.md",
-    "cad/prints/one-leg-body-r03/README.md"
+    "cad/prints/one-leg-body-r03/README.md",
+    "docs/checklists/2026-10-07-r03-assembly.md",
+    "docs/checklists/2026-10-13-r04-fit-review.md",
+    "cad/prints/one-leg-body-r04/README.md"
   ],
   "steps": [
     {
@@ -30,12 +33,14 @@
       "title": "Inspect and measure the prints",
       "phase": "passive",
       "status": "ready",
-      "action": "Check for cracks, warped plates and damaged holes. Try the intended M4 hardware gently. Measure both link centers and both fixed/carrier pivot separations.",
-      "measure": "Link centers: 110 mm each. Pivot separation: 40 mm on both plates. Record the actual hole fit, printed revision, material and quantities.",
+      "action": "Record the reported body fit problem. Print the R04 coupon, one angle and both joint samples. Check both fasteners and the actual tool before full body prints.",
+      "measure": "Record the failed joint and measured gap. R04 deck side clearance is nominally 0.6 mm per side. The physical fit remains unverified.",
       "evidence": "Dimensions and a photo of the measured parts. Retain any fit failures.",
       "sourcePaths": [
-        "docs/checklists/2026-10-02-mechanical-fit.md",
-        "cad/prints/v1-proof-r01/README.md"
+        "docs/checklists/2026-10-13-r04-fit-review.md",
+        "cad/prints/one-leg-body-r04/README.md",
+        "docs/checklists/2026-10-07-r03-assembly.md",
+        "cad/prints/one-leg-body-r03/README.md"
       ]
     },
     {
@@ -43,12 +48,14 @@
       "title": "Assemble the passive parallelogram",
       "phase": "passive",
       "status": "planned",
-      "action": "For R01, place 2 mm spacers at both ends of the lower link. Place 12 mm spacers at both ends of the upper link. Keep both plates behind the links.",
+      "action": "Use the matched R04 body parts. Reuse checked R03 links and spacers. Body spacers remain lower 2 mm and upper 12 mm. Carrier spacers remain lower 12 mm and upper 2 mm.",
       "measure": "Actual spacer and fastener stacks, bolt-end clearance, pivot retention and free motion. Match the printed revision before you use this layout.",
       "evidence": "Side and end-view photos. Fasteners retained without binding.",
       "sourcePaths": [
-        "docs/checklists/2026-10-02-mechanical-fit.md",
-        "cad/prints/v1-proof-r01/README.md#assemble-and-check-by-hand"
+        "docs/checklists/2026-10-13-r04-fit-review.md",
+        "cad/prints/one-leg-body-r04/README.md",
+        "docs/checklists/2026-10-07-r03-assembly.md",
+        "cad/prints/one-leg-body-r03/README.md#leg-and-motor-assembly"
       ]
     },
     {
@@ -187,6 +194,29 @@
       "sourcePaths": [
         "docs/checklists/2026-10-06-leg-motion.md",
         "cad/prints/one-leg-body-r03/README.md"
+      ]
+    },
+    {
+      "id": "r03-prints-complete",
+      "date": "2026-10-07",
+      "kind": "inventory",
+      "title": "All R03 parts printed",
+      "notes": "The user confirms that all R03 kit parts are printed. The October 6 setup uses default PLA. Fit checks and supported frame assembly are next. Measured fits, assembly results and powered qualification remain open.",
+      "sourcePaths": [
+        "docs/checklists/2026-10-07-r03-assembly.md",
+        "docs/parts-on-hand.md",
+        "cad/prints/one-leg-body-r03/README.md"
+      ]
+    },
+    {
+      "id": "r04-body-fit-review",
+      "date": "2026-10-13",
+      "kind": "design review",
+      "title": "Body fit problem and R04 revision",
+      "notes": "The user reports poor body fit and missing actuator mounts. R04 supplies a matched three-deck body, electronics mounts and an ST3215 case cradle. Check a small corner sample before full body prints. The servos have not arrived. Physical fit, powered tests and the leg transmission remain open. Recorded spend stays $173.70.",
+      "sourcePaths": [
+        "docs/checklists/2026-10-13-r04-fit-review.md",
+        "cad/prints/one-leg-body-r04/README.md"
       ]
     }
   ]

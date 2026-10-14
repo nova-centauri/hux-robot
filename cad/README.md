@@ -1,5 +1,7 @@
 # Hux CAD and layouts
 
+**2026-10-13:** the [R04 matched body](prints/one-leg-body-r04/README.md) replaces the body interfaces after a reported fit problem. It supplies three decks, component mounts and a servo cradle. Start with its small corner samples. Physical fit and the powered leg transmission remain open.
+
 **2026-10-06:** the [R03 one-leg body kit](prints/one-leg-body-r03/README.md) adds the supported body, neutral lock and suspended wheel carrier. It contains nine STL/STEP part types, a STEP/Blender assembly and four engineering sheets. The user reports satisfactory leg travel and sufficient adjustable bench-supply capacity. Exact travel measurements, new printed fits and powered qualification remain open.
 
 Active: [V1-PROOF envelope sketch](layouts/v1-proof.svg), generated from [model.json](../tools/v1-proof/model.json). It shows side, front and plan envelopes plus the simple parallel-link leg. It is not a fabrication drawing or a clearance validation.

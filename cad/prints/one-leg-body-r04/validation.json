@@ -1,0 +1,247 @@
+{
+  "revision": "R04",
+  "status": "CAD checks passed. Printed fits and load capacity remain unverified.",
+  "parts": [
+    {
+      "part": "01_body_side",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "c6a01d5979088d5704037904c5bfeba116e0063c206c9d821fcef57d76c3ebc2"
+    },
+    {
+      "part": "02_open_deck_angle",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "ffadb6d3aef2c05e0b7a810da9f8c07ec34fa9f998b277faefe757e7daefced1"
+    },
+    {
+      "part": "03_power_deck",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "d0be09425e0cf3f6e99ddbf8e6cc4606866ae9de65a4ca9720e71a6485e9f772"
+    },
+    {
+      "part": "04_interface_deck",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "54941b6326138ca9e3f9ad3d0e54a5867d54e7261d0bdaf20984dc437b50ea3b"
+    },
+    {
+      "part": "05_control_deck",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "7c9c204176e921542ef37ecce99353f4edaeccee77ceba48c3bbfa405424f4ed"
+    },
+    {
+      "part": "06_motor_carrier",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "36f9ae3837c614d80a061a779e74a3fea903ca804d321f56dd55fac10fd2a36c"
+    },
+    {
+      "part": "07_lower_lock_link",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "895012c266eedfffb1f56c129eb7423b3e103682e162cc5f78fc04402183df7d"
+    },
+    {
+      "part": "08_upper_link",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "88261dfa13e6e40782ae230c01a760baff638a344cc588b860caed1b3c48f2a9"
+    },
+    {
+      "part": "09_spacer_2mm",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "2a50d98869fdba7ed10c9e4778ef9a18db9317210f4bba02ef997368b695a50e"
+    },
+    {
+      "part": "10_spacer_12mm",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "4c94cf90f33bdcb093ac50e945f1a42704b78d5797b47bf943a54d86e4f298fe"
+    },
+    {
+      "part": "11_pico_plate",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "46f471ee862288c6326dd05b43c7b4ccbbcbe9ec4b8943efd6375eef8f26b7b0"
+    },
+    {
+      "part": "12_imu_plate",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "889fd65d982fc55e916be75540a2d28f2690edcfe62039b7f54f35d8ca8a390d"
+    },
+    {
+      "part": "13_servo_cradle",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "0f8051ca480933bd12563888071f27888841dc4af1198893637a000da9d209ff"
+    },
+    {
+      "part": "14_servo_cap_bar",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "c5edafbbbd0962a0690f2967b2be804fa9cdb9c9313b811ec53821fabc69cc31"
+    },
+    {
+      "part": "15_interface_cassette",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "379e43e286cb4ba0916169932a8bb3ed0eaaee8fb711d29ca0e0d7489bcd6955"
+    },
+    {
+      "part": "16_pico_standoff",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "a6e94ebf17eaa0b73e1f171b1bbf0845d3b685802ab99560590a55e3630641df"
+    },
+    {
+      "part": "17_board_standoff",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "ae71d1810888ae9109210ca0f6c699891d0ac5bab22862f42986f4fa08ab1c9f"
+    },
+    {
+      "part": "18_imu_standoff",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "ae71d1810888ae9109210ca0f6c699891d0ac5bab22862f42986f4fa08ab1c9f"
+    },
+    {
+      "part": "19_fit_coupon",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "372b4286105782c261490ca3f1d7f717b6b4749df5b908e9ed1449fad67cfc3a"
+    },
+    {
+      "part": "20_fixture_standoff",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "609c9852ba36235bbfd219aa79f93d798e7e3e56437e469b2dd2e7154fff984a"
+    },
+    {
+      "part": "21_side_joint_sample",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "8b711826f3e0083ca246c2e6947053784670c4061d1a337e492e69d9b79b1c19"
+    },
+    {
+      "part": "22_deck_joint_sample",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "fd06eddf2203f182552205fefac48a52ad3e64187c42e78505daa5c3ee2c5dfb"
+    },
+    {
+      "part": "23_module_foot",
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "07d5ada111da47278880f60ade6fa6761e45d4f4ac241d3507a53f8fd5a4aea2"
+    }
+  ],
+  "assembly_overlap_mm3": 0,
+  "fixed_exact_intersections": 3,
+  "deck_side_clearance_mm": 0.6,
+  "module_and_board_fasteners_checked": 48,
+  "bracket_hardware": [
+    {
+      "a": "side bolt",
+      "b": "deck bolt",
+      "clearance_mm": 7.906
+    },
+    {
+      "a": "side nut",
+      "b": "deck bolt",
+      "clearance_mm": 7.7
+    },
+    {
+      "a": "deck nut",
+      "b": "side bolt",
+      "clearance_mm": 8.549
+    },
+    {
+      "a": "side tool",
+      "b": "deck nut",
+      "clearance_mm": 3.3
+    },
+    {
+      "a": "deck tool",
+      "b": "side nut",
+      "clearance_mm": 3.3
+    },
+    {
+      "a": "side tool",
+      "b": "angle",
+      "clearance_mm": 2.0
+    },
+    {
+      "a": "deck tool",
+      "b": "angle",
+      "clearance_mm": 2.0
+    }
+  ],
+  "sweep": {
+    "poses": 61,
+    "range_deg": [
+      15,
+      45
+    ],
+    "step_deg": 0.5,
+    "pairs": 41236,
+    "exact_checks": 61,
+    "minimum_exact_clearance_mm": 2.0,
+    "scope": "Nominal parts and reserved board volumes. No flexible cable, print tolerance, pivot hardware, deflection or powered servo transmission."
+  },
+  "source_hashes": {
+    "build.py": "8030e591720ba7d6441824ed1ae3352ac219534755eb04b1085f9bb2139766bb",
+    "parameters.json": "eeb7eeb6eef75c4b0bb7dd5142143dc8e2de548502766948302e56b73820c5c1"
+  }
+}

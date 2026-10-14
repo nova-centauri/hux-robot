@@ -1,5 +1,9 @@
 # Single-leg bench plan
 
+**2026-10-13 body fit problem:** the user reports that the walls and horizontal layers do not fit together. The [dated evaluation](checklists/2026-10-13-r04-fit-review.md) records the report and CAD findings. Use the [R04 matched body and component mounts](../cad/prints/one-leg-body-r04/README.md) for the next fit trial. The ST3215 servos have not arrived. Physical qualification remains open.
+
+**Updated 2026-10-07:** the user confirms that all R03 kit parts are printed. The [fit and assembly checklist](checklists/2026-10-07-r03-assembly.md) is the next step. Keep actuator power disconnected for these checks. Measured fits and assembly results remain open.
+
 **Updated 2026-10-06:** the user reports completed leg tests and satisfactory travel. The [dated report](checklists/2026-10-06-leg-motion.md) contains that observation, without measured endpoints or load results. The [R03 body kit](../cad/prints/one-leg-body-r03/README.md) supplies the next supported body and motor carrier. Its first-stage assumption uses a fixed leg and a suspended wheel.
 
 The user confirms sufficient adjustable bench-supply voltage and current capacity. The supply replaces the battery at this stage. The rail settings and return-energy path remain part of the power procedure below. The full two-axis exercise still requires the servo transmission, supported shaft and interface checks.

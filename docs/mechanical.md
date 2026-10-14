@@ -1,5 +1,9 @@
 # V1-PROOF mechanical plan
 
+**2026-10-13 body fit problem:** the user reports that the walls and horizontal layers do not fit together. The [dated evaluation](checklists/2026-10-13-r04-fit-review.md) records the report and CAD findings. Use the [R04 matched body and component mounts](../cad/prints/one-leg-body-r04/README.md) for the next fit trial. The ST3215 servos have not arrived. Physical qualification remains open.
+
+**2026-10-07:** the user confirms that all R03 parts are printed. Start the [unpowered fit and assembly checklist](checklists/2026-10-07-r03-assembly.md). Use the R03 spacer arrangement with the motor carrier outboard of both links.
+
 **2026-10-06:** the user reports satisfactory leg travel and requests a body with one leg. The [R03 body kit](../cad/prints/one-leg-body-r03/README.md) supplies the next supported assembly, printable parts and engineering sheets. The [dated observation](checklists/2026-10-06-leg-motion.md) preserves the report. Exact travel measurements and powered qualification remain open.
 
 R03 keeps the 110 mm links and 40 mm pivots. It adds a removable 30 degree lock, two equipment decks and a motor carrier. Its first-stage assumption uses a suspended wheel and bench power. The servo transmission and shaft bearings remain separate interfaces. The fixture carries the body, so this stage does not apply the motor-shaft load exception below.

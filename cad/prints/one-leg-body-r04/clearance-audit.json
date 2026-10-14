@@ -1,0 +1,368 @@
+[
+  {
+    "angle_deg": 15.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 15.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 16.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 16.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 17.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 17.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 18.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 18.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 19.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 19.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 20.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 20.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 21.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 21.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 22.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 22.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 23.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 23.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 24.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 24.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 25.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 25.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 26.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 26.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 27.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 27.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 28.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 28.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 29.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 29.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 30.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 30.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 31.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 31.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 32.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 32.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 33.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 33.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 34.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 34.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 35.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 35.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 36.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 36.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 37.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 37.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 38.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 38.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 39.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 39.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 40.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 40.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 41.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 41.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 42.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 42.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 43.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 43.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 44.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 44.5,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  },
+  {
+    "angle_deg": 45.0,
+    "a": "lower_link",
+    "b": "body_near",
+    "clearance_mm": 2.0
+  }
+]

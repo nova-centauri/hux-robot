@@ -1,5 +1,7 @@
 # One-leg body R03
 
+**Superseded for body fabrication on 2026-10-13:** use the [R04 matched body](../one-leg-body-r04/README.md). The user reports poor body fit. R03 has no nominal deck side clearance and omits dedicated electronics and servo mounts. Keep this revision as the record of the earlier prints.
+
 **2026-10-06. A supported body for the next V1-PROOF bench build.** This revision adds a bolted frame, removable equipment decks, a neutral lock and a motor carrier. The first stage uses a fixed leg and a suspended wheel. The bench supply replaces the battery for this stage.
 
 The user reports satisfactory leg travel. The [dated observation](../../../docs/checklists/2026-10-06-leg-motion.md) records that report without inferred measurements. The ST3215 arrival and the current wheel/hub remain unconfirmed. Thus the first-stage scope is an explicit design assumption.

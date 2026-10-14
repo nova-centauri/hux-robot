@@ -1,0 +1,187 @@
+{
+  "date": "2026-10-13",
+  "projects": [
+    {
+      "file": "hux-r04-first-fit-pla.3mf",
+      "sha256": "21b4eb2a65f317d15d2616d6b2350c3d0af56e07f2b0cb3354c92c1de61cf7ce",
+      "objects": 4,
+      "plates": 1,
+      "quantities": {
+        "02_open_deck_angle.stl": 1,
+        "19_fit_coupon.stl": 1,
+        "21_side_joint_sample.stl": 1,
+        "22_deck_joint_sample.stl": 1
+      },
+      "checks": "Source vertices, face count, volume, flat orientation, scale, plate bounds and profile agree.",
+      "parts": [
+        {
+          "part": "02_open_deck_angle.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 5.740613651450675e-09,
+          "plate_bounds_mm": [
+            [
+              71.0,
+              133.0,
+              0.0
+            ],
+            [
+              105.0,
+              167.0,
+              22.0
+            ]
+          ]
+        },
+        {
+          "part": "19_fit_coupon.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 6.725233068283593e-08,
+          "plate_bounds_mm": [
+            [
+              74.0,
+              84.0,
+              0.0
+            ],
+            [
+              182.0,
+              124.0,
+              4.0
+            ]
+          ]
+        },
+        {
+          "part": "21_side_joint_sample.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 5.325254141050344e-09,
+          "plate_bounds_mm": [
+            [
+              114.0,
+              132.0,
+              0.0
+            ],
+            [
+              146.0,
+              168.0,
+              6.0
+            ]
+          ]
+        },
+        {
+          "part": "22_deck_joint_sample.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 6.575279569435553e-09,
+          "plate_bounds_mm": [
+            [
+              156.0,
+              132.0,
+              0.0
+            ],
+            [
+              188.0,
+              168.0,
+              4.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "file": "hux-r04-plate-02-pla.3mf",
+      "sha256": "54414c7288501bcdfe0fb0b8c2112efb6913e4738c4498a647447d4617afa3f6",
+      "objects": 5,
+      "plates": 1,
+      "quantities": {
+        "01_body_side.stl": 1,
+        "03_power_deck.stl": 1,
+        "02_open_deck_angle.stl": 3
+      },
+      "checks": "Source vertices, face count, volume, flat orientation, scale, plate bounds and profile agree.",
+      "parts": [
+        {
+          "part": "01_body_side.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 4.984718214273078e-07,
+          "plate_bounds_mm": [
+            [
+              5.0,
+              31.5,
+              0.0
+            ],
+            [
+              125.0,
+              246.5,
+              6.0
+            ]
+          ]
+        },
+        {
+          "part": "03_power_deck.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 6.991903010368179e-08,
+          "plate_bounds_mm": [
+            [
+              131.0,
+              89.1,
+              0.0
+            ],
+            [
+              251.0,
+              222.9,
+              4.0
+            ]
+          ]
+        },
+        {
+          "part": "02_open_deck_angle.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 5.740613651450675e-09,
+          "plate_bounds_mm": [
+            [
+              131.0,
+              40.0,
+              0.0
+            ],
+            [
+              165.0,
+              74.0,
+              22.0
+            ]
+          ]
+        },
+        {
+          "part": "02_open_deck_angle.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 5.740613651450675e-09,
+          "plate_bounds_mm": [
+            [
+              173.0,
+              40.0,
+              0.0
+            ],
+            [
+              207.0,
+              74.0,
+              22.0
+            ]
+          ]
+        },
+        {
+          "part": "02_open_deck_angle.stl",
+          "plate": 1,
+          "source_vertex_error_mm": 5.740613651450675e-09,
+          "plate_bounds_mm": [
+            [
+              215.0,
+              40.0,
+              0.0
+            ],
+            [
+              249.0,
+              74.0,
+              22.0
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

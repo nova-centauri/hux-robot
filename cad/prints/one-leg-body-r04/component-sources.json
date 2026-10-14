@@ -1,0 +1,43 @@
+{
+  "checked": "2026-10-13",
+  "sources": [
+    {
+      "component": "Pico 2",
+      "url": "https://datasheets.raspberrypi.com/pico/pico-2-datasheet.pdf",
+      "source_file": "pico.pdf",
+      "verified": "Figure 3: PCB 51 x 21 mm; four 2.1 mm holes on 47 x 11.4 mm centers.",
+      "download_sha256": "cbcfaf881018c686495a2e53c7bd281e7e0a8217d79447d73eda7c8f74b7f675"
+    },
+    {
+      "component": "LSM6DSO SEN-18020",
+      "url": "https://cdn.sparkfun.com/assets/8/6/0/c/1/SparkFun_Qwiic_6DoF_LSM6DSO.zip",
+      "source_file": "imu.zip",
+      "verified": "Eagle STANDOFF1..4: (2.54,2.54), (2.54,22.86), (22.86,2.54), (22.86,22.86), 3.048 mm drill.",
+      "download_sha256": "c5ae652a5385385cbf610a9d869f457355533f7e8aab935a57d0b592ce3c8029"
+    },
+    {
+      "component": "ST3215",
+      "url": "https://files.waveshare.com/upload/0/08/ST3215-2D.zip",
+      "source_file": "servo-2d.zip",
+      "verified": "45.22 x 24.72 mm case. Drawing title SCS215. Vendor STEP fit check is separate; received servo remains unverified.",
+      "download_sha256": "bd034f5301ec271a77a87e8bf5f6bb9995bb3348ba728b97ae3c58dffa79dc1b"
+    },
+    {
+      "component": "ST3215 vendor solid",
+      "url": "https://files.waveshare.com/upload/5/59/ST3215-3D.zip",
+      "source_file": "servo-3d.zip",
+      "verified": "Used unchanged for the optional check_vendor_servo.py check.",
+      "download_sha256": "2735561e0c1dc899b35d4740273e5340f15967028d2dd4014feed03d8175562c"
+    },
+    {
+      "component": "DRV8874",
+      "url": "https://www.pololu.com/product/4035",
+      "verified": "No mechanical mounting holes. Header or socket carrier on a separate secured board."
+    },
+    {
+      "component": "Pololu 4752",
+      "url": "https://www.pololu.com/product/4752",
+      "verified": "Retained R03/JD-03 interface: six M3 screws on 31 mm circle; 12 mm pilot; 7 mm shaft offset."
+    }
+  ]
+}

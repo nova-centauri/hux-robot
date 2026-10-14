@@ -1,0 +1,28 @@
+{
+  "source": "https://files.waveshare.com/upload/5/59/ST3215-3D.zip",
+  "step_sha256": "58e38e4dc49f97df738c5f229f9aa8a7dce64a0a1d01335486a52d53e6017e8a",
+  "transform": "Rotate -90 degrees about Y, translate (0,38.2,107) mm.",
+  "checks": [
+    {
+      "part": "servo_cradle",
+      "overlap_mm3": 0.0,
+      "clearance_mm": 0.4983
+    },
+    {
+      "part": "servo_bar_4",
+      "overlap_mm3": 0.0,
+      "clearance_mm": 0.8
+    },
+    {
+      "part": "servo_bar_17",
+      "overlap_mm3": 0.0,
+      "clearance_mm": 0.8
+    },
+    {
+      "part": "body_near",
+      "overlap_mm3": 0.0,
+      "clearance_mm": 4.8231
+    }
+  ],
+  "scope": "Vendor geometry only. Received servo, cable, pad compression and physical fit remain unverified."
+}

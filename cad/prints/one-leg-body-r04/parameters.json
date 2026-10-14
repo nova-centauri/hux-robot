@@ -1,0 +1,111 @@
+{
+  "revision": "R04",
+  "date": "2026-10-13",
+  "units": "mm",
+  "status": "Fit candidate. No physical fit or powered qualification.",
+  "panel": {
+    "width": 120,
+    "bottom": -35,
+    "top": 180,
+    "thickness": 6
+  },
+  "frame": {
+    "inside_width": 135,
+    "deck_width": 133.8,
+    "deck_depth": 120,
+    "deck_thickness": 4,
+    "deck_z": [
+      60,
+      120,
+      170
+    ],
+    "bolt_x": 44,
+    "bolt_inset": 18
+  },
+  "fit": {
+    "m4": 4.6,
+    "m3": 3.5,
+    "m2": 2.4,
+    "deck_slot_length": 6.6,
+    "motor_pilot": 12.4
+  },
+  "bracket": {
+    "leg": 34,
+    "wall": 5,
+    "width": 22,
+    "gusset": 3,
+    "hole_offset": 18
+  },
+  "pico": {
+    "pcb": [
+      51,
+      21,
+      1
+    ],
+    "hole_pitch": [
+      47,
+      11.4
+    ],
+    "standoff_height": 10
+  },
+  "imu": {
+    "pcb": [
+      25.4,
+      25.4,
+      1.6
+    ],
+    "hole_pitch": [
+      20.32,
+      20.32
+    ],
+    "standoff_height": 8
+  },
+  "servo": {
+    "case": [
+      24.72,
+      45.22,
+      35
+    ],
+    "core_depth": 29,
+    "case_clearance_per_side": 0.5,
+    "shaft_offset": -12.5,
+    "center_z": 94,
+    "mount_pitch": [
+      54,
+      40
+    ],
+    "cradle_floor": 4,
+    "bar_bottom": 40.5,
+    "case_depth_envelope": 36
+  },
+  "interface_plate": {
+    "size": [
+      62,
+      54,
+      3
+    ],
+    "board_hole_pitch": [
+      44,
+      30
+    ],
+    "standoff_height": 8
+  },
+  "leg": {
+    "link_centers": 110,
+    "pivot_spacing": 40,
+    "min_deg": 15,
+    "neutral_deg": 30,
+    "max_deg": 45
+  },
+  "fixture": {
+    "side_offset": 10,
+    "pivot_above_base": 200
+  },
+  "sources": {
+    "pico": "https://datasheets.raspberrypi.com/pico/pico-2-datasheet.pdf",
+    "imu": "https://github.com/sparkfun/SparkFun_Qwiic_6DoF_LSM6DSO",
+    "driver": "https://www.pololu.com/product/4035",
+    "motor": "https://www.pololu.com/product/4752",
+    "servo": "https://files.waveshare.com/upload/0/08/ST3215-2D.zip"
+  }
+}
