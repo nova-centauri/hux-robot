@@ -24,21 +24,23 @@ The balance trim is the angle that puts this CoM above the axle. The simulation 
 
 ## Findings
 
-The user corrected the first R05 proposal on 2026-10-14. The plan puts the hips near the rear of the body. Each strut slants forward and down to the wheel. The servos go inside the body.
+The user corrected the first R05 proposal on 2026-10-14. The plan puts the hips near the rear of the body. Each strut slants forward and down to the wheel. The servos and the battery go inside the body.
 
-The first R05 proposal moved the hips forward and kept the rearward strut slant. That proposal is withdrawn. The table shows the corrected R05 proposal.
+The user then reported that the published page still showed the unbalanced R04 layout. The page now opens with the R05 layout. The R05 layout keeps the R04 motor carrier without a mirror and puts the hips at X = +30. The table shows this layout.
 
-| ID | Finding | Evidence | Proposed correction |
+| ID | Finding | Evidence | Correction in R05 |
 | --- | --- | --- | --- |
-| F-1 | Hips on the centre line | R04 puts the hips at X = 0 and the struts slant rearward. The axle is 54-103 mm rearward of the body centre. The estimated lean is 17° / 26° / 35° back at 15° / 30° / 45°. | R05: hips at X = +50, 10 mm from the rear edge. The struts slant forward. Mirror the motor carrier so that the gearmotor stays clear of the lower strut. Mount the two rear lower-deck angles above the deck. The estimated lean becomes 3° / 13° / 24° forward. |
-| F-2 | JD-03 axle offset | JD-03 puts the axle 25 mm past the strut end. With rear hips, the wheel moves 25 mm forward of the planned position. | With the axle on the strut end, the R05 lean is 7° back / 3° forward / 13° forward. This agrees with the planned balance. Decide the axle position before the carrier R02 print. |
+| F-1 | Hips on the centre line | R04 puts the hips at X = 0 and the struts slant rearward. The axle is 54-103 mm rearward of the body centre. The estimated lean is 17° / 26° / 35° back at 15° / 30° / 45°. | Hips at X = +30. The struts slant forward. The two rear lower-deck angles go above the deck. The estimated lean is 10° back / 0° / 10° forward. At neutral, the axle is below the body centre. |
+| F-2 | Motor carrier hand | A mirrored carrier puts the axle 25 mm forward of the strut end. The lean at neutral is then 13° forward. | Keep the R04 carrier without a mirror. The axle and the gearmotor sit rearward of the strut end, toward the hip. The minimum CAD clearance between the gearmotor and the struts is 2.1 mm, at 45°. |
 | F-3 | Height above target | R04 is 320-348 mm high to the Pico 2 board, upright. The target is 280-310 mm. | Decision for the user: accept the height, or reduce the body to two decks. |
-| F-4 | One driver position | The lower deck has one DRV8874 position. V1-PROOF needs two. | R05: put both 15.2 x 17.8 mm drivers on the one driver board, 3 mm apart. |
-| F-5 | No battery position | R04 uses the bench supply. The mass list includes a 0.2 kg 3S pack. | R05: add a tray at the bottom of the walls. Put the pack along the body, between the two servo belts. |
-| F-6 | Servos outside the body | R04 mounts the ST3215 servo on the outer face of the near wall. | R05: put each servo inside, against its wall, below the lower deck. The output is 45 mm forward of the hip and 12 mm above it. A 3:1 belt drives the lower hip shaft on the inner side of the wall. |
+| F-4 | One driver position | The lower deck has one DRV8874 position. V1-PROOF needs two. | Put both 15.2 x 17.8 mm drivers on the one driver board, 3 mm apart. |
+| F-5 | No battery position | R04 uses the bench supply. The mass list includes a 0.2 kg 3S pack. | A tray at the bottom of the walls holds the pack, between the two servo belts. The CoM and the lean include the pack at X = -5, Z = -17.5. |
+| F-6 | Servos outside the body | R04 mounts the ST3215 servo on the outer face of the near wall. | Each servo goes inside, against its wall, below the lower deck. The output is at X = -15, Z = +12. A 3:1 belt drives the lower hip shaft on the inner side of the wall. |
 | F-7 | Circuits without a position | The watchdog, the latching gate, the ADC conditioning and the ARM switch have no board. | Assign each circuit to a board before the harness release. |
 
-The internal servo case measures 45.2 x 35 x 24.7 mm. It occupies X = -30 to +15 and Z = 0 to +24. This is clear of the front lower-deck angles and the moved rear angles. The two belts are 45 mm apart. The battery fits between them below the hips. The hip shaft, the wall bearings and the belt tension are not designed.
+The internal servo case measures 45.2 x 35 x 24.7 mm. It occupies X = -50 to -5 and Z = 0 to +24. This is clear of the front lower-deck angles. The two belts are 45 mm apart. The hip shaft, the wall bearings and the belt tension are not designed.
+
+The gearmotor clearance comes from the R04 strut meshes at 0.5 mm resolution. The value excludes the motor screws, the cables and print errors. Check it by hand through the full sweep.
 
 These checks pass in the mirrored layout:
 
@@ -53,8 +55,8 @@ The R05 items are proposals. The page shows them with the "R05 proposal" layout 
 
 ## Next checks
 
-- [ ] Decide F-1. Confirm the rear hip position X = +50 for the two-leg body.
-- [ ] Decide F-2. Put the axle on the strut end, or accept approximately 10° more lean.
+- [ ] Confirm the R05 hip position X = +30 for the two-leg body.
+- [ ] Check the gearmotor clearance to the struts by hand at 15°, 30° and 45°.
 - [ ] Decide F-3. Accept the R04 height, or reduce the deck count.
 - [ ] Measure two received DRV8874 drivers on one board blank. Record heat after a 2 A bench run.
 - [ ] Measure the actual battery. Record its size, mass and connector.

@@ -23,12 +23,12 @@
       <div>
         <p class="eyebrow">Mechanical / animated layout · 2026-10-14</p>
         <h1>Anatomy</h1>
-        <p class="lede">Top, side and front views of Hux at one scale, with a 3D view. The legs move through 15–45°. The robot leans to keep its CoM above the axle. The x-ray removes the body and shows each board and harness.</p>
+        <p class="lede">Top, side and front views of Hux at one scale, with a 3D view. The hips are near the rear, and the struts slant forward to the wheels. The legs move through 15–45°. The robot leans to keep its CoM above the axle. The x-ray removes the body and shows each board and harness.</p>
       </div>
       <p class="document-code">AN-01 / V1-PROOF</p>
     </div>
 
-    <div class="callout"><strong>Source and status.</strong> The geometry is the R04 CAD reference assembly of 2026-10-13, with the near leg stack mirrored to the far side. Electronics positions use the R04 board mounts. Harness classes use the EL netlist, Rev B. Harness paths, the CoM and the trim are estimates. Nothing on this page is a physical measurement.</div>
+    <div class="callout"><strong>Source and status.</strong> The parts are the R04 CAD reference parts of 2026-10-13. The R05 layout moves the hips, the servos and the battery, and mirrors the near leg to the far side. Electronics positions use the R04 board mounts, and harness classes use the EL netlist, Rev B. Harness paths, the CoM and the trim are estimates. Nothing on this page is a physical measurement.</div>
 
     <section class="player" aria-label="Animation controls">
       <div class="chapters" role="group" aria-label="Chapters">
@@ -43,8 +43,8 @@
       </div>
       <div class="layout-toggle" role="group" aria-label="Layout">
         <span class="k">Layout</span>
-        <button type="button" data-layout="r04" aria-pressed="true">R04 as drawn</button>
-        <button type="button" data-layout="r05" aria-pressed="false">R05 proposal</button>
+        <button type="button" data-layout="r05" aria-pressed="true">R05 rear hips</button>
+        <button type="button" data-layout="r04" aria-pressed="false">R04 as drawn</button>
       </div>
     </section>
 
@@ -98,23 +98,24 @@
 
     <section class="findings" aria-labelledby="findings-title">
       <h2 id="findings-title">Fit and function findings</h2>
-      <p>The animation exposes these points when the R04 one-leg body becomes the two-leg robot. The R05 proposal shows the corrections, with rear hips and internal servos. The user decides each correction. The CAD and the print files did not change.</p>
+      <p>The animation exposes these points when the R04 one-leg body becomes the two-leg robot. The R05 layout shows the corrections, with rear hips, internal servos and the battery in the body. The user decides each correction. The CAD and the print files did not change.</p>
       <ol>
         <li><h3>Hips on the centre line</h3>
-          <p>The plan puts the hips near the rear of the body. Each strut slants forward and down to the wheel, and the wheel sits below the CoM. R04 puts the hips on the centre line of the wall, and the struts slant rearward. The robot must then lean by <strong id="f-trim-r04">—</strong> at 15° / 30° / 45° to balance.</p>
-          <p><strong>R05 proposal:</strong> put the hips at X = +50, 10 mm from the rear edge. The struts slant forward. Mirror the motor carrier so that the gearmotor stays clear of the lower strut. Mount the two rear angles of the lower deck above the deck, clear of the upper hip nut. The lean becomes <strong id="f-trim-r05">—</strong>.</p></li>
-        <li><h3>The JD-03 axle offset adds lean</h3>
-          <p>JD-03 puts the axle 25 mm past the strut end. With rear hips, this moves the wheel 25 mm forward of the planned position. If the axle is on the strut end, the R05 lean is <strong id="f-trim-strut">—</strong>. The planned balance needs the axle on the strut end, or a lean of approximately 10° more. Decide this before the carrier R02 print.</p></li>
+          <p>The plan puts the hips near the rear of the body. Each strut slants forward and down to the wheel, and the wheel sits below the CoM. R04 puts the hips on the centre line, and the struts slant rearward. The robot must then lean by <strong id="f-trim-r04">—</strong> at 15° / 30° / 45° to balance.</p>
+          <p><strong>R05:</strong> put the hips at X = +30, 30 mm rearward of the body centre. The struts slant forward. Mount the two rear angles of the lower deck above the deck, clear of the upper hip nut. The lean becomes <strong id="f-trim-r05">—</strong>. At the 30° neutral pose, the axle is below the body centre.</p></li>
+        <li><h3>Keep the R04 motor carrier</h3>
+          <p>With forward struts, use the R04 motor carrier without a mirror. The axle and the gearmotor then sit 25 mm and 32 mm rearward of the strut end, toward the hip. This puts the wheel below the CoM at neutral.</p>
+          <p>The gearmotor clears the struts by 2.1 mm minimum, at 45°. This is a CAD value from the R04 strut meshes. Check it on the bench before powered tests.</p></li>
         <li><h3>Height is above the target</h3>
           <p>R04 is <strong id="f-height">—</strong> high to the Pico 2 board, upright. The V1-PROOF target is 280–310 mm. The three-deck bench stack adds approximately 40 mm. Accept this height or remove one deck.</p></li>
         <li><h3>One driver position for two wheel channels</h3>
-          <p>The lower deck has one DRV8874 position, but V1-PROOF needs two. Each DRV8874 driver is 15.2 x 17.8 mm. Two drivers fit in the 36 x 24 mm component space with 3 mm between them.</p><p><strong>R05 proposal:</strong> put both drivers on the one driver board. Check heat and solder access on the bench.</p></li>
-        <li><h3>No battery position</h3>
-          <p>R04 uses the bench supply. The model mass list includes a 0.2 kg 3S pack.</p><p><strong>R05 proposal:</strong> add a tray below the lower deck, at the bottom of the walls. Put the pack along the body, between the two servo belts. The pack size in the view is an example.</p></li>
+          <p>The lower deck has one DRV8874 position, but V1-PROOF needs two. Each DRV8874 driver is 15.2 x 17.8 mm. Two drivers fit in the 36 x 24 mm component space with 3 mm between them.</p><p><strong>R05:</strong> put both drivers on the one driver board. Check heat and solder access on the bench.</p></li>
+        <li><h3>Battery in the body</h3>
+          <p>R04 has no battery position. The model mass list includes a 0.2 kg 3S pack. <strong>R05:</strong> put the pack in a tray at the bottom of the walls, along the body, between the two servo belts. The CoM and the lean on this page include the pack at this position. The pack size is an example.</p></li>
         <li><h3>Circuits without a board position</h3>
           <p>The hardware watchdog, the latching gate, the ADC conditioning and the ARM switch have no position in R04. The netlist lists these circuits as unresolved. Assign each circuit to a board before the harness release.</p></li>
         <li><h3>Servos inside the body</h3>
-          <p>R04 puts the ST3215 servo outside the near wall. <strong>R05 proposal:</strong> put each servo inside the body, against its wall, below the lower deck. The output is 45 mm forward of the hip and 12 mm above it. A 3:1 belt, for example GT2 12T to 36T, drives the lower hip shaft on the inner side of the wall.</p>
+          <p>R04 puts the ST3215 servo outside the near wall. <strong>R05:</strong> put each servo inside the body, against its wall, below the lower deck. The output is 45 mm forward of the hip and 12 mm above it, at X = −15. A 3:1 belt, for example GT2 12T to 36T, drives the lower hip shaft on the inner side of the wall.</p>
           <p>The two belts are 45 mm apart, and the battery fits between them. The hip shaft needs a bearing in the wall. The shaft, the bearings and the belt tension are not designed.</p></li>
         <li><h3>Checks that pass</h3>
           <p>With the mirrored leg, the two encoder ends are 50 mm apart. The track is 230 mm and the overall width is 254 mm. These values agree with the V1-PROOF model. The gearmotor clears the wall bottom by 24 mm at 45°.</p></li>

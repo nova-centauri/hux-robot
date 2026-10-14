@@ -20,11 +20,14 @@ const TOP_Z = 192;                                // Pico 2 PCB top, highest fix
 const WALL_BOTTOM = -35;
 const NEU = neutral();
 
+/* 3S pack in a tray at the bottom of the body. The size is an example: 106 x 35 x 25 mm, 0.2 kg in the mass list. */
+const BATTERY = { x: -5, y: MID_Y, z: -17.5, dx: 106, dy: 35, dz: 25 };
 const LAYOUTS = {
   // dir +1: the strut slants rearward from the hip. dir -1: the strut slants forward from a rear hip.
-  r04: { id: 'r04', name: 'R04 as drawn', pivotX: 0, dir: 1, drivers: 1, battery: null, servoInside: false },
-  r05: { id: 'r05', name: 'R05 proposal', pivotX: 50, dir: -1, drivers: 2, servoInside: true,
-         battery: { x: -5, y: MID_Y, z: -17.5, dx: 106, dy: 35, dz: 25 } },
+  // carrier +1: the JD-03 axle and gearmotor sit rearward of the strut end (the R04 carrier, not mirrored).
+  // R05 keeps the R04 carrier with forward struts. The gearmotor then sits below the strut, toward the hip.
+  r04: { id: 'r04', name: 'R04 as drawn', pivotX: 0, dir: 1, carrier: 1, drivers: 1, servoInside: false, battery: BATTERY },
+  r05: { id: 'r05', name: 'R05 rear hips', pivotX: 30, dir: -1, carrier: 1, drivers: 2, servoInside: true, battery: BATTERY },
 };
 
 /* Mass list from tools/v1-proof/model.json. Positions are assumptions for the estimate. */
@@ -48,8 +51,8 @@ function legPose(q, lay) {
   const cx = px + d * LINK * Math.sin(r), cz = -LINK * Math.cos(r);
   // The JD-03 carrier puts the axle and motor on the far side of the strut end, away from the hip.
   // axleAtStrut: study case with the axle on the strut end (the planned layout before JD-03).
-  const ofs = lay.axleAtStrut ? 0 : AXLE_OFS;
-  return { q, px, cx, cz, ax: cx + d * ofs, az: cz, mx: cx + d * (ofs + MOTOR_OFS - AXLE_OFS) };
+  const ofs = lay.axleAtStrut ? 0 : AXLE_OFS, c = lay.carrier ?? d;
+  return { q, px, cx, cz, ax: cx + c * ofs, az: cz, mx: cx + c * (ofs + MOTOR_OFS - AXLE_OFS) };
 }
 
 function massPoint(name, p, lay) {
@@ -231,13 +234,15 @@ function makeLegRig() {
   const lower = new THREE.Group();              // rotates about Y through (0,0,0)
   const upperPivot = new THREE.Group(); upperPivot.position.set(0, 0, SPACING);
   const upper = new THREE.Group(); upper.position.set(0, 0, -SPACING); upperPivot.add(upper);
-  const carrier = new THREE.Group();            // translates
+  const carrier = new THREE.Group();            // translates with the strut end
+  const carrierBody = new THREE.Group();        // can mirror about the strut end, X = NEU.cx
+  carrier.add(carrierBody);
   const wheelSpin = new THREE.Group();          // at the neutral axle, spins about Y
   wheelSpin.position.set(NEU.cx + AXLE_OFS, WHEEL_Y, NEU.cz);
-  carrier.add(wheelSpin);
+  carrierBody.add(wheelSpin);
   const fixed = new THREE.Group();
   rig.add(lower, upperPivot, carrier, fixed);
-  return { rig, lower, upper, upperPivot, carrier, wheelSpin, fixed };
+  return { rig, lower, upper, upperPivot, carrier, carrierBody, wheelSpin, fixed };
 }
 const legs = [makeLegRig(), makeLegRig()];
 // Far side: the same rig under a group that mirrors about Y = MID_Y (y' = -135 - y).
@@ -260,7 +265,7 @@ function buildFromMesh() {
     };
     if (part.r === 'lower_link') { legs.forEach((s) => place(s.lower)); continue; }
     if (part.r === 'upper_link') { legs.forEach((s) => place(s.upper)); continue; }
-    if (part.r === 'carrier') { legs.forEach((s) => place(s.carrier)); continue; }
+    if (part.r === 'carrier') { legs.forEach((s) => place(s.carrierBody)); continue; }
     if (part.n === 'body_lower_spacer' || part.n === 'body_upper_spacer') { legs.forEach((s) => place(s.fixed)); continue; }
     if (NEAR_FIXED.has(part.n)) { servoSides.forEach((h) => place(h)); continue; }
     if (part.n === 'angle_60_44_0' || part.n === 'angle_60_44_1') { place(rearLowerAngles); continue; }
@@ -316,8 +321,8 @@ legs.forEach((s) => s.wheelSpin.add(makeWheel()));
 /* Encoder caps (the R04 reference uses a plain cylinder). */
 legs.forEach((s) => {
   const cap = cylY(16.5, 1.6, 0x1e7f4f, NEU.cx + MOTOR_OFS, -43.4, NEU.cz);
-  s.carrier.add(cap);
-  const magnet = cylY(6, 3, 0x9aa3a8, NEU.cx + MOTOR_OFS, -45.5, NEU.cz); s.carrier.add(magnet);
+  s.carrierBody.add(cap);
+  const magnet = cylY(6, 3, 0x9aa3a8, NEU.cx + MOTOR_OFS, -45.5, NEU.cz); s.carrierBody.add(magnet);
 });
 
 /* Electronics detail on the reference boards. Positions in body mm. */
@@ -591,10 +596,13 @@ function applyPose(q, x, accel, lay, balanced) {
     s.lower.rotation.y = (Q_NEU - q) * DEG;
     s.upperPivot.rotation.y = (Q_NEU - q) * DEG;
     s.carrier.position.set(LINK * Math.sin(q * DEG) - NEU.cx, 0, p.cz - NEU.cz);
+    // The rig mirrors with the strut direction. Mirror the carrier back when it keeps the R04 hand.
+    const keep = (lay.carrier ?? lay.dir) * lay.dir;
+    s.carrierBody.scale.x = keep; s.carrierBody.position.x = keep < 0 ? 2 * NEU.cx : 0;
   }
   // Rolling without slip: forward (-X) motion turns the wheel top forward.
   wheelAngle += (x - lastX) / WHEEL_R; lastX = x;
-  for (const s of legs) s.wheelSpin.rotation.y = wheelAngle * lay.dir;
+  for (const s of legs) s.wheelSpin.rotation.y = wheelAngle * (lay.carrier ?? lay.dir);
   const trim = balanced ? trimDeg(p, lay) : 0;
   const lean = balanced ? Math.atan2(accel, 9810) / DEG : 0; // lean into the acceleration
   const theta = (trim + lean) * DEG;
@@ -645,7 +653,7 @@ const LABELS = [
   { id: 'cut', text: 'Power cut and fuse', at: () => [0, -38.5, 100] },
   { id: 'servo', text: () => state.layout.servoInside ? 'ST3215 servo, inside, 3:1 belt' : 'ST3215 servo, outside wall', at: () => state.layout.servoInside ? [servoInside(state.layout).cx, -20, 26] : [0, 30, 118] },
   { id: 'motor', text: 'Pololu 4752 gearmotor', at: (p) => [p.mx, -40, p.cz + 20], leg: true },
-  { id: 'batt', text: () => state.layout.battery ? 'Battery bay (proposal)' : 'Bench supply lead (no battery position)', at: () => state.layout.battery ? [state.layout.battery.x - 30, MID_Y, -5] : [150, -30, 40] },
+  { id: 'batt', text: () => state.layout.servoInside ? 'Battery, 3S pack, in the body' : 'Battery, R04 has no tray', at: () => state.layout.battery ? [state.layout.battery.x - 30, MID_Y, -5] : [150, -30, 40] },
 ];
 const labelLayer = $('labels');
 for (const l of LABELS) { const d = document.createElement('div'); d.className = 'tag'; labelLayer.appendChild(d); l.el = d; }
@@ -875,8 +883,7 @@ function renderFindings() {
   const lean = (t) => `${fmt(Math.abs(t), 0)}° ${t >= 0 ? 'back' : 'fwd'}`;
   $('f-trim-r04').textContent = r04.map(lean).join(' / ');
   $('f-trim-r05').textContent = r05.map(lean).join(' / ');
-  const r05s = sweepTrim({ ...LAYOUTS.r05, axleAtStrut: true });
-  if ($('f-trim-strut')) $('f-trim-strut').textContent = r05s.map(lean).join(' / ');
+
   $('f-height').textContent = `${fmt(h(Q_MAX), 0)}–${fmt(h(Q_MIN), 0)} mm`;
 }
 
@@ -956,7 +963,7 @@ function start() {
   if (!MESH) { $('status').textContent = 'The geometry file did not load.'; return; }
   buildFromMesh();
   makeGrids();
-  setLayout(LAYOUTS.r04);
+  setLayout(LAYOUTS.r05);
   resize();
   $('status').hidden = true;
   stage.classList.add('ready');

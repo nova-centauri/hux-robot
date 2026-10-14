@@ -697,7 +697,7 @@
         {
           "date": "2026-10-14",
           "title": "Animated anatomy views and two-leg layout findings",
-          "summary": "The new anatomy page animates top, side, front and 3D views from the R04 CAD. R04 puts the hips on the centre line, and the plan puts them near the rear. The R05 proposal has rear hips, forward struts and internal servos. The JD-03 axle offset adds approximately 10° of lean. No CAD or print file changed.",
+          "summary": "The anatomy page animates top, side, front and 3D views and opens with the R05 layout. R05 puts the hips near the rear, the struts slant forward and the servos and battery are in the body. The estimated lean is 0° at the 30° neutral pose. No CAD or print file changed.",
           "sourcePaths": [
             "docs/checklists/2026-10-14-anatomy-review.md",
             "tools/living-drawings/anatomy.html",
