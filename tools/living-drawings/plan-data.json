@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-06",
+  "updatedAt": "2026-10-14",
   "currentVersion": "v1-proof",
   "description": "Source-backed HUX work-in-progress plan. Proposed and simulated work is separate from measured physical evidence. Null order quantities and costs mean unknown, not zero.",
   "statusLabels": {
@@ -51,9 +51,14 @@
         "docs/parts-on-hand.md"
       ],
       "focus": {
-        "title": "Build the supported body with one leg",
-        "summary": "The user reports satisfactory leg travel and sufficient adjustable bench-supply capacity. R03 adds a bolted body, removable decks, a neutral lock and a motor carrier. Its first-stage assumption uses a fixed leg and a suspended wheel. The X1C accepted the first PLA fit plate, which still requires completion and measurement. Exact motion measurements, new printed fits and the servo transmission remain open. Recorded spend stays $173.70.",
+        "title": "Correct the body fit and add component mounts",
+        "summary": "R04 corrects body interfaces and adds component mounts after the reported fit problems. Plate 1 is complete. The user requested further prints before the joint check. The X1C accepted plate 2 with one wall, the lower deck and three angles. Plate 2 completion, physical fit, servo arrival and powered tests remain open. Recorded spend stays $173.70.",
         "sourcePaths": [
+          "cad/prints/one-leg-body-r04/bambu/README.md",
+          "docs/checklists/2026-10-13-r04-fit-review.md",
+          "cad/prints/one-leg-body-r04/README.md",
+          "docs/checklists/2026-10-07-r03-assembly.md",
+          "NOTES.md",
           "cad/prints/one-leg-body-r03/bambu/README.md",
           "cad/prints/one-leg-body-r03/README.md",
           "docs/checklists/2026-10-06-leg-motion.md",
@@ -64,10 +69,15 @@
       "nextActions": [
         {
           "id": "fixture-mockup",
-          "title": "Print and fit the R03 body interfaces",
-          "detail": "The X1C accepted the first PLA coupon and deck angle. Check print completion, the actual fasteners and the motor pilot. Then fit one body side, the lower lock link and the motor carrier before the full batch. Keep the first wheel trial suspended in the supported fixture.",
+          "title": "Check the R04 corner and component fits",
+          "detail": "The user requested further prints before the joint check. Plate 1 is complete, and plate 2 is active with one wall, the lower deck and three angles. Continue the remaining Basic PLA parts after each bed clearance check. Check the sample joint and actual hardware before assembly. Physical fit remains unverified.",
           "status": "in-progress",
           "sourcePaths": [
+            "cad/prints/one-leg-body-r04/bambu/README.md",
+            "docs/checklists/2026-10-13-r04-fit-review.md",
+            "cad/prints/one-leg-body-r04/README.md",
+            "docs/checklists/2026-10-07-r03-assembly.md",
+            "NOTES.md",
             "cad/prints/one-leg-body-r03/bambu/README.md",
             "cad/prints/one-leg-body-r03/README.md",
             "docs/checklists/2026-10-06-leg-motion.md",
@@ -303,12 +313,15 @@
           "receivedQuantity": null,
           "actualCost": null,
           "currency": "USD",
-          "confirmedOn": "2026-10-02",
-          "note": "The user reports that the print is complete. The printed revision, material, quantities and dimensions remain to record. Start the passive fit and packaging checks. No fit, load or powered test is recorded. The print costs are unrecorded and not added to the receipt totals.",
+          "confirmedOn": "2026-10-07",
+          "note": "The R03 prints are complete. On October 13, the user reports poor body fit and missing actuator mounts. R04 is a new fit candidate, not a completed print. Actual print costs remain unrecorded.",
           "sourcePaths": [
-            "docs/checklists/2026-10-02-mechanical-fit.md",
-            "cad/prints/v1-proof-r01/README.md",
-            "docs/parts-on-hand.md"
+            "docs/checklists/2026-10-13-r04-fit-review.md",
+            "cad/prints/one-leg-body-r04/README.md",
+            "docs/checklists/2026-10-07-r03-assembly.md",
+            "cad/prints/one-leg-body-r03/README.md",
+            "docs/parts-on-hand.md",
+            "docs/checklists/2026-10-02-mechanical-fit.md"
           ]
         },
         {
@@ -348,7 +361,7 @@
           "id": "BENCH",
           "title": "One-leg actuator exercise",
           "status": "in-progress",
-          "summary": "The user reports satisfactory leg travel. The R03 kit supplies a supported body and suspended wheel as the next stage. Exact travel measurements, powered tests and the servo transmission remain open.",
+          "summary": "The user reports poor body fit and missing actuator mounts. R04 supplies a matched three-deck body, electronics mounts and an ST3215 case cradle. Check a small corner sample before full body prints. The servos have not arrived. Physical fit, powered tests and the leg transmission remain open. Recorded spend stays $173.70.",
           "criteria": [
             "Complete the staged session with bounded commands, measured signs and disabled startup.",
             "Record passive clearances, backlash and measured leg/wheel response.",
@@ -356,6 +369,9 @@
             "Use measured load, electrical and thermal results to inform the robot. A bench pass does not prove balance."
           ],
           "sourcePaths": [
+            "docs/checklists/2026-10-13-r04-fit-review.md",
+            "cad/prints/one-leg-body-r04/README.md",
+            "docs/checklists/2026-10-07-r03-assembly.md",
             "cad/prints/one-leg-body-r03/README.md",
             "docs/checklists/2026-10-06-leg-motion.md",
             "docs/one-leg-bench.md"
@@ -430,9 +446,12 @@
       ],
       "bench": {
         "title": "Single-leg bench exercise",
-        "status": "ready",
-        "summary": "The user reports satisfactory leg travel on October 6. The R03 body kit supplies the next supported frame, neutral lock and motor carrier. Exact travel measurements and powered results remain open. Use the available bench supply for the first suspended wheel stage. The servo transmission and shaft bearings remain separate interfaces.",
+        "status": "in-progress",
+        "summary": "The user reports poor body fit and missing actuator mounts. R04 supplies a matched three-deck body, electronics mounts and an ST3215 case cradle. Check a small corner sample before full body prints. The servos have not arrived. Physical fit, powered tests and the leg transmission remain open. Recorded spend stays $173.70.",
         "sourcePaths": [
+          "docs/checklists/2026-10-13-r04-fit-review.md",
+          "cad/prints/one-leg-body-r04/README.md",
+          "docs/checklists/2026-10-07-r03-assembly.md",
           "cad/prints/one-leg-body-r03/README.md",
           "docs/checklists/2026-10-06-leg-motion.md",
           "docs/one-leg-bench.md",
@@ -538,6 +557,26 @@
         ]
       },
       "documents": [
+        {
+          "title": "Anatomy and two-leg layout review - 14 October",
+          "path": "docs/checklists/2026-10-14-anatomy-review.md",
+          "kind": "animated views and layout findings"
+        },
+        {
+          "title": "R04 body fit review - 13 October",
+          "path": "docs/checklists/2026-10-13-r04-fit-review.md",
+          "kind": "user report and CAD evaluation"
+        },
+        {
+          "title": "One-leg body R04",
+          "path": "cad/prints/one-leg-body-r04/README.md",
+          "kind": "matched body, component mounts and fit samples"
+        },
+        {
+          "title": "R03 print completion and assembly - 7 October",
+          "path": "docs/checklists/2026-10-07-r03-assembly.md",
+          "kind": "user report and fit checklist"
+        },
         {
           "title": "One-leg body R03",
           "path": "cad/prints/one-leg-body-r03/README.md",
@@ -655,6 +694,72 @@
         }
       ],
       "updates": [
+        {
+          "date": "2026-10-14",
+          "title": "Animated anatomy views and two-leg layout findings",
+          "summary": "The new anatomy page animates top, side, front and 3D views from the R04 CAD. R04 puts the hips on the centre line, and the plan puts them near the rear. The R05 proposal has rear hips, forward struts and internal servos. The JD-03 axle offset adds approximately 10° of lean. No CAD or print file changed.",
+          "sourcePaths": [
+            "docs/checklists/2026-10-14-anatomy-review.md",
+            "tools/living-drawings/anatomy.html",
+            "NOTES.md"
+          ]
+        },
+        {
+          "date": "2026-10-13",
+          "title": "R04 plate 2 started in Basic PLA",
+          "summary": "The user requested further prints before the sample joint check. The X1C accepted one wall, the lower deck and three angles. The estimate is 3 hours, 43 minutes and 190.62 g. Plate 2 completion and physical fit remain unverified. Recorded spend stays $173.70.",
+          "sourcePaths": [
+            "cad/prints/one-leg-body-r04/bambu/README.md",
+            "NOTES.md"
+          ]
+        },
+        {
+          "date": "2026-10-13",
+          "title": "R04 first plate complete",
+          "summary": "The user confirms that plate 1 is complete. Bambu Studio shows the R04 job at 100%, 110/110 layers and Finished. The corner joint fit and measured dimensions remain unverified. The larger R04 body parts remain unprinted. Recorded spend stays $173.70.",
+          "sourcePaths": [
+            "cad/prints/one-leg-body-r04/bambu/README.md",
+            "docs/parts-on-hand.md",
+            "NOTES.md"
+          ]
+        },
+        {
+          "date": "2026-10-13",
+          "title": "R04 Basic PLA fit print started",
+          "summary": "The X1C accepted the four small R04 fit parts in Basic PLA and started heating. The estimate is 54 minutes and 33.73 g. Print completion and physical fit remain unverified. The larger R04 body parts remain unprinted. Recorded spend stays $173.70.",
+          "sourcePaths": [
+            "cad/prints/one-leg-body-r04/bambu/README.md",
+            "NOTES.md"
+          ]
+        },
+        {
+          "date": "2026-10-13",
+          "title": "Body fit problem and R04 revision",
+          "summary": "The user reports poor body fit and missing actuator mounts. R04 supplies a matched three-deck body, electronics mounts and an ST3215 case cradle. Check a small corner sample before full body prints. The servos have not arrived. Physical fit, powered tests and the leg transmission remain open. Recorded spend stays $173.70.",
+          "sourcePaths": [
+            "docs/checklists/2026-10-13-r04-fit-review.md",
+            "cad/prints/one-leg-body-r04/README.md"
+          ]
+        },
+        {
+          "date": "2026-10-07",
+          "title": "All R03 parts printed",
+          "summary": "The user confirms that all R03 kit parts are printed. The October 6 setup uses default PLA. Fit checks and supported body assembly are next. Actual fits, assembly results and powered qualification remain open. Recorded spend stays $173.70.",
+          "sourcePaths": [
+            "docs/checklists/2026-10-07-r03-assembly.md",
+            "docs/parts-on-hand.md",
+            "NOTES.md"
+          ]
+        },
+        {
+          "date": "2026-10-06",
+          "title": "First fit print complete and plate two started",
+          "summary": "The user reports the first fit print complete, and Bambu Studio confirms 90/90 layers. The live camera shows a clear plate. At the request of the user, the X1C accepted plate two with the same PLA profile. The estimate is 3 hours, 11 minutes and 137.07 g. Measured fits and plate two completion remain unverified. No new spend is recorded.",
+          "sourcePaths": [
+            "NOTES.md",
+            "cad/prints/one-leg-body-r03/bambu/README.md"
+          ]
+        },
         {
           "date": "2026-10-06",
           "title": "R03 PLA fit print started",
@@ -1033,7 +1138,7 @@
           ]
         }
       ],
-      "shoppingSummary": "The Pico 2 and the LSM6DSO IMU are received and paid. Two ST3215 servos are also already paid, with arrival unreported. The order ledger above records the other paid parts. Confirm the stock of the support parts before you buy replacements."
+      "shoppingSummary": "The Pico 2 and the LSM6DSO IMU are received and paid. Two ST3215 servos are also already paid, and the user reports that they have not arrived as of October 13. The order ledger above records the other paid parts. Confirm the stock of the support parts before you buy replacements."
     },
     {
       "id": "V0-GENESIS",

@@ -1,4 +1,4 @@
-# Working notes — V1-PROOF, updated 2026-10-06
+# Working notes — V1-PROOF, updated 2026-10-14
 
 The active objective is a useful, inexpensive proof robot. **Under $1,000. Reuse first. 2.5 kg target. Four actuators. Indoor mobility with bounded disturbance tests.** The previous stair work is [parked](docs/archive/stair-v1/README.md).
 
@@ -14,6 +14,38 @@ The active objective is a useful, inexpensive proof robot. **Under $1,000. Reuse
 - [x] Drivable [3D sandbox](tools/living-drawings/proof-sandbox.html) on the simulator of the study and the protocol fixtures, with size references. Leg-height motion there is a preview only.
 
 ## Next physical work
+
+**2026-10-14 animated anatomy:** the user requested animated top, side and front views, and an electronics x-ray. The new [anatomy page](tools/living-drawings/anatomy.html) uses the R04 reference geometry and mirrors the leg for the far side. The page shows leg motion, balance trim, drive and the harness classes of the EL netlist.
+
+The [dated review](docs/checklists/2026-10-14-anatomy-review.md) records six findings. The R04 pivot position gives an estimated 17-35° balance trim. The simulation assumes 0° at neutral. R04 is 320-348 mm high, above the 280-310 mm target. R04 has one driver position and no battery position.
+
+The "R05 proposal" layout shows the corrections. The R04 CAD and the print files did not change. The user decides each correction. No physical test result changed. Recorded spend stays $173.70.
+
+**2026-10-14 correction:** the user states that the hips go near the rear of the body. The struts slant forward to the wheel, and the servos go inside the body. The first R05 proposal is withdrawn. The corrected R05 puts the hips at X = +50 with internal servos and a 3:1 belt to the lower hip. Its estimated lean is 3-24° forward. The JD-03 axle offset causes approximately 10° of this lean.
+
+**2026-10-13 R04 plate 2 started:** the user said, "Not checked yet. Keep printing". The live camera showed a clear bed. MSL-Bambi-X1C accepted one wall, the lower deck and three more angles in Basic PLA. The printer showed an active heat cycle at 0/110 layers. The estimate is 3 hours, 43 minutes and 190.62 g, with an initial finish time of 19:17 EDT.
+
+The [saved plate 2 project](cad/prints/one-leg-body-r04/bambu/hux-r04-plate-02-pla.3mf) retains the source geometry, scale and flat orientations. The [print record](cad/prints/one-leg-body-r04/bambu/README.md) records the settings and authorization. Plate 1 is complete. Plate 2 completion, sample fit and measured dimensions remain unverified. Recorded spend stays $173.70.
+
+**2026-10-13 R04 first plate complete:** the user reports that plate 1 is complete. At 15:31 EDT, Bambu Studio showed `hux-r04-first-fit-pla_R04 first fit` at 100%, 110/110 layers and Finished. The [print record](cad/prints/one-leg-body-r04/bambu/README.md) now confirms completion of the four small Basic PLA parts. The actual finish time, measured dimensions and corner joint fit remain unrecorded.
+
+Check both M4 bolts, nuts, washers and the actual tool in the sample corner. One wall and the lower deck are next after the joint fits. The larger R04 parts remain unprinted. Recorded spend stays $173.70.
+
+**2026-10-13 R04 PLA print start:** the user requested Basic PLA. Bambu Studio sliced the four small R04 fit parts without an error. The live camera showed a clear plate. MSL-Bambi-X1C accepted `hux-r04-first-fit-pla_R04 first fit` and started heating at about 13:23 EDT. The estimate is 54 minutes and 33.73 g. Bed leveling and flow calibration were on.
+
+The [saved project and dispatch record](cad/prints/one-leg-body-r04/bambu/README.md) include geometry and profile checks. Completion and physical fit remain unverified. Test both bolts, nuts and the actual tool in the sample corner before the larger body prints. No larger R04 parts received a print command. Recorded spend stays $173.70.
+
+**2026-10-13 body fit revision:** the user reports poor body fit and missing actuator mounts. The [dated review](docs/checklists/2026-10-13-r04-fit-review.md) records the report. The [R04 kit](cad/prints/one-leg-body-r04/README.md) supplies matched walls, three decks, larger angles and removable component mounts. It adds an ST3215 case cradle and retains the motor carrier interface.
+
+The CAD checks include board hardware, socket access, connector spaces and sampled leg clearance. Small corner samples precede full body prints. Servo arrival, physical fit and the powered leg transmission remain open. No print was dispatched and no powered result changed. Recorded spend remains $173.70.
+
+**2026-10-07 R03 prints complete:** the user confirms that all parts are printed. The [dated record and assembly checklist](docs/checklists/2026-10-07-r03-assembly.md) closes the kit print-completion task. The October 6 setup uses default PLA. The next step is an unpowered fit check, then frame and leg assembly with the R03 spacer arrangement.
+
+Inventory and the shared plan now reflect this report. Measured fits, assembly results and powered qualification remain open. The earlier print-dispatch entries below retain their status at that date. Recorded spend stays $173.70.
+
+**2026-10-06 plate two:** the user reports the first fit plate complete and requests plate two. Bambu Studio confirms 90/90 layers and Finished for `hux-r03-first-fit-pla`. The live camera shows a clear plate. The X1C accepted `hux-r03-full-kit-pla_Decks and motor carrier` with the same PLA profile. The estimate is 3 hours, 11 minutes and 137.07 g.
+
+Plate two contains two equipment decks, the motor carrier, the upper link, one coupon and two spacers. The printer shows an active job at 0/60 layers after dispatch. Measured fits, assembly strength and plate two completion remain unverified. No completion record exists for the full-kit plate one.
 
 **2026-10-06 PLA print start:** the user selected default PLA and authorized the print. The [Bambu Studio projects](cad/prints/one-leg-body-r03/bambu/README.md) include a first fit plate and the complete kit on two plates. The X1C accepted the coupon and one deck angle, then entered its heat and bed-level cycle. The slicer estimate is 29 minutes and 14.47 g. Print completion and measured fits remain unverified. The complete kit includes the first fit parts again and requires the checks in the assembly guide before further prints.
 
