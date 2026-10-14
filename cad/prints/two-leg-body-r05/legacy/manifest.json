@@ -1,0 +1,1114 @@
+{
+  "revision": "R03",
+  "date": "2026-10-06",
+  "units": "mm",
+  "parameters_sha256": "ba1c4965976620e7594d151897f214d6381ffbdf3bee970360bd5055d928945b",
+  "scope": "Supported body, neutral lock and suspended wheel. Servo transmission remains open.",
+  "parts": [
+    {
+      "id": "01_body_side",
+      "quantity": 2,
+      "label": "Body side",
+      "color": "frame",
+      "features": {
+        "holes": [
+          [
+            0,
+            0,
+            4.5
+          ],
+          [
+            0,
+            40,
+            4.5
+          ],
+          [
+            12.0,
+            -20.784609690826528,
+            4.5
+          ],
+          [
+            -43,
+            47,
+            4.5
+          ],
+          [
+            -43,
+            127,
+            4.5
+          ],
+          [
+            43,
+            47,
+            4.5
+          ],
+          [
+            43,
+            127,
+            4.5
+          ],
+          [
+            -43,
+            10,
+            4.5
+          ],
+          [
+            -43,
+            80,
+            4.5
+          ]
+        ],
+        "window": [
+          0,
+          103,
+          72,
+          66,
+          5
+        ],
+        "datum": "Lower body pivot (0, 0)",
+        "thickness": 6
+      },
+      "status": "Print fit candidate",
+      "bounds_mm": [
+        120.0,
+        185.0,
+        6.0
+      ],
+      "solid_volume_mm3": 103829.17,
+      "solid_pla_mass_g_at_1_24": 128.7
+    },
+    {
+      "id": "02_equipment_deck",
+      "quantity": 2,
+      "label": "Equipment deck",
+      "color": "deck",
+      "features": {
+        "holes": [
+          [
+            -43,
+            -54.5,
+            4.5
+          ],
+          [
+            -43,
+            54.5,
+            4.5
+          ],
+          [
+            43,
+            -54.5,
+            4.5
+          ],
+          [
+            43,
+            54.5,
+            4.5
+          ]
+        ],
+        "slots": [
+          [
+            -44,
+            -36,
+            18,
+            4.5
+          ],
+          [
+            -44,
+            -12,
+            18,
+            4.5
+          ],
+          [
+            -44,
+            12,
+            18,
+            4.5
+          ],
+          [
+            -44,
+            36,
+            18,
+            4.5
+          ],
+          [
+            -22,
+            -36,
+            18,
+            4.5
+          ],
+          [
+            -22,
+            -12,
+            18,
+            4.5
+          ],
+          [
+            -22,
+            12,
+            18,
+            4.5
+          ],
+          [
+            -22,
+            36,
+            18,
+            4.5
+          ],
+          [
+            0,
+            -36,
+            18,
+            4.5
+          ],
+          [
+            0,
+            -12,
+            18,
+            4.5
+          ],
+          [
+            0,
+            12,
+            18,
+            4.5
+          ],
+          [
+            0,
+            36,
+            18,
+            4.5
+          ],
+          [
+            22,
+            -36,
+            18,
+            4.5
+          ],
+          [
+            22,
+            -12,
+            18,
+            4.5
+          ],
+          [
+            22,
+            12,
+            18,
+            4.5
+          ],
+          [
+            22,
+            36,
+            18,
+            4.5
+          ],
+          [
+            44,
+            -36,
+            18,
+            4.5
+          ],
+          [
+            44,
+            -12,
+            18,
+            4.5
+          ],
+          [
+            44,
+            12,
+            18,
+            4.5
+          ],
+          [
+            44,
+            36,
+            18,
+            4.5
+          ]
+        ],
+        "thickness": 4,
+        "datum": "Deck center"
+      },
+      "status": "Print fit candidate",
+      "bounds_mm": [
+        120.0,
+        135.0,
+        4.0
+      ],
+      "solid_volume_mm3": 58358.25,
+      "solid_pla_mass_g_at_1_24": 72.4
+    },
+    {
+      "id": "03_deck_angle",
+      "quantity": 8,
+      "label": "Deck angle",
+      "color": "deck",
+      "features": {
+        "leg": 26,
+        "width": 18,
+        "wall": 5,
+        "gusset": 3,
+        "hole_center_from_corner": 13,
+        "hole_center_across_width": 9,
+        "bore": 4.5
+      },
+      "status": "Print fit candidate",
+      "bounds_mm": [
+        26.0,
+        26.0,
+        18.0
+      ],
+      "solid_volume_mm3": 4454.96,
+      "solid_pla_mass_g_at_1_24": 5.5
+    },
+    {
+      "id": "04_lower_lock_link",
+      "quantity": 1,
+      "label": "Lower link with neutral lock",
+      "color": "link",
+      "features": {
+        "holes": [
+          [
+            0,
+            0,
+            4.5
+          ],
+          [
+            110,
+            0,
+            4.5
+          ],
+          [
+            24,
+            0,
+            4.5
+          ]
+        ],
+        "thickness": 5,
+        "datum": "Body pivot (0, 0)",
+        "pivot_centers": 110,
+        "lock_radius": 24
+      },
+      "status": "Print fit candidate",
+      "bounds_mm": [
+        126.0,
+        16.0,
+        5.0
+      ],
+      "solid_volume_mm3": 6118.21,
+      "solid_pla_mass_g_at_1_24": 7.6
+    },
+    {
+      "id": "05_motor_carrier",
+      "quantity": 1,
+      "label": "Motor carrier",
+      "color": "frame",
+      "features": {
+        "outline": [
+          [
+            -8.0,
+            9.797174393178826e-16
+          ],
+          [
+            -7.969557584733964,
+            -0.6972459419812636
+          ],
+          [
+            -7.878462024097665,
+            -1.3891854213354402
+          ],
+          [
+            -7.727406610312547,
+            -2.070552360820163
+          ],
+          [
+            -7.517540966287267,
+            -2.7361611466053493
+          ],
+          [
+            -7.250462296293202,
+            -3.380946093925591
+          ],
+          [
+            -6.928203230275509,
+            -4.000000000000001
+          ],
+          [
+            -6.553216354311936,
+            -4.588611490808367
+          ],
+          [
+            -6.128355544951827,
+            -5.142300877492311
+          ],
+          [
+            -5.6568542494923815,
+            -5.65685424949238
+          ],
+          [
+            -5.142300877492316,
+            -6.128355544951823
+          ],
+          [
+            -4.588611490808365,
+            -6.553216354311937
+          ],
+          [
+            -4.0000000000000036,
+            -6.928203230275507
+          ],
+          [
+            20.49999999999999,
+            -19.918584287042084
+          ],
+          [
+            22.2797799799639,
+            -20.845079101842945
+          ],
+          [
+            24.133536703509623,
+            -21.612930278075893
+          ],
+          [
+            26.047161962642026,
+            -22.21629400464857
+          ],
+          [
+            28.0060919136606,
+            -22.650578319280786
+          ],
+          [
+            29.99541791680386,
+            -22.912478056110146
+          ],
+          [
+            31.999999999999996,
+            -23.0
+          ],
+          [
+            34.004582083196134,
+            -22.912478056110146
+          ],
+          [
+            35.99390808633939,
+            -22.650578319280786
+          ],
+          [
+            37.952838037357964,
+            -22.216294004648574
+          ],
+          [
+            39.86646329649039,
+            -21.61293027807589
+          ],
+          [
+            41.72022002003607,
+            -20.845079101842956
+          ],
+          [
+            43.499999999999986,
+            -19.918584287042098
+          ],
+          [
+            45.19225803607406,
+            -18.84049701864681
+          ],
+          [
+            46.7841150227904,
+            -17.619022191736498
+          ],
+          [
+            48.26345596729059,
+            -16.263455967290597
+          ],
+          [
+            49.61902219173649,
+            -14.784115022790411
+          ],
+          [
+            50.84049701864681,
+            -13.192258036074069
+          ],
+          [
+            51.918584287042094,
+            -11.499999999999993
+          ],
+          [
+            52.84507910184294,
+            -9.7202200200361
+          ],
+          [
+            53.61293027807589,
+            -7.866463296490378
+          ],
+          [
+            54.216294004648574,
+            -5.952838037357976
+          ],
+          [
+            54.65057831928078,
+            -3.993908086339399
+          ],
+          [
+            54.912478056110146,
+            -2.004582083196141
+          ],
+          [
+            55.0,
+            0.0
+          ],
+          [
+            54.912478056110146,
+            2.0045820831961376
+          ],
+          [
+            54.65057831928078,
+            3.9939080863393976
+          ],
+          [
+            54.216294004648574,
+            5.952838037357977
+          ],
+          [
+            53.61293027807589,
+            7.86646329649038
+          ],
+          [
+            52.84507910184295,
+            9.720220020036088
+          ],
+          [
+            51.918584287042094,
+            11.499999999999998
+          ],
+          [
+            50.840497018646815,
+            13.192258036074058
+          ],
+          [
+            49.61902219173649,
+            14.784115022790402
+          ],
+          [
+            48.2634559672906,
+            16.263455967290593
+          ],
+          [
+            46.7841150227904,
+            17.619022191736494
+          ],
+          [
+            45.192258036074065,
+            18.840497018646808
+          ],
+          [
+            4.588611490808369,
+            46.553216354311935
+          ],
+          [
+            4.000000000000001,
+            46.92820323027551
+          ],
+          [
+            3.3809460939255955,
+            47.2504622962932
+          ],
+          [
+            2.7361611466053506,
+            47.517540966287264
+          ],
+          [
+            2.0705523608201677,
+            47.72740661031254
+          ],
+          [
+            1.3891854213354433,
+            47.878462024097665
+          ],
+          [
+            0.6972459419812651,
+            47.96955758473396
+          ],
+          [
+            4.898587196589413e-16,
+            48.0
+          ],
+          [
+            -0.6972459419812641,
+            47.96955758473396
+          ],
+          [
+            -1.3891854213354424,
+            47.878462024097665
+          ],
+          [
+            -2.070552360820167,
+            47.72740661031255
+          ],
+          [
+            -2.736161146605348,
+            47.51754096628727
+          ],
+          [
+            -3.3809460939255946,
+            47.2504622962932
+          ],
+          [
+            -3.9999999999999987,
+            46.92820323027551
+          ],
+          [
+            -4.588611490808369,
+            46.553216354311935
+          ],
+          [
+            -5.142300877492315,
+            46.12835554495182
+          ],
+          [
+            -5.65685424949238,
+            45.65685424949238
+          ],
+          [
+            -6.128355544951823,
+            45.14230087749232
+          ],
+          [
+            -6.553216354311935,
+            44.58861149080837
+          ],
+          [
+            -6.928203230275508,
+            44.0
+          ],
+          [
+            -7.2504622962931995,
+            43.380946093925594
+          ],
+          [
+            -7.5175409662872665,
+            42.736161146605355
+          ],
+          [
+            -7.7274066103125465,
+            42.070552360820166
+          ],
+          [
+            -7.878462024097664,
+            41.38918542133544
+          ],
+          [
+            -7.969557584733964,
+            40.697245941981265
+          ],
+          [
+            -8.0,
+            40.0
+          ]
+        ],
+        "holes": [
+          [
+            0,
+            0,
+            4.5
+          ],
+          [
+            0,
+            40,
+            4.5
+          ],
+          [
+            25,
+            0,
+            12.4
+          ],
+          [
+            18.576606241341203,
+            -7.750000000000002,
+            3.4
+          ],
+          [
+            31.999999999999996,
+            -15.5,
+            3.4
+          ],
+          [
+            45.4233937586588,
+            -7.750000000000007,
+            3.4
+          ],
+          [
+            45.4233937586588,
+            7.75,
+            3.4
+          ],
+          [
+            32.00000000000001,
+            15.5,
+            3.4
+          ],
+          [
+            18.576606241341196,
+            7.7499999999999964,
+            3.4
+          ]
+        ],
+        "thickness": 6,
+        "datum": "Lower carrier pivot (0, 0)",
+        "axle": [
+          25,
+          0
+        ],
+        "motor_axis": [
+          32,
+          0
+        ]
+      },
+      "status": "Suspended wheel fit candidate. No body load on the motor shaft.",
+      "bounds_mm": [
+        63.0,
+        71.0,
+        6.0
+      ],
+      "solid_volume_mm3": 17126.73,
+      "solid_pla_mass_g_at_1_24": 21.2
+    },
+    {
+      "id": "06_upper_link",
+      "quantity": 1,
+      "label": "Upper link",
+      "color": "link",
+      "features": {
+        "holes": [
+          [
+            0,
+            0,
+            4.5
+          ],
+          [
+            110,
+            0,
+            4.5
+          ]
+        ],
+        "thickness": 5,
+        "datum": "Body pivot (0, 0)",
+        "pivot_centers": 110
+      },
+      "status": "Reuse the R01 upper link if its fit agrees.",
+      "bounds_mm": [
+        126.0,
+        16.0,
+        5.0
+      ],
+      "solid_volume_mm3": 5804.65,
+      "solid_pla_mass_g_at_1_24": 7.2
+    },
+    {
+      "id": "07_spacer_2mm",
+      "quantity": 2,
+      "label": "Spacer 2 mm",
+      "color": "deck",
+      "features": {
+        "outside_diameter": 9,
+        "bore": 4.5,
+        "thickness": 2
+      },
+      "status": "Reuse the R01 spacers if their fit agrees.",
+      "bounds_mm": [
+        9.0,
+        9.0,
+        2.0
+      ],
+      "solid_volume_mm3": 95.43,
+      "solid_pla_mass_g_at_1_24": 0.1
+    },
+    {
+      "id": "08_spacer_12mm",
+      "quantity": 2,
+      "label": "Spacer 12 mm",
+      "color": "deck",
+      "features": {
+        "outside_diameter": 9,
+        "bore": 4.5,
+        "thickness": 12
+      },
+      "status": "Reuse the R01 spacers if their fit agrees.",
+      "bounds_mm": [
+        9.0,
+        9.0,
+        12.0
+      ],
+      "solid_volume_mm3": 572.56,
+      "solid_pla_mass_g_at_1_24": 0.7
+    },
+    {
+      "id": "09_interface_coupon",
+      "quantity": 1,
+      "label": "Interface coupon",
+      "color": "link",
+      "features": {
+        "holes": [
+          [
+            -30,
+            6,
+            4.3
+          ],
+          [
+            -15,
+            6,
+            4.5
+          ],
+          [
+            0,
+            6,
+            4.7
+          ],
+          [
+            15,
+            6,
+            3.4
+          ],
+          [
+            30,
+            6,
+            12.4
+          ]
+        ],
+        "thickness": 4,
+        "datum": "Coupon center. Hole row is 6 mm above center."
+      },
+      "status": "Print fit candidate",
+      "bounds_mm": [
+        86.0,
+        30.0,
+        4.0
+      ],
+      "solid_volume_mm3": 9578.63,
+      "solid_pla_mass_g_at_1_24": 11.9
+    }
+  ],
+  "assembly": [
+    {
+      "name": "body_near",
+      "file": "reference/body_near.stl",
+      "color": [
+        0.17,
+        0.38,
+        0.32
+      ],
+      "part_id": "01_body_side",
+      "reference_only": false
+    },
+    {
+      "name": "body_far",
+      "file": "reference/body_far.stl",
+      "color": [
+        0.17,
+        0.38,
+        0.32
+      ],
+      "part_id": "01_body_side",
+      "reference_only": false
+    },
+    {
+      "name": "deck_60",
+      "file": "reference/deck_60.stl",
+      "color": [
+        0.56,
+        0.67,
+        0.59
+      ],
+      "part_id": "02_equipment_deck",
+      "reference_only": false
+    },
+    {
+      "name": "angle_60_-43_0",
+      "file": "reference/angle_60_-43_0.stl",
+      "color": [
+        0.56,
+        0.67,
+        0.59
+      ],
+      "part_id": "03_deck_angle",
+      "reference_only": false
+    },
+    {
+      "name": "angle_60_-43_1",
+      "file": "reference/angle_60_-43_1.stl",
+      "color": [
+        0.56,
+        0.67,
+        0.59
+      ],
+      "part_id": "03_deck_angle",
+      "reference_only": false
+    },
+    {
+      "name": "angle_60_43_0",
+      "file": "reference/angle_60_43_0.stl",
+      "color": [
+        0.56,
+        0.67,
+        0.59
+      ],
+      "part_id": "03_deck_angle",
+      "reference_only": false
+    },
+    {
+      "name": "angle_60_43_1",
+      "file": "reference/angle_60_43_1.stl",
+      "color": [
+        0.56,
+        0.67,
+        0.59
+      ],
+      "part_id": "03_deck_angle",
+      "reference_only": false
+    },
+    {
+      "name": "deck_140",
+      "file": "reference/deck_140.stl",
+      "color": [
+        0.56,
+        0.67,
+        0.59
+      ],
+      "part_id": "02_equipment_deck",
+      "reference_only": false
+    },
+    {
+      "name": "angle_140_-43_0",
+      "file": "reference/angle_140_-43_0.stl",
+      "color": [
+        0.56,
+        0.67,
+        0.59
+      ],
+      "part_id": "03_deck_angle",
+      "reference_only": false
+    },
+    {
+      "name": "angle_140_-43_1",
+      "file": "reference/angle_140_-43_1.stl",
+      "color": [
+        0.56,
+        0.67,
+        0.59
+      ],
+      "part_id": "03_deck_angle",
+      "reference_only": false
+    },
+    {
+      "name": "angle_140_43_0",
+      "file": "reference/angle_140_43_0.stl",
+      "color": [
+        0.56,
+        0.67,
+        0.59
+      ],
+      "part_id": "03_deck_angle",
+      "reference_only": false
+    },
+    {
+      "name": "angle_140_43_1",
+      "file": "reference/angle_140_43_1.stl",
+      "color": [
+        0.56,
+        0.67,
+        0.59
+      ],
+      "part_id": "03_deck_angle",
+      "reference_only": false
+    },
+    {
+      "name": "lower_link",
+      "file": "reference/lower_link.stl",
+      "color": [
+        0.82,
+        0.4,
+        0.15
+      ],
+      "part_id": "04_lower_lock_link",
+      "reference_only": false
+    },
+    {
+      "name": "upper_link",
+      "file": "reference/upper_link.stl",
+      "color": [
+        0.82,
+        0.4,
+        0.15
+      ],
+      "part_id": "06_upper_link",
+      "reference_only": false
+    },
+    {
+      "name": "carrier",
+      "file": "reference/carrier.stl",
+      "color": [
+        0.17,
+        0.38,
+        0.32
+      ],
+      "part_id": "05_motor_carrier",
+      "reference_only": false
+    },
+    {
+      "name": "gearbox",
+      "file": "reference/gearbox.stl",
+      "color": [
+        0.45,
+        0.49,
+        0.54
+      ],
+      "part_id": null,
+      "reference_only": true
+    },
+    {
+      "name": "motor",
+      "file": "reference/motor.stl",
+      "color": [
+        0.45,
+        0.49,
+        0.54
+      ],
+      "part_id": null,
+      "reference_only": true
+    },
+    {
+      "name": "encoder",
+      "file": "reference/encoder.stl",
+      "color": [
+        0.45,
+        0.49,
+        0.54
+      ],
+      "part_id": null,
+      "reference_only": true
+    },
+    {
+      "name": "wheel",
+      "file": "reference/wheel.stl",
+      "color": [
+        0.08,
+        0.1,
+        0.12
+      ],
+      "part_id": null,
+      "reference_only": true
+    },
+    {
+      "name": "motor_pilot",
+      "file": "reference/motor_pilot.stl",
+      "color": [
+        0.45,
+        0.49,
+        0.54
+      ],
+      "part_id": null,
+      "reference_only": true
+    },
+    {
+      "name": "shaft",
+      "file": "reference/shaft.stl",
+      "color": [
+        0.45,
+        0.49,
+        0.54
+      ],
+      "part_id": null,
+      "reference_only": true
+    },
+    {
+      "name": "hub_envelope",
+      "file": "reference/hub_envelope.stl",
+      "color": [
+        0.45,
+        0.49,
+        0.54
+      ],
+      "part_id": null,
+      "reference_only": true
+    },
+    {
+      "name": "body_lower_spacer",
+      "file": "reference/body_lower_spacer.stl",
+      "color": [
+        0.56,
+        0.67,
+        0.59
+      ],
+      "part_id": "07_spacer_2mm",
+      "reference_only": false
+    },
+    {
+      "name": "body_upper_spacer",
+      "file": "reference/body_upper_spacer.stl",
+      "color": [
+        0.56,
+        0.67,
+        0.59
+      ],
+      "part_id": "08_spacer_12mm",
+      "reference_only": false
+    },
+    {
+      "name": "carrier_lower_spacer",
+      "file": "reference/carrier_lower_spacer.stl",
+      "color": [
+        0.56,
+        0.67,
+        0.59
+      ],
+      "part_id": "08_spacer_12mm",
+      "reference_only": false
+    },
+    {
+      "name": "carrier_upper_spacer",
+      "file": "reference/carrier_upper_spacer.stl",
+      "color": [
+        0.56,
+        0.67,
+        0.59
+      ],
+      "part_id": "07_spacer_2mm",
+      "reference_only": false
+    },
+    {
+      "name": "fixture_base",
+      "file": "reference/fixture_base.stl",
+      "color": [
+        0.68,
+        0.52,
+        0.32
+      ],
+      "part_id": null,
+      "reference_only": true
+    },
+    {
+      "name": "fixture_upright_near",
+      "file": "reference/fixture_upright_near.stl",
+      "color": [
+        0.68,
+        0.52,
+        0.32
+      ],
+      "part_id": null,
+      "reference_only": true
+    },
+    {
+      "name": "fixture_upright_far",
+      "file": "reference/fixture_upright_far.stl",
+      "color": [
+        0.68,
+        0.52,
+        0.32
+      ],
+      "part_id": null,
+      "reference_only": true
+    }
+  ],
+  "solid_pla_mass_g_for_printed_assembly": 483.8
+}

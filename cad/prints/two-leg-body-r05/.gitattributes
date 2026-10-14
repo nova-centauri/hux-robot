@@ -1,0 +1,7 @@
+# Preserve generated CAD and document exports as binary files.
+*.pdf binary
+*.step binary
+*.stl binary
+*.3mf binary
+*.blend binary
+*.zip binary

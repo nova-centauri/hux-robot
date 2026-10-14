@@ -1,5 +1,7 @@
 # Hux CAD and layouts
 
+**2026-10-14:** the [R05 two-leg body](prints/two-leg-body-r05/README.md) moves the hips to the rear and puts the servos and the battery inside. Five PLA plates hold one set. The servo transmission and physical fit remain open.
+
 **2026-10-13:** the [R04 matched body](prints/one-leg-body-r04/README.md) replaces the body interfaces after a reported fit problem. It supplies three decks, component mounts and a servo cradle. Start with its small corner samples. Physical fit and the powered leg transmission remain open.
 
 **2026-10-06:** the [R03 one-leg body kit](prints/one-leg-body-r03/README.md) adds the supported body, neutral lock and suspended wheel carrier. It contains nine STL/STEP part types, a STEP/Blender assembly and four engineering sheets. The user reports satisfactory leg travel and sufficient adjustable bench-supply capacity. Exact travel measurements, new printed fits and powered qualification remain open.

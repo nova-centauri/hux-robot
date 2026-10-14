@@ -1,0 +1,215 @@
+{
+  "revision": "R05",
+  "status": "CAD checks passed. Printed fits, the servo transmission and load capacity remain unverified.",
+  "parts": [
+    {
+      "part": "01_body_side",
+      "quantity": 2,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "37b1b3be63594990ed98d5424fbf32cef801eb88d5c550aab31a662e604b5607"
+    },
+    {
+      "part": "02_open_deck_angle",
+      "quantity": 12,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "4eb6720ed4592cd2f89188f22841583802a25666ea05844aad1e45b4e60a76f2"
+    },
+    {
+      "part": "03_power_deck",
+      "quantity": 1,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "b336ca0a437fb745dbfa43425a6cedd78e4dc768cccdb98b655ce04e58621780"
+    },
+    {
+      "part": "04_interface_deck",
+      "quantity": 1,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "6ef93e804e76d591144879ab6af16a75efcf6c37a6527710c93b06024f7c0665"
+    },
+    {
+      "part": "05_control_deck",
+      "quantity": 1,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "65bf877a833d3b486b0813bf4cdd91cf420315e967598f50f58bc143b2a4f473"
+    },
+    {
+      "part": "06_motor_carrier",
+      "quantity": 2,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "9f19fad60b1c6f3db33cef7af14e409f8d26a2262effd01933ae2ec17db8205b"
+    },
+    {
+      "part": "07_lower_lock_link",
+      "quantity": 2,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "8287749ed8ce8f7e8d09113e523a2307517f7f1b53e7dfa9deae8a5f85deedaf"
+    },
+    {
+      "part": "08_upper_link",
+      "quantity": 2,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "3f2159b17aea0aca2e3db878826f71a68f01216df91f4bd040177f52e046ee2b"
+    },
+    {
+      "part": "09_spacer_2mm",
+      "quantity": 4,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "9a99c54f23d4d3af5b813deb140ec3f274f7f8f66de2d573b2918c8803ee830a"
+    },
+    {
+      "part": "10_spacer_12mm",
+      "quantity": 4,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "b395c9291b76d23a972c603ce5eb3eb3fb255cf8e363a69d72e37e56b05f65f7"
+    },
+    {
+      "part": "11_pico_plate",
+      "quantity": 1,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "5cc211f2a3391b65ccb784cdaa7f8164f225cf0128db026d320b2f4b474da4be"
+    },
+    {
+      "part": "12_imu_plate",
+      "quantity": 1,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "cc7e36ce6542d76e7cc92e529524e377544e2fffecfa24c458e7f35693995900"
+    },
+    {
+      "part": "13_inner_servo_cradle",
+      "quantity": 2,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "3eeded99eeae65f3aed42de843a5880430770af9218b8e95d20579d698853354"
+    },
+    {
+      "part": "14_servo_cap_bar",
+      "quantity": 4,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "4e1f69f472190f69eafe66d2fef16750803b339f2c1959d0abec14a238be9e02"
+    },
+    {
+      "part": "24_battery_tray",
+      "quantity": 1,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "9add6b01ecf071153a18c27451b0aeab6a71ed936836e417572d3f3fbfed2e5f"
+    },
+    {
+      "part": "15_interface_cassette",
+      "quantity": 4,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "98b32fe751e829af2061f476d5e5887e42dbbf06013c83d0a96a8287e89792cd"
+    },
+    {
+      "part": "16_pico_standoff",
+      "quantity": 4,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "c149de917c7809b8624224d37762d7c2766a351c63b7a82834d80bc2f4041342"
+    },
+    {
+      "part": "17_board_standoff",
+      "quantity": 16,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "3bfedd7795192b08ee53c66607bcef42e0b74b7d8ec16bd8b4226d6044130f20"
+    },
+    {
+      "part": "18_imu_standoff",
+      "quantity": 4,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "3bfedd7795192b08ee53c66607bcef42e0b74b7d8ec16bd8b4226d6044130f20"
+    },
+    {
+      "part": "19_fit_coupon",
+      "quantity": 1,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "1b94cce0a850f2f9321952d4d194dca34c29a68af91f36b7b591dfe0db829264"
+    },
+    {
+      "part": "23_module_foot",
+      "quantity": 24,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "693c178c36e2f3935e3286618b0c91813d97807dd37c79e29fe0a4b05b8dbe98"
+    }
+  ],
+  "fixed_exact_intersections": 7,
+  "wall_hardware_envelopes": 18,
+  "sweep": {
+    "poses": 51,
+    "sides": 2,
+    "range_deg": [
+      15,
+      40
+    ],
+    "step_deg": 0.5,
+    "pairs": 108834,
+    "exact_checks": 562,
+    "minimum_exact_clearance_mm": 2.0,
+    "minimum_gearmotor_clearance_mm": 2.113,
+    "scope": "Nominal parts, reserved board volumes and wall bolt envelopes. No cable, print tolerance, deflection or servo transmission."
+  },
+  "source_hashes": {
+    "build.py": "30f14f4fdc299d182e0531bb8d1049606ab62f30cab48b76887bf7683e9e0159",
+    "parameters.json": "a73fa3e00f45aa2655dc8339a938f2099e19cd30abb46183ca3596e6ecd2ceeb"
+  }
+}

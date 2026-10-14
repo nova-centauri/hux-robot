@@ -1,0 +1,1048 @@
+{
+  "revision": "R05",
+  "profile": "Bambu PLA Basic, X1 Carbon 0.4 nozzle, 0.20 mm, 5 walls, 40% infill, no supports",
+  "plates": [
+    {
+      "file": "hux-r05-plate-1-walls.3mf",
+      "title": "R05 walls",
+      "objects": [
+        {
+          "part": "01_body_side",
+          "x": 65.0,
+          "y": 139.5,
+          "rotated_90": false,
+          "extents": [
+            120.0,
+            215.0,
+            6.0
+          ]
+        },
+        {
+          "part": "01_body_side",
+          "x": 190.0,
+          "y": 139.5,
+          "rotated_90": false,
+          "extents": [
+            120.0,
+            215.0,
+            6.0
+          ]
+        }
+      ]
+    },
+    {
+      "file": "hux-r05-plate-2-decks.3mf",
+      "title": "R05 lower and middle decks and angles",
+      "objects": [
+        {
+          "part": "03_power_deck",
+          "x": 65.0,
+          "y": 98.9,
+          "rotated_90": false,
+          "extents": [
+            120.0,
+            133.8,
+            4.0
+          ]
+        },
+        {
+          "part": "04_interface_deck",
+          "x": 190.0,
+          "y": 98.9,
+          "rotated_90": false,
+          "extents": [
+            120.0,
+            133.8,
+            4.0
+          ]
+        },
+        {
+          "part": "02_open_deck_angle",
+          "x": 22.0,
+          "y": 187.8,
+          "rotated_90": false,
+          "extents": [
+            34.0,
+            34.0,
+            22.0
+          ]
+        },
+        {
+          "part": "02_open_deck_angle",
+          "x": 61.0,
+          "y": 187.8,
+          "rotated_90": false,
+          "extents": [
+            34.0,
+            34.0,
+            22.0
+          ]
+        },
+        {
+          "part": "02_open_deck_angle",
+          "x": 100.0,
+          "y": 187.8,
+          "rotated_90": false,
+          "extents": [
+            34.0,
+            34.0,
+            22.0
+          ]
+        },
+        {
+          "part": "02_open_deck_angle",
+          "x": 139.0,
+          "y": 187.8,
+          "rotated_90": false,
+          "extents": [
+            34.0,
+            34.0,
+            22.0
+          ]
+        },
+        {
+          "part": "02_open_deck_angle",
+          "x": 178.0,
+          "y": 187.8,
+          "rotated_90": false,
+          "extents": [
+            34.0,
+            34.0,
+            22.0
+          ]
+        },
+        {
+          "part": "02_open_deck_angle",
+          "x": 217.0,
+          "y": 187.8,
+          "rotated_90": false,
+          "extents": [
+            34.0,
+            34.0,
+            22.0
+          ]
+        },
+        {
+          "part": "02_open_deck_angle",
+          "x": 22.0,
+          "y": 226.8,
+          "rotated_90": false,
+          "extents": [
+            34.0,
+            34.0,
+            22.0
+          ]
+        },
+        {
+          "part": "02_open_deck_angle",
+          "x": 61.0,
+          "y": 226.8,
+          "rotated_90": false,
+          "extents": [
+            34.0,
+            34.0,
+            22.0
+          ]
+        },
+        {
+          "part": "02_open_deck_angle",
+          "x": 100.0,
+          "y": 226.8,
+          "rotated_90": false,
+          "extents": [
+            34.0,
+            34.0,
+            22.0
+          ]
+        },
+        {
+          "part": "02_open_deck_angle",
+          "x": 139.0,
+          "y": 226.8,
+          "rotated_90": false,
+          "extents": [
+            34.0,
+            34.0,
+            22.0
+          ]
+        },
+        {
+          "part": "02_open_deck_angle",
+          "x": 178.0,
+          "y": 226.8,
+          "rotated_90": false,
+          "extents": [
+            34.0,
+            34.0,
+            22.0
+          ]
+        },
+        {
+          "part": "02_open_deck_angle",
+          "x": 217.0,
+          "y": 226.8,
+          "rotated_90": false,
+          "extents": [
+            34.0,
+            34.0,
+            22.0
+          ]
+        }
+      ]
+    },
+    {
+      "file": "hux-r05-plate-3-deck-tray.3mf",
+      "title": "R05 upper deck, tray and leg parts",
+      "objects": [
+        {
+          "part": "05_control_deck",
+          "x": 65.0,
+          "y": 98.9,
+          "rotated_90": false,
+          "extents": [
+            120.0,
+            133.8,
+            4.0
+          ]
+        },
+        {
+          "part": "24_battery_tray",
+          "x": 190.0,
+          "y": 98.9,
+          "rotated_90": false,
+          "extents": [
+            120.0,
+            133.8,
+            14.0
+          ]
+        },
+        {
+          "part": "06_motor_carrier",
+          "x": 36.5,
+          "y": 206.3,
+          "rotated_90": false,
+          "extents": [
+            63.0,
+            71.0,
+            6.0
+          ]
+        },
+        {
+          "part": "06_motor_carrier",
+          "x": 104.5,
+          "y": 206.3,
+          "rotated_90": false,
+          "extents": [
+            63.0,
+            71.0,
+            6.0
+          ]
+        },
+        {
+          "part": "09_spacer_2mm",
+          "x": 145.5,
+          "y": 175.3,
+          "rotated_90": false,
+          "extents": [
+            9.0,
+            8.998,
+            2.0
+          ]
+        },
+        {
+          "part": "09_spacer_2mm",
+          "x": 159.5,
+          "y": 175.3,
+          "rotated_90": false,
+          "extents": [
+            9.0,
+            8.998,
+            2.0
+          ]
+        },
+        {
+          "part": "09_spacer_2mm",
+          "x": 173.5,
+          "y": 175.3,
+          "rotated_90": false,
+          "extents": [
+            9.0,
+            8.998,
+            2.0
+          ]
+        },
+        {
+          "part": "09_spacer_2mm",
+          "x": 187.5,
+          "y": 175.3,
+          "rotated_90": false,
+          "extents": [
+            9.0,
+            8.998,
+            2.0
+          ]
+        },
+        {
+          "part": "10_spacer_12mm",
+          "x": 201.5,
+          "y": 175.3,
+          "rotated_90": false,
+          "extents": [
+            9.0,
+            8.998,
+            12.0
+          ]
+        },
+        {
+          "part": "10_spacer_12mm",
+          "x": 215.5,
+          "y": 175.3,
+          "rotated_90": false,
+          "extents": [
+            9.0,
+            8.998,
+            12.0
+          ]
+        },
+        {
+          "part": "10_spacer_12mm",
+          "x": 229.5,
+          "y": 175.3,
+          "rotated_90": false,
+          "extents": [
+            9.0,
+            8.998,
+            12.0
+          ]
+        },
+        {
+          "part": "10_spacer_12mm",
+          "x": 243.5,
+          "y": 175.3,
+          "rotated_90": false,
+          "extents": [
+            9.0,
+            8.998,
+            12.0
+          ]
+        }
+      ]
+    },
+    {
+      "file": "hux-r05-plate-4-links-servo.3mf",
+      "title": "R05 links and servo mounts",
+      "objects": [
+        {
+          "part": "07_lower_lock_link",
+          "x": 13.0,
+          "y": 95.0,
+          "rotated_90": false,
+          "extents": [
+            16.0,
+            126.0,
+            5.0
+          ]
+        },
+        {
+          "part": "07_lower_lock_link",
+          "x": 34.0,
+          "y": 95.0,
+          "rotated_90": false,
+          "extents": [
+            16.0,
+            126.0,
+            5.0
+          ]
+        },
+        {
+          "part": "08_upper_link",
+          "x": 55.0,
+          "y": 95.0,
+          "rotated_90": false,
+          "extents": [
+            16.0,
+            126.0,
+            5.0
+          ]
+        },
+        {
+          "part": "08_upper_link",
+          "x": 76.0,
+          "y": 95.0,
+          "rotated_90": false,
+          "extents": [
+            16.0,
+            126.0,
+            5.0
+          ]
+        },
+        {
+          "part": "14_servo_cap_bar",
+          "x": 93.0,
+          "y": 52.36,
+          "rotated_90": false,
+          "extents": [
+            8.0,
+            40.72,
+            4.0
+          ]
+        },
+        {
+          "part": "14_servo_cap_bar",
+          "x": 106.0,
+          "y": 52.36,
+          "rotated_90": false,
+          "extents": [
+            8.0,
+            40.72,
+            4.0
+          ]
+        },
+        {
+          "part": "14_servo_cap_bar",
+          "x": 119.0,
+          "y": 52.36,
+          "rotated_90": false,
+          "extents": [
+            8.0,
+            40.72,
+            4.0
+          ]
+        },
+        {
+          "part": "14_servo_cap_bar",
+          "x": 132.0,
+          "y": 52.36,
+          "rotated_90": false,
+          "extents": [
+            8.0,
+            40.72,
+            4.0
+          ]
+        },
+        {
+          "part": "13_inner_servo_cradle",
+          "x": 176.0,
+          "y": 51.86,
+          "rotated_90": false,
+          "extents": [
+            70.0,
+            39.72,
+            40.5
+          ]
+        },
+        {
+          "part": "13_inner_servo_cradle",
+          "x": 40.0,
+          "y": 182.86,
+          "rotated_90": false,
+          "extents": [
+            70.0,
+            39.72,
+            40.5
+          ]
+        }
+      ]
+    },
+    {
+      "file": "hux-r05-plate-5-electronics.3mf",
+      "title": "R05 electronics mounts and standoffs",
+      "objects": [
+        {
+          "part": "15_interface_cassette",
+          "x": 36.0,
+          "y": 59.0,
+          "rotated_90": false,
+          "extents": [
+            62.0,
+            54.0,
+            3.0
+          ]
+        },
+        {
+          "part": "15_interface_cassette",
+          "x": 103.0,
+          "y": 59.0,
+          "rotated_90": false,
+          "extents": [
+            62.0,
+            54.0,
+            3.0
+          ]
+        },
+        {
+          "part": "15_interface_cassette",
+          "x": 170.0,
+          "y": 59.0,
+          "rotated_90": false,
+          "extents": [
+            62.0,
+            54.0,
+            3.0
+          ]
+        },
+        {
+          "part": "15_interface_cassette",
+          "x": 36.0,
+          "y": 118.0,
+          "rotated_90": false,
+          "extents": [
+            62.0,
+            54.0,
+            3.0
+          ]
+        },
+        {
+          "part": "12_imu_plate",
+          "x": 94.0,
+          "y": 113.0,
+          "rotated_90": false,
+          "extents": [
+            44.0,
+            44.0,
+            3.0
+          ]
+        },
+        {
+          "part": "11_pico_plate",
+          "x": 154.0,
+          "y": 111.0,
+          "rotated_90": false,
+          "extents": [
+            66.0,
+            40.0,
+            3.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 195.5,
+          "y": 94.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 207.5,
+          "y": 94.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 219.5,
+          "y": 94.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 231.5,
+          "y": 94.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 243.5,
+          "y": 94.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 8.5,
+          "y": 153.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 20.5,
+          "y": 153.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 32.5,
+          "y": 153.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 44.5,
+          "y": 153.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 56.5,
+          "y": 153.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 68.5,
+          "y": 153.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 80.5,
+          "y": 153.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 92.5,
+          "y": 153.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 104.5,
+          "y": 153.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 116.5,
+          "y": 153.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 128.5,
+          "y": 153.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 140.5,
+          "y": 153.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 152.5,
+          "y": 153.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 164.5,
+          "y": 153.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 176.5,
+          "y": 153.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 188.5,
+          "y": 153.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 200.5,
+          "y": 153.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 212.5,
+          "y": 153.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "23_module_foot",
+          "x": 224.5,
+          "y": 153.5,
+          "rotated_90": false,
+          "extents": [
+            7.0,
+            6.999,
+            4.0
+          ]
+        },
+        {
+          "part": "17_board_standoff",
+          "x": 236.0,
+          "y": 153.0,
+          "rotated_90": false,
+          "extents": [
+            6.0,
+            5.999,
+            8.0
+          ]
+        },
+        {
+          "part": "17_board_standoff",
+          "x": 247.0,
+          "y": 153.0,
+          "rotated_90": false,
+          "extents": [
+            6.0,
+            5.999,
+            8.0
+          ]
+        },
+        {
+          "part": "17_board_standoff",
+          "x": 8.0,
+          "y": 165.0,
+          "rotated_90": false,
+          "extents": [
+            6.0,
+            5.999,
+            8.0
+          ]
+        },
+        {
+          "part": "17_board_standoff",
+          "x": 19.0,
+          "y": 165.0,
+          "rotated_90": false,
+          "extents": [
+            6.0,
+            5.999,
+            8.0
+          ]
+        },
+        {
+          "part": "17_board_standoff",
+          "x": 30.0,
+          "y": 165.0,
+          "rotated_90": false,
+          "extents": [
+            6.0,
+            5.999,
+            8.0
+          ]
+        },
+        {
+          "part": "17_board_standoff",
+          "x": 41.0,
+          "y": 165.0,
+          "rotated_90": false,
+          "extents": [
+            6.0,
+            5.999,
+            8.0
+          ]
+        },
+        {
+          "part": "17_board_standoff",
+          "x": 52.0,
+          "y": 165.0,
+          "rotated_90": false,
+          "extents": [
+            6.0,
+            5.999,
+            8.0
+          ]
+        },
+        {
+          "part": "17_board_standoff",
+          "x": 63.0,
+          "y": 165.0,
+          "rotated_90": false,
+          "extents": [
+            6.0,
+            5.999,
+            8.0
+          ]
+        },
+        {
+          "part": "17_board_standoff",
+          "x": 74.0,
+          "y": 165.0,
+          "rotated_90": false,
+          "extents": [
+            6.0,
+            5.999,
+            8.0
+          ]
+        },
+        {
+          "part": "17_board_standoff",
+          "x": 85.0,
+          "y": 165.0,
+          "rotated_90": false,
+          "extents": [
+            6.0,
+            5.999,
+            8.0
+          ]
+        },
+        {
+          "part": "17_board_standoff",
+          "x": 96.0,
+          "y": 165.0,
+          "rotated_90": false,
+          "extents": [
+            6.0,
+            5.999,
+            8.0
+          ]
+        },
+        {
+          "part": "17_board_standoff",
+          "x": 107.0,
+          "y": 165.0,
+          "rotated_90": false,
+          "extents": [
+            6.0,
+            5.999,
+            8.0
+          ]
+        },
+        {
+          "part": "17_board_standoff",
+          "x": 118.0,
+          "y": 165.0,
+          "rotated_90": false,
+          "extents": [
+            6.0,
+            5.999,
+            8.0
+          ]
+        },
+        {
+          "part": "17_board_standoff",
+          "x": 129.0,
+          "y": 165.0,
+          "rotated_90": false,
+          "extents": [
+            6.0,
+            5.999,
+            8.0
+          ]
+        },
+        {
+          "part": "17_board_standoff",
+          "x": 140.0,
+          "y": 165.0,
+          "rotated_90": false,
+          "extents": [
+            6.0,
+            5.999,
+            8.0
+          ]
+        },
+        {
+          "part": "17_board_standoff",
+          "x": 151.0,
+          "y": 165.0,
+          "rotated_90": false,
+          "extents": [
+            6.0,
+            5.999,
+            8.0
+          ]
+        },
+        {
+          "part": "18_imu_standoff",
+          "x": 162.0,
+          "y": 165.0,
+          "rotated_90": false,
+          "extents": [
+            6.0,
+            5.999,
+            8.0
+          ]
+        },
+        {
+          "part": "18_imu_standoff",
+          "x": 173.0,
+          "y": 165.0,
+          "rotated_90": false,
+          "extents": [
+            6.0,
+            5.999,
+            8.0
+          ]
+        },
+        {
+          "part": "18_imu_standoff",
+          "x": 184.0,
+          "y": 165.0,
+          "rotated_90": false,
+          "extents": [
+            6.0,
+            5.999,
+            8.0
+          ]
+        },
+        {
+          "part": "18_imu_standoff",
+          "x": 195.0,
+          "y": 165.0,
+          "rotated_90": false,
+          "extents": [
+            6.0,
+            5.999,
+            8.0
+          ]
+        },
+        {
+          "part": "16_pico_standoff",
+          "x": 204.6,
+          "y": 163.6,
+          "rotated_90": false,
+          "extents": [
+            3.2,
+            3.199,
+            10.0
+          ]
+        },
+        {
+          "part": "16_pico_standoff",
+          "x": 212.8,
+          "y": 163.6,
+          "rotated_90": false,
+          "extents": [
+            3.2,
+            3.199,
+            10.0
+          ]
+        },
+        {
+          "part": "16_pico_standoff",
+          "x": 221.0,
+          "y": 163.6,
+          "rotated_90": false,
+          "extents": [
+            3.2,
+            3.199,
+            10.0
+          ]
+        },
+        {
+          "part": "16_pico_standoff",
+          "x": 229.2,
+          "y": 163.6,
+          "rotated_90": false,
+          "extents": [
+            3.2,
+            3.199,
+            10.0
+          ]
+        }
+      ]
+    }
+  ]
+}
