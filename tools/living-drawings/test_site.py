@@ -131,6 +131,7 @@ class BuildTests(unittest.TestCase):
     def test_complete_build_has_readable_routes_assets_and_archival_context(self):
         report = site.build(self.root, self.output)
         self.assertEqual(report['errors'], [])
+        self.assertGreater(report['sitemap_urls'], 0)
         self.assertEqual((self.output / 'v1-proof.html').read_text(), (self.output / 'index.html').read_text())
         self.assertTrue((self.output / 'tools/v1-proof/sim.js').exists())
         self.assertTrue((self.output / 'assets/index.html').exists())
@@ -283,6 +284,29 @@ class BuildTests(unittest.TestCase):
         self.assertEqual(report['errors'], [])
         self.assertEqual(site.validate(self.output), [])
 
+    def test_discovery_files_list_public_pages_and_omit_redirects(self):
+        (self.root / site.WEB / 'sim.html').write_text(
+            '<html><head><meta http-equiv="refresh" content="0;url=proof-sandbox.html?robot=v0-genesis"></head>'
+            '<body><a href="proof-sandbox.html?robot=v0-genesis">Open the archived robot</a></body></html>'
+        )
+        (self.root / 'cad').mkdir()
+        (self.root / 'cad/README.md').write_text('# CAD files\n')
+        report = site.build(self.root, self.output)
+        self.assertEqual(report['errors'], [])
+        robots = (self.output / 'robots.txt').read_text()
+        self.assertIn('User-agent: *', robots)
+        self.assertIn('Allow: /', robots)
+        self.assertIn(f'Sitemap: {site.SITE_ORIGIN}/sitemap.xml', robots)
+        self.assertEqual((self.output / f'{site.INDEXNOW_KEY}.txt').read_bytes(), site.INDEXNOW_KEY.encode('ascii'))
+        sitemap = (self.output / 'sitemap.xml').read_text()
+        self.assertIn(f'<loc>{site.SITE_ORIGIN}/</loc>', sitemap)
+        self.assertIn(f'<loc>{site.SITE_ORIGIN}/v1-proof.html</loc>', sitemap)
+        self.assertIn(f'<loc>{site.SITE_ORIGIN}/proof-sandbox.html</loc>', sitemap)
+        self.assertIn(f'<loc>{site.SITE_ORIGIN}/docs/one-leg-bench.html</loc>', sitemap)
+        self.assertIn(f'<loc>{site.SITE_ORIGIN}/cad/</loc>', sitemap)
+        self.assertNotIn('sim.html', sitemap)
+        self.assertEqual(report['sitemap_urls'], sitemap.count('<loc>'))
+
     def test_validator_detects_raw_files_missing_files_and_bad_fragments(self):
         site.build(self.root, self.output)
         (self.output / 'raw.md').write_text('# Raw')
@@ -291,6 +315,31 @@ class BuildTests(unittest.TestCase):
         self.assertTrue(any('raw Markdown link' in error for error in errors))
         self.assertTrue(any('missing missing.html' in error for error in errors))
         self.assertTrue(any('missing fragment index.html#missing' in error for error in errors))
+
+
+class SandboxMergeTests(unittest.TestCase):
+    def test_source_page_has_robot_picker_and_both_templates(self):
+        page = Path(__file__).with_name('proof-sandbox.html').read_text()
+        self.assertIn('id="robot"', page)
+        self.assertIn('id="tpl-v1-proof"', page)
+        self.assertIn('id="tpl-v0-genesis"', page)
+        self.assertIn('data-panel-toggle="intro"', page)
+        self.assertIn('src="sandbox-shell.js"', page)
+        self.assertIn('src="../v1-proof/sim.js"', page)
+        self.assertIn('src="sim-view.js"', page)
+
+    def test_sim_html_redirects_to_the_archived_robot(self):
+        page = Path(__file__).with_name('sim.html').read_text()
+        self.assertIn('proof-sandbox.html?robot=v0-genesis', page)
+        self.assertIn('http-equiv="refresh"', page)
+        self.assertIn('location.replace', page)
+
+    def test_template_script_urls_are_relocated_on_the_published_page(self):
+        source = PurePosixPath(str(site.WEB / 'proof-sandbox.html'))
+        page = site.authored_page(Path(__file__).with_name('proof-sandbox.html').read_text(), source, Path(__file__).resolve().parents[2])
+        self.assertIn('src="tools/v1-proof/sim.js"', page)
+        self.assertIn('src="sandbox-shell.js"', page)
+        self.assertIn('id="tpl-v0-genesis"', page)
 
 
 if __name__ == '__main__':

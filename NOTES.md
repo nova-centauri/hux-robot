@@ -39,6 +39,10 @@ The [saved project and dispatch record](cad/prints/one-leg-body-r04/bambu/README
 
 The CAD checks include board hardware, socket access, connector spaces and sampled leg clearance. Small corner samples precede full body prints. Servo arrival, physical fit and the powered leg transmission remain open. No print was dispatched and no powered result changed. Recorded spend remains $173.70.
 
+**2026-10-11 IndexNow files:** the site build writes robots.txt, sitemap.xml and the IndexNow key file at the site root. The sitemap contains the public HTML pages. The sitemap does not include `/sim.html`. No hardware status changed.
+
+**2026-10-09 3D sandbox:** the two sandbox pages are now one page. A robot control sets V1-PROOF or V0-GENESIS. The user can hide the info panels. `sim.html` opens the archived robot. `proof-sandbox.html` is the merged page. No hardware status changed.
+
 **2026-10-07 R03 prints complete:** the user confirms that all parts are printed. The [dated record and assembly checklist](docs/checklists/2026-10-07-r03-assembly.md) closes the kit print-completion task. The October 6 setup uses default PLA. The next step is an unpowered fit check, then frame and leg assembly with the R03 spacer arrangement.
 
 Inventory and the shared plan now reflect this report. Measured fits, assembly results and powered qualification remain open. The earlier print-dispatch entries below retain their status at that date. Recorded spend stays $173.70.

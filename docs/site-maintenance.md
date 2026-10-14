@@ -57,9 +57,15 @@ The current project has six primary sections, with the same navigation on drawin
 
 Mechanical includes `/joints.html` for close-up detail studies and links to `/mechanical-tests.html`. Electrical includes `/controls.html`. Build & test links to the current simulation evidence and the 3D sandbox. `/v0-genesis.html` keeps the old plan model. `/docs/…html` remains the readable route for each source guide.
 
+The 3D sandbox is one page for both robots. The query `?robot=` sets the robot. `/sim.html` opens V0-GENESIS.
+
 The builder supplies the shared header, the breadcrumbs, the section navigation and the footer. New authored pages use `workshop.css` after their page styles. Edit the navigation in `build_site.py`. Do not add a second header.
 
 `workshop.js` keeps old homepage bookmarks such as `/#build`, `/#model`, `/#connections` and `/#budget`. It forwards them to the dedicated page. The publication step also relocates repository links to these old fragments. Keep the local notebook storage keys intact when you reorganize pages.
+
+The site build writes `robots.txt`, `sitemap.xml` and the IndexNow key file at the published root. `robots.txt` permits all crawlers. The file includes the sitemap URL `https://hux.xer0.io/sitemap.xml`.
+
+The sitemap contains the public HTML pages. The sitemap does not include `/sim.html`. That path is a redirect. The IndexNow key file is `/4d57d22d9d0038da36917c0d7db3bb71.txt`. Its body is the key.
 
 Joint studies remain open. The source-checked EL-01–04 wiring atlas replaces the electrical placeholders. Its [verification record](wiring-atlas.md) keeps the unresolved circuits and the physical harness release visible.
 
@@ -74,5 +80,7 @@ All active text obeys Simplified Technical English (STE). The rules and the proj
 The signed GitHub push hook for `main` uses the host configuration in [nova-centauri/vps-1](https://github.com/nova-centauri/vps-1/blob/main/docs/hux.md). The deploy script builds a separate release with the Python publisher of this repository. It validates the links of the release, then atomically switches the published directory. A failed build keeps the prior release. Failed post-publish route/revision checks restore the prior release. Generated output is not committed to this repository.
 
 Check [deployment.json](https://hux.xer0.io/deployment.json): its `revision` must equal the intended Hux Git commit. Then make sure that the live [budget](https://hux.xer0.io/docs/bom.html), [paid orders](https://hux.xer0.io/docs/purchases.html), [motor connections](https://hux.xer0.io/docs/electronics.html) and [control architecture](https://hux.xer0.io/docs/software.html) are correct. Also make sure that the orders and totals on the homepage are correct. [build-report.json](https://hux.xer0.io/build-report.json) must report no errors. A successful push or a homepage HTTP 200 alone does not establish that the new guides and data are current.
+
+After a publish, make sure that [robots.txt](https://hux.xer0.io/robots.txt), [sitemap.xml](https://hux.xer0.io/sitemap.xml) and the [IndexNow key](https://hux.xer0.io/4d57d22d9d0038da36917c0d7db3bb71.txt) return HTTP 200.
 
 Use `npm test` for the current model and simulation regression checks. Run `npm run test:legacy` when you change the historical engineering or simulator behavior.
