@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-14",
+  "updatedAt": "2026-10-15",
   "currentVersion": "v1-proof",
   "description": "Source-backed HUX work-in-progress plan. Proposed and simulated work is separate from measured physical evidence. Null order quantities and costs mean unknown, not zero.",
   "statusLabels": {
@@ -699,6 +699,15 @@
         }
       ],
       "updates": [
+        {
+          "date": "2026-10-15",
+          "title": "R05 plate 1 complete and plate 2 started",
+          "summary": "Bambu Studio shows the R05 walls plate Finished. The walls are not measured. The X1C accepted plate 2 with two decks and twelve angles. The estimate is 4 hours, 40 minutes and 211.87 g. Plate 2 completion is unverified.",
+          "sourcePaths": [
+            "cad/prints/two-leg-body-r05/bambu/README.md",
+            "NOTES.md"
+          ]
+        },
         {
           "date": "2026-10-14",
           "title": "R05 two-leg body kit and PLA plates",

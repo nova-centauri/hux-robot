@@ -21,3 +21,7 @@ The projects use the R04 profile: Bambu PLA Basic, X1 Carbon with a 0.4 mm nozzl
 MSL-Bambi-X1C shows the R04 plate 2 job at 100%, 110/110 layers and Finished. The camera view shows the bed at the bottom of its travel, and the plate surface is not clear in the image. No R05 job was sent. Remove the R04 parts and confirm a clear bed before the dispatch.
 
 **2026-10-14, plate 1 sent.** The user reports a clear bed. Bambu Studio sliced plate 1 again with the same result. At 17:37 EDT, MSL-Bambi-X1C accepted `hux-r05-plate-1-walls_R05 walls`. It showed 0% at layer 0/30 with the nozzle at heat, and an initial finish estimate of 21:41 EDT. Timelapse, bed leveling and flow calibration were on. Plate 1 completion and the wall fits remain unverified.
+
+**2026-10-15, plate 2 sent.** At 07:27 EDT, Bambu Studio showed the plate 1 job at 100%, 30/30 layers and Finished. The user reports a clear bed. The user did not measure the walls and said, "The printer is very accurate". The wall fits remain unmeasured.
+
+Bambu Studio sliced plate 2 without an error. The estimate is 4 hours, 40 minutes and 211.87 g. At 07:28 EDT, MSL-Bambi-X1C accepted `hux-r05-plate-2-decks_R05 lower and middle decks and angles`. It showed 0% at layer 0/110, with an initial finish estimate of 12:08 EDT. Plate 2 completion remains unverified.

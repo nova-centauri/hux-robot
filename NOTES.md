@@ -1,4 +1,4 @@
-# Working notes — V1-PROOF, updated 2026-10-14
+# Working notes — V1-PROOF, updated 2026-10-15
 
 The active objective is a useful, inexpensive proof robot. **Under $1,000. Reuse first. 2.5 kg target. Four actuators. Indoor mobility with bounded disturbance tests.** The previous stair work is [parked](docs/archive/stair-v1/README.md).
 
@@ -22,6 +22,8 @@ The [dated review](docs/checklists/2026-10-14-anatomy-review.md) records six fin
 The "R05 proposal" layout shows the corrections. The R04 CAD and the print files did not change. The user decides each correction. No physical test result changed. Recorded spend stays $173.70.
 
 **2026-10-14 correction:** the user states that the hips go near the rear of the body. The struts slant forward to the wheel, and the servos go inside the body. The first R05 proposal is withdrawn. The corrected R05 puts the hips at X = +50 with internal servos and a 3:1 belt to the lower hip. Its estimated lean is 3-24° forward. The JD-03 axle offset causes approximately 10° of this lean.
+
+**2026-10-15 R05 plate 2:** Bambu Studio showed the R05 walls plate at 100% and Finished. The user reports a clear bed and did not measure the walls. At 07:28 EDT, the X1C accepted plate 2 with the lower and middle decks and twelve angles. The estimate is 4 hours, 40 minutes and 211.87 g, with an initial finish time of 12:08 EDT.
 
 **2026-10-14 R05 two-leg body kit:** the user requested new STL files and PLA prints for this build. The [R05 kit](cad/prints/two-leg-body-r05/README.md) puts the hips at X = +30, an inner ST3215 cradle on each wall and a battery tray below the decks. The rear lower-deck angles move to X = +48, clear of the upper hip nut.
 
