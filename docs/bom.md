@@ -48,14 +48,14 @@ Refer to the inventory for the controller and IMU receipt status. The servo inte
 
 ## Remaining shopping list
 
-The Pico 2 and the LSM6DSO IMU are received and paid. Two ST3215 servos are also already paid, with arrival unreported. The order ledger above records the other paid parts. Confirm the stock of the support parts before you buy replacements.
+The Pico 2 and the LSM6DSO IMU are received and paid. Two ST3215 servos are also already paid, and the user reports that they have not arrived as of October 13. The order ledger above records the other paid parts. Confirm the stock of the support parts before you buy replacements.
 
 | Part / assembly | What remains | Next step |
 | --- | --- | --- |
 | Pololu 4752 encoder wheel motor | 1 more motor. The complete drive requires two wheel gearmotors of the same model. | Still to buy |
 | DRV8874 wheel driver and current-limit passives | Confirm coverage for 2 wheel channels. The receipt covers one driver. The total received count is unconfirmed. Buy a second Pololu 4035 only if one is missing. The current-limit passives still need confirmation. | Check stock first |
 | Compatible half-duplex TTL servo interface | 1 interface. The Pico 2 and the IMU are received. The ST3215 bus adapter is a separate part with no confirmed purchase or stock. | Check stock first |
-| Rubber wheels, hubs and supported axle hardware | 2 wheel assemblies. Approximately 100 mm wheels. The hubs and the axle support must fit the selected gearmotor and layout. No stock is reserved. | Check stock first |
+| Rubber wheels, hubs and supported axle hardware | 2 wheel assemblies. Approximately 100 mm wheels. The JD-03 proposal names the Pololu 3278 scooter wheel and the Pololu 2674 adapter, $33.22 for two of each before freight. Confirm the fit session first. No stock is reserved and nothing is ordered. | Check stock first |
 | Leg reductions, shafts, pivots, bearings, stops and lock pins | Hardware for both legs. Two 3:1 reductions are planned. The printed links are on hand. The transmission and pivot hardware still need inventory confirmation. | Check stock first |
 | Manual input / deadman link | 1 usable control link. Confirm a laptop/gamepad or a compatible receiver/transmitter before you buy replacements. | Check stock first |
 | Compatible 3S battery | 1 pack. The model, cell count and condition of the current pack are unconfirmed. Reuse a qualified pack or buy one. | Check stock first |
