@@ -45,7 +45,7 @@ The encoder gives **1920 counts per output revolution** with both edges of both 
 
 Set the DRV8874 **PMODE low** before enable. Set **IMODE directly to ground** for fixed-off-time regulation. In its default 20 kΩ state, IMODE reports the routine current chop on nFAULT. Do not confuse that report with a latched robot fault. Add a 3.3 V pull-up to each fault output.
 
-Add a physical actuator-power cut and a hardware watchdog gate on **SLEEP**. Add an MCU fault latch that needs a deliberate rearm. In PH/EN mode, EN low brakes. SLEEP low disables the outputs. The automatic retry of the driver never authorizes a robot rearm.
+Add a physical actuator-power cut and a hardware watchdog gate. The [kill chain](kill-chain.md) proposes both on the switched actuator rail, with **SLEEP** as the software layer. Add an MCU fault latch that needs a deliberate rearm. In PH/EN mode, EN low brakes. SLEEP low disables the outputs. The automatic retry of the driver never authorizes a robot rearm.
 
 Start the VREF calculation near 2.8 V with the 2.49 kΩ CS resistor of the board. Then measure the threshold and the tolerance.
 

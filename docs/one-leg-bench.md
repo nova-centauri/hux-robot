@@ -18,7 +18,7 @@ This note updates the controller availability and the current total in the older
 
 The user confirms the servo 12 V variant. Verify the labels on arrival. The two-wheel robot still needs a second motor, and the driver coverage is still to confirm. The bench supply has sufficient adjustable capacity per the October 6 user report. Its model, final settings and return-energy behavior remain unrecorded. Refer to [paid orders](purchases.md), [inventory](parts-on-hand.md) and [hardware selection](v1-proof-hardware.md).
 
-**2026-10-15:** the [electronics bench guide](electronics-bench-guide.md) covers the Pico 2 toolchain, the IMU, the encoder and one wheel channel, stages E0–E6. Do those stages before the servo stages below.
+**2026-10-15:** the [electronics bench guide](electronics-bench-guide.md) covers the Pico 2 toolchain, the IMU, the encoder and one wheel channel, stages E0–E6. Do those stages before the servo stages below. The user reports that two ST3215 servos are received. Check the 12 V labels before power. The [kill chain](kill-chain.md) is the proposed actuator-power cut for both benches.
 
 **This plan is for V1-PROOF and the confirmed Pololu/ST3215 actuators.** RobStride is the intended actuator for the future full-size Hux. The 110 mm linkage geometry applies to this test version. The final structural fits and the power circuit still need measured hardware and supply checks.
 

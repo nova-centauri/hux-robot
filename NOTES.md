@@ -15,6 +15,10 @@ The active objective is a useful, inexpensive proof robot. **Under $1,000. Reuse
 
 ## Next physical work
 
+**2026-10-15 bench firmware, kill chain and servo arrival:** the user reports that two ST3215 servos are received, with labels unchecked. The first firmware, [`firmware/bench`](firmware/bench/README.md), compiles for `pico2` with Pico SDK 2.2.0 and Arm GCC 15.2.1 in the cloud toolchain. The prebuilt `hux_bench.uf2` and the host console `tools/bench/hux_bench.py` are in the repository. No board test is recorded.
+
+The [kill chain](docs/kill-chain.md) proposes a Pololu 2813 rail switch with a momentary KILL button on its OFF pin. An ARM button and a charge-pump heartbeat detector on GP22 gate the power-on. No part is ordered. Recorded spend stays $173.70.
+
 **2026-10-15 electronics bench guide:** the user is ready for bench tests with the Pico 2, the IMU and the motor. The [electronics bench guide](docs/electronics-bench-guide.md) gives stages E0–E6: toolchain and blink, IMU identity and raw data, encoder counts, driver and motor jog, wheel speed loop, fault checks and a tilt-follow routine. It gives the seven-wire IMU connection, the sensor register values, the encoder divider, the DRV8874 driver pads and a bench firmware command contract.
 
 The Build & test section links the guide. No bench firmware exists. No stage is closed. Recorded spend stays $173.70.

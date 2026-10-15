@@ -1,5 +1,7 @@
 # V1-PROOF electronics
 
+**2026-10-15:** the [kill chain](kill-chain.md) proposes the actuator rail switch, the KILL and ARM buttons and the heartbeat gate. The [bench firmware](../firmware/bench/README.md) exists.
+
 **Selected baseline: Pico 2, the LSM6DSO IMU on SPI, two DRV8874 drivers and two ST3215 servos (12 V variant).** [Exact interfaces, proposed GPIO map, component sources and qualification gates](v1-proof-hardware.md). Confirmed equivalent equipment on hand can reduce the spend only after it meets the same contract. No onboard Linux computer or camera is necessary.
 
 The [Electrical page](../tools/living-drawings/electrical.html) now contains the color-coordinated **EL-01–04 wiring atlas**, with an enlarged vector viewer and a printable PDF. The [source checks and detailed pin maps](wiring-atlas.md) separate the vendor-confirmed pinouts from the proposed GPIO assignments and the unresolved circuits. This is a build-plan drawing. The physical harness and the power-protection release remain open.

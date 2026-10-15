@@ -1,5 +1,7 @@
 # V1-PROOF parts and reuse inventory
 
+**2026-10-15 servo arrival:** the user reports that **two ST3215 servos are received**. The labels, the 12 V variant check, the condition and the bus IDs are not recorded. The half-duplex TTL interface is not selected. Start the servo stages of the [single-leg bench plan](one-leg-bench.md) after the [electronics bench](electronics-bench-guide.md) stages. Recorded spend stays $173.70.
+
 **2026-10-13 body fit problem:** the user reports that the walls and horizontal layers do not fit together. The [dated evaluation](checklists/2026-10-13-r04-fit-review.md) records the report and CAD findings. Use the [R04 matched body and component mounts](../cad/prints/one-leg-body-r04/README.md) for the next fit trial. The ST3215 servos have not arrived. Physical qualification remains open.
 
 The user confirms completion of the four small R04 fit parts in Basic PLA on October 13. Bambu Studio also shows 100%, 110/110 layers and Finished. The [print record](../cad/prints/one-leg-body-r04/bambu/README.md) confirms completion only. The corner joint fit remains unverified.
@@ -37,7 +39,7 @@ Purchased parts count as new cash spend. We infer no reuse credit.
 | Pico 2 with yellow pre-soldered headers | 1 received per user and screenshot 2026-10-03; untested; individual price unshown within $30.58 controller/IMU order | USB/LED bring-up, then C/C++ controller qualification | $0 |
 | SparkFun LSM6DSO Qwiic IMU | 1 received per user 2026-10-03; untested; individual price unshown within the $30.58 controller/IMU order | Main SPI and data-ready sensing; replaces the earlier LSM6DSOX choice after qualification | $0 |
 | Pololu 4752 encoder gearmotors | 1 received per user 2026-10-02, untested; $60.95 goods, part of the $88.34 paid Pololu order; second motor still required | Dry-fit the received motor, then qualify one restrained wheel channel | $0 |
-| ST3215 12 V servos | 2 paid; $42.38 goods + $12.40 shipping = $54.78; awaiting shipment in latest receipt; 12 V variant confirmed by user | Supported single-leg bench now; robot height adjustment after pinned-leg balance | $0 |
+| ST3215 12 V servos | 2 received per user 2026-10-15; untested; labels unchecked; $42.38 goods + $12.40 shipping = $54.78; 12 V variant confirmed by user at order | Supported single-leg bench now; robot height adjustment after pinned-leg balance | $0 |
 | Pololu 4035 DRV8874 drivers | Received per user 2026-10-02, untested; total delivered count pending; receipt covers 1 at $11.94 goods | H-bridge and current limiting for each wheel motor; confirm coverage of both channels | $0 |
 | 3D-printed mechanical parts | R03 kit complete per user 2026-10-07; default PLA setup. Earlier prints reported 2026-10-02. Actual count, dimensions and fits unrecorded | R03 frame and leg fit checks, then supported assembly. Powered mounts and load capacity remain unqualified | $0 |
 | Servo interface / adapter | Purchase/availability unconfirmed | Half-duplex TTL commands and feedback | $0 |

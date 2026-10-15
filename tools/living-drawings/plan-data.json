@@ -87,18 +87,28 @@
         {
           "id": "pico-usb",
           "title": "Run the electronics bench, stages E0–E6",
-          "detail": "The user is ready for bench tests. Follow the electronics bench guide: toolchain and blink, IMU identity and raw data, encoder counts, driver and motor jog, wheel speed loop, fault checks and the tilt-follow routine. Start with the USB and LED checklist. Write the bench firmware in C/C++ with PICO_BOARD=pico2. Record each stage in a dated session record, because no stage is closed.",
+          "detail": "The user is ready for bench tests. Flash the prebuilt hux_bench.uf2, start the host console and follow the electronics bench guide: toolchain and blink, IMU identity and raw data, encoder counts, driver and motor jog, wheel speed loop, fault checks and the tilt-follow routine. Record each stage in a dated session record, because no stage is closed.",
           "status": "ready",
           "sourcePaths": [
             "docs/electronics-bench-guide.md",
-            "docs/checklists/2026-10-03-pico-bringup.md",
-            "firmware/README.md"
+            "firmware/bench/README.md",
+            "docs/checklists/2026-10-03-pico-bringup.md"
+          ]
+        },
+        {
+          "id": "kill-chain",
+          "title": "Build and test the kill chain",
+          "detail": "Order the Pololu 2813 rail switch, a 74HC14, a 3.3 V regulator, the diodes, the passives and two momentary buttons. Build the circuit on a small board. Run stages K0–K6 with the wheel lifted after stage E5. The design is a proposal, and no part is ordered.",
+          "status": "ready",
+          "sourcePaths": [
+            "docs/kill-chain.md",
+            "docs/electronics-bench-guide.md"
           ]
         },
         {
           "id": "record-orders",
           "title": "Identify the received parts and outstanding arrivals",
-          "detail": "Record the gearmotor/driver labels, the total received driver count, the dimensions and the condition. The receipt covers one Pololu 4752 gearmotor and one DRV8874 driver (Pololu 4035). The Pico 2 is received, so record its markings and USB checks. The user reports that the LSM6DSO IMU is received, so record its label, board revision and condition. Record the ST3215 servo arrival and verify the 12 V labels when the servos are available.",
+          "detail": "Record the gearmotor/driver labels, the total received driver count, the dimensions and the condition. The receipt covers one Pololu 4752 gearmotor and one DRV8874 driver (Pololu 4035). The Pico 2 and the LSM6DSO IMU are received. The user reports that two ST3215 servos are received on October 15. Record their labels, confirm the 12 V variant and record the condition.",
           "status": "ready",
           "sourcePaths": [
             "docs/purchases.md",
@@ -362,7 +372,7 @@
           "id": "BENCH",
           "title": "One-leg actuator exercise",
           "status": "in-progress",
-          "summary": "The user reports poor body fit and missing actuator mounts. R04 supplies a matched three-deck body, electronics mounts and an ST3215 case cradle. Check a small corner sample before full body prints. The servos have not arrived. Physical fit, powered tests and the leg transmission remain open. Recorded spend stays $173.70.",
+          "summary": "The user reports poor body fit and missing actuator mounts. R04 supplies a matched three-deck body, electronics mounts and an ST3215 case cradle. Check a small corner sample before full body prints. The user reports that two ST3215 servos are received on October 15, with labels unchecked. Physical fit, powered tests and the leg transmission remain open. Recorded spend stays $173.70.",
           "criteria": [
             "Complete the staged session with bounded commands, measured signs and disabled startup.",
             "Record passive clearances, backlash and measured leg/wheel response.",
@@ -448,7 +458,7 @@
       "bench": {
         "title": "Single-leg bench exercise",
         "status": "in-progress",
-        "summary": "The user reports poor body fit and missing actuator mounts. R04 supplies a matched three-deck body, electronics mounts and an ST3215 case cradle. Check a small corner sample before full body prints. The servos have not arrived. Physical fit, powered tests and the leg transmission remain open. Recorded spend stays $173.70.",
+        "summary": "The user reports poor body fit and missing actuator mounts. R04 supplies a matched three-deck body, electronics mounts and an ST3215 case cradle. Check a small corner sample before full body prints. The user reports that two ST3215 servos are received on October 15, with labels unchecked. Physical fit, powered tests and the leg transmission remain open. Recorded spend stays $173.70.",
         "sourcePaths": [
           "docs/checklists/2026-10-13-r04-fit-review.md",
           "cad/prints/one-leg-body-r04/README.md",
@@ -558,6 +568,16 @@
         ]
       },
       "documents": [
+        {
+          "title": "Kill chain · 15 October",
+          "path": "docs/kill-chain.md",
+          "kind": "design proposal, stages K0–K6"
+        },
+        {
+          "title": "Bench firmware",
+          "path": "firmware/bench/README.md",
+          "kind": "Pico 2 program, prebuilt UF2"
+        },
         {
           "title": "R05 two-leg body assembly guide",
           "path": "docs/r05-assembly.md",
@@ -715,6 +735,17 @@
         }
       ],
       "updates": [
+        {
+          "date": "2026-10-15",
+          "title": "Bench firmware, kill chain and servo arrival",
+          "summary": "The first firmware, firmware/bench, compiles for pico2 with a prebuilt UF2 and a host console. The kill chain proposes a latched rail switch, a KILL button, an ARM button and a heartbeat gate. The user reports that two ST3215 servos are received, with labels unchecked. No board test is recorded.",
+          "sourcePaths": [
+            "firmware/bench/README.md",
+            "docs/kill-chain.md",
+            "docs/parts-on-hand.md",
+            "NOTES.md"
+          ]
+        },
         {
           "date": "2026-10-15",
           "title": "R05 plate 3 started",

@@ -2,7 +2,9 @@
 
 **Opened 2026-10-15.** This guide prepares the first powered electronics bench for V1-PROOF. The user wants to program the Pico 2, connect the LSM6DSO IMU and run a test routine with the motor. The guide gives the bench layout, the connections, the firmware stages and the pass conditions. It is a plan. A physical result exists only after a dated [session record](checklists/one-leg-bench-session.md) with measured evidence.
 
-**Parts for this bench:** one Pico 2, one LSM6DSO IMU, one Pololu 4752 gearmotor and the received DRV8874 drivers. The adjustable bench supply replaces the battery. The ST3215 servos are not received. The second wheel gearmotor is not purchased. [Inventory](parts-on-hand.md) · [Hardware baseline and pin allocation](v1-proof-hardware.md) · [Electrical sheets EL-01 to EL-05](wiring-atlas.md).
+**Parts for this bench:** one Pico 2, one LSM6DSO IMU, one Pololu 4752 gearmotor and the received DRV8874 drivers. The adjustable bench supply replaces the battery. Two ST3215 servos are received on 2026-10-15, with the labels not yet checked. The second wheel gearmotor is not purchased. [Inventory](parts-on-hand.md) · [Hardware baseline and pin allocation](v1-proof-hardware.md) · [Electrical sheets EL-01 to EL-05](wiring-atlas.md).
+
+**Firmware, 2026-10-15:** the bench program exists in [`firmware/bench`](../firmware/bench/README.md), with a prebuilt `hux_bench.uf2` and the host console `tools/bench/hux_bench.py`. It compiles for `pico2`. No board test is recorded.
 
 **Scope.** This bench qualifies one controller, one sensor and one wheel channel on a fixture. It does not balance the robot. It does not move a leg. Balance and manual travel follow the [software contract](software.md) after both wheel channels pass. The [single-leg bench plan](one-leg-bench.md) covers the leg servo and the loaded leg tests.
 
@@ -17,6 +19,7 @@
 | E4 | Wheel speed loop | +10 rpm → 0 → −10 rpm with stable control and a log |
 | E5 | Fault checks | Stale command, USB loss, reset and the physical cut all stop the wheel |
 | E6 | Tilt-follow routine | The lifted wheel follows the IMU pitch in the correct direction, with the log |
+| K0–K6 | Kill chain | The [kill chain](kill-chain.md) stages: rail switch, KILL and ARM buttons, heartbeat gate |
 
 Do the stages in this order. Do not skip E5 before E6. Each stage ends with a dated record. "Done" in a browser note does not close a stage.
 
@@ -35,7 +38,7 @@ Clamp the motor in a fixture. Lift the wheel clear of the bench through the full
 | Logic power | Laptop USB to the Pico 2 Micro-USB. The IMU gets 3.3 V from 3V3(OUT), pin 36. |
 | Motor power | Bench supply at **12.0 V**. First current limit **1.0 A**. Supply positive → fuse → physical cut → driver VIN. Supply negative → driver GND. |
 | Fuse | A fast fuse in the VIN lead, maximum 3 A for this bench. The project fuse value remains open. |
-| Physical cut | A switch in the VIN lead, or the supply output button in reach. The cut must work when the laptop or the Pico 2 stops. |
+| Physical cut | A switch in the VIN lead, or the supply output button in reach, until the [kill chain](kill-chain.md) exists. The cut must work when the laptop or the Pico 2 stops. |
 | Common ground | One connection between the supply negative, the driver GND and a Pico 2 GND pin. |
 | Encoder power | 5 V from VBUS, pin 40. Encoder A and B go through 5 V → 3.3 V conversion. |
 | Instruments | Multimeter, a second multimeter or clamp for the supply current, calipers, a camera and a timer. A scope is optional for E3 and E4. |
@@ -56,11 +59,11 @@ Install the toolchain on the Mac mini with one of these methods:
 Then do these steps:
 
 1. Complete the [USB and LED checklist](checklists/2026-10-03-pico-bringup.md) with the vendor Blink UF2. Record the drive name `RP2350`.
-2. Make a project `firmware/bench` in the repository. Enable `pico_enable_stdio_usb` and disable the UART stdio. Build with `cmake -DPICO_BOARD=pico2`.
-3. Load the UF2 by a copy to the `RP2350` drive, or run `picotool load -f`. Open the serial port `/dev/cu.usbmodem…` at any baud rate.
-4. Make sure that the program prints a line each second and blinks the onboard LED. Record the SDK version, the toolchain version and the commit.
+2. Flash [`firmware/bench/release/hux_bench.uf2`](../firmware/bench/release/hux_bench.uf2) by a copy to the `RP2350` drive. The [firmware README](../firmware/bench/README.md) gives the build steps for the Mac mini.
+3. Install `pyserial` and start `python3 tools/bench/hux_bench.py`. The console opens `/dev/cu.usbmodem…`, sends the keepalive and saves a log.
+4. Make sure that the board prints its `ID` line and one telemetry line at 50 Hz. The LED gives one short blink each second. Record the build ID from the `ID` line.
 
-Set GP10 to a low output as the first instruction after boot. GP10 is the driver SLEEP line. A low SLEEP sets the driver outputs to off. Keep this instruction first in every bench program.
+The firmware sets GP10 low as its first instruction after boot. GP10 is the driver SLEEP line. A low SLEEP sets the driver outputs to off. Keep this instruction first in every Hux program.
 
 ## Stage E1 — IMU identity and raw data
 
@@ -212,7 +215,7 @@ Do each check with the wheel lifted and the supply at the 1.0 A limit. Each chec
 | Physical cut | Arm, command +10 rpm, then open the physical cut. | The wheel coasts to a stop. The Pico 2 stays on and logs the loss of VIN. |
 | Rearm | After each fault, send one new command without a rearm. | The firmware rejects the command. Only the arm command clears the fault. |
 
-A loss of USB power is a loss of the controller. The physical cut must work without the controller. Do each check two times. A pass on this bench does not prove the robot kill chain. The hardware gate and the watchdog gate on nSLEEP remain [open items](v1-proof-hardware.md#interfaces-that-must-be-built-correctly).
+A loss of USB power is a loss of the controller. The physical cut must work without the controller. Do each check two times. A pass on this bench does not prove the robot kill chain. The [kill chain design](kill-chain.md) adds the rail switch, the buttons and the heartbeat gate, with its own stages K0–K6.
 
 ## Stage E6 — tilt-follow routine
 
@@ -230,7 +233,7 @@ Pass: the wheel follows the tilt in the correct direction, with no jump at arm a
 
 ## Bench firmware contract
 
-The bench firmware is the proposed `firmware/bench` program. It does not exist yet. It uses the same modes as the [single-leg bench](one-leg-bench.md#controls-to-prepare): `DISARMED`, `BENCH_ARMED` and `FAULT`. The host sends ASCII commands over USB serial. The firmware sends one telemetry line at 50 Hz.
+The bench firmware is the [`firmware/bench`](../firmware/bench/README.md) program. It uses the same modes as the [single-leg bench](one-leg-bench.md#controls-to-prepare): `DISARMED`, `BENCH_ARMED` and `FAULT`. The host sends ASCII commands over USB serial. The firmware sends one telemetry line at 50 Hz.
 
 | Command | Action | Permitted in |
 | --- | --- | --- |
@@ -244,6 +247,12 @@ The bench firmware is the proposed `firmware/bench` program. It does not exist y
 | `stop` | Ramp the duty to 0 and hold `BENCH_ARMED` | `BENCH_ARMED` |
 | `disarm` | Set nSLEEP low, enter `DISARMED` | all modes |
 | `hang` | Stop the main loop, for the watchdog test | `DISARMED` only |
+| `k` | Keepalive. Renews the deadman. The host console sends it at 20 Hz. | all modes |
+| `imu rate` / `imu regs` | Print the INT1 edge rate, or the configuration registers | all modes |
+| `zero` | Set the encoder count to zero | all modes |
+| `rail on` / `rail off` | Enable the switched-rail check on GP28, after the kill chain exists | all modes |
+| `kp <v>` / `ki <v>` | Set the speed loop gains | all modes |
+| `tele on` / `tele off` | Start or stop the 50 Hz telemetry line | all modes |
 
 Rules for the firmware:
 
@@ -269,6 +278,7 @@ The telemetry line has these comma-separated fields:
 | CS current | A |
 | nFAULT state | 0 or 1 |
 | loop time | µs |
+| switched rail | V |
 
 Put the units in the log header. Save each log with the session date and the stage ID.
 
@@ -286,8 +296,8 @@ Then add a dated entry to `NOTES.md` and update the [plan data](../tools/living-
 
 ## Open items that this bench does not close
 
-- The ST3215 servos are not received. The half-duplex TTL transceiver is not selected. The leg tests wait for both. [Single-leg bench plan](one-leg-bench.md).
+- Two ST3215 servos are received. Check the 12 V labels. The half-duplex TTL transceiver is not selected. The leg tests wait for it. [Single-leg bench plan](one-leg-bench.md).
 - The second Pololu 4752 gearmotor is not purchased. The total received driver count is not confirmed. Two-wheel balance needs both.
-- The hardware kill gate and the watchdog gate on nSLEEP remain open. The robot regulator, the fuse value, the level-conversion part and the return-energy clamp also remain open. [Electronics plan](electronics.md).
+- The [kill chain](kill-chain.md) is a design. No part is ordered or tested. The robot regulator, the fuse value, the level-conversion part and the return-energy clamp also remain open. [Electronics plan](electronics.md).
 - E6 measures the 500 Hz loop, the ≤6 ms data age and the ≤10 ms drive lag. They are not proven until the robot firmware runs on the robot.
 - The IMU position on the R05 body and the body axis table need a record after the body assembly.
