@@ -36,7 +36,7 @@ Physical kill + hardware watchdog ------------------> actuator disable
 
 The purchase locks the control interfaces to the Pololu 4752 gearmotors, the DRV8874 drivers (Pololu 4035) and the ST3215 servos on the 12 V bus. One wheel gearmotor and the drivers are received. The total driver count is not yet confirmed. Both leg servos are ordered, and the second wheel gearmotor is still necessary. The Pico 2 is received, untested. The LSM6DSO IMU is received, untested.
 
-The LSM6DSO IMU replaces the earlier LSM6DSOX selection. The sensor qualification and the TTL interface remain open. Start with [USB/LED checks](checklists/2026-10-03-pico-bringup.md), readback and small supported bench motions. Then pin both legs, then do balance and manual travel, and finally qualified height adjustment. Refer to [electrical connections](electronics.md) and the [ordered hardware baseline](v1-proof-hardware.md).
+The LSM6DSO IMU replaces the earlier LSM6DSOX selection. The sensor qualification and the TTL interface remain open. Start with [USB/LED checks](checklists/2026-10-03-pico-bringup.md), then the [electronics bench guide](electronics-bench-guide.md), readback and small supported bench motions. Then pin both legs, then do balance and manual travel, and finally qualified height adjustment. Refer to [electrical connections](electronics.md) and the [ordered hardware baseline](v1-proof-hardware.md).
 
 ## Minimal control contract
 

@@ -121,7 +121,7 @@ class BuildTests(unittest.TestCase):
         (self.root / 'tools/v1-proof').mkdir(); (self.root / 'tools/v1-proof/sim.js').write_text('window.sim = {};')
         (self.root / 'docs/checklists').mkdir(parents=True)
         (self.root / 'docs/archive/stair-v1').mkdir(parents=True)
-        for path in ['one-leg-bench', 'parts-on-hand', 'decisions', 'checklists/README', 'archive/stair-v1/README']:
+        for path in ['one-leg-bench', 'electronics-bench-guide', 'parts-on-hand', 'decisions', 'checklists/README', 'archive/stair-v1/README']:
             (self.root / f'docs/{path}.md').write_text('# Working document\n\n## Setup\n\n- [ ] Verify\n')
         (self.root / 'README.md').write_text('# Hux\n\n[Models](tools/living-drawings/assets/)\n\n[Checklists](docs/checklists/)')
 

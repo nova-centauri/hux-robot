@@ -86,10 +86,11 @@
         },
         {
           "id": "pico-usb",
-          "title": "Check the received Pico over USB",
-          "detail": "Use a Micro-USB data cable with the external GPIO wires and the actuator wires disconnected. Hold BOOTSEL during connection, confirm the RP2350 drive, load the official Blink UF2 and record the LED behavior. The Hello World check over USB serial is optional. The LSM6DSO IMU is also received. Identify its label and board revision before the sensor bring-up. The sensor firmware and the timing remain open.",
+          "title": "Run the electronics bench, stages E0–E6",
+          "detail": "The user is ready for bench tests. Follow the electronics bench guide: toolchain and blink, IMU identity and raw data, encoder counts, driver and motor jog, wheel speed loop, fault checks and the tilt-follow routine. Start with the USB and LED checklist. Write the bench firmware in C/C++ with PICO_BOARD=pico2. Record each stage in a dated session record, because no stage is closed.",
           "status": "ready",
           "sourcePaths": [
+            "docs/electronics-bench-guide.md",
             "docs/checklists/2026-10-03-pico-bringup.md",
             "firmware/README.md"
           ]
@@ -558,6 +559,11 @@
       },
       "documents": [
         {
+          "title": "Electronics bench guide · 15 October",
+          "path": "docs/electronics-bench-guide.md",
+          "kind": "guide, stages E0–E6"
+        },
+        {
           "title": "Two-leg body R05",
           "path": "cad/prints/two-leg-body-r05/README.md",
           "kind": "rear hips, inner servos, battery tray and PLA plates"
@@ -699,6 +705,15 @@
         }
       ],
       "updates": [
+        {
+          "date": "2026-10-15",
+          "title": "Electronics bench guide",
+          "summary": "The user is ready for bench tests. The guide gives stages E0–E6 for the Pico 2 toolchain, the IMU, the encoder, one wheel channel, fault checks and a tilt-follow routine. It includes a bench firmware command contract. No bench firmware exists, and no stage is closed.",
+          "sourcePaths": [
+            "docs/electronics-bench-guide.md",
+            "NOTES.md"
+          ]
+        },
         {
           "date": "2026-10-15",
           "title": "R05 plate 1 complete and plate 2 started",

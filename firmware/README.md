@@ -6,4 +6,4 @@ V1-PROOF targets C/C++ with `PICO_BOARD=pico2`. The target also includes the rec
 
 Robot modes are `DISARMED`, `BALANCE`, `DRIVE`, `FAULT`. A proposed `BENCH_ARMED` state supports a rigidly fixed single leg and a lifted wheel before balance. Refer to the [bench controls and test plan](../docs/one-leg-bench.md). No bench controller exists. CAN, one-wheel stance modes and stair control belong to the parked project.
 
-First jobs can be readback, bounded actuator motion and fault checks in the fixture. Then sensor logs and pinned-leg balance can follow.
+The [electronics bench guide](../docs/electronics-bench-guide.md) defines the first program, `firmware/bench`, and its command contract. First jobs can be readback, bounded actuator motion and fault checks in the fixture. Then sensor logs and pinned-leg balance can follow.

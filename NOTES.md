@@ -15,6 +15,10 @@ The active objective is a useful, inexpensive proof robot. **Under $1,000. Reuse
 
 ## Next physical work
 
+**2026-10-15 electronics bench guide:** the user is ready for bench tests with the Pico 2, the IMU and the motor. The [electronics bench guide](docs/electronics-bench-guide.md) gives stages E0–E6: toolchain and blink, IMU identity and raw data, encoder counts, driver and motor jog, wheel speed loop, fault checks and a tilt-follow routine. It gives the seven-wire IMU connection, the sensor register values, the encoder divider, the DRV8874 driver pads and a bench firmware command contract.
+
+The Build & test section links the guide. No bench firmware exists. No stage is closed. Recorded spend stays $173.70.
+
 **2026-10-14 animated anatomy:** the user requested animated top, side and front views, and an electronics x-ray. The new [anatomy page](tools/living-drawings/anatomy.html) uses the R04 reference geometry and mirrors the leg for the far side. The page shows leg motion, balance trim, drive and the harness classes of the EL netlist.
 
 The [dated review](docs/checklists/2026-10-14-anatomy-review.md) records six findings. The R04 pivot position gives an estimated 17-35° balance trim. The simulation assumes 0° at neutral. R04 is 320-348 mm high, above the 280-310 mm target. R04 has one driver position and no battery position.

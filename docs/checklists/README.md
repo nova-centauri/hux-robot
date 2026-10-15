@@ -6,6 +6,7 @@ The active checklists are for the small, four-actuator indoor proof with bounded
 
 - [Mobility and disturbance protocol](../v1-proof-validation.md)
 - [Hardware decisions and interfaces](../v1-proof-hardware.md)
+- [Electronics bench guide, opened 2026-10-15](../electronics-bench-guide.md): Pico 2 toolchain, IMU, encoder and one wheel channel, stages E0–E6. No stage is closed.
 - [Single-leg bench plan](../one-leg-bench.md) and [copyable session record](one-leg-bench-session.md)
 - [R03 print completion and assembly, 2026-10-07](2026-10-07-r03-assembly.md): all kit parts are printed per the user. Fit checks and assembly are next.
 - [First mechanical fit session, opened 2026-10-02](2026-10-02-mechanical-fit.md): the motor/drivers and the printed parts are received. The passive checks are ready. No results are recorded yet.

@@ -41,7 +41,8 @@ SUB_ROUTES = {
     "mechanical.html": (("mechanical.html", "Assembly"), ("anatomy.html", "Anatomy"), ("joints.html", "Joint details"),
                         ("wheel-mount.html", "Wheel mount"), ("mechanical-tests.html", "Mechanical tests")),
     "electrical.html": (("electrical.html", "Wiring"), ("controls.html", "Control software")),
-    "build.html": (("build.html", "Build plan"), ("docs/one-leg-bench.html", "Bench testing"),
+    "build.html": (("build.html", "Build plan"), ("docs/electronics-bench-guide.html", "Electronics bench"),
+                   ("docs/one-leg-bench.html", "Bench testing"),
                    ("proof-simulation.html", "Simulation evidence"), ("proof-sandbox.html", "3D sandbox")),
 }
 OLD_SECTIONS = {
