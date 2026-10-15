@@ -37,6 +37,9 @@ target_include_directories(hux_bench PRIVATE src)
 target_compile_definitions(hux_bench PRIVATE
     HUX_BUILD_ID="${HUX_GIT_ID}"
     PICO_STDIO_USB_CONNECT_WAIT_TIMEOUT_MS=0
+    # A host that stops reading must not stall the control loop. Drop output
+    # after 2 ms instead of the 500 ms default, which would trip the watchdog.
+    PICO_STDIO_USB_STDOUT_TIMEOUT_US=2000
 )
 target_compile_options(hux_bench PRIVATE -Wall -Wextra)
 
