@@ -559,6 +559,16 @@
       },
       "documents": [
         {
+          "title": "R05 two-leg body assembly guide",
+          "path": "docs/r05-assembly.md",
+          "kind": "parts, hardware and assembly steps"
+        },
+        {
+          "title": "R05 print and fit record - 15 October",
+          "path": "docs/checklists/2026-10-15-r05-fit-record.md",
+          "kind": "print status and open measurements"
+        },
+        {
           "title": "Electronics bench guide · 15 October",
           "path": "docs/electronics-bench-guide.md",
           "kind": "guide, stages E0–E6"
@@ -705,6 +715,16 @@
         }
       ],
       "updates": [
+        {
+          "date": "2026-10-15",
+          "title": "R05 plate 2 complete and assembly guide published",
+          "summary": "The user reports plate 2 complete. The R05 assembly guide gives the parts, the hardware and eight steps with CAD views. Plates 3, 4 and 5 remain to print. No R05 dimension is measured.",
+          "sourcePaths": [
+            "docs/r05-assembly.md",
+            "docs/checklists/2026-10-15-r05-fit-record.md",
+            "NOTES.md"
+          ]
+        },
         {
           "date": "2026-10-15",
           "title": "Electronics bench guide",
