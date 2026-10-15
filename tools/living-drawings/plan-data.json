@@ -717,6 +717,16 @@
       "updates": [
         {
           "date": "2026-10-15",
+          "title": "R05 plate 3 started",
+          "summary": "The X1C accepted plate 3 with the upper deck, the battery tray, two carriers and eight leg spacers. The estimate is 3 hours, 8 minutes and 150.49 g. Plate 3 completion is unverified.",
+          "sourcePaths": [
+            "cad/prints/two-leg-body-r05/bambu/README.md",
+            "docs/checklists/2026-10-15-r05-fit-record.md",
+            "NOTES.md"
+          ]
+        },
+        {
+          "date": "2026-10-15",
           "title": "R05 plate 2 complete and assembly guide published",
           "summary": "The user reports plate 2 complete. The R05 assembly guide gives the parts, the hardware and eight steps with CAD views. Plates 3, 4 and 5 remain to print. No R05 dimension is measured.",
           "sourcePaths": [
