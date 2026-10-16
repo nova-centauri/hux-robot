@@ -161,7 +161,8 @@ class BuildTests(unittest.TestCase):
         self.assertIn('href="controls.html" aria-current="page">Control software', controls)
         sandbox = (self.output / 'proof-sandbox.html').read_text()
         self.assertIn('href="proof-sandbox.html" aria-current="page">3D sandbox', sandbox)
-        self.assertIn('href="docs/one-leg-bench.html">Bench testing', sandbox)
+        self.assertIn('href="docs/electronics-bench-guide.html">Electronics bench', sandbox)
+        self.assertNotIn('>Bench testing<', sandbox)  # The single-leg bench is parked (2026-10-16).
 
     def test_old_headers_are_removed_and_interactive_markup_stays_intact(self):
         source = PurePosixPath(str(site.WEB / 'proof-sandbox.html'))

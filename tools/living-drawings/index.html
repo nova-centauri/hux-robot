@@ -2,18 +2,18 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Project overview · HUX / V1-PROOF</title><meta name="description" content="Hux V1-PROOF wheeled balancing robot. Live R05 anatomy, the R05 assembly guide, blueprints, print plates, wiring and the build status."><link rel="stylesheet" href="proof.css"><link rel="stylesheet" href="workshop.css"><link rel="stylesheet" href="home.css"></head>
 <body><a class="skip-link" href="#content">Skip to page content</a><main id="content" class="engineering-main home">
 <section class="home-hero" aria-labelledby="title">
-<div class="home-intro"><p class="eyebrow">HUX / V1-PROOF / Revision R05</p><span class="status-tag is-pending">R05 assembly in progress</span><h1 id="title">Wheeled<br>balancing robot.</h1><p class="hero-description">A compact robot with four actuators: two wheel gearmotors and two leg servos. It must balance, drive indoors and change its leg height slowly. R05 puts the hips at the rear, and the servos and the battery in the body.</p><div class="hero-actions"><a class="primary-link" href="../../docs/r05-assembly.md">R05 assembly guide <span aria-hidden="true">→</span></a><a href="#r05-kit">R05 blueprints and documents ↓</a></div></div>
+<div class="home-intro"><p class="eyebrow">HUX / V1-PROOF / Revision R05</p><span class="status-tag is-pending">R05 assembly in progress</span><h1 id="title">Wheeled<br>balancing robot.</h1><p class="hero-description">A compact two-wheel robot. It must balance, drive indoors and stop safely. The legs stay locked at 30° in V1-PROOF. R05 puts the hips at the rear and the battery in the body.</p><div class="hero-actions"><a class="primary-link" href="../../docs/r05-assembly.md">R05 assembly guide <span aria-hidden="true">→</span></a><a href="#r05-kit">R05 blueprints and documents ↓</a></div></div>
 <aside class="home-status" aria-labelledby="status-title"><p class="eyebrow">Build status / 16 Oct 2026</p><h2 id="status-title">R05 two-leg body</h2><ol class="status-list">
 <li class="is-done"><strong>Plates 1–3 printed</strong><span>Walls, decks, angles, battery tray, carriers and leg spacers.</span></li>
-<li class="is-done"><strong>Body frame assembled</strong><span>Two walls, three decks and the battery tray, per the user. Fits are not measured.</span></li>
-<li class="is-done"><strong>Two ST3215 servos received</strong><span>Labels, variant and bus IDs are not checked.</span></li>
+<li class="is-done"><strong>Body frame assembled</strong><span>Two walls, three decks and the battery tray. The hip holes agree with the guide, per the user.</span></li>
 <li class="is-active"><strong>Plate 4 printing</strong><span>Struts, servo cradles and cap bars.</span></li>
 <li><strong>Plate 5 next</strong><span>Electronics mounts, standoffs and feet.</span></li>
-<li class="is-open"><strong>Open</strong><span>Hip-hole measurements, the 3:1 servo drive to the hips and all powered tests.</span></li>
+<li class="is-open"><strong>To order</strong><span>Second gearmotor, second driver, two wheels with adapters, and a battery if necessary.</span></li>
+<li class="is-open"><strong>Open</strong><span>Wheel channel bench stages E0–E6 and all powered tests.</span></li>
 </ol><a href="build.html">See the next steps and evidence gates →</a></aside>
 </section>
 
-<section class="home-live" aria-labelledby="live-title"><div class="section-head"><div><p class="eyebrow">AN-01 / Live anatomy / R05</p><h2 id="live-title">See how Hux moves.</h2><p>Top, side, front and 3D views at one scale. The legs move through 15–40°, the robot drives, and the x-ray shows the boards and the harness. Drag the 3D view to turn it.</p></div><a href="anatomy.html">Open the full anatomy page with readouts →</a></div>
+<section class="home-live" aria-labelledby="live-title"><div class="section-head"><div><p class="eyebrow">AN-01 / Live anatomy / R05</p><h2 id="live-title">See how Hux moves.</h2><p>Top, side, front and 3D views at one scale. The first chapter shows the leg geometry through 15–40°. V1-PROOF locks the legs at 30°. The robot drives, and the x-ray shows the boards and the harness. Drag the 3D view to turn it.</p></div><a href="anatomy.html">Open the full anatomy page with readouts →</a></div>
 <div class="anatomy-frame-wrap"><iframe id="anatomy-frame" class="anatomy-frame" src="anatomy.html?embed" title="Animated R05 anatomy: top, side, front and 3D views of Hux" allow="fullscreen"></iframe></div>
 <p class="small home-note">CAD estimates with assumed mass positions. Nothing in these views is a physical measurement.</p></section>
 
@@ -26,7 +26,7 @@
 <figure class="kit-figure"><img src="../../cad/prints/two-leg-body-r05/views.png" alt="Side, front and top CAD views of the R05 two-leg body with rear hips, forward struts and wheels." loading="lazy"><figcaption><span>ME-05 / R05 ASSEMBLY VIEWS</span><span>CAD CHECKS PASSED · PHYSICAL FIT OPEN</span></figcaption></figure>
 </section>
 
-<dl class="project-specs" aria-label="Project design targets"><div><dt>Target mass</dt><dd id="target-mass">2.5 kg</dd><small>3.0 kg maximum</small></div><div><dt>Actuators</dt><dd id="axis-count">4</dd><small>2 wheel motors · 2 leg servos</small></div><div><dt>Leg range</dt><dd>15–40°</dd><small>R05 limit · 30° neutral</small></div><div><dt>Planning ceiling</dt><dd id="total-budget">$900</dd><small>With shipping &amp; reserves</small></div></dl>
+<dl class="project-specs" aria-label="Project design targets"><div><dt>Target mass</dt><dd id="target-mass">2.5 kg</dd><small>3.0 kg maximum</small></div><div><dt>Powered axes</dt><dd>2</dd><small>2 wheel gearmotors</small></div><div><dt>Legs</dt><dd>30°</dd><small>Locked · hips in the next version</small></div><div><dt>Planning ceiling</dt><dd id="total-budget">$900</dd><small>With shipping &amp; reserves</small></div></dl>
 
 <section class="section" aria-labelledby="project-sections"><div class="section-head"><div><p class="eyebrow">Project directory</p><h2 id="project-sections">One place for each part of the build.</h2><p>Subsystem drawings, test work and support records each have a page.</p></div></div><div class="resource-grid">
 <a class="resource-card" href="mechanical.html"><span class="eyebrow">01 / Mechanical</span><h3>Assembly &amp; drawings</h3><p>R05 body, general arrangement, wheel mount, joint details and the drawing register.</p><span class="resource-arrow">→</span></a>

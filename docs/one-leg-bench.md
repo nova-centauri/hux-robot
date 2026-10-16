@@ -1,5 +1,7 @@
 # Single-leg bench plan
 
+**Parked on 2026-10-16.** The user dropped the one-leg requirement, and V1-PROOF has no powered hips. Do not use this plan for V1-PROOF. Use the [electronics bench guide](electronics-bench-guide.md) for the wheel channel, and the [R05 assembly guide](r05-assembly.md) for the body. This plan stays for the powered legs of the next version. The text below describes the plan before this change.
+
 **2026-10-16 status:** R05 is the current build. The [R05 two-leg body](../cad/prints/two-leg-body-r05/README.md) holds both legs, the two inner servo cradles and the battery tray. Follow the [R05 assembly guide](r05-assembly.md). The user reports that the R05 frame is assembled and that two ST3215 servos are received.
 
 The 3:1 servo drive to the hips is not designed. Until it exists, do the servo stages below with the bare servo or with a servo in its cradle and no load. Use the R05 neutral lock for the leg. The R01, R03 and R04 kits are superseded.

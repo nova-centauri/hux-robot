@@ -10,7 +10,7 @@ The active checklists are for the small, four-actuator indoor proof with bounded
 - [Kill chain, opened 2026-10-15](../kill-chain.md): rail switch, KILL and ARM buttons, heartbeat gate, stages K0–K6. Design only.
 - [R05 print and fit record, opened 2026-10-15](2026-10-15-r05-fit-record.md): plates 1–3 are printed and the frame is assembled, per the user. No dimension is measured.
 - [Anatomy and layout review, 2026-10-14](2026-10-14-anatomy-review.md): the findings that led to R05.
-- [Single-leg bench plan](../one-leg-bench.md) and [copyable session record](one-leg-bench-session.md)
+- [Single-leg bench plan](../one-leg-bench.md) and [session record](one-leg-bench-session.md): parked on 2026-10-16, for the next version.
 - [Recording workflow](../mechanical-testing.md)
 - [Mechanical stages and trials](mechanical-v1.md)
 - [Electronics bring-up](electronics-bringup.md)

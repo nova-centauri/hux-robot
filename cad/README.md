@@ -18,6 +18,6 @@ Planning layout: [V1-PROOF envelope sketch](layouts/v1-proof.svg), generated fro
 
 For bench geometry checks, use the [1:1 single-leg geometry template](layouts/one-leg-bench-template.svg) with the [bench plan](../docs/one-leg-bench.md). Print at actual size and make sure that the 100 mm scale is correct. The template marks pivot centers for a paper/scrap mockup. Shaft holes, structural sections, lateral offsets and purchased-part mounts are not released.
 
-Next: measure the R05 parts, then design the 3:1 servo drive to the hips. That drive needs a hip shaft, wall bearings and pulleys. Suitable scrap/COTS stock is welcome. There is no carbon or custom in-wheel motor requirement.
+Next: install the struts, the carriers and the gearmotors with both legs locked at 30°. V1-PROOF has no powered hips. The 3:1 servo drive to the hips is for the next version. Suitable scrap/COTS stock is welcome. There is no carbon or custom in-wheel motor requirement.
 
 [H1](layouts/head-h1.svg), the [stair engineering review](../docs/head-and-leg-review.md), old sheets and downloaded vendor geometry are parked references. Vendor files in `vendor/` remain untouched and do not establish ownership. No released Hux custom parts exist.

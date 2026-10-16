@@ -2,7 +2,19 @@
 
 **2026-10-15 servo arrival:** the user reports that **two ST3215 servos are received**. The labels, the 12 V variant check, the condition and the bus IDs are not recorded. The half-duplex TTL interface is not selected. Start the servo stages of the [single-leg bench plan](one-leg-bench.md) after the [electronics bench](electronics-bench-guide.md) stages. Recorded spend stays $173.70.
 
-**2026-10-16 R05 printed parts:** plates 1–3 of the [R05 two-leg body](../cad/prints/two-leg-body-r05/README.md) are printed in Bambu PLA Basic. The user reports that the frame is assembled with the two walls, the three decks and the battery tray. Plate 4 is in print, and plate 5 is next. No R05 dimension is measured. The [print record](../cad/prints/two-leg-body-r05/bambu/README.md) lists each plate.
+**2026-10-16 parts to order:** the user still needs to order the second drive channel, the wheels and possibly a battery. V1-PROOF has no powered hips, so the servo bus interface and the hip drive parts are not necessary for V1-PROOF. Pololu prices checked on 2026-10-16, goods only:
+
+| Item | Quantity | Unit price |
+| --- | ---: | ---: |
+| [Pololu 4752 gearmotor](https://www.pololu.com/product/4752), 30:1, 12 V, encoder | 1 | $60.95 |
+| [Pololu 4035 DRV8874 driver](https://www.pololu.com/product/4035) | 1 | $11.94 |
+| [Pololu 3278 scooter wheel](https://www.pololu.com/product/3278), 100 × 24 mm | 2 | $8.86 |
+| [Pololu 2674 wheel adapter](https://www.pololu.com/product/2674), 6 mm shaft | 2 | $7.75 |
+| 3S LiPo pack, approximately 2.2 Ah, maximum 106 × 35 × 25 mm | 1 | Not checked |
+
+The Pololu items total $106.11 before shipping and tax. Buy the battery only if no compatible 3S pack and charger are on hand. The R05 tray holds a pack of 106 × 35 × 25 mm or less. No order is placed or recorded.
+
+**2026-10-16 R05 printed parts:** plates 1–3 of the [R05 two-leg body](../cad/prints/two-leg-body-r05/README.md) are printed in Bambu PLA Basic. The user reports that the frame is assembled with the two walls, the three decks and the battery tray. Plate 4 is in print, and plate 5 is next. The user reports that the hip-hole measurements agree with the guide. The [print record](../cad/prints/two-leg-body-r05/bambu/README.md) lists each plate.
 
 The R05 hardware is in the [assembly guide](r05-assembly.md#hardware). Confirm the stock of M4 and M3 bolts, nuts and washers before step 5. The R01, R03 and R04 printed parts are superseded. Keep them for spares and comparison only.
 
@@ -39,15 +51,15 @@ Purchased parts count as new cash spend. We infer no reuse credit.
 | Pico 2 with yellow pre-soldered headers | 1 received per user and screenshot 2026-10-03; untested; individual price unshown within $30.58 controller/IMU order | USB/LED bring-up, then C/C++ controller qualification | $0 |
 | SparkFun LSM6DSO Qwiic IMU | 1 received per user 2026-10-03; untested; individual price unshown within the $30.58 controller/IMU order | Main SPI and data-ready sensing; replaces the earlier LSM6DSOX choice after qualification | $0 |
 | Pololu 4752 encoder gearmotors | 1 received per user 2026-10-02, untested; $60.95 goods, part of the $88.34 paid Pololu order; second motor still required | Dry-fit the received motor, then qualify one restrained wheel channel | $0 |
-| ST3215 12 V servos | 2 received per user 2026-10-15; untested; labels unchecked; $42.38 goods + $12.40 shipping = $54.78; 12 V variant confirmed by user at order | Supported single-leg bench now; robot height adjustment after pinned-leg balance | $0 |
+| ST3215 12 V servos | 2 received per user 2026-10-15; untested; labels unchecked; $42.38 goods + $12.40 shipping = $54.78; 12 V variant confirmed by user at order | Next version: powered hips. V1-PROOF does not use them (2026-10-16) | $0 |
 | Pololu 4035 DRV8874 drivers | Received per user 2026-10-02, untested; total delivered count pending; receipt covers 1 at $11.94 goods | H-bridge and current limiting for each wheel motor; confirm coverage of both channels | $0 |
-| 3D-printed mechanical parts | R03 kit complete per user 2026-10-07; default PLA setup. Earlier prints reported 2026-10-02. Actual count, dimensions and fits unrecorded | R03 frame and leg fit checks, then supported assembly. Powered mounts and load capacity remain unqualified | $0 |
-| Servo interface / adapter | Purchase/availability unconfirmed | Half-duplex TTL commands and feedback | $0 |
+| 3D-printed mechanical parts | R05 plates 1–3 printed, frame assembled per user 2026-10-16, hip holes agree per user; plate 4 in print, plate 5 next. R01, R03 and R04 parts superseded | R05 body with legs locked at 30° | $0 |
+| Servo interface / adapter | Purchase/availability unconfirmed | Next version only. Half-duplex TTL commands and feedback | $0 |
 | Bench supply | Available; sufficient adjustable voltage/current capacity per user 2026-10-06; model, final settings and reverse-energy behavior unrecorded | Supported body and single-actuator tests with the existing power/interface checks | $0 |
 | Panasonic MSMD042G1A industrial servo | 1 on hand per the user 2026-10-01; two photo views; untested, drive/harness/supply unknown | Bench/future mechanism candidate; 200 V-class drive and mass conflict with current proof | $0 |
 | Stepper motors; one labeled Astrosyn 610-024 | 2 on hand per the user 2026-10-01; only one label verified; ratings and condition unknown | Positioning/fixture candidates after identification; no current axis assigned | $0 |
 | Battery and balance charger | Cell count, condition and models unknown | Compatible 3S-class system or deliberate requalification | $0 |
-| Wheels, hubs, bearings, belts, fasteners | None reserved | Approximately 100 mm wheel package and simple legs | $0 |
+| Wheels, hubs and fasteners | None on hand; 2 × Pololu 3278 wheels and 2 × Pololu 2674 adapters to order | 100 mm wheel package on the gearmotor shafts | $0 |
 | Aluminum, plywood, tube, wire, connectors | Shop stock not inventoried | Frame, fixture and harness | $0 |
 
 For each confirmed item, record the date, exact variant, quantity, condition, electrical limits and measured mass/envelope. Also record if the item is available for Hux. A vendor CAD file is not owned hardware. The presence of a board does not establish spare pins or compatible logic levels. A receiver needs a usable transmitter/link.

@@ -15,6 +15,12 @@ The active objective is a useful, inexpensive proof robot. **Under $1,000. Reuse
 
 ## Next physical work
 
+**2026-10-16 hips leave V1-PROOF:** the user said: "We are leaving hips out of V1-Proof and will bring it back in the next version. We dropped the one-leg and stair-climbing requirements." V1-PROOF now has two powered axes, and both legs stay locked at 30°. The [decision log](docs/decisions.md), the requirements, the build brief, the validation protocol, the assembly guide, the plan data and the website show this change.
+
+The single-leg bench plan is parked. The plan data moves it, the powered-leg milestone and the hip drive design to the next version. The V1-PROOF bench is now the electronics bench, stages E0–E6. The numerical model and the budget still include the servo and leg transmission allowances.
+
+The user reports that the hip-hole measurement is "perfect", without the values. The user still needs to order a second gearmotor, a second driver, the wheels and possibly a battery. The [inventory](docs/parts-on-hand.md) lists the Pololu prices of 2026-10-16: $106.11 goods for the Pololu items. No order is placed.
+
 **2026-10-16 R05 frame and website update:** the user reports an assembled R05 body: two walls, three decks and the battery tray. The servos are received. No dimension is measured. The [fit record](docs/checklists/2026-10-15-r05-fit-record.md) and the [assembly guide](docs/r05-assembly.md) record this. The guide now tells how to install the servo cradles through the front opening of an assembled frame.
 
 The home page now shows the live R05 anatomy, the build status and one group of R05 links. The Mechanical page, the document library, the README files and the plan data now put R05 first. Each R01–R04 record shows a superseded notice. The anatomy servo position now agrees with the R05 kit: 41 mm forward of the lower hip and 3 mm above it.

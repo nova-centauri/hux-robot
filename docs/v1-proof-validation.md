@@ -51,9 +51,9 @@ These are separate intended test fixtures. Simultaneous shove + turn + bump comb
 
 ## Duty, faults and next-version release
 
-- [ ] Repeat the ten-minute mixed balance/drive/height session within the measured temperature and electrical limits, with controlled stops and both steering directions. The current simulator has no thermal model. Short runs cannot clear this gate.
+- [ ] Repeat the ten-minute mixed balance/drive session within the measured temperature and electrical limits, with controlled stops and both steering directions. The current simulator has no thermal model. Short runs cannot clear this gate.
 - [ ] Do tests of the hard kill, stale command >250 ms, stale IMU/encoder, missed deadlines, undervoltage, reset and driver fault. A deliberate rearm is necessary. Do a test of power removal in the catch fixture.
-- [ ] Complete ten powered low/high/low cycles over the measured qualified range. Target ≥25 mm height change. This is a separate gate from pinned-leg mobility.
+- Moved to the next version on 2026-10-16: ten powered low/high/low cycles with a target of ≥25 mm height change. V1-PROOF keeps the legs locked.
 - [ ] Keep the total mass ≤3.0 kg and the actual all-in new cash < $1,000.
 - [ ] Replace the simulation assumptions with measured motor, delay, inertia, friction and backlash data. Rerun the complete matrix and investigate every failure.
 - [ ] Archive the trial CSVs/video references and the failure counts with the firmware/model hashes before you add V2 payload, compute, cameras or terrain requirements.

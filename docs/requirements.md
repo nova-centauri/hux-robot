@@ -1,16 +1,18 @@
 # V1-PROOF requirements
 
-**Active from 2026-09-28.** The user's scope reset supersedes the stair project. The [archive](archive/stair-v1/requirements.md) keeps the historical R1–R44 requirements. They do not constrain this proof build. [Plan and finish line](v1-proof.md).
+**Active from 2026-09-28. Updated 2026-10-16:** powered hips leave V1-PROOF. PF04, PF05, PF07 and PF15 change. The one-leg and stair requirements are dropped. [Decision](decisions.md#2026-10-16--hips-leave-v1-proof-one-leg-and-stair-requirements-dropped).
+
+The user's scope reset supersedes the stair project. The [archive](archive/stair-v1/requirements.md) keeps the historical R1–R44 requirements. They do not constrain this proof build. [Plan and finish line](v1-proof.md).
 
 | ID | Requirement | Acceptance / scope |
 | --- | --- | --- |
 | PF01 | Strictly under $1,000 new cash | Entire proof build, all stages, tax, shipping, consumables and repairs; $900 planned ceiling |
 | PF02 | Reuse suitable equipment first | Confirm exact items before deducting budget; no assumed free inventory |
 | PF03 | Small, lightweight robot | 2.5 kg proposed target; 3.0 kg maximum including battery |
-| PF04 | Four powered axes maximum | Two wheels plus one leg adjustment per side; no roll or ankle axes |
-| PF05 | First balance with pinned legs | Same structure/wheel/electronics hardware carries into leg-motion stage |
+| PF04 | Two powered axes | Two wheels. Legs locked at 30°. Powered hips return in the next version. No roll or ankle axes |
+| PF05 | Balance with pinned legs | All V1-PROOF trials use the 30° lock. The structure, wheels and electronics carry into the next version |
 | PF06 | Two-wheel balance and manual drive | 60 s balance 9/10 starts; forward/reverse, left/right arcs and both in-place rotations; [physical protocol](v1-proof-validation.md) |
-| PF07 | Modest leg movement, both wheels down | Ten low/high/low cycles; target ≥25 mm measured height change |
+| PF07 | Moved to the next version | Powered leg-height change. Not a V1-PROOF gate |
 | PF08 | Shallow indoor irregularities | At 0.15 m/s: ±3° cross-slope, 3° ascent/descent, 5 mm smooth bump over 300 mm, 3 mm seam; no rough terrain or stairs |
 | PF09 | Slow travel | 0.25 m/s cruise; 0.5 m/s remains unqualified; recovery clearance to 0.65 m/s |
 | PF10 | Flexible, inexpensive drives | Geared brushed wheel motors and small servos allowed; encoder feedback and mounted duty tests required |
@@ -18,7 +20,7 @@
 | PF12 | Compatible power and fault handling | Pack/rails verified at full charge and low operating voltage; current limits, physical cut and stale-data handling |
 | PF13 | Serviceable shop construction | Existing/COTS stock, removable pack, accessible fasteners, proper bearings and cable strain relief |
 | PF14 | Honest model and evidence | Preliminary drawings before detail CAD; measured mass/CoM and trial logs before performance claims |
-| PF15 | Ten-minute mixed demonstration | Within mounted thermal/electrical limits and no resets; fault recovery requires deliberate rearm |
+| PF15 | Ten-minute mixed demonstration | Balance and drive within mounted thermal/electrical limits and no resets; fault recovery requires deliberate rearm |
 
 | PF16 | Bounded push recovery | Fore/aft 0.8 N·s, lateral 0.4 N·s at 0.20 m height; 50/200 ms pulses, settle within 3 s; larger human shoves unqualified |
 | PF17 | Explicit hardware baseline | [Selected components and bench gates](v1-proof-hardware.md); no purchase or physical validation implied |

@@ -2,7 +2,7 @@
 
 **2026-10-16 status:** R05 is the current build. In the [R05 two-leg body](../cad/prints/two-leg-body-r05/README.md), the hips are 30 mm rearward of the body centre, and the struts slant forward to the wheels. The ST3215 servos and the battery are inside the body. Follow the [R05 assembly guide](r05-assembly.md).
 
-The user reports that the frame is assembled, with the two walls, the three decks and the battery tray. No R05 dimension is measured. The 3:1 servo drive to the hips is not designed.
+The user reports that the frame is assembled, with the two walls, the three decks and the battery tray. The user reports that the hip-hole measurements agree with the guide. V1-PROOF has no powered hips: both legs stay locked at 30°. The 3:1 servo drive returns in the next version.
 
 R05 keeps the 110 mm struts, the 40 mm hip spacing, the 30° neutral lock and the JD-03 carrier. The R05 leg range is 15–40°. The [earlier revisions](#earlier-revisions) are at the end of this document.
 
@@ -16,7 +16,7 @@ One selected Pololu 4752 gearmotor with encoder at each wheel carrier. Use prope
 
 Do a check of the complete motor length and the wire-harness sweep before you fix the track. The proposed track is 230 mm and the wheel width is 25 mm. This gives 255 mm across the tires.
 
-Each leg has two 110 mm parallel links. The body pivots and the wheel-carrier pivots have the same 40 mm vertical separation. This makes a planar parallelogram. One leg servo drives one body pivot through a 3:1 belt reduction. The other pivots are passive and have bearings.
+Each leg has two 110 mm parallel links. The body pivots and the wheel-carrier pivots have the same 40 mm vertical separation. This makes a planar parallelogram. In the next version, one leg servo drives one body pivot through a 3:1 belt reduction. V1-PROOF locks the legs at 30°. The other pivots are passive and have bearings.
 
 In R05, the hips are near the rear of the body. Each strut slants forward and down from its hip to the wheel carrier. The R05 range is 15–40° from the downward vertical, with 30° at neutral.
 

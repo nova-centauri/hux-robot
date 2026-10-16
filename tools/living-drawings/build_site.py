@@ -42,7 +42,6 @@ SUB_ROUTES = {
                         ("wheel-mount.html", "Wheel mount"), ("mechanical-tests.html", "Mechanical tests")),
     "electrical.html": (("electrical.html", "Wiring"), ("controls.html", "Control software")),
     "build.html": (("build.html", "Build plan"), ("docs/electronics-bench-guide.html", "Electronics bench"),
-                   ("docs/one-leg-bench.html", "Bench testing"),
                    ("proof-simulation.html", "Simulation evidence"), ("proof-sandbox.html", "3D sandbox")),
 }
 OLD_SECTIONS = {
@@ -400,7 +399,7 @@ def document_sidebar(source: PurePosixPath, root: Path) -> str:
         ("Mechanical", (("mechanical.html", "Assembly overview"), ("anatomy.html", "Animated anatomy"), ("joints.html", "Joint details"),
                         ("wheel-mount.html", "Wheel drive mount"), ("docs/mechanical-testing.html", "Mechanical test plan"))),
         ("Electrical & controls", (("electrical.html", "Wiring diagrams"), ("controls.html", "Control software"))),
-        ("Build & test", (("build.html", "Build board"), ("docs/one-leg-bench.html", "Single-leg bench guide"),
+        ("Build & test", (("build.html", "Build board"), ("docs/electronics-bench-guide.html", "Electronics bench guide"),
                           ("docs/checklists/README.html", "Build checklists"))),
         ("Parts & records", (("parts.html", "Parts & budget"), ("docs/parts-on-hand.html", "Inventory & orders"),
                              ("v0-genesis.html", "Archived studies"))),

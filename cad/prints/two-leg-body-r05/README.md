@@ -37,7 +37,9 @@ The battery tray has a flange along each wall and four strap slots. The pack env
 
 ## Limits
 
-The 3:1 belt drive from each servo to its lower hip is not in this kit. The hip shaft, the wall bearings and the pulleys remain to design. The hips use the passive M4 pivot stack of R04. Do not apply servo torque through these pivots.
+**2026-10-16:** V1-PROOF has no powered hips. Both legs stay locked at 30° with the lock links. The servo cradles and cap bars are optional in V1-PROOF.
+
+The 3:1 belt drive from each servo to its lower hip is not in this kit. It is for the next version. The hip shaft, the wall bearings and the pulleys remain to design. The hips use the passive M4 pivot stack of R04. Do not apply servo torque through these pivots.
 
 Limit the leg to 40° until a hand sweep confirms the gearmotor clearance. Use the neutral lock link for the first balance tests.
 

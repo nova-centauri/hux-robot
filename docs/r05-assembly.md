@@ -2,7 +2,9 @@
 
 **Revision R05, 2026-10-16.** This guide tells you how to assemble the [R05 two-leg body](../cad/prints/two-leg-body-r05/README.md). It follows the [anatomy layout](../tools/living-drawings/anatomy.html) with rear hips, inner servos and a battery tray. Plates 1, 2 and 3 are printed. Plate 4 is in progress, and plate 5 remains to print.
 
-The user reports that the frame is assembled: the two walls, the three decks and the battery tray. The two ST3215 servos are received. No R05 fit, load or powered test is recorded.
+The user reports that the frame is assembled: the two walls, the three decks and the battery tray. The user reports that the hip-hole measurements agree with step 0. No R05 load or powered test is recorded.
+
+**V1-PROOF has no powered hips (2026-10-16).** Both legs stay locked at 30°. Steps 1 and 7 install the servo cradles and the servos. They are optional for V1-PROOF, because the servos return in the next version. Do steps 2 to 6 and step 8.
 
 ![Side view of the R05 leg geometry with rear hips and forward struts](assets/r05-assembly/side-hip-geometry.png)
 
@@ -10,7 +12,7 @@ The user reports that the frame is assembled: the two walls, the three decks and
 
 WARNING: Disconnect the battery and the bench supply before you assemble or adjust Hux. A motor or a servo can move and cause injury.
 
-CAUTION: Do not apply servo torque through the M4 hip pivots. The 3:1 servo drive is not designed. Torque through the pivots can cause damage to the walls.
+CAUTION: Do not apply servo torque through the M4 hip pivots. The 3:1 servo drive is for the next version and is not designed. Torque through the pivots can cause damage to the walls.
 
 CAUTION: Do not move a leg beyond 40°. At 45° the gearmotor is 0.23 mm from the lower strut. Contact can cause damage to the strut.
 
@@ -93,7 +95,7 @@ Measure the pivot bolt length on the actual stack. The stack at each hip is the 
 
 If a measurement is more than 0.3 mm from its value, stop. Record the value before you continue.
 
-## Step 1. Install the servo cradles
+## Step 1. Install the servo cradles (optional for V1-PROOF)
 
 ![Step 1. Servo cradles on both walls](assets/r05-assembly/step-1-cradles.png)
 
@@ -189,9 +191,11 @@ CAUTION: Use the same carrier hand on both sides. The gearmotor must sit toward 
 5. Put a cable tie through the carrier anchor slots. Leave a service loop for the full leg range.
 6. Do steps 1 to 5 again on the other side.
 
-## Step 7. Install the servos and the battery
+## Step 7. Install the servos (optional) and the battery
 
 ![Step 7. Servos and battery](assets/r05-assembly/step-7-servo-battery.png)
+
+For V1-PROOF, you can skip items 1 to 6. Then do items 7 and 8.
 
 1. Put the ST3215 servo into the cradle with the output to the rear and into the body.
 2. Put a 1 mm resilient pad under each cap bar.

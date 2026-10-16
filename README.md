@@ -1,13 +1,13 @@
 # Hux — V1-PROOF
 
-**Build a small wheeled robot that balances, drives and adjusts its height for under $1,000.** The stair project is parked. V1-PROOF is the active model as of 2026-09-28. Old requirements do not gate this build.
+**Build a small two-wheel robot that balances and drives for under $1,000.** Powered leg height returns in the next version. The stair project is parked. V1-PROOF is the active model as of 2026-09-28. Old requirements do not gate this build.
 
 | Design target | V1-PROOF |
 | --- | --- |
 | Cash budget | **$900 planning ceiling**, including $100 shipping/tax and $125 repair contingency; strictly under $1,000 |
 | Mass | **2.5 kg target; 3.0 kg maximum**, including battery |
-| Actuators | **Four:** two encoder wheel gearmotors, one small leg servo per side |
-| First milestone | Pin the legs; balance using only the two wheel motors |
+| Actuators | **Two:** two encoder wheel gearmotors. Legs locked at 30°. Powered hips return in the next version |
+| First milestone | Balance with the legs locked, with only the two wheel motors |
 | Size | Target approximately **28–31 cm high, 25.5 cm wide**, 10 cm rubber wheels. The R05 CAD is approximately 32–35 cm high. |
 | Motion | Indoor mobility; 0.25 m/s cruise, 0.15 m/s on qualified shallow uneven surfaces; approximately 28 mm leg-height adjustment |
 | Reuse | Existing controller, IMU, manual input, battery/charger and shop stock when confirmed |

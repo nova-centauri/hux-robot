@@ -6,7 +6,11 @@ This is the dated log of the decisions of the user for Hux, in the order that th
 
 The source of truth is this repo (`nova-centauri/hux-robot`). Docs only. **No spend.** No SKU locks beyond the locks that are already decided below.
 
-## Current governing decisions — V1-PROOF, updated 2026-10-04
+## Current governing decisions — V1-PROOF, updated 2026-10-16
+
+**2026-10-16 scope change (the user):** "We are leaving hips out of V1-Proof and will bring it back in the next version." The user also dropped the one-leg requirement and the stair-climbing requirement. V1-PROOF now has two powered axes: the two wheel gearmotors.
+
+Both legs stay locked at the 30° neutral pose with the R05 lock bolts. Powered leg-height change, the 3:1 servo drive and the single-leg bench move to the next version. The two received ST3215 servos stay in stock for that version. The rows below show this change.
 
 The user extended V1-PROOF to dependable forward/reverse traversal, left/right turns, rotation in place, bounded pushes/uneven terrain and concrete component decisions. This extends the proof scope but keeps its cost, mass and four-axis limits. The earlier dated entries remain history.
 
@@ -14,15 +18,15 @@ The user extended V1-PROOF to dependable forward/reverse traversal, left/right t
 | --- | --- |
 | Active model | V1-PROOF is current; V0-GENESIS names the old planning model (historically STAIR-V1); a third version follows the proof, with scope/name open |
 | Cost / mass | Strictly < $1,000; **$900** allocation including $225 reserves; 2.5 kg target / 3.0 kg maximum |
-| Actuators | **2 × Pololu 4752 wheels + 2 × ST3215 12 V variant legs through 3:1 belts**; first mobility with pinned 30° legs |
+| Actuators | **2 × Pololu 4752 wheels only** (2026-10-16). Legs locked at 30°. The 2 × ST3215 12 V servos and the 3:1 hip drive move to the next version |
 | Drivers | **2 × Pololu 4035 DRV8874**, configured current limiting, sleep/kill/watchdog, PH/EN and fixed-off-time regulation |
 | Control / sensing | **Pico 2 + SparkFun LSM6DSO received, SPI planned**, encoder/current/fault/battery feedback; USB, sensor and timing qualification open |
-| Power | 3S approximately 2.2 Ah; **9 V servo / 5 V logic branches**; actual pack, regulators and protection require measured circuit qualification |
+| Power | 3S approximately 2.2 Ah; **5 V logic branch**. The 9 V servo branch moves to the next version with the servos. Actual pack, regulators and protection require measured circuit qualification |
 | Cameras | **Zero onboard in V1**; existing external video for trials; perception is a later version gate |
 | Motion | 0.25 m/s cruise, 0.15 m/s uneven fixtures, 0.4 rad/s arc / 0.6 rad/s pivot; 0.5 m/s not yet qualified |
 | Disturbances | Qualification targets: 0.8 N·s longitudinal / 0.4 N·s lateral at 0.20 m, 50/200 ms pulses; 3° grades/cross-slopes, 5 mm smooth bump, 3 mm seam |
-| Evidence | Pinned-leg 3D closed-loop simulation with seed/parameter sweep and failure cases; physical validation and powered-leg dynamics remain open |
-| Next versions | Carry measured actuator/sensor models, telemetry, fault behavior and tests forward; no promised stair upgrade of this chassis |
+| Evidence | Pinned-leg 3D closed-loop simulation with seed/parameter sweep and failure cases; physical validation remains open. Powered-leg dynamics belong to the next version |
+| Next versions | Powered hips and leg-height change return in the next version. Carry measured actuator/sensor models, telemetry, fault behavior and tests forward. Stair climbing is not a requirement |
 | Orders / publication | **Motor/drivers, Pico and LSM6DSO received; 2 × ST3215 ordered; $173.70 recorded spend**. Second wheel motor still required; total delivered driver count pending. User confirms servo 12 V variant. New order charge breakdown is unshown. Publish through the existing CI/CD when authorized and verify live pages. |
 | Writing standard | **All active text obeys ASD-STE100 Simplified Technical English** (2026-10-04); `python3 tools/ste/check_repo.py` is a build gate in `npm run test:site`; `docs/archive/`, `docs/research/` and the V0-GENESIS pages stay historical |
 
@@ -31,6 +35,12 @@ Refer to [hardware decisions](v1-proof-hardware.md), [simulation evidence](v1-pr
 ---
 
 ## Log
+
+### 2026-10-16 — Hips leave V1-PROOF; one-leg and stair requirements dropped
+
+The user said: "We are leaving hips out of V1-Proof and will bring it back in the next version. We dropped the one-leg and stair-climbing requirements." V1-PROOF keeps the R05 two-leg body with both legs locked at 30°. It proves balance, manual drive, faults, disturbances and duty on two wheel gearmotors.
+
+Requirement PF07 and the finish-line leg-motion item move to the next version. The single-leg bench plan is parked. The servo cradles and cap bars of plate 4 can stay in the body or come out. The numerical model and the budget allowances still include the servos and the leg transmission. Remove those allowances at the next model revision.
 
 ### 2026-10-04 — Simplified Technical English becomes the writing standard
 

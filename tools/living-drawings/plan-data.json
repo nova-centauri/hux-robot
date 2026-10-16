@@ -44,29 +44,28 @@
       "name": "V1-PROOF",
       "role": "current",
       "status": "in-progress",
-      "summary": "The current HUX: a small, four-actuator wheeled robot to prove balance, manual drive and slow leg-height changes for strictly less than $1,000.",
+      "summary": "The current HUX: a small two-wheel robot with its legs locked at 30°, to prove balance, manual drive and fault handling for strictly less than $1,000. Powered hips return in the next version.",
       "sourcePaths": [
         "docs/v1-proof.md",
         "docs/decisions.md",
         "docs/parts-on-hand.md"
       ],
       "focus": {
-        "title": "Assemble and measure the R05 two-leg body",
-        "summary": "R05 is the current build, with rear hips, inner servos and a battery tray. Plates 1–3 are printed, and the user reports that the frame is assembled. Plate 4 is in print, and plate 5 is next. Two ST3215 servos are received. No R05 dimension is measured, and the 3:1 servo drive to the hips is not designed. Recorded spend stays $173.70.",
+        "title": "Finish the R05 body and the second wheel channel",
+        "summary": "R05 is the current build. The user reports an assembled frame and hip holes that agree with the guide. V1-PROOF has no powered hips: both legs stay locked at 30°, and the two wheel gearmotors are the only powered axes. Plate 4 is in print, and plate 5 is next. Order the second gearmotor, the second driver, the wheels and a battery if necessary.",
         "sourcePaths": [
+          "docs/decisions.md",
           "docs/r05-assembly.md",
           "docs/checklists/2026-10-15-r05-fit-record.md",
-          "cad/prints/two-leg-body-r05/README.md",
-          "cad/prints/two-leg-body-r05/bambu/README.md",
-          "NOTES.md",
-          "docs/parts-on-hand.md"
+          "docs/parts-on-hand.md",
+          "NOTES.md"
         ]
       },
       "nextActions": [
         {
           "id": "fixture-mockup",
-          "title": "Measure and finish the R05 assembly",
-          "detail": "Measure the hip holes on each wall: 40.0 mm apart and 30 mm from the rear edge. Install the servo cradles through the front opening when plate 4 is complete. Then install the struts, the carriers and the gearmotors, and sweep each leg by hand from 15° to 40°. Record each value in the R05 fit record. The frame is assembled, per the user, and no dimension is measured.",
+          "title": "Finish the R05 assembly with locked legs",
+          "detail": "The hip holes agree with the guide, per the user. When plate 4 is complete, install the struts and the carriers, and lock both legs at 30°. Install the gearmotors and the wheels when they arrive. The servo cradles are optional. Record each value in the R05 fit record.",
           "status": "in-progress",
           "sourcePaths": [
             "docs/r05-assembly.md",
@@ -77,14 +76,14 @@
           ]
         },
         {
-          "id": "hip-drive",
-          "title": "Design the R05 servo drive to the hips",
-          "detail": "Each inner servo must turn its lower hip through a 3:1 reduction. Design the hip shaft, the wall bearings, the pulleys, the belt and the belt tension. Until this drive exists, the M4 hip pivots are passive. Do not apply servo torque through them. New printed parts go on the next print plate.",
-          "status": "planned",
+          "id": "order-drive",
+          "title": "Order the second wheel channel, the wheels and the battery",
+          "detail": "Order one Pololu 4752 gearmotor ($60.95), one Pololu 4035 driver ($11.94), two Pololu 3278 wheels ($8.86 each) and two Pololu 2674 adapters ($7.75 each). Prices are goods only, checked on 2026-10-16. Buy a 3S pack of approximately 2.2 Ah, maximum 106 × 35 × 25 mm, only if no compatible pack and charger are on hand. Record each paid order in docs/purchases.md.",
+          "status": "to-buy",
           "sourcePaths": [
-            "cad/prints/two-leg-body-r05/README.md",
-            "docs/checklists/2026-10-14-anatomy-review.md",
-            "docs/mechanical.md"
+            "docs/parts-on-hand.md",
+            "docs/purchases.md",
+            "docs/v1-proof-hardware.md"
           ]
         },
         {
@@ -111,7 +110,7 @@
         {
           "id": "record-orders",
           "title": "Identify the received parts and outstanding arrivals",
-          "detail": "Record the gearmotor/driver labels, the total received driver count, the dimensions and the condition. The receipt covers one Pololu 4752 gearmotor and one DRV8874 driver (Pololu 4035), but R05 needs two of each. The Pico 2 and the LSM6DSO IMU are received. The user reports that two ST3215 servos are received. Record their labels and confirm the 12 V variant. Give the two servos different bus IDs before you connect both to one bus.",
+          "detail": "Record the gearmotor/driver labels, the total received driver count, the dimensions and the condition. The receipt covers one Pololu 4752 gearmotor and one DRV8874 driver (Pololu 4035), but R05 needs two of each. The Pico 2 and the LSM6DSO IMU are received. The two ST3215 servos are received and stay in stock for the next version.",
           "status": "ready",
           "sourcePaths": [
             "docs/purchases.md",
@@ -119,23 +118,13 @@
           ]
         },
         {
-          "id": "record-session",
-          "title": "Add measurements to the leg motion report",
-          "detail": "The user reports completed leg tests and satisfactory travel. Record the actual endpoints, closest clearances, neutral free play, printed revision and material when available. Preserve the report without an inferred load or power pass.",
-          "status": "ready",
-          "sourcePaths": [
-            "docs/checklists/2026-10-06-leg-motion.md",
-            "docs/checklists/one-leg-bench-session.md"
-          ]
-        },
-        {
           "id": "inventory-interfaces",
           "title": "Confirm controls and power interfaces",
-          "detail": "The Pico 2 and the DRV8874 drivers are received, but the total driver count remains to record. The LSM6DSO IMU is received, untested. Confirm the half-duplex servo interface, the encoder level conversion, the harness and the protected power rails. Record the bench-supply ratings. A second wheel gearmotor is still necessary. Reconcile the driver inventory before you order another driver.",
+          "detail": "The Pico 2 and the DRV8874 drivers are received, but the total driver count remains to record. The LSM6DSO IMU is received, untested. Confirm the encoder level conversion, the harness and the protected power rails. Record the bench-supply ratings. V1-PROOF needs no servo interface.",
           "status": "ready",
           "sourcePaths": [
             "docs/parts-on-hand.md",
-            "docs/one-leg-bench.md"
+            "docs/electronics-bench-guide.md"
           ]
         },
         {
@@ -144,7 +133,7 @@
           "detail": "Prepare a fused harness and an independent actuator-power cut. Verify the supply behavior, the current limits and a regeneration path before you lower a load, backdrive an actuator or reverse aggressively.",
           "status": "planned",
           "sourcePaths": [
-            "docs/one-leg-bench.md",
+            "docs/kill-chain.md",
             "docs/v1-proof-hardware.md"
           ]
         }
@@ -172,8 +161,8 @@
         },
         {
           "label": "Powered axes",
-          "value": "4",
-          "note": "Two wheel gearmotors and two reduced leg servos. The first free-standing balance uses pinned legs."
+          "value": "2",
+          "note": "Two wheel gearmotors. Both legs stay locked at 30°. Powered hips return in the next version."
         },
         {
           "label": "Simulation evidence",
@@ -276,7 +265,7 @@
         {
           "id": "control-interface",
           "name": "Compatible half-duplex servo interface",
-          "status": "unconfirmed",
+          "status": "future",
           "plannedQuantity": 1,
           "orderedQuantity": null,
           "actualCost": null,
@@ -358,36 +347,18 @@
           "id": "P0",
           "title": "Inventory and layout",
           "status": "in-progress",
-          "summary": "The R05 frame is assembled, per the user. Plates 1–3 are printed, plate 4 is in print, and plate 5 is next. Paid receipts cover one wheel gearmotor, one driver and two leg servos. The servos are received. The R05 fits, the second wheel gearmotor, the servo interface and the hip drive remain open.",
+          "summary": "The R05 frame is assembled and the hip holes agree with the guide, per the user. Plates 1–3 are printed, plate 4 is in print, and plate 5 is next. Paid receipts cover one wheel gearmotor, one driver and two leg servos. The second gearmotor, the second driver, the wheels and the battery remain to order.",
           "criteria": [
             "Record exact parts, variants, quantities, costs and reusable stock.",
             "Quote missing items and retain reserves inside the strict cash cap.",
             "Check mass allocations and the full wheel, motor, bearing, battery and cable envelopes.",
-            "Detail the pinned structure and a supported reduced-servo leg before final machining."
+            "Detail the pinned structure with both legs locked at 30°."
           ],
           "sourcePaths": [
             "docs/checklists/2026-10-15-r05-fit-record.md",
-            "docs/checklists/mechanical-v1.md",
             "docs/parts-on-hand.md",
-            "docs/bom.md"
-          ]
-        },
-        {
-          "id": "BENCH",
-          "title": "One-leg actuator exercise",
-          "status": "in-progress",
-          "summary": "R05 supplies the body, an inner cradle for each ST3215 servo and the neutral lock. The two servos are received, with labels unchecked. The 3:1 drive to the hips is not designed. Do the servo stages with a bare servo or a servo in its cradle and no load. Physical fit, powered tests and the leg transmission remain open. Recorded spend stays $173.70.",
-          "criteria": [
-            "Complete the staged session with bounded commands, measured signs and disabled startup.",
-            "Record passive clearances, backlash and measured leg/wheel response.",
-            "Demonstrate independent power cut and implemented fault behavior in the fixture.",
-            "Use measured load, electrical and thermal results to inform the robot. A bench pass does not prove balance."
-          ],
-          "sourcePaths": [
-            "docs/r05-assembly.md",
-            "cad/prints/two-leg-body-r05/README.md",
-            "docs/checklists/2026-10-15-r05-fit-record.md",
-            "docs/one-leg-bench.md"
+            "docs/bom.md",
+            "docs/decisions.md"
           ]
         },
         {
@@ -424,22 +395,6 @@
           ]
         },
         {
-          "id": "P3",
-          "title": "Powered leg-height adjustment",
-          "status": "planned",
-          "summary": "Add the supported 3:1 reductions after the pinned-leg balance. Qualify each leg before synchronized movement.",
-          "criteria": [
-            "Qualify the 0.75 N·m mounted servo hold for 10 minutes. Qualify the separate 1.0 N·m short transient target.",
-            "Measure backlash, loaded clearance and pose-dependent pitch trim.",
-            "Complete ten low/high/low cycles with both wheels loaded. The target is at least 25 mm of actual body-height change.",
-            "Make sure that there is no support contact, overload or balance loss. Use the measured qualified range."
-          ],
-          "sourcePaths": [
-            "docs/checklists/mechanical-v1.md",
-            "docs/v1-proof-validation.md"
-          ]
-        },
-        {
           "id": "P4",
           "title": "Complete the physical proof",
           "status": "planned",
@@ -447,7 +402,7 @@
           "criteria": [
             "Qualify the specified 0.8 N·s longitudinal and 0.4 N·s lateral pulses, both signs and durations.",
             "Qualify separate 3° slopes, 5 mm smooth bumps and 3 mm seam fixtures at 0.15 m/s.",
-            "Complete a 10-minute mixed session in the measured electrical and thermal limits, with no resets.",
+            "Complete a 10-minute mixed balance and drive session in the measured electrical and thermal limits, with no resets.",
             "Record final mass ≤3.0 kg and all-in new cash < $1,000.",
             "Archive the logs, videos and failure counts. Replace the model assumptions with measurements and rerun the matrix."
           ],
@@ -458,112 +413,85 @@
         }
       ],
       "bench": {
-        "title": "Single-leg bench exercise",
-        "status": "in-progress",
-        "summary": "R05 supplies the body, an inner cradle for each ST3215 servo and the neutral lock. The two servos are received, with labels unchecked. The 3:1 drive to the hips is not designed. Do the servo stages with a bare servo or a servo in its cradle and no load. Physical fit, powered tests and the leg transmission remain open. Recorded spend stays $173.70.",
+        "title": "Electronics and wheel bench",
+        "status": "ready",
+        "summary": "The bench for V1-PROOF is the Pico 2, the IMU and one wheel channel. The single-leg bench is parked for the next version. Follow the electronics bench guide, then the kill chain stages.",
         "sourcePaths": [
-          "docs/r05-assembly.md",
-          "cad/prints/two-leg-body-r05/README.md",
-          "docs/checklists/2026-10-15-r05-fit-record.md",
-          "docs/one-leg-bench.md",
-          "docs/checklists/one-leg-bench-session.md"
+          "docs/electronics-bench-guide.md",
+          "firmware/bench/README.md",
+          "docs/kill-chain.md"
         ],
         "geometry": [
           {
-            "label": "Links",
-            "value": "2 × 110 mm struts from rear hips, slanted forward"
+            "label": "Controller",
+            "value": "Pico 2, bench firmware hux_bench.uf2"
           },
           {
-            "label": "Pivot separation",
-            "value": "40 mm on body and carrier"
+            "label": "IMU",
+            "value": "LSM6DSO on SPI"
           },
           {
-            "label": "Neutral / design range",
-            "value": "30° / 15–40° from downward vertical (R05 limit)"
+            "label": "Encoder",
+            "value": "1920 counts per output revolution"
           },
           {
-            "label": "Transmission",
-            "value": "3:1, on a bearing-supported shaft"
-          },
-          {
-            "label": "First driven leg range",
-            "value": "28–32° at 1°/s after bare-servo checks"
+            "label": "Driver",
+            "value": "DRV8874, PH/EN, current limit set"
           },
           {
             "label": "Wheel",
-            "value": "100 mm nominal; lifted for first powered tests"
+            "value": "Lifted for every powered stage"
           }
         ],
         "stages": [
           {
-            "id": "B0",
-            "title": "Identify received parts",
+            "id": "E0",
+            "title": "Toolchain and blink",
             "status": "ready",
-            "action": "Identify the received gearmotor/driver labels, the total driver count, the printed revision/material, the dimensions and the condition. The receipt and the print alone do not complete this stage.",
-            "evidence": "A confirmed inventory and a marked wiring diagram. The template is updated for the actual parts."
+            "action": "Flash the bench firmware and open the host console.",
+            "evidence": "A Hux C/C++ build runs on the Pico 2 and prints over USB serial."
           },
           {
-            "id": "B1",
-            "title": "Power and readback",
+            "id": "E1",
+            "title": "IMU identity and raw data",
             "status": "planned",
-            "action": "Check the disconnected rails and the polarity. Secure the bare servo. Verify the disabled startup and read the feedback. Read the encoder counts with the motor power off.",
-            "evidence": "Stable communications, expected counts per measured wheel revolution, and a verified independent power cut."
+            "action": "Connect the IMU with seven wires and read the identity register.",
+            "evidence": "WHO_AM_I reads 0x6C. A stationary log and a six-face check are recorded."
           },
           {
-            "id": "B2",
-            "title": "Bare servo",
+            "id": "E2",
+            "title": "Encoder counts",
             "status": "planned",
-            "action": "Verify the startup and the target mapping first. Then command ±5° at the servo output at maximum 5°/s with the horn, belt and load removed.",
-            "evidence": "Correct direction with no startup jump, reset, unexpected current or tracking fault."
+            "action": "Power the encoder at 5 V through the level conversion. Turn the output shaft one revolution by hand.",
+            "evidence": "One turn gives 1920 ±4 counts with the correct sign."
           },
           {
-            "id": "B3",
-            "title": "Passive linkage",
-            "status": "in-progress",
-            "action": "Preserve the user report of satisfactory travel. Add measured endpoints, closest clearances and neutral free play. Recheck the lateral stack after the R03 carrier and lock link replace the R01 parts.",
-            "evidence": "The recorded distance between centers, the retained fastener stack, and photos that show no binding or hardware contact through the hand sweep. The powered-fixture catch and the load capacity remain separate checks."
-          },
-          {
-            "id": "B4",
-            "title": "Small driven leg cycles",
+            "id": "E3",
+            "title": "Driver and motor jog",
             "status": "planned",
-            "action": "Align at 30° with the power off. Remove the lock before you arm the system. Start 28–32° at 1°/s and hold 2 seconds at each end.",
-            "evidence": "Ten small cycles with independently measured angle, no jump or binding, and logged current, voltage and temperature."
+            "action": "Connect the DRV8874 driver. Do the static checks. Jog the lifted wheel at low duty.",
+            "evidence": "The lifted wheel turns in both directions, and the encoder sign agrees."
           },
           {
-            "id": "B5",
-            "title": "Wider unloaded travel",
+            "id": "E4",
+            "title": "Wheel speed loop",
             "status": "planned",
-            "action": "After small-cycle success, try 25–35° and expand only in the measured clearance and stop margins.",
-            "evidence": "Repeatable endpoints, measured vertical/fore-aft travel and approach-direction backlash. No stop strikes."
+            "action": "Command +10 rpm, 0 and −10 rpm.",
+            "evidence": "Stable control and a log."
           },
           {
-            "id": "B6",
-            "title": "Wheel alone",
+            "id": "E5",
+            "title": "Fault checks",
             "status": "planned",
-            "action": "Pin the leg, keep the wheel lifted and keep the servo torque off. Verify the sign. Then try +10 rpm → 0 → −10 rpm, and wait for measured zero before the reversal.",
-            "evidence": "Stable low-speed response with the correct feedback sign. No reset or overvoltage. Record the stiction before you raise the limits."
+            "action": "Test a stale command, USB loss, a reset and the physical cut.",
+            "evidence": "Each fault stops the wheel."
           },
           {
-            "id": "B7",
-            "title": "Fault behavior",
+            "id": "E6",
+            "title": "Tilt-follow routine",
             "status": "planned",
-            "action": "In the supported small-motion envelope, do tests of the deadman release, lost commands/feedback, reset, lost servo communication and physical kill.",
-            "evidence": "Faults latch, the catch contains torque loss, the cut works without software, and reconnection never rearms automatically."
-          },
-          {
-            "id": "B8",
-            "title": "Combined unloaded motion",
-            "status": "planned",
-            "action": "After separate and fault tests, slowly sweep 28–32° while the lifted wheel turns at 10 rpm.",
-            "evidence": "Five repeatable cycles with no dropped commands, resets, wire snags or rail violations."
-          },
-          {
-            "id": "B9",
-            "title": "Measured loading",
-            "status": "planned",
-            "action": "Add a captured, measured load only after the electrical and thermal gates. Add the load in steps with a known force direction and lever arm.",
-            "evidence": "Record the deflection, backlash, temperature and rail behavior under load, with a supported power loss. The later torque/duty qualification remains separate."
+            "action": "Tilt the IMU by hand with the wheel lifted.",
+            "evidence": "The wheel follows the IMU pitch in the correct direction, with the log."
           }
         ]
       },
@@ -735,6 +663,17 @@
         }
       ],
       "updates": [
+        {
+          "date": "2026-10-16",
+          "title": "Hips leave V1-PROOF",
+          "summary": "The user removed the powered hips from V1-PROOF and dropped the one-leg and stair requirements. Both legs stay locked at 30°. Powered leg-height change, the 3:1 drive and the single-leg bench move to the next version. The user reports that the hip-hole measurements agree with the guide.",
+          "sourcePaths": [
+            "docs/decisions.md",
+            "docs/requirements.md",
+            "docs/checklists/2026-10-15-r05-fit-record.md",
+            "docs/parts-on-hand.md"
+          ]
+        },
         {
           "date": "2026-10-16",
           "title": "R05 frame assembled and website reorganized",
@@ -1128,7 +1067,7 @@
           "name": "Pololu 4752 encoder wheel motor",
           "status": "to-buy",
           "need": "1 more motor",
-          "note": "The complete drive requires two wheel gearmotors of the same model.",
+          "note": "The complete drive requires two wheel gearmotors of the same model. Buy one more: $60.95 goods, checked 2026-10-16.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -1139,9 +1078,9 @@
         {
           "id": "wheel-driver",
           "name": "DRV8874 wheel driver and current-limit passives",
-          "status": "check-stock",
+          "status": "to-buy",
           "need": "Confirm coverage for 2 wheel channels",
-          "note": "The receipt covers one driver. The total received count is unconfirmed. Buy a second Pololu 4035 only if one is missing. The current-limit passives still need confirmation.",
+          "note": "R05 needs two drivers. The receipt covers one. Buy one more Pololu 4035: $11.94 goods, checked 2026-10-16.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -1150,9 +1089,9 @@
         {
           "id": "servo-interface",
           "name": "Compatible half-duplex TTL servo interface",
-          "status": "check-stock",
+          "status": "future",
           "need": "1 interface",
-          "note": "The Pico 2 and the IMU are received. The ST3215 bus adapter is a separate part with no confirmed purchase or stock.",
+          "note": "Next version only. V1-PROOF has no powered hips.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -1161,9 +1100,9 @@
         {
           "id": "wheels-hubs",
           "name": "Rubber wheels, hubs and supported axle hardware",
-          "status": "check-stock",
+          "status": "to-buy",
           "need": "2 wheel assemblies",
-          "note": "Approximately 100 mm wheels. The JD-03 proposal names the Pololu 3278 scooter wheel and the Pololu 2674 adapter, $33.22 for two of each before freight. Confirm the fit session first. No stock is reserved and nothing is ordered.",
+          "note": "Two Pololu 3278 wheels, 100 × 24 mm, $8.86 each, and two Pololu 2674 adapters for the 6 mm shaft, $7.75 each. Goods only, checked 2026-10-16.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md",
@@ -1173,9 +1112,9 @@
         {
           "id": "leg-hardware",
           "name": "Leg reductions, shafts, pivots, bearings, stops and lock pins",
-          "status": "check-stock",
+          "status": "future",
           "need": "Hardware for both legs",
-          "note": "R05 needs two 3:1 drives from the inner servos to the lower hips: hip shafts, wall bearings, pulleys and belts. The drive is not designed. The printed struts are in print on R05 plate 4.",
+          "note": "Next version only. V1-PROOF locks the legs at 30° with the printed lock links.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -1197,7 +1136,7 @@
           "name": "Compatible 3S battery",
           "status": "check-stock",
           "need": "1 pack",
-          "note": "The model, cell count and condition of the current pack are unconfirmed. Reuse a qualified pack or buy one.",
+          "note": "Buy only if no compatible pack is on hand. Approximately 2.2 Ah, maximum 106 × 35 × 25 mm for the R05 tray. The model, cell count and condition of any current pack are unconfirmed.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -1259,7 +1198,7 @@
           ]
         }
       ],
-      "shoppingSummary": "The Pico 2, the LSM6DSO IMU and two ST3215 servos are received and paid. The order ledger above records the other paid parts. R05 needs a second wheel gearmotor, a servo bus interface and the parts of the 3:1 hip drive. Confirm the stock of the support parts before you buy replacements."
+      "shoppingSummary": "The Pico 2, the LSM6DSO IMU and two ST3215 servos are received and paid. The servos stay in stock for the next version. V1-PROOF still needs a second gearmotor, a second driver, two wheels with adapters and possibly a battery. Confirm the stock of the support parts before you buy replacements."
     },
     {
       "id": "V0-GENESIS",
@@ -1403,7 +1342,7 @@
       ],
       "focus": {
         "title": "Let measured proof results define the next version",
-        "summary": "Carry forward the measured actuator and sensor behavior, the telemetry, the fault handling and the test evidence. Future full-size Hux has a stated RobStride direction, but no RobStride order or third-version hardware release is established.",
+        "summary": "Powered hips and leg-height change return in this version. Carry forward the measured actuator and sensor behavior, the telemetry, the fault handling and the test evidence. Future full-size Hux has a stated RobStride direction, but no RobStride order or third-version hardware release is established.",
         "sourcePaths": [
           "docs/v1-proof-validation.md",
           "docs/decisions.md",
@@ -1429,12 +1368,149 @@
             "docs/decisions.md",
             "docs/v1-proof.md"
           ]
+        },
+        {
+          "id": "hip-drive",
+          "title": "Design the powered hips",
+          "detail": "Each inner ST3215 servo turns its lower hip through a 3:1 reduction. Design the hip shaft, the wall bearings, the pulleys, the belt and the belt tension. The R05 body has the servo cradles. V1-PROOF keeps the legs locked.",
+          "status": "future",
+          "sourcePaths": [
+            "cad/prints/two-leg-body-r05/README.md",
+            "docs/decisions.md",
+            "docs/checklists/2026-10-14-anatomy-review.md"
+          ]
         }
       ],
       "metrics": [],
       "purchases": [],
-      "milestones": [],
-      "bench": null,
+      "milestones": [
+        {
+          "id": "P3",
+          "title": "Powered leg-height adjustment",
+          "status": "future",
+          "summary": "Moved from V1-PROOF on 2026-10-16. Add the supported 3:1 reductions after the pinned-leg balance. Qualify each leg before synchronized movement.",
+          "criteria": [
+            "Qualify the 0.75 N·m mounted servo hold for 10 minutes. Qualify the separate 1.0 N·m short transient target.",
+            "Measure backlash, loaded clearance and pose-dependent pitch trim.",
+            "Complete ten low/high/low cycles with both wheels loaded. The target is at least 25 mm of actual body-height change.",
+            "Make sure that there is no support contact, overload or balance loss. Use the measured qualified range."
+          ],
+          "sourcePaths": [
+            "docs/checklists/mechanical-v1.md",
+            "docs/v1-proof-validation.md"
+          ]
+        }
+      ],
+      "bench": {
+        "title": "Single-leg bench exercise",
+        "status": "future",
+        "summary": "Parked on 2026-10-16. The user removed the powered hips from V1-PROOF and dropped the one-leg requirement. This bench returns with the powered legs of the next version.",
+        "sourcePaths": [
+          "docs/r05-assembly.md",
+          "cad/prints/two-leg-body-r05/README.md",
+          "docs/checklists/2026-10-15-r05-fit-record.md",
+          "docs/one-leg-bench.md",
+          "docs/checklists/one-leg-bench-session.md"
+        ],
+        "geometry": [
+          {
+            "label": "Links",
+            "value": "2 × 110 mm struts from rear hips, slanted forward"
+          },
+          {
+            "label": "Pivot separation",
+            "value": "40 mm on body and carrier"
+          },
+          {
+            "label": "Neutral / design range",
+            "value": "30° / 15–40° from downward vertical (R05 limit)"
+          },
+          {
+            "label": "Transmission",
+            "value": "3:1, on a bearing-supported shaft"
+          },
+          {
+            "label": "First driven leg range",
+            "value": "28–32° at 1°/s after bare-servo checks"
+          },
+          {
+            "label": "Wheel",
+            "value": "100 mm nominal; lifted for first powered tests"
+          }
+        ],
+        "stages": [
+          {
+            "id": "B0",
+            "title": "Identify received parts",
+            "status": "future",
+            "action": "Identify the received gearmotor/driver labels, the total driver count, the printed revision/material, the dimensions and the condition. The receipt and the print alone do not complete this stage.",
+            "evidence": "A confirmed inventory and a marked wiring diagram. The template is updated for the actual parts."
+          },
+          {
+            "id": "B1",
+            "title": "Power and readback",
+            "status": "future",
+            "action": "Check the disconnected rails and the polarity. Secure the bare servo. Verify the disabled startup and read the feedback. Read the encoder counts with the motor power off.",
+            "evidence": "Stable communications, expected counts per measured wheel revolution, and a verified independent power cut."
+          },
+          {
+            "id": "B2",
+            "title": "Bare servo",
+            "status": "future",
+            "action": "Verify the startup and the target mapping first. Then command ±5° at the servo output at maximum 5°/s with the horn, belt and load removed.",
+            "evidence": "Correct direction with no startup jump, reset, unexpected current or tracking fault."
+          },
+          {
+            "id": "B3",
+            "title": "Passive linkage",
+            "status": "future",
+            "action": "Preserve the user report of satisfactory travel. Add measured endpoints, closest clearances and neutral free play. Recheck the lateral stack after the R03 carrier and lock link replace the R01 parts.",
+            "evidence": "The recorded distance between centers, the retained fastener stack, and photos that show no binding or hardware contact through the hand sweep. The powered-fixture catch and the load capacity remain separate checks."
+          },
+          {
+            "id": "B4",
+            "title": "Small driven leg cycles",
+            "status": "future",
+            "action": "Align at 30° with the power off. Remove the lock before you arm the system. Start 28–32° at 1°/s and hold 2 seconds at each end.",
+            "evidence": "Ten small cycles with independently measured angle, no jump or binding, and logged current, voltage and temperature."
+          },
+          {
+            "id": "B5",
+            "title": "Wider unloaded travel",
+            "status": "future",
+            "action": "After small-cycle success, try 25–35° and expand only in the measured clearance and stop margins.",
+            "evidence": "Repeatable endpoints, measured vertical/fore-aft travel and approach-direction backlash. No stop strikes."
+          },
+          {
+            "id": "B6",
+            "title": "Wheel alone",
+            "status": "future",
+            "action": "Pin the leg, keep the wheel lifted and keep the servo torque off. Verify the sign. Then try +10 rpm → 0 → −10 rpm, and wait for measured zero before the reversal.",
+            "evidence": "Stable low-speed response with the correct feedback sign. No reset or overvoltage. Record the stiction before you raise the limits."
+          },
+          {
+            "id": "B7",
+            "title": "Fault behavior",
+            "status": "future",
+            "action": "In the supported small-motion envelope, do tests of the deadman release, lost commands/feedback, reset, lost servo communication and physical kill.",
+            "evidence": "Faults latch, the catch contains torque loss, the cut works without software, and reconnection never rearms automatically."
+          },
+          {
+            "id": "B8",
+            "title": "Combined unloaded motion",
+            "status": "future",
+            "action": "After separate and fault tests, slowly sweep 28–32° while the lifted wheel turns at 10 rpm.",
+            "evidence": "Five repeatable cycles with no dropped commands, resets, wire snags or rail violations."
+          },
+          {
+            "id": "B9",
+            "title": "Measured loading",
+            "status": "future",
+            "action": "Add a captured, measured load only after the electrical and thermal gates. Add the load in steps with a known force direction and lever arm.",
+            "evidence": "Record the deflection, backlash, temperature and rail behavior under load, with a supported power loss. The later torque/duty qualification remains separate."
+          }
+        ]
+      },
       "documents": [
         {
           "title": "Proof release and handoff gates",

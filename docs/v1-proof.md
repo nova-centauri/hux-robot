@@ -1,18 +1,18 @@
 # V1-PROOF
 
-**A small, four-actuator wheeled robot for strictly less than $1,000**. Prove balance, manual drive and a small amount of leg motion. Use equipment that is already in the shop where practical. This is the active Hux plan. The [previous stair project](archive/stair-v1/README.md) is parked intact.
+**A small two-wheel robot for strictly less than $1,000**. Prove balance, manual drive and safe stops, with the legs locked. Use equipment that is already in the shop where practical. This is the active Hux plan. The [previous stair project](archive/stair-v1/README.md) is parked intact.
 
-**2026-10-16:** the current build is the [R05 two-leg body](../cad/prints/two-leg-body-r05/README.md). Follow the [R05 assembly guide](r05-assembly.md).
+**2026-10-16:** the current build is the [R05 two-leg body](../cad/prints/two-leg-body-r05/README.md). Follow the [R05 assembly guide](r05-assembly.md). The user removed the powered hips from V1-PROOF. Both legs stay locked at 30°, and the two wheel gearmotors are the only powered axes. Powered hips return in the next version. [Decision](decisions.md#2026-10-16--hips-leave-v1-proof-one-leg-and-stair-requirements-dropped).
 
 The user set the budget and scope reset on 2026-09-28. The later request adds reliable traversal, both turns, turns in place, bounded pushes/uneven terrain and component decisions. The [hardware baseline](v1-proof-hardware.md), [simulation evidence](v1-proof-simulation.md) and [physical protocol](v1-proof-validation.md) put that request into effect. They are not measured hardware capabilities.
 
 ## What we are building
 
-Two rubber wheels. A small wheel gearmotor with an encoder drives each wheel. One compact leg servo on each side adjusts a simple parallel-link leg through a 3:1 reduction. Both wheels stay on the floor. A rigid, accessible body carries a battery, a controller and an IMU.
+Two rubber wheels. A small wheel gearmotor with an encoder drives each wheel. Each simple parallel-link leg is locked at 30°. In the next version, one compact leg servo on each side adjusts its leg through a 3:1 reduction. Both wheels stay on the floor. A rigid, accessible body carries a battery, a controller and an IMU.
 
 Use aluminum, plywood, suitable tube on hand, brackets and standard fasteners. There is no requirement for carbon or a styled shell.
 
-Start with lock pins in both legs. The first real success is a two-motor balancer. Those same wheels, electronics and frame carry forward when we add the two leg servos. Pinned legs are the first milestone, not a claim that the complete four-actuator proof is complete.
+Both legs stay locked for all of V1-PROOF. The proof is a two-motor balancer. The same wheels, electronics and frame carry forward to the next version, which adds the two leg servos.
 
 | Item | Proposed baseline |
 | --- | --- |
@@ -21,8 +21,8 @@ Start with lock pins in both legs. The first real success is a two-motor balance
 | Mass | 2.5 kg target, 3.0 kg maximum with battery |
 | Overall envelope | About 278–306 mm upright height, 255 mm outside wheel width. The R05 CAD is approximately 320–348 mm high. |
 | Wheel diameter / track | 100 mm / 230 mm center to center |
-| Leg adjustment | 110 mm parallel links, 3:1 reduction. Plan: 15–45° from vertical, 28.5 mm nominal height travel. R05: rear hips, forward struts, 15–40°, 22.0 mm height travel. |
-| Powered axes | Left wheel, right wheel, left leg adjustment, right leg adjustment |
+| Legs | Locked at 30° in V1-PROOF. R05: rear hips, forward struts, 110 mm parallel links. Powered height change moves to the next version. |
+| Powered axes | Left wheel and right wheel |
 | Ground | Dry indoor floor plus defined 3° / 5 mm bump / 3 mm seam test fixtures |
 | Speed | 0.25 m/s cruise; 0.15 m/s on uneven fixtures; 0.5 m/s remains unqualified |
 | Power | Compatible 3S pack, approximately 2.2 Ah; actual reused pack governs interfaces |
@@ -41,7 +41,7 @@ Carry forward service access, a deliberate wire harness, real mass records, know
 
 **Wheel drives:** select **two Pololu 4752 12 V 30:1 encoder gearmotors** and **two Pololu 4035 DRV8874 H-bridges**. Keep the 100 mm rubber tires, the supported axles and the 230 mm track. Qualify the reversal/deadband, the current control and the torque near 96 rpm at the loaded battery minimum. The smaller driver replaces the G2 reference. The sleep/kill/watchdog behavior, the hardware current limit and the current sense are explicit bench gates. Refer to the [hardware details](v1-proof-hardware.md).
 
-**Leg drives:** two selected ST3215 servos, the 12 V / 30 kg-cm variant. Each drives a bearing-supported pivot through a 3:1 belt reduction. The load goes through the bearings and the frame, not the servo spline.
+**Leg drives (next version, 2026-10-16):** V1-PROOF does not use them. The plan for the next version is two selected ST3215 servos, the 12 V / 30 kg-cm variant. Each drives a bearing-supported pivot through a 3:1 belt reduction. The load goes through the bearings and the frame, not the servo spline.
 
 In the preliminary model, the full mass at a 60/40 two-wheel load split produces approximately 0.54 N·m static demand. This is at the servo with the heavier load. A mounted test must qualify a 0.75 N·m hold for 10 minutes at the regulated 9 V rail at its lowest loaded output. The advertised stall torque alone does not qualify it. Keep the mechanical lock pins and the travel stops.
 
@@ -71,9 +71,9 @@ Complete all of the items below at the final measured mass. Core drive trials st
 
 1. **Balance:** hold two-wheel balance for 60 seconds without support contact in at least 9 of 10 starts. Log the angle, wheel speed, battery voltage, current and faults.
 2. **Manual drive:** at 0.25 m/s, travel 2 m forward and reverse. Make 90° left/right arcs and full 360° rotations in both directions. Meet the endpoint/heading/settling limits and the repeated runs in the [physical protocol](v1-proof-validation.md), with five combined sequences included. 0.5 m/s stays unqualified.
-3. **Leg motion:** with both wheels loaded and zero requested travel, complete 10 slow low-to-high-to-low cycles over the qualified range. Target at least 25 mm body-height change. No support contact, servo overload or loss of balance. Measure the actual body height. Upright linkage travel alone does not prove it.
+3. **Leg motion:** moved to the next version on 2026-10-16. V1-PROOF keeps both legs locked at 30°.
 4. **Faults:** in the catch fixture, make sure that manual kill, stale command (>250 ms), stale IMU/encoder, controller reset and low battery disable the drive. Each must need a deliberate rearm. The fixture/rest support catches the robot at power-off. Power-off does not promise an upright robot.
-5. **Duty and budget:** complete a 10-minute mixed balance/drive/height session within the tested electrical/thermal limits, with no resets. Final mass ≤3.0 kg. New cash expenditure < $1,000 with shipping, tax and replacement parts included.
+5. **Duty and budget:** complete a 10-minute mixed balance/drive session within the tested electrical/thermal limits, with no resets. Final mass ≤3.0 kg. New cash expenditure < $1,000 with shipping, tax and replacement parts included.
 
 6. **Disturbances and uneven surfaces:** qualify the 0.8 N·s longitudinal and 0.4 N·s lateral pulses, both signs and durations. Also qualify 3° grades/cross-slopes, 5 mm smooth bumps and 3 mm seams under the [specified physical protocol](v1-proof-validation.md). Strong human shoves and rough terrain remain outside the promised envelope.
 
