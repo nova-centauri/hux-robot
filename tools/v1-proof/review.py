@@ -118,12 +118,12 @@ def purchase_lines(c, plan):
             qty, unit = item.get("quantity"), item.get("unitCost")
             cost = None if qty is None or unit is None else Decimal(str(unit)) * qty
             delivery = item.get("status", order["status"])
-            status = {"shipped": "Shipped", "ordered": "Paid; awaiting shipment", "received": "Received; untested", "awaiting-arrival": "Awaiting arrival"}.get(delivery, delivery)
+            status = {"shipped": "Shipped", "ordered": "Paid; awaiting shipment", "received": "Received; untested", "awaiting-arrival": "Awaiting arrival", "unconfirmed": "Paid; delivery unconfirmed"}.get(delivery, delivery)
             lines.append(f"| {order['vendor']} {item['name']} | {qty if qty is not None else 'Not recorded'} | {money(unit)} | {money(cost)} | {status} |")
     lines += [""]
     lines += [f"- **{order['vendor']}:** {order['deliveryNote']}" for order in p["orders"]]
     lines += [""] + quantity_summary(p["quantities"])
-    lines[-1] += " When the servos arrive, make sure that the labels say 12 V. The receipt names the ST3215 series. The user confirmed the voltage variant. [Motor connections and controls](v1-proof-hardware.md)."
+    lines[-1] += " The servos are received and stay in stock for the next version, because V1-PROOF has no powered hips. Check that the labels say 12 V. [Motor connections and controls](v1-proof-hardware.md)."
     lines += ["",
               "## Recorded order totals", "", "| Vendor / recorded date | Goods | Shipping / handling | Tax | Order total |", "| --- | ---: | ---: | ---: | ---: |"]
     for order in p["orders"]:
@@ -140,7 +140,7 @@ def purchase_lines(c, plan):
               f"| Shipping, tax and import-charge allowance | {money(remaining['shippingTax'])} |",
               f"| Repair and overrun reserve retained | {money(c['budget']['repair_contingency_usd'])} |",
               f"| **Remaining against the planning ceiling** | **{money(remaining['total'])}** |", "",
-              "Refer to the inventory for the controller and IMU receipt status. The servo interface, encoder level conversion, current-limit passives, wheels/hubs, protected power and wire harness still need confirmation. Bench-supply ratings remain unconfirmed. Historical carts and unassigned V0-GENESIS parts are not recorded V1-PROOF spend.", ""]
+              "On 2026-10-16, the hip drive allowance left the plan, and the servo row became the paid servo cost. The $77.62 difference moved to the repair and overrun reserve, so the planning ceiling stays $900. Refer to the inventory for the receipt status. The encoder level conversion, current-limit passives, wheels/hubs, protected power and wire harness still need confirmation. Bench-supply ratings remain unconfirmed. Historical carts and unassigned V0-GENESIS parts are not recorded V1-PROOF spend.", ""]
     version = next(version for version in plan["versions"] if version["id"] == "V1-PROOF")
     if version.get("shoppingList"):
         lines += ["## Remaining shopping list", "", version["shoppingSummary"], "",
@@ -301,12 +301,12 @@ def outputs(c, plan=None):
               "We checked the price and availability observations that follow on **2026-09-28**. They are not current stock checks or evidence of more purchases. The receipt table above controls the actual spend.", "",
               "- Pololu 4752 gearmotor: the reference price is $60.95 each. Two of the selected encoder motors fit the $125 allocation. The report above calculates the current purchased quantities and the remaining needs.",
               "- DRV8874 driver (Pololu 4035): the reference price is $11.94 each. Two carriers plus the current-limit passives fit the $40 allowance. The current-limit passives still need confirmation. Measure the 2.5 A limit. The historical stock page permitted backorders. This driver replaces the oversized G2 reference.",
-              "- ST3215 servo (Waveshare ST3215 series): the reference price is $16.99–21.99 as a function of the variant. The receipt prices are recorded above. Qualify the hold performance on the regulated 9 V rail. The $60 allocation remains the original cap, with a separate transmission row.",
-              "- The original allocation for the Pico 2, the Adafruit LSM6DSOX 4438 and the half-duplex adapter was $40. The IMU reference price on September 28 was $11.95. The October 2 controller/IMU order instead names the SparkFun LSM6DSO IMU. That order has a $30.58 combined total and no itemized charges. The servo interface remains unconfirmed. Keep the original cap and record the remaining costs separately.",
+              "- ST3215 servo (Waveshare ST3215 series): the reference price is $16.99–21.99 as a function of the variant. The receipt prices are recorded above. The servos are for the next version. The allocation now equals the paid goods, and the transmission row is removed.",
+              "- The original allocation for the Pico 2, the Adafruit LSM6DSOX 4438 and the half-duplex adapter was $40. The IMU reference price on September 28 was $11.95. The October 2 controller/IMU order instead names the SparkFun LSM6DSO IMU. That order has a $30.58 combined total and no itemized charges. The user reports a Waveshare servo board at $13.77 on 2026-10-16. Keep the original cap and record the remaining costs separately.",
               "- Manual input can reuse RC or a laptop/gamepad with a timed deadman link. The $60 fallback is an allocation, not a claim that a new TBS receiver and transmitter together cost $60.", "",
               "## Build sequence", "",
-              "P0 makes an inventory of the controls on hand and qualifies them. P1 builds the supported wheel rig and the pinned structure. P2 proves two-wheel balance and slow teleop. P3 adds the two leg servos and their reductions. P4 runs the finish-line trials.", "",
-              "These stages share one budget. Do not add a second two-motor robot to the four-motor cost. A quote that exceeds an allocation consumes the reserve or forces a substitution before purchase.", "",
+              "P0 makes an inventory of the controls on hand and qualifies them. P1 builds the supported wheel rig and the pinned structure. P2 proves two-wheel balance and slow teleop. P4 runs the finish-line trials. P3, the two leg servos and their reductions, moved to the next version on 2026-10-16.", "",
+              "These stages share one budget. Do not add a second robot to this cost. A quote that exceeds an allocation consumes the reserve or forces a substitution before purchase.", "",
               "Sources: the planning caps are in [model.json](../tools/v1-proof/model.json). The paid orders are in [plan-data.json](../tools/living-drawings/plan-data.json), under V1-PROOF `orders`. Refer to the [receipt provenance](purchases.md). Regenerate with `python3 tools/v1-proof/review.py --write`. [Active plan](v1-proof.md) · [Inventory](parts-on-hand.md).", ""]
     wheel = r["wheel_at_max_mass"]
     calc = ["# V1-PROOF sizing screen", "", f"The source of this screen is [model.json](../tools/v1-proof/model.json), revision {c['revision']}. All masses and geometry are allocations. **Hardware validation and fabrication release remain false.**", "",
@@ -317,7 +317,7 @@ def outputs(c, plan=None):
             f"- The upright height is {r['poses'][1]['overall_height_mm']:.1f}–{r['poses'][0]['overall_height_mm']:.1f} mm. The outside wheel width is {r['overall_width_mm']:.0f} mm.",
             f"- The nominal height travel is {r['height_travel_mm']:.2f} mm. The axle sweep is {r['axle_fore_aft_travel_mm']:.2f} mm. The servo travel is 90 degrees through the 3:1 reduction.",
             "- The axle sweep changes the center of mass relative to the contact line. Movement of both wheels alone does not remove that static offset. Measure the whole-robot CoM and set a pitch trim for each height. Make sure that the trim stays in the balance envelope. Start with pinned legs. If the trim is excessive, reduce the travel or revise the linkage inside this budget.", "",
-            "## Leg sizing", "",
+            "## Leg sizing for the next version", "", "V1-PROOF locks both legs at 30° and has no leg servos. This screen stays for the powered hips of the next version.", "",
             "Use all robot mass as sprung mass for a conservative vertical-load screen: servo torque = m g share L sin(q) / (reduction × efficiency). The assumed efficiency is 0.85. A 60/40 load split is the worst planned two-wheel condition, not a single-support claim.", "",
             f"At 3.0 kg, 60% load on one side and 45 degrees: **{r['worst_static_servo_nm']:.3f} N·m** at the servo. The requirement is a **0.75 N·m mounted hold for 10 minutes**, plus a separately qualified 1.0 N·m short transient. The screen uses no spring credit. We must measure acceleration, horizontal forces, bearing friction and real efficiency. A 30 kg-cm (~2.94 N·m) advertised maximum is not a continuous rating.", "",
             "## Wheel sizing", "",

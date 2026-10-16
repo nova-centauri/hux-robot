@@ -6,7 +6,7 @@ window.HuxProof = {
     "status": "simulation-backed component baseline; physical qualification open",
     "actuators": {
       "wheels": 2,
-      "legs": 2
+      "legs": 0
     },
     "limits": {
       "budget_usd_exclusive": 1000,
@@ -104,7 +104,7 @@ window.HuxProof = {
     ],
     "budget": {
       "shipping_tax_usd": 100,
-      "repair_contingency_usd": 125,
+      "repair_contingency_usd": 202.62,
       "confirmed_reuse_credit_usd": 0,
       "rows": [
         {
@@ -128,19 +128,11 @@ window.HuxProof = {
         {
           "id": "leg_servos",
           "qty": 2,
-          "item": "Waveshare ST3215, 12 V variant (9 V qualified rail)",
-          "unit_cap_usd": 30,
-          "stage": "P3",
-          "reuse": "Existing servos only after mounted hold and feedback tests",
+          "item": "Waveshare ST3215, 12 V variant, paid and kept for the next version",
+          "unit_cap_usd": 21.19,
+          "stage": "Next version",
+          "reuse": "Paid 2026-09-28. V1-PROOF has no powered hips.",
           "source": "leg_servo"
-        },
-        {
-          "id": "leg_hardware",
-          "qty": 1,
-          "item": "Two 3:1 reductions, shafts, pivots, bearings, stops and lock pins",
-          "unit_cap_usd": 60,
-          "stage": "P3",
-          "reuse": "Shop bearings, belts and hardware after dimensions are measured"
         },
         {
           "id": "wheels",
@@ -153,7 +145,7 @@ window.HuxProof = {
         {
           "id": "controller",
           "qty": 1,
-          "item": "Pico 2, SparkFun LSM6DSO and half-duplex servo interface",
+          "item": "Pico 2, SparkFun LSM6DSO and Waveshare servo bus board",
           "unit_cap_usd": 40,
           "stage": "P0",
           "reuse": "Confirmed equivalent MCU/IMU may substitute only after timing/pin/level qualification"
@@ -185,7 +177,7 @@ window.HuxProof = {
         {
           "id": "power",
           "qty": 1,
-          "item": "9 V servo and 5 V logic rails, fuse, kill, regeneration protection",
+          "item": "5 V logic rail, DC step-down converters, fuse, kill and regeneration protection",
           "unit_cap_usd": 65,
           "stage": "P1",
           "reuse": "Only parts meeting rail voltage and current requirements"
@@ -201,7 +193,7 @@ window.HuxProof = {
         {
           "id": "structure",
           "qty": 1,
-          "item": "Scrap/COTS frame, links, brackets, fasteners and prototype material",
+          "item": "Printed R05 body, lock links, brackets, fasteners and prototype material",
           "unit_cap_usd": 60,
           "stage": "P1",
           "reuse": "Aluminum, plywood or suitable existing stock; no carbon requirement"
@@ -345,8 +337,8 @@ window.HuxProof = {
   "results": {
     "name": "V1-PROOF",
     "revision": "2026-09-28-B",
-    "actuator_count": 4,
-    "parts_cap_usd": 675.0,
+    "actuator_count": 2,
+    "parts_cap_usd": 597.38,
     "total_cap_usd": 900.0,
     "headroom_usd": 100.0,
     "under_budget": true,

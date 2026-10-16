@@ -1,8 +1,8 @@
 {
   "name": "V1-PROOF",
   "revision": "2026-09-28-B",
-  "actuator_count": 4,
-  "parts_cap_usd": 675.0,
+  "actuator_count": 2,
+  "parts_cap_usd": 597.38,
   "total_cap_usd": 900.0,
   "headroom_usd": 100.0,
   "under_budget": true,

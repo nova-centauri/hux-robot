@@ -1,5 +1,9 @@
 # V1-PROOF recorded orders and delivery status
 
+**Updated 2026-10-16: $195.94 recorded spend.** The user reports two more purchases: a 5-pack of DC step-down converters for **$8.47** and a Waveshare servo board for **$13.77**. The vendor of the converters, the models, the charge breakdowns and the delivery status are not recorded. **$704.06 remains** under the $900 plan.
+
+The servo board and the two ST3215 servos are for the next version, because V1-PROOF has no powered hips. Their cost still counts as V1-PROOF spend.
+
 **Updated 2026-10-03: $173.70 recorded spend.** The user confirms that the **Pico 2 and LSM6DSO IMU are both received**, untested. The October 2 Amazon order of the user totals **$30.58** in the supplied screenshot. We count this total one time, together with the earlier $143.12 in Pololu and Waveshare receipts. This receipt confirmation supersedes the screenshot arrival estimate.
 
 The Amazon order does not show the item prices, shipping, tax and payment date. **$726.30 remains** under the $900 plan. [Pico/IMU bring-up](checklists/2026-10-03-pico-bringup.md) · [Remaining shopping list](bom.md#remaining-shopping-list).
@@ -12,7 +16,9 @@ The Amazon order does not show the item prices, shipping, tax and payment date. 
 | --- | ---: | ---: | ---: | --- |
 | Pololu **4752**, 30:1 Metal Gearmotor 37Dx68L mm, 12 V, 64 CPR encoder, helical pinion | **1** | $60.95 | $60.95 | Received per user report recorded 2026-10-02; untested |
 | Pololu **4035**, DRV8874 Single Brushed DC Motor Driver Carrier | **1** | $11.94 | $11.94 | Drivers received per user 2026-10-02; total received count pending; untested |
-| Waveshare **22414**, ST3215 servo series; **12 V variant confirmed by user** | **2** | $21.19 | $42.38 | Paid 2026-09-28; vendor receipt says **Awaiting Shipment** |
+| Waveshare **22414**, ST3215 servo series; **12 V variant confirmed by user** | **2** | $21.19 | $42.38 | Received per user 2026-10-15; kept for the next version |
+| DC step-down converters, 5-pack | **5** | Not recorded | Not recorded | $8.47 total per user 2026-10-16; delivery unconfirmed |
+| Waveshare servo board | **1** | Not recorded | Not recorded | $13.77 total per user 2026-10-16; delivery unconfirmed; next version |
 | Pico 2 with yellow pre-soldered headers, via Amazon | **1** | Not recorded | Not recorded | Received per user and screenshot 2026-10-03; untested |
 | SparkFun **LSM6DSO Qwiic** IMU, via Amazon | **1** | Not recorded | Not recorded | Received per user confirmation 2026-10-03; untested |
 
@@ -25,13 +31,15 @@ The September 28 Pololu shipment notification estimated delivery on **Thursday, 
 | Pololu, 2026-09-28 | $72.89 | $10.45 | $5.00 | **$88.34** |
 | Waveshare, 2026-09-28 | $42.38 | $12.40 | $0.00 separately charged | **$54.78** |
 | Amazon, ordered 2026-10-02; payment date unshown | Not recorded | Not recorded | Not recorded | **$30.58** order total |
-| **Recorded V1-PROOF spend** | **Not recorded** | **Not recorded** | **Not recorded** | **$173.70** |
+| DC step-down converters, 5-pack; vendor and date not recorded | Not recorded | Not recorded | Not recorded | **$8.47** per the user |
+| Waveshare servo board; date not recorded | Not recorded | Not recorded | Not recorded | **$13.77** per the user |
+| **Recorded V1-PROOF spend** | **Not recorded** | **Not recorded** | **Not recorded** | **$195.94** |
 
 The Pololu invoice explicitly records $88.34 paid and $0 due. The Waveshare payment confirmation and the PayPal receipt for that order both record $54.78. Do not add the payment-service confirmation as a second purchase.
 
 The two earlier orders have a known breakdown of $115.27 goods, $22.85 shipping and $5.00 tax. The new screenshot supplies only a combined order total. Do not infer individual prices, and do not treat missing charges as zero. Record its $30.58 one time in the order ledger. Leave the purchase-card goods costs unknown.
 
-Against the **$900 planning ceiling**, **$726.30 remains**. This amount includes everything still to buy and the retained reserves. With the **$125 repair reserve intact**, $601.30 remains for parts and shipping/tax combined. Their exact separate balances are unknown until the Amazon breakdown is available. These are remaining allocations, not a quote to complete the robot.
+Against the **$900 planning ceiling**, **$704.06 remains**. This amount includes everything still to buy and the retained reserves. On 2026-10-16, the hip drive allowance left the plan, and the repair reserve became $202.62. With that reserve intact, $501.44 remains for parts and shipping/tax combined. Their exact separate balances are unknown, because three orders have no charge breakdown. These are remaining allocations, not a quote to complete the robot.
 
 The hard all-in limit remains strictly below $1,000. [Full budget](bom.md).
 

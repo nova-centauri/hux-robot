@@ -54,7 +54,8 @@ Purchased parts count as new cash spend. We infer no reuse credit.
 | ST3215 12 V servos | 2 received per user 2026-10-15; untested; labels unchecked; $42.38 goods + $12.40 shipping = $54.78; 12 V variant confirmed by user at order | Next version: powered hips. V1-PROOF does not use them (2026-10-16) | $0 |
 | Pololu 4035 DRV8874 drivers | Received per user 2026-10-02, untested; total delivered count pending; receipt covers 1 at $11.94 goods | H-bridge and current limiting for each wheel motor; confirm coverage of both channels | $0 |
 | 3D-printed mechanical parts | R05 plates 1–3 printed, frame assembled per user 2026-10-16, hip holes agree per user; plate 4 in print, plate 5 next. R01, R03 and R04 parts superseded | R05 body with legs locked at 30° | $0 |
-| Servo interface / adapter | Purchase/availability unconfirmed | Next version only. Half-duplex TTL commands and feedback | $0 |
+| Servo interface / adapter | Waveshare servo board, $13.77 per user 2026-10-16; delivery unconfirmed | Next version only. Half-duplex TTL commands and feedback | $0 |
+| DC step-down converters | 5-pack, $8.47 per user 2026-10-16; model, rating and delivery unconfirmed | 5 V logic rail candidate after a rating and load check | $0 |
 | Bench supply | Available; sufficient adjustable voltage/current capacity per user 2026-10-06; model, final settings and reverse-energy behavior unrecorded | Supported body and single-actuator tests with the existing power/interface checks | $0 |
 | Panasonic MSMD042G1A industrial servo | 1 on hand per the user 2026-10-01; two photo views; untested, drive/harness/supply unknown | Bench/future mechanism candidate; 200 V-class drive and mass conflict with current proof | $0 |
 | Stepper motors; one labeled Astrosyn 610-024 | 2 on hand per the user 2026-10-01; only one label verified; ratings and condition unknown | Positioning/fixture candidates after identification; no current axis assigned | $0 |
@@ -64,7 +65,7 @@ Purchased parts count as new cash spend. We infer no reuse credit.
 
 For each confirmed item, record the date, exact variant, quantity, condition, electrical limits and measured mass/envelope. Also record if the item is available for Hux. A vendor CAD file is not owned hardware. The presence of a board does not establish spare pins or compatible logic levels. A receiver needs a usable transmitter/link.
 
-The [budget](bom.md) separates the **$173.70 recorded spend** from the **$900 planning ceiling**. Refer to the [order ledger](purchases.md) for the two itemized paid orders and the controller/IMU order with an unshown charge breakdown. New ordered components count one time as project spend. They are not zero-cost reuse. The remaining $726.30 includes unpurchased parts and reserves. The unknown breakdown of the new order prevents exact remaining allocations for parts and for freight/tax.
+The [budget](bom.md) separates the **$195.94 recorded spend** from the **$900 planning ceiling**. Refer to the [order ledger](purchases.md) for the two itemized paid orders and the three orders with an unshown charge breakdown. New ordered components count one time as project spend. They are not zero-cost reuse. The remaining $704.06 includes unpurchased parts and reserves. The unknown breakdowns prevent exact remaining allocations for parts and for freight/tax.
 
 Give credit for equipment on hand only when it displaces a purchase. Do not count the same item two times, and do not spend the savings on new features. Keep the reserve. [Shop capabilities](capabilities.md) describes tools, not component stock.
 

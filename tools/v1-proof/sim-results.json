@@ -4,7 +4,7 @@
   "engine": "Rapier 0.20.0",
   "seed": 9282026,
   "inputHashes": {
-    "model.json": "69239ecfd9b30ecb1a3931473ec4f3f26e3d769de09bd3a1650c5f531af14c73",
+    "model.json": "fa7fafdc6a78c072d47699f45777b226b71e3d6d153f9049fc7fdbae10e677bd",
     "sim.js": "5d76b257e0a379fa6b16659b4197b0f525a96ce1f92cad23d634f19cdfbdcd27",
     "run_sim.js": "921928345d8701b35b1f56ae43ab0305d5832e5876c8db104dc6ce0f0c93a1c8"
   },

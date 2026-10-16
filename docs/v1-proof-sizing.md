@@ -14,7 +14,9 @@ For link length L and angle q: the axle rearward offset = L sin(q). The pivot ab
 - The nominal height travel is 28.47 mm. The axle sweep is 49.31 mm. The servo travel is 90 degrees through the 3:1 reduction.
 - The axle sweep changes the center of mass relative to the contact line. Movement of both wheels alone does not remove that static offset. Measure the whole-robot CoM and set a pitch trim for each height. Make sure that the trim stays in the balance envelope. Start with pinned legs. If the trim is excessive, reduce the travel or revise the linkage inside this budget.
 
-## Leg sizing
+## Leg sizing for the next version
+
+V1-PROOF locks both legs at 30° and has no leg servos. This screen stays for the powered hips of the next version.
 
 Use all robot mass as sprung mass for a conservative vertical-load screen: servo torque = m g share L sin(q) / (reduction × efficiency). The assumed efficiency is 0.85. A 60/40 load split is the worst planned two-wheel condition, not a single-support claim.
 

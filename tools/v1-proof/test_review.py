@@ -24,16 +24,16 @@ class ProofChecks(unittest.TestCase):
     def test_receipts_reconcile_to_paid_spend_and_remaining_allocations(self):
         plan = json.loads(r.PLAN.read_text())
         purchases = r.purchase_report(self.c, plan)
-        self.assertEqual(purchases["totals"]["paidTotal"], Decimal("173.70"))
+        self.assertEqual(purchases["totals"]["paidTotal"], Decimal("195.94"))
         self.assertIsNone(purchases["totals"]["merchandiseCost"])
         self.assertIsNone(purchases["remaining"]["parts"])
         self.assertIsNone(purchases["remaining"]["shippingTax"])
-        self.assertEqual(purchases["remaining"]["total"], Decimal("726.30"))
+        self.assertEqual(purchases["remaining"]["total"], Decimal("704.06"))
         ordered = {item["partId"]: item["quantity"] for order in purchases["orders"] for item in order["items"]}
-        self.assertEqual(ordered, {"pololu-4752": 1, "pololu-4035": 1, "st3215": 2, "pico2": 1, "lsm6dso": 1})
+        self.assertEqual(ordered, {"pololu-4752": 1, "pololu-4035": 1, "st3215": 2, "pico2": 1, "lsm6dso": 1, "dc-step-down": 5, "control-interface": 1})
         budget = r.outputs(self.c, plan)[r.ROOT / "docs/bom.md"]
-        self.assertIn("**$173.70**", budget)
-        self.assertIn("**$726.30**", budget)
+        self.assertIn("**$195.94**", budget)
+        self.assertIn("**$704.06**", budget)
         self.assertIn("**$900.00**", budget)
         self.assertIn("Amazon / 2026-10-02 (ordered)", budget)
         self.assertIn("SparkFun LSM6DSO Qwiic IMU | 1 | Not recorded | Not recorded | Received; untested", budget)
@@ -66,7 +66,7 @@ class ProofChecks(unittest.TestCase):
         self.assertEqual(r.money(0), "$0.00")
         budget = r.outputs(self.c, plan)[r.ROOT / "docs/bom.md"]
         self.assertIn("Recorded spend: Not recorded", budget)
-        self.assertNotIn("$726.30", budget)
+        self.assertNotIn("$704.06", budget)
 
     def test_second_wheel_order_updates_coverage_without_stale_first_channel_claims(self):
         plan = json.loads(r.PLAN.read_text())
@@ -141,7 +141,7 @@ class ProofChecks(unittest.TestCase):
         result = r.report(self.c)
         self.assertFalse(result["hardware_validated"])
         self.assertFalse(result["fabrication_ready"])
-        self.assertEqual(result["actuator_count"], 4)
+        self.assertEqual(result["actuator_count"], 2)  # Hips left V1-PROOF on 2026-10-16.
 
     def test_parked_publisher_cannot_overwrite_active_budget(self):
         spec = importlib.util.spec_from_file_location("stair_publish", r.ROOT / "tools/engineering/publish.py")

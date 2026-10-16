@@ -15,6 +15,10 @@ The active objective is a useful, inexpensive proof robot. **Under $1,000. Reuse
 
 ## Next physical work
 
+**2026-10-16 budget update:** the user reports a 5-pack of DC step-down converters for $8.47 and a Waveshare servo board for $13.77. Recorded spend is now $195.94, with $704.06 remaining in the $900 plan. The vendor of the converters, the models, the charge breakdowns and the delivery status are not recorded.
+
+The model now has two powered axes. The hip drive allowance of $60 left the budget, and the servo row now equals the $42.38 paid goods. The $77.62 difference moved to the repair and overrun reserve, which is now $202.62. `review.py --write` regenerated the budget, the sizing screen and the page data. The mass list keeps the servo allowance until a measured mass replaces it.
+
 **2026-10-16 hips leave V1-PROOF:** the user said: "We are leaving hips out of V1-Proof and will bring it back in the next version. We dropped the one-leg and stair-climbing requirements." V1-PROOF now has two powered axes, and both legs stay locked at 30°. The [decision log](docs/decisions.md), the requirements, the build brief, the validation protocol, the assembly guide, the plan data and the website show this change.
 
 The single-leg bench plan is parked. The plan data moves it, the powered-leg milestone and the hip drive design to the next version. The V1-PROOF bench is now the electronics bench, stages E0–E6. The numerical model and the budget still include the servo and leg transmission allowances.

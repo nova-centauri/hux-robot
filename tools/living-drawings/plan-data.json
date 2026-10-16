@@ -142,12 +142,12 @@
         {
           "label": "Planned all-in budget",
           "value": "$900",
-          "note": "Includes $100 shipping/tax and $125 repair/overrun reserve. Recorded spend is $173.70. The remainder to this ceiling is $726.30, which covers future purchases and reserves. The latest order charge breakdown is unknown."
+          "note": "Includes $100 shipping/tax and a $202.62 repair/overrun reserve. Recorded spend is $195.94. The remainder to this ceiling is $704.06, which covers future purchases and reserves. Three order charge breakdowns are unknown."
         },
         {
           "label": "Recorded spend",
-          "value": "$173.70",
-          "note": "Pololu $88.34 + Waveshare $54.78 + Amazon controller/IMU order $30.58. The Amazon screenshot supplies an order total, with item prices, shipping/tax and payment date unshown."
+          "value": "$195.94",
+          "note": "Pololu $88.34 + Waveshare servos $54.78 + Amazon controller/IMU order $30.58 + DC step-down 5-pack $8.47 + Waveshare servo board $13.77. The last three totals have no itemized charges."
         },
         {
           "label": "Hard spend limit",
@@ -264,17 +264,32 @@
         },
         {
           "id": "control-interface",
-          "name": "Compatible half-duplex servo interface",
-          "status": "future",
+          "name": "Waveshare servo bus board",
+          "status": "unconfirmed",
           "plannedQuantity": 1,
-          "orderedQuantity": null,
+          "orderedQuantity": 1,
           "actualCost": null,
           "currency": "USD",
           "confirmedOn": null,
-          "note": "The servo bus interface ownership/purchase remains unconfirmed. The controller/IMU order tracks the Pico 2 and the IMU separately. That screenshot establishes no interface.",
+          "note": "The user reports a Waveshare servo board at $13.77, recorded 16 October. Model and delivery unconfirmed. Next version only.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
+          ]
+        },
+        {
+          "id": "dc-step-down",
+          "name": "DC step-down converters, 5-pack",
+          "status": "unconfirmed",
+          "plannedQuantity": null,
+          "orderedQuantity": 5,
+          "actualCost": null,
+          "currency": "USD",
+          "confirmedOn": null,
+          "note": "The user reports $8.47 for a 5-pack, recorded 16 October. The model, the output rating and the delivery are not recorded.",
+          "sourcePaths": [
+            "docs/purchases.md",
+            "docs/parts-on-hand.md"
           ]
         },
         {
@@ -665,6 +680,16 @@
       "updates": [
         {
           "date": "2026-10-16",
+          "title": "Budget updated for two powered axes",
+          "summary": "The user reports two more purchases: a 5-pack of DC step-down converters for $8.47 and a Waveshare servo board for $13.77. Recorded spend is now $195.94, with $704.06 remaining in the $900 plan. The hip drive allowance left the budget, and the difference moved to the reserve.",
+          "sourcePaths": [
+            "docs/bom.md",
+            "docs/purchases.md",
+            "tools/v1-proof/model.json"
+          ]
+        },
+        {
+          "date": "2026-10-16",
           "title": "Hips leave V1-PROOF",
           "summary": "The user removed the powered hips from V1-PROOF and dropped the one-leg and stair requirements. Both legs stay locked at 30°. Powered leg-height change, the 3:1 drive and the single-leg bench move to the next version. The user reports that the hip-hole measurements agree with the guide.",
           "sourcePaths": [
@@ -1008,7 +1033,7 @@
           "id": "waveshare-2026-09-28",
           "vendor": "Waveshare",
           "paidOn": "2026-09-28",
-          "status": "ordered",
+          "status": "received",
           "currency": "USD",
           "items": [
             {
@@ -1022,7 +1047,7 @@
           "shippingCost": 12.4,
           "taxCost": 0.0,
           "paidTotal": 54.78,
-          "deliveryNote": "Paid. The latest vendor receipt says that the order is not yet shipped. No dispatch or delivery date is confirmed. This receipt does not charge tax separately.",
+          "deliveryNote": "Paid. The user reports that the two servos are received on 15 October, with labels unchecked. They stay in stock for the next version, because V1-PROOF has no powered hips. This receipt does not charge tax separately.",
           "sourcePaths": [
             "docs/purchases.md"
           ]
@@ -1059,6 +1084,54 @@
             "docs/purchases.md",
             "docs/parts-on-hand.md"
           ]
+        },
+        {
+          "id": "step-down-2026-10-16",
+          "vendor": "Vendor not recorded",
+          "paidOn": null,
+          "orderedOn": null,
+          "status": "unconfirmed",
+          "currency": "USD",
+          "items": [
+            {
+              "partId": "dc-step-down",
+              "name": "DC step-down converters, 5-pack",
+              "quantity": 5,
+              "unitCost": null
+            }
+          ],
+          "merchandiseCost": null,
+          "shippingCost": null,
+          "taxCost": null,
+          "paidTotal": 8.47,
+          "deliveryNote": "The user reports $8.47 for a 5-pack of DC step-down converters, recorded 16 October. The vendor, the model, the output rating, the charge breakdown and the delivery status are not recorded.",
+          "sourcePaths": [
+            "docs/purchases.md"
+          ]
+        },
+        {
+          "id": "waveshare-servo-board-2026-10-16",
+          "vendor": "Waveshare",
+          "paidOn": null,
+          "orderedOn": null,
+          "status": "unconfirmed",
+          "currency": "USD",
+          "items": [
+            {
+              "partId": "control-interface",
+              "name": "Servo bus driver board",
+              "quantity": 1,
+              "unitCost": null
+            }
+          ],
+          "merchandiseCost": null,
+          "shippingCost": null,
+          "taxCost": null,
+          "paidTotal": 13.77,
+          "deliveryNote": "The user reports $13.77 for a Waveshare servo board, recorded 16 October. It is the half-duplex interface for the ST3215 servos, which are for the next version. The model, the charge breakdown and the delivery status are not recorded.",
+          "sourcePaths": [
+            "docs/purchases.md"
+          ]
         }
       ],
       "shoppingList": [
@@ -1081,17 +1154,6 @@
           "status": "to-buy",
           "need": "Confirm coverage for 2 wheel channels",
           "note": "R05 needs two drivers. The receipt covers one. Buy one more Pololu 4035: $11.94 goods, checked 2026-10-16.",
-          "sourcePaths": [
-            "docs/parts-on-hand.md",
-            "docs/v1-proof-hardware.md"
-          ]
-        },
-        {
-          "id": "servo-interface",
-          "name": "Compatible half-duplex TTL servo interface",
-          "status": "future",
-          "need": "1 interface",
-          "note": "Next version only. V1-PROOF has no powered hips.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -1158,7 +1220,7 @@
           "name": "Regulators and protected power distribution",
           "status": "check-stock",
           "need": "9 V servo and 5 V logic rails, plus fuse, kill and return-energy protection",
-          "note": "The bench supply is available, with ratings unconfirmed. The robot power/protection parts are not yet confirmed.",
+          "note": "A 5-pack of DC step-down converters is bought, $8.47 per the user. Confirm their output and current rating against the 5 V logic rail. The fuse, the kill chain and the regeneration protection are not confirmed.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -1198,7 +1260,7 @@
           ]
         }
       ],
-      "shoppingSummary": "The Pico 2, the LSM6DSO IMU and two ST3215 servos are received and paid. The servos stay in stock for the next version. V1-PROOF still needs a second gearmotor, a second driver, two wheels with adapters and possibly a battery. Confirm the stock of the support parts before you buy replacements."
+      "shoppingSummary": "The Pico 2, the LSM6DSO IMU and two ST3215 servos are received and paid. The servos and the Waveshare servo board stay in stock for the next version. V1-PROOF still needs a second gearmotor, a second driver, two wheels with adapters and possibly a battery. Confirm the stock of the support parts before you buy replacements."
     },
     {
       "id": "V0-GENESIS",
