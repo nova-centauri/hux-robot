@@ -15,6 +15,8 @@ The active objective is a useful, inexpensive proof robot. **Under $1,000. Reuse
 
 ## Next physical work
 
+**2026-10-16 R05 plate 4:** Bambu Studio showed plate 3 at 100% and Finished. The user reports a clear bed. At 07:08 EDT, the X1C accepted plate 4 with four struts, two servo cradles and four cap bars. The estimate is 3 hours, 11 minutes and 95.86 g, with an initial finish time of approximately 10:19 EDT.
+
 **2026-10-15 bench firmware, kill chain and servo arrival:** the user reports that two ST3215 servos are received, with labels unchecked. The first firmware, [`firmware/bench`](firmware/bench/README.md), compiles for `pico2` with Pico SDK 2.2.0 and Arm GCC 15.2.1 in the cloud toolchain. The prebuilt `hux_bench.uf2` and the host console `tools/bench/hux_bench.py` are in the repository. No board test is recorded.
 
 The [kill chain](docs/kill-chain.md) proposes a Pololu 2813 rail switch with a momentary KILL button on its OFF pin. An ARM button and a charge-pump heartbeat detector on GP22 gate the power-on. No part is ordered. Recorded spend stays $173.70.

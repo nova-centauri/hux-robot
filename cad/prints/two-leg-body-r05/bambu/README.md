@@ -31,3 +31,7 @@ Bambu Studio sliced plate 2 without an error. The estimate is 4 hours, 40 minute
 **2026-10-15, plate 3 sent.** At 12:51 EDT, Bambu Studio showed the plate 2 job at 100%, 110/110 layers and Finished. The user reports a clear bed. Bambu Studio sliced plate 3 without an error. The estimate is 3 hours, 8 minutes and 150.49 g.
 
 At 12:52 EDT, MSL-Bambi-X1C accepted `hux-r05-plate-3-deck-tray_R05 upper deck, tray and leg parts`. It showed 0% at layer 0/70, with an initial finish estimate of 15:59 EDT. Plate 3 completion remains unverified.
+
+**2026-10-16, plate 4 sent.** At 07:04 EDT, Bambu Studio showed the plate 3 job at 100%, 70/70 layers and Finished. The user reports a clear bed. Bambu Studio sliced plate 4 without an error. The estimate is 3 hours, 11 minutes and 95.86 g.
+
+At 07:08 EDT, MSL-Bambi-X1C accepted `hux-r05-plate-4-links-servo_R05 links and servo mounts`. It showed 0% at layer 0/202 and waited for the bed temperature. The initial finish estimate is approximately 10:19 EDT. Plate 4 completion remains unverified.

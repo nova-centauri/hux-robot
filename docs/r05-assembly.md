@@ -1,6 +1,6 @@
 # R05 two-leg body assembly guide
 
-**Revision R05, 2026-10-15.** This guide tells you how to assemble the [R05 two-leg body](../cad/prints/two-leg-body-r05/README.md). It follows the [anatomy layout](../tools/living-drawings/anatomy.html) with rear hips, inner servos and a battery tray. Plates 1 and 2 are printed. Plates 3, 4 and 5 remain to print. No R05 fit, load or powered test is recorded.
+**Revision R05, 2026-10-15.** This guide tells you how to assemble the [R05 two-leg body](../cad/prints/two-leg-body-r05/README.md). It follows the [anatomy layout](../tools/living-drawings/anatomy.html) with rear hips, inner servos and a battery tray. Plates 1, 2 and 3 are printed. Plate 4 is in progress, and plate 5 remains to print. No R05 fit, load or powered test is recorded.
 
 ![Side view of the R05 leg geometry with rear hips and forward struts](assets/r05-assembly/side-hip-geometry.png)
 
