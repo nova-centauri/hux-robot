@@ -1,0 +1,40 @@
+/* Home page: current-build status, live anatomy and the R05 kit hub. */
+.home .home-hero{display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:start;padding:48px 0 34px}
+.home h1{font-size:clamp(42px,6vw,76px);line-height:.95;letter-spacing:-2.5px;margin:14px 0 18px}
+.home .hero-description{max-width:560px;font-size:17px;color:var(--muted)}
+.home-status{background:var(--white);border:1px solid var(--line);border-top:3px solid var(--accent);padding:24px 26px}
+.home-status h2{font-size:24px;margin:4px 0 14px;letter-spacing:-.5px}
+.home-status>a{font-size:13px}
+.status-list{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:0}
+.status-list li{position:relative;padding:9px 0 9px 28px;border-bottom:1px solid var(--line);display:grid;gap:1px}
+.status-list li:last-child{border-bottom:0}
+.status-list li::before{content:"";position:absolute;left:2px;top:14px;width:12px;height:12px;border-radius:50%;border:2px solid #9aa6a8;background:var(--white)}
+.status-list li.is-done::before{background:var(--green);border-color:var(--green)}
+.status-list li.is-active::before{border-color:var(--accent);background:conic-gradient(var(--accent) 0 50%,var(--white) 0)}
+.status-list li.is-open::before{border-style:dashed}
+.status-list strong{font-size:14px}
+.status-list span{font-size:12.5px;color:var(--muted);line-height:1.45}
+.home-live{padding:26px 0 8px}
+.home-live .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:16px}
+.home-live .section-head>a{font-size:13px;white-space:nowrap}
+.anatomy-frame-wrap{background:var(--white);border:1px solid var(--line);padding:12px}
+.anatomy-frame{display:block;width:100%;height:min(820px,68vw);border:0;background:transparent}
+.home-note{margin:8px 0 0;color:var(--muted)}
+.kit-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.kit-group{display:grid;align-content:start;gap:8px}
+.kit-group>.eyebrow{margin:0 0 2px}
+.kit-link{display:grid;gap:2px;padding:14px 16px;background:var(--white);border:1px solid var(--line);text-decoration:none;color:var(--ink)}
+.kit-link:hover{border-color:var(--green)}
+.kit-link strong{font-size:15px;color:var(--green)}
+.kit-link small{font-size:12.5px;color:var(--muted);line-height:1.45}
+.kit-link.is-primary{border-left:3px solid var(--green)}
+.kit-figure{margin:22px 0 34px;background:#e9edeb;border:1px solid var(--line);padding:16px}
+.kit-figure img{display:block;width:100%;height:auto}
+.kit-figure figcaption{display:flex;justify-content:space-between;gap:12px;margin-top:10px;font:10px var(--mono);letter-spacing:1px;color:var(--muted)}
+@media (max-width:900px){
+  .home .home-hero{grid-template-columns:1fr;gap:26px;padding:30px 0 22px}
+  .kit-groups{grid-template-columns:1fr}
+  .home-live .section-head{display:block}
+  .anatomy-frame{height:170vw}
+}
+@media (max-width:520px){.anatomy-frame-wrap{padding:6px}.kit-figure figcaption{display:grid}}

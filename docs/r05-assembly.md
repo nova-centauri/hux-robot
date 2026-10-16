@@ -1,6 +1,8 @@
 # R05 two-leg body assembly guide
 
-**Revision R05, 2026-10-15.** This guide tells you how to assemble the [R05 two-leg body](../cad/prints/two-leg-body-r05/README.md). It follows the [anatomy layout](../tools/living-drawings/anatomy.html) with rear hips, inner servos and a battery tray. Plates 1, 2 and 3 are printed. Plate 4 is in progress, and plate 5 remains to print. No R05 fit, load or powered test is recorded.
+**Revision R05, 2026-10-16.** This guide tells you how to assemble the [R05 two-leg body](../cad/prints/two-leg-body-r05/README.md). It follows the [anatomy layout](../tools/living-drawings/anatomy.html) with rear hips, inner servos and a battery tray. Plates 1, 2 and 3 are printed. Plate 4 is in progress, and plate 5 remains to print.
+
+The user reports that the frame is assembled: the two walls, the three decks and the battery tray. The two ST3215 servos are received. No R05 fit, load or powered test is recorded.
 
 ![Side view of the R05 leg geometry with rear hips and forward struts](assets/r05-assembly/side-hip-geometry.png)
 
@@ -105,6 +107,10 @@ Install the cradles before the frame assembly. The open walls give better access
 6. Do steps 1 to 5 again on the second wall.
 
 The two walls are the same part. The cradle on the far wall is the same part, turned over.
+
+If the frame is already assembled, you can install the cradles after steps 2 and 3. The cradle is 39.8 mm tall. The vertical space between the tray flange and the lower deck angles is 47 mm. Push the cradle in through the front opening, below the lower deck.
+
+Hold the four M4 nuts in their pockets with a piece of tape. Then do steps 3 to 5. In the CAD, the cradle clears the tray flange by 4.1 mm and the front angle by 3.1 mm. Make sure that the cradle does not touch them.
 
 ## Step 2. Assemble the decks and the angles
 

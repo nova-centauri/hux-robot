@@ -15,6 +15,12 @@ The active objective is a useful, inexpensive proof robot. **Under $1,000. Reuse
 
 ## Next physical work
 
+**2026-10-16 R05 frame and website update:** the user reports an assembled R05 body: two walls, three decks and the battery tray. The servos are received. No dimension is measured. The [fit record](docs/checklists/2026-10-15-r05-fit-record.md) and the [assembly guide](docs/r05-assembly.md) record this. The guide now tells how to install the servo cradles through the front opening of an assembled frame.
+
+The home page now shows the live R05 anatomy, the build status and one group of R05 links. The Mechanical page, the document library, the README files and the plan data now put R05 first. Each R01–R04 record shows a superseded notice. The anatomy servo position now agrees with the R05 kit: 41 mm forward of the lower hip and 3 mm above it.
+
+The plan data adds the 3:1 hip drive as an open design action. It also records the R05 leg range of 15–40° and the need for different servo bus IDs. No STL changed.
+
 **2026-10-16 R05 plate 4:** Bambu Studio showed plate 3 at 100% and Finished. The user reports a clear bed. At 07:08 EDT, the X1C accepted plate 4 with four struts, two servo cradles and four cap bars. The estimate is 3 hours, 11 minutes and 95.86 g, with an initial finish time of approximately 10:19 EDT.
 
 **2026-10-15 bench firmware, kill chain and servo arrival:** the user reports that two ST3215 servos are received, with labels unchecked. The first firmware, [`firmware/bench`](firmware/bench/README.md), compiles for `pico2` with Pico SDK 2.2.0 and Arm GCC 15.2.1 in the cloud toolchain. The prebuilt `hux_bench.uf2` and the host console `tools/bench/hux_bench.py` are in the repository. No board test is recorded.

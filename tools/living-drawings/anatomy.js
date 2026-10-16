@@ -39,9 +39,10 @@ const MASS_FALLBACK = [
 const MASS = (PROOF && PROOF.mass_items ? PROOF.mass_items.map((m) => [m.item, m.kg]) : MASS_FALLBACK);
 
 /* Internal servo (R05): ST3215 case 45.2 long (X), 35 deep (Y), 24.7 high (Z), output 12.5 mm from case centre.
- * The output is 45 mm forward of the hip and 12 mm above the lower hip. A 3:1 belt drives the lower hip. */
+ * R05 kit (parameters.json inner_servo): the output is 41 mm forward of the hip and 3 mm above the lower hip.
+ * A 3:1 belt drives the lower hip. */
 function servoInside(lay) {
-  const ox = lay.pivotX - 45, oz = 12;
+  const ox = lay.pivotX - 41, oz = 3;
   return { ox, oz, cx: ox - 12.5, cz: oz, yIn: -1, depth: 35 };
 }
 function neutral() { const r = Q_NEU * DEG; return { cx: LINK * Math.sin(r), cz: -LINK * Math.cos(r) }; }
@@ -556,6 +557,9 @@ for (const v of Object.values(views)) { v.cam.layers.enable(0); v.cam.layers.ena
 views.iso.cam.position.set(-620, 520, -760);
 const controls = new OrbitControls(views.iso.cam, views.iso.el);
 controls.target.set(0, 150, 67.5); controls.enableDamping = true; controls.minDistance = 250; controls.maxDistance = 3000;
+// Embedded on the home page: the page scroll must not zoom the 3D view.
+const EMBED = document.documentElement.classList.contains('embed');
+if (EMBED) { controls.enableZoom = false; const note = document.querySelector('#v-iso .view-note'); if (note) note.textContent = 'drag to turn'; }
 let userOrbit = false;   // after the user turns the 3D view, the script stops moving the camera
 controls.addEventListener('start', () => { userOrbit = true; $('reset-view').hidden = false; });
 /* Scripted 3D camera: slow turntable, closer during the x-ray. Angles about the vertical axis. */
@@ -575,7 +579,9 @@ function placeOrtho(cx, rects) {
   // One scale for all three orthographic views, so they are true projections at one scale.
   const spanX = 480, spanZ = 470, spanY = 340;
   const r = rects;
-  const mmPerPx = Math.max(spanY / r.top.h, spanX / r.top.w, spanX / r.side.w, spanZ / r.side.h, spanY / r.front.w, spanZ / r.front.h) / zoom;
+  // A hidden view (the phone embed shows only 3D and SIDE) has no size. Leave it out of the scale.
+  const fit = (rect, sw, sh) => (rect.w < 2 || rect.h < 2 ? [] : [sw / rect.w, sh / rect.h]);
+  const mmPerPx = Math.max(...fit(r.top, spanX, spanY), ...fit(r.side, spanX, spanZ), ...fit(r.front, spanY, spanZ), 0.01) / zoom;
   const zc = 175, yc = 67.5;  // ground sits near the lower edge, room for dimensions // three y (height) centre and three z (= -CAD Y) centre
   const set = (cam, w, h, pos, look, up) => {
     cam.left = -w * mmPerPx / 2; cam.right = w * mmPerPx / 2; cam.top = h * mmPerPx / 2; cam.bottom = -h * mmPerPx / 2;
@@ -974,3 +980,10 @@ function start() {
 }
 start();
 window.HuxAnatomy = { state, legPose, trimDeg, com, LAYOUTS, timeline };
+
+/* Embedded view: report the content height so the parent page can size the frame. */
+if (EMBED && window.parent !== window) {
+  const main = document.getElementById('main');
+  const post = () => window.parent.postMessage({ hux: 'anatomy-height', height: Math.ceil(main.getBoundingClientRect().height) }, location.origin);
+  new ResizeObserver(post).observe(main); post();
+}

@@ -2,11 +2,11 @@
 
 **2026-10-15 servo arrival:** the user reports that **two ST3215 servos are received**. The labels, the 12 V variant check, the condition and the bus IDs are not recorded. The half-duplex TTL interface is not selected. Start the servo stages of the [single-leg bench plan](one-leg-bench.md) after the [electronics bench](electronics-bench-guide.md) stages. Recorded spend stays $173.70.
 
-**2026-10-13 body fit problem:** the user reports that the walls and horizontal layers do not fit together. The [dated evaluation](checklists/2026-10-13-r04-fit-review.md) records the report and CAD findings. Use the [R04 matched body and component mounts](../cad/prints/one-leg-body-r04/README.md) for the next fit trial. The ST3215 servos have not arrived. Physical qualification remains open.
+**2026-10-16 R05 printed parts:** plates 1–3 of the [R05 two-leg body](../cad/prints/two-leg-body-r05/README.md) are printed in Bambu PLA Basic. The user reports that the frame is assembled with the two walls, the three decks and the battery tray. Plate 4 is in print, and plate 5 is next. No R05 dimension is measured. The [print record](../cad/prints/two-leg-body-r05/bambu/README.md) lists each plate.
 
-The user confirms completion of the four small R04 fit parts in Basic PLA on October 13. Bambu Studio also shows 100%, 110/110 layers and Finished. The [print record](../cad/prints/one-leg-body-r04/bambu/README.md) confirms completion only. The corner joint fit remains unverified.
+The R05 hardware is in the [assembly guide](r05-assembly.md#hardware). Confirm the stock of M4 and M3 bolts, nuts and washers before step 5. The R01, R03 and R04 printed parts are superseded. Keep them for spares and comparison only.
 
-The user requested further prints before the joint check. The X1C accepted plate 2 with one wall, the lower deck and three more angles. Plate 2 completion remains unverified.
+**2026-10-13 body fit problem:** the user reports that the walls and horizontal layers do not fit together. The [dated evaluation](checklists/2026-10-13-r04-fit-review.md) records the report and CAD findings. R04 corrected the fit, and R05 replaced R04.
 
 **2026-10-07 R03 prints complete:** the user confirms that all [R03 body kit](../cad/prints/one-leg-body-r03/README.md) parts are printed. The October 6 setup uses default PLA. Start the [fit and assembly checklist](checklists/2026-10-07-r03-assembly.md). Actual dimensions, fits, mass and assembly results remain unrecorded. Recorded spend stays $173.70.
 

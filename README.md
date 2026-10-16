@@ -8,7 +8,7 @@
 | Mass | **2.5 kg target; 3.0 kg maximum**, including battery |
 | Actuators | **Four:** two encoder wheel gearmotors, one small leg servo per side |
 | First milestone | Pin the legs; balance using only the two wheel motors |
-| Size | Approximately **28–31 cm high, 25.5 cm wide**, 10 cm rubber wheels |
+| Size | Target approximately **28–31 cm high, 25.5 cm wide**, 10 cm rubber wheels. The R05 CAD is approximately 32–35 cm high. |
 | Motion | Indoor mobility; 0.25 m/s cruise, 0.15 m/s on qualified shallow uneven surfaces; approximately 28 mm leg-height adjustment |
 | Reuse | Existing controller, IMU, manual input, battery/charger and shop stock when confirmed |
 | Finish line | Repeatable balance, five movement types, controlled stops, bounded disturbances and slow height changes |
@@ -19,10 +19,14 @@ The scope has no stairs, one-wheel stance, jumps, rough terrain, onboard cameras
 
 ## Working documents
 
-- [One-leg body R04](cad/prints/one-leg-body-r04/README.md): matched three-deck body, component mounts, fit samples, STEP models and four engineering sheets.
-- [2026-10-06 leg motion report](docs/checklists/2026-10-06-leg-motion.md): satisfactory travel per the user, with exact measurements still open.
+**Current build: R05.** The frame is assembled, per the user, and the leg and servo parts are in print.
 
-- [Mechanical testing layout and timeline](tools/living-drawings/mechanical-tests.html): movable side/end views, the R01 render, test steps and dated session drafts.
+- [R05 assembly guide](docs/r05-assembly.md): parts, hardware, tools and eight assembly steps with CAD views.
+- [R05 two-leg body](cad/prints/two-leg-body-r05/README.md): rear hips, inner servos, battery tray, STL, STEP and CAD checks.
+- [R05 print plates](cad/prints/two-leg-body-r05/bambu/README.md) and the [R05 print and fit record](docs/checklists/2026-10-15-r05-fit-record.md).
+- [Animated anatomy](tools/living-drawings/anatomy.html): top, side, front and 3D views of R05, with an electronics x-ray.
+- [Electronics bench guide](docs/electronics-bench-guide.md), [kill chain](docs/kill-chain.md) and [bench firmware](firmware/bench/README.md).
+- Superseded kits: [R04](cad/prints/one-leg-body-r04/README.md), [R03](cad/prints/one-leg-body-r03/README.md) and [R01](cad/prints/v1-proof-r01/README.md).
 - [Single-leg bench preparation](docs/one-leg-bench.md), [printable geometry template](cad/layouts/one-leg-bench-template.svg) and [session record](docs/checklists/one-leg-bench-session.md)
 - [Requirements](docs/requirements.md) and [decision log](docs/decisions.md)
 - [Mechanical](docs/mechanical.md), [electronics](docs/electronics.md), [software](docs/software.md)

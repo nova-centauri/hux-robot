@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-15",
+  "updatedAt": "2026-10-16",
   "currentVersion": "v1-proof",
   "description": "Source-backed HUX work-in-progress plan. Proposed and simulated work is separate from measured physical evidence. Null order quantities and costs mean unknown, not zero.",
   "statusLabels": {
@@ -51,36 +51,39 @@
         "docs/parts-on-hand.md"
       ],
       "focus": {
-        "title": "Correct the body fit and add component mounts",
-        "summary": "R04 corrects body interfaces and adds component mounts after the reported fit problems. Plate 1 is complete. The user requested further prints before the joint check. The X1C accepted plate 2 with one wall, the lower deck and three angles. Plate 2 completion, physical fit, servo arrival and powered tests remain open. Recorded spend stays $173.70.",
+        "title": "Assemble and measure the R05 two-leg body",
+        "summary": "R05 is the current build, with rear hips, inner servos and a battery tray. Plates 1–3 are printed, and the user reports that the frame is assembled. Plate 4 is in print, and plate 5 is next. Two ST3215 servos are received. No R05 dimension is measured, and the 3:1 servo drive to the hips is not designed. Recorded spend stays $173.70.",
         "sourcePaths": [
-          "cad/prints/one-leg-body-r04/bambu/README.md",
-          "docs/checklists/2026-10-13-r04-fit-review.md",
-          "cad/prints/one-leg-body-r04/README.md",
-          "docs/checklists/2026-10-07-r03-assembly.md",
+          "docs/r05-assembly.md",
+          "docs/checklists/2026-10-15-r05-fit-record.md",
+          "cad/prints/two-leg-body-r05/README.md",
+          "cad/prints/two-leg-body-r05/bambu/README.md",
           "NOTES.md",
-          "cad/prints/one-leg-body-r03/bambu/README.md",
-          "cad/prints/one-leg-body-r03/README.md",
-          "docs/checklists/2026-10-06-leg-motion.md",
-          "docs/parts-on-hand.md",
-          "docs/one-leg-bench.md"
+          "docs/parts-on-hand.md"
         ]
       },
       "nextActions": [
         {
           "id": "fixture-mockup",
-          "title": "Check the R04 corner and component fits",
-          "detail": "The user requested further prints before the joint check. Plate 1 is complete, and plate 2 is active with one wall, the lower deck and three angles. Continue the remaining Basic PLA parts after each bed clearance check. Check the sample joint and actual hardware before assembly. Physical fit remains unverified.",
+          "title": "Measure and finish the R05 assembly",
+          "detail": "Measure the hip holes on each wall: 40.0 mm apart and 30 mm from the rear edge. Install the servo cradles through the front opening when plate 4 is complete. Then install the struts, the carriers and the gearmotors, and sweep each leg by hand from 15° to 40°. Record each value in the R05 fit record. The frame is assembled, per the user, and no dimension is measured.",
           "status": "in-progress",
           "sourcePaths": [
-            "cad/prints/one-leg-body-r04/bambu/README.md",
-            "docs/checklists/2026-10-13-r04-fit-review.md",
-            "cad/prints/one-leg-body-r04/README.md",
-            "docs/checklists/2026-10-07-r03-assembly.md",
-            "NOTES.md",
-            "cad/prints/one-leg-body-r03/bambu/README.md",
-            "cad/prints/one-leg-body-r03/README.md",
-            "docs/checklists/2026-10-06-leg-motion.md",
+            "docs/r05-assembly.md",
+            "docs/checklists/2026-10-15-r05-fit-record.md",
+            "cad/prints/two-leg-body-r05/README.md",
+            "cad/prints/two-leg-body-r05/bambu/README.md",
+            "NOTES.md"
+          ]
+        },
+        {
+          "id": "hip-drive",
+          "title": "Design the R05 servo drive to the hips",
+          "detail": "Each inner servo must turn its lower hip through a 3:1 reduction. Design the hip shaft, the wall bearings, the pulleys, the belt and the belt tension. Until this drive exists, the M4 hip pivots are passive. Do not apply servo torque through them. New printed parts go on the next print plate.",
+          "status": "planned",
+          "sourcePaths": [
+            "cad/prints/two-leg-body-r05/README.md",
+            "docs/checklists/2026-10-14-anatomy-review.md",
             "docs/mechanical.md"
           ]
         },
@@ -108,7 +111,7 @@
         {
           "id": "record-orders",
           "title": "Identify the received parts and outstanding arrivals",
-          "detail": "Record the gearmotor/driver labels, the total received driver count, the dimensions and the condition. The receipt covers one Pololu 4752 gearmotor and one DRV8874 driver (Pololu 4035). The Pico 2 and the LSM6DSO IMU are received. The user reports that two ST3215 servos are received on October 15. Record their labels, confirm the 12 V variant and record the condition.",
+          "detail": "Record the gearmotor/driver labels, the total received driver count, the dimensions and the condition. The receipt covers one Pololu 4752 gearmotor and one DRV8874 driver (Pololu 4035), but R05 needs two of each. The Pico 2 and the LSM6DSO IMU are received. The user reports that two ST3215 servos are received. Record their labels and confirm the 12 V variant. Give the two servos different bus IDs before you connect both to one bus.",
           "status": "ready",
           "sourcePaths": [
             "docs/purchases.md",
@@ -180,7 +183,7 @@
         {
           "label": "Physical acceptance",
           "value": "All open",
-          "note": "The current records establish no hardware test and no firmware implementation."
+          "note": "No hardware test is recorded. The bench firmware compiles and is untested on hardware."
         }
       ],
       "purchases": [
@@ -204,7 +207,7 @@
         {
           "id": "st3215",
           "name": "Waveshare ST3215, 12 V variant",
-          "status": "ordered",
+          "status": "received",
           "plannedQuantity": 2,
           "orderedQuantity": 2,
           "actualCost": 42.38,
@@ -325,7 +328,7 @@
           "actualCost": null,
           "currency": "USD",
           "confirmedOn": "2026-10-07",
-          "note": "The R03 prints are complete. On October 13, the user reports poor body fit and missing actuator mounts. R04 is a new fit candidate, not a completed print. Actual print costs remain unrecorded.",
+          "note": "R05 plates 1–3 are printed, plate 4 is in print and plate 5 is next. The earlier R01, R03 and R04 parts are superseded.",
           "sourcePaths": [
             "docs/checklists/2026-10-13-r04-fit-review.md",
             "cad/prints/one-leg-body-r04/README.md",
@@ -355,7 +358,7 @@
           "id": "P0",
           "title": "Inventory and layout",
           "status": "in-progress",
-          "summary": "The user reports that the gearmotor and the drivers are received and the parts are printed. Paid receipts cover one wheel gearmotor, one driver and two leg servos. The received labels/counts, the printed fits, the electronics interfaces and the second wheel gearmotor remain open.",
+          "summary": "The R05 frame is assembled, per the user. Plates 1–3 are printed, plate 4 is in print, and plate 5 is next. Paid receipts cover one wheel gearmotor, one driver and two leg servos. The servos are received. The R05 fits, the second wheel gearmotor, the servo interface and the hip drive remain open.",
           "criteria": [
             "Record exact parts, variants, quantities, costs and reusable stock.",
             "Quote missing items and retain reserves inside the strict cash cap.",
@@ -363,6 +366,7 @@
             "Detail the pinned structure and a supported reduced-servo leg before final machining."
           ],
           "sourcePaths": [
+            "docs/checklists/2026-10-15-r05-fit-record.md",
             "docs/checklists/mechanical-v1.md",
             "docs/parts-on-hand.md",
             "docs/bom.md"
@@ -372,7 +376,7 @@
           "id": "BENCH",
           "title": "One-leg actuator exercise",
           "status": "in-progress",
-          "summary": "The user reports poor body fit and missing actuator mounts. R04 supplies a matched three-deck body, electronics mounts and an ST3215 case cradle. Check a small corner sample before full body prints. The user reports that two ST3215 servos are received on October 15, with labels unchecked. Physical fit, powered tests and the leg transmission remain open. Recorded spend stays $173.70.",
+          "summary": "R05 supplies the body, an inner cradle for each ST3215 servo and the neutral lock. The two servos are received, with labels unchecked. The 3:1 drive to the hips is not designed. Do the servo stages with a bare servo or a servo in its cradle and no load. Physical fit, powered tests and the leg transmission remain open. Recorded spend stays $173.70.",
           "criteria": [
             "Complete the staged session with bounded commands, measured signs and disabled startup.",
             "Record passive clearances, backlash and measured leg/wheel response.",
@@ -380,11 +384,9 @@
             "Use measured load, electrical and thermal results to inform the robot. A bench pass does not prove balance."
           ],
           "sourcePaths": [
-            "docs/checklists/2026-10-13-r04-fit-review.md",
-            "cad/prints/one-leg-body-r04/README.md",
-            "docs/checklists/2026-10-07-r03-assembly.md",
-            "cad/prints/one-leg-body-r03/README.md",
-            "docs/checklists/2026-10-06-leg-motion.md",
+            "docs/r05-assembly.md",
+            "cad/prints/two-leg-body-r05/README.md",
+            "docs/checklists/2026-10-15-r05-fit-record.md",
             "docs/one-leg-bench.md"
           ]
         },
@@ -458,20 +460,18 @@
       "bench": {
         "title": "Single-leg bench exercise",
         "status": "in-progress",
-        "summary": "The user reports poor body fit and missing actuator mounts. R04 supplies a matched three-deck body, electronics mounts and an ST3215 case cradle. Check a small corner sample before full body prints. The user reports that two ST3215 servos are received on October 15, with labels unchecked. Physical fit, powered tests and the leg transmission remain open. Recorded spend stays $173.70.",
+        "summary": "R05 supplies the body, an inner cradle for each ST3215 servo and the neutral lock. The two servos are received, with labels unchecked. The 3:1 drive to the hips is not designed. Do the servo stages with a bare servo or a servo in its cradle and no load. Physical fit, powered tests and the leg transmission remain open. Recorded spend stays $173.70.",
         "sourcePaths": [
-          "docs/checklists/2026-10-13-r04-fit-review.md",
-          "cad/prints/one-leg-body-r04/README.md",
-          "docs/checklists/2026-10-07-r03-assembly.md",
-          "cad/prints/one-leg-body-r03/README.md",
-          "docs/checklists/2026-10-06-leg-motion.md",
+          "docs/r05-assembly.md",
+          "cad/prints/two-leg-body-r05/README.md",
+          "docs/checklists/2026-10-15-r05-fit-record.md",
           "docs/one-leg-bench.md",
           "docs/checklists/one-leg-bench-session.md"
         ],
         "geometry": [
           {
             "label": "Links",
-            "value": "2 × 110 mm between pivot centers"
+            "value": "2 × 110 mm struts from rear hips, slanted forward"
           },
           {
             "label": "Pivot separation",
@@ -479,7 +479,7 @@
           },
           {
             "label": "Neutral / design range",
-            "value": "30° / 15–45° from downward vertical"
+            "value": "30° / 15–40° from downward vertical (R05 limit)"
           },
           {
             "label": "Transmission",
@@ -606,27 +606,27 @@
         {
           "title": "R04 body fit review - 13 October",
           "path": "docs/checklists/2026-10-13-r04-fit-review.md",
-          "kind": "user report and CAD evaluation"
+          "kind": "superseded: user report and CAD evaluation"
         },
         {
           "title": "One-leg body R04",
           "path": "cad/prints/one-leg-body-r04/README.md",
-          "kind": "matched body, component mounts and fit samples"
+          "kind": "superseded: matched body, component mounts and fit samples"
         },
         {
           "title": "R03 print completion and assembly - 7 October",
           "path": "docs/checklists/2026-10-07-r03-assembly.md",
-          "kind": "user report and fit checklist"
+          "kind": "superseded: user report and fit checklist"
         },
         {
           "title": "One-leg body R03",
           "path": "cad/prints/one-leg-body-r03/README.md",
-          "kind": "STL, STEP, assembly and engineering sheets"
+          "kind": "superseded: STL, STEP, assembly and engineering sheets"
         },
         {
           "title": "Leg motion report - 6 October",
           "path": "docs/checklists/2026-10-06-leg-motion.md",
-          "kind": "user observation, measurements open"
+          "kind": "superseded: user observation, measurements open"
         },
         {
           "title": "Wheel drive mount · JD-03",
@@ -646,12 +646,12 @@
         {
           "title": "Mechanical testing · layout and timeline",
           "path": "tools/living-drawings/mechanical-tests.html",
-          "kind": "living diagram"
+          "kind": "superseded: living diagram"
         },
         {
           "title": "First mechanical fit session · 2 October",
           "path": "docs/checklists/2026-10-02-mechanical-fit.md",
-          "kind": "session checklist"
+          "kind": "superseded: session checklist"
         },
         {
           "title": "Current build plan",
@@ -735,6 +735,17 @@
         }
       ],
       "updates": [
+        {
+          "date": "2026-10-16",
+          "title": "R05 frame assembled and website reorganized",
+          "summary": "The user reports that the R05 frame is assembled with the walls, the decks and the battery tray, and that the servos are received. The home page shows the live R05 anatomy and the R05 kit. The R01–R04 records show a superseded notice. No R05 dimension is measured.",
+          "sourcePaths": [
+            "docs/checklists/2026-10-15-r05-fit-record.md",
+            "docs/r05-assembly.md",
+            "docs/mechanical.md",
+            "NOTES.md"
+          ]
+        },
         {
           "date": "2026-10-16",
           "title": "R05 plate 4 started",
@@ -1164,7 +1175,7 @@
           "name": "Leg reductions, shafts, pivots, bearings, stops and lock pins",
           "status": "check-stock",
           "need": "Hardware for both legs",
-          "note": "Two 3:1 reductions are planned. The printed links are on hand. The transmission and pivot hardware still need inventory confirmation.",
+          "note": "R05 needs two 3:1 drives from the inner servos to the lower hips: hip shafts, wall bearings, pulleys and belts. The drive is not designed. The printed struts are in print on R05 plate 4.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -1230,7 +1241,7 @@
           "name": "Frame/bracket stock and mechanical fasteners",
           "status": "check-stock",
           "need": "Remaining structure and assembly hardware",
-          "note": "The user reports that the 3D print is complete. Confirm the printed fit and the available fasteners/frame stock before you buy more.",
+          "note": "The R05 frame is printed and assembled, per the user. Confirm the M4 and M3 bolts, nuts and washers in the hardware table of the R05 assembly guide.",
           "sourcePaths": [
             "docs/parts-on-hand.md",
             "docs/v1-proof-hardware.md"
@@ -1248,7 +1259,7 @@
           ]
         }
       ],
-      "shoppingSummary": "The Pico 2 and the LSM6DSO IMU are received and paid. Two ST3215 servos are also already paid, and the user reports that they have not arrived as of October 13. The order ledger above records the other paid parts. Confirm the stock of the support parts before you buy replacements."
+      "shoppingSummary": "The Pico 2, the LSM6DSO IMU and two ST3215 servos are received and paid. The order ledger above records the other paid parts. R05 needs a second wheel gearmotor, a servo bus interface and the parts of the 3:1 hip drive. Confirm the stock of the support parts before you buy replacements."
     },
     {
       "id": "V0-GENESIS",

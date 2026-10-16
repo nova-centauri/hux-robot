@@ -1,10 +1,12 @@
 # Mechanical testing — layout and dated results
 
-Open the [living mechanical test page](../tools/living-drawings/mechanical-tests.html) for the movable linkage diagram, the R01 print render, the test steps and the chronological record. Start with the [first passive fit session](checklists/2026-10-02-mechanical-fit.md). The record shows the receipt and the 3D printing of the parts on October 2, 2026. There is no reported measured test result.
+**2026-10-16:** R05 is the current build. Record R05 measurements in the [R05 print and fit record](checklists/2026-10-15-r05-fit-record.md), with the steps of the [R05 assembly guide](r05-assembly.md). The session workflow below applies to R05.
+
+The [living mechanical test page](../tools/living-drawings/mechanical-tests.html) shows the R01 passive leg of October 2, 2026, with its linkage diagram, render and chronological record. There is no reported measured test result.
 
 ## Read the layout
 
-The diagram uses the R01 parallelogram: two 110 mm links, 40 mm fixed/carrier pivot separation, a 30° neutral and a 15–45° design range. Move the angle control to compare the axle positions. The end view shows 2 mm lower-link and 12 mm upper-link spacers at both ends of their respective links. Confirm the printed revision before you use that stack.
+The diagram uses the R01 parallelogram. R05 keeps these dimensions, with forward struts and a 15–40° range. R01 has two 110 mm links, 40 mm fixed/carrier pivot separation, a 30° neutral and a 15–45° design range. Move the angle control to compare the axle positions. The end view shows 2 mm lower-link and 12 mm upper-link spacers at both ends of their respective links. R05 uses the same spacers.
 
 The 100 mm circle is a wheel envelope. The motor placement, hubs, bearings and powered mounts still need measurements and detail design.
 

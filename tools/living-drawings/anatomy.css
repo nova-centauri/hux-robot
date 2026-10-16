@@ -84,6 +84,7 @@ body.anatomy *{box-sizing:border-box}
 .findings li p{margin:0 0 8px}
 .findings .small{font-size:12px;color:var(--muted)}
 .anatomy a{color:var(--green)}
+.anatomy .workshop-brand{color:#fffefa}
 
 @media (max-width:860px){
   .anatomy-main{padding-block:18px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
@@ -95,3 +96,11 @@ body.anatomy *{box-sizing:border-box}
   .readouts{grid-template-columns:repeat(2,1fr)}
   .view-note{display:none}
 }
+/* Embedded on the home page (anatomy.html?embed): animation and chapters only. */
+.embed body.anatomy{background:transparent}
+.embed .workshop-header,.embed .workshop-routebar,.embed .workshop-footer,.embed .skip-link,.embed .page-heading,.embed .callout,.embed .console,.embed .legend,.embed .findings,.embed .layout-toggle{display:none}
+.embed .anatomy-main{max-width:none;padding:0}
+.embed .player{margin:0 0 10px}
+.embed .views{grid-template-columns:1fr 1fr}
+/* Phones: the 3D and side views only, one above the other. */
+@media (max-width:620px){.embed .views{grid-template-columns:1fr}.embed #v-top,.embed #v-front{display:none}.embed .view{aspect-ratio:4/3;min-height:0}.embed .view-note{display:none}}

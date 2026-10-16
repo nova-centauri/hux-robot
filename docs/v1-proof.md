@@ -2,6 +2,8 @@
 
 **A small, four-actuator wheeled robot for strictly less than $1,000**. Prove balance, manual drive and a small amount of leg motion. Use equipment that is already in the shop where practical. This is the active Hux plan. The [previous stair project](archive/stair-v1/README.md) is parked intact.
 
+**2026-10-16:** the current build is the [R05 two-leg body](../cad/prints/two-leg-body-r05/README.md). Follow the [R05 assembly guide](r05-assembly.md).
+
 The user set the budget and scope reset on 2026-09-28. The later request adds reliable traversal, both turns, turns in place, bounded pushes/uneven terrain and component decisions. The [hardware baseline](v1-proof-hardware.md), [simulation evidence](v1-proof-simulation.md) and [physical protocol](v1-proof-validation.md) put that request into effect. They are not measured hardware capabilities.
 
 ## What we are building
@@ -17,9 +19,9 @@ Start with lock pins in both legs. The first real success is a two-motor balance
 | All-in new cash | $900 ceiling: $675 parts/fixture + $100 shipping/tax + $125 repairs/overruns |
 | Hard spend limit | Strictly below $1,000 across all stages and replacements |
 | Mass | 2.5 kg target, 3.0 kg maximum with battery |
-| Overall envelope | About 278–306 mm upright height, 255 mm outside wheel width |
+| Overall envelope | About 278–306 mm upright height, 255 mm outside wheel width. The R05 CAD is approximately 320–348 mm high. |
 | Wheel diameter / track | 100 mm / 230 mm center to center |
-| Leg adjustment | 110 mm parallel links, 15–45° from vertical, 3:1 reduction; 28.5 mm nominal height travel |
+| Leg adjustment | 110 mm parallel links, 3:1 reduction. Plan: 15–45° from vertical, 28.5 mm nominal height travel. R05: rear hips, forward struts, 15–40°, 22.0 mm height travel. |
 | Powered axes | Left wheel, right wheel, left leg adjustment, right leg adjustment |
 | Ground | Dry indoor floor plus defined 3° / 5 mm bump / 3 mm seam test fixtures |
 | Speed | 0.25 m/s cruise; 0.15 m/s on uneven fixtures; 0.5 m/s remains unqualified |

@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Animated top, side and front orthographic views of Hux V1-PROOF from the R04 CAD, with leg kinematics, static balance trim and an electronics x-ray of the harness.">
+  <meta name="description" content="Animated top, side and front orthographic views of the Hux V1-PROOF R05 two-leg body, with leg kinematics, static balance trim and an electronics x-ray of the harness.">
   <title>Hux Anatomy</title>
+  <script>if(new URLSearchParams(location.search).has("embed")){document.documentElement.classList.add("embed");document.documentElement.dataset.theme="light"}</script>
   <link rel="stylesheet" href="anatomy.css">
   <link rel="stylesheet" href="workshop.css">
   <script type="importmap">
@@ -21,14 +22,14 @@
   <main id="main" class="anatomy-main">
     <div class="page-heading">
       <div>
-        <p class="eyebrow">Mechanical / animated layout · 2026-10-14</p>
+        <p class="eyebrow">Mechanical / animated layout · R05 · 2026-10-16</p>
         <h1>Anatomy</h1>
-        <p class="lede">Top, side and front views of Hux at one scale, with a 3D view. The hips are near the rear, and the struts slant forward to the wheels. The legs move through 15–45°. The robot leans to keep its CoM above the axle. The x-ray removes the body and shows each board and harness.</p>
+        <p class="lede">Top, side and front views of Hux at one scale, with a 3D view. The hips are near the rear, and the struts slant forward to the wheels. The legs move through 15–40°. The robot leans to keep its CoM above the axle. The x-ray removes the body and shows each board and harness.</p>
       </div>
       <p class="document-code">AN-01 / V1-PROOF</p>
     </div>
 
-    <div class="callout"><strong>Source and status.</strong> The parts are the R04 CAD reference parts of 2026-10-13. The R05 layout moves the hips, the servos and the battery, and mirrors the near leg to the far side. Electronics positions use the R04 board mounts, and harness classes use the EL netlist, Rev B. Harness paths, the CoM and the trim are estimates. Nothing on this page is a physical measurement.</div>
+    <div class="callout"><strong>Source and status.</strong> The meshes are the R04 CAD reference parts of 2026-10-13, set in the R05 layout. R05 moves the hips to the rear, puts the servos and the battery in the body, and mirrors the near leg to the far side. The <a href="../../cad/prints/two-leg-body-r05/README.md">R05 print kit</a> is the source for fabrication. Board positions use the R04 mounts, and harness classes use the EL netlist, Rev B. Harness paths, the CoM and the trim are estimates, not physical measurements.</div>
 
     <section class="player" aria-label="Animation controls">
       <div class="chapters" role="group" aria-label="Chapters">
@@ -98,11 +99,11 @@
 
     <section class="findings" aria-labelledby="findings-title">
       <h2 id="findings-title">Fit and function findings</h2>
-      <p>The animation exposes these points when the R04 one-leg body becomes the two-leg robot. The R05 layout shows the corrections, with rear hips, internal servos and the battery in the body. The user decides each correction. The CAD and the print files did not change.</p>
+      <p>The animation found these points when the R04 one-leg body became the two-leg robot. The <a href="../../cad/prints/two-leg-body-r05/README.md">R05 kit</a> of 2026-10-14 includes corrections 1, 2, 4, 5 and 7. Items 3 and 6 remain open, and the servo belt drive is not designed.</p>
       <ol>
         <li><h3>Hips on the centre line</h3>
           <p>The plan puts the hips near the rear of the body. Each strut slants forward and down to the wheel, and the wheel sits below the CoM. R04 puts the hips on the centre line, and the struts slant rearward. The robot must then lean by <strong id="f-trim-r04">—</strong> at 15° / 30° / 45° to balance.</p>
-          <p><strong>R05:</strong> put the hips at X = +30, 30 mm rearward of the body centre. The struts slant forward. Mount the two rear angles of the lower deck above the deck, clear of the upper hip nut. The lean at 15° / 30° / 40° becomes <strong id="f-trim-r05">—</strong>. At the 30° neutral pose, the axle is below the body centre.</p></li>
+          <p><strong>R05:</strong> put the hips at X = +30, 30 mm rearward of the body centre. The struts slant forward. The two rear angles of the lower deck move to X = +48, clear of the upper hip nut. The lean at 15° / 30° / 40° becomes <strong id="f-trim-r05">—</strong>. At the 30° neutral pose, the axle is below the body centre.</p></li>
         <li><h3>Keep the R04 motor carrier</h3>
           <p>With forward struts, use the R04 motor carrier without a mirror. The axle and the gearmotor then sit 25 mm and 32 mm rearward of the strut end, toward the hip. This puts the wheel below the CoM at neutral.</p>
           <p>The gearmotor clears the lower strut by 2.1 mm at 40° and by 0.23 mm at 45°. R05 limits the leg to 15–40°. These are exact CAD distances from the R05 kit. Check them by hand before powered tests.</p></li>
@@ -115,7 +116,7 @@
         <li><h3>Circuits without a board position</h3>
           <p>The hardware watchdog, the latching gate, the ADC conditioning and the ARM switch have no position in R04. The netlist lists these circuits as unresolved. Assign each circuit to a board before the harness release.</p></li>
         <li><h3>Servos inside the body</h3>
-          <p>R04 puts the ST3215 servo outside the near wall. <strong>R05:</strong> put each servo inside the body, against its wall, below the lower deck. The output is 45 mm forward of the hip and 12 mm above it, at X = −15. A 3:1 belt, for example GT2 12T to 36T, drives the lower hip shaft on the inner side of the wall.</p>
+          <p>R04 puts the ST3215 servo outside the near wall. <strong>R05:</strong> put each servo inside the body, against its wall, below the lower deck. The output is 41 mm forward of the lower hip and 3 mm above it, at X = −11. A 3:1 belt, for example GT2 12T to 36T, drives the lower hip shaft on the inner side of the wall.</p>
           <p>The two belts are 45 mm apart, and the battery fits between them. The hip shaft needs a bearing in the wall. The shaft, the bearings and the belt tension are not designed.</p></li>
         <li><h3>Checks that pass</h3>
           <p>With the mirrored leg, the two encoder ends are 50 mm apart. The track is 230 mm and the overall width is 254 mm. These values agree with the V1-PROOF model. The gearmotor clears the wall bottom by 24 mm at 45°.</p></li>

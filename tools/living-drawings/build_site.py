@@ -289,6 +289,22 @@ class Markdown:
         return "\n".join(out)
 
 
+# Earlier V1-PROOF revisions. Their records stay published, with a notice that R05 replaces them.
+SUPERSEDED = {
+    "cad/prints/v1-proof-r01/": "R01", "cad/prints/one-leg-body-r03/": "R03", "cad/prints/one-leg-body-r04/": "R04",
+    "docs/checklists/2026-10-02-mechanical-fit.md": "R01", "docs/checklists/2026-10-06-leg-motion.md": "R01",
+    "docs/checklists/2026-10-07-r03-assembly.md": "R03", "docs/checklists/2026-10-13-r04-fit-review.md": "R04",
+}
+
+
+def superseded(source: PurePosixPath) -> str:
+    """Return the revision of a superseded V1-PROOF record, or an empty string."""
+    for prefix, revision in SUPERSEDED.items():
+        if str(source) == prefix or (prefix.endswith("/") and str(source).startswith(prefix)):
+            return revision
+    return ""
+
+
 def legacy(source: PurePosixPath) -> bool:
     return (str(source).startswith(("docs/archive/", "docs/research/", "tools/engineering/", "art/", "cad/vendor/"))
             or str(source) == "docs/head-and-leg-review.md" or str(site_path(source)) in ARCHIVE_PAGES)
@@ -323,7 +339,7 @@ def workshop_header(source: PurePosixPath, title: str) -> str:
         breadcrumb += f'<span aria-hidden="true">/</span><a href="{at(section)}">{html.escape(section_label)}</a>'
     if route != section and route != "v1-proof.html":
         breadcrumb += f'<span aria-hidden="true">/</span><span>{html.escape(title)}</span>'
-    revision = "V0-GENESIS · archive" if historical else "V1-PROOF · current build"
+    revision = "V0-GENESIS · archive" if historical else (f"V1-PROOF · {superseded(source)} · superseded" if superseded(source) else "V1-PROOF · R05 current build")
     subnav = ""
     if section in SUB_ROUTES:
         sublinks = "".join(f'<a href="{at(path)}"' + (' aria-current="page"' if route == path else '') +
@@ -376,9 +392,12 @@ def authored_page(text: str, source: PurePosixPath, root: Path) -> str:
 
 def document_sidebar(source: PurePosixPath, root: Path) -> str:
     groups = (
+        ("Current build: R05", (("index.html#r05-kit", "R05 kit overview"), ("docs/r05-assembly.html", "R05 assembly guide"),
+                                ("cad/prints/two-leg-body-r05/README.html", "R05 CAD and checks"),
+                                ("docs/checklists/2026-10-15-r05-fit-record.html", "R05 fit record"))),
         ("Project", (("documents.html", "Document library"), ("docs/v1-proof.html", "Project brief"),
                      ("docs/decisions.html", "Decision history"))),
-        ("Mechanical", (("mechanical.html", "Assembly overview"), ("anatomy.html", "Animated anatomy"), ("docs/r05-assembly.html", "R05 assembly guide"), ("joints.html", "Joint details"),
+        ("Mechanical", (("mechanical.html", "Assembly overview"), ("anatomy.html", "Animated anatomy"), ("joints.html", "Joint details"),
                         ("wheel-mount.html", "Wheel drive mount"), ("docs/mechanical-testing.html", "Mechanical test plan"))),
         ("Electrical & controls", (("electrical.html", "Wiring diagrams"), ("controls.html", "Control software"))),
         ("Build & test", (("build.html", "Build board"), ("docs/one-leg-bench.html", "Single-leg bench guide"),
@@ -390,8 +409,11 @@ def document_sidebar(source: PurePosixPath, root: Path) -> str:
     for label, entries in groups:
         links = []
         for route, title in entries:
-            original = (WEB / route) if "/" not in route else PurePosixPath(route).with_suffix('.md')
+            page = route.split("#")[0]
+            original = (WEB / page) if "/" not in page else PurePosixPath(page).with_suffix('.md')
             if not (root / original).is_file(): continue
+            if "#" in route and f'id="{route.split("#")[1]}"' not in (root / original).read_text():
+                route = page  # Keep the link valid when the page has no such section.
             current = ' aria-current="page"' if str(site_path(source)) == route else ''
             links.append(f'<a href="{published_url(source, route)}"{current}>{html.escape(title)}</a>')
         if links:
@@ -410,8 +432,9 @@ def document_page(source: PurePosixPath, text: str, root: Path) -> str:
     depth = os.path.relpath(".", str(site_path(source).parent)).replace(os.sep, "/")
     at = lambda path: html.escape(f"{depth}/{path}", quote=True)
     historical = legacy(source)
-    label = "V0-GENESIS / ARCHIVE" if historical else "V1-PROOF / WORKING PLAN"
-    notice = ('<strong>V0-GENESIS · historical planning.</strong> This earlier model is archived. Its requirements and purchase statements describe that revision. <a href="' + at("index.html") + '">V1-PROOF is the current build.</a>') if historical else ('<strong>Living work in progress.</strong> Plans and checklists are not test results. Progress is recorded in the <a href="' + at("build.html") + '">build board</a> and linked evidence.')
+    old_revision = superseded(source)
+    label = "V0-GENESIS / ARCHIVE" if historical else (f"V1-PROOF / {old_revision} SUPERSEDED" if old_revision else "V1-PROOF / WORKING PLAN")
+    notice = ('<strong>' + old_revision + ' · superseded record.</strong> R05 replaces this revision. The dated results and decisions stay here for the history. Do not print or assemble from this record. <a href="' + at("docs/r05-assembly.html") + '">Use the R05 assembly guide.</a>') if old_revision and not historical else ('<strong>V0-GENESIS · historical planning.</strong> This earlier model is archived. Its requirements and purchase statements describe that revision. <a href="' + at("index.html") + '">V1-PROOF is the current build.</a>') if historical else ('<strong>Living work in progress.</strong> Plans and checklists are not test results. Progress is recorded in the <a href="' + at("build.html") + '">build board</a> and linked evidence.')
     toc = "".join(f'<li class="toc-level-{level}"><a href="#{anchor}">{inline(label)}</a></li>' for level, label, anchor in markdown.headings if level in (2, 3))
     # Link to the editable repository source, never back into a raw-file dead end.
     github = "https://github.com/nova-centauri/hux-robot/blob/main/" + quote(str(source), safe="/")
@@ -419,7 +442,7 @@ def document_page(source: PurePosixPath, text: str, root: Path) -> str:
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title_text} · HUX</title><meta name="description" content="{html.escape(label + ': ' + html.unescape(title_text), quote=True)}"><link rel="stylesheet" href="{at('docs.css')}">{workshop_assets(source)}</head>
 <body><a class="skip-link" href="#content">Skip to document</a>{workshop_header(source, html.unescape(title_text))}
 <div class="doc-layout"><aside class="doc-sidebar"><p class="doc-eyebrow">{label}</p>{document_sidebar(source, root)}{'<details open><summary>On this page</summary><ol>' + toc + '</ol></details>' if toc else ''}</aside>
-<main id="content" class="doc-main"><aside class="doc-notice{' doc-notice-archive' if historical else ''}" role="note">{notice}</aside><article class="doc-content">{content}</article><footer class="doc-footer"><a href="{github}">Edit this document on GitHub ↗</a><span>Published from {html.escape(str(source))}</span><a href="#content">Back to top ↑</a></footer></main></div>{workshop_footer(source)}</body></html>
+<main id="content" class="doc-main"><aside class="doc-notice{' doc-notice-archive' if historical or old_revision else ''}" role="note">{notice}</aside><article class="doc-content">{content}</article><footer class="doc-footer"><a href="{github}">Edit this document on GitHub ↗</a><span>Published from {html.escape(str(source))}</span><a href="#content">Back to top ↑</a></footer></main></div>{workshop_footer(source)}</body></html>
 '''
 
 

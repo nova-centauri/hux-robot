@@ -48,14 +48,18 @@ The current project has six primary sections, with the same navigation on drawin
 
 | Section | Published route | Contents |
 | --- | --- | --- |
-| Overview | `/` (also `/v1-proof.html`) | Active scope, assembly rendering, design targets and current status |
+| Overview | `/` (also `/v1-proof.html`) | Build status, the live R05 anatomy, the R05 kit links and the design targets |
 | Mechanical | `/mechanical.html` | Assembly, interactive general arrangement and drawing register |
 | Electrical | `/electrical.html` | EL-01–04 wiring atlas, enlarged vector viewer, printable PDF and architecture |
 | Build & test | `/build.html` | Workbench, milestones, updates and local session notebook |
 | Parts & budget | `/parts.html` | Paid orders, shopping list, component register and allowances |
 | Documents | `/documents.html` | Discipline-grouped source register and historical archive |
 
-Mechanical includes `/joints.html` for close-up detail studies and links to `/mechanical-tests.html`. Electrical includes `/controls.html`. Build & test links to the current simulation evidence and the 3D sandbox. `/v0-genesis.html` keeps the old plan model. `/docs/…html` remains the readable route for each source guide.
+Mechanical includes `/joints.html` for close-up detail studies and links to `/mechanical-tests.html`. Electrical includes `/controls.html`.
+
+Build & test links to the current simulation evidence and the 3D sandbox. The home page embeds `anatomy.html?embed`. In that mode, the anatomy page shows only the chapters and the four views, and reports its height to the home page. Superseded R01–R04 records get a notice from `SUPERSEDED` in `build_site.py`. Add a path there when a new revision replaces a kit.
+
+`/v0-genesis.html` keeps the old plan model. `/docs/…html` remains the readable route for each source guide.
 
 The 3D sandbox is one page for both robots. The query `?robot=` sets the robot. `/sim.html` opens V0-GENESIS.
 

@@ -1,10 +1,8 @@
 # Single-leg bench plan
 
-**2026-10-13 body fit problem:** the user reports that the walls and horizontal layers do not fit together. The [dated evaluation](checklists/2026-10-13-r04-fit-review.md) records the report and CAD findings. Use the [R04 matched body and component mounts](../cad/prints/one-leg-body-r04/README.md) for the next fit trial. The ST3215 servos have not arrived. Physical qualification remains open.
+**2026-10-16 status:** R05 is the current build. The [R05 two-leg body](../cad/prints/two-leg-body-r05/README.md) holds both legs, the two inner servo cradles and the battery tray. Follow the [R05 assembly guide](r05-assembly.md). The user reports that the R05 frame is assembled and that two ST3215 servos are received.
 
-**Updated 2026-10-07:** the user confirms that all R03 kit parts are printed. The [fit and assembly checklist](checklists/2026-10-07-r03-assembly.md) is the next step. Keep actuator power disconnected for these checks. Measured fits and assembly results remain open.
-
-**Updated 2026-10-06:** the user reports completed leg tests and satisfactory travel. The [dated report](checklists/2026-10-06-leg-motion.md) contains that observation, without measured endpoints or load results. The [R03 body kit](../cad/prints/one-leg-body-r03/README.md) supplies the next supported body and motor carrier. Its first-stage assumption uses a fixed leg and a suspended wheel.
+The 3:1 servo drive to the hips is not designed. Until it exists, do the servo stages below with the bare servo or with a servo in its cradle and no load. Use the R05 neutral lock for the leg. The R01, R03 and R04 kits are superseded.
 
 The user confirms sufficient adjustable bench-supply voltage and current capacity. The supply replaces the battery at this stage. The rail settings and return-energy path remain part of the power procedure below. The full two-axis exercise still requires the servo transmission, supported shaft and interface checks.
 
@@ -26,9 +24,9 @@ This bench work can happen **before** two-wheel balance. The pinned-leg-first ru
 
 ## Start with passive mechanical checks
 
-The [V1-PROOF R01 kit](../cad/prints/v1-proof-r01/README.md), drafted September 29, gives eight STL part types and a Blender project. The kit is for a **Bambu X1C / PLA** mockup of the 110 mm links and 40 mm pivot spacing. The prints are now reported complete. Record the revision, the material and the quantities of the printed parts. **Measure the fit coupon if it is printed**, and try the intended M4 hardware. The clearances and the printed sections remain provisional.
+Use the [R05 assembly guide](r05-assembly.md) for the parts, the hardware and the passive checks. Step 0 measures the hip holes. Step 8 sweeps each leg by hand from 15° to 40°. Record the results in the [R05 fit record](checklists/2026-10-15-r05-fit-record.md). The [R01 kit](../cad/prints/v1-proof-r01/README.md) and its [fit session](checklists/2026-10-02-mechanical-fit.md) are superseded records.
 
-Use the [first fit-session checklist](checklists/2026-10-02-mechanical-fit.md) to assemble and sweep the passive linkage. Then do a check of the packaging against the received motor. This is a hand-moved geometry mockup. Powered mounts, bearings and load capacity remain unqualified. Receipt of parts or completed prints does not close a bench stage.
+Assemble and sweep the passive linkage. Then do a check of the packaging against the received motor. This is a hand-moved geometry mockup. Powered mounts, bearings and load capacity remain unqualified. Receipt of parts or completed prints does not close a bench stage.
 
 Complete the identification and passive geometry checks (stages 0 and 3 below) before powered motion. The passive checks do not depend on servo arrival or completed electronics.
 
