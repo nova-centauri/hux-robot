@@ -1,36 +1,129 @@
-# V1-PROOF wiring atlas — Rev B
+# V1-PROOF wiring atlas — Rev C
 
-**Revision dated October 4, 2026. This is a source-checked build-plan drawing. The physical harness and circuit release remain open.** The [Electrical page](../tools/living-drawings/electrical.html) leads with the full system schematic and a separate two-motor sheet. Enlarge a sheet, choose Read labels, and pan to inspect individual conductors. Download the [five-page printable atlas](../cad/wiring/v1-proof-wiring-atlas.pdf) or search the [wire register](../cad/wiring/v1-proof-wire-register.html) by conductor ID, signal or endpoint.
+**Revision dated October 17, 2026. This is a source-checked build-plan drawing. The physical harness and circuit release remain open.** Rev C puts each board where it mounts in the R05 body. It adds the harness run lengths and a connector standard. The [Electrical page](../tools/living-drawings/electrical.html) leads with the full system schematic by location. Download the [seven-page printable atlas](../cad/wiring/v1-proof-wiring-atlas.pdf) or search the [conductor register](../cad/wiring/v1-proof-wire-register.html).
+
+The [harness register](../cad/wiring/v1-proof-harness.html) has the bundles, the cut lengths and the connector loading.
 
 | Sheet | Drawing | Coverage |
 | --- | --- | --- |
-| EL-01 | [Complete system wiring](../cad/wiring/v1-proof-el-01-overview.svg) | Individual proposed external conductors, both wheel motors and drivers, controller, sensor, power branches, hardware enable and servo bus |
-| EL-02 | [Pico 2 + IMU](../cad/wiring/v1-proof-el-02-pico-imu.svg) | Component-side pin maps and seven-wire main SPI connection |
-| EL-03 | [Wheel harness](../cad/wiring/v1-proof-el-03-wheel-harness.svg) | Exact DRV8874 pad order, motor lead colors, encoder conversion and wheel GPIOs |
-| EL-04 | [Power + servo bus](../cad/wiring/v1-proof-el-04-power-servo.svg) | Power-cut boundary, VSYS isolation, TTL interface and unresolved protection circuits |
-| EL-05 | [Both wheel motors — every wire](../cad/wiring/v1-proof-el-05-both-wheels.svg) | Separate left and right motor leads, encoder supply and feedback, driver command and monitoring, and gated enable |
+| EL-01 | [Complete system wiring by location](../cad/wiring/v1-proof-el-01-overview.svg) | Rear elevation of the R05 body. Each board in its mount position. Every harness conductor with its connector position and a register ID |
+| EL-02 | [Pico 2 + IMU](../cad/wiring/v1-proof-el-02-pico-imu.svg) | Component-side pin maps and the seven-wire main SPI connection |
+| EL-03 | [Wheel harness](../cad/wiring/v1-proof-el-03-wheel-harness.svg) | Exact DRV8874 pad order, motor lead colors, the leg junction board and the wheel GPIOs |
+| EL-04 | [Power + kill chain](../cad/wiring/v1-proof-el-04-power-servo.svg) | Fused pack, Pololu 2813 latched rail switch, 74HC14 heartbeat gate, logic branch and the open items |
+| EL-05 | [Both wheel motors — every wire](../cad/wiring/v1-proof-el-05-both-wheels.svg) | Two complete channels through the leg junction board, with terminal names |
+| EL-06 | [Harness bundles and run lengths](../cad/wiring/v1-proof-el-06-harness-runs.svg) | Route model on the body, a cut length for each bundle, connector hardware count |
+| EL-07 | [Connector loading](../cad/wiring/v1-proof-el-07-connectors.svg) | Each harness connector with its positions, pins, nets and mating wire |
 
-## 11 x 17 inch print views
+## What changed in Rev C
 
-The [system PDF](../cad/wiring/v1-proof-el-01-overview-11x17.pdf) and the [motor PDF](../cad/wiring/v1-proof-el-05-both-wheels-11x17.pdf) each contain one sheet. Both use landscape orientation and 0.5 inch margins. Select 11 x 17 inch paper and print at 100% scale. The five-sheet atlas uses the same page size.
+Rev B drew the circuits in a logical order. Rev C draws them in their mount positions. The sheet is a rear elevation: the CTRL deck at the top, then the BUS deck, the PWR deck and the tray. The left lane holds the near-wall items and the right lane holds the far-wall items. The user asked for this layout on 2026-10-17.
 
-The print layout date is October 5, 2026. The source audit remains Rev B. EL-01 uses less vertical space. Text and circular symbols keep their proportions. EL-01 and EL-05 omit the dot grid for clear print output. Their website diagrams and PDFs use the same generated SVGs.
+Rev C also removes a conflict. Rev B drew the old kill gate, with a latching gate on SLEEP, an ARM input on GP19 and a pack divider on GP28. The [kill chain](kill-chain.md) of 2026-10-15 and `firmware/bench/src/pins.h` use a different circuit. GP10 drives both nSLEEP pins directly. GP22 sends the heartbeat to the gate. GP28 reads the switched rail.
 
-Follow the [export procedure](../cad/wiring/README.md) after each electrical change. The site build rejects exports that do not match their recorded source hashes.
+Rev C draws that circuit. The gate is still a design, with no part ordered or tested.
+
+The servo branch is out of the V1-PROOF sheets. V1-PROOF has no powered hips, by the decision of 2026-10-16. The two ST3215 servos, the 9 V regulator and the bus interface stay in stock for the next version. The old EL-04 file name remains for the site links.
+
+## Side naming
+
+**Robot LEFT is the near wall.** The R05 CAD and the assembly guide use near wall and far wall. The electrical sheets and the firmware use left and right. The user set this mapping on 2026-10-17. The near wall is the wall that you see in the side view of the assembly guide. EL-01 shows the robot from the rear, so the left wheel is at the left of the sheet.
+
+## Mount positions
+
+The positions come from `cad/prints/two-leg-body-r05/build.py` and `parameters.json` of 2026-10-16. The body coordinates are X rearward, Y into the body from the near wall and Z up.
+
+| Board | Mount position | Centre, mm |
+| --- | --- | --- |
+| P1 Pico 2 | CTRL deck, far half | (0, −97.5, 193) |
+| U1 LSM6DSO | CTRL deck, near half | (0, −41.5, 190) |
+| PDB power distribution | BUS deck, near half, regulator cassette | (0, −38.5, 145) |
+| Spare | BUS deck, far half, the former servo bus cassette | no board |
+| KC kill chain | PWR deck, near half, power-cut cassette | (0, −38.5, 85) |
+| DB driver board | PWR deck, far half, driver cassette | (0, −96.5, 85) |
+| JLEG leg junction | under the PWR deck, centre | (0, −67.5, 52) |
+| Left gearmotor pigtail exit | under the body, near side | (7, −42.6, −95) |
+| Right gearmotor pigtail exit | under the body, far side | (7, −92.4, −95) |
+| Pack lead exit | tray, rear end, assumed | (48, −50, −10) |
+
+Both drivers stay on one board on the far half of the PWR deck, as the R05 assembly guide says. The user confirmed this on 2026-10-17. Each gearmotor reaches the body with one six-wire vendor pigtail.
+
+## The leg junction board
+
+The Pololu 4752 pigtail is 200 mm long and ends in a 1x6 0.1 in female housing. The left pigtail cannot reach the driver board. The route model gives 216 mm. Both pigtails can reach a point under the PWR deck. The route model gives 179 mm.
+
+Rev C adds a small junction board, JLEG, under the PWR deck. The user accepted this unified junction on 2026-10-17. It has two 1x6 male headers for the pigtails. The motor leads pass across the board to JPL and JPR, then to the driver board. The four encoder channels pass through 2.2 kΩ / 3.3 kΩ dividers, the bench values from the [electronics bench guide](electronics-bench-guide.md). The 3.0 V outputs go to the Pico on one five-position connector.
+
+This changes the R05 module table. The far cassette of the BUS deck, planned for the servo bus and the encoder conversion, becomes a spare position. The JLEG board layout and its mount under the deck remain open. Measure the pigtail route on the frame before you fix the position.
+
+## Connector standard
+
+**JST XH 2.50 mm is the standard for every low-voltage harness connector.** Every board that we terminate has 0.1 in through-holes: the Pico 2, the LSM6DSO, the Pololu 4035 carriers, the Pololu 2813 and the protoboards. An XH header with up to six positions solders into a 0.1 in grid. The pitch error is 0.2 mm over six positions. XH has a friction lock, 3 A for each contact and takes 22 to 28 AWG wire.
+
+| Part | Use |
+| --- | --- |
+| B2B-XH-A to B6B-XH-A | Board headers, top entry. Use S#B-XH-A side entry where the cassette height is tight. |
+| XHP-2 to XHP-6 | Housings |
+| SXH-001T-P0.6 | Contacts, 22 to 28 AWG |
+| 24 AWG | Signals |
+| 22 AWG | 5 V, 3V3 and the motor OUT1 / OUT2 leads |
+| 20 AWG, XT30 | The pack, the fuse and the switched rail |
+| 1x6 0.1 in male header | The Pololu pigtail housing stays as received |
+
+One kit covers the housing, header and contact counts of this harness. The [harness register](../cad/wiring/v1-proof-harness.html) lists the kit, the crimp tool and a pre-crimped alternative, with the prices seen on 2026-10-17. Record the paid order in [purchases.md](purchases.md).
+
+**The Pico end.** The received Pico 2 has pre-soldered pins. The user decided on 2026-10-17 to desolder them and to solder the XH headers to the board. The harness then plugs into the Pico directly. Desolder with a pump or low-melt alloy, one row at a time, and check each pad for a lifted trace before you solder the headers.
+
+## Pico 2 headers
+
+The Pico 2 gets eight connectors in contiguous pin groups. Each harness branch plugs into one group.
+
+| Header | Pins | Positions | Function |
+| --- | --- | ---: | --- |
+| PH-A | p4–p7 | 4 | Encoder inputs GP2–GP5 |
+| PH-A2 | p8–p10 | 3 | GND, left EN GP6, left PH GP7 |
+| PH-B | p11–p15 | 5 | Right EN GP8, right PH GP9, GND, nSLEEP GP10, left nFAULT GP11 |
+| PH-C | p16–p21 | 6 | SPI1 to the IMU: GP12–GP16 and GND |
+| PH-D | p24–p29 | 6 | Right nFAULT GP18, GND, heartbeat GP22. GP19–GP21 empty |
+| PH-E | p31–p34 | 4 | Left CS GP26, right CS GP27, AGND, rail sense GP28 |
+| PH-F | p36–p39 | 4 | 3V3(OUT), GND, VSYS. 3V3_EN empty |
+| PH-G | p1–p3 | 3 | Optional UART0 link. No cable in V1-PROOF |
+
+The 3V3 output of PH-F feeds the IMU and the driver pull-ups through one splice, SP1, about 30 mm from the Pico header.
+
+## Bundles and run lengths
+
+The route model is a Manhattan path. It goes from the board to the front cable notch of its deck lane, then along the front face of the body. It then goes through the notch of the other lane to the board. The cut length is the path length plus 10 percent, plus 15 mm at each end for the termination, rounded up to 5 mm. **The lengths are estimates.** Cut each run long, route it on the frame, trim it and record the measured length.
+
+| Bundle | Name | Wires | AWG | Model path | Cut length |
+| --- | --- | ---: | ---: | ---: | ---: |
+| B1 | Sensor, P1 to U1 | 7 | 24 | 59 mm | 95 mm |
+| B2 | 3V3 feed, P1 to DB | 2 | 22 | 275 mm | 335 mm |
+| B3 | Left driver signals, P1 to DB | 5 | 24 | 275 mm | 335 mm |
+| B4 | Right driver signals, P1 to DB | 5 | 24 | 275 mm | 335 mm |
+| B5 | Driver sleep, P1 to DB | 1 | 24 | 275 mm | 335 mm |
+| B6 | Encoder signals, P1 to JLEG | 5 | 24 | 287 mm | 350 mm |
+| B7 | Kill-chain sense, P1 to KC | 3 | 24 | 329 mm | 395 mm |
+| B8 | Pico power, PDB to P1 | 2 | 22 | 269 mm | 330 mm |
+| B9 | Logic bus, KC to PDB | 2 | 22 | 226 mm | 280 mm |
+| B10 | Switched rail, KC to DB | 2 | 20 | 58 mm | 95 mm |
+| B11 | Encoder supply, PDB to JLEG | 2 | 22 | 238 mm | 295 mm |
+| B12 | Left motor power, DB to JLEG | 2 | 22 | 62 mm | 100 mm |
+| B13 | Right motor power, DB to JLEG | 2 | 22 | 62 mm | 100 mm |
+| B14 | Left motor pigtail, vendor | 6 | — | — | 200 mm fixed |
+| B15 | Right motor pigtail, vendor | 6 | — | — | 200 mm fixed |
+| B16 | Pack, BAT to KC | 3 | 20 | 154 mm | 200 mm |
+| B17 | KILL button, fixture | 2 | 24 | — | 600 mm |
+| B18 | ARM button, fixture | 2 | 24 | — | 600 mm |
+
+Bundles B2 to B7 run together down the front face of the far half. The route from the Pico to the driver board is 275 mm. The Pico is on the top deck and the drivers are on the bottom deck. A Pico position on the PWR deck can cut these runs to about 60 mm. The user accepts the 335 mm runs (2026-10-17), so the Pico stays on the CTRL deck.
 
 ## Diagram conventions
 
-Colors identify the rail families or the signal families. The motor lead colors keep their documented function, and outlined white is encoder B. Dots show connected branches. Crossings without dots do not connect. Ground symbols share the common reference. Dashed component frames mark circuits or interfaces whose implementation remains undecided.
+Colors identify the rail families or the signal families. The motor lead colors keep their documented function, and outlined white is encoder B. Dots show connected branches. Crossings without dots do not connect. Dashed boards mark circuits whose parts remain unselected.
 
-EL-01 shows individual conductors with global IDs and named endpoints. Those IDs refer to the searchable wire register. EL-05 labels wheel terminals without separate wire IDs. Search those terminal names in the same register.
+EL-01 shows every harness conductor with a global ID and a connector position at each end. The register IDs refer to the searchable conductor register. The harness register adds the bundle, the gauge and the cut length. EL-05 labels wheel terminals without separate wire IDs.
 
-IDs are references for the proposed harness. They do not establish released wire gauges, connector contacts or internal circuit designs. Functional blocks are not connector face views. EL-02–04 provide closer pin maps and implementation notes alongside the complete system drawing.
-
-## Both motors and the wire register
-
-The [two-wheel sheet](../cad/wiring/v1-proof-el-05-both-wheels.svg) shows both planned channels independently. Each motor has two switched power leads and four encoder leads. Each driver also needs its own power and ground, command signals, fault feedback, conditioned current feedback, mode straps and a current-limit setting network (TBD). Encoder A and B need separate conversion channels. The hardware gate supplies SLEEP to both drivers.
-
-Match a conductor ID in the schematic to its source and destination in the [searchable register](../cad/wiring/v1-proof-wire-register.html). The [machine-readable endpoint and connection register](../cad/wiring/v1-proof-netlist.json) supports review and generation. These files describe proposed external wiring. They do not close any dashed internal interface or protection circuit. Both channels are planned, and the [inventory](parts-on-hand.md) records the actual received quantities.
+IDs are references for the proposed harness. They do not establish released wire gauges or circuit designs. Functional blocks are not connector face views. EL-02 and EL-03 provide closer pin maps and implementation notes.
 
 ## Sensor harness — source checked
 
@@ -54,11 +147,13 @@ We independently compared these sources: [Raspberry Pi Pico 2 pinout](https://da
 
 ## Wheel harness — source checked
 
-Each Pololu 4752 gearmotor needs its own DRV8874 driver. Red and black connect to OUT1 and OUT2. **Black is a switched motor lead.** Encoder green is GND, blue is regulated 5 V, yellow is A and white is B. A/B pass through non-inverted conversion to 3.3 V. The view orientation of the six-position 2.54 mm female connector and its mating harness remain to verify. We assign no arbitrary pin-1 number.
+Each Pololu 4752 gearmotor needs its own DRV8874 driver. Red and black connect to OUT1 and OUT2 through the junction board. **Black is a switched motor lead.** Encoder green is GND, blue is regulated 5 V, yellow is A and white is B. A and B pass through the dividers on JLEG to 3.0 V.
 
-The drawing shows the DRV8874 driver component side up, in the orientation of the vendor. Feed the actuator power through VIN. VM is access to the reverse-protected motor bus. Ground PMODE and IMODE directly. SLEEP is active low and must come from the hardware gate. Each open-drain FAULT needs its own 3.3 V pull-up.
+The pigtail is six leads, 200 mm long, in a 1x6 0.1 in female housing. The [Pololu 4752 page](https://www.pololu.com/product/4752) says that you can remove the crimped wires or cut the housing off. We keep the housing.
 
-CS returns through an ADC protection and conditioning interface. The VREF network remains to select and to calibrate against the 2.5 A peak target. The default limit of the carrier is not the released Hux value. EN low brakes. SLEEP low sets the outputs to off.
+The drawing shows the DRV8874 driver component side up, in the orientation of the vendor. Feed the switched rail through VIN. VM is access to the reverse-protected motor bus. Ground PMODE and IMODE directly. nSLEEP is active low and comes from GP10 for both carriers. Each open-drain nFAULT gets a 10 kΩ pull-up to 3V3 on the driver board.
+
+CS returns through a 1 kΩ series resistor. The VREF divider from 3V3 gives about 2.8 V, which sets the limit near 2.5 A with the 2.49 kΩ carrier resistor. Measure it. EN low brakes. nSLEEP low sets the outputs to off.
 
 | Interface | Left GPIO / physical pin | Right GPIO / physical pin |
 | --- | --- | --- |
@@ -66,41 +161,33 @@ CS returns through an ADC protection and conditioning interface. The VREF networ
 | Encoder B | GP3 / 5 | GP5 / 7 |
 | EN / PWM | GP6 / 9 | GP8 / 11 |
 | PH / direction | GP7 / 10 | GP9 / 12 |
-| FAULT | GP11 / 15 | GP18 / 24 |
-| CS via conditioning | GP26 / 31 | GP27 / 32 |
+| nFAULT | GP11 / 15 | GP18 / 24 |
+| CS via 1 kΩ | GP26 / 31 | GP27 / 32 |
 
-We independently compared these sources: [Pololu 4752](https://www.pololu.com/product/4752), [4035 carrier and pinout](https://www.pololu.com/product/4035), [carrier schematic](https://www.pololu.com/file/0J1862/drv887x-single-brushed-dc-motor-driver-carrier-schematic.pdf), and [TI DRV8874 datasheet, current regulation and fault modes](https://www.ti.com/lit/ds/symlink/drv8874.pdf). The GPIO assignments come from the [Hux hardware proposal](v1-proof-hardware.md#interfaces-that-must-be-built-correctly), not from installed firmware. Wheel direction and encoder sign need lifted-wheel checks.
+We independently compared these sources: [Pololu 4752](https://www.pololu.com/product/4752), [4035 carrier and pinout](https://www.pololu.com/product/4035), [carrier schematic](https://www.pololu.com/file/0J1862/drv887x-single-brushed-dc-motor-driver-carrier-schematic.pdf), and [TI DRV8874 datasheet, current regulation and fault modes](https://www.ti.com/lit/ds/symlink/drv8874.pdf). The GPIO assignments agree with `firmware/bench/src/pins.h`. Wheel direction and encoder sign need lifted-wheel checks.
 
-## Power and servo interfaces — functional plan
+## Power and kill chain — functional plan
 
-The fused distribution splits before the physical actuator cut. The logic stays powered for the log. The cut removes the positive feed to both wheel drivers and to the 9 V servo branch. All grounds share a reference. High-current returns need deliberate physical routing. The regulator, fuse, wire, connector and energy-clamp choices are still open.
+The pack lead passes through the inline fuse F1 to the kill-chain board. The Pololu 2813 latched switch turns the rail on and off. The switched rail feeds both driver VIN pads through one XT30 pair. The 5 V regulator sits before the switch, so the logic stays on through a kill. The kill-chain logic has its own LD1117V33 regulator from the unswitched bus.
 
-External regulated 5 V enters **VSYS, physical pin 39**, through a suitable Schottky isolation diode or a power-OR circuit. Do not assume that the onboard USB diode of the Pico 2 isolates an external regulator from USB backfeed. Feed the LSM6DSO IMU from 3V3(OUT). Qualify the loaded rail voltage and the power-off injection at all GPIO/ADC interfaces.
+External regulated 5 V enters **VSYS, physical pin 39**, through a Schottky diode on the power distribution board. Do not assume that the onboard USB diode of the Pico 2 isolates an external regulator from USB backfeed. Feed the LSM6DSO IMU from 3V3(OUT). Qualify the loaded rail voltage and the power-off injection at all GPIO/ADC interfaces.
 
 | Function | Proposed Pico endpoint |
 | --- | --- |
-| Wheel enable request into gate | GP10 / pin 14 |
-| External watchdog heartbeat | GP22 / pin 29 |
-| Servo UART1 TX / RX | GP20 / pin 26; GP21 / pin 27 |
-| Servo transceiver direction, if supported | GP17 / pin 22 |
-| Deliberate arm input | GP19 / pin 25 |
-| Pack voltage via protected divider | GP28 / pin 34 |
+| Driver nSLEEP, both carriers | GP10 / pin 14 |
+| Heartbeat to the kill-chain gate | GP22 / pin 29 |
+| Switched rail via 100 kΩ / 22 kΩ divider | GP28 / pin 34 |
 | Optional UART0 manual link | GP0 / pin 1; GP1 / pin 2 |
+| NC | GP17 / pin 22, GP19 / pin 25, GP20 / pin 26, GP21 / pin 27 |
 
-The plan supplies the selected ST3215 servo (12 V variant) from a protected regulated 9 V supply. The mounted torque and duty at that voltage remain unmeasured. Both servos share a single half-duplex TTL DATA net with distinct IDs. The cable contact order, the bus voltage compatibility and the adapter remain unconfirmed. Separate Pico 2 TX/RX connect to a compatible directional interface. They are not tied together on the bus.
-
-The proposed wheel watchdog gate does not itself cut servo power. EL-01 adds a proposed servo torque-cut switch driven by the gated hardware enable. Its circuit and failure behavior still need selection and powered tests. The physical actuator cut covers both branches.
-
-We independently compared these sources: [Pico 2 datasheet, power and ADC guidance](https://datasheets.raspberrypi.com/pico/pico-2-datasheet.pdf), [Raspberry Pi SDK pin functions](https://www.raspberrypi.com/documentation/pico-sdk/hardware.html), [Waveshare ST3215 variants](https://www.waveshare.com/product/modules/st3215-servo.htm), and [Waveshare directional bus interface example](https://files.waveshare.com/upload/d/d3/Bus_servo_control_circuit.pdf). This example documents the interface principle and does not select a purchased adapter.
+The KILL and ARM buttons go on the bench fixture, not on the robot, as the [kill chain](kill-chain.md) says. The fuse value, the rail wire gauge, the return-energy clamp and the ON / OFF priority of the 2813 remain open. Stages K0 to K6 remain open.
 
 ## What was double checked
 
-Independent reviews compared the vendor documents, schematics and component-side images with the repository proposal. A second review checked the generated SVGs and the endpoint register: all 40 Pico 2 pins, seven sensor connections, both wheel GPIO allocations, the DRV8874 pad order and six motor lead functions. The automated generation rejects duplicate Pico 2 pin allocations and checks the SPI/UART/ADC physical pins. The visual review covers line endpoints, ground crossings, board proportions, legibility and the enlarged viewer of the site.
+Rev C keeps the Rev B source checks. They cover the Pico 2 pins, the IMU pads, the DRV8874 pad order and the six motor lead functions. The automated generation rejects duplicate Pico 2 pin allocations and checks the SPI and ADC physical pins. The conductor graph checks terminal coverage and endpoint/net conflicts for 20 GPIO endpoints and 12 motor pigtail leads. Geometry checks reject overlapping wires of different nets, endpoint touches between different nets and wires hidden inside component bodies.
 
-Rev B adds a conductor graph that checks terminal coverage and endpoint/net conflicts. It checks all 26 proposed GPIO endpoints, 12 motor cable leads and six servo leads. Geometry checks reject overlapping wires of different nets and endpoint touches between different nets. They also reject wires hidden inside component bodies. EL-01 checks that all branches of each drawn net join, including its rails and junctions.
+Rev C adds a consistency check. The wires drawn on EL-01 must equal the wire list of `cad/wiring/harness.py`, with the same nets. The harness model checks that every loaded connector position has one wire and that every XH connector has two to six positions. The route model checks that both pigtails can reach JLEG.
 
-These checks verify the drawing data. They cannot prove physical wiring or the behavior of a TBD circuit.
+These checks verify the drawing data. They cannot prove physical wiring, the behavior of a TBD circuit or the actual cable length. This is source verification, not a measured assembly pass. The [received inventory](parts-on-hand.md), [Pico bring-up record](checklists/2026-10-03-pico-bringup.md) and [electrical qualification checklist](checklists/electronics-bringup.md) keep their current status.
 
-This is source verification, not a measured assembly pass. The [received inventory](parts-on-hand.md), [Pico bring-up record](checklists/2026-10-03-pico-bringup.md) and [electrical qualification checklist](checklists/electronics-bringup.md) keep their current status. Before we can release an assembly schematic, we must record these items: the fuse and wire ratings, the energy clamps, the ADC protection and the encoder conversion. We must also record the servo interface, the watchdog circuits, the harness contact orientation and the physical tests.
-
-[cad/wiring/README.md](../cad/wiring/README.md) describes the editable drawing source and the reproducible exports. The [endpoint register](../cad/wiring/v1-proof-netlist.json) is a review aid, not a firmware implementation.
+[cad/wiring/README.md](../cad/wiring/README.md) describes the editable drawing source and the reproducible exports. The [endpoint register](../cad/wiring/v1-proof-netlist.json) and the [harness data](../cad/wiring/v1-proof-harness.json) are review aids, not a firmware implementation.

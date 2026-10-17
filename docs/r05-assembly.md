@@ -1,10 +1,10 @@
 # R05 two-leg body assembly guide
 
-**Revision R05, 2026-10-16.** This guide tells you how to assemble the [R05 two-leg body](../cad/prints/two-leg-body-r05/README.md). It follows the [anatomy layout](../tools/living-drawings/anatomy.html) with rear hips, inner servos and a battery tray. Plates 1, 2 and 3 are printed. Plate 4 is in progress, and plate 5 remains to print.
+**Revision R05, 2026-10-16.** This guide tells you how to assemble the [R05 two-leg body](../cad/prints/two-leg-body-r05/README.md). It follows the [anatomy layout](../tools/living-drawings/anatomy.html) with rear hips, inner servos and a battery tray. Plates 1 to 4 are printed. Plate 5 remains to print. Plate 6, the leg drive, is new on 2026-10-16.
 
-The user reports that the frame is assembled: the two walls, the three decks and the battery tray. The user reports that the hip-hole measurements agree with step 0. No R05 load or powered test is recorded.
+The user reports that the frame is assembled: the two walls, the three decks and the battery tray. The user reports that the hip-hole measurements agree with step 0. The user reports that the ST3215 servos do not fit the part 13 cradles. The leg drive supersedes parts 13 and 14. No R05 load or powered test is recorded.
 
-**V1-PROOF has no powered hips (2026-10-16).** Both legs stay locked at 30°. Steps 1 and 7 install the servo cradles and the servos. They are optional for V1-PROOF, because the servos return in the next version. Do steps 2 to 6 and step 8.
+**V1-PROOF has no powered hips (2026-10-16).** Both legs stay locked at 30°. Steps 1 and 7 install the leg drive: the servo frames, the servos, the crank hubs and the pushrods. They are optional for V1-PROOF. Do steps 2 to 6 and step 8 first.
 
 ![Side view of the R05 leg geometry with rear hips and forward struts](assets/r05-assembly/side-hip-geometry.png)
 
@@ -12,7 +12,7 @@ The user reports that the frame is assembled: the two walls, the three decks and
 
 WARNING: Disconnect the battery and the bench supply before you assemble or adjust Hux. A motor or a servo can move and cause injury.
 
-CAUTION: Do not apply servo torque through the M4 hip pivots. The 3:1 servo drive is for the next version and is not designed. Torque through the pivots can cause damage to the walls.
+CAUTION: Do not power a servo with its pushrod connected and the lock bolt installed. The servo pulls against the lock and can cause damage to the link, the hub or the servo gears. Remove the lock bolt before a powered test, or disconnect the pushrod.
 
 CAUTION: Do not move a leg beyond 40°. At 45° the gearmotor is 0.23 mm from the lower strut. Contact can cause damage to the strut.
 
@@ -44,9 +44,12 @@ Count the parts before you start. The plate column tells you where each part pri
 | 09 | Leg spacer, 2 mm | 4 | 3 |
 | 10 | Leg spacer, 12 mm | 4 | 3 |
 | 07 | Lower lock link | 2 | 4 |
-| 08 | Upper link | 2 | 4 |
-| 13 | Inner servo cradle | 2 | 4 |
-| 14 | Servo cap bar | 4 | 4 |
+| 08 | Upper link with pushrod boss | 2 | 6 |
+| 25 | Servo frame | 2 | 6 |
+| 26 | Crank hub | 2 | 6 |
+| 27 | Wall bushing | 2 | 6 |
+| 28 | Drill jig, near wall | 1 | 6 |
+| 29 | Drill jig, far wall | 1 | 6 |
 | 15 | Interface cassette | 4 | 5 |
 | 11 | Pico 2 plate | 1 | 5 |
 | 12 | IMU plate | 1 | 5 |
@@ -62,16 +65,18 @@ The lower deck and the middle deck look almost the same. On the lower deck, the 
 | Item | Quantity | Use |
 | --- | ---: | --- |
 | M4 x 16 bolt, plain nut, two 0.5 mm washers | 24 | Twelve deck angles, two bolts each |
-| M4 x 12 bolt, plain nut, one washer | 8 | Two servo cradles, four bolts each |
+| M4 x 20 bolt, plain nut, one washer | 8 | Two servo frames, four bolts each. The nut sits in the frame pocket. |
 | M4 x 16 bolt, plain nut, washer | 4 | Battery tray, two bolts in each wall |
-| M3 x 45 bolt, plain nut, washers to 1 mm | 8 | Four cap bars, two bolts each |
+| M2 x 10 screw | 8 | Two servos, four screws each, into the servo face holes |
+| M3 x 35 screw | 2 | One through each crank hub into the servo output |
+| Ball stud, 2 mm thread, with nut | 4 | One on each crank, one on each upper link boss |
+| RC pushrod with two ball links, 40 mm between ball centres | 2 | One each side |
 | M4 pivot bolt, nut and smooth washers | 8 | Four hips and four carrier pivots |
 | M4 lock bolt and nut | 2 | Neutral lock, one each side |
 | M3 x 8 screw | 12 | Two gearmotors, six screws each |
 | M3 x 16 screw, nut and thin washer | 24 | Six module plates to the decks |
 | M3 x 16 screw, nut and thin washer | 20 | Four interface boards and the IMU |
 | M2 x 18 screw, nut and insulating washer | 4 | Pico 2 |
-| Resilient pad, 1 mm | 4 strips | Servo cap bars |
 | Hook-and-loop strap, 20 mm | 2 | Battery |
 
 Measure the pivot bolt length on the actual stack. The stack at each hip is the wall, a spacer and a strut. The stack at each carrier pivot is the strut, a spacer and the carrier. Use the spacer table in step 5.
@@ -95,24 +100,22 @@ Measure the pivot bolt length on the actual stack. The stack at each hip is the 
 
 If a measurement is more than 0.3 mm from its value, stop. Record the value before you continue.
 
-## Step 1. Install the servo cradles (optional for V1-PROOF)
+## Step 1. Prepare the walls and install the servo frames (optional for V1-PROOF)
 
-![Step 1. Servo cradles on both walls](assets/r05-assembly/step-1-cradles.png)
+![Step 1. Servo frames and wall bushings on both walls](assets/r05-assembly/step-1-cradles.png)
 
-Install the cradles before the frame assembly. The open walls give better access.
+The printed walls of 2026-10-14 do not have the leg-drive holes. Add them with the drill jigs before you install the frames. If the frame is already assembled, remove the struts first.
 
-1. Put four M4 nuts into the hex pockets of each cradle base.
-2. Put the cradle on the inner face of the wall. The output relief must point to the rear, toward the hips.
-3. Install four M4 x 12 bolts from the outer face of the wall, with a washer under each head.
-4. Tighten the bolts until the cradle cannot move. Do not crush the cradle base.
-5. Look through the 7 mm access holes. Each hole must align with a cap-bar nut pocket.
-6. Do steps 1 to 5 again on the second wall.
-
-The two walls are the same part. The cradle on the far wall is the same part, turned over.
-
-If the frame is already assembled, you can install the cradles after steps 2 and 3. The cradle is 39.8 mm tall. The vertical space between the tray flange and the lower deck angles is 47 mm. Push the cradle in through the front opening, below the lower deck.
-
-Hold the four M4 nuts in their pockets with a piece of tape. Then do steps 3 to 5. In the CAD, the cradle clears the tray flange by 4.1 mm and the front angle by 3.1 mm. Make sure that the cradle does not touch them.
+1. Put the near-wall jig (part 28) on the outer face of the near wall. Bolt it to the two hip holes with M4 bolts.
+2. Drill the four frame holes at 4.5 mm and the pilot hole at 3.2 mm through the wall.
+3. Remove the jig. Open the pilot hole to 24 mm with a step bit or a 15/16 in Forstner bit. Remove the burr on both faces.
+4. Do items 1 to 3 again on the far wall with part 29.
+5. Push a wall bushing (part 27) into each bore from the outside, flange out. Glue it if it is loose.
+6. Attach each servo to its frame on the bench. Put the servo output face in the frame recess, with the output disc in the round window and the cable sockets in the rear window. Install four M2 x 10 screws from the wall side of the frame.
+7. Connect the servo cables before you install the frame. Route them out of the rear window.
+8. Put four M4 nuts into the frame pockets. Put the frame on the inner face of the wall. Install four M4 x 20 bolts from the outer face, with a washer under each head.
+9. Make sure that the output disc is central in the wall bushing. Then tighten the bolts.
+10. Do items 6 to 9 again on the far wall.
 
 ## Step 2. Assemble the decks and the angles
 
@@ -154,7 +157,9 @@ Assemble each module on the bench before you attach it to a deck. The [R04 guide
 | Middle, "R05 BUS" | Regulators | Servo bus and encoder conversion |
 | Lower, "R05 PWR" | Power cut and fuse | Two DRV8874 drivers |
 
-Route the harness through the cable exits on the front edge of each deck. Refer to the [wiring atlas](electronics.md) for each connection.
+Route the harness through the cable exits on the front edge of each deck. Refer to the [wiring atlas](wiring-atlas.md) for each connection. The atlas Rev C of 2026-10-17 gives a cut length for each bundle and the connector loading.
+
+**Change of 2026-10-17.** The wiring atlas adds a leg junction board under the lower deck, accepted by the user. It carries the two motor pigtail headers and the encoder dividers. The far half of the middle deck then has no board in V1-PROOF. The board layout and its mount under the deck are open. Measure the pigtail route on the frame before you fix the position.
 
 ## Step 5. Install the struts and the carriers
 
@@ -191,22 +196,26 @@ CAUTION: Use the same carrier hand on both sides. The gearmotor must sit toward 
 5. Put a cable tie through the carrier anchor slots. Leave a service loop for the full leg range.
 6. Do steps 1 to 5 again on the other side.
 
-## Step 7. Install the servos (optional) and the battery
+## Step 7. Install the crank hubs, the pushrods and the battery
 
-![Step 7. Servos and battery](assets/r05-assembly/step-7-servo-battery.png)
+![Step 7. Servos, crank hubs, pushrods and battery](assets/r05-assembly/step-7-servo-battery.png)
 
 For V1-PROOF, you can skip items 1 to 6. Then do items 7 and 8.
 
-1. Put the ST3215 servo into the cradle with the output to the rear and into the body.
-2. Put a 1 mm resilient pad under each cap bar.
-3. Put the M3 nuts into the base pockets through the wall access holes.
-4. Install each cap bar with two M3 x 45 bolts. Tighten until the case cannot move.
-5. Do not compress or bend the servo case. Make sure that the output turns freely.
-6. Do not connect the servo output to a hip. The belt drive is not designed.
-7. Put the 3S pack on the tray between the two servos.
+1. Remove the M3 screw from the servo output disc. Keep the disc on the spline.
+2. Put the crank hub (part 26) on the disc from the outside, through the wall bushing. The four pins enter the disc holes. Turn the hub until the pins drop in.
+3. Install the M3 x 35 screw through the hub into the servo output. Tighten it until the hub cannot turn on the disc.
+4. Install one ball stud in the crank tip and one in the upper link boss, both pointing outward. Tighten the nuts on the back.
+5. Set the pushrod to 40 mm between the ball centres. Put the leg at 30°, with the lock bolt installed. Turn the hub until the pushrod snaps onto both studs without force. Adjust the pushrod length if necessary.
+6. Turn the servo on with torque disabled and record the position at 30°. Then remove the lock bolt and move the leg by hand from 15° to 40°. The crank must turn about 69°. Nothing must touch.
+7. Put the 3S pack on the tray.
 8. Put two straps through the tray slots and around the pack.
 
+CAUTION: Do not power a servo with the lock bolt installed and the pushrod connected.
+
 Measure the actual pack before you buy straps. The CAD space is 106 x 35 x 25 mm.
+
+![Side view of the leg drive at 30 degrees](assets/r05-assembly/side-leg-drive.png)
 
 ## Step 8. Final checks
 

@@ -1,221 +1,165 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="3200" height="2000" viewBox="0 0 3200 2000" role="img" aria-labelledby="title desc">
-<title id="title">Hux V1-PROOF Both wheel motors — every wire</title><desc id="desc">Two complete channels. Rails and enable come from EL-01. Use terminal names here. EL-01 has the conductor register IDs. Source-checked planning drawing; proposed harnesses and unresolved interfaces require physical verification.</desc>
+<title id="title">Hux V1-PROOF Both wheel motors — every wire</title><desc id="desc">Two complete channels through the leg junction board. Rails and nSLEEP come from EL-01. Use terminal names here. EL-01 has the conductor register IDs. Source-checked planning drawing; proposed harnesses and unresolved interfaces require physical verification.</desc>
 <defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r=".7" fill="#c9d5d1"/></pattern></defs>
 <rect x="0" y="0" width="3200" height="2000" rx="0" fill="#ffffff" stroke="#ced8d7" stroke-width="1.4"/>
 <rect x="32" y="32" width="3136" height="1936" fill="none" stroke="#ced8d7"/>
 <text x="64" y="72" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" text-anchor="start" letter-spacing="2" fill="#387b65">HUX  /  V1-PROOF  /  ELECTRICAL</text>
 <text x="64" y="119" font-family="Arial,Helvetica,sans-serif" font-size="44" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">Both wheel motors — every wire</text>
-<text x="64" y="150" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Two complete channels. Rails and enable come from EL-01. Use terminal names here. EL-01 has the conductor register IDs.</text>
+<text x="64" y="150" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Two complete channels through the leg junction board. Rails and nSLEEP come from EL-01. Use terminal names here. EL-01 has the conductor register IDs.</text>
 <rect x="2590" y="58" width="546" height="65" rx="8" fill="#ece7d7" stroke="#ced8d7" stroke-width="1.4"/>
 <text x="2863" y="86" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" text-anchor="middle" letter-spacing="1" fill="#20343e">SOURCE-CHECKED PLAN</text>
 <text x="2863" y="112" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="500" text-anchor="middle" letter-spacing="1" fill="#647780">HARNESS / BENCH RELEASE OPEN</text>
 <polyline points="64,174 3136,174" fill="none" stroke="#ced8d7" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
 <polyline points="64,1910 3136,1910" fill="none" stroke="#ced8d7" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
-<text x="64" y="1940" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Rev B  |  Source: 04 OCT 2026  |  Print layout: 05 OCT 2026</text>
+<text x="64" y="1940" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Rev C  |  Source: 17 OCT 2026  |  Print layout: 17 OCT 2026</text>
 <text x="64" y="1966" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">17 x 11 in / landscape / 0.5 in margins / print at 100%. Sources and open checks: docs/wiring-atlas.md.</text>
 <text x="3134" y="1944" font-family="Arial,Helvetica,sans-serif" font-size="30" font-weight="700" text-anchor="end" letter-spacing="0" fill="#387b65">EL-05</text>
 <g id="circuit"><g data-wire="W001"><title>PL.GP6 → DL.EN / L_EN</title>
-<polyline points="530,460.0 815,460.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W001"><title>PL.GP6 → DL.EN / L_EN</title>
-<polyline points="825,460.0 985,460.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<polyline points="530,460.0 985,460.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
 <g data-wire="W001"><title>PL.GP6 → DL.EN / L_EN</title>
 <polyline points="995,460.0 1080,460.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
 <g data-wire="W002"><title>PL.GP7 → DL.PH / L_PH</title>
-<polyline points="530,520.0 815,520.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W002"><title>PL.GP7 → DL.PH / L_PH</title>
-<polyline points="825,520.0 985,520.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<polyline points="530,520.0 985,520.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
 <g data-wire="W002"><title>PL.GP7 → DL.PH / L_PH</title>
 <polyline points="995,520.0 1080,520.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W003"><title>PL.GP11 → DL.FAULT / L_FAULT</title>
-<polyline points="530,580.0 815,580.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W003"><title>PL.GP11 → DL.nFAULT / L_nFAULT</title>
+<polyline points="530,580.0 1080,580.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W003"><title>PL.GP11 → DL.FAULT / L_FAULT</title>
-<polyline points="825,580.0 1080,580.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W004"><title>DL.CS → AL.IN / L_CS</title>
+<g data-wire="W004"><title>DL.CS → RCL.2 / L_CS</title>
 <polyline points="960,640.0 1080,640.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W004"><title>DL.CS → AL.IN / L_CS</title>
-<polyline points="960,640.0 960,670.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W004"><title>DL.CS → RCL.2 / L_CS</title>
+<polyline points="960,640.0 960,663.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W004"><title>DL.CS → AL.IN / L_CS</title>
-<polyline points="920,670.0 960,670.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W004"><title>DL.CS → RCL.2 / L_CS</title>
+<polyline points="780,663.0 960,663.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W005"><title>AL.OUT → PL.GP26 / L_CS_SAFE</title>
-<polyline points="600,670.0 700,670.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W005"><title>RCL.1 → PL.GP26 / L_CS</title>
+<polyline points="600,617.0 780,617.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W005"><title>AL.OUT → PL.GP26 / L_CS_SAFE</title>
-<polyline points="600,670.0 600,640.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W005"><title>RCL.1 → PL.GP26 / L_CS</title>
+<polyline points="600,617.0 600,640.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W005"><title>AL.OUT → PL.GP26 / L_CS_SAFE</title>
+<g data-wire="W005"><title>RCL.1 → PL.GP26 / L_CS</title>
 <polyline points="530,640.0 600,640.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W006"><title>DL.OUT1 → ML.RED / L_MOTOR_OUT1</title>
-<polyline points="1560,460.0 1685,460.0" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W006"><title>JL.RED → ML.RED / L_MOTOR_OUT1</title>
+<polyline points="2360,460.0 2600,460.0" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W006"><title>DL.OUT1 → ML.RED / L_MOTOR_OUT1</title>
-<polyline points="1695,460.0 2600,460.0" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W007"><title>JL.BLACK → ML.BLACK / L_MOTOR_OUT2</title>
+<polyline points="2360,520.0 2600,520.0" fill="none" stroke="#20343e" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W007"><title>DL.OUT2 → ML.BLACK / L_MOTOR_OUT2</title>
-<polyline points="1560,520.0 1685,520.0" fill="none" stroke="#20343e" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W008"><title>JL.GREEN → ML.GREEN / GND</title>
+<polyline points="2360,650.0 2600,650.0" fill="none" stroke="#387b65" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W007"><title>DL.OUT2 → ML.BLACK / L_MOTOR_OUT2</title>
-<polyline points="1695,520.0 2600,520.0" fill="none" stroke="#20343e" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W009"><title>JL.BLUE → ML.BLUE / 5V</title>
+<polyline points="2360,710.0 2600,710.0" fill="none" stroke="#437fb4" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W008"><title>BL.A_OUT → PL.GP2 / L_ENC_A_OUT</title>
-<polyline points="530,770.0 815,770.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W010"><title>JL.YELLOW → ML.YELLOW / L_ENC_A5</title>
+<polyline points="2360,770.0 2600,770.0" fill="none" stroke="#bd9221" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W008"><title>BL.A_OUT → PL.GP2 / L_ENC_A_OUT</title>
-<polyline points="825,770.0 1155,770.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W011"><title>JL.WHITE → ML.WHITE / L_ENC_B5</title>
+<polyline points="2360,830.0 2600,830.0" fill="none" stroke="#52676d" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<polyline points="2360,830.0 2600,830.0" fill="none" stroke="#fffef9" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W008"><title>BL.A_OUT → PL.GP2 / L_ENC_A_OUT</title>
+<g data-wire="W012"><title>DL.OUT1 → JL.OUT1_IN / L_MOTOR_OUT1</title>
+<polyline points="1560,460.0 1740,460.0" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+</g>
+<g data-wire="W013"><title>DL.OUT2 → JL.OUT2_IN / L_MOTOR_OUT2</title>
+<polyline points="1560,520.0 1740,520.0" fill="none" stroke="#20343e" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+</g>
+<g data-wire="W014"><title>JL.A_OUT → PL.GP2 / L_ENC_A</title>
+<polyline points="530,770.0 1155,770.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+</g>
+<g data-wire="W014"><title>JL.A_OUT → PL.GP2 / L_ENC_A</title>
 <polyline points="1165,770.0 1255,770.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W008"><title>BL.A_OUT → PL.GP2 / L_ENC_A_OUT</title>
+<g data-wire="W014"><title>JL.A_OUT → PL.GP2 / L_ENC_A</title>
 <polyline points="1265,770.0 1355,770.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W008"><title>BL.A_OUT → PL.GP2 / L_ENC_A_OUT</title>
+<g data-wire="W014"><title>JL.A_OUT → PL.GP2 / L_ENC_A</title>
 <polyline points="1365,770.0 1475,770.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W008"><title>BL.A_OUT → PL.GP2 / L_ENC_A_OUT</title>
+<g data-wire="W014"><title>JL.A_OUT → PL.GP2 / L_ENC_A</title>
 <polyline points="1485,770.0 1740,770.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W009"><title>BL.B_OUT → PL.GP3 / L_ENC_B_OUT</title>
-<polyline points="530,830.0 815,830.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W015"><title>JL.B_OUT → PL.GP3 / L_ENC_B</title>
+<polyline points="530,830.0 1155,830.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W009"><title>BL.B_OUT → PL.GP3 / L_ENC_B_OUT</title>
-<polyline points="825,830.0 1155,830.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W009"><title>BL.B_OUT → PL.GP3 / L_ENC_B_OUT</title>
+<g data-wire="W015"><title>JL.B_OUT → PL.GP3 / L_ENC_B</title>
 <polyline points="1165,830.0 1255,830.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W009"><title>BL.B_OUT → PL.GP3 / L_ENC_B_OUT</title>
+<g data-wire="W015"><title>JL.B_OUT → PL.GP3 / L_ENC_B</title>
 <polyline points="1265,830.0 1355,830.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W009"><title>BL.B_OUT → PL.GP3 / L_ENC_B_OUT</title>
+<g data-wire="W015"><title>JL.B_OUT → PL.GP3 / L_ENC_B</title>
 <polyline points="1365,830.0 1475,830.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W009"><title>BL.B_OUT → PL.GP3 / L_ENC_B_OUT</title>
+<g data-wire="W015"><title>JL.B_OUT → PL.GP3 / L_ENC_B</title>
 <polyline points="1485,830.0 1740,830.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W010"><title>ML.YELLOW → BL.A_IN / L_ENC_A5</title>
-<polyline points="2210,770.0 2455,770.0" fill="none" stroke="#bd9221" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W010"><title>ML.YELLOW → BL.A_IN / L_ENC_A5</title>
-<polyline points="2465,770.0 2495,770.0" fill="none" stroke="#bd9221" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W010"><title>ML.YELLOW → BL.A_IN / L_ENC_A5</title>
-<polyline points="2505,770.0 2600,770.0" fill="none" stroke="#bd9221" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W011"><title>ML.WHITE → BL.B_IN / L_ENC_B5</title>
-<polyline points="2210,830.0 2455,830.0" fill="none" stroke="#52676d" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
-<polyline points="2210,830.0 2455,830.0" fill="none" stroke="#fffef9" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W011"><title>ML.WHITE → BL.B_IN / L_ENC_B5</title>
-<polyline points="2465,830.0 2495,830.0" fill="none" stroke="#52676d" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
-<polyline points="2465,830.0 2495,830.0" fill="none" stroke="#fffef9" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W011"><title>ML.WHITE → BL.B_IN / L_ENC_B5</title>
-<polyline points="2505,830.0 2600,830.0" fill="none" stroke="#52676d" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
-<polyline points="2505,830.0 2600,830.0" fill="none" stroke="#fffef9" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W012"><title>L3V3a → L3V3b / 3V3</title>
+<g data-wire="W016"><title>L3V3a → L3V3b / 3V3</title>
 <polyline points="640,300.0 1475,300.0" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W012"><title>L3V3a → L3V3b / 3V3</title>
+<g data-wire="W016"><title>L3V3a → L3V3b / 3V3</title>
 <polyline points="1485,300.0 2500,300.0" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W013"><title>LACT_BUSa → LACT_BUSb / ACT_BUS</title>
+<g data-wire="W017"><title>LRAILa → LRAILb / RAIL</title>
 <polyline points="640,260.0 2500,260.0" fill="none" stroke="#db5a4a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W014"><title>L5Va → L5Vb / 5V</title>
-<polyline points="640,960.0 815,960.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W018"><title>L5Va → L5Vb / 5V</title>
+<polyline points="640,960.0 1155,960.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W014"><title>L5Va → L5Vb / 5V</title>
-<polyline points="825,960.0 1155,960.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W014"><title>L5Va → L5Vb / 5V</title>
+<g data-wire="W018"><title>L5Va → L5Vb / 5V</title>
 <polyline points="1165,960.0 1255,960.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W014"><title>L5Va → L5Vb / 5V</title>
+<g data-wire="W018"><title>L5Va → L5Vb / 5V</title>
 <polyline points="1265,960.0 1355,960.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W014"><title>L5Va → L5Vb / 5V</title>
+<g data-wire="W018"><title>L5Va → L5Vb / 5V</title>
 <polyline points="1365,960.0 1475,960.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W014"><title>L5Va → L5Vb / 5V</title>
-<polyline points="1485,960.0 1995,960.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W018"><title>L5Va → L5Vb / 5V</title>
+<polyline points="1485,960.0 2045,960.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W014"><title>L5Va → L5Vb / 5V</title>
-<polyline points="2005,960.0 2455,960.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W018"><title>L5Va → L5Vb / 5V</title>
+<polyline points="2055,960.0 2500,960.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W014"><title>L5Va → L5Vb / 5V</title>
-<polyline points="2465,960.0 2500,960.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W015"><title>LGNDa → LGNDb / GND</title>
+<g data-wire="W019"><title>LGNDa → LGNDb / GND</title>
 <polyline points="640,1005.0 2500,1005.0" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W016"><title>DL.VIN → LDLVIN / ACT_BUS</title>
+<g data-wire="W020"><title>DL.VIN → LDLVIN / RAIL</title>
 <polyline points="1480,340.0 1480,260.0" fill="none" stroke="#db5a4a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W017"><title>DL.GND → LDLGND / GND</title>
+<g data-wire="W021"><title>DL.GND → LDLGND / GND</title>
 <polyline points="1160,710.0 1160,1005.0" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W018"><title>DL.PMODE → LDLPMODE / GND</title>
+<g data-wire="W022"><title>DL.PMODE → LDLPMODE / GND</title>
 <polyline points="1260,710.0 1260,1005.0" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W019"><title>DL.IMODE → LDLIMODE / GND</title>
+<g data-wire="W023"><title>DL.IMODE → LDLIMODE / GND</title>
 <polyline points="1360,710.0 1360,1005.0" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W020"><title>BL.3V3 → LBL3V3 / 3V3</title>
-<polyline points="2080,695.0 2080,670.0" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W024"><title>JL.5V → LJL5V / 5V</title>
+<polyline points="2160,940.0 2160,960.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W020"><title>BL.3V3 → LBL3V3 / 3V3</title>
-<polyline points="1690,670.0 2080,670.0" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W025"><title>JL.GND → LJLGND / GND</title>
+<polyline points="2050,940.0 2050,1005.0" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W020"><title>BL.3V3 → LBL3V3 / 3V3</title>
-<polyline points="1690,670.0 1690,300.0" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W026"><title>ENL → DL.nSLEEP / nSLEEP</title>
+<polyline points="640,425.0 985,425.0" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W021"><title>BL.GND → LBLGND / GND</title>
-<polyline points="2000,900.0 2000,1005.0" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W022"><title>AL.GND → LALGND / GND</title>
-<polyline points="820,745.0 820,1005.0" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W023"><title>AL.REF → LALREF / 3V3</title>
-<polyline points="820,610.0 820,300.0" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W024"><title>ML.GREEN → LGREEN / GND</title>
-<polyline points="2460,650.0 2600,650.0" fill="none" stroke="#387b65" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W024"><title>ML.GREEN → LGREEN / GND</title>
-<polyline points="2460,650.0 2460,1005.0" fill="none" stroke="#387b65" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W025"><title>ML.BLUE → LBLUE / 5V</title>
-<polyline points="2500,710.0 2600,710.0" fill="none" stroke="#437fb4" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W025"><title>ML.BLUE → LBLUE / 5V</title>
-<polyline points="2500,710.0 2500,960.0" fill="none" stroke="#437fb4" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W026"><title>ENL → DL.SLEEP / HW_ENABLE</title>
-<polyline points="640,425.0 815,425.0" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W026"><title>ENL → DL.SLEEP / HW_ENABLE</title>
-<polyline points="825,425.0 985,425.0" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W026"><title>ENL → DL.SLEEP / HW_ENABLE</title>
+<g data-wire="W026"><title>ENL → DL.nSLEEP / nSLEEP</title>
 <polyline points="995,425.0 1080,425.0" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
 <g data-wire="W027"><title>RFL.1 → RFL3 / 3V3</title>
 <polyline points="990,530.0 990,300.0" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W028"><title>RFL.2 → FL / L_FAULT</title>
+<g data-wire="W028"><title>RFL.2 → FL / L_nFAULT</title>
 <polyline points="990,576.0 990,580.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
 <g data-wire="W029"><title>DL.VREF → RVL.1 / L_VREF</title>
@@ -225,207 +169,151 @@
 <polyline points="1480,911.0 1480,1005.0" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
 <g data-wire="W031"><title>PR.GP8 → DR.EN / R_EN</title>
-<polyline points="530,1320.0 815,1320.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W031"><title>PR.GP8 → DR.EN / R_EN</title>
-<polyline points="825,1320.0 985,1320.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<polyline points="530,1320.0 985,1320.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
 <g data-wire="W031"><title>PR.GP8 → DR.EN / R_EN</title>
 <polyline points="995,1320.0 1080,1320.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
 <g data-wire="W032"><title>PR.GP9 → DR.PH / R_PH</title>
-<polyline points="530,1380.0 815,1380.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W032"><title>PR.GP9 → DR.PH / R_PH</title>
-<polyline points="825,1380.0 985,1380.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<polyline points="530,1380.0 985,1380.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
 <g data-wire="W032"><title>PR.GP9 → DR.PH / R_PH</title>
 <polyline points="995,1380.0 1080,1380.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W033"><title>PR.GP18 → DR.FAULT / R_FAULT</title>
-<polyline points="530,1440.0 815,1440.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W033"><title>PR.GP18 → DR.nFAULT / R_nFAULT</title>
+<polyline points="530,1440.0 1080,1440.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W033"><title>PR.GP18 → DR.FAULT / R_FAULT</title>
-<polyline points="825,1440.0 1080,1440.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W034"><title>DR.CS → AR.IN / R_CS</title>
+<g data-wire="W034"><title>DR.CS → RCR.2 / R_CS</title>
 <polyline points="960,1500.0 1080,1500.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W034"><title>DR.CS → AR.IN / R_CS</title>
-<polyline points="960,1500.0 960,1530.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W034"><title>DR.CS → RCR.2 / R_CS</title>
+<polyline points="960,1500.0 960,1523.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W034"><title>DR.CS → AR.IN / R_CS</title>
-<polyline points="920,1530.0 960,1530.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W034"><title>DR.CS → RCR.2 / R_CS</title>
+<polyline points="780,1523.0 960,1523.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W035"><title>AR.OUT → PR.GP27 / R_CS_SAFE</title>
-<polyline points="600,1530.0 700,1530.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W035"><title>RCR.1 → PR.GP27 / R_CS</title>
+<polyline points="600,1477.0 780,1477.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W035"><title>AR.OUT → PR.GP27 / R_CS_SAFE</title>
-<polyline points="600,1530.0 600,1500.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W035"><title>RCR.1 → PR.GP27 / R_CS</title>
+<polyline points="600,1477.0 600,1500.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W035"><title>AR.OUT → PR.GP27 / R_CS_SAFE</title>
+<g data-wire="W035"><title>RCR.1 → PR.GP27 / R_CS</title>
 <polyline points="530,1500.0 600,1500.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W036"><title>DR.OUT1 → MR.RED / R_MOTOR_OUT1</title>
-<polyline points="1560,1320.0 1685,1320.0" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W036"><title>JR.RED → MR.RED / R_MOTOR_OUT1</title>
+<polyline points="2360,1320.0 2600,1320.0" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W036"><title>DR.OUT1 → MR.RED / R_MOTOR_OUT1</title>
-<polyline points="1695,1320.0 2600,1320.0" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W037"><title>JR.BLACK → MR.BLACK / R_MOTOR_OUT2</title>
+<polyline points="2360,1380.0 2600,1380.0" fill="none" stroke="#20343e" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W037"><title>DR.OUT2 → MR.BLACK / R_MOTOR_OUT2</title>
-<polyline points="1560,1380.0 1685,1380.0" fill="none" stroke="#20343e" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W038"><title>JR.GREEN → MR.GREEN / GND</title>
+<polyline points="2360,1510.0 2600,1510.0" fill="none" stroke="#387b65" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W037"><title>DR.OUT2 → MR.BLACK / R_MOTOR_OUT2</title>
-<polyline points="1695,1380.0 2600,1380.0" fill="none" stroke="#20343e" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W039"><title>JR.BLUE → MR.BLUE / 5V</title>
+<polyline points="2360,1570.0 2600,1570.0" fill="none" stroke="#437fb4" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W038"><title>BR.A_OUT → PR.GP4 / R_ENC_A_OUT</title>
-<polyline points="530,1630.0 815,1630.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W040"><title>JR.YELLOW → MR.YELLOW / R_ENC_A5</title>
+<polyline points="2360,1630.0 2600,1630.0" fill="none" stroke="#bd9221" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W038"><title>BR.A_OUT → PR.GP4 / R_ENC_A_OUT</title>
-<polyline points="825,1630.0 1155,1630.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W041"><title>JR.WHITE → MR.WHITE / R_ENC_B5</title>
+<polyline points="2360,1690.0 2600,1690.0" fill="none" stroke="#52676d" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<polyline points="2360,1690.0 2600,1690.0" fill="none" stroke="#fffef9" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W038"><title>BR.A_OUT → PR.GP4 / R_ENC_A_OUT</title>
+<g data-wire="W042"><title>DR.OUT1 → JR.OUT1_IN / R_MOTOR_OUT1</title>
+<polyline points="1560,1320.0 1740,1320.0" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+</g>
+<g data-wire="W043"><title>DR.OUT2 → JR.OUT2_IN / R_MOTOR_OUT2</title>
+<polyline points="1560,1380.0 1740,1380.0" fill="none" stroke="#20343e" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+</g>
+<g data-wire="W044"><title>JR.A_OUT → PR.GP4 / R_ENC_A</title>
+<polyline points="530,1630.0 1155,1630.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+</g>
+<g data-wire="W044"><title>JR.A_OUT → PR.GP4 / R_ENC_A</title>
 <polyline points="1165,1630.0 1255,1630.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W038"><title>BR.A_OUT → PR.GP4 / R_ENC_A_OUT</title>
+<g data-wire="W044"><title>JR.A_OUT → PR.GP4 / R_ENC_A</title>
 <polyline points="1265,1630.0 1355,1630.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W038"><title>BR.A_OUT → PR.GP4 / R_ENC_A_OUT</title>
+<g data-wire="W044"><title>JR.A_OUT → PR.GP4 / R_ENC_A</title>
 <polyline points="1365,1630.0 1475,1630.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W038"><title>BR.A_OUT → PR.GP4 / R_ENC_A_OUT</title>
+<g data-wire="W044"><title>JR.A_OUT → PR.GP4 / R_ENC_A</title>
 <polyline points="1485,1630.0 1740,1630.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W039"><title>BR.B_OUT → PR.GP5 / R_ENC_B_OUT</title>
-<polyline points="530,1690.0 815,1690.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W045"><title>JR.B_OUT → PR.GP5 / R_ENC_B</title>
+<polyline points="530,1690.0 1155,1690.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W039"><title>BR.B_OUT → PR.GP5 / R_ENC_B_OUT</title>
-<polyline points="825,1690.0 1155,1690.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W039"><title>BR.B_OUT → PR.GP5 / R_ENC_B_OUT</title>
+<g data-wire="W045"><title>JR.B_OUT → PR.GP5 / R_ENC_B</title>
 <polyline points="1165,1690.0 1255,1690.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W039"><title>BR.B_OUT → PR.GP5 / R_ENC_B_OUT</title>
+<g data-wire="W045"><title>JR.B_OUT → PR.GP5 / R_ENC_B</title>
 <polyline points="1265,1690.0 1355,1690.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W039"><title>BR.B_OUT → PR.GP5 / R_ENC_B_OUT</title>
+<g data-wire="W045"><title>JR.B_OUT → PR.GP5 / R_ENC_B</title>
 <polyline points="1365,1690.0 1475,1690.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W039"><title>BR.B_OUT → PR.GP5 / R_ENC_B_OUT</title>
+<g data-wire="W045"><title>JR.B_OUT → PR.GP5 / R_ENC_B</title>
 <polyline points="1485,1690.0 1740,1690.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W040"><title>MR.YELLOW → BR.A_IN / R_ENC_A5</title>
-<polyline points="2210,1630.0 2455,1630.0" fill="none" stroke="#bd9221" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W040"><title>MR.YELLOW → BR.A_IN / R_ENC_A5</title>
-<polyline points="2465,1630.0 2495,1630.0" fill="none" stroke="#bd9221" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W040"><title>MR.YELLOW → BR.A_IN / R_ENC_A5</title>
-<polyline points="2505,1630.0 2600,1630.0" fill="none" stroke="#bd9221" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W041"><title>MR.WHITE → BR.B_IN / R_ENC_B5</title>
-<polyline points="2210,1690.0 2455,1690.0" fill="none" stroke="#52676d" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
-<polyline points="2210,1690.0 2455,1690.0" fill="none" stroke="#fffef9" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W041"><title>MR.WHITE → BR.B_IN / R_ENC_B5</title>
-<polyline points="2465,1690.0 2495,1690.0" fill="none" stroke="#52676d" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
-<polyline points="2465,1690.0 2495,1690.0" fill="none" stroke="#fffef9" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W041"><title>MR.WHITE → BR.B_IN / R_ENC_B5</title>
-<polyline points="2505,1690.0 2600,1690.0" fill="none" stroke="#52676d" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
-<polyline points="2505,1690.0 2600,1690.0" fill="none" stroke="#fffef9" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W042"><title>R3V3a → R3V3b / 3V3</title>
+<g data-wire="W046"><title>R3V3a → R3V3b / 3V3</title>
 <polyline points="640,1160.0 1475,1160.0" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W042"><title>R3V3a → R3V3b / 3V3</title>
+<g data-wire="W046"><title>R3V3a → R3V3b / 3V3</title>
 <polyline points="1485,1160.0 2500,1160.0" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W043"><title>RACT_BUSa → RACT_BUSb / ACT_BUS</title>
+<g data-wire="W047"><title>RRAILa → RRAILb / RAIL</title>
 <polyline points="640,1120.0 2500,1120.0" fill="none" stroke="#db5a4a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W044"><title>R5Va → R5Vb / 5V</title>
-<polyline points="640,1820.0 815,1820.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W048"><title>R5Va → R5Vb / 5V</title>
+<polyline points="640,1820.0 1155,1820.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W044"><title>R5Va → R5Vb / 5V</title>
-<polyline points="825,1820.0 1155,1820.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W044"><title>R5Va → R5Vb / 5V</title>
+<g data-wire="W048"><title>R5Va → R5Vb / 5V</title>
 <polyline points="1165,1820.0 1255,1820.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W044"><title>R5Va → R5Vb / 5V</title>
+<g data-wire="W048"><title>R5Va → R5Vb / 5V</title>
 <polyline points="1265,1820.0 1355,1820.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W044"><title>R5Va → R5Vb / 5V</title>
+<g data-wire="W048"><title>R5Va → R5Vb / 5V</title>
 <polyline points="1365,1820.0 1475,1820.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W044"><title>R5Va → R5Vb / 5V</title>
-<polyline points="1485,1820.0 1995,1820.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W048"><title>R5Va → R5Vb / 5V</title>
+<polyline points="1485,1820.0 2045,1820.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W044"><title>R5Va → R5Vb / 5V</title>
-<polyline points="2005,1820.0 2455,1820.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W048"><title>R5Va → R5Vb / 5V</title>
+<polyline points="2055,1820.0 2500,1820.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W044"><title>R5Va → R5Vb / 5V</title>
-<polyline points="2465,1820.0 2500,1820.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W045"><title>RGNDa → RGNDb / GND</title>
+<g data-wire="W049"><title>RGNDa → RGNDb / GND</title>
 <polyline points="640,1865.0 2500,1865.0" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W046"><title>DR.VIN → RDRVIN / ACT_BUS</title>
+<g data-wire="W050"><title>DR.VIN → RDRVIN / RAIL</title>
 <polyline points="1480,1200.0 1480,1120.0" fill="none" stroke="#db5a4a" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W047"><title>DR.GND → RDRGND / GND</title>
+<g data-wire="W051"><title>DR.GND → RDRGND / GND</title>
 <polyline points="1160,1570.0 1160,1865.0" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W048"><title>DR.PMODE → RDRPMODE / GND</title>
+<g data-wire="W052"><title>DR.PMODE → RDRPMODE / GND</title>
 <polyline points="1260,1570.0 1260,1865.0" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W049"><title>DR.IMODE → RDRIMODE / GND</title>
+<g data-wire="W053"><title>DR.IMODE → RDRIMODE / GND</title>
 <polyline points="1360,1570.0 1360,1865.0" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W050"><title>BR.3V3 → RBR3V3 / 3V3</title>
-<polyline points="2080,1555.0 2080,1530.0" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W054"><title>JR.5V → RJR5V / 5V</title>
+<polyline points="2160,1800.0 2160,1820.0" fill="none" stroke="#c77822" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W050"><title>BR.3V3 → RBR3V3 / 3V3</title>
-<polyline points="1690,1530.0 2080,1530.0" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W055"><title>JR.GND → RJRGND / GND</title>
+<polyline points="2050,1800.0 2050,1865.0" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W050"><title>BR.3V3 → RBR3V3 / 3V3</title>
-<polyline points="1690,1530.0 1690,1160.0" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
+<g data-wire="W056"><title>ENR → DR.nSLEEP / nSLEEP</title>
+<polyline points="640,1285.0 985,1285.0" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W051"><title>BR.GND → RBRGND / GND</title>
-<polyline points="2000,1760.0 2000,1865.0" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W052"><title>AR.GND → RARGND / GND</title>
-<polyline points="820,1605.0 820,1865.0" fill="none" stroke="#52676d" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W053"><title>AR.REF → RARREF / 3V3</title>
-<polyline points="820,1470.0 820,1160.0" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W054"><title>MR.GREEN → RGREEN / GND</title>
-<polyline points="2460,1510.0 2600,1510.0" fill="none" stroke="#387b65" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W054"><title>MR.GREEN → RGREEN / GND</title>
-<polyline points="2460,1510.0 2460,1865.0" fill="none" stroke="#387b65" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W055"><title>MR.BLUE → RBLUE / 5V</title>
-<polyline points="2500,1570.0 2600,1570.0" fill="none" stroke="#437fb4" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W055"><title>MR.BLUE → RBLUE / 5V</title>
-<polyline points="2500,1570.0 2500,1820.0" fill="none" stroke="#437fb4" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W056"><title>ENR → DR.SLEEP / HW_ENABLE</title>
-<polyline points="640,1285.0 815,1285.0" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W056"><title>ENR → DR.SLEEP / HW_ENABLE</title>
-<polyline points="825,1285.0 985,1285.0" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
-</g>
-<g data-wire="W056"><title>ENR → DR.SLEEP / HW_ENABLE</title>
+<g data-wire="W056"><title>ENR → DR.nSLEEP / nSLEEP</title>
 <polyline points="995,1285.0 1080,1285.0" fill="none" stroke="#db5a4a" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
 <g data-wire="W057"><title>RFR.1 → RFR3 / 3V3</title>
 <polyline points="990,1390.0 990,1160.0" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W058"><title>RFR.2 → FR / R_FAULT</title>
+<g data-wire="W058"><title>RFR.2 → FR / R_nFAULT</title>
 <polyline points="990,1436.0 990,1440.0" fill="none" stroke="#218ca0" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
 <g data-wire="W059"><title>DR.VREF → RVR.1 / R_VREF</title>
@@ -436,13 +324,13 @@
 </g>
 <rect x="80" y="340.0" width="450" height="540.0" rx="8" fill="#fffef9" stroke="#387b65" stroke-width="1.4" />
 <text x="98" y="370.0" font-family="Arial,Helvetica,sans-serif" font-size="22.0" font-weight="700" text-anchor="start" letter-spacing="0" fill="#387b65">PL / Pico 2 / LEFT</text>
-<text x="98" y="397.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Individual GPIO terminals</text>
+<text x="98" y="397.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">GPIO terminals on PH-A, PH-B, PH-D, PH-E</text>
 <rect x="1080" y="340.0" width="480" height="370.0" rx="8" fill="#fffef9" stroke="#437fb4" stroke-width="1.4" />
 <text x="1098" y="370.0" font-family="Arial,Helvetica,sans-serif" font-size="22.0" font-weight="700" text-anchor="start" letter-spacing="0" fill="#437fb4">DL / DRV8874 / L</text>
-<text x="1098" y="397.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Pololu 4035 carrier</text>
+<text x="1098" y="397.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Pololu 4035 carrier on the driver board</text>
 <rect x="2600" y="340.0" width="520" height="600.0" rx="8" fill="#fffef9" stroke="#437fb4" stroke-width="1.4" />
 <text x="2618" y="370.0" font-family="Arial,Helvetica,sans-serif" font-size="22.0" font-weight="700" text-anchor="start" letter-spacing="0" fill="#437fb4">ML / 4752 / L wheel motor</text>
-<text x="2618" y="397.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">12 V / 30:1 / encoder fitted</text>
+<text x="2618" y="397.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">12 V / 30:1 / encoder fitted / 200 mm pigtail</text>
 <circle cx="2875" cy="530.0" r="66" fill="#fffef9" stroke="#20343e" stroke-width="4" />
 <text x="2875" y="543.0" font-family="Arial,Helvetica,sans-serif" font-size="34.0" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#20343e">ML</text>
 <rect x="2805" y="690.0" width="140" height="108.0" rx="4" fill="#e8eeea" stroke="#ced8d7" stroke-width="1.4" />
@@ -458,53 +346,64 @@
 <circle cx="530" cy="580.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
 <text x="516" y="586.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">GP11 / p15</text>
 <circle cx="1080" cy="580.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
-<text x="1094" y="586.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">FAULT</text>
+<text x="1094" y="586.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">nFAULT</text>
 <circle cx="530" cy="640.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
 <text x="516" y="646.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">GP26 / p31</text>
 <circle cx="1080" cy="640.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
 <text x="1094" y="646.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">CS</text>
-<rect x="700" y="610.0" width="220" height="135.0" rx="8" fill="#fffef9" stroke="#bd9221" stroke-width="1.4" stroke-dasharray="7 5" />
-<text x="718" y="630.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" text-anchor="start" letter-spacing="0" fill="#bd9221">AL / ADC protection</text>
-<text x="718" y="730.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">TBD / high impedance</text>
-<circle cx="920" cy="670.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
-<text x="906" y="676.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">IN</text>
-<circle cx="700" cy="670.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
-<text x="714" y="676.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">OUT</text>
+<rect x="772" y="617.0" width="16" height="46.0" rx="0" fill="#fffef9" stroke="#20343e" stroke-width="1.4" />
+<text x="765" y="609.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">RCL</text>
+<text x="765" y="687.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="end" letter-spacing="0" fill="#647780">1 kΩ series</text>
 <circle cx="1560" cy="460.0" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5" />
 <text x="1546" y="466.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#db5a4a">OUT1</text>
 <circle cx="1560" cy="520.0" r="5" fill="#fffef9" stroke="#20343e" stroke-width="2.5" />
 <text x="1546" y="526.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">OUT2</text>
+<rect x="1740" y="340.0" width="620" height="600.0" rx="8" fill="#fffef9" stroke="#387b65" stroke-width="1.4" stroke-dasharray="7 5" />
+<text x="1758" y="370.0" font-family="Arial,Helvetica,sans-serif" font-size="22.0" font-weight="700" text-anchor="start" letter-spacing="0" fill="#387b65">JL / JLEG / L channel</text>
+<text x="1758" y="397.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">1x6 0.1 in header for the pigtail · dividers 2.2 kΩ / 3.3 kΩ</text>
+<circle cx="1740" cy="460.0" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5" />
+<text x="1754" y="466.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">OUT1_IN</text>
+<circle cx="1740" cy="520.0" r="5" fill="#fffef9" stroke="#20343e" stroke-width="2.5" />
+<text x="1754" y="526.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">OUT2_IN</text>
+<circle cx="1740" cy="770.0" r="5" fill="#fffef9" stroke="#bd9221" stroke-width="2.5" />
+<text x="1754" y="776.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#bd9221">A_OUT</text>
+<circle cx="1740" cy="830.0" r="5" fill="#fffef9" stroke="#387b65" stroke-width="2.5" />
+<text x="1754" y="836.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#387b65">B_OUT</text>
+<circle cx="2360" cy="460.0" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5" />
+<text x="2346" y="466.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#db5a4a">RED</text>
 <circle cx="2600" cy="460.0" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5" />
 <text x="2614" y="466.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">RED</text>
+<circle cx="2360" cy="520.0" r="5" fill="#fffef9" stroke="#20343e" stroke-width="2.5" />
+<text x="2346" y="526.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">BLACK</text>
 <circle cx="2600" cy="520.0" r="5" fill="#fffef9" stroke="#20343e" stroke-width="2.5" />
 <text x="2614" y="526.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">BLACK</text>
+<circle cx="2360" cy="650.0" r="5" fill="#fffef9" stroke="#387b65" stroke-width="2.5" />
+<text x="2346" y="656.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#387b65">GREEN</text>
 <circle cx="2600" cy="650.0" r="5" fill="#fffef9" stroke="#387b65" stroke-width="2.5" />
 <text x="2614" y="656.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#387b65">GREEN</text>
+<circle cx="2360" cy="710.0" r="5" fill="#fffef9" stroke="#437fb4" stroke-width="2.5" />
+<text x="2346" y="716.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#437fb4">BLUE</text>
 <circle cx="2600" cy="710.0" r="5" fill="#fffef9" stroke="#437fb4" stroke-width="2.5" />
 <text x="2614" y="716.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#437fb4">BLUE</text>
+<circle cx="2360" cy="770.0" r="5" fill="#fffef9" stroke="#bd9221" stroke-width="2.5" />
+<text x="2346" y="776.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#bd9221">YELLOW</text>
 <circle cx="2600" cy="770.0" r="5" fill="#fffef9" stroke="#bd9221" stroke-width="2.5" />
 <text x="2614" y="776.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#bd9221">YELLOW</text>
+<circle cx="2360" cy="830.0" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5" />
+<text x="2346" y="836.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">WHITE</text>
 <circle cx="2600" cy="830.0" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5" />
 <text x="2614" y="836.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#52676d">WHITE</text>
-<rect x="1740" y="695.0" width="470" height="205.0" rx="8" fill="#fffef9" stroke="#387b65" stroke-width="1.4" stroke-dasharray="7 5" />
-<text x="1758" y="725.0" font-family="Arial,Helvetica,sans-serif" font-size="22.0" font-weight="700" text-anchor="start" letter-spacing="0" fill="#387b65">BL / 5 V-tolerant buffer</text>
-<text x="1758" y="752.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">3.3 V / non-inverting / part TBD</text>
-<circle cx="2210" cy="770.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
-<text x="2196" y="776.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">A_IN</text>
-<circle cx="2210" cy="830.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
-<text x="2196" y="836.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">B_IN</text>
-<circle cx="1740" cy="770.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
-<text x="1754" y="776.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">A_OUT</text>
-<circle cx="1740" cy="830.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
-<text x="1754" y="836.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">B_OUT</text>
+<text x="2050" y="580.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="middle" letter-spacing="0" fill="#647780">OUT1 → RED, OUT2 → BLACK pass through on the board.</text>
+<text x="2050" y="605.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="middle" letter-spacing="0" fill="#647780">A, B: 2.2 kΩ series, 3.3 kΩ to GND → 3.0 V high level.</text>
+<text x="2050" y="630.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="middle" letter-spacing="0" fill="#647780">GREEN → GND, BLUE → 5 V on the board rails.</text>
 <circle cx="530" cy="770.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
 <text x="516" y="776.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">GP2 / p4</text>
 <circle cx="530" cy="830.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
 <text x="516" y="836.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">GP3 / p5</text>
 <rect x="644" y="268.0" width="133.0" height="29.0" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
 <text x="650" y="290.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#8260a9">3V3 / EL-01</text>
-<rect x="644" y="228.0" width="177.0" height="29.0" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
-<text x="650" y="250.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">ACT_BUS / EL-01</text>
+<rect x="644" y="228.0" width="144.0" height="29.0" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
+<text x="650" y="250.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">RAIL / EL-01</text>
 <rect x="644" y="928.0" width="122.00000000000001" height="29.0" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
 <text x="650" y="950.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#c77822">5V / EL-01</text>
 <rect x="644" y="973.0" width="133.0" height="29.0" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
@@ -517,37 +416,33 @@
 <text x="1248" y="734.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">PMODE</text>
 <circle cx="1360" cy="710.0" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5" />
 <text x="1348" y="734.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">IMODE</text>
-<circle cx="2080" cy="695.0" r="5" fill="#fffef9" stroke="#8260a9" stroke-width="2.5" />
-<text x="2092" y="683.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="start" letter-spacing="0" fill="#8260a9">3V3</text>
-<circle cx="2000" cy="900.0" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5" />
-<text x="1988" y="924.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">GND</text>
-<circle cx="820" cy="745.0" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5" />
-<text x="808" y="769.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">GND</text>
-<circle cx="820" cy="610.0" r="5" fill="#fffef9" stroke="#8260a9" stroke-width="2.5" />
-<text x="832" y="598.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="start" letter-spacing="0" fill="#8260a9">REF</text>
+<circle cx="2160" cy="940.0" r="5" fill="#fffef9" stroke="#c77822" stroke-width="2.5" />
+<text x="2148" y="964.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="end" letter-spacing="0" fill="#c77822">5V</text>
+<circle cx="2050" cy="940.0" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5" />
+<text x="2038" y="964.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">GND</text>
 <circle cx="1080" cy="425.0" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5" />
-<text x="1094" y="431.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">SLEEP</text>
-<rect x="644" y="393.0" width="199.00000000000003" height="29.0" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
-<text x="650" y="415.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">HW_ENABLE / EL-01</text>
-<rect x="982" y="530.0" width="16" height="46.0" rx="0" fill="#fffef9" stroke="#20343e" stroke-width="1.4" stroke-dasharray="7 5" />
+<text x="1094" y="431.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">nSLEEP</text>
+<rect x="644" y="393.0" width="243.00000000000003" height="29.0" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
+<text x="650" y="415.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">nSLEEP / GP10 / EL-01</text>
+<rect x="982" y="530.0" width="16" height="46.0" rx="0" fill="#fffef9" stroke="#20343e" stroke-width="1.4" />
 <text x="975" y="552.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">RFL</text>
-<text x="975" y="579.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="end" letter-spacing="0" fill="#647780">pull-up TBD</text>
+<text x="975" y="579.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="end" letter-spacing="0" fill="#647780">10 kΩ pull-up</text>
 <circle cx="1480" cy="710.0" r="5" fill="#fffef9" stroke="#c77822" stroke-width="2.5" />
 <text x="1468" y="734.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="end" letter-spacing="0" fill="#c77822">VREF</text>
 <rect x="1472" y="865.0" width="16" height="46.0" rx="0" fill="#fffef9" stroke="#20343e" stroke-width="1.4" stroke-dasharray="7 5" />
 <text x="1495" y="887.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">RVL</text>
-<text x="1495" y="914.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">limit TBD</text>
+<text x="1495" y="914.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">divider ≈ 2.8 V</text>
 <text x="1320" y="678.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="middle" letter-spacing="0" fill="#647780">VM: NC</text>
 <text x="2700" y="915.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">BLACK is a switched motor lead.</text>
 <rect x="80" y="1200.0" width="450" height="540.0" rx="8" fill="#fffef9" stroke="#387b65" stroke-width="1.4" />
 <text x="98" y="1230.0" font-family="Arial,Helvetica,sans-serif" font-size="22.0" font-weight="700" text-anchor="start" letter-spacing="0" fill="#387b65">PR / Pico 2 / RIGHT</text>
-<text x="98" y="1257.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Individual GPIO terminals</text>
+<text x="98" y="1257.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">GPIO terminals on PH-A, PH-B, PH-D, PH-E</text>
 <rect x="1080" y="1200.0" width="480" height="370.0" rx="8" fill="#fffef9" stroke="#437fb4" stroke-width="1.4" />
 <text x="1098" y="1230.0" font-family="Arial,Helvetica,sans-serif" font-size="22.0" font-weight="700" text-anchor="start" letter-spacing="0" fill="#437fb4">DR / DRV8874 / R</text>
-<text x="1098" y="1257.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Pololu 4035 carrier</text>
+<text x="1098" y="1257.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Pololu 4035 carrier on the driver board</text>
 <rect x="2600" y="1200.0" width="520" height="600.0" rx="8" fill="#fffef9" stroke="#437fb4" stroke-width="1.4" />
 <text x="2618" y="1230.0" font-family="Arial,Helvetica,sans-serif" font-size="22.0" font-weight="700" text-anchor="start" letter-spacing="0" fill="#437fb4">MR / 4752 / R wheel motor</text>
-<text x="2618" y="1257.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">12 V / 30:1 / encoder fitted</text>
+<text x="2618" y="1257.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">12 V / 30:1 / encoder fitted / 200 mm pigtail</text>
 <circle cx="2875" cy="1390.0" r="66" fill="#fffef9" stroke="#20343e" stroke-width="4" />
 <text x="2875" y="1403.0" font-family="Arial,Helvetica,sans-serif" font-size="34.0" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#20343e">MR</text>
 <rect x="2805" y="1550.0" width="140" height="108.0" rx="4" fill="#e8eeea" stroke="#ced8d7" stroke-width="1.4" />
@@ -563,53 +458,64 @@
 <circle cx="530" cy="1440.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
 <text x="516" y="1446.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">GP18 / p24</text>
 <circle cx="1080" cy="1440.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
-<text x="1094" y="1446.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">FAULT</text>
+<text x="1094" y="1446.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">nFAULT</text>
 <circle cx="530" cy="1500.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
 <text x="516" y="1506.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">GP27 / p32</text>
 <circle cx="1080" cy="1500.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
 <text x="1094" y="1506.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">CS</text>
-<rect x="700" y="1470.0" width="220" height="135.0" rx="8" fill="#fffef9" stroke="#bd9221" stroke-width="1.4" stroke-dasharray="7 5" />
-<text x="718" y="1490.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" text-anchor="start" letter-spacing="0" fill="#bd9221">AR / ADC protection</text>
-<text x="718" y="1590.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">TBD / high impedance</text>
-<circle cx="920" cy="1530.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
-<text x="906" y="1536.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">IN</text>
-<circle cx="700" cy="1530.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
-<text x="714" y="1536.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">OUT</text>
+<rect x="772" y="1477.0" width="16" height="46.0" rx="0" fill="#fffef9" stroke="#20343e" stroke-width="1.4" />
+<text x="765" y="1469.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">RCR</text>
+<text x="765" y="1547.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="end" letter-spacing="0" fill="#647780">1 kΩ series</text>
 <circle cx="1560" cy="1320.0" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5" />
 <text x="1546" y="1326.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#db5a4a">OUT1</text>
 <circle cx="1560" cy="1380.0" r="5" fill="#fffef9" stroke="#20343e" stroke-width="2.5" />
 <text x="1546" y="1386.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">OUT2</text>
+<rect x="1740" y="1200.0" width="620" height="600.0" rx="8" fill="#fffef9" stroke="#387b65" stroke-width="1.4" stroke-dasharray="7 5" />
+<text x="1758" y="1230.0" font-family="Arial,Helvetica,sans-serif" font-size="22.0" font-weight="700" text-anchor="start" letter-spacing="0" fill="#387b65">JR / JLEG / R channel</text>
+<text x="1758" y="1257.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">1x6 0.1 in header for the pigtail · dividers 2.2 kΩ / 3.3 kΩ</text>
+<circle cx="1740" cy="1320.0" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5" />
+<text x="1754" y="1326.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">OUT1_IN</text>
+<circle cx="1740" cy="1380.0" r="5" fill="#fffef9" stroke="#20343e" stroke-width="2.5" />
+<text x="1754" y="1386.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">OUT2_IN</text>
+<circle cx="1740" cy="1630.0" r="5" fill="#fffef9" stroke="#bd9221" stroke-width="2.5" />
+<text x="1754" y="1636.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#bd9221">A_OUT</text>
+<circle cx="1740" cy="1690.0" r="5" fill="#fffef9" stroke="#387b65" stroke-width="2.5" />
+<text x="1754" y="1696.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#387b65">B_OUT</text>
+<circle cx="2360" cy="1320.0" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5" />
+<text x="2346" y="1326.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#db5a4a">RED</text>
 <circle cx="2600" cy="1320.0" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5" />
 <text x="2614" y="1326.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">RED</text>
+<circle cx="2360" cy="1380.0" r="5" fill="#fffef9" stroke="#20343e" stroke-width="2.5" />
+<text x="2346" y="1386.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">BLACK</text>
 <circle cx="2600" cy="1380.0" r="5" fill="#fffef9" stroke="#20343e" stroke-width="2.5" />
 <text x="2614" y="1386.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">BLACK</text>
+<circle cx="2360" cy="1510.0" r="5" fill="#fffef9" stroke="#387b65" stroke-width="2.5" />
+<text x="2346" y="1516.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#387b65">GREEN</text>
 <circle cx="2600" cy="1510.0" r="5" fill="#fffef9" stroke="#387b65" stroke-width="2.5" />
 <text x="2614" y="1516.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#387b65">GREEN</text>
+<circle cx="2360" cy="1570.0" r="5" fill="#fffef9" stroke="#437fb4" stroke-width="2.5" />
+<text x="2346" y="1576.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#437fb4">BLUE</text>
 <circle cx="2600" cy="1570.0" r="5" fill="#fffef9" stroke="#437fb4" stroke-width="2.5" />
 <text x="2614" y="1576.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#437fb4">BLUE</text>
+<circle cx="2360" cy="1630.0" r="5" fill="#fffef9" stroke="#bd9221" stroke-width="2.5" />
+<text x="2346" y="1636.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#bd9221">YELLOW</text>
 <circle cx="2600" cy="1630.0" r="5" fill="#fffef9" stroke="#bd9221" stroke-width="2.5" />
 <text x="2614" y="1636.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#bd9221">YELLOW</text>
+<circle cx="2360" cy="1690.0" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5" />
+<text x="2346" y="1696.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">WHITE</text>
 <circle cx="2600" cy="1690.0" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5" />
 <text x="2614" y="1696.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#52676d">WHITE</text>
-<rect x="1740" y="1555.0" width="470" height="205.0" rx="8" fill="#fffef9" stroke="#387b65" stroke-width="1.4" stroke-dasharray="7 5" />
-<text x="1758" y="1585.0" font-family="Arial,Helvetica,sans-serif" font-size="22.0" font-weight="700" text-anchor="start" letter-spacing="0" fill="#387b65">BR / 5 V-tolerant buffer</text>
-<text x="1758" y="1612.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">3.3 V / non-inverting / part TBD</text>
-<circle cx="2210" cy="1630.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
-<text x="2196" y="1636.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">A_IN</text>
-<circle cx="2210" cy="1690.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
-<text x="2196" y="1696.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">B_IN</text>
-<circle cx="1740" cy="1630.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
-<text x="1754" y="1636.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">A_OUT</text>
-<circle cx="1740" cy="1690.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
-<text x="1754" y="1696.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">B_OUT</text>
+<text x="2050" y="1440.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="middle" letter-spacing="0" fill="#647780">OUT1 → RED, OUT2 → BLACK pass through on the board.</text>
+<text x="2050" y="1465.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="middle" letter-spacing="0" fill="#647780">A, B: 2.2 kΩ series, 3.3 kΩ to GND → 3.0 V high level.</text>
+<text x="2050" y="1490.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="middle" letter-spacing="0" fill="#647780">GREEN → GND, BLUE → 5 V on the board rails.</text>
 <circle cx="530" cy="1630.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
 <text x="516" y="1636.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">GP4 / p6</text>
 <circle cx="530" cy="1690.0" r="5" fill="#fffef9" stroke="#218ca0" stroke-width="2.5" />
 <text x="516" y="1696.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">GP5 / p7</text>
 <rect x="644" y="1128.0" width="133.0" height="29.0" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
 <text x="650" y="1150.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#8260a9">3V3 / EL-01</text>
-<rect x="644" y="1088.0" width="177.0" height="29.0" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
-<text x="650" y="1110.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">ACT_BUS / EL-01</text>
+<rect x="644" y="1088.0" width="144.0" height="29.0" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
+<text x="650" y="1110.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">RAIL / EL-01</text>
 <rect x="644" y="1788.0" width="122.00000000000001" height="29.0" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
 <text x="650" y="1810.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#c77822">5V / EL-01</text>
 <rect x="644" y="1833.0" width="133.0" height="29.0" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
@@ -622,68 +528,58 @@
 <text x="1248" y="1594.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">PMODE</text>
 <circle cx="1360" cy="1570.0" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5" />
 <text x="1348" y="1594.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">IMODE</text>
-<circle cx="2080" cy="1555.0" r="5" fill="#fffef9" stroke="#8260a9" stroke-width="2.5" />
-<text x="2092" y="1543.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="start" letter-spacing="0" fill="#8260a9">3V3</text>
-<circle cx="2000" cy="1760.0" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5" />
-<text x="1988" y="1784.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">GND</text>
-<circle cx="820" cy="1605.0" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5" />
-<text x="808" y="1629.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">GND</text>
-<circle cx="820" cy="1470.0" r="5" fill="#fffef9" stroke="#8260a9" stroke-width="2.5" />
-<text x="832" y="1458.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="start" letter-spacing="0" fill="#8260a9">REF</text>
+<circle cx="2160" cy="1800.0" r="5" fill="#fffef9" stroke="#c77822" stroke-width="2.5" />
+<text x="2148" y="1824.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="end" letter-spacing="0" fill="#c77822">5V</text>
+<circle cx="2050" cy="1800.0" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5" />
+<text x="2038" y="1824.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="end" letter-spacing="0" fill="#52676d">GND</text>
 <circle cx="1080" cy="1285.0" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5" />
-<text x="1094" y="1291.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">SLEEP</text>
-<rect x="644" y="1253.0" width="199.00000000000003" height="29.0" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
-<text x="650" y="1275.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">HW_ENABLE / EL-01</text>
-<rect x="982" y="1390.0" width="16" height="46.0" rx="0" fill="#fffef9" stroke="#20343e" stroke-width="1.4" stroke-dasharray="7 5" />
+<text x="1094" y="1291.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">nSLEEP</text>
+<rect x="644" y="1253.0" width="243.00000000000003" height="29.0" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
+<text x="650" y="1275.0" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">nSLEEP / GP10 / EL-01</text>
+<rect x="982" y="1390.0" width="16" height="46.0" rx="0" fill="#fffef9" stroke="#20343e" stroke-width="1.4" />
 <text x="975" y="1412.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="end" letter-spacing="0" fill="#20343e">RFR</text>
-<text x="975" y="1439.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="end" letter-spacing="0" fill="#647780">pull-up TBD</text>
+<text x="975" y="1439.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="end" letter-spacing="0" fill="#647780">10 kΩ pull-up</text>
 <circle cx="1480" cy="1570.0" r="5" fill="#fffef9" stroke="#c77822" stroke-width="2.5" />
 <text x="1468" y="1594.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="end" letter-spacing="0" fill="#c77822">VREF</text>
 <rect x="1472" y="1725.0" width="16" height="46.0" rx="0" fill="#fffef9" stroke="#20343e" stroke-width="1.4" stroke-dasharray="7 5" />
 <text x="1495" y="1747.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">RVR</text>
-<text x="1495" y="1774.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">limit TBD</text>
+<text x="1495" y="1774.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">divider ≈ 2.8 V</text>
 <text x="1320" y="1538.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="middle" letter-spacing="0" fill="#647780">VM: NC</text>
 <text x="2700" y="1775.0" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">BLACK is a switched motor lead.</text>
 <circle cx="640" cy="260.0" r="4" fill="#20343e" />
 <circle cx="1480" cy="260.0" r="4" fill="#20343e" />
 <circle cx="2500" cy="260.0" r="4" fill="#20343e" />
 <circle cx="640" cy="300.0" r="4" fill="#20343e" />
-<circle cx="820" cy="300.0" r="4" fill="#20343e" />
 <circle cx="990" cy="300.0" r="4" fill="#20343e" />
-<circle cx="1690" cy="300.0" r="4" fill="#20343e" />
 <circle cx="2500" cy="300.0" r="4" fill="#20343e" />
 <circle cx="640" cy="425.0" r="4" fill="#20343e" />
 <circle cx="990" cy="580.0" r="4" fill="#20343e" />
 <circle cx="640" cy="960.0" r="4" fill="#20343e" />
+<circle cx="2160" cy="960.0" r="4" fill="#20343e" />
 <circle cx="2500" cy="960.0" r="4" fill="#20343e" />
 <circle cx="640" cy="1005.0" r="4" fill="#52676d" />
-<circle cx="820" cy="1005.0" r="4" fill="#52676d" />
 <circle cx="1160" cy="1005.0" r="4" fill="#52676d" />
 <circle cx="1260" cy="1005.0" r="4" fill="#52676d" />
 <circle cx="1360" cy="1005.0" r="4" fill="#52676d" />
 <circle cx="1480" cy="1005.0" r="4" fill="#52676d" />
-<circle cx="2000" cy="1005.0" r="4" fill="#52676d" />
-<circle cx="2460" cy="1005.0" r="4" fill="#52676d" />
+<circle cx="2050" cy="1005.0" r="4" fill="#52676d" />
 <circle cx="2500" cy="1005.0" r="4" fill="#52676d" />
 <circle cx="640" cy="1120.0" r="4" fill="#20343e" />
 <circle cx="1480" cy="1120.0" r="4" fill="#20343e" />
 <circle cx="2500" cy="1120.0" r="4" fill="#20343e" />
 <circle cx="640" cy="1160.0" r="4" fill="#20343e" />
-<circle cx="820" cy="1160.0" r="4" fill="#20343e" />
 <circle cx="990" cy="1160.0" r="4" fill="#20343e" />
-<circle cx="1690" cy="1160.0" r="4" fill="#20343e" />
 <circle cx="2500" cy="1160.0" r="4" fill="#20343e" />
 <circle cx="640" cy="1285.0" r="4" fill="#20343e" />
 <circle cx="990" cy="1440.0" r="4" fill="#20343e" />
 <circle cx="640" cy="1820.0" r="4" fill="#20343e" />
+<circle cx="2160" cy="1820.0" r="4" fill="#20343e" />
 <circle cx="2500" cy="1820.0" r="4" fill="#20343e" />
 <circle cx="640" cy="1865.0" r="4" fill="#52676d" />
-<circle cx="820" cy="1865.0" r="4" fill="#52676d" />
 <circle cx="1160" cy="1865.0" r="4" fill="#52676d" />
 <circle cx="1260" cy="1865.0" r="4" fill="#52676d" />
 <circle cx="1360" cy="1865.0" r="4" fill="#52676d" />
 <circle cx="1480" cy="1865.0" r="4" fill="#52676d" />
-<circle cx="2000" cy="1865.0" r="4" fill="#52676d" />
-<circle cx="2460" cy="1865.0" r="4" fill="#52676d" />
+<circle cx="2050" cy="1865.0" r="4" fill="#52676d" />
 <circle cx="2500" cy="1865.0" r="4" fill="#52676d" /></g>
 </svg>

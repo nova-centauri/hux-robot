@@ -1,0 +1,2122 @@
+{
+  "revision": "C",
+  "date": "2026-10-17",
+  "standard": {
+    "low_voltage": "JST XH 2.50 mm: header B#B-XH-A, housing XHP-#, contact SXH-001T-P0.6 (22-28 AWG)",
+    "power": "XT30 for the pack, the fuse and the switched rail",
+    "motor": "Pololu 4752 pigtail keeps its 1x6 0.1 in housing; mates with a 1x6 male header on JLEG",
+    "pico_end": "Decided 2026-10-17: the user desolders the pre-soldered pins of the Pico 2 and solders the XH headers to the board. The harness plugs into the Pico directly.",
+    "wire": "24 AWG signals, 22 AWG for 5 V / 3V3 / motor OUT1-OUT2, 20 AWG for the pack and the rail"
+  },
+  "length_model": {
+    "rule": "Manhattan path: board -> front deck notch -> front face -> notch -> board. Cut = path x 1.10 + 2 x 15 mm, rounded up to 5 mm.",
+    "status": "Estimate. Cut long, route on the frame, trim, record the measured length."
+  },
+  "locations": {
+    "P1": {
+      "name": "Pico 2",
+      "place": "CTRL deck, far half",
+      "deck": "CTRL",
+      "lane": "far",
+      "xyz": [
+        0,
+        -97.5,
+        193
+      ],
+      "source": "R05 build.py: 11_pico_plate at (0, -97.5, 178), PCB at Z 191"
+    },
+    "U1": {
+      "name": "LSM6DSO IMU",
+      "place": "CTRL deck, near half",
+      "deck": "CTRL",
+      "lane": "near",
+      "xyz": [
+        0,
+        -41.5,
+        190
+      ],
+      "source": "R05 build.py: 12_imu_plate at (0, -41.5, 178), PCB at Z 189.6"
+    },
+    "PDB": {
+      "name": "Power distribution board (5 V regulator, D5)",
+      "place": "BUS deck, near half",
+      "deck": "BUS",
+      "lane": "near",
+      "xyz": [
+        0,
+        -38.5,
+        145
+      ],
+      "source": "R05 build.py: regulator_clamp cassette at (0, -38.5, 128), board at Z 139"
+    },
+    "SPARE": {
+      "name": "Spare cassette position",
+      "place": "BUS deck, far half",
+      "deck": "BUS",
+      "lane": "far",
+      "xyz": [
+        0,
+        -96.5,
+        145
+      ],
+      "source": "R05 build.py: servo_bus_encoder cassette at (0, -96.5, 128). No board in V1-PROOF."
+    },
+    "KC": {
+      "name": "Kill-chain board (fuse, Pololu 2813, 74HC14, 3.3 V LDO, rail divider)",
+      "place": "PWR deck, near half",
+      "deck": "PWR",
+      "lane": "near",
+      "xyz": [
+        0,
+        -38.5,
+        85
+      ],
+      "source": "R05 build.py: power_cut_fuse cassette at (0, -38.5, 68), board at Z 79"
+    },
+    "DB": {
+      "name": "Driver board (2 x DRV8874 carriers, pull-ups, VREF, CS series)",
+      "place": "PWR deck, far half",
+      "deck": "PWR",
+      "lane": "far",
+      "xyz": [
+        0,
+        -96.5,
+        85
+      ],
+      "source": "R05 build.py: DRV8874 cassette at (0, -96.5, 68), board at Z 79"
+    },
+    "JLEG": {
+      "name": "Leg junction board (2 x 1x6 header, encoder dividers)",
+      "place": "under the PWR deck, centre",
+      "deck": "PWR",
+      "lane": "centre",
+      "xyz": [
+        0,
+        -67.5,
+        52
+      ],
+      "source": "Accepted by the user 2026-10-17 as the unified junction for both pigtails. Deck underside at Z 60. Board layout and mount detail open."
+    },
+    "BAT": {
+      "name": "3S pack lead exit",
+      "place": "battery tray, rear end",
+      "deck": null,
+      "lane": "near",
+      "xyz": [
+        48,
+        -50,
+        -10
+      ],
+      "source": "R05 parameters.json battery centre (-5, -67.5, -17.5), 106 x 35 x 25. Lead exit assumed at the rear end toward the near wall. Measure the pack."
+    },
+    "ML": {
+      "name": "Left (near) gearmotor pigtail exit",
+      "place": "under the body, near side",
+      "deck": null,
+      "lane": "near",
+      "xyz": [
+        7,
+        -42.6,
+        -95.3
+      ],
+      "source": "R05 build.py moving(30): encoder end at Y -42.6, axis X 7, Z -95.3"
+    },
+    "MR": {
+      "name": "Right (far) gearmotor pigtail exit",
+      "place": "under the body, far side",
+      "deck": null,
+      "lane": "far",
+      "xyz": [
+        7,
+        -92.4,
+        -95.3
+      ],
+      "source": "R05 build.py moving(30), mirrored about Y -67.5"
+    },
+    "SWK": {
+      "name": "KILL button",
+      "place": "bench fixture (robot panel position open)",
+      "deck": null,
+      "lane": "near",
+      "xyz": null,
+      "source": "docs/kill-chain.md: mount both buttons on the fixture for the bench"
+    },
+    "SWA": {
+      "name": "ARM button",
+      "place": "bench fixture (robot panel position open)",
+      "deck": null,
+      "lane": "near",
+      "xyz": null,
+      "source": "docs/kill-chain.md"
+    },
+    "JUSB": {
+      "name": "Laptop USB cable",
+      "place": "external, front of the body",
+      "deck": null,
+      "lane": "far",
+      "xyz": null,
+      "source": "R05 build.py: pico_USB_access at X -40"
+    }
+  },
+  "connectors": {
+    "P1.PH-A": {
+      "board": "P1",
+      "family": "XH",
+      "positions": 4,
+      "pins": "p4-p7",
+      "title": "Encoder inputs",
+      "load": {
+        "1": [
+          "GP2",
+          "L_ENC_A"
+        ],
+        "2": [
+          "GP3",
+          "L_ENC_B"
+        ],
+        "3": [
+          "GP4",
+          "R_ENC_A"
+        ],
+        "4": [
+          "GP5",
+          "R_ENC_B"
+        ]
+      }
+    },
+    "P1.PH-A2": {
+      "board": "P1",
+      "family": "XH",
+      "positions": 3,
+      "pins": "p8-p10",
+      "title": "Encoder ground, left EN / PH",
+      "load": {
+        "1": [
+          "GND",
+          "GND"
+        ],
+        "2": [
+          "GP6",
+          "L_EN"
+        ],
+        "3": [
+          "GP7",
+          "L_PH"
+        ]
+      }
+    },
+    "P1.PH-B": {
+      "board": "P1",
+      "family": "XH",
+      "positions": 5,
+      "pins": "p11-p15",
+      "title": "Right EN / PH, nSLEEP, left FAULT",
+      "load": {
+        "1": [
+          "GP8",
+          "R_EN"
+        ],
+        "2": [
+          "GP9",
+          "R_PH"
+        ],
+        "3": [
+          "GND",
+          "GND"
+        ],
+        "4": [
+          "GP10",
+          "nSLEEP"
+        ],
+        "5": [
+          "GP11",
+          "L_FAULT"
+        ]
+      }
+    },
+    "P1.PH-C": {
+      "board": "P1",
+      "family": "XH",
+      "positions": 6,
+      "pins": "p16-p21",
+      "title": "SPI1 sensor",
+      "load": {
+        "1": [
+          "GP12",
+          "SPI_SDO"
+        ],
+        "2": [
+          "GP13",
+          "SPI_CS"
+        ],
+        "3": [
+          "GND",
+          "GND"
+        ],
+        "4": [
+          "GP14",
+          "SPI_SCL"
+        ],
+        "5": [
+          "GP15",
+          "SPI_SDI"
+        ],
+        "6": [
+          "GP16",
+          "IMU_INT1"
+        ]
+      }
+    },
+    "P1.PH-D": {
+      "board": "P1",
+      "family": "XH",
+      "positions": 6,
+      "pins": "p24-p29",
+      "title": "Right FAULT, heartbeat",
+      "load": {
+        "1": [
+          "GP18",
+          "R_FAULT"
+        ],
+        "2": [
+          "GP19",
+          null
+        ],
+        "3": [
+          "GP20",
+          null
+        ],
+        "4": [
+          "GP21",
+          null
+        ],
+        "5": [
+          "GND",
+          "GND"
+        ],
+        "6": [
+          "GP22",
+          "HB"
+        ]
+      }
+    },
+    "P1.PH-E": {
+      "board": "P1",
+      "family": "XH",
+      "positions": 4,
+      "pins": "p31-p34",
+      "title": "Current sense, rail sense",
+      "load": {
+        "1": [
+          "GP26",
+          "L_CS"
+        ],
+        "2": [
+          "GP27",
+          "R_CS"
+        ],
+        "3": [
+          "AGND",
+          "AGND"
+        ],
+        "4": [
+          "GP28",
+          "RAIL_ADC"
+        ]
+      }
+    },
+    "P1.PH-F": {
+      "board": "P1",
+      "family": "XH",
+      "positions": 4,
+      "pins": "p36-p39",
+      "title": "Logic power",
+      "load": {
+        "1": [
+          "3V3(OUT)",
+          "3V3"
+        ],
+        "2": [
+          "3V3_EN",
+          null
+        ],
+        "3": [
+          "GND",
+          "GND"
+        ],
+        "4": [
+          "VSYS",
+          "VSYS"
+        ]
+      }
+    },
+    "P1.PH-G": {
+      "board": "P1",
+      "family": "XH",
+      "positions": 3,
+      "pins": "p1-p3",
+      "title": "Optional UART0 link (no cable in V1-PROOF)",
+      "load": {
+        "1": [
+          "GP0",
+          null
+        ],
+        "2": [
+          "GP1",
+          null
+        ],
+        "3": [
+          "GND",
+          null
+        ]
+      }
+    },
+    "P1.USB": {
+      "board": "P1",
+      "family": "Micro-USB",
+      "positions": 4,
+      "pins": "onboard",
+      "title": "Onboard Micro-USB",
+      "load": {
+        "1": [
+          "VBUS",
+          "USB_VBUS"
+        ],
+        "2": [
+          "D+",
+          "USB_D+"
+        ],
+        "3": [
+          "D-",
+          "USB_D-"
+        ],
+        "4": [
+          "GND",
+          "GND"
+        ]
+      }
+    },
+    "U1.JMAIN": {
+      "board": "U1",
+      "family": "XH",
+      "positions": 6,
+      "pins": "main pads",
+      "title": "LSM6DSO main SPI pads",
+      "load": {
+        "1": [
+          "GND",
+          "GND"
+        ],
+        "2": [
+          "3V3",
+          "3V3"
+        ],
+        "3": [
+          "SDA / SDI",
+          "SPI_SDI"
+        ],
+        "4": [
+          "SCL",
+          "SPI_SCL"
+        ],
+        "5": [
+          "SDO",
+          "SPI_SDO"
+        ],
+        "6": [
+          "CS",
+          "SPI_CS"
+        ]
+      }
+    },
+    "U1.JINT": {
+      "board": "U1",
+      "family": "XH",
+      "positions": 2,
+      "pins": "INT2, INT1 pads",
+      "title": "LSM6DSO interrupt pads",
+      "load": {
+        "1": [
+          "INT2",
+          null
+        ],
+        "2": [
+          "INT1",
+          "IMU_INT1"
+        ]
+      }
+    },
+    "DB.JSIG-L": {
+      "board": "DB",
+      "family": "XH",
+      "positions": 5,
+      "pins": "protoboard",
+      "title": "Left driver signals",
+      "load": {
+        "1": [
+          "EN",
+          "L_EN"
+        ],
+        "2": [
+          "PH",
+          "L_PH"
+        ],
+        "3": [
+          "nFAULT",
+          "L_FAULT"
+        ],
+        "4": [
+          "CS out",
+          "L_CS"
+        ],
+        "5": [
+          "GND",
+          "GND"
+        ]
+      }
+    },
+    "DB.JSIG-R": {
+      "board": "DB",
+      "family": "XH",
+      "positions": 5,
+      "pins": "protoboard",
+      "title": "Right driver signals",
+      "load": {
+        "1": [
+          "EN",
+          "R_EN"
+        ],
+        "2": [
+          "PH",
+          "R_PH"
+        ],
+        "3": [
+          "nFAULT",
+          "R_FAULT"
+        ],
+        "4": [
+          "CS out",
+          "R_CS"
+        ],
+        "5": [
+          "GND",
+          "GND"
+        ]
+      }
+    },
+    "DB.JCTL": {
+      "board": "DB",
+      "family": "XH",
+      "positions": 2,
+      "pins": "protoboard",
+      "title": "Shared nSLEEP and pull-up supply",
+      "load": {
+        "1": [
+          "nSLEEP",
+          "nSLEEP"
+        ],
+        "2": [
+          "3V3",
+          "3V3"
+        ]
+      }
+    },
+    "DB.JML": {
+      "board": "DB",
+      "family": "XH",
+      "positions": 2,
+      "pins": "protoboard",
+      "title": "Left motor OUT1 / OUT2",
+      "load": {
+        "1": [
+          "OUT1",
+          "L_MOTOR_OUT1"
+        ],
+        "2": [
+          "OUT2",
+          "L_MOTOR_OUT2"
+        ]
+      }
+    },
+    "DB.JMR": {
+      "board": "DB",
+      "family": "XH",
+      "positions": 2,
+      "pins": "protoboard",
+      "title": "Right motor OUT1 / OUT2",
+      "load": {
+        "1": [
+          "OUT1",
+          "R_MOTOR_OUT1"
+        ],
+        "2": [
+          "OUT2",
+          "R_MOTOR_OUT2"
+        ]
+      }
+    },
+    "DB.XRAIL": {
+      "board": "DB",
+      "family": "XT30",
+      "positions": 2,
+      "pins": "pigtail",
+      "title": "Switched rail in",
+      "load": {
+        "1": [
+          "+",
+          "RAIL"
+        ],
+        "2": [
+          "-",
+          "GND"
+        ]
+      }
+    },
+    "JLEG.JML_IN": {
+      "board": "JLEG",
+      "family": "P6",
+      "positions": 6,
+      "pins": "1x6 male header",
+      "title": "Left Pololu pigtail",
+      "load": {
+        "1": [
+          "RED",
+          "L_MOTOR_OUT1"
+        ],
+        "2": [
+          "BLACK",
+          "L_MOTOR_OUT2"
+        ],
+        "3": [
+          "GREEN",
+          "GND"
+        ],
+        "4": [
+          "BLUE",
+          "5V"
+        ],
+        "5": [
+          "YELLOW",
+          "L_ENC_A5"
+        ],
+        "6": [
+          "WHITE",
+          "L_ENC_B5"
+        ]
+      }
+    },
+    "JLEG.JMR_IN": {
+      "board": "JLEG",
+      "family": "P6",
+      "positions": 6,
+      "pins": "1x6 male header",
+      "title": "Right Pololu pigtail",
+      "load": {
+        "1": [
+          "RED",
+          "R_MOTOR_OUT1"
+        ],
+        "2": [
+          "BLACK",
+          "R_MOTOR_OUT2"
+        ],
+        "3": [
+          "GREEN",
+          "GND"
+        ],
+        "4": [
+          "BLUE",
+          "5V"
+        ],
+        "5": [
+          "YELLOW",
+          "R_ENC_A5"
+        ],
+        "6": [
+          "WHITE",
+          "R_ENC_B5"
+        ]
+      }
+    },
+    "JLEG.JPL": {
+      "board": "JLEG",
+      "family": "XH",
+      "positions": 2,
+      "pins": "protoboard",
+      "title": "Left motor power to driver",
+      "load": {
+        "1": [
+          "OUT1",
+          "L_MOTOR_OUT1"
+        ],
+        "2": [
+          "OUT2",
+          "L_MOTOR_OUT2"
+        ]
+      }
+    },
+    "JLEG.JPR": {
+      "board": "JLEG",
+      "family": "XH",
+      "positions": 2,
+      "pins": "protoboard",
+      "title": "Right motor power to driver",
+      "load": {
+        "1": [
+          "OUT1",
+          "R_MOTOR_OUT1"
+        ],
+        "2": [
+          "OUT2",
+          "R_MOTOR_OUT2"
+        ]
+      }
+    },
+    "JLEG.JENC": {
+      "board": "JLEG",
+      "family": "XH",
+      "positions": 5,
+      "pins": "protoboard",
+      "title": "Encoder outputs, 3.3 V level",
+      "load": {
+        "1": [
+          "L_A",
+          "L_ENC_A"
+        ],
+        "2": [
+          "L_B",
+          "L_ENC_B"
+        ],
+        "3": [
+          "R_A",
+          "R_ENC_A"
+        ],
+        "4": [
+          "R_B",
+          "R_ENC_B"
+        ],
+        "5": [
+          "GND",
+          "GND"
+        ]
+      }
+    },
+    "JLEG.J5V": {
+      "board": "JLEG",
+      "family": "XH",
+      "positions": 2,
+      "pins": "protoboard",
+      "title": "Encoder supply",
+      "load": {
+        "1": [
+          "5V",
+          "5V"
+        ],
+        "2": [
+          "GND",
+          "GND"
+        ]
+      }
+    },
+    "KC.XPACK": {
+      "board": "KC",
+      "family": "XT30",
+      "positions": 2,
+      "pins": "pigtail",
+      "title": "Fused pack in",
+      "load": {
+        "1": [
+          "+",
+          "PACK_FUSED"
+        ],
+        "2": [
+          "-",
+          "GND"
+        ]
+      }
+    },
+    "KC.XRAIL": {
+      "board": "KC",
+      "family": "XT30",
+      "positions": 2,
+      "pins": "pigtail",
+      "title": "Switched rail out (Pololu 2813 VOUT)",
+      "load": {
+        "1": [
+          "+",
+          "RAIL"
+        ],
+        "2": [
+          "-",
+          "GND"
+        ]
+      }
+    },
+    "KC.JBUS": {
+      "board": "KC",
+      "family": "XH",
+      "positions": 2,
+      "pins": "protoboard",
+      "title": "Unswitched fused bus to the 5 V regulator",
+      "load": {
+        "1": [
+          "BUS",
+          "BUS"
+        ],
+        "2": [
+          "GND",
+          "GND"
+        ]
+      }
+    },
+    "KC.JHB": {
+      "board": "KC",
+      "family": "XH",
+      "positions": 3,
+      "pins": "protoboard",
+      "title": "Heartbeat in, rail sense out",
+      "load": {
+        "1": [
+          "HB",
+          "HB"
+        ],
+        "2": [
+          "RAIL_ADC",
+          "RAIL_ADC"
+        ],
+        "3": [
+          "AGND",
+          "AGND"
+        ]
+      }
+    },
+    "KC.JKILL": {
+      "board": "KC",
+      "family": "XH",
+      "positions": 2,
+      "pins": "protoboard",
+      "title": "KILL button",
+      "load": {
+        "1": [
+          "3V3K",
+          "KILL_A"
+        ],
+        "2": [
+          "OFF node",
+          "KILL_B"
+        ]
+      }
+    },
+    "KC.JARM": {
+      "board": "KC",
+      "family": "XH",
+      "positions": 2,
+      "pins": "protoboard",
+      "title": "ARM button",
+      "load": {
+        "1": [
+          "3V3K",
+          "ARM_A"
+        ],
+        "2": [
+          "ON node",
+          "ARM_B"
+        ]
+      }
+    },
+    "PDB.JIN": {
+      "board": "PDB",
+      "family": "XH",
+      "positions": 2,
+      "pins": "protoboard",
+      "title": "Fused bus in",
+      "load": {
+        "1": [
+          "BUS",
+          "BUS"
+        ],
+        "2": [
+          "GND",
+          "GND"
+        ]
+      }
+    },
+    "PDB.JPICO": {
+      "board": "PDB",
+      "family": "XH",
+      "positions": 2,
+      "pins": "protoboard",
+      "title": "5 V through D5 to VSYS",
+      "load": {
+        "1": [
+          "VSYS",
+          "VSYS"
+        ],
+        "2": [
+          "GND",
+          "GND"
+        ]
+      }
+    },
+    "PDB.J5V": {
+      "board": "PDB",
+      "family": "XH",
+      "positions": 2,
+      "pins": "protoboard",
+      "title": "5 V to the encoder junction",
+      "load": {
+        "1": [
+          "5V",
+          "5V"
+        ],
+        "2": [
+          "GND",
+          "GND"
+        ]
+      }
+    },
+    "BAT.LEADS": {
+      "board": "BAT",
+      "family": "pack leads",
+      "positions": 2,
+      "pins": "pack",
+      "title": "Pack leads",
+      "load": {
+        "1": [
+          "+",
+          "PACK"
+        ],
+        "2": [
+          "-",
+          "GND"
+        ]
+      }
+    },
+    "F1.INLINE": {
+      "board": "F1",
+      "family": "inline fuse holder",
+      "positions": 2,
+      "pins": "holder",
+      "title": "Main fuse, value open",
+      "load": {
+        "1": [
+          "IN",
+          "PACK"
+        ],
+        "2": [
+          "OUT",
+          "PACK_FUSED"
+        ]
+      }
+    },
+    "SWK.LEADS": {
+      "board": "SWK",
+      "family": "XH",
+      "positions": 2,
+      "pins": "button",
+      "title": "KILL button leads",
+      "load": {
+        "1": [
+          "NO",
+          "KILL_A"
+        ],
+        "2": [
+          "COM",
+          "KILL_B"
+        ]
+      }
+    },
+    "SWA.LEADS": {
+      "board": "SWA",
+      "family": "XH",
+      "positions": 2,
+      "pins": "button",
+      "title": "ARM button leads",
+      "load": {
+        "1": [
+          "NO",
+          "ARM_A"
+        ],
+        "2": [
+          "COM",
+          "ARM_B"
+        ]
+      }
+    },
+    "JUSB.CABLE": {
+      "board": "JUSB",
+      "family": "Micro-USB",
+      "positions": 4,
+      "pins": "cable",
+      "title": "Laptop USB cable",
+      "load": {
+        "1": [
+          "VBUS",
+          "USB_VBUS"
+        ],
+        "2": [
+          "D+",
+          "USB_D+"
+        ],
+        "3": [
+          "D-",
+          "USB_D-"
+        ],
+        "4": [
+          "GND",
+          "GND"
+        ]
+      }
+    },
+    "ML.PIGTAIL": {
+      "board": "ML",
+      "family": "P6",
+      "positions": 6,
+      "pins": "vendor housing",
+      "title": "Pololu 4752 leads, 200 mm",
+      "load": {
+        "1": [
+          "RED",
+          "L_MOTOR_OUT1"
+        ],
+        "2": [
+          "BLACK",
+          "L_MOTOR_OUT2"
+        ],
+        "3": [
+          "GREEN",
+          "GND"
+        ],
+        "4": [
+          "BLUE",
+          "5V"
+        ],
+        "5": [
+          "YELLOW",
+          "L_ENC_A5"
+        ],
+        "6": [
+          "WHITE",
+          "L_ENC_B5"
+        ]
+      }
+    },
+    "MR.PIGTAIL": {
+      "board": "MR",
+      "family": "P6",
+      "positions": 6,
+      "pins": "vendor housing",
+      "title": "Pololu 4752 leads, 200 mm",
+      "load": {
+        "1": [
+          "RED",
+          "R_MOTOR_OUT1"
+        ],
+        "2": [
+          "BLACK",
+          "R_MOTOR_OUT2"
+        ],
+        "3": [
+          "GREEN",
+          "GND"
+        ],
+        "4": [
+          "BLUE",
+          "5V"
+        ],
+        "5": [
+          "YELLOW",
+          "R_ENC_A5"
+        ],
+        "6": [
+          "WHITE",
+          "R_ENC_B5"
+        ]
+      }
+    }
+  },
+  "splices": {
+    "SP1": {
+      "net": "3V3",
+      "near": "P1",
+      "note": "3V3 from P1.PH-F.1 to the IMU and the driver pull-ups. About 30 mm from the Pico header."
+    }
+  },
+  "bundles": [
+    {
+      "id": "B1",
+      "name": "Sensor",
+      "ends": [
+        "P1",
+        "U1"
+      ],
+      "awg": 24,
+      "conductors": 7,
+      "path_mm": 59,
+      "cut_mm": 95,
+      "fixed": false,
+      "path": [
+        [
+          0,
+          -97.5,
+          193
+        ],
+        [
+          0,
+          -41.5,
+          190
+        ]
+      ]
+    },
+    {
+      "id": "B2",
+      "name": "3V3 feed",
+      "ends": [
+        "P1",
+        "DB"
+      ],
+      "awg": 22,
+      "conductors": 2,
+      "path_mm": 275,
+      "cut_mm": 335,
+      "fixed": false,
+      "path": [
+        [
+          0,
+          -97.5,
+          193
+        ],
+        [
+          -58,
+          -94.5,
+          172
+        ],
+        [
+          -58,
+          -94.5,
+          62
+        ],
+        [
+          0,
+          -96.5,
+          85
+        ]
+      ]
+    },
+    {
+      "id": "B3",
+      "name": "Left driver signals",
+      "ends": [
+        "P1",
+        "DB"
+      ],
+      "awg": 24,
+      "conductors": 5,
+      "path_mm": 275,
+      "cut_mm": 335,
+      "fixed": false,
+      "path": [
+        [
+          0,
+          -97.5,
+          193
+        ],
+        [
+          -58,
+          -94.5,
+          172
+        ],
+        [
+          -58,
+          -94.5,
+          62
+        ],
+        [
+          0,
+          -96.5,
+          85
+        ]
+      ]
+    },
+    {
+      "id": "B4",
+      "name": "Right driver signals",
+      "ends": [
+        "P1",
+        "DB"
+      ],
+      "awg": 24,
+      "conductors": 5,
+      "path_mm": 275,
+      "cut_mm": 335,
+      "fixed": false,
+      "path": [
+        [
+          0,
+          -97.5,
+          193
+        ],
+        [
+          -58,
+          -94.5,
+          172
+        ],
+        [
+          -58,
+          -94.5,
+          62
+        ],
+        [
+          0,
+          -96.5,
+          85
+        ]
+      ]
+    },
+    {
+      "id": "B5",
+      "name": "Driver sleep",
+      "ends": [
+        "P1",
+        "DB"
+      ],
+      "awg": 24,
+      "conductors": 1,
+      "path_mm": 275,
+      "cut_mm": 335,
+      "fixed": false,
+      "path": [
+        [
+          0,
+          -97.5,
+          193
+        ],
+        [
+          -58,
+          -94.5,
+          172
+        ],
+        [
+          -58,
+          -94.5,
+          62
+        ],
+        [
+          0,
+          -96.5,
+          85
+        ]
+      ]
+    },
+    {
+      "id": "B6",
+      "name": "Encoder signals",
+      "ends": [
+        "P1",
+        "JLEG"
+      ],
+      "awg": 24,
+      "conductors": 5,
+      "path_mm": 287,
+      "cut_mm": 350,
+      "fixed": false,
+      "path": [
+        [
+          0,
+          -97.5,
+          193
+        ],
+        [
+          -58,
+          -94.5,
+          172
+        ],
+        [
+          -58,
+          -94.5,
+          62
+        ],
+        [
+          0,
+          -67.5,
+          52
+        ]
+      ]
+    },
+    {
+      "id": "B7",
+      "name": "Kill-chain sense",
+      "ends": [
+        "P1",
+        "KC"
+      ],
+      "awg": 24,
+      "conductors": 3,
+      "path_mm": 329,
+      "cut_mm": 395,
+      "fixed": false,
+      "path": [
+        [
+          0,
+          -97.5,
+          193
+        ],
+        [
+          -58,
+          -94.5,
+          172
+        ],
+        [
+          -58,
+          -40.5,
+          62
+        ],
+        [
+          0,
+          -38.5,
+          85
+        ]
+      ]
+    },
+    {
+      "id": "B8",
+      "name": "Pico power",
+      "ends": [
+        "PDB",
+        "P1"
+      ],
+      "awg": 22,
+      "conductors": 2,
+      "path_mm": 269,
+      "cut_mm": 330,
+      "fixed": false,
+      "path": [
+        [
+          0,
+          -38.5,
+          145
+        ],
+        [
+          -58,
+          -40.5,
+          122
+        ],
+        [
+          -58,
+          -94.5,
+          172
+        ],
+        [
+          0,
+          -97.5,
+          193
+        ]
+      ]
+    },
+    {
+      "id": "B9",
+      "name": "Logic bus",
+      "ends": [
+        "KC",
+        "PDB"
+      ],
+      "awg": 22,
+      "conductors": 2,
+      "path_mm": 226,
+      "cut_mm": 280,
+      "fixed": false,
+      "path": [
+        [
+          0,
+          -38.5,
+          85
+        ],
+        [
+          -58,
+          -40.5,
+          62
+        ],
+        [
+          -58,
+          -40.5,
+          122
+        ],
+        [
+          0,
+          -38.5,
+          145
+        ]
+      ]
+    },
+    {
+      "id": "B10",
+      "name": "Switched rail",
+      "ends": [
+        "KC",
+        "DB"
+      ],
+      "awg": 20,
+      "conductors": 2,
+      "path_mm": 58,
+      "cut_mm": 95,
+      "fixed": false,
+      "path": [
+        [
+          0,
+          -38.5,
+          85
+        ],
+        [
+          0,
+          -96.5,
+          85
+        ]
+      ]
+    },
+    {
+      "id": "B11",
+      "name": "Encoder supply",
+      "ends": [
+        "PDB",
+        "JLEG"
+      ],
+      "awg": 22,
+      "conductors": 2,
+      "path_mm": 238,
+      "cut_mm": 295,
+      "fixed": false,
+      "path": [
+        [
+          0,
+          -38.5,
+          145
+        ],
+        [
+          -58,
+          -40.5,
+          122
+        ],
+        [
+          -58,
+          -40.5,
+          62
+        ],
+        [
+          0,
+          -67.5,
+          52
+        ]
+      ]
+    },
+    {
+      "id": "B12",
+      "name": "Left motor power",
+      "ends": [
+        "DB",
+        "JLEG"
+      ],
+      "awg": 22,
+      "conductors": 2,
+      "path_mm": 62,
+      "cut_mm": 100,
+      "fixed": false,
+      "path": [
+        [
+          0,
+          -96.5,
+          85
+        ],
+        [
+          0,
+          -67.5,
+          52
+        ]
+      ]
+    },
+    {
+      "id": "B13",
+      "name": "Right motor power",
+      "ends": [
+        "DB",
+        "JLEG"
+      ],
+      "awg": 22,
+      "conductors": 2,
+      "path_mm": 62,
+      "cut_mm": 100,
+      "fixed": false,
+      "path": [
+        [
+          0,
+          -96.5,
+          85
+        ],
+        [
+          0,
+          -67.5,
+          52
+        ]
+      ]
+    },
+    {
+      "id": "B14",
+      "name": "Left motor pigtail (vendor)",
+      "ends": [
+        "ML",
+        "JLEG"
+      ],
+      "awg": "vendor",
+      "conductors": 6,
+      "path_mm": null,
+      "cut_mm": 200,
+      "fixed": true,
+      "path": null
+    },
+    {
+      "id": "B15",
+      "name": "Right motor pigtail (vendor)",
+      "ends": [
+        "MR",
+        "JLEG"
+      ],
+      "awg": "vendor",
+      "conductors": 6,
+      "path_mm": null,
+      "cut_mm": 200,
+      "fixed": true,
+      "path": null
+    },
+    {
+      "id": "B16",
+      "name": "Pack",
+      "ends": [
+        "BAT",
+        "KC"
+      ],
+      "awg": 20,
+      "conductors": 3,
+      "path_mm": 154,
+      "cut_mm": 200,
+      "fixed": false,
+      "path": [
+        [
+          48,
+          -50,
+          -10
+        ],
+        [
+          0,
+          -38.5,
+          85
+        ]
+      ]
+    },
+    {
+      "id": "B17",
+      "name": "KILL button (fixture)",
+      "ends": [
+        "SWK",
+        "KC"
+      ],
+      "awg": 24,
+      "conductors": 2,
+      "path_mm": null,
+      "cut_mm": 600,
+      "fixed": true,
+      "path": null
+    },
+    {
+      "id": "B18",
+      "name": "ARM button (fixture)",
+      "ends": [
+        "SWA",
+        "KC"
+      ],
+      "awg": 24,
+      "conductors": 2,
+      "path_mm": null,
+      "cut_mm": 600,
+      "fixed": true,
+      "path": null
+    },
+    {
+      "id": "B19",
+      "name": "Laptop USB cable (external)",
+      "ends": [
+        "JUSB",
+        "P1"
+      ],
+      "awg": "cable",
+      "conductors": 4,
+      "path_mm": null,
+      "cut_mm": null,
+      "fixed": true,
+      "path": null
+    }
+  ],
+  "wires": [
+    {
+      "id": "H001",
+      "bundle": "B1",
+      "source": "P1.PH-C.1",
+      "destination": "U1.JMAIN.5",
+      "net": "SPI_SDO",
+      "awg": 24
+    },
+    {
+      "id": "H002",
+      "bundle": "B1",
+      "source": "P1.PH-C.2",
+      "destination": "U1.JMAIN.6",
+      "net": "SPI_CS",
+      "awg": 24
+    },
+    {
+      "id": "H003",
+      "bundle": "B1",
+      "source": "P1.PH-C.3",
+      "destination": "U1.JMAIN.1",
+      "net": "GND",
+      "awg": 24
+    },
+    {
+      "id": "H004",
+      "bundle": "B1",
+      "source": "P1.PH-C.4",
+      "destination": "U1.JMAIN.4",
+      "net": "SPI_SCL",
+      "awg": 24
+    },
+    {
+      "id": "H005",
+      "bundle": "B1",
+      "source": "P1.PH-C.5",
+      "destination": "U1.JMAIN.3",
+      "net": "SPI_SDI",
+      "awg": 24
+    },
+    {
+      "id": "H006",
+      "bundle": "B1",
+      "source": "P1.PH-C.6",
+      "destination": "U1.JINT.2",
+      "net": "IMU_INT1",
+      "awg": 24
+    },
+    {
+      "id": "H007",
+      "bundle": "B1",
+      "source": "SP1",
+      "destination": "U1.JMAIN.2",
+      "net": "3V3",
+      "awg": 24
+    },
+    {
+      "id": "H008",
+      "bundle": "B2",
+      "source": "P1.PH-F.1",
+      "destination": "SP1",
+      "net": "3V3",
+      "awg": 22
+    },
+    {
+      "id": "H009",
+      "bundle": "B2",
+      "source": "SP1",
+      "destination": "DB.JCTL.2",
+      "net": "3V3",
+      "awg": 22
+    },
+    {
+      "id": "H010",
+      "bundle": "B3",
+      "source": "P1.PH-A2.2",
+      "destination": "DB.JSIG-L.1",
+      "net": "L_EN",
+      "awg": 24
+    },
+    {
+      "id": "H011",
+      "bundle": "B3",
+      "source": "P1.PH-A2.3",
+      "destination": "DB.JSIG-L.2",
+      "net": "L_PH",
+      "awg": 24
+    },
+    {
+      "id": "H012",
+      "bundle": "B3",
+      "source": "P1.PH-B.5",
+      "destination": "DB.JSIG-L.3",
+      "net": "L_FAULT",
+      "awg": 24
+    },
+    {
+      "id": "H013",
+      "bundle": "B3",
+      "source": "P1.PH-E.1",
+      "destination": "DB.JSIG-L.4",
+      "net": "L_CS",
+      "awg": 24
+    },
+    {
+      "id": "H014",
+      "bundle": "B3",
+      "source": "P1.PH-B.3",
+      "destination": "DB.JSIG-L.5",
+      "net": "GND",
+      "awg": 24
+    },
+    {
+      "id": "H015",
+      "bundle": "B4",
+      "source": "P1.PH-B.1",
+      "destination": "DB.JSIG-R.1",
+      "net": "R_EN",
+      "awg": 24
+    },
+    {
+      "id": "H016",
+      "bundle": "B4",
+      "source": "P1.PH-B.2",
+      "destination": "DB.JSIG-R.2",
+      "net": "R_PH",
+      "awg": 24
+    },
+    {
+      "id": "H017",
+      "bundle": "B4",
+      "source": "P1.PH-D.1",
+      "destination": "DB.JSIG-R.3",
+      "net": "R_FAULT",
+      "awg": 24
+    },
+    {
+      "id": "H018",
+      "bundle": "B4",
+      "source": "P1.PH-E.2",
+      "destination": "DB.JSIG-R.4",
+      "net": "R_CS",
+      "awg": 24
+    },
+    {
+      "id": "H019",
+      "bundle": "B4",
+      "source": "P1.PH-D.5",
+      "destination": "DB.JSIG-R.5",
+      "net": "GND",
+      "awg": 24
+    },
+    {
+      "id": "H020",
+      "bundle": "B5",
+      "source": "P1.PH-B.4",
+      "destination": "DB.JCTL.1",
+      "net": "nSLEEP",
+      "awg": 24
+    },
+    {
+      "id": "H021",
+      "bundle": "B6",
+      "source": "P1.PH-A.1",
+      "destination": "JLEG.JENC.1",
+      "net": "L_ENC_A",
+      "awg": 24
+    },
+    {
+      "id": "H022",
+      "bundle": "B6",
+      "source": "P1.PH-A.2",
+      "destination": "JLEG.JENC.2",
+      "net": "L_ENC_B",
+      "awg": 24
+    },
+    {
+      "id": "H023",
+      "bundle": "B6",
+      "source": "P1.PH-A.3",
+      "destination": "JLEG.JENC.3",
+      "net": "R_ENC_A",
+      "awg": 24
+    },
+    {
+      "id": "H024",
+      "bundle": "B6",
+      "source": "P1.PH-A.4",
+      "destination": "JLEG.JENC.4",
+      "net": "R_ENC_B",
+      "awg": 24
+    },
+    {
+      "id": "H025",
+      "bundle": "B6",
+      "source": "P1.PH-A2.1",
+      "destination": "JLEG.JENC.5",
+      "net": "GND",
+      "awg": 24
+    },
+    {
+      "id": "H026",
+      "bundle": "B7",
+      "source": "P1.PH-D.6",
+      "destination": "KC.JHB.1",
+      "net": "HB",
+      "awg": 24
+    },
+    {
+      "id": "H027",
+      "bundle": "B7",
+      "source": "P1.PH-E.4",
+      "destination": "KC.JHB.2",
+      "net": "RAIL_ADC",
+      "awg": 24
+    },
+    {
+      "id": "H028",
+      "bundle": "B7",
+      "source": "P1.PH-E.3",
+      "destination": "KC.JHB.3",
+      "net": "AGND",
+      "awg": 24
+    },
+    {
+      "id": "H029",
+      "bundle": "B8",
+      "source": "PDB.JPICO.1",
+      "destination": "P1.PH-F.4",
+      "net": "VSYS",
+      "awg": 22
+    },
+    {
+      "id": "H030",
+      "bundle": "B8",
+      "source": "PDB.JPICO.2",
+      "destination": "P1.PH-F.3",
+      "net": "GND",
+      "awg": 22
+    },
+    {
+      "id": "H031",
+      "bundle": "B9",
+      "source": "KC.JBUS.1",
+      "destination": "PDB.JIN.1",
+      "net": "BUS",
+      "awg": 22
+    },
+    {
+      "id": "H032",
+      "bundle": "B9",
+      "source": "KC.JBUS.2",
+      "destination": "PDB.JIN.2",
+      "net": "GND",
+      "awg": 22
+    },
+    {
+      "id": "H033",
+      "bundle": "B10",
+      "source": "KC.XRAIL.1",
+      "destination": "DB.XRAIL.1",
+      "net": "RAIL",
+      "awg": 20
+    },
+    {
+      "id": "H034",
+      "bundle": "B10",
+      "source": "KC.XRAIL.2",
+      "destination": "DB.XRAIL.2",
+      "net": "GND",
+      "awg": 20
+    },
+    {
+      "id": "H035",
+      "bundle": "B11",
+      "source": "PDB.J5V.1",
+      "destination": "JLEG.J5V.1",
+      "net": "5V",
+      "awg": 22
+    },
+    {
+      "id": "H036",
+      "bundle": "B11",
+      "source": "PDB.J5V.2",
+      "destination": "JLEG.J5V.2",
+      "net": "GND",
+      "awg": 22
+    },
+    {
+      "id": "H037",
+      "bundle": "B12",
+      "source": "DB.JML.1",
+      "destination": "JLEG.JPL.1",
+      "net": "L_MOTOR_OUT1",
+      "awg": 22
+    },
+    {
+      "id": "H038",
+      "bundle": "B12",
+      "source": "DB.JML.2",
+      "destination": "JLEG.JPL.2",
+      "net": "L_MOTOR_OUT2",
+      "awg": 22
+    },
+    {
+      "id": "H039",
+      "bundle": "B13",
+      "source": "DB.JMR.1",
+      "destination": "JLEG.JPR.1",
+      "net": "R_MOTOR_OUT1",
+      "awg": 22
+    },
+    {
+      "id": "H040",
+      "bundle": "B13",
+      "source": "DB.JMR.2",
+      "destination": "JLEG.JPR.2",
+      "net": "R_MOTOR_OUT2",
+      "awg": 22
+    },
+    {
+      "id": "H041",
+      "bundle": "B14",
+      "source": "ML.PIGTAIL.1",
+      "destination": "JLEG.JML_IN.1",
+      "net": "L_MOTOR_OUT1",
+      "awg": "vendor"
+    },
+    {
+      "id": "H042",
+      "bundle": "B14",
+      "source": "ML.PIGTAIL.2",
+      "destination": "JLEG.JML_IN.2",
+      "net": "L_MOTOR_OUT2",
+      "awg": "vendor"
+    },
+    {
+      "id": "H043",
+      "bundle": "B14",
+      "source": "ML.PIGTAIL.3",
+      "destination": "JLEG.JML_IN.3",
+      "net": "GND",
+      "awg": "vendor"
+    },
+    {
+      "id": "H044",
+      "bundle": "B14",
+      "source": "ML.PIGTAIL.4",
+      "destination": "JLEG.JML_IN.4",
+      "net": "5V",
+      "awg": "vendor"
+    },
+    {
+      "id": "H045",
+      "bundle": "B14",
+      "source": "ML.PIGTAIL.5",
+      "destination": "JLEG.JML_IN.5",
+      "net": "L_ENC_A5",
+      "awg": "vendor"
+    },
+    {
+      "id": "H046",
+      "bundle": "B14",
+      "source": "ML.PIGTAIL.6",
+      "destination": "JLEG.JML_IN.6",
+      "net": "L_ENC_B5",
+      "awg": "vendor"
+    },
+    {
+      "id": "H047",
+      "bundle": "B15",
+      "source": "MR.PIGTAIL.1",
+      "destination": "JLEG.JMR_IN.1",
+      "net": "R_MOTOR_OUT1",
+      "awg": "vendor"
+    },
+    {
+      "id": "H048",
+      "bundle": "B15",
+      "source": "MR.PIGTAIL.2",
+      "destination": "JLEG.JMR_IN.2",
+      "net": "R_MOTOR_OUT2",
+      "awg": "vendor"
+    },
+    {
+      "id": "H049",
+      "bundle": "B15",
+      "source": "MR.PIGTAIL.3",
+      "destination": "JLEG.JMR_IN.3",
+      "net": "GND",
+      "awg": "vendor"
+    },
+    {
+      "id": "H050",
+      "bundle": "B15",
+      "source": "MR.PIGTAIL.4",
+      "destination": "JLEG.JMR_IN.4",
+      "net": "5V",
+      "awg": "vendor"
+    },
+    {
+      "id": "H051",
+      "bundle": "B15",
+      "source": "MR.PIGTAIL.5",
+      "destination": "JLEG.JMR_IN.5",
+      "net": "R_ENC_A5",
+      "awg": "vendor"
+    },
+    {
+      "id": "H052",
+      "bundle": "B15",
+      "source": "MR.PIGTAIL.6",
+      "destination": "JLEG.JMR_IN.6",
+      "net": "R_ENC_B5",
+      "awg": "vendor"
+    },
+    {
+      "id": "H053",
+      "bundle": "B16",
+      "source": "BAT.LEADS.1",
+      "destination": "F1.INLINE.1",
+      "net": "PACK",
+      "awg": 20
+    },
+    {
+      "id": "H054",
+      "bundle": "B16",
+      "source": "F1.INLINE.2",
+      "destination": "KC.XPACK.1",
+      "net": "PACK_FUSED",
+      "awg": 20
+    },
+    {
+      "id": "H055",
+      "bundle": "B16",
+      "source": "BAT.LEADS.2",
+      "destination": "KC.XPACK.2",
+      "net": "GND",
+      "awg": 20
+    },
+    {
+      "id": "H056",
+      "bundle": "B17",
+      "source": "SWK.LEADS.1",
+      "destination": "KC.JKILL.1",
+      "net": "KILL_A",
+      "awg": 24
+    },
+    {
+      "id": "H057",
+      "bundle": "B17",
+      "source": "SWK.LEADS.2",
+      "destination": "KC.JKILL.2",
+      "net": "KILL_B",
+      "awg": 24
+    },
+    {
+      "id": "H058",
+      "bundle": "B18",
+      "source": "SWA.LEADS.1",
+      "destination": "KC.JARM.1",
+      "net": "ARM_A",
+      "awg": 24
+    },
+    {
+      "id": "H059",
+      "bundle": "B18",
+      "source": "SWA.LEADS.2",
+      "destination": "KC.JARM.2",
+      "net": "ARM_B",
+      "awg": 24
+    },
+    {
+      "id": "H060",
+      "bundle": "B19",
+      "source": "JUSB.CABLE.1",
+      "destination": "P1.USB.1",
+      "net": "USB_VBUS",
+      "awg": "cable"
+    },
+    {
+      "id": "H061",
+      "bundle": "B19",
+      "source": "JUSB.CABLE.2",
+      "destination": "P1.USB.2",
+      "net": "USB_D+",
+      "awg": "cable"
+    },
+    {
+      "id": "H062",
+      "bundle": "B19",
+      "source": "JUSB.CABLE.3",
+      "destination": "P1.USB.3",
+      "net": "USB_D-",
+      "awg": "cable"
+    },
+    {
+      "id": "H063",
+      "bundle": "B19",
+      "source": "JUSB.CABLE.4",
+      "destination": "P1.USB.4",
+      "net": "GND",
+      "awg": "cable"
+    }
+  ],
+  "bom": {
+    "purchase": [
+      {
+        "item": "JST-XH connector kit, 460 pcs: 2/3/4/5/6-position housings, PCB headers, female crimp contacts",
+        "vendor": "Amazon (IZOKEE, sold by KeeYees-US)",
+        "price_usd": 9.99,
+        "asin": "B0791DJMW9",
+        "url": "https://www.amazon.com/IZOKEE-460pcs-Connector-Housing-Terminal/dp/B0791DJMW9",
+        "note": "Covers every XH connector in this harness. Only 2 to 6 positions, so no header has more than 6."
+      },
+      {
+        "item": "Ratcheting crimp tool for open-barrel JST / Molex contacts, 32-20 AWG (iCrimp IWS-3220M or IWISS SN-01BM)",
+        "vendor": "Amazon",
+        "price_usd": 25.99,
+        "asin": null,
+        "url": "https://www.amazon.com/jst-xh-connector-kit/s?k=jst+xh+connector+kit",
+        "note": "Listed with the kit as frequently bought together. Any 0.1 in open-barrel ratcheting crimper works."
+      },
+      {
+        "item": "Pre-crimped XH leads with housings, 2 to 7 positions (alternative to crimping)",
+        "vendor": "Amazon",
+        "price_usd": 16.99,
+        "asin": null,
+        "url": "https://www.amazon.com/jst-xh-connector-kit/s?k=jst+xh+connector+kit",
+        "note": "Shortcut for the first build: cut the leads to the EL-06 lengths and solder the joins. Search the kit results for a pre-crimped set."
+      },
+      {
+        "item": "XT30 connector pairs with pigtails (pack, fuse, rail)",
+        "vendor": "hobby supplier",
+        "price_usd": null,
+        "asin": null,
+        "url": null,
+        "note": "Two pairs. Match the pack connector when the pack is chosen."
+      }
+    ],
+    "xh_housings": {
+      "XHP-2": 15,
+      "XHP-3": 3,
+      "XHP-4": 3,
+      "XHP-5": 4,
+      "XHP-6": 3
+    },
+    "xh_headers": {
+      "B2B-XH-A": 13,
+      "B3B-XH-A": 3,
+      "B4B-XH-A": 3,
+      "B5B-XH-A": 4,
+      "B6B-XH-A": 3
+    },
+    "xh_contacts": 81,
+    "xh_contacts_with_spares": 106,
+    "xt30_pairs": 2,
+    "pololu_1x6_male_headers": 2,
+    "wire_mm_by_awg": {
+      "AWG 20": 790,
+      "AWG 22": 2880,
+      "AWG 24": 9685
+    }
+  }
+}

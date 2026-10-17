@@ -24,22 +24,22 @@
     <section class="section" id="wiring" aria-labelledby="wiring-title">
       <div class="section-head">
         <div>
-          <p class="eyebrow">EL-01 / Complete system schematic</p>
+          <p class="eyebrow">EL-01 / Complete system schematic by location</p>
           <h2 id="wiring-title">Complete system wiring</h2>
-          <p>Both motor channels and every proposed external conductor, with wire IDs and named endpoints. Enlarge the sheet or search the wire register to follow a connection.</p>
+          <p>A rear elevation of the R05 body. Each board sits where it mounts, and every harness conductor ends at a connector position. Robot LEFT is the near wall. Enlarge the sheet or search the registers to follow a connection.</p>
         </div>
         <span class="status-tag is-pending">Proposed harness / untested</span>
       </div>
       <div class="atlas-toolbar">
-        <p class="atlas-issue"><span class="atlas-dot" aria-hidden="true"></span>V1-PROOF · Rev B · EL-01–05 · 2026-10-04</p>
-        <div class="atlas-toolbar-links"><a class="atlas-download" href="../../cad/wiring/v1-proof-el-01-overview-11x17.pdf" download>Download EL-01 / 11 x 17 PDF <span aria-hidden="true">↓</span></a><a class="atlas-register-link" href="../../cad/wiring/v1-proof-wire-register.html">Search wire register <span aria-hidden="true">↗</span></a><a class="atlas-download" href="../../cad/wiring/v1-proof-wiring-atlas.pdf" download>Download five-sheet atlas <span aria-hidden="true">↓</span></a></div>
+        <p class="atlas-issue"><span class="atlas-dot" aria-hidden="true"></span>V1-PROOF · Rev C · EL-01–07 · 2026-10-17</p>
+        <div class="atlas-toolbar-links"><a class="atlas-download" href="../../cad/wiring/v1-proof-el-01-overview-11x17.pdf" download>Download EL-01 / 11 x 17 PDF <span aria-hidden="true">↓</span></a><a class="atlas-register-link" href="../../cad/wiring/v1-proof-wire-register.html">Search wire register <span aria-hidden="true">↗</span></a><a class="atlas-register-link" href="../../cad/wiring/v1-proof-harness.html">Harness register: bundles, lengths, connectors <span aria-hidden="true">↗</span></a><a class="atlas-download" href="../../cad/wiring/v1-proof-wiring-atlas.pdf" download>Download seven-sheet atlas <span aria-hidden="true">↓</span></a></div>
       </div>
       <figure class="atlas-overview">
         <a class="atlas-preview atlas-preview-overview" href="../../cad/wiring/v1-proof-el-01-overview.svg" data-wiring-viewer data-title="EL-01 · Complete system wiring" aria-label="Enlarge EL-01 complete system wiring schematic">
-          <img src="../../cad/wiring/v1-proof-el-01-overview.svg" alt="Complete proposed Hux V1-PROOF wiring schematic showing individual labeled conductors for both Pololu 4752 wheel motors, both DRV8874 drivers, encoder conversion, Pico 2, LSM6DSO SPI IMU, power protection, watchdog and two ST3215 servos.">
+          <img src="../../cad/wiring/v1-proof-el-01-overview.svg" alt="Complete Hux V1-PROOF wiring schematic as a rear elevation of the R05 body: Pico 2 and LSM6DSO on the control deck, power distribution on the bus deck, kill chain and driver board on the power deck, the leg junction board and the pack below, both Pololu 4752 gearmotors in the leg lanes, every harness conductor with its connector position.">
           <span class="atlas-enlarge"><span aria-hidden="true">↗</span> Explore full sheet</span>
         </a>
-        <figcaption><span>EL-01 / Complete system wiring · individual conductors</span><a href="../../cad/wiring/v1-proof-el-01-overview.svg" target="_blank" rel="noopener">Open vector original ↗</a></figcaption>
+        <figcaption><span>EL-01 / Complete system wiring by location · individual conductors</span><a href="../../cad/wiring/v1-proof-el-01-overview.svg" target="_blank" rel="noopener">Open vector original ↗</a></figcaption>
       </figure>
       <details class="atlas-pdf-view" id="system-pdf">
         <summary><span>View EL-01 PDF</span><span class="atlas-pdf-size">11 x 17 in / landscape / 0.5 in margins</span></summary>
@@ -49,7 +49,7 @@
           <iframe src="../../cad/wiring/v1-proof-el-01-overview-11x17.pdf#view=Fit" title="EL-01 complete system PDF, 11 x 17 inches" loading="lazy"></iframe>
         </div>
       </details>
-      <div class="atlas-scope"><strong>Proposed external wiring.</strong><p>EL-01 wire IDs refer to the global register, and named terminals let you follow the external wiring. Vendor pinouts are source checked. GPIO assignments and routing are proposed. Internal regulator, clamp, watchdog, ADC and interface circuits still need selection and qualification. This is not a released or bench-tested assembly schematic. <a href="../../docs/wiring-atlas.md">Read the source audit and open checks ↗</a></p></div>
+      <div class="atlas-scope"><strong>Proposed harness.</strong><p>EL-01 wire IDs refer to the global register, and each port is a connector position. Vendor pinouts are source checked. GPIO assignments follow the bench firmware. The kill chain, the 5 V regulator and the leg junction board are designs without a tested part. The run lengths are estimates from a route model, and this is not a released or bench-tested assembly schematic. <a href="../../docs/wiring-atlas.md">Read the source audit and open checks ↗</a></p></div>
     </section>
 
     <section class="section" id="harnesses" aria-labelledby="harness-title">
@@ -66,7 +66,7 @@
       </div>
       <figure class="atlas-overview atlas-wheel-sheet">
         <a class="atlas-preview atlas-preview-overview" href="../../cad/wiring/v1-proof-el-05-both-wheels.svg" data-wiring-viewer data-title="EL-05 · Both wheel motors — every wire" aria-label="Enlarge EL-05 both wheel motors and every wire">
-          <img src="../../cad/wiring/v1-proof-el-05-both-wheels.svg" loading="lazy" alt="Both left and right Pololu 4752 motors and DRV8874 carriers with all six motor cable wires, separate Pico PWM and direction signals, gated SLEEP, fault and current feedback, and both encoder level-conversion paths.">
+          <img src="../../cad/wiring/v1-proof-el-05-both-wheels.svg" loading="lazy" alt="Both left and right Pololu 4752 motors, the leg junction board with the encoder dividers, and the DRV8874 carriers with all six motor cable wires, separate Pico PWM and direction signals, nSLEEP from GP10, fault and current feedback.">
           <span class="atlas-enlarge"><span aria-hidden="true">↗</span> Inspect both motors</span>
         </a>
         <figcaption><span>EL-05 / Both wheel motors — every wire</span><a href="../../cad/wiring/v1-proof-el-05-both-wheels.svg" target="_blank" rel="noopener">Open vector original ↗</a></figcaption>
@@ -80,7 +80,7 @@
         </div>
       </details>
       <p class="atlas-wire-note">Search terminal names from this sheet in the <a href="../../cad/wiring/v1-proof-wire-register.html">wire register</a>. EL-01 uses the register's global conductor IDs. Motor cable colors retain their vendor functions. Black is a switched motor lead and green is encoder ground. Both channels are planned, with received quantities and physical checks tracked in the <a href="../../docs/parts-on-hand.md">inventory</a>.</p>
-      <div class="atlas-subhead"><p class="eyebrow">EL-02–04 / Component details</p><h3>Pin maps, driver pads and power boundaries</h3><p>Use these closer views alongside the complete schematic and conductor register.</p></div>
+      <div class="atlas-subhead"><p class="eyebrow">EL-02–04, EL-06–07 / Component and harness details</p><h3>Pin maps, driver pads, power, run lengths and connectors</h3><p>Use these closer views alongside the complete schematic and the two registers.</p></div>
       <div class="detail-grid atlas-details">
         <article class="detail-card atlas-card">
           <a class="atlas-preview" href="../../cad/wiring/v1-proof-el-02-pico-imu.svg" data-wiring-viewer data-title="EL-02 · Pico 2 and SPI IMU" aria-label="Enlarge EL-02 Pico 2 and SPI IMU sheet">
@@ -97,7 +97,7 @@
         </article>
         <article class="detail-card atlas-card">
           <a class="atlas-preview" href="../../cad/wiring/v1-proof-el-03-wheel-harness.svg" data-wiring-viewer data-title="EL-03 · Wheel motor and encoder harness" aria-label="Enlarge EL-03 wheel motor and encoder harness sheet">
-            <img src="../../cad/wiring/v1-proof-el-03-wheel-harness.svg" loading="lazy" alt="Pololu 4752 six-wire motor and encoder harness connected to a Pololu 4035 DRV8874 carrier and the Pico through 5 V-to-3.3 V encoder conversion.">
+            <img src="../../cad/wiring/v1-proof-el-03-wheel-harness.svg" loading="lazy" alt="Pololu 4752 six-wire motor and encoder pigtail connected through the leg junction board to a Pololu 4035 DRV8874 carrier and the Pico, with 2.2 kΩ / 3.3 kΩ encoder dividers.">
             <span class="atlas-enlarge"><span aria-hidden="true">↗</span> Enlarge</span>
           </a>
           <div class="detail-body">
@@ -109,16 +109,42 @@
           </div>
         </article>
         <article class="detail-card atlas-card">
-          <a class="atlas-preview" href="../../cad/wiring/v1-proof-el-04-power-servo.svg" data-wiring-viewer data-title="EL-04 · Power distribution and servo bus" aria-label="Enlarge EL-04 power distribution and servo bus sheet">
-            <img src="../../cad/wiring/v1-proof-el-04-power-servo.svg" loading="lazy" alt="Separate actuator and logic power branches, physical power cut, protected 9 V servo rail, half-duplex TTL interface and two ST3215 leg servos with distinct bus IDs.">
+          <a class="atlas-preview" href="../../cad/wiring/v1-proof-el-04-power-servo.svg" data-wiring-viewer data-title="EL-04 · Power distribution and kill chain" aria-label="Enlarge EL-04 power distribution and kill chain sheet">
+            <img src="../../cad/wiring/v1-proof-el-04-power-servo.svg" loading="lazy" alt="Fused 3S pack, Pololu 2813 latched rail switch feeding both DRV8874 carriers, 74HC14 heartbeat gate, KILL and ARM buttons on the fixture, unswitched 5 V logic branch and the Pico sense lines.">
             <span class="atlas-enlarge"><span aria-hidden="true">↗</span> Enlarge</span>
           </a>
           <div class="detail-body">
-            <p class="eyebrow">EL-04 / Power &amp; serial bus</p>
-            <h3>Power distribution &amp; leg servos</h3>
-            <p>Protected 9 V power and a half-duplex TTL bus for the two ST3215 12 V variant servos, each with its own internal driver.</p>
-            <p class="small">Needs received cable pinouts, transceiver selection, distinct servo IDs and labeled harness routing.</p>
+            <p class="eyebrow">EL-04 / Power &amp; kill chain</p>
+            <h3>Power distribution &amp; kill chain</h3>
+            <p>The fused pack, the Pololu 2813 latched rail switch, the 74HC14 heartbeat gate and the unswitched 5 V logic branch of the kill-chain design.</p>
+            <p class="small">No part is ordered or tested. The fuse value, the rail wire gauge and the return-energy clamp remain open. The servo branch moved to the next version.</p>
             <a class="atlas-sheet-link" href="../../cad/wiring/v1-proof-el-04-power-servo.svg" target="_blank" rel="noopener">Open full-size vector <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <article class="detail-card atlas-card">
+          <a class="atlas-preview" href="../../cad/wiring/v1-proof-el-06-harness-runs.svg" data-wiring-viewer data-title="EL-06 · Harness bundles and run lengths" aria-label="Enlarge EL-06 harness bundles and run lengths sheet">
+            <img src="../../cad/wiring/v1-proof-el-06-harness-runs.svg" loading="lazy" alt="Front elevation of the R05 body with the boards at their mount positions and the modelled harness routes, a table of nineteen bundles with cut lengths, the JST XH connector standard and the hardware count.">
+            <span class="atlas-enlarge"><span aria-hidden="true">↗</span> Enlarge</span>
+          </a>
+          <div class="detail-body">
+            <p class="eyebrow">EL-06 / Harness runs</p>
+            <h3>Bundles, cut lengths &amp; hardware</h3>
+            <p>Nineteen bundles with a cut length from the route model. JST XH 2.50 mm is the standard for the low-voltage harness, and XT30 for the 12 V path.</p>
+            <p class="small">The lengths are estimates. Cut long, route on the frame, trim and record the measured length.</p>
+            <a class="atlas-sheet-link" href="../../cad/wiring/v1-proof-el-06-harness-runs.svg" target="_blank" rel="noopener">Open full-size vector <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <article class="detail-card atlas-card">
+          <a class="atlas-preview" href="../../cad/wiring/v1-proof-el-07-connectors.svg" data-wiring-viewer data-title="EL-07 · Connector loading" aria-label="Enlarge EL-07 connector loading sheet">
+            <img src="../../cad/wiring/v1-proof-el-07-connectors.svg" loading="lazy" alt="Connector loading tables for every harness connector: the eight Pico 2 headers, the IMU pads, the driver board, the leg junction board, the kill-chain board, the power distribution board and the fixture buttons, each position with its pin, net and mating wire.">
+            <span class="atlas-enlarge"><span aria-hidden="true">↗</span> Enlarge</span>
+          </a>
+          <div class="detail-body">
+            <p class="eyebrow">EL-07 / Connector loading</p>
+            <h3>Every connector, every position</h3>
+            <p>Each harness connector with its positions, pins, nets and the wire that mates with it. Position 1 is the pin nearest the mark on the housing.</p>
+            <p class="small">The received Pico 2 has pre-soldered pins. The user desolders them and solders the XH headers to the board, so the harness plugs into the Pico directly.</p>
+            <a class="atlas-sheet-link" href="../../cad/wiring/v1-proof-el-07-connectors.svg" target="_blank" rel="noopener">Open full-size vector <span aria-hidden="true">↗</span></a>
           </div>
         </article>
       </div>
@@ -134,22 +160,22 @@
         <a href="controls.html">Control architecture ↗</a>
       </div>
       <ol class="connection-path" aria-label="Proposed wheel command and drive path">
-        <li><span class="eyebrow">Wheel command</span><strong>Pico 2</strong><p>3.3 V PWM, direction and watchdog/kill-gated SLEEP.</p></li>
-        <li><span class="eyebrow">Wheel power stage</span><strong>DRV8874</strong><p>One Pololu 4035 carrier per wheel. Fused actuator power feeds the driver.</p></li>
-        <li><span class="eyebrow">Wheel actuator</span><strong>Pololu 4752</strong><p>Motor leads connect to driver outputs. Encoder signals return through level conversion.</p></li>
+        <li><span class="eyebrow">Wheel command</span><strong>Pico 2</strong><p>3.3 V PWM, direction and nSLEEP on GP10. A 500 Hz heartbeat on GP22 feeds the kill chain.</p></li>
+        <li><span class="eyebrow">Wheel power stage</span><strong>DRV8874</strong><p>One Pololu 4035 carrier per wheel on one board. The switched rail of the kill chain feeds the drivers.</p></li>
+        <li><span class="eyebrow">Wheel actuator</span><strong>Pololu 4752</strong><p>The vendor pigtail lands on the leg junction board. Motor leads pass to the driver outputs. Encoder signals return through dividers.</p></li>
       </ol>
       <div class="table-wrap">
         <table class="engineering-table">
           <thead><tr><th scope="col">Subsystem</th><th scope="col">Proposed power / signal path</th><th scope="col">Qualification still required</th></tr></thead>
           <tbody>
-            <tr><th scope="row">Wheel encoders</th><td>Regulated 5 V supply; encoder A/B → 5 V-to-3.3 V level conversion → Pico.</td><td>Confirm orientation, signal levels and direction/count sign with each wheel lifted.</td></tr>
-            <tr><th scope="row">Leg servos</th><td>Pico UART ↔ compatible 3.3 V half-duplex TTL transceiver ↔ two ST3215 servos. Protected, regulated 9 V branch.</td><td>Confirm bus adapter and cable pinout; measure simultaneous demand, rail protection and mounted holding duty at 9 V.</td></tr>
-            <tr><th scope="row">Logic &amp; IMU</th><td>Separate 5 V logic branch → supply isolation → Pico VSYS (pin 39); SparkFun LSM6DSO uses Pico 3V3(OUT), SPI and a data-ready interrupt.</td><td>Inspect received breakout pads/jumpers; verify external/USB power isolation, then complete board-only USB and sensor checks.</td></tr>
-            <tr><th scope="row">Protection &amp; monitoring</th><td>Physical actuator-power cut, watchdog enable gate, driver current/fault inputs and divided pack-voltage input.</td><td>Verify default-disabled startup, measured current limits, fault latching, deliberate rearm and return-energy protection.</td></tr>
+            <tr><th scope="row">Wheel encoders</th><td>Regulated 5 V supply; encoder A/B → 2.2 kΩ / 3.3 kΩ dividers on the leg junction board → Pico.</td><td>Confirm orientation, signal levels and direction/count sign with each wheel lifted.</td></tr>
+            <tr><th scope="row">Leg servos</th><td>Next version. The two ST3215 servos, the Waveshare bus board and the 9 V branch stay in stock. V1-PROOF has no powered hips.</td><td>None in V1-PROOF.</td></tr>
+            <tr><th scope="row">Logic &amp; IMU</th><td>Unswitched 5 V logic branch → Schottky diode → Pico VSYS (pin 39); SparkFun LSM6DSO uses Pico 3V3(OUT), SPI and a data-ready interrupt.</td><td>Inspect received breakout pads/jumpers; verify external/USB power isolation, then complete board-only USB and sensor checks.</td></tr>
+            <tr><th scope="row">Protection &amp; monitoring</th><td>Inline fuse, Pololu 2813 latched rail switch, 74HC14 heartbeat gate, KILL and ARM buttons on the fixture, driver current/fault inputs and the divided rail voltage on GP28.</td><td>Build and test stages K0–K6. Verify default-off startup, measured current limits, fault latching, deliberate rearm and return-energy protection.</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="callout">The 12 V servo variant is planned for qualification on a regulated 9 V branch. Its 12 V torque rating does not establish performance at 9 V. The pack, regulators, clamps and branch protection still need a measured circuit.</p>
+      <p class="callout">Both drivers sit on one board on the far half of the PWR deck. Each gearmotor reaches it with one 200 mm vendor pigtail through the leg junction board under the deck. The pack, the regulator, the clamp and the fuse still need a measured circuit.</p>
     </section>
 
     <section class="section" id="drawing-release" aria-labelledby="release-title">
@@ -165,17 +191,18 @@
           <h3>Open assembly details</h3>
           <ul>
             <li>Verified received-part pinouts, connector orientation and mating connector part numbers.</li>
-            <li>Harness identifiers, wire labels, branch routing, lengths and strain relief.</li>
+            <li>Harness identifiers, wire labels, measured run lengths against the EL-06 estimates, and strain relief.</li>
             <li>Conductor sizes, connector current ratings and measured fuse size.</li>
             <li>Grounding and common signal-reference arrangement.</li>
-            <li>Regulator, power-cut, watchdog and regenerated-energy protection circuits.</li>
-            <li>ADC input limits and behavior while the controller is unpowered. Servo disable on controller/watchdog failure.</li>
+            <li>Regulator, kill-chain and regenerated-energy protection circuits. The leg junction board layout and mount. The Pico-end connector decision.</li>
+            <li>ADC input limits and behavior while the controller is unpowered.</li>
           </ul>
         </article>
         <article class="panel detail-body">
           <h3>Build references</h3>
           <ul class="link-list">
             <li><a href="../../cad/wiring/v1-proof-wire-register.html">Searchable conductor IDs and endpoints ↗</a></li>
+            <li><a href="../../cad/wiring/v1-proof-harness.html">Harness register: bundles, cut lengths, connector loading, hardware ↗</a></li>
             <li><a href="../../docs/wiring-atlas.md">Wiring atlas, source audit and verification record ↗</a></li>
             <li><a href="../../docs/electronics.md">Electronics plan and motor connections ↗</a></li>
             <li><a href="../../docs/v1-proof-hardware.md">Selected hardware and proposed GPIO allocation ↗</a></li>

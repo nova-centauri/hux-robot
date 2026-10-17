@@ -1,0 +1,275 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3200" height="2000" viewBox="0 0 3200 2000" role="img" aria-labelledby="title desc">
+<title id="title">Hux V1-PROOF Harness bundles and run lengths</title><desc id="desc">Route model on the R05 body, cut length for each bundle, connector hardware. Lengths are estimates: cut long, route on the frame, trim, record. Source-checked planning drawing; proposed harnesses and unresolved interfaces require physical verification.</desc>
+<defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r=".7" fill="#c9d5d1"/></pattern></defs>
+<rect x="0" y="0" width="3200" height="2000" rx="0" fill="#ffffff" stroke="#ced8d7" stroke-width="1.4"/>
+<rect x="32" y="32" width="3136" height="1936" fill="none" stroke="#ced8d7"/>
+<text x="64" y="72" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" text-anchor="start" letter-spacing="2" fill="#387b65">HUX  /  V1-PROOF  /  ELECTRICAL</text>
+<text x="64" y="119" font-family="Arial,Helvetica,sans-serif" font-size="44" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">Harness bundles and run lengths</text>
+<text x="64" y="150" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Route model on the R05 body, cut length for each bundle, connector hardware. Lengths are estimates: cut long, route on the frame, trim, record.</text>
+<rect x="2590" y="58" width="546" height="65" rx="8" fill="#ece7d7" stroke="#ced8d7" stroke-width="1.4"/>
+<text x="2863" y="86" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" text-anchor="middle" letter-spacing="1" fill="#20343e">SOURCE-CHECKED PLAN</text>
+<text x="2863" y="112" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="500" text-anchor="middle" letter-spacing="1" fill="#647780">HARNESS / BENCH RELEASE OPEN</text>
+<polyline points="64,174 3136,174" fill="none" stroke="#ced8d7" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="64,1910 3136,1910" fill="none" stroke="#ced8d7" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="64" y="1940" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Rev C  |  Source: 17 OCT 2026  |  Print layout: 17 OCT 2026</text>
+<text x="64" y="1966" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">17 x 11 in / landscape / 0.5 in margins / print at 100%. Sources and open checks: docs/wiring-atlas.md.</text>
+<text x="3134" y="1944" font-family="Arial,Helvetica,sans-serif" font-size="30" font-weight="700" text-anchor="end" letter-spacing="0" fill="#387b65">EL-06</text>
+<text x="64" y="217" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" text-anchor="start" letter-spacing="1" fill="#387b65">ROUTE MODEL / FRONT ELEVATION</text>
+<text x="64" y="240" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Boards at their R05 centres. Harness runs follow the front cable notches of each deck lane.</text>
+<rect x="560.0" y="474.0" width="25.200000000000003" height="903.0" rx="2" fill="#9fb3ad" stroke="#9fb3ad" stroke-width="1.4"/>
+<rect x="1101.8" y="474.0" width="25.200000000000003" height="903.0" rx="2" fill="#9fb3ad" stroke="#9fb3ad" stroke-width="1.4"/>
+<rect x="560.0" y="961.2" width="567.0" height="16.8" rx="1" fill="#d7e0dc" stroke="#c3cfc9" stroke-width="1.4"/>
+<text x="1139.0" y="978.0" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">PWR Z +60</text>
+<rect x="560.0" y="709.2" width="567.0" height="16.8" rx="1" fill="#d7e0dc" stroke="#c3cfc9" stroke-width="1.4"/>
+<text x="1139.0" y="726.0" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">BUS Z +120</text>
+<rect x="560.0" y="499.2" width="567.0" height="16.8" rx="1" fill="#d7e0dc" stroke="#c3cfc9" stroke-width="1.4"/>
+<text x="1139.0" y="516.0" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">CTRL Z +170</text>
+<rect x="560.0" y="1360.2" width="567.0" height="16.8" rx="1" fill="#d7e0dc" stroke="#c3cfc9" stroke-width="1.4"/>
+<text x="1139.0" y="1383.0" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">TRAY Z −35</text>
+<rect x="770.0" y="1251.0" width="147.0" height="105.0" rx="3" fill="#f3dad3" stroke="#db5a4a" stroke-width="1.4" stroke-dasharray="7 5"/>
+<text x="843.5" y="1308.5" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#db5a4a">BAT</text>
+<text x="566.0" y="453.0" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" text-anchor="end" letter-spacing="0" fill="#647780">NEAR WALL · LEFT</text>
+<text x="1121.0" y="453.0" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" text-anchor="start" letter-spacing="0" fill="#647780">FAR WALL · RIGHT</text>
+<polyline points="730.1,495.0 730.1,999.0" fill="none" stroke="#647780" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="7 5"/>
+<text x="730.1" y="476.4" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="middle" letter-spacing="0" fill="#647780">near notch</text>
+<polyline points="956.9000000000001,495.0 956.9000000000001,999.0" fill="none" stroke="#647780" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="7 5"/>
+<text x="956.9000000000001" y="476.4" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="middle" letter-spacing="0" fill="#647780">far notch</text>
+<rect x="889.7" y="385.79999999999995" width="159.6" height="67.2" rx="3" fill="#fffef9" stroke="#387b65" stroke-width="1.4"/>
+<text x="969.5" y="424.4" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#387b65">P1</text>
+<rect x="683.9" y="411.0" width="100.80000000000001" height="42.0" rx="3" fill="#fffef9" stroke="#387b65" stroke-width="1.4"/>
+<text x="734.3" y="437.0" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#387b65">U1</text>
+<rect x="646.1" y="579.0" width="151.20000000000002" height="84.0" rx="3" fill="#fffef9" stroke="#c77822" stroke-width="1.4"/>
+<text x="721.7" y="626.0" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#c77822">PDB</text>
+<rect x="646.1" y="831.0" width="151.20000000000002" height="84.0" rx="3" fill="#fffef9" stroke="#db5a4a" stroke-width="1.4"/>
+<text x="721.7" y="878.0" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#db5a4a">KC</text>
+<rect x="889.6999999999999" y="831.0" width="151.20000000000002" height="84.0" rx="3" fill="#fffef9" stroke="#437fb4" stroke-width="1.4"/>
+<text x="965.3" y="878.0" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#437fb4">DB</text>
+<rect x="734.3" y="990.6" width="218.4" height="42.0" rx="3" fill="#fffef9" stroke="#387b65" stroke-width="1.4"/>
+<text x="843.5" y="1016.6" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#387b65">JLEG</text>
+<rect x="625.5200000000001" y="1558.86" width="142.8" height="142.8" rx="4" fill="#e8eef4" stroke="#437fb4" stroke-width="1.4"/>
+<text x="696.9200000000001" y="1635.26" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#437fb4">ML</text>
+<rect x="457.52000000000004" y="1420.26" width="100.80000000000001" height="420.0" rx="6" fill="#2b2f33" stroke="#2b2f33" stroke-width="1.4"/>
+<rect x="918.6800000000001" y="1558.86" width="142.8" height="142.8" rx="4" fill="#e8eef4" stroke="#437fb4" stroke-width="1.4"/>
+<text x="990.08" y="1635.26" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#437fb4">MR</text>
+<rect x="1116.08" y="1420.26" width="100.80000000000001" height="420.0" rx="6" fill="#2b2f33" stroke="#2b2f33" stroke-width="1.4"/>
+<text x="843.5" y="1860.0" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="middle" letter-spacing="0" fill="#647780">wheels and gearmotors hang under the body; pigtails rise to JLEG</text>
+<polyline points="969.5,419.4 969.5,432.0 734.3,432.0" fill="none" stroke="#218ca0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="969.5" cy="419.4" r="3" fill="#218ca0"/>
+<circle cx="734.3" cy="432.0" r="3" fill="#218ca0"/>
+<polyline points="969.5,419.4 969.5,507.6 956.9000000000001,507.6 956.9000000000001,969.5999999999999 956.9000000000001,873.0 965.3,873.0" fill="none" stroke="#218ca0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="969.5" cy="419.4" r="3" fill="#218ca0"/>
+<circle cx="965.3" cy="873.0" r="3" fill="#218ca0"/>
+<polyline points="969.5,419.4 969.5,507.6 956.9000000000001,507.6 956.9000000000001,969.5999999999999 956.9000000000001,873.0 965.3,873.0" fill="none" stroke="#218ca0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="969.5" cy="419.4" r="3" fill="#218ca0"/>
+<circle cx="965.3" cy="873.0" r="3" fill="#218ca0"/>
+<polyline points="969.5,419.4 969.5,507.6 956.9000000000001,507.6 956.9000000000001,969.5999999999999 956.9000000000001,873.0 965.3,873.0" fill="none" stroke="#218ca0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="969.5" cy="419.4" r="3" fill="#218ca0"/>
+<circle cx="965.3" cy="873.0" r="3" fill="#218ca0"/>
+<polyline points="969.5,419.4 969.5,507.6 956.9000000000001,507.6 956.9000000000001,969.5999999999999 956.9000000000001,873.0 965.3,873.0" fill="none" stroke="#218ca0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="969.5" cy="419.4" r="3" fill="#218ca0"/>
+<circle cx="965.3" cy="873.0" r="3" fill="#218ca0"/>
+<polyline points="969.5,419.4 969.5,507.6 956.9000000000001,507.6 956.9000000000001,969.5999999999999 956.9000000000001,1011.6 843.5,1011.6" fill="none" stroke="#218ca0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="969.5" cy="419.4" r="3" fill="#218ca0"/>
+<circle cx="843.5" cy="1011.6" r="3" fill="#218ca0"/>
+<polyline points="969.5,419.4 969.5,507.6 956.9000000000001,507.6 956.9000000000001,969.5999999999999 730.1,969.5999999999999 730.1,873.0 721.7,873.0" fill="none" stroke="#218ca0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="969.5" cy="419.4" r="3" fill="#218ca0"/>
+<circle cx="721.7" cy="873.0" r="3" fill="#218ca0"/>
+<polyline points="721.7,621.0 721.7,717.6 730.1,717.6 730.1,507.6 956.9000000000001,507.6 956.9000000000001,419.4 969.5,419.4" fill="none" stroke="#218ca0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="721.7" cy="621.0" r="3" fill="#218ca0"/>
+<circle cx="969.5" cy="419.4" r="3" fill="#218ca0"/>
+<polyline points="721.7,873.0 721.7,969.5999999999999 730.1,969.5999999999999 730.1,717.6 730.1,621.0 721.7,621.0" fill="none" stroke="#218ca0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="721.7" cy="873.0" r="3" fill="#218ca0"/>
+<circle cx="721.7" cy="621.0" r="3" fill="#218ca0"/>
+<polyline points="721.7,873.0 965.3,873.0" fill="none" stroke="#218ca0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="721.7" cy="873.0" r="3" fill="#218ca0"/>
+<circle cx="965.3" cy="873.0" r="3" fill="#218ca0"/>
+<polyline points="721.7,621.0 721.7,717.6 730.1,717.6 730.1,969.5999999999999 730.1,1011.6 843.5,1011.6" fill="none" stroke="#218ca0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="721.7" cy="621.0" r="3" fill="#218ca0"/>
+<circle cx="843.5" cy="1011.6" r="3" fill="#218ca0"/>
+<polyline points="965.3,873.0 965.3,1011.6 843.5,1011.6" fill="none" stroke="#218ca0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="965.3" cy="873.0" r="3" fill="#218ca0"/>
+<circle cx="843.5" cy="1011.6" r="3" fill="#218ca0"/>
+<polyline points="965.3,873.0 965.3,1011.6 843.5,1011.6" fill="none" stroke="#218ca0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="965.3" cy="873.0" r="3" fill="#218ca0"/>
+<circle cx="843.5" cy="1011.6" r="3" fill="#218ca0"/>
+<polyline points="770.0,1272.0 770.0,873.0 721.7,873.0" fill="none" stroke="#218ca0" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="770.0" cy="1272.0" r="3" fill="#218ca0"/>
+<circle cx="721.7" cy="873.0" r="3" fill="#218ca0"/>
+<text x="1300" y="217" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" text-anchor="start" letter-spacing="1" fill="#387b65">BUNDLES / CUT LENGTHS</text>
+<text x="1300" y="260" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#647780">Bundle</text>
+<text x="1390" y="260" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#647780">Name</text>
+<text x="1860" y="260" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#647780">From → to</text>
+<text x="2120" y="260" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#647780">Wires</text>
+<text x="2220" y="260" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#647780">AWG</text>
+<text x="2330" y="260" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#647780">Model path</text>
+<text x="2500" y="260" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#647780">Cut length</text>
+<text x="2700" y="260" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="start" letter-spacing="0" fill="#647780">Connectors</text>
+<polyline points="1300,270 3100,270" fill="none" stroke="#ced8d7" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="1300" y="300" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">B1</text>
+<text x="1390" y="300" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">Sensor</text>
+<text x="1860" y="300" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">P1 → U1</text>
+<text x="2120" y="300" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">7</text>
+<text x="2220" y="300" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">24</text>
+<text x="2330" y="300" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">59 mm</text>
+<text x="2500" y="300" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">95 mm</text>
+<text x="2700" y="300" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">P1.PH-C · SP1 · U1.JINT · U1.JMAIN</text>
+<text x="1300" y="334" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">B2</text>
+<text x="1390" y="334" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">3V3 feed</text>
+<text x="1860" y="334" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">P1 → DB</text>
+<text x="2120" y="334" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">2</text>
+<text x="2220" y="334" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">22</text>
+<text x="2330" y="334" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">275 mm</text>
+<text x="2500" y="334" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">335 mm</text>
+<text x="2700" y="334" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">DB.JCTL · P1.PH-F · SP1</text>
+<text x="1300" y="368" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">B3</text>
+<text x="1390" y="368" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">Left driver signals</text>
+<text x="1860" y="368" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">P1 → DB</text>
+<text x="2120" y="368" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">5</text>
+<text x="2220" y="368" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">24</text>
+<text x="2330" y="368" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">275 mm</text>
+<text x="2500" y="368" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">335 mm</text>
+<text x="2700" y="368" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">DB.JSIG-L · P1.PH-A2 · P1.PH-B · P1.PH-E</text>
+<text x="1300" y="402" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">B4</text>
+<text x="1390" y="402" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">Right driver signals</text>
+<text x="1860" y="402" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">P1 → DB</text>
+<text x="2120" y="402" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">5</text>
+<text x="2220" y="402" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">24</text>
+<text x="2330" y="402" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">275 mm</text>
+<text x="2500" y="402" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">335 mm</text>
+<text x="2700" y="402" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">DB.JSIG-R · P1.PH-B · P1.PH-D · P1.PH-E</text>
+<text x="1300" y="436" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">B5</text>
+<text x="1390" y="436" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">Driver sleep</text>
+<text x="1860" y="436" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">P1 → DB</text>
+<text x="2120" y="436" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">1</text>
+<text x="2220" y="436" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">24</text>
+<text x="2330" y="436" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">275 mm</text>
+<text x="2500" y="436" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">335 mm</text>
+<text x="2700" y="436" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">DB.JCTL · P1.PH-B</text>
+<text x="1300" y="470" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">B6</text>
+<text x="1390" y="470" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">Encoder signals</text>
+<text x="1860" y="470" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">P1 → JLEG</text>
+<text x="2120" y="470" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">5</text>
+<text x="2220" y="470" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">24</text>
+<text x="2330" y="470" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">287 mm</text>
+<text x="2500" y="470" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">350 mm</text>
+<text x="2700" y="470" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">JLEG.JENC · P1.PH-A · P1.PH-A2</text>
+<text x="1300" y="504" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">B7</text>
+<text x="1390" y="504" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">Kill-chain sense</text>
+<text x="1860" y="504" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">P1 → KC</text>
+<text x="2120" y="504" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">3</text>
+<text x="2220" y="504" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">24</text>
+<text x="2330" y="504" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">329 mm</text>
+<text x="2500" y="504" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">395 mm</text>
+<text x="2700" y="504" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">KC.JHB · P1.PH-D · P1.PH-E</text>
+<text x="1300" y="538" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">B8</text>
+<text x="1390" y="538" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">Pico power</text>
+<text x="1860" y="538" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">PDB → P1</text>
+<text x="2120" y="538" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">2</text>
+<text x="2220" y="538" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">22</text>
+<text x="2330" y="538" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">269 mm</text>
+<text x="2500" y="538" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">330 mm</text>
+<text x="2700" y="538" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">P1.PH-F · PDB.JPICO</text>
+<text x="1300" y="572" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">B9</text>
+<text x="1390" y="572" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">Logic bus</text>
+<text x="1860" y="572" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">KC → PDB</text>
+<text x="2120" y="572" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">2</text>
+<text x="2220" y="572" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">22</text>
+<text x="2330" y="572" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">226 mm</text>
+<text x="2500" y="572" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">280 mm</text>
+<text x="2700" y="572" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">KC.JBUS · PDB.JIN</text>
+<text x="1300" y="606" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">B10</text>
+<text x="1390" y="606" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">Switched rail</text>
+<text x="1860" y="606" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">KC → DB</text>
+<text x="2120" y="606" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">2</text>
+<text x="2220" y="606" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">20</text>
+<text x="2330" y="606" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">58 mm</text>
+<text x="2500" y="606" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">95 mm</text>
+<text x="2700" y="606" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">DB.XRAIL · KC.XRAIL</text>
+<text x="1300" y="640" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">B11</text>
+<text x="1390" y="640" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">Encoder supply</text>
+<text x="1860" y="640" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">PDB → JLEG</text>
+<text x="2120" y="640" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">2</text>
+<text x="2220" y="640" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">22</text>
+<text x="2330" y="640" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">238 mm</text>
+<text x="2500" y="640" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">295 mm</text>
+<text x="2700" y="640" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">JLEG.J5V · PDB.J5V</text>
+<text x="1300" y="674" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">B12</text>
+<text x="1390" y="674" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">Left motor power</text>
+<text x="1860" y="674" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">DB → JLEG</text>
+<text x="2120" y="674" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">2</text>
+<text x="2220" y="674" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">22</text>
+<text x="2330" y="674" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">62 mm</text>
+<text x="2500" y="674" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">100 mm</text>
+<text x="2700" y="674" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">DB.JML · JLEG.JPL</text>
+<text x="1300" y="708" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">B13</text>
+<text x="1390" y="708" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">Right motor power</text>
+<text x="1860" y="708" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">DB → JLEG</text>
+<text x="2120" y="708" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">2</text>
+<text x="2220" y="708" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">22</text>
+<text x="2330" y="708" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">62 mm</text>
+<text x="2500" y="708" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">100 mm</text>
+<text x="2700" y="708" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">DB.JMR · JLEG.JPR</text>
+<text x="1300" y="742" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">B14</text>
+<text x="1390" y="742" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">Left motor pigtail (vendor)</text>
+<text x="1860" y="742" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">ML → JLEG</text>
+<text x="2120" y="742" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">6</text>
+<text x="2220" y="742" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">vendor</text>
+<text x="2330" y="742" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">—</text>
+<text x="2500" y="742" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">200 mm fixed</text>
+<text x="2700" y="742" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">JLEG.JML_IN · ML.PIGTAIL</text>
+<text x="1300" y="776" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">B15</text>
+<text x="1390" y="776" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">Right motor pigtail (vendor)</text>
+<text x="1860" y="776" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">MR → JLEG</text>
+<text x="2120" y="776" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">6</text>
+<text x="2220" y="776" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">vendor</text>
+<text x="2330" y="776" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">—</text>
+<text x="2500" y="776" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">200 mm fixed</text>
+<text x="2700" y="776" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">JLEG.JMR_IN · MR.PIGTAIL</text>
+<text x="1300" y="810" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">B16</text>
+<text x="1390" y="810" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">Pack</text>
+<text x="1860" y="810" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">BAT → KC</text>
+<text x="2120" y="810" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">3</text>
+<text x="2220" y="810" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">20</text>
+<text x="2330" y="810" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">154 mm</text>
+<text x="2500" y="810" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">200 mm</text>
+<text x="2700" y="810" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">BAT.LEADS · F1.INLINE · KC.XPACK</text>
+<text x="1300" y="844" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">B17</text>
+<text x="1390" y="844" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">KILL button (fixture)</text>
+<text x="1860" y="844" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">SWK → KC</text>
+<text x="2120" y="844" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">2</text>
+<text x="2220" y="844" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">24</text>
+<text x="2330" y="844" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">—</text>
+<text x="2500" y="844" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">600 mm fixed</text>
+<text x="2700" y="844" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">KC.JKILL · SWK.LEADS</text>
+<text x="1300" y="878" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">B18</text>
+<text x="1390" y="878" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">ARM button (fixture)</text>
+<text x="1860" y="878" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">SWA → KC</text>
+<text x="2120" y="878" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">2</text>
+<text x="2220" y="878" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">24</text>
+<text x="2330" y="878" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">—</text>
+<text x="2500" y="878" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">600 mm fixed</text>
+<text x="2700" y="878" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">KC.JARM · SWA.LEADS</text>
+<text x="1300" y="912" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">B19</text>
+<text x="1390" y="912" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">Laptop USB cable (external)</text>
+<text x="1860" y="912" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">JUSB → P1</text>
+<text x="2120" y="912" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">4</text>
+<text x="2220" y="912" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">cable</text>
+<text x="2330" y="912" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">—</text>
+<text x="2500" y="912" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">—</text>
+<text x="2700" y="912" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">JUSB.CABLE · P1.USB</text>
+<polyline points="1300,942 3100,942" fill="none" stroke="#ced8d7" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="1300" y="966" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Length rule: Manhattan path: board -&gt; front deck notch -&gt; front face -&gt; notch -&gt; board. Cut = path x 1.10 + 2 x 15 mm, rounded up to 5 mm.</text>
+<text x="1300" y="990" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Totals: AWG 20 790 mm, AWG 22 2880 mm, AWG 24 9685 mm. Buy about 1.5 m of each.</text>
+<text x="1300" y="1014" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Pigtail reach check: left motor exit to JLEG = 179 mm Manhattan, pigtail 200 mm. The left pigtail cannot reach the driver board (216 mm). JLEG accepted 2026-10-17.</text>
+<text x="1300" y="1066" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" text-anchor="start" letter-spacing="1" fill="#387b65">CONNECTOR STANDARD</text>
+<text x="1300" y="1094" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0" fill="#20343e">low_voltage: JST XH 2.50 mm: header B#B-XH-A, housing XHP-#, contact SXH-001T-P0.6 (22-28 AWG)</text>
+<text x="1300" y="1118" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">power: XT30 for the pack, the fuse and the switched rail</text>
+<text x="1300" y="1142" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">motor: Pololu 4752 pigtail keeps its 1x6 0.1 in housing; mates with a 1x6 male header on JLEG</text>
+<text x="1300" y="1166" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">pico_end: Decided 2026-10-17: the user desolders the pre-soldered pins of the Pico 2 and solders the XH headers to the board. The harness plugs into the Pico directly.</text>
+<text x="1300" y="1190" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">wire: 24 AWG signals, 22 AWG for 5 V / 3V3 / motor OUT1-OUT2, 20 AWG for the pack and the rail</text>
+<text x="1300" y="1230" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" text-anchor="start" letter-spacing="1" fill="#387b65">HARDWARE COUNT (V1-PROOF harness)</text>
+<text x="1300" y="1258" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Housings: XHP-2 × 15  XHP-3 × 3  XHP-4 × 3  XHP-5 × 4  XHP-6 × 3  B2B-XH-A × 13</text>
+<text x="1300" y="1282" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Headers: B3B-XH-A × 3  B4B-XH-A × 3  B5B-XH-A × 4  B6B-XH-A × 3</text>
+<text x="1300" y="1306" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Contacts SXH-001T-P0.6: 81 used, buy 106. XT30 pairs: 2. 1x6 0.1 in male headers: 2. Crimp tool: IWISS SN-01BM or Engineer PA-09.</text>
+<text x="64" y="2070.0" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Left: robot LEFT = near wall. The pack lead exit is an assumption; measure the pack. Button leads are fixture runs (600 mm).</text>
+</svg>

@@ -19,7 +19,7 @@ runPython('build.py');
 const require = createRequire(import.meta.url);
 const sharp = require('sharp');
 const { chromium } = require('playwright');
-const stems = ['v1-proof-el-01-overview', 'v1-proof-el-02-pico-imu', 'v1-proof-el-03-wheel-harness', 'v1-proof-el-04-power-servo', 'v1-proof-el-05-both-wheels'];
+const stems = ['v1-proof-el-01-overview', 'v1-proof-el-02-pico-imu', 'v1-proof-el-03-wheel-harness', 'v1-proof-el-04-power-servo', 'v1-proof-el-05-both-wheels', 'v1-proof-el-06-harness-runs', 'v1-proof-el-07-connectors'];
 const sheets = await Promise.all(stems.map(stem => readFile(path.join(here, stem + '.svg'), 'utf8')));
 for (const stem of stems) {
   await sharp(path.join(here, stem + '.svg'), { density: 144 }).resize({ width: 4800, withoutEnlargement: true }).png().toFile(path.join(here, stem + '.png'));
@@ -42,10 +42,10 @@ try {
   }
   await exportPDF('v1-proof-el-01-overview-11x17.pdf', [0], 'Hux EL-01 complete system wiring - 11 x 17');
   await exportPDF('v1-proof-el-05-both-wheels-11x17.pdf', [4], 'Hux EL-05 both wheel motors - 11 x 17');
-  await exportPDF('v1-proof-wiring-atlas.pdf', [0, 1, 2, 3, 4], 'Hux V1-PROOF wiring atlas - 11 x 17');
+  await exportPDF('v1-proof-wiring-atlas.pdf', [0, 1, 2, 3, 4, 5, 6], 'Hux V1-PROOF wiring atlas - 11 x 17');
 } finally {
   await browser.close();
 }
 // A failed export must not certify old PDFs as current.
 runPython('exports.py', ['--write']);
-console.log('Exported five PNGs, two single-sheet PDFs and the five-sheet atlas. Each PDF page is 17 x 11 inches with 0.5-inch margins.');
+console.log('Exported seven PNGs, two single-sheet PDFs and the seven-sheet atlas. Each PDF page is 17 x 11 inches with 0.5-inch margins.');

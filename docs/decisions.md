@@ -28,6 +28,8 @@ The user extended V1-PROOF to dependable forward/reverse traversal, left/right t
 | Evidence | Pinned-leg 3D closed-loop simulation with seed/parameter sweep and failure cases; physical validation remains open. Powered-leg dynamics belong to the next version |
 | Next versions | Powered hips and leg-height change return in the next version. Carry measured actuator/sensor models, telemetry, fault behavior and tests forward. Stair climbing is not a requirement |
 | Orders / publication | **2026-10-16: $195.94 recorded spend**, with a DC step-down 5-pack ($8.47) and a Waveshare servo board ($13.77). The hip drive allowance moved to the reserve, and the $900 ceiling stays. Earlier: **motor/drivers, Pico and LSM6DSO received; 2 × ST3215 ordered; $173.70 recorded spend**. Second wheel motor still required; total delivered driver count pending. User confirms servo 12 V variant. New order charge breakdown is unshown. Publish through the existing CI/CD when authorized and verify live pages. |
+| Harness | **JST XH 2.50 mm for every low-voltage harness connector, XT30 for the 12 V path** (2026-10-17). The Pololu pigtail keeps its 1x6 0.1 in housing. Wiring atlas Rev C draws the boards in their R05 mount positions. Run lengths are estimates until measured |
+| Side naming | **Robot LEFT is the near wall** (2026-10-17). The near wall is the wall in the side view of the R05 assembly guide |
 | Writing standard | **All active text obeys ASD-STE100 Simplified Technical English** (2026-10-04); `python3 tools/ste/check_repo.py` is a build gate in `npm run test:site`; `docs/archive/`, `docs/research/` and the V0-GENESIS pages stay historical |
 
 Refer to [hardware decisions](v1-proof-hardware.md), [simulation evidence](v1-proof-simulation.md), [physical acceptance](v1-proof-validation.md), [PF requirements](requirements.md) and [numerical source](../tools/v1-proof/model.json). The hardware selections are the current engineering baseline. They remain subject to explicit bench rejection criteria and budget limits.
@@ -35,6 +37,18 @@ Refer to [hardware decisions](v1-proof-hardware.md), [simulation evidence](v1-pr
 ---
 
 ## Log
+
+### 2026-10-17 — Wiring atlas Rev C: boards by location, run lengths, connector standard
+
+The user asked for a new pass on the schematic: keep the wiring, move each item to where it mounts in the machine, think about the wire length of each run and generate bundled connectors. The user then asked for a JST connector type that fits the pin styles of the parts. The user also asked for an Amazon link to a connector kit in the BOM.
+
+Four decisions came from the questions of this pass. The sheets draw the kill chain of 2026-10-15 and the pins of `firmware/bench/src/pins.h`, not the Rev B gate. The servo branch is out of the V1-PROOF sheets. The servos stay in stock for the next version. Robot LEFT is the near wall. Both drivers stay on one board on the far half of the PWR deck, as the R05 guide says.
+
+The standard is JST XH 2.50 mm for every low-voltage harness connector, with XT30 for the pack, the fuse and the switched rail. The [wiring atlas](wiring-atlas.md) Rev C, the [harness register](../cad/wiring/v1-proof-harness.html) and sheets EL-06 and EL-07 record the bundles, the cut lengths and the connector loading. The BOM harness row names a 460-piece XH kit with its link and price of the day.
+
+Three answers came later the same day. A leg junction board under the PWR deck takes the two motor pigtails and the encoder dividers. The left pigtail cannot reach the driver board. The user: "an extension or unified bundle is fine".
+
+The user desolders the pre-soldered pins of the Pico 2 and solders the XH headers to the board: "it would be cool to have the wires plug right into the board". The 335 mm Pico-to-driver runs are fine. No harness is built and no part is ordered in this pass.
 
 ### 2026-10-16 — Hips leave V1-PROOF; one-leg and stair requirements dropped
 

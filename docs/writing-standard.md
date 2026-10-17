@@ -39,6 +39,13 @@ Rule 1.8 says: use the official names of the project. These are the official nam
 | The two leg actuators | leg servos |
 | The person who builds Hux | the user |
 | Interactive pages in `tools/living-drawings` | living drawings |
+| The wall that you see in the side view, the robot left side | near wall, robot LEFT |
+| The opposite wall, the robot right side | far wall, robot RIGHT |
+| The proposed junction board under the PWR deck | leg junction board, JLEG |
+| The board with the Pololu 2813, the 74HC14 gate and the fuse input | kill-chain board, KC |
+| The board with the 5 V regulator and the Schottky diode | power distribution board, PDB |
+| The board with both DRV8874 drivers | driver board, DB |
+| JST XH 2.50 mm connectors | XH connector, XH header, XH housing |
 
 Add a row when a new part gets a name. The name in the first document is the name for all documents.
 

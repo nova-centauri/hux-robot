@@ -1,4 +1,4 @@
-# Working notes — V1-PROOF, updated 2026-10-15
+# Working notes — V1-PROOF, updated 2026-10-17
 
 The active objective is a useful, inexpensive proof robot. **Under $1,000. Reuse first. 2.5 kg target. Four actuators. Indoor mobility with bounded disturbance tests.** The previous stair work is [parked](docs/archive/stair-v1/README.md).
 
@@ -14,6 +14,46 @@ The active objective is a useful, inexpensive proof robot. **Under $1,000. Reuse
 - [x] Drivable [3D sandbox](tools/living-drawings/proof-sandbox.html) on the simulator of the study and the protocol fixtures, with size references. Leg-height motion there is a preview only.
 
 ## Next physical work
+
+**2026-10-17 wiring atlas Rev C, by location:** the user asked for a new pass on the schematic. The wiring stays. Each item moves to where it mounts in the machine, each run gets a wire length, and the harness gets bundled connectors. The user then asked for one JST connector type for the low-voltage circuit and for an Amazon kit link in the BOM.
+
+EL-01 is now a rear elevation of the R05 body. The CTRL deck is at the top with the IMU and the Pico 2. The BUS deck with the power distribution board is next. The PWR deck with the kill-chain board and the driver board is below it. The leg junction board and the pack are below.
+
+Robot LEFT is the near wall, by the decision of the user today. Every port is a connector position, for example `P1.PH-A.2 / GP3`.
+
+The pass found a conflict and the user chose the fix. Rev B drew the old kill gate. The [kill chain](docs/kill-chain.md) and `firmware/bench/src/pins.h` use the Pololu 2813 switch, GP10 to nSLEEP, GP22 heartbeat and GP28 rail sense. Rev C draws that circuit on EL-01 and EL-04. The servo branch is out of the V1-PROOF sheets. Both drivers stay on one board on the PWR deck.
+
+New files: `cad/wiring/harness.py` holds the mount positions, the connectors, the wires and the length rule. EL-06 gives a cut length for each of 19 bundles. EL-07 gives the loading of every connector. The [harness register](cad/wiring/v1-proof-harness.html) has the same data with the purchase candidates. The build stops when EL-01 and the harness model differ.
+
+The standard is JST XH 2.50 mm, with XT30 for the pack and the rail. The Pololu pigtail keeps its 1x6 0.1 in housing and lands on a proposed junction board under the PWR deck. The left pigtail cannot reach the driver board. 
+
+The received Pico 2 has pre-soldered pins. The user decided to desolder them and to solder the XH headers to the board, so the harness plugs in directly. The user accepted the leg junction board and the 335 mm Pico-to-driver runs. The lengths are estimates from a route model. No harness is built and no part is ordered.
+
+**2026-10-16 leg drive designed, plate 6:** the user asked for a cradle that fits the servo and a drive to the legs, printed now. The R05 kit now has the crank-and-pushrod leg drive.
+
+New parts: the servo frame (25), the crank hub (26), the wall bushing (27) and two drill jigs (28, 29). The upper link (08) has a new boss at 42 mm. Parts 13 and 14 are superseded.
+
+`validate.py` sweeps the hub and the pushrod with the legs: minimum clearance 1.0 mm, crank sweep 69°, transmission angles 55° to 90°. [Plate 6](cad/prints/two-leg-body-r05/bambu/README.md) holds the ten parts. At 15:11 EDT, MSL-Bambi-X1C accepted it: 2 h 48 min, 104.11 g, 156 layers, finish estimate 17:59 EDT.
+
+The printed walls need a 24 mm bore and four M4 holes on each side. The drill jigs add them. A new wall print is the alternative. The frame bolts need M4 x 20.
+
+The servo screws are M2 x 10 and the hub screw is M3 x 35. The ball studs, the ball links and the pushrods are RC parts that the user has. The disc hardware and the connector position still need a check on the real servo.
+
+**Open conflict.** The decision log of this morning says that V1-PROOF has no powered hips and that the servos stay in stock. This request puts the leg drive back into the R05 build. The decision log is not changed. The user must say whether V1-PROOF now includes the powered legs.
+
+**2026-10-16 leg drive concept:** the user asks for a cradle that fits the real ST3215, and a drive to the leg. We measured the vendor STEP model and the 2D drawing in `cad/vendor/waveshare-st3215/`, a local download that the repository does not publish. The body is 45.22 x 24.72 x 28.7 mm. The output disc is 19.2 mm in diameter and stands 5.2 mm proud of the body. The rear idler disc stands 3.3 mm proud. The height over both discs is 37.25 mm.
+
+The R05 cap bars sit 36.5 mm from the wall, so they land on the idler disc. The output face has four 2.0 mm mounting holes on a 20.7 x 20.5 mm pattern. The output disc has four 2.5 mm holes on a 14 mm pattern.
+
+The proposed drive is a crank and a pushrod, not a belt. Refer to the [concept drawing](docs/assets/r06-leg-drive/concept.png) and the geometry search in `tools/leg-drive/kin.py`. The servo sits inside the wall with its output at X = -18, Z = +34. A printed hub bolts to the output disc and passes through a 22 mm bore in the wall. A 16 mm crank on the hub drives a 40 mm pushrod to a boss at 42 mm on the upper link.
+
+The ratio is 2.6 to 3.1 : 1 and the crank sweeps 69 degrees for the leg range 15 to 40 degrees. The transmission angles stay between 55 and 124 degrees. A drive on the lower link was rejected: its pushrod crosses the upper link plane with 1 mm of clearance.
+
+This is a proposal, with no printed part and no test. The user must confirm the disc hardware, the connector position and the RC linkage parts before the CAD work starts. The walls need the bore and four bolt holes: a drill jig or a new wall print.
+
+**2026-10-16 servo fit report:** at 12:21 EDT, the user reports that all R05 parts are printed and the assembly continues. The ST3215 servos do not fit well in the inner servo cradles, part 13. The user did not give the dimension or the position of the contact. The cradle pocket is the nominal case envelope plus 0.5 mm on each side. The CAD checks do not include a servo fit check.
+
+The user also asks how the servo moves the leg. The answer is in the [R05 kit record](cad/prints/two-leg-body-r05/README.md#limits): the 3:1 belt drive is a concept, not a design. The hip shaft, the wall bearings, the pulleys and the belt tension do not exist. V1-PROOF does not use the servos, so the cradles stay optional. The [fit record](docs/checklists/2026-10-15-r05-fit-record.md) records the report.
 
 **2026-10-16 budget update:** the user reports a 5-pack of DC step-down converters for $8.47 and a Waveshare servo board for $13.77. Recorded spend is now $195.94, with $704.06 remaining in the $900 plan. The vendor of the converters, the models, the charge breakdowns and the delivery status are not recorded.
 

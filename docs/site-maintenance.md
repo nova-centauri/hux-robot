@@ -34,7 +34,7 @@ Open `http://localhost:8080/`. The output is a self-contained static site in `di
 
 ## Electrical PDFs
 
-The Electrical page includes separate PDF views for EL-01 and EL-05. Each PDF contains one 11 x 17 inch landscape sheet with 0.5 inch margins. The five-sheet atlas uses the same paper size. Print at 100% scale.
+The Electrical page includes separate PDF views for EL-01 and EL-05. Each PDF contains one 11 x 17 inch landscape sheet with 0.5 inch margins. The seven-sheet atlas uses the same paper size. Print at 100% scale.
 
 After a change to an electrical diagram, regenerate its SVG and PDF in the same commit. Run `node cad/wiring/render.mjs` from the repository root. This command rebuilds all electrical SVGs, registers, PNGs and PDFs from their shared sources. Refer to the [electrical export procedure](../cad/wiring/README.md) for the runtime requirements and visual checks.
 
@@ -50,7 +50,7 @@ The current project has six primary sections, with the same navigation on drawin
 | --- | --- | --- |
 | Overview | `/` (also `/v1-proof.html`) | Build status, the live R05 anatomy, the R05 kit links and the design targets |
 | Mechanical | `/mechanical.html` | Assembly, interactive general arrangement and drawing register |
-| Electrical | `/electrical.html` | EL-01–04 wiring atlas, enlarged vector viewer, printable PDF and architecture |
+| Electrical | `/electrical.html` | EL-01–07 wiring atlas, harness register, enlarged vector viewer, printable PDF and architecture |
 | Build & test | `/build.html` | Workbench, milestones, updates and local session notebook |
 | Parts & budget | `/parts.html` | Paid orders, shopping list, component register and allowances |
 | Documents | `/documents.html` | Discipline-grouped source register and historical archive |
@@ -71,7 +71,7 @@ The site build writes `robots.txt`, `sitemap.xml` and the IndexNow key file at t
 
 The sitemap contains the public HTML pages. The sitemap does not include `/sim.html`. That path is a redirect. The IndexNow key file is `/4d57d22d9d0038da36917c0d7db3bb71.txt`. Its body is the key.
 
-Joint studies remain open. The source-checked EL-01–04 wiring atlas replaces the electrical placeholders. Its [verification record](wiring-atlas.md) keeps the unresolved circuits and the physical harness release visible.
+Joint studies remain open. The source-checked EL-01–07 wiring atlas replaces the electrical placeholders. Its [verification record](wiring-atlas.md) keeps the unresolved circuits and the physical harness release visible.
 
 Replace placeholders with measured photographs or reviewed drawings only when their evidence exists. Keep the sheet identifiers and the release status. The source Markdown remains editable in the repository. The site links to the rendered pages.
 

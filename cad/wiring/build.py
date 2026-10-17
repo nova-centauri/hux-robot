@@ -17,13 +17,14 @@ C = dict(ink='#20343e', muted='#647780', line='#ced8d7', paper='#f7f5ee',
 PIN = {0:1,1:2,2:4,3:5,4:6,5:7,6:9,7:10,8:11,9:12,10:14,11:15,
        12:16,13:17,14:19,15:20,16:21,17:22,18:24,19:25,20:26,21:27,
        22:29,26:31,27:32,28:34}
-FUNCTION = {0:'Manual TX (optional)',1:'Manual RX (optional)',2:'Left encoder A',3:'Left encoder B',
+FUNCTION = {0:'Manual TX (optional, no cable)',1:'Manual RX (optional, no cable)',2:'Left encoder A',3:'Left encoder B',
             4:'Right encoder A',5:'Right encoder B',6:'Left EN / PWM',7:'Left PH / direction',
-            8:'Right EN / PWM',9:'Right PH / direction',10:'Wheel enable request',11:'Left FAULT',
+            8:'Right EN / PWM',9:'Right PH / direction',10:'Driver nSLEEP, both carriers',11:'Left nFAULT',
             12:'SPI1 MISO',13:'SPI1 chip select',14:'SPI1 clock',15:'SPI1 MOSI',16:'IMU INT1 / DRDY',
-            17:'Servo bus direction',18:'Right FAULT',19:'Deliberate arm input',20:'UART1 servo TX',
-            21:'UART1 servo RX',22:'Watchdog heartbeat',26:'Left CS via conditioning',
-            27:'Right CS via conditioning',28:'Pack voltage via divider'}
+            17:'NC (was servo bus direction)',18:'Right nFAULT',19:'NC, reserved for an ARM read',20:'NC (was UART1 servo TX)',
+            21:'NC (was UART1 servo RX)',22:'Heartbeat to the kill chain',26:'Left CS via 1 kΩ series',
+            27:'Right CS via 1 kΩ series',28:'Switched rail via 100 kΩ / 22 kΩ divider'}
+NC_GPIO = {0,1,17,19,20,21}
 
 class Sheet:
     def __init__(self, number, name, subtitle, width=W, height=H, tabloid=False):
@@ -45,7 +46,7 @@ class Sheet:
         self.text(width-(337 if tabloid else 197),112 if tabloid else 103,'HARNESS / BENCH RELEASE OPEN',18 if tabloid else 10,C['muted'],500,'middle',1)
         self.line([(64,174),(width-64,174)],C['line'],1)
         self.line([(64,page_height-90),(width-64,page_height-90)],C['line'],1)
-        self.text(64,page_height-60,'Rev B  |  Source: 04 OCT 2026  |  Print layout: 05 OCT 2026' if tabloid else 'Rev B  |  04 OCT 2026  |  Vendor pinouts + proposed Hux circuits',20 if tabloid else 12,C['muted'])
+        self.text(64,page_height-60,'Rev C  |  Source: 17 OCT 2026  |  Print layout: 17 OCT 2026' if tabloid else 'Rev C  |  17 OCT 2026  |  Vendor pinouts + proposed Hux circuits',20 if tabloid else 12,C['muted'])
         self.text(64,page_height-34 if tabloid else page_height-38,'17 x 11 in / landscape / 0.5 in margins / print at 100%. Sources and open checks: docs/wiring-atlas.md.' if tabloid else 'See docs/wiring-atlas.md and the wire register for sources and open circuit decisions.',18 if tabloid else 11,C['muted'])
         self.text(width-66,page_height-56,number,30 if tabloid else 25,C['green'],700,'end')
 
@@ -102,60 +103,6 @@ class Sheet:
         path=HERE/f'{stem}.svg'
         path.write_text('\n'.join(self.p)+ '\n</svg>\n')
         return path
-
-def overview():
-    s=Sheet('EL-01','Wiring overview','A four-actuator architecture with separate power, sensing and hardware enable paths.')
-    s.card(64,207,410,113,'POWER / PROPOSED PACK','3S battery', ['Up to 12.6 V charged; pack / charger TBD'],C['red'],True)
-    s.card(64,357,410,94,'PROTECTION / VALUES TBD','Main fuse + distribution',[],C['red'],True)
-    s.card(64,508,410,113,'PHYSICAL CUT / CIRCUIT TBD','Actuator power cut',['Opens wheel + servo positive supply'],C['red'],True)
-    s.card(64,693,410,126,'LOGIC BRANCH / CIRCUIT TBD','5 V regulator + power ORing',['Feeds Pico VSYS and both encoders','USB / external-power isolation required'],C['orange'],True)
-    s.card(64,878,410,123,'SERVO BRANCH / CIRCUIT TBD','Regulated + protected 9 V',['About 6 A short-peak sizing target','Return-energy handling to be qualified'],C['purple'],True)
-    s.card(642,207,420,120,'RECEIVED / UNTESTED','SparkFun LSM6DSO',['3.3 V • main SPI • INT1 data-ready','Open address jumper for SPI  [EL-02]'])
-    s.card(642,407,420,220,'RECEIVED / UNTESTED','Raspberry Pi Pico 2',[
-        '3.3 V GPIO; proposed allocation [EL-02]','SPI1 sensor / encoder feedback',
-        'PWM + direction / current + fault inputs','USB commands + logs; 250 ms deadman',
-        'Balance firmware remains unimplemented'])
-    s.card(642,702,420,103,'HARDWARE ENABLE / CIRCUIT TBD','Watchdog + kill gate',['GP10 request AND healthy watchdog / cut'],C['red'],True)
-    s.card(642,878,420,123,'SERVO INTERFACE / PART TBD','Half-duplex TTL interface',['UART1 TX / RX + GP17 direction','3.3 V MCU side; verify bus logic levels'],C['cyan'],True)
-    for y,side,pins in [(207,'Left','GP6 / 7 • FAULT GP11 • CS GP26'),(475,'Right','GP8 / 9 • FAULT GP18 • CS GP27')]:
-        s.card(1210,y,406,194,'WHEEL CHANNEL / EL-03',side+' DRV8874 → 4752',[
-            pins,'Motor red → OUT1; black → OUT2',
-            '5 V encoder → level shift → Pico',
-            'Left GP2 / 3; right GP4 / 5'],C['blue'])
-    s.card(1210,878,406,123,'LEG ACTUATORS / EL-04','2 × ST3215, 12 V variant',[
-        'Qualify holding performance at 9 V','Unique bus IDs; arrival unreported'],C['purple'])
-    # Rails. Each junction dot represents an actual branch; line crossings do not.
-    s.line([(270,320),(270,357)],C['red'],5)
-    s.line([(270,451),(270,508)],C['red'],5)
-    s.line([(474,402),(517,402),(517,748),(474,748)],C['orange'],4)
-    s.dot(474,402,C['red'])
-    s.line([(474,563),(563,563),(563,372),(1180,372),(1180,294),(1210,294)],C['red'],5)
-    s.line([(1180,372),(1180,565),(1210,565)],C['red'],5);s.dot(1180,372,C['red'])
-    s.line([(563,563),(563,937),(474,937)],C['red'],5);s.dot(563,563,C['red'])
-    s.label(599,365,'SWITCHED ACTUATOR BUS',C['red'])
-    s.line([(474,787),(605,787),(605,563),(642,563)],C['orange'],4)
-    s.label(526,670,'VSYS p39',C['orange'],12)
-    s.line([(852,327),(852,407)],C['cyan'],4);s.label(866,365,'SPI + INT1',C['cyan'])
-    s.line([(1062,472),(1104,472),(1104,254),(1210,254)],C['cyan'],3)
-    s.line([(1104,472),(1104,522),(1210,522)],C['cyan'],3);s.dot(1104,472)
-    s.label(1077,433,'I/O',C['cyan'])
-    s.line([(830,627),(830,702)],C['red'],3);s.label(847,668,'GP10 / GP22',C['red'])
-    s.line([(1062,754),(1144,754),(1144,333),(1210,333)],C['red'],3,True)
-    s.line([(1144,603),(1210,603)],C['red'],3,True);s.dot(1144,603,C['red'])
-    s.label(1108,686,'SLEEP',C['red'])
-    # UART originates at the Pico. Offset path avoids the enable gate.
-    s.line([(1062,610),(1090,610),(1090,749)],C['cyan'],3)
-    s.line([(1090,759),(1090,851),(1027,851),(1027,878)],C['cyan'],3)
-    s.label(863,848,'UART1 / GP17',C['cyan'])
-    s.line([(1062,928),(1210,928)],C['cyan'],3);s.label(1078,916,'TTL DATA',C['cyan'],12)
-    s.line([(474,975),(593,975),(593,1010),(1178,1010),(1178,972),(1210,972)],C['purple'],4)
-    s.label(783,1001,'PROTECTED 9 V SERVO POWER',C['purple'])
-    s.note(1210,714,406,'READING THE SHEET',[
-        'Links marked I/O bundle multiple wires.',
-        'All GND returns share a common reference.',
-        'Dots join wires; crossings do not.',
-        'Dashed blocks need a selected circuit.'])
-    return s.save('v1-proof-el-01-overview')
 
 def pico_imu():
     s=Sheet('EL-02','Pico 2 + IMU connections','Component-side views, USB at the top of the Pico. Physical pins and GPIO numbers are distinct.')
@@ -218,7 +165,7 @@ def pico_imu():
     return s.save('v1-proof-el-02-pico-imu')
 
 def wheel():
-    s=Sheet('EL-03','Wheel motor + encoder harness','One channel shown; repeat for the other wheel using the assignment table. Colors match the motor leads.')
+    s=Sheet('EL-03','Wheel motor + encoder harness','One channel shown; repeat for the other wheel using the assignment table. Colors match the motor leads. The pigtail lands on the JLEG junction board.')
     s.card(64,212,434,114,'PICO / PROPOSED OUTPUTS','3.3 V command signals',['Use the left / right GPIO table below.'],C['cyan'])
     # Precise physical top view of the 4035 carrier.
     s.rect(663,246,292,337,'#254d78',8,'#254d78')
@@ -232,7 +179,7 @@ def wheel():
         for x,label,anchor,tx in [(678,left[i],'start',693),(940,right[i],'end',925)]:
             s.rect(x-5,y-6,10,12,'#dfce85',2,'#dfce85')
             s.text(tx,y+4,label,12,'#f0f4ee',600,anchor)
-    for y,label in [(367,'EN / PWM'),(411,'PH / direction'),(499,'Gated SLEEP')]:
+    for y,label in [(367,'EN / PWM'),(411,'PH / direction'),(499,'nSLEEP (GP10)')]:
         s.text(86,y+5,label,17,C['cyan'],600)
         s.line([(296,y),(678,y)],C['red'] if 'SLEEP' in label else C['cyan'],3)
         s.port(296,y,C['red'] if 'SLEEP' in label else C['cyan'])
@@ -250,20 +197,20 @@ def wheel():
     s.line([(940,411),(1232,411)],C['ink'],5)
     s.label(1038,355,'RED',C['red']);s.label(1038,399,'BLACK ≠ GND',C['ink'])
     s.line([(940,499),(1086,499),(1086,610),(1232,610)],C['yellow'],3)
-    s.card(1232,533,384,135,'FAULT / CURRENT INPUTS','Return to Pico via protection',[
-        'FAULT → GP11 / GP18; 3.3 V pull-ups','CS → GP26 / GP27 via protection TBD','Latch faults; deliberate rearm required.'],C['yellow'],True)
+    s.card(1232,533,384,135,'FAULT / CURRENT INPUTS','Return to Pico on the driver board',[
+        'nFAULT → GP11 / GP18; 10 kΩ pull-ups to 3V3','CS → GP26 / GP27 via 1 kΩ series','Latch faults; deliberate rearm required.'],C['yellow'])
     s.line([(940,543),(1062,543),(1062,644),(1232,644)],C['blue'],3)
     s.line([(678,543),(542,543),(542,638)],C['orange'],3)
     s.rect(498,638,463,38,C['white'],5,C['orange'],True)
-    s.text(518,662,'VREF network TBD: set + measure 2.5 A peak',13,C['orange'],600)
+    s.text(518,662,'VREF divider from 3V3 ≈ 2.8 V: measure 2.5 A peak',13,C['orange'],600)
     # Separate encoder sub-harness, functional wire order; not a connector view.
-    s.card(1232,715,384,228,'4752 / ENCODER LEADS','Four-wire feedback harness',[
+    s.card(1232,715,384,228,'4752 / ENCODER LEADS','Six-wire vendor pigtail, 200 mm',[
         'GREEN  →  common GND','BLUE  →  regulated 5 V',
         'YELLOW  →  channel A','WHITE  →  channel B',
-        'Connector orientation: verify by color.'],C['green'])
-    s.card(649,731,414,196,'REQUIRED INTERFACE / PART TBD','5 V → 3.3 V level conversion',[
-        'Four input channels for both wheels','Use a translator suitable for push-pull',
-        'quadrature outputs; check power-off state.','No direct 5 V signals into Pico GPIO.'],C['green'],True)
+        '1x6 0.1 in housing → JLEG header. Verify by color.'],C['green'])
+    s.card(649,731,414,196,'JLEG JUNCTION BOARD / PROPOSED','5 V → 3.0 V resistor dividers',[
+        'Four channels: 2.2 kΩ series, 3.3 kΩ to GND','Bench value from the electronics bench guide.',
+        'Measure the high level on GP2 before use.','No direct 5 V signals into Pico GPIO.'],C['green'],True)
     s.line([(1090,797),(1232,797)],C['green'],3);s.port(1090,797,C['green'])
     s.label(1092,785,'GND / GREEN',C['green'],12)
     s.line([(1090,820),(1232,820)],C['blue'],3);s.port(1090,820,C['blue'])
@@ -282,79 +229,79 @@ def wheel():
         lv=f'{l}/{l+1}' if name=='EN / PH' else str(l)
         rv=f'{r}/{r+1}' if name=='EN / PH' else str(r)
         s.text(256,y,'GP'+lv,14,C['cyan'],600);s.text(369,y,'GP'+rv,14,C['cyan'],600)
-    s.text(649,979,'EN low = brake. SLEEP low = outputs off / coast.',15,C['red'],700)
+    s.text(649,979,'EN low = brake. nSLEEP low = outputs off / coast. GP10 drives both nSLEEP pins.',15,C['red'],700)
     s.text(649,1002,'2.5 A peak / 1.2 A RMS are Hux qualification targets, not tested settings.',13,C['muted'])
     return s.save('v1-proof-el-03-wheel-harness')
 
-def power_servo():
-    s=Sheet('EL-04','Power distribution + servo bus','Functional interface drawing: regulator, clamp, fuse, enable-gate and bus-adapter circuits remain to select.')
-    # Compact top power chain with branch nodes and common return.
-    s.card(64,216,290,108,'BATTERY / UNCONFIRMED','3S pack',['Up to 12.6 V charged'],C['red'],True)
-    s.card(416,216,285,108,'PROTECTION / TBD','Main fuse',['Fuse / wire / connector sizing'],C['red'],True)
-    s.card(833,216,360,108,'PHYSICAL CUT / TBD','Actuator power cut',['Opens positive feed to all actuators'],C['red'],True)
-    s.card(1281,216,335,108,'WHEELS / ×2','DRV8874 VIN',['Use VIN; VM is protected bus access'],C['red'])
-    for a,b in [(354,416),(701,833),(1193,1281)]:s.line([(a,270),(b,270)],C['red'],5)
-    s.dot(756,270,C['red']);s.dot(1234,270,C['red'])
-    s.card(64,400,440,125,'UNSWITCHED LOGIC BRANCH / TBD','Protected 5 V regulator',[
-        'Branch protection + return-energy handling','Feeds both encoder BLUE leads at 5 V'],C['orange'],True)
-    s.line([(756,270),(756,367),(284,367),(284,400)],C['orange'],4)
-    s.card(64,605,440,127,'USB + EXTERNAL POWER / TBD','Schottky diode / power ORing',[
-        'External 5 V → isolation → VSYS p39','Check loaded voltage and USB backfeed'],C['orange'],True)
+def power_kill():
+    s=Sheet('EL-04','Power distribution + kill chain','Functional drawing of docs/kill-chain.md: fused pack, latched rail switch, heartbeat gate, logic branch. No part is ordered or tested.')
+    s.card(64,216,290,108,'BATTERY / TBD','3S pack',['Up to 12.6 V charged · XT30'],C['red'],True)
+    s.card(416,216,285,108,'F1 / INLINE','Main fuse',['Value and wire gauge open'],C['red'],True)
+    s.card(833,216,360,108,'KC / POLOLU 2813','Latched rail switch',['VIN → VOUT. ON / OFF pulse inputs.'],C['red'],True)
+    s.card(1281,216,335,108,'DB / ×2','DRV8874 VIN',['Both carriers on the switched rail'],C['red'])
+    for a_,b_ in [(354,416),(701,833),(1193,1281)]:s.line([(a_,270),(b_,270)],C['red'],5)
+    s.dot(756,270,C['red']);s.label(1200,257,'RAIL',C['red'],12)
+    s.card(64,400,440,125,'PDB / UNSWITCHED LOGIC BRANCH','5 V regulator, part TBD',[
+        'Fed before the switch: logic stays on through a kill','5 V to the encoders through JLEG'],C['orange'],True)
+    s.line([(756,270),(756,367),(284,367),(284,400)],C['orange'],4);s.label(600,357,'BUS → logic',C['orange'],12)
+    s.card(64,605,440,127,'PDB / USB + EXTERNAL POWER','D5 Schottky → VSYS p39',[
+        'External 5 V → diode → VSYS','Check the loaded voltage and USB backfeed'],C['orange'],True)
     s.line([(284,525),(284,605)],C['orange'],4)
-    s.card(644,605,447,127,'CONTROLLER / LOGIC ONLY','Pico 2 power + ADC',[
-        '3V3(OUT) p36 → IMU + interface logic','GP28 p34 ← protected pack divider'],C['cyan'])
+    s.card(644,605,447,127,'P1 / CONTROLLER','Pico 2 power + sense',[
+        '3V3(OUT) p36 → IMU + driver pull-ups','GP28 p34 ← rail divider 100 kΩ / 22 kΩ'],C['cyan'])
     s.line([(504,669),(644,669)],C['orange'],4);s.label(531,654,'VSYS p39',C['orange'],12)
-    s.card(1281,400,335,148,'SWITCHED SERVO BRANCH / TBD','9 V regulator + protection',[
-        'About 6 A short-peak sizing target','Define an energy sink / clamp','Qualify voltage / heat at load.'],C['purple'],True)
-    s.line([(1234,270),(1234,365),(1448,365),(1448,400)],C['red'],4)
-    s.card(1281,638,335,217,'TWO ST3215 / 12 V VARIANT','Shared half-duplex bus',[
-        'Supply: protected regulated 9 V','GND: common return','DATA: single TTL bus',
-        'Assign different servo IDs.','Confirm cable contact order.'],C['purple'])
-    s.line([(1448,548),(1448,638)],C['purple'],4);s.label(1462,590,'9 V',C['purple'])
-    s.card(644,803,447,144,'SERVO INTERFACE / ADAPTER TBD','3.3 V-compatible transceiver',[
-        'GP20 p26 TX → interface TX input','GP21 p27 RX ← interface RX output','GP17 p22 → direction (if supported)'],C['cyan'],True)
+    s.card(1281,400,335,148,'KC / HEARTBEAT GATE','74HC14 + charge pump',[
+        'GP22 500 Hz → 220 nF → BAT54S → 1 µF ∥ 100 kΩ','No edges for ≈ 80 ms → /HB_OK high → OFF','Own LD1117V33 3.3 V from the bus'],C['red'],True)
+    s.line([(900,270),(900,380),(1448,380),(1448,400)],C['red'],4);s.dot(900,270,C['red']);s.label(1250,372,'BUS → gate logic',C['red'],12)
+    s.card(1281,638,335,217,'KC / BUTTONS ON THE FIXTURE','KILL and ARM',[
+        'KILL: 3.3 V → button → diode → OFF','ARM: 3.3 V → button → 4.7 kΩ → ON','ON clamped low while HB_OK is low','Second KILL press does nothing.','Rail returns only on ARM with the heartbeat.'],C['red'])
+    s.line([(1448,548),(1448,638)],C['red'],4)
+    s.card(644,803,447,144,'P1 → KC / SENSE AND HEARTBEAT','Bundle B7, connector KC.JHB',[
+        'GP22 p29 → JHB.1 HB','GP28 p34 ← JHB.2 RAIL_ADC','AGND p33 → JHB.3'],C['cyan'])
     s.line([(868,732),(868,803)],C['cyan'],3)
     s.line([(1091,876),(1188,876),(1188,755),(1281,755)],C['cyan'],3)
-    s.label(1120,909,'TTL DATA',C['cyan'])
-    s.note(64,803,440,'ENABLE + WATCHDOG BOUNDARY',[
-        'GP10 p14 + GP22 p29 → hardware gate',
-        'Gate output → BOTH wheel SLEEP pins.',
-        'Servo torque-cut circuit: proposed in EL-01.',
-        'Physical cut must remove wheel + servo power.'],C['red'])
-    # Common reference drawn as a functional bus, with distinct return branches.
+    s.label(1120,909,'HB / RAIL_ADC',C['cyan'])
+    s.note(64,803,440,'SOFTWARE DISABLE, SEPARATE LAYER',[
+        'GP10 p14 → both DRV8874 nSLEEP pins directly.',
+        'disarm and FAULT set nSLEEP low in the same cycle.',
+        'The rail switch is the second, independent layer.',
+        'A reset or reboot never turns the rail on.'],C['red'])
     s.line([(84,988),(1594,988)],C['ground'],4)
     for x,y in [(310,324),(1594,324),(483,525),(1080,732),(1594,855),(1080,947)]:
         s.ground(x,y)
     s.label(1177,982,'COMMON GND / RETURNS',C['ground'],13)
-    s.text(64,1012,'All GND symbols join this reference. Route high-current returns away from sensor / MCU wiring.',13,C['muted'])
-    s.note(833,391,360,'MEASUREMENT INTERFACES / TBD',[
-        'Pack divider + ADC protection → GP28.',
-        'Both CS inputs need ADC protection.',
-        'Check input range and power-off injection.'])
+    s.text(64,1012,'All GND symbols join this reference. Route the rail and the pack return away from the sensor and MCU wiring.',13,C['muted'])
+    s.note(833,391,360,'OPEN ITEMS',[
+        'Fuse value, rail wire gauge and the XT30 fit.',
+        'Return-energy clamp: the switch opens the supply path.',
+        'ON / OFF priority of the 2813 (stage K2).'])
     return s.save('v1-proof-el-04-power-servo')
 
 def netlist():
     # Every GPIO endpoint is allocated once. Physical pin labels derive from PIN.
-    endpoints = [dict(gpio=g,physical_pin=PIN[g],function=f) for g,f in FUNCTION.items()]
+    endpoints = [dict(gpio=g,physical_pin=PIN[g],function=f,connected=g not in NC_GPIO) for g,f in FUNCTION.items()]
     assert len({x['physical_pin'] for x in endpoints})==len(endpoints)
     assert [PIN[x] for x in (12,13,14,15,16)]==[16,17,19,20,21]
     assert [PIN[x] for x in (20,21,26,27,28)]==[26,27,31,32,34]
-    data=dict(revision='B',source_checked='2026-10-04',status='build-planning; physical verification pending',
+    data=dict(revision='C',source_checked='2026-10-17',status='build-planning; physical verification pending',
+              arrangement='EL-01 is a rear elevation of the R05 body; robot LEFT = near wall',
               pico_endpoints=endpoints,
-              imu=[dict(pico='GND p18',pad='GND'),dict(pico='3V3(OUT) p36',pad='3V3'),
+              imu=[dict(pico='GND p18',pad='GND'),dict(pico='3V3(OUT) p36 via SP1',pad='3V3'),
                    *[dict(gpio=g,physical_pin=PIN[g],pad=p) for g,p in [(15,'SDA/SDI'),(14,'SCL'),(12,'SDO'),(13,'CS'),(16,'INT1')]]],
-              motor_leads={'red':'DRV8874 OUT1','black':'DRV8874 OUT2 (switched, not GND)',
-                           'green':'common GND','blue':'regulated 5 V','yellow':'encoder A via 5 V to 3.3 V conversion','white':'encoder B via 5 V to 3.3 V conversion'},
-              unresolved=['Regulators and return-energy protection','Fuse and conductor sizing','Encoder translator',
-                          'Servo bus interface and cable pinout','Hardware watchdog / kill implementation',
-                          'ADC conditioning and protection','Received component revisions and harness orientation'])
+              motor_leads={'red':'DRV8874 OUT1 through JLEG','black':'DRV8874 OUT2 through JLEG (switched, not GND)',
+                           'green':'common GND','blue':'regulated 5 V','yellow':'encoder A via 2.2 kΩ / 3.3 kΩ divider on JLEG','white':'encoder B via 2.2 kΩ / 3.3 kΩ divider on JLEG'},
+              unresolved=['5 V regulator part and return-energy clamp','Fuse value and conductor sizing','Kill-chain build and stages K0-K6',
+                          'JLEG board layout and mount','XH header fit on the Pico 0.1 in grid','Pack connector and lead exit','Received component revisions and harness orientation'])
     (HERE/'v1-proof-netlist.json').write_text(json.dumps(data,indent=2)+'\n')
 
 if __name__=='__main__':
     netlist()
-    pico_imu();wheel();power_servo()
-    from complete import full_system, both_wheels, register
+    pico_imu();wheel();power_kill()
+    import harness
+    harness.write_outputs()
+    from complete import full_system, both_wheels, register, harness_runs, connectors
     master=full_system()
     both_wheels()
     register(master)
-    print('Built five SVG sheets and the complete conductor register.')
+    harness_runs();connectors()
+    print('Built seven SVG sheets, the conductor register and the harness register.')

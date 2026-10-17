@@ -112,4 +112,4 @@ A pass on the bench with one driver does not qualify the robot harness. The robo
 - The fuse value, the wire gauge and the connectors of the switched rail.
 - The return-energy clamp. The Pololu switch turns off the supply path. The motor energy then has no path to the supply. Keep the bench reversals slow until the clamp exists.
 - The GPIO allocation keeps GP19 free. A later revision can read the ARM button on GP19 for the log.
-- The electrical sheets EL-01 and EL-04 show the kill as an open dashed block. Update them after the first build passes K6.
+- The electrical sheets EL-01 and EL-04 of Rev C draw this circuit as a dashed board, KC, on the near half of the PWR deck. The connector loading is on EL-07. Mark the board as built after the first build passes K6.

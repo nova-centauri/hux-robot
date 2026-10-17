@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-16",
+  "updatedAt": "2026-10-17",
   "currentVersion": "v1-proof",
   "description": "Source-backed HUX work-in-progress plan. Proposed and simulated work is separate from measured physical evidence. Null order quantities and costs mean unknown, not zero.",
   "statusLabels": {
@@ -577,9 +577,14 @@
           "kind": "living diagram, design proposal"
         },
         {
-          "title": "Wiring atlas · EL-01–04",
+          "title": "Wiring atlas · EL-01–07",
           "path": "docs/wiring-atlas.md",
-          "kind": "source-checked planning drawing"
+          "kind": "source-checked planning drawing, Rev C"
+        },
+        {
+          "title": "Harness register · bundles, cut lengths, connectors",
+          "path": "cad/wiring/v1-proof-harness.html",
+          "kind": "generated register, estimates"
         },
         {
           "title": "Pico 2 USB bring-up · 3 October",
@@ -678,6 +683,17 @@
         }
       ],
       "updates": [
+        {
+          "date": "2026-10-17",
+          "title": "Wiring atlas Rev C: boards by location, run lengths, connectors",
+          "summary": "EL-01 is now a rear elevation of the R05 body with each board in its mount position and every harness wire on a connector position. Robot LEFT is the near wall. The sheets follow the kill-chain design and the bench firmware pins, and the servo branch is out of V1-PROOF. New sheets EL-06 and EL-07 give a cut length for each of nineteen bundles and the loading of every connector. JST XH 2.50 mm is the connector standard, with XT30 for the 12 V path. A leg junction board under the PWR deck takes the motor pigtails and the Pico 2 gets XH headers after the user desolders its pins.",
+          "sourcePaths": [
+            "docs/wiring-atlas.md",
+            "cad/wiring/v1-proof-harness.html",
+            "tools/living-drawings/electrical.html",
+            "docs/decisions.md"
+          ]
+        },
         {
           "date": "2026-10-16",
           "title": "Budget updated for two powered axes",
@@ -1228,13 +1244,13 @@
         },
         {
           "id": "harness",
-          "name": "Wiring, connectors, encoder level shifting and strain relief",
-          "status": "check-stock",
-          "need": "Harness for both wheel channels and the servo bus",
-          "note": "Confirm the shop stock. The 5 V encoder signals require suitable 3.3 V level conversion.",
+          "name": "Wiring, JST XH connector kit, crimp tool and strain relief",
+          "status": "to-buy",
+          "need": "Harness for both wheel channels: 28 XH housings, 28 XH headers and 81 contacts, per the harness register",
+          "note": "One [460-piece JST-XH kit, 2 to 6 positions, $9.99 on Amazon](https://www.amazon.com/IZOKEE-460pcs-Connector-Housing-Terminal/dp/B0791DJMW9) covers the counts, checked 2026-10-17. Add an open-barrel ratcheting crimp tool, about $26, or a pre-crimped XH lead set, about $17. Two XT30 pairs for the pack and the rail. The encoder dividers sit on the proposed leg junction board.",
           "sourcePaths": [
-            "docs/parts-on-hand.md",
-            "docs/v1-proof-hardware.md"
+            "docs/wiring-atlas.md",
+            "cad/wiring/v1-proof-harness.html"
           ]
         },
         {
@@ -1434,7 +1450,7 @@
         {
           "id": "hip-drive",
           "title": "Design the powered hips",
-          "detail": "Each inner ST3215 servo turns its lower hip through a 3:1 reduction. Design the hip shaft, the wall bearings, the pulleys, the belt and the belt tension. The R05 body has the servo cradles. V1-PROOF keeps the legs locked.",
+          "detail": "Each inner ST3215 servo turns a crank on its output disc. A 40 mm RC pushrod moves the upper link, ratio 2.6 to 3.1 : 1. The R05 kit has the servo frame, the crank hub, the wall bushing, the upper link with a boss and two drill jigs (plate 6). V1-PROOF keeps the legs locked.",
           "status": "future",
           "sourcePaths": [
             "cad/prints/two-leg-body-r05/README.md",
@@ -1519,7 +1535,7 @@
             "id": "B2",
             "title": "Bare servo",
             "status": "future",
-            "action": "Verify the startup and the target mapping first. Then command ±5° at the servo output at maximum 5°/s with the horn, belt and load removed.",
+            "action": "Verify the startup and the target mapping first. Then command ±5° at the servo output at maximum 5°/s with the hub, the pushrod and the load removed.",
             "evidence": "Correct direction with no startup jump, reset, unexpected current or tracking fault."
           },
           {
