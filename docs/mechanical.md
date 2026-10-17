@@ -1,6 +1,6 @@
 # V1-PROOF mechanical plan
 
-**2026-10-16 status:** R05 is the current build. In the [R05 two-leg body](../cad/prints/two-leg-body-r05/README.md), the hips are 30 mm rearward of the body centre, and the struts slant forward to the wheels. The ST3215 servos and the battery are inside the body. Follow the [R05 assembly guide](r05-assembly.md).
+**2026-10-16 status:** R05 is the current build. In the [R05 two-leg body](../cad/prints/two-leg-body-r05/README.md), the hips are 30 mm rearward of the body centre, and the struts slant forward to the wheels. The ST3215 servos and the battery are inside the body. Follow the [R05 assembly guide](r05-assembly.md). The [R06 plan](r06-plan.md) collects the corrections for the next body revision.
 
 The user reports that the frame is assembled, with the two walls, the three decks and the battery tray. The user reports that the hip-hole measurements agree with the guide. V1-PROOF has no powered hips: both legs stay locked at 30°. The 3:1 servo drive returns in the next version.
 

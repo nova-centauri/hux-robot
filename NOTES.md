@@ -27,7 +27,9 @@ New files: `cad/wiring/harness.py` holds the mount positions, the connectors, th
 
 The standard is JST XH 2.50 mm, with XT30 for the pack and the rail. The Pololu pigtail keeps its 1x6 0.1 in housing and lands on a proposed junction board under the PWR deck. The left pigtail cannot reach the driver board. 
 
-The received Pico 2 has pre-soldered pins. The user decided to desolder them and to solder the XH headers to the board, so the harness plugs in directly. The user accepted the leg junction board and the 335 mm Pico-to-driver runs. The lengths are estimates from a route model. No harness is built and no part is ordered.
+The received Pico 2 has pre-soldered pins. The user decided to desolder them and to solder the XH headers to the board, so the harness plugs in directly. The user accepted the leg junction board and the 335 mm Pico-to-driver runs.
+
+The [R06 plan](docs/r06-plan.md) collects the body corrections from the R05 build and from Rev C. It waits for the R05 measurements. The lengths are estimates from a route model. No harness is built and no part is ordered.
 
 **2026-10-16 leg drive designed, plate 6:** the user asked for a cradle that fits the servo and a drive to the legs, printed now. The R05 kit now has the crank-and-pushrod leg drive.
 

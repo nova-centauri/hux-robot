@@ -136,6 +136,17 @@
             "docs/kill-chain.md",
             "docs/v1-proof-hardware.md"
           ]
+        },
+        {
+          "id": "r06-plan",
+          "title": "Prepare R06: measure R05, then correct the body",
+          "detail": "R06 keeps the R05 layout and corrects the findings of the build and of wiring atlas Rev C. The walls get the leg-drive holes. The cassettes take a 70 x 50 mm perfboard. The PWR deck gets a mount for the leg junction board and tie points for the harness. The tray fits the measured pack, the gearmotor gets 45° clearance and the body gets a KILL button position. It starts after the R05 fit record, the first bench tests, the kill-chain board and the pack measurement.",
+          "status": "planned",
+          "sourcePaths": [
+            "docs/r06-plan.md",
+            "docs/checklists/2026-10-15-r05-fit-record.md",
+            "docs/wiring-atlas.md"
+          ]
         }
       ],
       "metrics": [
@@ -511,6 +522,11 @@
         ]
       },
       "documents": [
+        {
+          "title": "R06 body plan",
+          "path": "docs/r06-plan.md",
+          "kind": "plan, opened 2026-10-17"
+        },
         {
           "title": "Kill chain · 15 October",
           "path": "docs/kill-chain.md",

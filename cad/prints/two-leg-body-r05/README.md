@@ -9,6 +9,7 @@ R05 follows the [anatomy layout](../../../tools/living-drawings/anatomy.html) an
 - [Complete kit](two-leg-body-r05-kit.zip), [assembly STEP](two-leg-body-r05.step) and [parameters](parameters.json)
 - [Part quantities](manifest.json) and [CAD checks](validation.json)
 - [Bambu Studio plates](bambu/README.md)
+- [R06 plan](../../../docs/r06-plan.md): the corrections for the next revision
 
 ## Changes from R04
 
