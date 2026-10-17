@@ -330,7 +330,7 @@
     },
     {
       "file": "hux-r05-plate-4-links-servo.3mf",
-      "title": "R05 links and servo mounts",
+      "title": "R05 lower lock links",
       "objects": [
         {
           "part": "07_lower_lock_link",
@@ -352,94 +352,6 @@
             16.0,
             126.0,
             5.0
-          ]
-        },
-        {
-          "part": "08_upper_link",
-          "x": 55.0,
-          "y": 95.0,
-          "rotated_90": false,
-          "extents": [
-            16.0,
-            126.0,
-            5.0
-          ]
-        },
-        {
-          "part": "08_upper_link",
-          "x": 76.0,
-          "y": 95.0,
-          "rotated_90": false,
-          "extents": [
-            16.0,
-            126.0,
-            5.0
-          ]
-        },
-        {
-          "part": "14_servo_cap_bar",
-          "x": 93.0,
-          "y": 52.36,
-          "rotated_90": false,
-          "extents": [
-            8.0,
-            40.72,
-            4.0
-          ]
-        },
-        {
-          "part": "14_servo_cap_bar",
-          "x": 106.0,
-          "y": 52.36,
-          "rotated_90": false,
-          "extents": [
-            8.0,
-            40.72,
-            4.0
-          ]
-        },
-        {
-          "part": "14_servo_cap_bar",
-          "x": 119.0,
-          "y": 52.36,
-          "rotated_90": false,
-          "extents": [
-            8.0,
-            40.72,
-            4.0
-          ]
-        },
-        {
-          "part": "14_servo_cap_bar",
-          "x": 132.0,
-          "y": 52.36,
-          "rotated_90": false,
-          "extents": [
-            8.0,
-            40.72,
-            4.0
-          ]
-        },
-        {
-          "part": "13_inner_servo_cradle",
-          "x": 176.0,
-          "y": 51.86,
-          "rotated_90": false,
-          "extents": [
-            70.0,
-            39.72,
-            40.5
-          ]
-        },
-        {
-          "part": "13_inner_servo_cradle",
-          "x": 40.0,
-          "y": 182.86,
-          "rotated_90": false,
-          "extents": [
-            70.0,
-            39.72,
-            40.5
           ]
         }
       ]
@@ -1040,6 +952,122 @@
             3.2,
             3.199,
             10.0
+          ]
+        }
+      ]
+    },
+    {
+      "file": "hux-r05-plate-6-leg-drive.3mf",
+      "title": "R05 leg drive, servo frames, crank hubs, bushings, upper links and drill jigs",
+      "objects": [
+        {
+          "part": "08_upper_link",
+          "x": 13.0,
+          "y": 95.0,
+          "rotated_90": false,
+          "extents": [
+            16.0,
+            126.0,
+            5.0
+          ]
+        },
+        {
+          "part": "08_upper_link",
+          "x": 34.0,
+          "y": 95.0,
+          "rotated_90": false,
+          "extents": [
+            16.0,
+            126.0,
+            5.0
+          ]
+        },
+        {
+          "part": "28_drill_jig_near",
+          "x": 83.0,
+          "y": 64.5,
+          "rotated_90": false,
+          "extents": [
+            72.0,
+            65.0,
+            6.0
+          ]
+        },
+        {
+          "part": "29_drill_jig_far",
+          "x": 160.0,
+          "y": 64.5,
+          "rotated_90": false,
+          "extents": [
+            72.0,
+            65.0,
+            6.0
+          ]
+        },
+        {
+          "part": "25_servo_frame",
+          "x": 222.0,
+          "y": 58.0,
+          "rotated_90": true,
+          "extents": [
+            42.0,
+            52.0,
+            12.0
+          ]
+        },
+        {
+          "part": "25_servo_frame",
+          "x": 31.0,
+          "y": 184.0,
+          "rotated_90": false,
+          "extents": [
+            52.0,
+            42.0,
+            12.0
+          ]
+        },
+        {
+          "part": "27_wall_bushing",
+          "x": 74.5,
+          "y": 175.5,
+          "rotated_90": false,
+          "extents": [
+            25.0,
+            24.995,
+            7.5
+          ]
+        },
+        {
+          "part": "27_wall_bushing",
+          "x": 104.5,
+          "y": 175.5,
+          "rotated_90": false,
+          "extents": [
+            25.0,
+            24.995,
+            7.5
+          ]
+        },
+        {
+          "part": "26_crank_hub",
+          "x": 137.5,
+          "y": 173.0,
+          "rotated_90": false,
+          "extents": [
+            30.997,
+            19.999,
+            31.1
+          ]
+        },
+        {
+          "part": "26_crank_hub",
+          "x": 173.5,
+          "y": 173.0,
+          "rotated_90": false,
+          "extents": [
+            30.997,
+            19.999,
+            31.1
           ]
         }
       ]

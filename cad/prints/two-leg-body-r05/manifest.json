@@ -1,8 +1,8 @@
 {
   "revision": "R05",
-  "date": "2026-10-14",
+  "date": "2026-10-16",
   "units": "mm",
-  "status": "Print candidate. Two-leg body. No physical fit or powered qualification.",
+  "status": "Print candidate. Two-leg body with the crank-and-pushrod leg drive. No physical fit or powered qualification.",
   "parts": [
     {
       "id": "01_body_side",
@@ -56,44 +56,29 @@
             4.6
           ],
           [
-            -53.5,
-            -5,
+            -18,
+            34,
+            24
+          ],
+          [
+            -26,
+            17,
             4.6
           ],
           [
-            -53.5,
-            11,
+            -26,
+            49,
             4.6
           ],
           [
-            6.5,
-            -5,
+            16,
+            17,
             4.6
           ],
           [
-            6.5,
-            11,
+            16,
+            49,
             4.6
-          ],
-          [
-            -40.5,
-            -13.36,
-            7.0
-          ],
-          [
-            -40.5,
-            19.36,
-            7.0
-          ],
-          [
-            -27.5,
-            -13.36,
-            7.0
-          ],
-          [
-            -27.5,
-            19.36,
-            7.0
           ],
           [
             -40,
@@ -114,7 +99,7 @@
         215.0,
         6.0
       ],
-      "volume_mm3": 152251.406,
+      "volume_mm3": 150460.698,
       "reuse": null
     },
     {
@@ -871,36 +856,6 @@
       "reuse": "04_lower_lock_link"
     },
     {
-      "id": "08_upper_link",
-      "quantity": 2,
-      "label": "Upper link",
-      "features": {
-        "holes": [
-          [
-            0,
-            0,
-            4.5
-          ],
-          [
-            110,
-            0,
-            4.5
-          ]
-        ],
-        "thickness": 5,
-        "datum": "Body pivot (0, 0)",
-        "pivot_centers": 110
-      },
-      "color": "mount",
-      "bounds_mm": [
-        126.0,
-        16.0,
-        5.0
-      ],
-      "volume_mm3": 5804.652,
-      "reuse": "06_upper_link"
-    },
-    {
       "id": "09_spacer_2mm",
       "quantity": 4,
       "label": "Leg spacer 2 mm",
@@ -1053,99 +1008,277 @@
       "reuse": null
     },
     {
-      "id": "13_inner_servo_cradle",
+      "id": "08_upper_link",
       "quantity": 2,
-      "label": "ST3215 inner cradle, one each side",
+      "label": "Upper link with pushrod boss",
       "features": {
         "holes": [
           [
-            -17,
-            -16.36,
-            3.5
-          ],
-          [
-            -17,
-            16.36,
-            3.5
-          ],
-          [
-            -4,
-            -16.36,
-            3.5
-          ],
-          [
-            -4,
-            16.36,
-            3.5
-          ],
-          [
-            -30,
-            -8,
+            0,
+            0,
             4.6
           ],
           [
-            -30,
-            8,
+            110,
+            0,
             4.6
           ],
           [
-            30,
-            -8,
-            4.6
-          ],
-          [
-            30,
-            8,
-            4.6
+            42,
+            0,
+            2.2
           ]
         ],
-        "thickness": 4,
-        "case_pocket": [
-          46.22,
-          25.72
-        ],
-        "cap_seat_z": 40.5,
-        "output_relief": [
-          12.5,
-          0,
-          22
-        ]
+        "thickness": 5,
+        "datum": "Body pivot (0, 0)",
+        "pivot_centers": 110,
+        "boss_radius": 42
       },
       "color": "mount",
       "bounds_mm": [
-        70.0,
-        39.72,
-        40.5
+        126.0,
+        16.0,
+        5.0
       ],
-      "volume_mm3": 30811.688,
+      "volume_mm3": 5819.374,
       "reuse": null
     },
     {
-      "id": "14_servo_cap_bar",
-      "quantity": 4,
-      "label": "ST3215 cap bar, two each side",
+      "id": "25_servo_frame",
+      "quantity": 2,
+      "label": "ST3215 servo frame, one each side",
+      "features": {
+        "holes": [
+          [
+            -9.7,
+            23.75,
+            2.4
+          ],
+          [
+            -9.7,
+            44.25,
+            2.4
+          ],
+          [
+            11.0,
+            23.75,
+            2.4
+          ],
+          [
+            11.0,
+            44.25,
+            2.4
+          ],
+          [
+            -26,
+            17,
+            4.6
+          ],
+          [
+            -26,
+            49,
+            4.6
+          ],
+          [
+            16,
+            17,
+            4.6
+          ],
+          [
+            16,
+            49,
+            4.6
+          ]
+        ],
+        "thickness": 12,
+        "recess": [
+          45.72,
+          25.22,
+          1.0
+        ],
+        "hub_window_d": 20.5,
+        "connector_window": [
+          -9.5,
+          21,
+          15.0
+        ],
+        "servo_screw": "M2 x 10, four, from the wall side",
+        "wall_bolt": "M4 x 20, four, from the outside",
+        "nut_pocket_depth": 4.5
+      },
+      "color": "mount",
+      "bounds_mm": [
+        52.0,
+        42.0,
+        12.0
+      ],
+      "volume_mm3": 14603.141,
+      "reuse": null
+    },
+    {
+      "id": "26_crank_hub",
+      "quantity": 2,
+      "label": "Crank hub on the servo output disc, one each side",
       "features": {
         "holes": [
           [
             0,
-            -16.36,
-            3.5
-          ],
-          [
             0,
-            16.36,
-            3.5
+            3.4
           ]
         ],
-        "thickness": 4
+        "thickness": 31.1,
+        "stud_hole": [
+          16,
+          0,
+          2.2
+        ],
+        "pins": [
+          2.3,
+          2.3,
+          14.0
+        ],
+        "print_note": "The STL is in print orientation: the crank face on the bed, the pins at the top."
       },
       "color": "mount",
       "bounds_mm": [
-        8.0,
-        40.72,
-        4.0
+        31.0,
+        20.0,
+        31.1
       ],
-      "volume_mm3": 1212.336,
+      "volume_mm3": 7818.575,
+      "reuse": null
+    },
+    {
+      "id": "27_wall_bushing",
+      "quantity": 2,
+      "label": "Hub bushing in the wall bore, one each side",
+      "features": {
+        "holes": [
+          [
+            0,
+            0,
+            19
+          ]
+        ],
+        "thickness": 7.5,
+        "wall_bore": 24
+      },
+      "color": "mount",
+      "bounds_mm": [
+        25.0,
+        25.0,
+        7.5
+      ],
+      "volume_mm3": 1212.262,
+      "reuse": null
+    },
+    {
+      "id": "28_drill_jig_near",
+      "quantity": 1,
+      "label": "Near wall drill jig, R05 printed walls",
+      "features": {
+        "holes": [
+          [
+            30,
+            0,
+            4.3
+          ],
+          [
+            30,
+            40,
+            4.3
+          ],
+          [
+            -18,
+            34,
+            3.2
+          ],
+          [
+            -26,
+            17,
+            4.5
+          ],
+          [
+            -26,
+            49,
+            4.5
+          ],
+          [
+            16,
+            17,
+            4.5
+          ],
+          [
+            16,
+            49,
+            4.5
+          ]
+        ],
+        "thickness": 6,
+        "note": "Bolt to the hip holes from the outside. Drill the frame holes 4.5 mm and the pilot 3.2 mm, then open the bore to 24 mm with a step bit or a 15/16 in Forstner bit."
+      },
+      "color": "mount",
+      "bounds_mm": [
+        72.0,
+        65.0,
+        6.0
+      ],
+      "volume_mm3": 27318.191,
+      "reuse": null
+    },
+    {
+      "id": "29_drill_jig_far",
+      "quantity": 1,
+      "label": "Far wall drill jig, R05 printed walls",
+      "features": {
+        "holes": [
+          [
+            -26.0,
+            0,
+            4.3
+          ],
+          [
+            -26.0,
+            40,
+            4.3
+          ],
+          [
+            22.0,
+            34,
+            3.2
+          ],
+          [
+            30.0,
+            17,
+            4.5
+          ],
+          [
+            30.0,
+            49,
+            4.5
+          ],
+          [
+            -12.0,
+            17,
+            4.5
+          ],
+          [
+            -12.0,
+            49,
+            4.5
+          ]
+        ],
+        "thickness": 6,
+        "note": "Bolt to the hip holes from the outside. Drill the frame holes 4.5 mm and the pilot 3.2 mm, then open the bore to 24 mm with a step bit or a 15/16 in Forstner bit."
+      },
+      "color": "mount",
+      "bounds_mm": [
+        72.0,
+        65.0,
+        6.0
+      ],
+      "volume_mm3": 27321.081,
       "reuse": null
     },
     {
@@ -1910,79 +2043,31 @@
       "file": "reference/carrier_upper_spacer_far.stl"
     },
     {
-      "name": "servo_cradle_near",
+      "name": "servo_frame_near",
       "color": [
         0.85,
         0.47,
         0.2
       ],
-      "part_id": "13_inner_servo_cradle",
+      "part_id": "25_servo_frame",
       "reference_only": false,
       "group": "fixed",
-      "file": "reference/servo_cradle_near.stl"
+      "file": "reference/servo_frame_near.stl"
     },
     {
-      "name": "servo_cradle_far",
+      "name": "servo_frame_far",
       "color": [
         0.85,
         0.47,
         0.2
       ],
-      "part_id": "13_inner_servo_cradle",
+      "part_id": "25_servo_frame",
       "reference_only": false,
       "group": "fixed",
-      "file": "reference/servo_cradle_far.stl"
+      "file": "reference/servo_frame_far.stl"
     },
     {
-      "name": "servo_bar_near_-17",
-      "color": [
-        0.85,
-        0.47,
-        0.2
-      ],
-      "part_id": "14_servo_cap_bar",
-      "reference_only": false,
-      "group": "fixed",
-      "file": "reference/servo_bar_near_-17.stl"
-    },
-    {
-      "name": "servo_bar_far_-17",
-      "color": [
-        0.85,
-        0.47,
-        0.2
-      ],
-      "part_id": "14_servo_cap_bar",
-      "reference_only": false,
-      "group": "fixed",
-      "file": "reference/servo_bar_far_-17.stl"
-    },
-    {
-      "name": "servo_bar_near_-4",
-      "color": [
-        0.85,
-        0.47,
-        0.2
-      ],
-      "part_id": "14_servo_cap_bar",
-      "reference_only": false,
-      "group": "fixed",
-      "file": "reference/servo_bar_near_-4.stl"
-    },
-    {
-      "name": "servo_bar_far_-4",
-      "color": [
-        0.85,
-        0.47,
-        0.2
-      ],
-      "part_id": "14_servo_cap_bar",
-      "reference_only": false,
-      "group": "fixed",
-      "file": "reference/servo_bar_far_-4.stl"
-    },
-    {
-      "name": "ST3215_case_near",
+      "name": "ST3215_body_near",
       "color": [
         0.5,
         0.53,
@@ -1991,10 +2076,10 @@
       "part_id": null,
       "reference_only": true,
       "group": "fixed",
-      "file": "reference/ST3215_case_near.stl"
+      "file": "reference/ST3215_body_near.stl"
     },
     {
-      "name": "ST3215_case_far",
+      "name": "ST3215_body_far",
       "color": [
         0.5,
         0.53,
@@ -2003,10 +2088,10 @@
       "part_id": null,
       "reference_only": true,
       "group": "fixed",
-      "file": "reference/ST3215_case_far.stl"
+      "file": "reference/ST3215_body_far.stl"
     },
     {
-      "name": "ST3215_output_near",
+      "name": "ST3215_disc_near",
       "color": [
         0.5,
         0.53,
@@ -2015,10 +2100,10 @@
       "part_id": null,
       "reference_only": true,
       "group": "fixed",
-      "file": "reference/ST3215_output_near.stl"
+      "file": "reference/ST3215_disc_near.stl"
     },
     {
-      "name": "ST3215_output_far",
+      "name": "ST3215_disc_far",
       "color": [
         0.5,
         0.53,
@@ -2027,7 +2112,127 @@
       "part_id": null,
       "reference_only": true,
       "group": "fixed",
-      "file": "reference/ST3215_output_far.stl"
+      "file": "reference/ST3215_disc_far.stl"
+    },
+    {
+      "name": "ST3215_idler_near",
+      "color": [
+        0.5,
+        0.53,
+        0.56
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "fixed",
+      "file": "reference/ST3215_idler_near.stl"
+    },
+    {
+      "name": "ST3215_idler_far",
+      "color": [
+        0.5,
+        0.53,
+        0.56
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "fixed",
+      "file": "reference/ST3215_idler_far.stl"
+    },
+    {
+      "name": "ST3215_connector_block_near",
+      "color": [
+        0.5,
+        0.53,
+        0.56
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "keepout",
+      "file": "reference/ST3215_connector_block_near.stl"
+    },
+    {
+      "name": "ST3215_connector_block_far",
+      "color": [
+        0.5,
+        0.53,
+        0.56
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "keepout",
+      "file": "reference/ST3215_connector_block_far.stl"
+    },
+    {
+      "name": "wall_bushing_near",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "27_wall_bushing",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/wall_bushing_near.stl"
+    },
+    {
+      "name": "wall_bushing_far",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "27_wall_bushing",
+      "reference_only": false,
+      "group": "fixed",
+      "file": "reference/wall_bushing_far.stl"
+    },
+    {
+      "name": "crank_hub",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "26_crank_hub",
+      "reference_only": false,
+      "group": "drive",
+      "file": "reference/crank_hub.stl"
+    },
+    {
+      "name": "crank_hub_far",
+      "color": [
+        0.85,
+        0.47,
+        0.2
+      ],
+      "part_id": "26_crank_hub",
+      "reference_only": false,
+      "group": "drive_far",
+      "file": "reference/crank_hub_far.stl"
+    },
+    {
+      "name": "pushrod",
+      "color": [
+        0.5,
+        0.53,
+        0.56
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "drive",
+      "file": "reference/pushrod.stl"
+    },
+    {
+      "name": "pushrod_far",
+      "color": [
+        0.5,
+        0.53,
+        0.56
+      ],
+      "part_id": null,
+      "reference_only": true,
+      "group": "drive_far",
+      "file": "reference/pushrod_far.stl"
     },
     {
       "name": "11_pico_plate",
@@ -2835,7 +3040,7 @@
     }
   ],
   "source_hashes": {
-    "build.py": "30f14f4fdc299d182e0531bb8d1049606ab62f30cab48b76887bf7683e9e0159",
-    "parameters.json": "a73fa3e00f45aa2655dc8339a938f2099e19cd30abb46183ca3596e6ecd2ceeb"
+    "build.py": "5b5f3c4c7a6a69943fcbdea1155d106a4018a3476d85cd0e827413df2107d539",
+    "parameters.json": "214b1f9d8715d6ef39138c3172cec982c2e8591003a7bfd246658d531bf5d2d2"
   }
 }

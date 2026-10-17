@@ -35,3 +35,9 @@ At 12:52 EDT, MSL-Bambi-X1C accepted `hux-r05-plate-3-deck-tray_R05 upper deck, 
 **2026-10-16, plate 4 sent.** At 07:04 EDT, Bambu Studio showed the plate 3 job at 100%, 70/70 layers and Finished. The user reports a clear bed. Bambu Studio sliced plate 4 without an error. The estimate is 3 hours, 11 minutes and 95.86 g.
 
 At 07:08 EDT, MSL-Bambi-X1C accepted `hux-r05-plate-4-links-servo_R05 links and servo mounts`. It showed 0% at layer 0/202 and waited for the bed temperature. The initial finish estimate is approximately 10:19 EDT. Plate 4 completion remains unverified.
+
+**2026-10-16, plate 4 complete, plate 6 sent.** At 15:00 EDT, Bambu Studio showed the plate 4 job at 100%, 202/202 layers and Finished. The user reports a clear bed. Bambu Studio opened `hux-r05-plate-6-leg-drive.3mf` and sliced it without an error. The estimate is 2 hours, 48 minutes and 104.11 g, with 156 layers.
+
+At 15:11 EDT, MSL-Bambi-X1C accepted `hux-r05-plate-6-leg-drive_R05 leg drive, servo frames, crank hubs, bushings, upper links and drill jigs`. It showed 0% at layer 0/156, with an initial finish estimate of 17:59 EDT. Timelapse, bed leveling and flow calibration were on. Plate 6 completion and the leg-drive fits remain unverified.
+
+A first plate title with a colon caused a Bambu Studio error, "Invalid name". `build_plates.py` now uses a comma. Plate titles must not contain `< > : / \ | ? *`.

@@ -1,6 +1,6 @@
 {
   "revision": "R05",
-  "status": "CAD checks passed. Printed fits, the servo transmission and load capacity remain unverified.",
+  "status": "CAD checks passed. Printed fits, the servo drive hardware and load capacity remain unverified.",
   "parts": [
     {
       "part": "01_body_side",
@@ -9,7 +9,7 @@
       "one_solid": true,
       "step_valid": true,
       "hole_and_slot_sections": true,
-      "sha256": "37b1b3be63594990ed98d5424fbf32cef801eb88d5c550aab31a662e604b5607"
+      "sha256": "d721c3034aec80483b66e374c3c22ee8207b7a6c770e1f96337e89cc71b66034"
     },
     {
       "part": "02_open_deck_angle",
@@ -66,15 +66,6 @@
       "sha256": "8287749ed8ce8f7e8d09113e523a2307517f7f1b53e7dfa9deae8a5f85deedaf"
     },
     {
-      "part": "08_upper_link",
-      "quantity": 2,
-      "watertight": true,
-      "one_solid": true,
-      "step_valid": true,
-      "hole_and_slot_sections": true,
-      "sha256": "3f2159b17aea0aca2e3db878826f71a68f01216df91f4bd040177f52e046ee2b"
-    },
-    {
       "part": "09_spacer_2mm",
       "quantity": 4,
       "watertight": true,
@@ -111,22 +102,58 @@
       "sha256": "cc7e36ce6542d76e7cc92e529524e377544e2fffecfa24c458e7f35693995900"
     },
     {
-      "part": "13_inner_servo_cradle",
+      "part": "08_upper_link",
       "quantity": 2,
       "watertight": true,
       "one_solid": true,
       "step_valid": true,
       "hole_and_slot_sections": true,
-      "sha256": "3eeded99eeae65f3aed42de843a5880430770af9218b8e95d20579d698853354"
+      "sha256": "cf82a7d11d0db776b4bfa4199c697579fd1d5a7eaed7cb7605cd04ee9ccb11f2"
     },
     {
-      "part": "14_servo_cap_bar",
-      "quantity": 4,
+      "part": "25_servo_frame",
+      "quantity": 2,
       "watertight": true,
       "one_solid": true,
       "step_valid": true,
       "hole_and_slot_sections": true,
-      "sha256": "4e1f69f472190f69eafe66d2fef16750803b339f2c1959d0abec14a238be9e02"
+      "sha256": "fdd88bb7ec6d279b31955b3202de748e06800f914831f77fd9b780928f4d5561"
+    },
+    {
+      "part": "26_crank_hub",
+      "quantity": 2,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "323c7b650dc2786b22072f8263a383a96079689a163a71bd6e73aaebb6242777"
+    },
+    {
+      "part": "27_wall_bushing",
+      "quantity": 2,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "06d05bc6f466172460c6fc69551f00f718bca100b2ab70643e188d9d9073c908"
+    },
+    {
+      "part": "28_drill_jig_near",
+      "quantity": 1,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "6d14af56f208672aeddf09fd78bdfb6d125d44c569f57f0bd29eb5848a61c8fc"
+    },
+    {
+      "part": "29_drill_jig_far",
+      "quantity": 1,
+      "watertight": true,
+      "one_solid": true,
+      "step_valid": true,
+      "hole_and_slot_sections": true,
+      "sha256": "ebf8fe43bf840396e2d3164c10d077c2875eb9cbf7ed1689ff8c29d12620c18a"
     },
     {
       "part": "24_battery_tray",
@@ -192,8 +219,8 @@
       "sha256": "693c178c36e2f3935e3286618b0c91813d97807dd37c79e29fe0a4b05b8dbe98"
     }
   ],
-  "fixed_exact_intersections": 7,
-  "wall_hardware_envelopes": 18,
+  "fixed_exact_intersections": 23,
+  "wall_hardware_envelopes": 26,
   "sweep": {
     "poses": 51,
     "sides": 2,
@@ -202,14 +229,23 @@
       40
     ],
     "step_deg": 0.5,
-    "pairs": 108834,
-    "exact_checks": 562,
+    "pairs": 118014,
+    "exact_checks": 346,
     "minimum_exact_clearance_mm": 2.0,
     "minimum_gearmotor_clearance_mm": 2.113,
-    "scope": "Nominal parts, reserved board volumes and wall bolt envelopes. No cable, print tolerance, deflection or servo transmission."
+    "leg_drive": {
+      "exact_checks": 435,
+      "minimum_clearance_mm": 1.031,
+      "crank_sweep_deg": 69.2,
+      "transmission_angles_deg": [
+        55.2,
+        89.9
+      ]
+    },
+    "scope": "Nominal parts, reserved board volumes, wall bolt envelopes and the leg drive at the nominal pushrod length. No cable, print tolerance, deflection, ball-link body or servo backlash."
   },
   "source_hashes": {
-    "build.py": "30f14f4fdc299d182e0531bb8d1049606ab62f30cab48b76887bf7683e9e0159",
-    "parameters.json": "a73fa3e00f45aa2655dc8339a938f2099e19cd30abb46183ca3596e6ecd2ceeb"
+    "build.py": "5b5f3c4c7a6a69943fcbdea1155d106a4018a3476d85cd0e827413df2107d539",
+    "parameters.json": "214b1f9d8715d6ef39138c3172cec982c2e8591003a7bfd246658d531bf5d2d2"
   }
 }

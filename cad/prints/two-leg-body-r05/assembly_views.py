@@ -16,13 +16,14 @@ HERE = Path(__file__).resolve().parent
 OUT = HERE.parents[2] / 'docs/assets/r05-assembly'
 OUT.mkdir(parents=True, exist_ok=True)
 M = json.loads((HERE / 'manifest.json').read_text())
-SKIP = ('component_space', 'pico_USB', 'pico_header', 'ST3215_output')
+SKIP = ('component_space', 'pico_USB', 'pico_header', 'ST3215_connector')
 
 
 def group(name):
     if name.startswith('body_near') or name.startswith('body_far'): return 'walls'
-    if name.startswith('servo_cradle') or name.startswith('servo_bar'): return 'cradles'
-    if name.startswith('ST3215_case'): return 'servos'
+    if name.startswith('servo_frame') or name.startswith('wall_bushing'): return 'cradles'
+    if name.startswith('crank_hub') or name.startswith('pushrod'): return 'drive'
+    if name.startswith('ST3215_'): return 'servos'
     if name.startswith('angle_') or name.endswith('_deck'): return 'frame'
     if name.startswith('battery_tray'): return 'tray'
     if name.startswith('battery_envelope'): return 'battery'
@@ -39,16 +40,16 @@ for inst in M['assembly']:
     meshes[inst['name']] = (group(inst['name']), trimesh.load_mesh(HERE / inst['file']))
 
 STEPS = [
-    ('step-1-cradles', 'Step 1. Servo cradles on both walls', ['walls'], ['cradles']),
+    ('step-1-cradles', 'Step 1. Servo frames and wall bushings on both walls', ['walls'], ['cradles']),
     ('step-2-frame', 'Step 2. Decks and angles between the walls', ['walls', 'cradles'], ['frame']),
     ('step-3-tray', 'Step 3. Battery tray at the bottom of the walls', ['walls', 'cradles', 'frame'], ['tray']),
     ('step-4-electronics', 'Step 4. Electronics modules on the decks', ['walls', 'cradles', 'frame', 'tray'], ['electronics']),
     ('step-5-legs', 'Step 5. Struts and carriers at the rear hips', ['walls', 'cradles', 'frame', 'tray', 'electronics'], ['legs']),
     ('step-6-drive', 'Step 6. Gearmotors and wheels', ['walls', 'cradles', 'frame', 'tray', 'electronics', 'legs'], ['motors', 'wheels']),
-    ('step-7-servo-battery', 'Step 7. Servos and battery', ['walls', 'cradles', 'frame', 'tray', 'electronics', 'legs', 'motors', 'wheels'], ['servos', 'battery']),
+    ('step-7-servo-battery', 'Step 7. Servos, crank hubs, pushrods and battery', ['walls', 'cradles', 'frame', 'tray', 'electronics', 'legs', 'motors', 'wheels'], ['servos', 'drive', 'battery']),
 ]
 BASE = {'walls': '#5f8a80', 'cradles': '#c9b9a3', 'frame': '#b9c9bf', 'tray': '#b9c9bf', 'electronics': '#8fb3cf',
-        'legs': '#c9b9a3', 'motors': '#9aa1a8', 'wheels': '#3a3f42', 'servos': '#4a4f52', 'battery': '#6f9fca'}
+        'legs': '#c9b9a3', 'motors': '#9aa1a8', 'wheels': '#3a3f42', 'servos': '#4a4f52', 'drive': '#c9b9a3', 'battery': '#6f9fca'}
 NEW = '#e07a3f'
 
 
@@ -94,4 +95,7 @@ for s in STEPS: render(*s)
 render('side-hip-geometry', 'Side view. Rear hips and forward struts',
        ['walls', 'cradles', 'frame', 'tray', 'motors', 'wheels'], ['legs'], az=90, el=0,
        note='Side view from the near side. Forward is to the right.')
-print('rendered', len(STEPS) + 1, 'views to', OUT)
+render('side-leg-drive', 'Side view. Crank hub, pushrod and upper link boss at 30 degrees',
+       ['walls', 'frame', 'tray', 'motors', 'wheels', 'legs'], ['cradles', 'drive'], az=90, el=0,
+       note='Side view from the near side. Forward is to the right. The servo is inside the wall.')
+print('rendered', len(STEPS) + 2, 'views to', OUT)

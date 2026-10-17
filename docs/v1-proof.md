@@ -41,7 +41,9 @@ Carry forward service access, a deliberate wire harness, real mass records, know
 
 **Wheel drives:** select **two Pololu 4752 12 V 30:1 encoder gearmotors** and **two Pololu 4035 DRV8874 H-bridges**. Keep the 100 mm rubber tires, the supported axles and the 230 mm track. Qualify the reversal/deadband, the current control and the torque near 96 rpm at the loaded battery minimum. The smaller driver replaces the G2 reference. The sleep/kill/watchdog behavior, the hardware current limit and the current sense are explicit bench gates. Refer to the [hardware details](v1-proof-hardware.md).
 
-**Leg drives (next version, 2026-10-16):** V1-PROOF does not use them. The plan for the next version is two selected ST3215 servos, the 12 V / 30 kg-cm variant. Each drives a bearing-supported pivot through a 3:1 belt reduction. The load goes through the bearings and the frame, not the servo spline.
+**Leg drives (next version, 2026-10-16):** V1-PROOF does not use them. The plan for the next version is two selected ST3215 servos, the 12 V / 30 kg-cm variant. Each turns a crank on its output disc, and a 40 mm RC pushrod moves the upper link. The ratio is 2.6 to 3.1 : 1.
+
+A wall bushing carries the pushrod side load, not the servo spline. The [R05 kit](../cad/prints/two-leg-body-r05/README.md#leg-drive) has the parts.
 
 In the preliminary model, the full mass at a 60/40 two-wheel load split produces approximately 0.54 N·m static demand. This is at the servo with the heavier load. A mounted test must qualify a 0.75 N·m hold for 10 minutes at the regulated 9 V rail at its lowest loaded output. The advertised stall torque alone does not qualify it. Keep the mechanical lock pins and the travel stops.
 

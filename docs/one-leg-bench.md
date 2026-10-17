@@ -4,7 +4,7 @@
 
 **2026-10-16 status:** R05 is the current build. The [R05 two-leg body](../cad/prints/two-leg-body-r05/README.md) holds both legs, the two inner servo cradles and the battery tray. Follow the [R05 assembly guide](r05-assembly.md). The user reports that the R05 frame is assembled and that two ST3215 servos are received.
 
-The 3:1 servo drive to the hips is not designed. Until it exists, do the servo stages below with the bare servo or with a servo in its cradle and no load. Use the R05 neutral lock for the leg. The R01, R03 and R04 kits are superseded.
+The servo drive is the R05 crank and pushrod. Until it is printed and fitted, do the servo stages below with the bare servo or with a servo on its frame and no load. Use the R05 neutral lock for the leg. The R01, R03 and R04 kits are superseded.
 
 The user confirms sufficient adjustable bench-supply voltage and current capacity. The supply replaces the battery at this stage. The rail settings and return-energy path remain part of the power procedure below. The full two-axis exercise still requires the servo transmission, supported shaft and interface checks.
 
@@ -51,7 +51,7 @@ This leg is a **parallelogram**, not a thigh and shin in series. Both bars conne
 | Wheel axle | At the lower carrier pivot in the kinematic model; real coaxial support needs detailing |
 | Neutral | **30° rearward from downward vertical** |
 | Design range | **15–45°**; initial powered range is smaller |
-| Reduction | Servo turns 3° for each 1° of leg motion; 3:1 belt reduction to an independently supported shaft |
+| Reduction | Servo turns 2.6° to 3.1° for each 1° of leg motion; crank and pushrod to the upper link, hub in a wall bushing |
 | Wheel envelope | **100 mm diameter** nominal |
 
 110 mm is the distance **between holes**, not the finished stock length. Do not cut two 110 mm end-to-end bars and then place the holes inside them. The extra end material depends on the selected bearings, bolt size and load path. Mark the centers now. The final structural machining follows those choices.
@@ -73,7 +73,7 @@ Full travel changes the vertical separation by **28.47 mm** and moves the axle f
 - Put the leg load through bearings and frame members, not through an unsupported servo horn. The wheel load also needs a defined bearing path. Do not assume that the motor output shaft supports the robot.
 - Put the mechanical stops outside the commissioned software travel, with a verified clearance margin, and inside a collision-free envelope. Add a 30° lock pin for assembly. Stops are containment, not a homing method. Do not enable the servo against an installed lock pin.
 
-Start with the body pivots fixed and the wheel off the bench. Do a test of the linkage by hand **with the servo/belt disconnected**. Support the leg before you connect the drive or release the lock. Then the fixture can catch the leg if the torque disappears.
+Start with the body pivots fixed and the wheel off the bench. Do a test of the linkage by hand **with the pushrod disconnected**. Support the leg before you connect the drive or release the lock. Then the fixture can catch the leg if the torque disappears.
 
 For a first fixture layout, put the lower body pivot **200 mm above the base** and the upper pivot at 240 mm. The nominal wheel then has at least **43.75 mm clearance above the base** through the design range, before brackets/cables. Reserve space for the wheel sweep alone, relative to the lower pivot: at least **21.53 mm forward to 127.78 mm rearward**, and **27.78–156.25 mm downward**. Make this space larger for the measured hardware and the catch. These are geometry allowances, not a strength rating.
 
@@ -107,7 +107,7 @@ The MCU servo path needs a compatible half-duplex TTL interface. Do not tie bare
 
 If you use Adapter A, obey its [USB wiring example](https://docs.waveshare.com/Bus_Servo_Adapter_A/Product-Wiring-Example) (USB mode jumper B). Start with the official [Python ping/readback workflow](https://docs.waveshare.com/Bus_Servo_Adapter_A/Python_Execution_Example). Inspect the motion examples before you run them. Identify the actual serial port. Assign unique IDs with only one new servo connected at a time. Do not overwrite the mode, the calibration or the persistent settings blindly.
 
-**Commission the current limits instead of a copied supply setting.** For the first servo power-up, secure the servo case. Remove the horn, the belt and the load. Assume that the shaft can move until you verify the startup/torque-enable behavior. Keep the wheel driver asleep. Use current-limited power, with the initial supply limit from the idle/inrush needs of the confirmed device and the harness rating.
+**Commission the current limits instead of a copied supply setting.** For the first servo power-up, secure the servo case. Remove the crank hub, the pushrod and the load. Assume that the shaft can move until you verify the startup/torque-enable behavior. Keep the wheel driver asleep. Use current-limited power, with the initial supply limit from the idle/inrush needs of the confirmed device and the harness rating.
 
 Stop on unexpected current or repeated brownouts. Use a conservative wheel-driver limit for the first unloaded jogs, then measure its threshold before you continue. The project ceilings are **2.5 A short motor peak and initially 1.2 A motor RMS**. The pulse duration and the temperature are still to be qualified. Supply current under PWM is not motor winding current. A reported servo load is not automatically calibrated torque, and a USB adapter does not add a servo current limiter.
 
@@ -122,7 +122,7 @@ Combined wheel/leg tests need a separately regulated/protected **9 V servo branc
 | Stage | Action | Evidence required before advancing |
 | --- | --- | --- |
 | 0 — identify | Record labels, quantities, connector pinouts, shaft/spline, mass and mounting measurements. Inspect shipping damage. | Confirmed inventory and a marked wiring diagram; update the template for actual hardware. |
-| 1 — power and readback | Verify rails/polarity with actuators disconnected. Secure the servo case, remove horn/belt/load and assume possible shaft motion on first power. Connect only that servo, inspect its torque state, verify documented disable behavior, and read ID, mode, position, voltage and available temperature/error fields. For the wheel, leave motor power off but power the encoder at 5 V through verified logic conversion; rotate the output slowly by hand and read counts/sign. | Stable communications and verified disabled startup behavior before attaching a load; one measured wheel revolution agrees with expected counts; power cut leaves actuator rail de-energized after stored energy decays. |
+| 1 — power and readback | Verify rails/polarity with actuators disconnected. Secure the servo case, remove the hub, the pushrod and the load, and assume possible shaft motion on first power. Connect only that servo, inspect its torque state, verify documented disable behavior, and read ID, mode, position, voltage and available temperature/error fields. For the wheel, leave motor power off but power the encoder at 5 V through verified logic conversion; rotate the output slowly by hand and read counts/sign. | Stable communications and verified disabled startup behavior before attaching a load; one measured wheel revolution agrees with expected counts; power cut leaves actuator rail de-energized after stored energy decays. |
 | 2 — bare servo | Secure the case. Read current position, configure a bounded target near it and verify documented torque-enable behavior before enabling. Command **±5° at the servo output**, at a verified nonzero speed no faster than **5°/s**. | Correct direction; no startup jump, reset, unexpected current or tracking fault. Do not run an example that sweeps the full servo range. |
 | 3 — passive leg | Disconnect the drive. Move the scrap linkage through 15–45° by hand; check both end positions and all intermediate positions. | No binding or cable/hardware contact, correct center spacing, catch support works. |
 | 4 — driven leg, no added load | Support/lock the leg at 30°; with actuator power physically off, install the aligned transmission using the established neutral/sign mapping. Remove the lock pin, retain the support/catch, then power up using verified disabled startup behavior and establish a matching target before arm. Begin **28–32° at 1°/s leg speed**; hold 2 s at each end. | Ten small cycles, no jump or binding; independently measured leg angle follows the target. Log error, current, voltage and temperature. |
@@ -140,7 +140,7 @@ Keep the interface small: **Connect/read → Arm → Jog leg → Set wheel speed
 
 Suggested bench states are `DISARMED`, `BENCH_ARMED` and `FAULT`. They are additions to plan and implement, not firmware that exists. Gate each actuator independently so that arm does not immediately energize both. The leg uses the internal position loop of its servo. The wheel speed uses encoder feedback on the MCU. An IMU and a balance controller can wait.
 
-Use `servo_angle = calibrated_neutral + direction_sign × 3 × (leg_angle − 30°)`. Measure the mapping before you install the belt. Keep every command in the permitted single-turn range of the servo and in the verified mechanical envelope. Do not assume that the factory midpoint, the absolute angle or the reboot state is the mechanical neutral. Confirm the real leg angle with an external reference, because internal servo feedback cannot detect belt slip.
+The crank angle is not linear in the leg angle. Use the table from `cad/prints/two-leg-body-r05/leg_drive.py` (`python3 leg_drive.py`). Measure the mapping before you install the pushrod. Keep every command in the permitted single-turn range of the servo and in the verified mechanical envelope. Do not assume that the factory midpoint, the absolute angle or the reboot state is the mechanical neutral. Confirm the real leg angle with an external reference, because internal servo feedback cannot detect a loose pushrod or a slipped hub.
 
 Renew the host commands at **20 Hz** at the start. Reject commands older than **250 ms**, invalid sequence numbers, out-of-range targets and bad feedback. Arm only from a fresh, valid state.
 
@@ -166,7 +166,7 @@ Approach that load in steps, for example 25%, 50%, 75%, then 100%, after the pow
 
 The later **0.75 N·m servo hold for 10 minutes** and **1.0 N·m short transient** of the repository remain separate qualification targets. Do not go directly to a ten-minute loaded hold on arrival day. Do short holds first, then 30 s, 2 min and finally 10 min. Log the temperature and the tracking error during the holds. Stop at the predeclared limit for the weakest component or at a loss of control. Set the actual temperature, voltage and pulse-duration limits from the received hardware documentation and instrumentation before the loaded tests.
 
-To claim a servo-output torque, measure it at that output with a supported torque fixture/load cell. An assumed belt efficiency or a servo load register does not prove it. For orientation, **0.75 N·m = 7.5 N at a 100 mm perpendicular lever arm**, before the weight of the lever itself. An independently supported shaft/coupling keeps the measurement load out of an unqualified horn/bearing. Tests on the assembled leg give its measured external load capacity instead.
+To claim a servo-output torque, measure it at that output with a supported torque fixture/load cell. An assumed linkage efficiency or a servo load register does not prove it. For orientation, **0.75 N·m = 7.5 N at a 100 mm perpendicular lever arm**, before the weight of the lever itself. An independently supported shaft/coupling keeps the measurement load out of an unqualified horn/bearing. Tests on the assembled leg give its measured external load capacity instead.
 
 ## What this bench should deliver
 

@@ -1,8 +1,8 @@
 {
   "revision": "R05",
-  "date": "2026-10-14",
+  "date": "2026-10-16",
   "units": "mm",
-  "status": "Print candidate. Two-leg body. No physical fit or powered qualification.",
+  "status": "Print candidate. Two-leg body with the crank-and-pushrod leg drive. No physical fit or powered qualification.",
   "panel": {
     "width": 120,
     "bottom": -35,
@@ -62,22 +62,36 @@
     "standoff_height": 8
   },
   "servo": {
-    "case": [
-      24.72,
+    "source": "Waveshare ST3215 STEP and 2D drawing, measured 2026-10-16. cad/vendor/waveshare-st3215.",
+    "body": [
       45.22,
-      35
+      24.72,
+      28.7
     ],
-    "core_depth": 29,
-    "case_clearance_per_side": 0.5,
-    "shaft_offset": -12.5,
-    "center_z": 94,
-    "mount_pitch": [
-      54,
-      40
+    "output_from_end": 10.11,
+    "disc_d": 19.2,
+    "disc_t": 2.5,
+    "disc_boss_h": 2.2,
+    "disc_proud": 5.2,
+    "idler_proud": 3.3,
+    "height_over_discs": 37.25,
+    "disc_hole_pitch": 14.0,
+    "disc_hole_d": 2.5,
+    "centre_screw": "M3, clearance 3.2 in the disc",
+    "face_holes_x_from_output": [
+      8.3,
+      29.0
     ],
-    "cradle_floor": 4,
-    "bar_bottom": 40.5,
-    "case_depth_envelope": 36
+    "face_holes_z": 10.25,
+    "face_hole_d": 2.0,
+    "connector_block": {
+      "x_from_output": [
+        9.1,
+        34.1
+      ],
+      "half_width": 7.0,
+      "proud": 2.5
+    }
   },
   "interface_plate": {
     "size": [
@@ -113,36 +127,6 @@
     "strut_direction": "forward",
     "lock_offset_mm": 24
   },
-  "inner_servo": {
-    "case_centre_x": -23.5,
-    "case_centre_z": 3,
-    "output_offset_x": 12.5,
-    "wall_bolts": [
-      [
-        -30,
-        -8
-      ],
-      [
-        -30,
-        8
-      ],
-      [
-        30,
-        -8
-      ],
-      [
-        30,
-        8
-      ]
-    ],
-    "cap_bar_x": [
-      -17,
-      -4
-    ],
-    "rail_thickness": 7,
-    "case_depth_envelope": 36,
-    "height": 40.5
-  },
   "battery": {
     "size": [
       106,
@@ -176,5 +160,96 @@
       "top_z_local": 9
     }
   },
-  "rear_lower_angles": "below the lower deck at X = +48"
+  "rear_lower_angles": "below the lower deck at X = +48",
+  "leg_drive": {
+    "note": "Crank on the servo output, RC pushrod to the upper link. Servo inside the near wall, output face toward the wall.",
+    "crank_centre_xz": [
+      -18,
+      34
+    ],
+    "crank_radius": 16,
+    "pushrod_ball_to_ball": 40,
+    "link_boss_from_hip": 42,
+    "link_boss_d": 10,
+    "stud_hole_d": 2.2,
+    "ratio_range": [
+      2.6,
+      3.1
+    ],
+    "crank_sweep_deg": 69,
+    "transmission_angle_deg": [
+      55,
+      124
+    ],
+    "frame": {
+      "x": [
+        -31,
+        21
+      ],
+      "z": [
+        12,
+        54
+      ],
+      "thickness": 12,
+      "recess_depth": 1.0,
+      "recess_clearance": 0.25,
+      "m4_holes_xz": [
+        [
+          -26,
+          17
+        ],
+        [
+          -26,
+          49
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          16,
+          49
+        ]
+      ],
+      "window_half_width": 7.5,
+      "window_x_from_output": 8.5,
+      "hub_window_d": 20.5,
+      "m2_counterbore": [
+        4.2,
+        5.0
+      ],
+      "servo_screw": "M2 x 10, four, from the wall side",
+      "nut_pocket_depth": 4.5,
+      "wall_bolt": "M4 x 20, four, from the outside"
+    },
+    "hub": {
+      "d": 18,
+      "crank_boss_d": 20,
+      "crank_thickness": 5,
+      "arm_width": 10,
+      "pin_d": 2.3,
+      "pin_h": 2.3,
+      "centre_bore": 3.4,
+      "head_counterbore": [
+        6.5,
+        3.5
+      ],
+      "centre_screw": "M3 x 35, replaces the disc screw",
+      "face_y": -5.8,
+      "crank_face_y": 23
+    },
+    "bushing": {
+      "wall_bore": 24,
+      "od": 23.5,
+      "id": 19,
+      "flange_d": 25,
+      "flange_t": 1.5
+    },
+    "jig": {
+      "thickness": 6,
+      "pin_hole_d": 4.3,
+      "guide_d": 4.5,
+      "pilot_d": 3.2
+    }
+  }
 }

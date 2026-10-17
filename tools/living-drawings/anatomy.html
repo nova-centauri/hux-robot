@@ -94,12 +94,12 @@
       <li><i style="--c:#3e93de"></i>Pico 2 control and SPI</li>
       <li><i style="--c:#8e4ec6"></i>Servo bus, 9 V and data</li>
       <li><i style="--c:#30a46c"></i>Encoder feedback</li>
-      <li><i class="dash"></i>Concept 3:1 belt, not designed</li>
+      <li><i class="dash"></i>Crank and pushrod, R05 leg drive, not yet printed</li>
     </ul>
 
     <section class="findings" aria-labelledby="findings-title">
       <h2 id="findings-title">Fit and function findings</h2>
-      <p>The animation found these points when the R04 one-leg body became the two-leg robot. The <a href="../../cad/prints/two-leg-body-r05/README.md">R05 kit</a> of 2026-10-14 includes corrections 1, 2, 4, 5 and 7. Items 3 and 6 remain open. V1-PROOF has no powered hips, so the servo belt drive is for the next version.</p>
+      <p>The animation found these points when the R04 one-leg body became the two-leg robot. The <a href="../../cad/prints/two-leg-body-r05/README.md">R05 kit</a> of 2026-10-14 includes corrections 1, 2, 4, 5 and 7. Items 3 and 6 remain open. V1-PROOF has no powered hips. The servo drive is now the R05 crank and pushrod. Its parts are on plate 6.</p>
       <ol>
         <li><h3>Hips on the centre line</h3>
           <p>The plan puts the hips near the rear of the body. Each strut slants forward and down to the wheel, and the wheel sits below the CoM. R04 puts the hips on the centre line, and the struts slant rearward. The robot must then lean by <strong id="f-trim-r04">—</strong> at 15° / 30° / 45° to balance.</p>
@@ -116,8 +116,9 @@
         <li><h3>Circuits without a board position</h3>
           <p>The hardware watchdog, the latching gate, the ADC conditioning and the ARM switch have no position in R04. The netlist lists these circuits as unresolved. Assign each circuit to a board before the harness release.</p></li>
         <li><h3>Servos inside the body</h3>
-          <p>R04 puts the ST3215 servo outside the near wall. <strong>R05:</strong> put each servo inside the body, against its wall, below the lower deck. The output is 41 mm forward of the lower hip and 3 mm above it, at X = −11. A 3:1 belt, for example GT2 12T to 36T, drives the lower hip shaft on the inner side of the wall.</p>
-          <p>The two belts are 45 mm apart, and the battery fits between them. The hip shaft needs a bearing in the wall. The shaft, the bearings and the belt tension are not designed.</p></li>
+          <p>R04 puts the ST3215 servo outside the near wall. <strong>R05:</strong> put each servo inside the body, on a frame against its wall, output face toward the wall. The output is at X = −18, Z = +34. A printed hub on the output disc passes through a wall bushing.</p>
+          <p>A 16 mm crank and a 40 mm pushrod drive a boss at 42 mm on the upper link. The ratio is 2.6 to 3.1 : 1.</p>
+          <p>The crank and the pushrod are in the upper-link plane outside each wall. The printed R05 walls need a 24 mm bore and four M4 holes for the frame. The drill jigs are on plate 6. The ball studs and the pushrod are RC parts.</p></li>
         <li><h3>Checks that pass</h3>
           <p>With the mirrored leg, the two encoder ends are 50 mm apart. The track is 230 mm and the overall width is 254 mm. These values agree with the V1-PROOF model. The gearmotor clears the wall bottom by 24 mm at 45°.</p></li>
       </ol>

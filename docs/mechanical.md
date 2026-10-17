@@ -16,7 +16,9 @@ One selected Pololu 4752 gearmotor with encoder at each wheel carrier. Use prope
 
 Do a check of the complete motor length and the wire-harness sweep before you fix the track. The proposed track is 230 mm and the wheel width is 25 mm. This gives 255 mm across the tires.
 
-Each leg has two 110 mm parallel links. The body pivots and the wheel-carrier pivots have the same 40 mm vertical separation. This makes a planar parallelogram. In the next version, one leg servo drives one body pivot through a 3:1 belt reduction. V1-PROOF locks the legs at 30°. The other pivots are passive and have bearings.
+Each leg has two 110 mm parallel links. The body pivots and the wheel-carrier pivots have the same 40 mm vertical separation. This makes a planar parallelogram. One leg servo on each side drives the upper link through a crank and an RC pushrod.
+
+The ratio is 2.6 to 3.1 : 1. Refer to the [R05 leg drive](../cad/prints/two-leg-body-r05/README.md#leg-drive). V1-PROOF locks the legs at 30°. The other pivots are passive M4 pivots.
 
 In R05, the hips are near the rear of the body. Each strut slants forward and down from its hip to the wheel carrier. The R05 range is 15–40° from the downward vertical, with 30° at neutral.
 
@@ -60,14 +62,14 @@ The upper carrier pivot also lies inside the projected radius of the wheel and n
 
 1. Mock up the body, wheels, full gearmotor envelopes, battery, pivots and wire harness in 2D/scrap.
 2. Build the pinned neutral stance (30° link angle) and qualify two-wheel balance.
-3. Detail one reduced-servo leg with belt engagement, bearings, stops and cable sweep. Do a load test of it in a fixture.
+3. Print and fit the R05 leg drive: the servo frame, the crank hub, the wall bushing and the pushrod. Do a load test of one leg in a fixture.
 4. Fit both powered legs and qualify small, slow synchronized height changes.
 
 The sketch does not validate bolts, bearing fits, swept clearance or structure. The detailed dimensions come from the measured available parts. [Build checklist](checklists/mechanical-v1.md).
 
 ## Bounded disturbance envelope
 
-The [pinned-leg 3D study](v1-proof-simulation.md) exercises the 230 mm track against longitudinal/lateral pushes and shallow uneven fixtures. Lateral recovery comes from the track width and passive ground contact. There is no roll axis and no active one-wheel recovery. Keep the travel pinned at 30° until the [physical protocol](v1-proof-validation.md) passes. Fixed 15°/45° simulated corners do not validate servo motion, belt compliance or real load distribution. Measured CoM/inertia and tire friction must replace the assumed values before the terrain or the payload increases.
+The [pinned-leg 3D study](v1-proof-simulation.md) exercises the 230 mm track against longitudinal/lateral pushes and shallow uneven fixtures. Lateral recovery comes from the track width and passive ground contact. There is no roll axis and no active one-wheel recovery. Keep the travel pinned at 30° until the [physical protocol](v1-proof-validation.md) passes. Fixed 15°/45° simulated corners do not validate servo motion, pushrod play or real load distribution. Measured CoM/inertia and tire friction must replace the assumed values before the terrain or the payload increases.
 
 Provide adjustable mounts for the battery/electronics and measure the sprung fore/aft CoM at pinned neutral. Target **within ±2 mm of the nominal balance line** before grade qualification. A near −4 mm offset failed the strict grade-settling gate. Recheck the trim at each fixed height. The full uncertainty matrix keeps its wider ±4 mm corners and their failures.
 

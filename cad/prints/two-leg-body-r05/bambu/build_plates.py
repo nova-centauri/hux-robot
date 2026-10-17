@@ -20,11 +20,14 @@ PLATES = [
     ('hux-r05-plate-2-decks', 'R05 lower and middle decks and angles', [('03_power_deck', 1), ('04_interface_deck', 1), ('02_open_deck_angle', 12)]),
     ('hux-r05-plate-3-deck-tray', 'R05 upper deck, tray and leg parts',
         [('05_control_deck', 1), ('24_battery_tray', 1), ('06_motor_carrier', 2), ('09_spacer_2mm', 4), ('10_spacer_12mm', 4)]),
-    ('hux-r05-plate-4-links-servo', 'R05 links and servo mounts',
-        [('07_lower_lock_link', 2, True), ('08_upper_link', 2, True), ('13_inner_servo_cradle', 2), ('14_servo_cap_bar', 4)]),
+    ('hux-r05-plate-4-links-servo', 'R05 lower lock links',
+        [('07_lower_lock_link', 2, True)]),
     ('hux-r05-plate-5-electronics', 'R05 electronics mounts and standoffs',
         [('15_interface_cassette', 4), ('11_pico_plate', 1), ('12_imu_plate', 1), ('16_pico_standoff', 4),
          ('17_board_standoff', 16), ('18_imu_standoff', 4), ('23_module_foot', 24)]),
+    ('hux-r05-plate-6-leg-drive', 'R05 leg drive, servo frames, crank hubs, bushings, upper links and drill jigs',
+        [('25_servo_frame', 2), ('26_crank_hub', 2), ('27_wall_bushing', 2), ('08_upper_link', 2, True),
+         ('28_drill_jig_near', 1), ('29_drill_jig_far', 1)]),
 ]
 
 

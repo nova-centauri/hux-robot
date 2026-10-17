@@ -6,7 +6,9 @@ the body centre line at the lower R04 pivot height. R05 moves both hips to X = +
 Each strut slants forward and down to its wheel. The R04 motor carrier keeps its hand, so the axle
 and the gearmotor sit rearward of the strut end, toward the hip. The ST3215 servos and the 3S pack
 are inside the body. The far side is the near side, mirrored about the body mid-plane (Y = -67.5).
-The servo-to-hip 3:1 transmission (shaft, bearings, pulleys) is not part of this kit.
+Leg drive (2026-10-16): each ST3215 sits inside its wall on a frame, output face toward the wall.
+A printed hub on the output disc passes through a wall bushing. A 16 mm crank and a 40 mm RC pushrod
+drive a boss at 42 mm on the upper link. The R05 servo cradle and cap bars (parts 13, 14) are superseded.
 """
 from pathlib import Path
 import hashlib
@@ -22,7 +24,8 @@ PARTS, INSTANCES = {}, []
 F, B = P['fit'], P['bracket']
 HIP = P['hip']['x']
 REAR_LOWER_X = P['frame']['rear_lower_angle_x']   # moved rearward for upper hip nut and socket access
-SV = P['inner_servo']
+SVO = P['servo']; LD = P['leg_drive']
+CX, CZ = LD['crank_centre_xz']
 MID = -67.5
 COLORS = {'frame': (.16,.35,.30), 'deck': (.55,.68,.60), 'mount': (.85,.47,.20),
           'board': (.12,.38,.52), 'metal': (.50,.53,.56), 'tire': (.08,.09,.09), 'pack': (.18,.44,.66)}
@@ -86,12 +89,10 @@ def wall_holes():
         for z in P['frame']['deck_z']:
             xx=REAR_LOWER_X if (z==60 and x>0) else x
             holes.append((xx,z-18,F['m4']))
-    # Inner servo cradle: four M4 wall bolts and four rear access holes for the cap-bar nuts.
-    for bx,bz in SV['wall_bolts']:
-        holes.append((SV['case_centre_x']+bx,SV['case_centre_z']+bz,F['m4']))
-    for cx in SV['cap_bar_x']:
-        for cz in (-16.36,16.36):
-            holes.append((SV['case_centre_x']+cx,SV['case_centre_z']+cz,7.0))
+    # Leg drive: the hub bore for the wall bushing and four M4 bolts for the servo frame.
+    holes.append((CX,CZ,LD['bushing']['wall_bore']))
+    for bx,bz in LD['frame']['m4_holes_xz']:
+        holes.append((bx,bz,F['m4']))
     # Battery tray flange bolts.
     for x in P['tray']['bolt_x']: holes.append((x,P['tray']['bolt_z'],F['m4']))
     return holes
@@ -160,37 +161,107 @@ def spacer(pid,label,od,di,h,qty):
         {'holes':[(0,0,di)],'thickness':h},'mount')
 
 
-def inner_servo_cradle():
-    """ST3215 case pocket, long axis along X. Local +X points to the hip. Base on the wall inner face."""
-    p=P['servo']; cw,cl,_=p['case']; c=p['case_clearance_per_side']; rt=SV['rail_thickness']; H=SV['height']
-    half_y=cw/2+c+rt                                   # 12.86 + 7 = 19.86
-    o=rect(70,2*half_y,4,r=3)
-    # Rear relief for the idler boss and the case centre.
-    o=bore(o,SV['output_offset_x'],0,22,4)
-    o=o.cut(rect(14,16,6,x=-10,r=2).translate((0,0,-1)))
-    # Two rails capture the case in local Y. They carry the cap-bar bolts.
-    for s in (-1,1):
-        o=o.union(rect(cl+2*c,rt,H,y=s*(cw/2+c+rt/2)))
-    # Four end stops leave a 12 mm cable opening at each case end.
-    for x in (-1,1):
-        for y in (-1,1):o=o.union(rect(3,7,14,x=x*(cl/2+c+1.5),y=y*(cw/2+c-2.5)))
-    clamp_holes=[(x,s*16.36,F['m3']) for x in SV['cap_bar_x'] for s in (-1,1)]
-    wall_holes=[(x,y,F['m4']) for x,y in SV['wall_bolts']]
-    for x,y,d in clamp_holes:o=bore(o,x,y,d,H)
-    for x,y,d in wall_holes:o=bore(o,x,y,d,4)
-    for x,y,d in clamp_holes:
-        o=o.cut(cq.Workplane('XY').center(x,y).polygon(6,6.7).extrude(3.2))
-    for x,y,d in wall_holes:
-        o=o.cut(cq.Workplane('XY').workplane(offset=1.5).center(x,y).polygon(6,8.1).extrude(3))
-    return save('13_inner_servo_cradle',o,2,'ST3215 inner cradle, one each side',{'holes':clamp_holes+wall_holes,
-        'thickness':4,'case_pocket':[cl+2*c,cw+2*c],'cap_seat_z':H,'output_relief':[SV['output_offset_x'],0,22]},'mount')
+def hexpocket(o,x,y,af,depth,z0=0):
+    """Hex nut pocket. af is the across-flats size; the polygon takes the across-corners diameter."""
+    return o.cut(cq.Workplane('XY').workplane(offset=z0).center(x,y).polygon(6,af/math.cos(math.pi/6)).extrude(depth))
 
 
-def cap_bar():
-    o=rect(8,2*16.36+8,4,r=2)
-    holes=[(0,-16.36,F['m3']),(0,16.36,F['m3'])]
-    for x,y,d in holes:o=bore(o,x,y,d,4)
-    return save('14_servo_cap_bar',o,4,'ST3215 cap bar, two each side',{'holes':holes,'thickness':4},'mount')
+def servo_frame():
+    """Servo frame between the ST3215 output face and the wall inner face.
+
+    Local XY is the wall plane (X rearward, Y up = body Z). Local Z goes from the wall face (0) into the body.
+    The output axis is at local (CX, CZ). The servo long axis points rearward (+X) from the output."""
+    fr=LD['frame']; t=fr['thickness']; (x0,x1),(z0,z1)=fr['x'],fr['z']
+    o=rect(x1-x0,z1-z0,t,x=(x0+x1)/2,y=(z0+z1)/2,r=4)
+    # Body-side recess for the servo case outline, centred on the case, not on the output.
+    bl,bw,_=SVO['body']; c=fr['recess_clearance']
+    case_cx=CX-SVO['output_from_end']+bl/2
+    o=o.cut(rect(bl+2*c,bw+2*c,fr['recess_depth']+1,x=case_cx,y=CZ,r=1).translate((0,0,t-fr['recess_depth'])))
+    # Through window for the output disc and the hub.
+    o=bore(o,CX,CZ,fr['hub_window_d'],t)
+    # Connector window: from the raised block on the output face to the rear edge, open at the edge.
+    hw=fr['window_half_width']; wx0=CX+fr['window_x_from_output']
+    o=o.cut(rect(x1-wx0+2,2*hw,t+2,x=(wx0+x1+2)/2,y=CZ).translate((0,0,-1)))
+    # Four M2 servo screws from the wall side, counterbored for the heads.
+    cbd,cbh=fr['m2_counterbore']; screws=[]
+    for dx in SVO['face_holes_x_from_output']:
+        for s in (-1,1):
+            x,y=CX+dx,CZ+s*SVO['face_holes_z']
+            o=bore(o,x,y,F['m2'],t); o=bore(o,x,y,cbd,cbh,z=-1); screws.append((x,y,F['m2']))
+    # Four M4 wall bolts with nut pockets on the body face.
+    m4=[]
+    for x,y in fr['m4_holes_xz']:
+        o=bore(o,x,y,F['m4'],t); o=hexpocket(o,x,y,7.2,fr['nut_pocket_depth'],t-fr['nut_pocket_depth']); m4.append((x,y,F['m4']))
+    return save('25_servo_frame',o,2,'ST3215 servo frame, one each side',{'holes':screws+m4,'thickness':t,
+        'recess':[bl+2*c,bw+2*c,fr['recess_depth']],'hub_window_d':fr['hub_window_d'],'connector_window':[wx0,x1,2*hw],
+        'servo_screw':fr['servo_screw'],'wall_bolt':fr['wall_bolt'],'nut_pocket_depth':fr['nut_pocket_depth']},'mount')
+
+
+def crank_hub():
+    """Hub on the servo output disc, through the wall bushing, with the crank. Local Z is the hub axis.
+    Z = 0 is the face on the output disc. The crank arm points along local +X."""
+    h=LD['hub']; L=h['crank_face_y']-h['face_y']; ct=h['crank_thickness']
+    o=cq.Workplane('XY').circle(h['d']/2).extrude(L-ct)
+    o=o.union(cq.Workplane('XY').workplane(offset=L-ct).circle(h['crank_boss_d']/2).extrude(ct))
+    r=LD['crank_radius']; w=h['arm_width']
+    arm=cq.Workplane('XY').workplane(offset=L-ct).center(r/2,0).rect(r,w).extrude(ct)
+    arm=arm.union(cq.Workplane('XY').workplane(offset=L-ct).center(r,0).circle(w/2).extrude(ct))
+    o=o.union(arm)
+    # Four pins into the disc holes, on the disc face.
+    for a in range(4):
+        px,py=SVO['disc_hole_pitch']/2*math.cos(a*math.pi/2),SVO['disc_hole_pitch']/2*math.sin(a*math.pi/2)
+        o=o.union(cq.Workplane('XY').workplane(offset=-h['pin_h']).center(px,py).circle(h['pin_d']/2).extrude(h['pin_h']+.5))
+    o=o.translate((0,0,h['pin_h']))
+    L2=L+h['pin_h']
+    o=bore(o,0,0,h['centre_bore'],L2)
+    cd,ch=h['head_counterbore']; o=o.cut(cq.Workplane('XY').workplane(offset=L2-ch).circle(cd/2).extrude(ch+1))
+    o=bore(o,r,0,LD['stud_hole_d'],L2)
+    # Print orientation: the crank face on the bed (Z = 0), the pins at the top.
+    o=o.rotate((0,0,0),(1,0,0),180).translate((0,0,L2))
+    return save('26_crank_hub',o,2,'Crank hub on the servo output disc, one each side',{'holes':[(0,0,h['centre_bore'])],
+        'thickness':L2,'stud_hole':[r,0,LD['stud_hole_d']],'pins':[h['pin_d'],h['pin_h'],SVO['disc_hole_pitch']],
+        'print_note':'The STL is in print orientation: the crank face on the bed, the pins at the top.'},'mount')
+
+
+def wall_bushing():
+    b=LD['bushing']; t=P['panel']['thickness']
+    o=cq.Workplane('XY').circle(b['flange_d']/2).extrude(b['flange_t'])
+    o=o.union(cq.Workplane('XY').workplane(offset=b['flange_t']).circle(b['od']/2).extrude(t))
+    o=bore(o,0,0,b['id'],t+b['flange_t'])
+    return save('27_wall_bushing',o,2,'Hub bushing in the wall bore, one each side',{'holes':[(0,0,b['id'])],
+        'thickness':b['flange_t']+t,'wall_bore':b['wall_bore']},'mount')
+
+
+def drill_jig(pid,label,mirror_x=False):
+    """Drill guide for a printed R05 wall. Two M4 bolts in the hip holes locate it on the outer face."""
+    j=LD['jig']; t=j['thickness']
+    pts=[(HIP,0),(HIP,40),(CX,CZ)]+[tuple(p) for p in LD['frame']['m4_holes_xz']]
+    xs=[p[0] for p in pts]; zs=[p[1] for p in pts]; m=8
+    o=rect(max(xs)-min(xs)+2*m,max(zs)-min(zs)+2*m,t,x=(max(xs)+min(xs))/2,y=(max(zs)+min(zs))/2,r=5)
+    holes=[(HIP,0,j['pin_hole_d']),(HIP,40,j['pin_hole_d']),(CX,CZ,j['pilot_d'])]+[(x,z,j['guide_d']) for x,z in LD['frame']['m4_holes_xz']]
+    for x,y,d in holes:o=bore(o,x,y,d,t)
+    o=o.cut(cq.Workplane('XY').workplane(offset=t-.5).center((max(xs)+min(xs))/2,max(zs)+m-4).text(label.split(',')[0].upper(),5,.7,font='Arial'))
+    if mirror_x:
+        o=o.mirror('YZ',((max(xs)+min(xs))/2,0,0)); holes=[(2*((max(xs)+min(xs))/2)-x,y,d) for x,y,d in holes]
+    return save(pid,o,1,label,{'holes':holes,'thickness':t,'note':'Bolt to the hip holes from the outside. Drill the frame holes 4.5 mm and the pilot 3.2 mm, then open the bore to 24 mm with a step bit or a 15/16 in Forstner bit.'},'mount')
+
+
+def upper_link_with_boss():
+    """R03 link outline, 110 mm centres, with a pushrod boss at the leg-drive radius."""
+    pts=[]
+    for i in range(33):
+        a=math.pi/2+math.pi*i/32; pts.append((8*math.cos(a),8*math.sin(a)))
+    pts+=[(14,-4),(96,-4),(110,-8)]
+    for i in range(1,33):
+        a=-math.pi/2+math.pi*i/32; pts.append((110+8*math.cos(a),8*math.sin(a)))
+    pts+=[(96,4),(14,4)]
+    o=cq.Workplane('XY').polyline(pts).close().extrude(5)
+    rb=LD['link_boss_from_hip']
+    o=o.union(cq.Workplane('XY').center(rb,0).circle(LD['link_boss_d']/2).extrude(5))
+    holes=[(0,0,F['m4']),(110,0,F['m4']),(rb,0,LD['stud_hole_d'])]
+    for x,y,d in holes:o=bore(o,x,y,d,5)
+    return save('08_upper_link',o,2,'Upper link with pushrod boss',{'holes':holes,'thickness':5,'datum':'Body pivot (0, 0)',
+        'pivot_centers':110,'boss_radius':rb},'mount')
 
 
 def battery_tray():
@@ -256,7 +327,7 @@ DECK3=deck('05_control_deck','Upper control and sensor deck',
     [(x,y-30,d) for x,y,d in pico_feet]+[(x,y+26,d) for x,y,d in imu_feet],[(x,0,10,3.2,0) for x in (-36,36)])
 MOTOR=carrier()
 for pid,old,qty,label in [('07_lower_lock_link','04_lower_lock_link',2,'Lower lock link'),
-    ('08_upper_link','06_upper_link',2,'Upper link'),('09_spacer_2mm','07_spacer_2mm',4,'Leg spacer 2 mm'),
+    ('09_spacer_2mm','07_spacer_2mm',4,'Leg spacer 2 mm'),
     ('10_spacer_12mm','08_spacer_12mm',4,'Leg spacer 12 mm')]:
     oldm=json.loads((HERE/'legacy/manifest.json').read_text())
     feat=next(p['features'] for p in oldm['parts'] if p['id']==old)
@@ -265,7 +336,10 @@ pico_holes=grid(0,0,47,11.4,F['m2'])
 PICO=board_plate('11_pico_plate','Pico 2 plate',66,40,pico_holes,pico_feet,(40,26))
 imu_holes=grid(0,0,20.32,20.32,F['m3'])
 IMU=board_plate('12_imu_plate','LSM6DSO rigid plate',44,44,imu_holes,imu_feet)
-CRADLE=inner_servo_cradle(); CAP=cap_bar(); TRAY=battery_tray()
+UPPER=upper_link_with_boss()
+FRAME=servo_frame(); HUB=crank_hub(); BUSH=wall_bushing()
+drill_jig('28_drill_jig_near','Near wall drill jig, R05 printed walls'); drill_jig('29_drill_jig_far','Far wall drill jig, R05 printed walls',True)
+TRAY=battery_tray()
 o=rect(62,54,3,r=3)
 o=o.cut(rect(34,20,5,r=2).translate((0,0,-1)))
 board_holes=grid(0,0,44,30,F['m3'])
@@ -302,20 +376,38 @@ for name,xx,yy,zz,h in [('body_lower',HIP,8,0,2),('body_upper',HIP,18,40,12),('c
     s=side(PARTS[pid]['shape'],yy,xx,zz)
     g='joint' if name.startswith('body') else 'moving'
     add(name+'_spacer',s,'mount',pid,group=g); add(name+'_spacer_far',far(s),'mount',pid,group=g+('_far' if g=='moving' else ''))
-# Inner servo cradles, cap bars and case envelopes.
-cx,cz=SV['case_centre_x'],SV['case_centre_z']
-near_cradle=inward(CRADLE,0,cx,cz)
-add('servo_cradle_near',near_cradle,'mount','13_inner_servo_cradle')
-add('servo_cradle_far',far(near_cradle),'mount','13_inner_servo_cradle')
-for bxl in SV['cap_bar_x']:
-    bar=inward(CAP,-SV['height'],cx+bxl,cz)
-    add(f'servo_bar_near_{bxl}',bar,'mount','14_servo_cap_bar'); add(f'servo_bar_far_{bxl}',far(bar),'mount','14_servo_cap_bar')
-cw,cl,_=P['servo']['case']
-case=rect(cl,cw,36,r=1).val()
-case_near=inward(case,-4,cx,cz)
-add('ST3215_case_near',case_near,'metal',reference=True); add('ST3215_case_far',far(case_near),'metal',reference=True)
-out_near=cyl(19.2,4,cx+SV['output_offset_x'],-40,cz,(0,-1,0))
-add('ST3215_output_near',out_near,'metal',reference=True); add('ST3215_output_far',far(out_near),'metal',reference=True)
+# Leg drive: servo frames, servo envelopes, wall bushings, crank hubs and the pushrod at the 30 degree pose.
+import leg_drive as KIN
+near_frame=inward(FRAME,0,0,0)                                   # local XY = body XZ, local Z into the body
+add('servo_frame_near',near_frame,'mount','25_servo_frame'); add('servo_frame_far',far(near_frame),'mount','25_servo_frame')
+fr=LD['frame']; flange_y=-(fr['thickness']-fr['recess_depth'])  # servo output face
+bl,bw,bh=SVO['body']; case_cx=CX-SVO['output_from_end']+bl/2
+case=rect(bl,bw,bh,r=1).val()
+case_near=inward(case,flange_y,case_cx,CZ)                       # body from the output face into the body
+add('ST3215_body_near',case_near,'metal',reference=True); add('ST3215_body_far',far(case_near),'metal',reference=True)
+disc_near=cyl(SVO['disc_d'],SVO['disc_proud'],CX,flange_y,CZ,(0,1,0))
+add('ST3215_disc_near',disc_near,'metal',reference=True); add('ST3215_disc_far',far(disc_near),'metal',reference=True)
+idler_near=cyl(SVO['disc_d'],SVO['idler_proud'],CX,flange_y-bh,CZ,(0,-1,0))
+add('ST3215_idler_near',idler_near,'metal',reference=True); add('ST3215_idler_far',far(idler_near),'metal',reference=True)
+cb=SVO['connector_block']; blk=rect(cb['x_from_output'][1]-cb['x_from_output'][0],2*cb['half_width'],cb['proud']).val()
+blk_near=inward(blk,flange_y,CX+sum(cb['x_from_output'])/2,CZ).translate((0,cb['proud'],0))
+add('ST3215_connector_block_near',blk_near,'metal',reference=True,group='keepout'); add('ST3215_connector_block_far',far(blk_near),'metal',reference=True,group='keepout')
+bush=BUSH.rotate((0,0,0),(1,0,0),90).translate((CX,6+LD['bushing']['flange_t'],CZ))   # flange on the outer wall face
+add('wall_bushing_near',bush,'mount','27_wall_bushing'); add('wall_bushing_far',far(bush),'mount','27_wall_bushing')
+def hub_pose(q):
+    """Hub with the crank at the angle for leg angle q. Local +Z becomes +Y, the arm starts along +X."""
+    h=HUB.rotate((0,0,0),(1,0,0),90).translate((0,LD['hub']['crank_face_y'],0))   # local +Z (crank face to pins) becomes -Y
+    h=h.rotate((0,0,0),(0,1,0),-KIN.crank_angle(q))
+    return h.translate((CX,0,CZ))
+def pushrod_pose(q,y=28):
+    S=KIN.crank_tip(q); Pb=KIN.boss(q); d=(Pb[0]-S[0],Pb[1]-S[1]); n=math.hypot(*d)
+    rod=cq.Solid.makeCylinder(1,n,cq.Vector(S[0],y,S[1]),cq.Vector(d[0],0,d[1]))
+    for x,z in (S,Pb):rod=rod.fuse(cq.Solid.makeSphere(3).translate(cq.Vector(x,y,z)))
+    return rod
+hub30=hub_pose(30)
+add('crank_hub',hub30,'mount','26_crank_hub',group='drive'); add('crank_hub_far',far(hub30),'mount','26_crank_hub',group='drive_far')
+rod30=pushrod_pose(30)
+add('pushrod',rod30,'metal',reference=True,group='drive'); add('pushrod_far',far(rod30),'metal',reference=True,group='drive_far')
 # Component plates and PCB envelopes (unchanged from R04).
 for pid,s,ccx,ccy,zz,holes,spid,pcb,sph in [
     ('11_pico_plate',PICO,0,-97.5,178,pico_holes,'16_pico_standoff',(51,21,1),10),
