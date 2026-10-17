@@ -9,28 +9,28 @@
   },
   "sources": {
     "build.py": "d51bfbb1c5e10dae8cb0963103f400fbe25d8e5b65d3315f3a61fd6c3ea6fe53",
-    "complete.py": "48dd97fdfe54a41e11dae2839a69d8518320327efd319a69311a30a81c97d168",
-    "harness.py": "8084d3a00e46b7109fbccea2bb19cee4cbe22ef1bf38ae35ec11c94c6d09abb0",
+    "complete.py": "1f6ff074daa80cec47600dd4e0bb1c7aaa98687cc8b94e1e30edbf34ada14caf",
+    "harness.py": "1f2b324e86c309477adcef0620d68d1ba9de8f1a94f4c6fe670ec10e7f8abc20",
     "render.mjs": "c5642216a3b863f0f7cfb0d61ce1f4446f5eb6e60b2e62912d51195886400948",
     "exports.py": "769bed98b8a48ac3d72aa0511fab6daac14488c8da625ea38d887e0523015146",
-    "v1-proof-el-01-overview.svg": "7cf9a782617ddd8204308cd066d7c76ce4cfe043131633a613d0843894a10714",
+    "v1-proof-el-01-overview.svg": "47613d7545b1480d445f8481d0d63149bedcc133fa88fad96ead534c2d1a2549",
     "v1-proof-el-02-pico-imu.svg": "ba33a5dd8b6e71e8a953092a7cd6ff325655c16d2665d1e3194cb3783371f925",
     "v1-proof-el-03-wheel-harness.svg": "a67fa69c7aa953ecefcb5c0f83c9138bc32d5560db071d7bfa9d0ab7db1e5cd1",
     "v1-proof-el-04-power-servo.svg": "2dd7d10a548e446db69daa79a3b481959704e62dc60c120ce5ae5a1e5be6a33a",
     "v1-proof-el-05-both-wheels.svg": "7c4912bb525c580b9fc00cb918ec4bd10426379223965708d0f9a3e313732324",
-    "v1-proof-el-06-harness-runs.svg": "b0903833dcd0752bb12948d2fd689faa5abad4494a3ec69819258c3d51376615",
-    "v1-proof-el-07-connectors.svg": "16be2c604878c39439b8fcf7b4ad48dc8ea45c7181fbcdcf828f14a4558a82aa"
+    "v1-proof-el-06-harness-runs.svg": "6a1af3b70627e5350ae23e0d4954c88cd64109bb24db412f26895087cbe0851e",
+    "v1-proof-el-07-connectors.svg": "a65604bf6327ce05257b69c0cfb47cecb4a11d9ee942be9bac0c505ba259fbbc"
   },
   "outputs": {
-    "v1-proof-el-01-overview-11x17.pdf": "a9b3c4e9436c394980ea95634cc02cd16d16b2e984733fc22868fe0faae4156b",
-    "v1-proof-el-05-both-wheels-11x17.pdf": "da4497b54cd375177e1e64d63fb5adb68f0c0fa14ad81d1f41dc158409d88fe8",
-    "v1-proof-wiring-atlas.pdf": "54dfd0f5547ef9877df77106c0fd05ab6cb2fbd8062729cbf2bf8faea323889c",
-    "v1-proof-el-01-overview.png": "7e3a3f620ea35865c69be44da7bfb5f2e2078b4ed8d14ce1c7fe1d2e1bba0c0b",
-    "v1-proof-el-02-pico-imu.png": "313654b46adb09f03a746faee68c7a5451637d6c0035b0e820e1eb6c851cd8b5",
-    "v1-proof-el-03-wheel-harness.png": "1e51f6ead775fd8e250ef78cf46faf9d5498ec5bea4c42e48e9ccc2afbcb988f",
-    "v1-proof-el-04-power-servo.png": "d946807ab73e7a8c11fb0616173af4b554ee411b758c37607815e23c62b34bbf",
-    "v1-proof-el-05-both-wheels.png": "2710244462175ab005268b05b1af3e7e61eb28f2e3a8e63265efe9eeb6a9b4d3",
-    "v1-proof-el-06-harness-runs.png": "7926eec651af7f9eef82f0f7eb8a3c59c3135f95083cbaa3863390d18f4ed892",
-    "v1-proof-el-07-connectors.png": "7db4205aff4f547d66604085855dfca0293fac393cfc870230c5d6a947d4d288"
+    "v1-proof-el-01-overview-11x17.pdf": "955f3ce429c1dffc82cf5082138199ce3dcf117dd79dfb99587617e59a1296a9",
+    "v1-proof-el-05-both-wheels-11x17.pdf": "882b16e37d38f8cb1903f38682ac52fa6b82422c7c4be2218efadabf8684bf0d",
+    "v1-proof-wiring-atlas.pdf": "aa87b100c76eebdfead9508fc4618d1a19c54284adbffc8f142a985c235ca585",
+    "v1-proof-el-01-overview.png": "c8eed949cbd1abc77bf030315d4a12f70b3c34dab2278944c3dbb35a718e4d98",
+    "v1-proof-el-02-pico-imu.png": "8013eb4d25a7769968f14ccecebcc3360ab4d4d73904f139bb3213fad8a84b1e",
+    "v1-proof-el-03-wheel-harness.png": "d09b86cd6ff3ab45151066a05b2a8d0be38224bc2b759057697866134ea33f32",
+    "v1-proof-el-04-power-servo.png": "5ddd429e1762bd29f25d5cc09fdc413ef7a9544cb42d35c77ba104d06c70a82d",
+    "v1-proof-el-05-both-wheels.png": "07057152d5cce77e58f5eded5d2befc6686dd1edd14618ac1f1da6a59e91edcf",
+    "v1-proof-el-06-harness-runs.png": "88ce77d447d54bab6c7670483c3d1d1d6ac59d28d6392d8127d291e1b6ea2f88",
+    "v1-proof-el-07-connectors.png": "13f426dc5337dddcde174cd2a24f6b8a13d0f950cbb1c2bc83070fdf6dbb5ad8"
   }
 }

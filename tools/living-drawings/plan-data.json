@@ -702,7 +702,7 @@
         {
           "date": "2026-10-17",
           "title": "Wiring atlas Rev C: boards by location, run lengths, connectors",
-          "summary": "EL-01 is now a rear elevation of the R05 body with each board in its mount position and every harness wire on a connector position. Robot LEFT is the near wall. The sheets follow the kill-chain design and the bench firmware pins, and the servo branch is out of V1-PROOF. New sheets EL-06 and EL-07 give a cut length for each of nineteen bundles and the loading of every connector. JST XH 2.50 mm is the connector standard, with XT30 for the 12 V path. A leg junction board under the PWR deck takes the motor pigtails and the Pico 2 gets XH headers after the user desolders its pins.",
+          "summary": "EL-01 is now a rear elevation of the R05 body with each board in its mount position and every harness wire on a connector position. Robot LEFT is the near wall. The sheets follow the kill-chain design and the bench firmware pins, and the servo branch is out of V1-PROOF. New sheet EL-06 gives one card for each of the twelve harnesses, with ends and cut lengths, and EL-07 lists every connector position. JST XH 2.50 mm is the connector standard, with XT30 for the 12 V path. A leg junction board under the PWR deck takes the motor pigtails and the Pico 2 gets XH headers after the user desolders its pins.",
           "sourcePaths": [
             "docs/wiring-atlas.md",
             "cad/wiring/v1-proof-harness.html",

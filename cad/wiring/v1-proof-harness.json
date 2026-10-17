@@ -509,15 +509,32 @@
       "family": "XH",
       "positions": 2,
       "pins": "protoboard",
-      "title": "Shared nSLEEP and pull-up supply",
+      "title": "Shared nSLEEP",
       "load": {
         "1": [
           "nSLEEP",
           "nSLEEP"
         ],
         "2": [
+          "spare",
+          null
+        ]
+      }
+    },
+    "DB.J3V3": {
+      "board": "DB",
+      "family": "XH",
+      "positions": 2,
+      "pins": "protoboard",
+      "title": "Pull-up supply from the Pico 3V3",
+      "load": {
+        "1": [
           "3V3",
           "3V3"
+        ],
+        "2": [
+          "spare",
+          null
         ]
       }
     },
@@ -1623,7 +1640,7 @@
       "id": "H009",
       "bundle": "B2",
       "source": "SP1",
-      "destination": "DB.JCTL.2",
+      "destination": "DB.J3V3.1",
       "net": "3V3",
       "awg": 22
     },
@@ -2060,6 +2077,468 @@
       "awg": "cable"
     }
   ],
+  "harnesses": [
+    {
+      "id": "H1",
+      "name": "CTRL deck harness",
+      "note": "Sensor wires to the IMU, logic power from the PDB, one 3V3 tail down the far side to the driver board. Splice SP1 near the Pico.",
+      "pico": [
+        "P1.PH-C",
+        "P1.PH-F"
+      ],
+      "ends": [
+        "U1.JMAIN",
+        "U1.JINT",
+        "PDB.JPICO",
+        "DB.J3V3"
+      ],
+      "branches": [
+        {
+          "bundle": "B1",
+          "name": "Sensor",
+          "ends": [
+            "P1",
+            "U1"
+          ],
+          "wires": 7,
+          "awg": 24,
+          "cut_mm": 95,
+          "fixed": false
+        },
+        {
+          "bundle": "B2",
+          "name": "3V3 feed",
+          "ends": [
+            "P1",
+            "DB"
+          ],
+          "wires": 2,
+          "awg": 22,
+          "cut_mm": 335,
+          "fixed": false
+        },
+        {
+          "bundle": "B8",
+          "name": "Pico power",
+          "ends": [
+            "PDB",
+            "P1"
+          ],
+          "wires": 2,
+          "awg": 22,
+          "cut_mm": 330,
+          "fixed": false
+        }
+      ],
+      "wires": 11,
+      "connectors": [
+        "DB.J3V3",
+        "P1.PH-C",
+        "P1.PH-F",
+        "PDB.JPICO",
+        "U1.JINT",
+        "U1.JMAIN"
+      ],
+      "longest_mm": 335
+    },
+    {
+      "id": "H2",
+      "name": "Right trunk harness",
+      "note": "All Pico I/O down the front face of the far half. Three branches: driver board, leg junction encoders, kill-chain sense.",
+      "pico": [
+        "P1.PH-A",
+        "P1.PH-A2",
+        "P1.PH-B",
+        "P1.PH-D",
+        "P1.PH-E"
+      ],
+      "ends": [
+        "DB.JSIG-L",
+        "DB.JSIG-R",
+        "DB.JCTL",
+        "JLEG.JENC",
+        "KC.JHB"
+      ],
+      "branches": [
+        {
+          "bundle": "B3",
+          "name": "Left driver signals",
+          "ends": [
+            "P1",
+            "DB"
+          ],
+          "wires": 5,
+          "awg": 24,
+          "cut_mm": 335,
+          "fixed": false
+        },
+        {
+          "bundle": "B4",
+          "name": "Right driver signals",
+          "ends": [
+            "P1",
+            "DB"
+          ],
+          "wires": 5,
+          "awg": 24,
+          "cut_mm": 335,
+          "fixed": false
+        },
+        {
+          "bundle": "B5",
+          "name": "Driver sleep",
+          "ends": [
+            "P1",
+            "DB"
+          ],
+          "wires": 1,
+          "awg": 24,
+          "cut_mm": 335,
+          "fixed": false
+        },
+        {
+          "bundle": "B6",
+          "name": "Encoder signals",
+          "ends": [
+            "P1",
+            "JLEG"
+          ],
+          "wires": 5,
+          "awg": 24,
+          "cut_mm": 350,
+          "fixed": false
+        },
+        {
+          "bundle": "B7",
+          "name": "Kill-chain sense",
+          "ends": [
+            "P1",
+            "KC"
+          ],
+          "wires": 3,
+          "awg": 24,
+          "cut_mm": 395,
+          "fixed": false
+        }
+      ],
+      "wires": 19,
+      "connectors": [
+        "DB.JCTL",
+        "DB.JSIG-L",
+        "DB.JSIG-R",
+        "JLEG.JENC",
+        "KC.JHB",
+        "P1.PH-A",
+        "P1.PH-A2",
+        "P1.PH-B",
+        "P1.PH-D",
+        "P1.PH-E"
+      ],
+      "longest_mm": 395
+    },
+    {
+      "id": "H3",
+      "name": "Logic bus",
+      "note": "Unswitched fused bus up to the 5 V regulator. 22 AWG.",
+      "pico": [],
+      "ends": [
+        "KC.JBUS",
+        "PDB.JIN"
+      ],
+      "branches": [
+        {
+          "bundle": "B9",
+          "name": "Logic bus",
+          "ends": [
+            "KC",
+            "PDB"
+          ],
+          "wires": 2,
+          "awg": 22,
+          "cut_mm": 280,
+          "fixed": false
+        }
+      ],
+      "wires": 2,
+      "connectors": [
+        "KC.JBUS",
+        "PDB.JIN"
+      ],
+      "longest_mm": 280
+    },
+    {
+      "id": "H4",
+      "name": "Switched rail",
+      "note": "Pololu 2813 VOUT across the PWR deck to both drivers. XT30, 20 AWG.",
+      "pico": [],
+      "ends": [
+        "KC.XRAIL",
+        "DB.XRAIL"
+      ],
+      "branches": [
+        {
+          "bundle": "B10",
+          "name": "Switched rail",
+          "ends": [
+            "KC",
+            "DB"
+          ],
+          "wires": 2,
+          "awg": 20,
+          "cut_mm": 95,
+          "fixed": false
+        }
+      ],
+      "wires": 2,
+      "connectors": [
+        "DB.XRAIL",
+        "KC.XRAIL"
+      ],
+      "longest_mm": 95
+    },
+    {
+      "id": "H5",
+      "name": "Encoder supply",
+      "note": "5 V and GND down the mid gap to the leg junction board. 22 AWG.",
+      "pico": [],
+      "ends": [
+        "PDB.J5V",
+        "JLEG.J5V"
+      ],
+      "branches": [
+        {
+          "bundle": "B11",
+          "name": "Encoder supply",
+          "ends": [
+            "PDB",
+            "JLEG"
+          ],
+          "wires": 2,
+          "awg": 22,
+          "cut_mm": 295,
+          "fixed": false
+        }
+      ],
+      "wires": 2,
+      "connectors": [
+        "JLEG.J5V",
+        "PDB.J5V"
+      ],
+      "longest_mm": 295
+    },
+    {
+      "id": "H6",
+      "name": "Left motor power",
+      "note": "OUT1 / OUT2, straight down. 22 AWG.",
+      "pico": [],
+      "ends": [
+        "DB.JML",
+        "JLEG.JPL"
+      ],
+      "branches": [
+        {
+          "bundle": "B12",
+          "name": "Left motor power",
+          "ends": [
+            "DB",
+            "JLEG"
+          ],
+          "wires": 2,
+          "awg": 22,
+          "cut_mm": 100,
+          "fixed": false
+        }
+      ],
+      "wires": 2,
+      "connectors": [
+        "DB.JML",
+        "JLEG.JPL"
+      ],
+      "longest_mm": 100
+    },
+    {
+      "id": "H7",
+      "name": "Right motor power",
+      "note": "OUT1 / OUT2, straight down. 22 AWG.",
+      "pico": [],
+      "ends": [
+        "DB.JMR",
+        "JLEG.JPR"
+      ],
+      "branches": [
+        {
+          "bundle": "B13",
+          "name": "Right motor power",
+          "ends": [
+            "DB",
+            "JLEG"
+          ],
+          "wires": 2,
+          "awg": 22,
+          "cut_mm": 100,
+          "fixed": false
+        }
+      ],
+      "wires": 2,
+      "connectors": [
+        "DB.JMR",
+        "JLEG.JPR"
+      ],
+      "longest_mm": 100
+    },
+    {
+      "id": "H8",
+      "name": "Left motor pigtail",
+      "note": "Vendor cable, 200 mm, 1x6 0.1 in housing. No work.",
+      "pico": [],
+      "ends": [
+        "ML.PIGTAIL",
+        "JLEG.JML_IN"
+      ],
+      "branches": [
+        {
+          "bundle": "B14",
+          "name": "Left motor pigtail (vendor)",
+          "ends": [
+            "ML",
+            "JLEG"
+          ],
+          "wires": 6,
+          "awg": "vendor",
+          "cut_mm": 200,
+          "fixed": true
+        }
+      ],
+      "wires": 6,
+      "connectors": [
+        "JLEG.JML_IN",
+        "ML.PIGTAIL"
+      ],
+      "longest_mm": 200
+    },
+    {
+      "id": "H9",
+      "name": "Right motor pigtail",
+      "note": "Vendor cable, 200 mm, 1x6 0.1 in housing. No work.",
+      "pico": [],
+      "ends": [
+        "MR.PIGTAIL",
+        "JLEG.JMR_IN"
+      ],
+      "branches": [
+        {
+          "bundle": "B15",
+          "name": "Right motor pigtail (vendor)",
+          "ends": [
+            "MR",
+            "JLEG"
+          ],
+          "wires": 6,
+          "awg": "vendor",
+          "cut_mm": 200,
+          "fixed": true
+        }
+      ],
+      "wires": 6,
+      "connectors": [
+        "JLEG.JMR_IN",
+        "MR.PIGTAIL"
+      ],
+      "longest_mm": 200
+    },
+    {
+      "id": "H10",
+      "name": "Pack lead",
+      "note": "Pack to the inline fuse to the kill-chain board. XT30 at the board. 20 AWG.",
+      "pico": [],
+      "ends": [
+        "BAT.LEADS",
+        "F1.INLINE",
+        "KC.XPACK"
+      ],
+      "branches": [
+        {
+          "bundle": "B16",
+          "name": "Pack",
+          "ends": [
+            "BAT",
+            "KC"
+          ],
+          "wires": 3,
+          "awg": 20,
+          "cut_mm": 200,
+          "fixed": false
+        }
+      ],
+      "wires": 3,
+      "connectors": [
+        "BAT.LEADS",
+        "F1.INLINE",
+        "KC.XPACK"
+      ],
+      "longest_mm": 200
+    },
+    {
+      "id": "H11",
+      "name": "KILL button lead",
+      "note": "Fixture lead, 600 mm.",
+      "pico": [],
+      "ends": [
+        "SWK.LEADS",
+        "KC.JKILL"
+      ],
+      "branches": [
+        {
+          "bundle": "B17",
+          "name": "KILL button (fixture)",
+          "ends": [
+            "SWK",
+            "KC"
+          ],
+          "wires": 2,
+          "awg": 24,
+          "cut_mm": 600,
+          "fixed": true
+        }
+      ],
+      "wires": 2,
+      "connectors": [
+        "KC.JKILL",
+        "SWK.LEADS"
+      ],
+      "longest_mm": 600
+    },
+    {
+      "id": "H12",
+      "name": "ARM button lead",
+      "note": "Fixture lead, 600 mm.",
+      "pico": [],
+      "ends": [
+        "SWA.LEADS",
+        "KC.JARM"
+      ],
+      "branches": [
+        {
+          "bundle": "B18",
+          "name": "ARM button (fixture)",
+          "ends": [
+            "SWA",
+            "KC"
+          ],
+          "wires": 2,
+          "awg": 24,
+          "cut_mm": 600,
+          "fixed": true
+        }
+      ],
+      "wires": 2,
+      "connectors": [
+        "KC.JARM",
+        "SWA.LEADS"
+      ],
+      "longest_mm": 600
+    }
+  ],
   "bom": {
     "purchase": [
       {
@@ -2096,14 +2575,14 @@
       }
     ],
     "xh_housings": {
-      "XHP-2": 15,
+      "XHP-2": 16,
       "XHP-3": 3,
       "XHP-4": 3,
       "XHP-5": 4,
       "XHP-6": 3
     },
     "xh_headers": {
-      "B2B-XH-A": 13,
+      "B2B-XH-A": 14,
       "B3B-XH-A": 3,
       "B4B-XH-A": 3,
       "B5B-XH-A": 4,

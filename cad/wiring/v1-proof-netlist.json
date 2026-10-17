@@ -1231,17 +1231,43 @@
       "position_index": 1,
       "net": "nSLEEP"
     },
-    "DB.JCTL.2": {
+    "DB.J3V3.1": {
       "component": "DB",
       "pin": "3V3",
       "position": [
         1700,
         1365.468
       ],
-      "label": "JCTL.2 / 3V3",
+      "label": "J3V3.1 / 3V3",
+      "connector": "DB.J3V3",
+      "position_index": 1,
+      "net": "3V3"
+    },
+    "DB.J3V3.2": {
+      "component": "DB",
+      "pin": "spare",
+      "position": [
+        1800,
+        1365.468
+      ],
+      "label": "J3V3.2 / spare",
+      "nc": true,
+      "connector": "DB.J3V3",
+      "position_index": 2,
+      "net": null
+    },
+    "DB.JCTL.2": {
+      "component": "DB",
+      "pin": "spare",
+      "position": [
+        1620,
+        1365.468
+      ],
+      "label": "JCTL.2 / spare",
+      "nc": true,
       "connector": "DB.JCTL",
       "position_index": 2,
-      "net": "3V3"
+      "net": null
     },
     "DB.XRAIL.1": {
       "component": "DB",
@@ -2164,7 +2190,7 @@
     {
       "id": "W009",
       "source": "SP1",
-      "destination": "DB.JCTL.2",
+      "destination": "DB.J3V3.1",
       "net": "3V3",
       "color": "#8260a9",
       "route": [

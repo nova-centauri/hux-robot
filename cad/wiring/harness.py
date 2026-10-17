@@ -89,8 +89,10 @@ CONNECTORS = {
                       load={1: ('EN', 'L_EN'), 2: ('PH', 'L_PH'), 3: ('nFAULT', 'L_FAULT'), 4: ('CS out', 'L_CS'), 5: ('GND', 'GND')}),
     'DB.JSIG-R': dict(board='DB', family='XH', positions=5, pins='protoboard', title='Right driver signals',
                       load={1: ('EN', 'R_EN'), 2: ('PH', 'R_PH'), 3: ('nFAULT', 'R_FAULT'), 4: ('CS out', 'R_CS'), 5: ('GND', 'GND')}),
-    'DB.JCTL': dict(board='DB', family='XH', positions=2, pins='protoboard', title='Shared nSLEEP and pull-up supply',
-                    load={1: ('nSLEEP', 'nSLEEP'), 2: ('3V3', '3V3')}),
+    'DB.JCTL': dict(board='DB', family='XH', positions=2, pins='protoboard', title='Shared nSLEEP',
+                    load={1: ('nSLEEP', 'nSLEEP'), 2: ('spare', None)}),
+    'DB.J3V3': dict(board='DB', family='XH', positions=2, pins='protoboard', title='Pull-up supply from the Pico 3V3',
+                    load={1: ('3V3', '3V3'), 2: ('spare', None)}),
     'DB.JML': dict(board='DB', family='XH', positions=2, pins='protoboard', title='Left motor OUT1 / OUT2',
                    load={1: ('OUT1', 'L_MOTOR_OUT1'), 2: ('OUT2', 'L_MOTOR_OUT2')}),
     'DB.JMR': dict(board='DB', family='XH', positions=2, pins='protoboard', title='Right motor OUT1 / OUT2',
@@ -154,7 +156,7 @@ BUNDLES = [
         ('P1.PH-C.4', 'U1.JMAIN.4', 'SPI_SCL'), ('P1.PH-C.5', 'U1.JMAIN.3', 'SPI_SDI'), ('P1.PH-C.6', 'U1.JINT.2', 'IMU_INT1'),
         ('SP1', 'U1.JMAIN.2', '3V3')]),
     dict(id='B2', name='3V3 feed', ends=('P1', 'DB'), awg=22, wires=[
-        ('P1.PH-F.1', 'SP1', '3V3'), ('SP1', 'DB.JCTL.2', '3V3')]),
+        ('P1.PH-F.1', 'SP1', '3V3'), ('SP1', 'DB.J3V3.1', '3V3')]),
     dict(id='B3', name='Left driver signals', ends=('P1', 'DB'), awg=24, wires=[
         ('P1.PH-A2.2', 'DB.JSIG-L.1', 'L_EN'), ('P1.PH-A2.3', 'DB.JSIG-L.2', 'L_PH'), ('P1.PH-B.5', 'DB.JSIG-L.3', 'L_FAULT'),
         ('P1.PH-E.1', 'DB.JSIG-L.4', 'L_CS'), ('P1.PH-B.3', 'DB.JSIG-L.5', 'GND')]),
@@ -211,6 +213,27 @@ PURCHASE = [
          note='Shortcut for the first build: cut the leads to the EL-06 lengths and solder the joins. Search the kit results for a pre-crimped set.'),
     dict(item='XT30 connector pairs with pigtails (pack, fuse, rail)', vendor='hobby supplier', price_usd=None, asin=None, url=None,
          note='Two pairs. Match the pack connector when the pack is chosen.'),
+]
+
+# Physical harnesses: the bundles that are built as one assembly. Every
+# connector housing belongs to exactly one harness.
+HARNESSES = [
+    dict(id='H1', name='CTRL deck harness', bundles=['B1', 'B2', 'B8'],
+         pico=['P1.PH-C', 'P1.PH-F'], ends=['U1.JMAIN', 'U1.JINT', 'PDB.JPICO', 'DB.J3V3'],
+         note='Sensor wires to the IMU, logic power from the PDB, one 3V3 tail down the far side to the driver board. Splice SP1 near the Pico.'),
+    dict(id='H2', name='Right trunk harness', bundles=['B3', 'B4', 'B5', 'B6', 'B7'],
+         pico=['P1.PH-A', 'P1.PH-A2', 'P1.PH-B', 'P1.PH-D', 'P1.PH-E'], ends=['DB.JSIG-L', 'DB.JSIG-R', 'DB.JCTL', 'JLEG.JENC', 'KC.JHB'],
+         note='All Pico I/O down the front face of the far half. Three branches: driver board, leg junction encoders, kill-chain sense.'),
+    dict(id='H3', name='Logic bus', bundles=['B9'], pico=[], ends=['KC.JBUS', 'PDB.JIN'], note='Unswitched fused bus up to the 5 V regulator. 22 AWG.'),
+    dict(id='H4', name='Switched rail', bundles=['B10'], pico=[], ends=['KC.XRAIL', 'DB.XRAIL'], note='Pololu 2813 VOUT across the PWR deck to both drivers. XT30, 20 AWG.'),
+    dict(id='H5', name='Encoder supply', bundles=['B11'], pico=[], ends=['PDB.J5V', 'JLEG.J5V'], note='5 V and GND down the mid gap to the leg junction board. 22 AWG.'),
+    dict(id='H6', name='Left motor power', bundles=['B12'], pico=[], ends=['DB.JML', 'JLEG.JPL'], note='OUT1 / OUT2, straight down. 22 AWG.'),
+    dict(id='H7', name='Right motor power', bundles=['B13'], pico=[], ends=['DB.JMR', 'JLEG.JPR'], note='OUT1 / OUT2, straight down. 22 AWG.'),
+    dict(id='H8', name='Left motor pigtail', bundles=['B14'], pico=[], ends=['ML.PIGTAIL', 'JLEG.JML_IN'], note='Vendor cable, 200 mm, 1x6 0.1 in housing. No work.'),
+    dict(id='H9', name='Right motor pigtail', bundles=['B15'], pico=[], ends=['MR.PIGTAIL', 'JLEG.JMR_IN'], note='Vendor cable, 200 mm, 1x6 0.1 in housing. No work.'),
+    dict(id='H10', name='Pack lead', bundles=['B16'], pico=[], ends=['BAT.LEADS', 'F1.INLINE', 'KC.XPACK'], note='Pack to the inline fuse to the kill-chain board. XT30 at the board. 20 AWG.'),
+    dict(id='H11', name='KILL button lead', bundles=['B17'], pico=[], ends=['SWK.LEADS', 'KC.JKILL'], note='Fixture lead, 600 mm.'),
+    dict(id='H12', name='ARM button lead', bundles=['B18'], pico=[], ends=['SWA.LEADS', 'KC.JARM'], note='Fixture lead, 600 mm.'),
 ]
 
 TERMINATION_MM = 15      # strip, crimp and housing entry, each end
@@ -342,7 +365,31 @@ def data():
                 length_model=dict(rule='Manhattan path: board -> front deck notch -> front face -> notch -> board. Cut = path x 1.10 + 2 x 15 mm, rounded up to 5 mm.',
                                   status='Estimate. Cut long, route on the frame, trim, record the measured length.'),
                 locations={k: {kk: vv for kk, vv in v.items()} for k, v in LOCATIONS.items()},
-                connectors=CONNECTORS, splices=SPLICES, bundles=runs, wires=wires(), bom=bom())
+                connectors=CONNECTORS, splices=SPLICES, bundles=runs, wires=wires(), harnesses=harnesses(runs), bom=bom())
+
+
+def harnesses(runs):
+    """Physical harness cards: ends, housings, branch lengths."""
+    by_id = {r['id']: r for r in runs}
+    out = []
+    owner = {}
+    for h in HARNESSES:
+        conns = set(h['pico']) | set(h['ends'])
+        for b in h['bundles']:
+            for src, dst, net in next(x for x in BUNDLES if x['id'] == b)['wires']:
+                for e in (src, dst):
+                    if e not in SPLICES:
+                        conns.add(e.rsplit('.', 1)[0])
+        for c in conns:
+            assert c not in owner, ('connector in two harnesses', c, owner.get(c), h['id'])
+            owner[c] = h['id']
+        branches = [dict(bundle=b, name=by_id[b]['name'], ends=by_id[b]['ends'], wires=by_id[b]['conductors'], awg=by_id[b]['awg'], cut_mm=by_id[b]['cut_mm'], fixed=by_id[b]['fixed']) for b in h['bundles']]
+        wires_total = sum(x['wires'] for x in branches)
+        out.append(dict(id=h['id'], name=h['name'], note=h['note'], pico=h['pico'], ends=h['ends'], branches=branches, wires=wires_total,
+                        connectors=sorted(conns), longest_mm=max((x['cut_mm'] or 0) for x in branches)))
+    unowned = {k for k in CONNECTORS if k not in owner and k != 'JUSB.CABLE' and k != 'P1.USB' and k != 'P1.PH-G'}
+    assert not unowned, ('connector without a harness', unowned)
+    return out
 
 
 def write_outputs():
@@ -360,14 +407,17 @@ def write_outputs():
     for key, c in d['connectors'].items():
         loads = '<br>'.join(f"{pos}: {pin}" + (f" — {net}" if net else ' — empty') for pos, (pin, net) in sorted(c['load'].items()))
         crows.append('<tr>' + ''.join(f'<td>{t}</td>' for t in [escape(key), escape(c['family']), c['positions'], escape(c['pins']), escape(c['title']), loads]) + '</tr>')
+    hrows = ''.join('<tr>' + ''.join(f'<td>{escape(str(t))}</td>' for t in [h['id'], h['name'], ', '.join(h['pico'] or [h['ends'][0]]), ', '.join(e for e in h['ends'] if e not in (h['pico'] or [h['ends'][0]])), h['wires'], '; '.join(f"{x['bundle']} {x['cut_mm']} mm" + (' fixed' if x['fixed'] else '') for x in h['branches'])]) + '</tr>' for h in d['harnesses'])
     brows = ''.join(f'<tr><td>{escape(k)}</td><td>{escape(str(v))}</td></tr>' for group in ['xh_housings', 'xh_headers', 'wire_mm_by_awg'] for k, v in d['bom'][group].items())
     brows += f"<tr><td>SXH-001T-P0.6 contacts</td><td>{d['bom']['xh_contacts']} used, buy {d['bom']['xh_contacts_with_spares']}</td></tr>"
     brows += f"<tr><td>XT30 pairs</td><td>{d['bom']['xt30_pairs']}</td></tr><tr><td>1x6 0.1 in male headers</td><td>{d['bom']['pololu_1x6_male_headers']}</td></tr>"
     prows = ''.join('<tr><td>' + (f'<a href="{escape(x["url"])}">{escape(x["item"])}</a>' if x['url'] else escape(x['item'])) + f"</td><td>{escape(x['vendor'])}</td><td>{'$%.2f' % x['price_usd'] if x['price_usd'] else 'open'}</td><td>{escape(x['note'])}</td></tr>" for x in d['bom']['purchase'])
     html = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hux Rev C harness register</title><style>body{{margin:0;background:#f7f5ee;color:#20343e;font:16px/1.6 system-ui,sans-serif}}main{{max-width:1200px;margin:auto;padding:32px}}h1{{font-size:36px;line-height:1.15}}h2{{font-size:24px;margin-top:40px}}a{{color:#387b65}}input{{font:inherit;width:100%;padding:12px;box-sizing:border-box;border:1px solid #647780;background:#fffef9}}table{{width:100%;border-collapse:collapse;margin-top:16px;font-size:14px}}th,td{{text-align:left;padding:10px 12px;border-bottom:1px solid #ced8d7;vertical-align:top}}th{{background:#e8eeea}}.scroll{{overflow:auto}}small{{color:#647780}}input:focus-visible,a:focus-visible{{outline:3px solid #218ca0;outline-offset:3px}}</style></head><body><main>
-<p>HUX / V1-PROOF / HARNESS / REV {REVISION}</p><h1>Bundles, run lengths and connector loading</h1>
+<p>HUX / V1-PROOF / HARNESS / REV {REVISION}</p><h1>Harnesses, cut lengths and connector loading</h1>
 <p>{DATE}. The run lengths come from a route model, not from a measurement. Cut each run long, route it on the frame, then trim it and record the length. The robot LEFT is the near wall.</p>
 <p><a href="../../tools/living-drawings/electrical.html">Electrical page</a> · <a href="v1-proof-el-01-overview.svg">EL-01 by location</a> · <a href="v1-proof-el-06-harness-runs.svg">EL-06 runs</a> · <a href="v1-proof-el-07-connectors.svg">EL-07 connectors</a> · <a href="v1-proof-harness.json">JSON</a> · <a href="v1-proof-wire-register.html">EL-01 conductor register</a></p>
+<h2>Twelve harnesses</h2><div class="scroll"><table><thead><tr><th>Harness</th><th>Name</th><th>From</th><th>To</th><th>Wires</th><th>Branch cut lengths</th></tr></thead><tbody>{hrows}</tbody></table></div>
+<p><small>Each housing belongs to one harness. EL-06 draws one card for each harness. The bundle table below is the detail behind the cards.</small></p>
 <h2>Connector standard</h2><table><tbody>{''.join(f'<tr><td>{escape(k)}</td><td>{escape(v)}</td></tr>' for k, v in d['standard'].items())}</tbody></table>
 <h2>Bundles and cut lengths</h2><div class="scroll"><table><thead><tr><th>Bundle</th><th>Name</th><th>Ends</th><th>Wires</th><th>AWG</th><th>Model path</th><th>Cut length</th></tr></thead><tbody>{''.join(rows)}</tbody></table></div>
 <p><small>{escape(d['length_model']['rule'])} B14 and B15 are the vendor pigtails. B17 and B18 are fixture leads for the bench. The USB cable is external.</small></p>

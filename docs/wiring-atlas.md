@@ -11,7 +11,7 @@ The [harness register](../cad/wiring/v1-proof-harness.html) has the bundles, the
 | EL-03 | [Wheel harness](../cad/wiring/v1-proof-el-03-wheel-harness.svg) | Exact DRV8874 pad order, motor lead colors, the leg junction board and the wheel GPIOs |
 | EL-04 | [Power + kill chain](../cad/wiring/v1-proof-el-04-power-servo.svg) | Fused pack, Pololu 2813 latched rail switch, 74HC14 heartbeat gate, logic branch and the open items |
 | EL-05 | [Both wheel motors — every wire](../cad/wiring/v1-proof-el-05-both-wheels.svg) | Two complete channels through the leg junction board, with terminal names |
-| EL-06 | [Harness bundles and run lengths](../cad/wiring/v1-proof-el-06-harness-runs.svg) | Route model on the body, a cut length for each bundle, connector hardware count |
+| EL-06 | [Harnesses](../cad/wiring/v1-proof-el-06-harness-runs.svg) | One card for each of the twelve harnesses: the two ends, the housings and the cut length of each branch |
 | EL-07 | [Connector loading](../cad/wiring/v1-proof-el-07-connectors.svg) | Each harness connector with its positions, pins, nets and mating wire |
 
 ## What changed in Rev C
@@ -90,9 +90,32 @@ The Pico 2 gets eight connectors in contiguous pin groups. Each harness branch p
 
 The 3V3 output of PH-F feeds the IMU and the driver pull-ups through one splice, SP1, about 30 mm from the Pico header.
 
+## Twelve harnesses
+
+The wires build as twelve harnesses. Every connector housing belongs to one harness. EL-06 shows one card for each harness.
+
+H1 is the CTRL deck harness. It runs from PH-C and PH-F to the IMU, the PDB and the driver 3V3 input. H2 is the right trunk. It runs from PH-A to PH-E down to the driver board, the leg junction board and the kill-chain board.
+
+The other ten are two-wire or six-wire runs between two housings. The driver board gets its own two-position 3V3 input, J3V3, so that no housing is shared.
+
+| Harness | From | To | Wires | Longest cut |
+| --- | --- | --- | ---: | ---: |
+| H1 CTRL deck | P1.PH-C, P1.PH-F | U1.JMAIN, U1.JINT, PDB.JPICO, DB.J3V3 | 11 | 335 mm |
+| H2 Right trunk | P1.PH-A, PH-A2, PH-B, PH-D, PH-E | DB.JSIG-L, DB.JSIG-R, DB.JCTL, JLEG.JENC, KC.JHB | 19 | 395 mm |
+| H3 Logic bus | KC.JBUS | PDB.JIN | 2 | 280 mm |
+| H4 Switched rail | KC.XRAIL | DB.XRAIL | 2 | 95 mm |
+| H5 Encoder supply | PDB.J5V | JLEG.J5V | 2 | 295 mm |
+| H6 Left motor power | DB.JML | JLEG.JPL | 2 | 100 mm |
+| H7 Right motor power | DB.JMR | JLEG.JPR | 2 | 100 mm |
+| H8 Left motor pigtail | ML | JLEG.JML_IN | 6 | 200 mm, vendor |
+| H9 Right motor pigtail | MR | JLEG.JMR_IN | 6 | 200 mm, vendor |
+| H10 Pack lead | BAT | F1, KC.XPACK | 3 | 200 mm |
+| H11 KILL button | SWK | KC.JKILL | 2 | 600 mm, fixture |
+| H12 ARM button | SWA | KC.JARM | 2 | 600 mm, fixture |
+
 ## Bundles and run lengths
 
-The route model is a Manhattan path. It goes from the board to the front cable notch of its deck lane, then along the front face of the body. It then goes through the notch of the other lane to the board. The cut length is the path length plus 10 percent, plus 15 mm at each end for the termination, rounded up to 5 mm. **The lengths are estimates.** Cut each run long, route it on the frame, trim it and record the measured length.
+The bundles below are the detail behind the harness cards. The route model is a Manhattan path. It goes from the board to the front cable notch of its deck lane, then along the front face of the body. It then goes through the notch of the other lane to the board. The cut length is the path length plus 10 percent, plus 15 mm at each end for the termination, rounded up to 5 mm. **The lengths are estimates.** Cut each run long, route it on the frame, trim it and record the measured length.
 
 | Bundle | Name | Wires | AWG | Model path | Cut length |
 | --- | --- | ---: | ---: | ---: | ---: |

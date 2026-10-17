@@ -56,16 +56,16 @@
 <g data-wire="W008"><title>W008: SP1 → U1.JMAIN.2 / 3V3</title>
 <polyline points="1340,585.243 1470,585.243" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W009"><title>W009: SP1 → DB.JCTL.2 / 3V3</title>
+<g data-wire="W009"><title>W009: SP1 → DB.J3V3.1 / 3V3</title>
 <polyline points="1470,585.243 1470,1300.449" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W009"><title>W009: SP1 → DB.JCTL.2 / 3V3</title>
+<g data-wire="W009"><title>W009: SP1 → DB.J3V3.1 / 3V3</title>
 <polyline points="1470,1300.449 1535,1300.449" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W009"><title>W009: SP1 → DB.JCTL.2 / 3V3</title>
+<g data-wire="W009"><title>W009: SP1 → DB.J3V3.1 / 3V3</title>
 <polyline points="1545,1300.449 1700,1300.449" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
-<g data-wire="W009"><title>W009: SP1 → DB.JCTL.2 / 3V3</title>
+<g data-wire="W009"><title>W009: SP1 → DB.J3V3.1 / 3V3</title>
 <polyline points="1700,1300.449 1700,1365.468" fill="none" stroke="#8260a9" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round" />
 </g>
 <g data-wire="W010"><title>W010: PDB.JPICO.1 → P1.PH-F.4 / VSYS</title>
@@ -824,7 +824,11 @@
 <circle cx="1540" cy="1365.468" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5" />
 <text x="1552" y="1355.715" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">JCTL.1 / nSLEEP</text>
 <circle cx="1700" cy="1365.468" r="5" fill="#fffef9" stroke="#8260a9" stroke-width="2.5" />
-<text x="1712" y="1355.715" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="start" letter-spacing="0" fill="#8260a9">JCTL.2 / 3V3</text>
+<text x="1712" y="1355.715" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="start" letter-spacing="0" fill="#8260a9">J3V3.1 / 3V3</text>
+<circle cx="1800" cy="1365.468" r="5" fill="#fffef9" stroke="#ced8d7" stroke-width="2.5" />
+<text x="1812" y="1355.715" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">J3V3.2 / spare</text>
+<circle cx="1620" cy="1365.468" r="5" fill="#fffef9" stroke="#ced8d7" stroke-width="2.5" />
+<text x="1632" y="1355.715" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="start" letter-spacing="0" fill="#647780">JCTL.2 / spare</text>
 <circle cx="1500" cy="1511.76" r="5" fill="#fffef9" stroke="#db5a4a" stroke-width="2.5" />
 <text x="1514" y="1516.637" font-family="Arial,Helvetica,sans-serif" font-size="20.0" font-weight="600" text-anchor="start" letter-spacing="0" fill="#db5a4a">XRAIL.1 / +</text>
 <circle cx="1500" cy="1544.27" r="5" fill="#fffef9" stroke="#52676d" stroke-width="2.5" />

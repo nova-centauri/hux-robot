@@ -267,7 +267,7 @@ def full_system():
     # ---- Driver board ----
     d.box('DB',1500,1640,920,300,'Driver board','DL, DR: Pololu 4035 / DRV8874 carriers on one 52 x 38 mm board · EL-03, EL-05',color=C['blue'],
           lines=['10 kΩ nFAULT pull-ups to 3V3. 1 kΩ CS series.','VREF divider ≈ 2.8 V (≈ 2.5 A). PMODE, IMODE to GND. VM NC.','nSLEEP from GP10 to both carriers.','EN low = brake. nSLEEP low = outputs off.','OUT1 / OUT2 go to JLEG, not to the motor directly.'],line_y=1715,line_x=1660)
-    hx_port(d,'DB.JCTL',1,1540,1640,'top');hx_port(d,'DB.JCTL',2,1700,1640,'top')
+    hx_port(d,'DB.JCTL',1,1540,1640,'top');hx_port(d,'DB.J3V3',1,1700,1640,'top');hx_port(d,'DB.J3V3',2,1800,1640,'top');hx_port(d,'DB.JCTL',2,1620,1640,'top')
     hx_port(d,'DB.XRAIL',1,1500,1820,'left');hx_port(d,'DB.XRAIL',2,1500,1860,'left')
     for pos,y in zip(range(1,6),range(1670,1820,30)):hx_port(d,'DB.JSIG-L',pos,2420,y,'right',size=18)
     for pos,y in zip(range(1,6),range(1820,1970,30)):hx_port(d,'DB.JSIG-R',pos,2420,y,'right',size=18)
@@ -314,7 +314,7 @@ def full_system():
     for pos,dst in [(1,'U1.JMAIN.5'),(2,'U1.JMAIN.6'),(3,'U1.JMAIN.1'),(4,'U1.JMAIN.4'),(5,'U1.JMAIN.3'),(6,'U1.JINT.2')]:
         net=HX.CONNECTORS['P1.PH-C']['load'][pos][1];W(f'P1.PH-C.{pos}',dst,net)
     W('P1.PH-F.1','SP1','3V3');W('SP1','U1.JMAIN.2','3V3')
-    W('SP1','DB.JCTL.2','3V3',[(1470,1560),(1700,1560)])
+    W('SP1','DB.J3V3.1','3V3',[(1470,1560),(1700,1560)])
     W('PDB.JPICO.1','P1.PH-F.4','VSYS',[(1100,1160),(1520,1160),(1520,800)])
     W('PDB.JPICO.2','P1.PH-F.3','GND',[(1240,1140),(1500,1140),(1500,760)])
     W('KC.JBUS.1','PDB.JIN.1','BUS');W('KC.JBUS.2','PDB.JIN.2','GND')
@@ -411,79 +411,62 @@ def both_wheels():
     return d
 
 def harness_runs():
-    """EL-06: the route map and the bundle cut-length table."""
+    """EL-06: one card for each physical harness: ends, housings, cut lengths."""
     H=HX.data()
-    s=Sheet('EL-06','Harness bundles and run lengths','Route model on the R05 body, cut length for each bundle, connector hardware. Lengths are estimates: cut long, route on the frame, trim, record.',3200,2000,tabloid=True)
-    # Left: a front elevation (Y-Z) of the body with the boards and the trunk.
-    ox,oz=560,1230;SC=4.2   # scale: 1 mm = 4.2 px; Y = -135..0 maps right to left
-    def X(y):return ox+(-y)*SC
-    def Z(z):return oz-z*SC
-    s.text(64,217,'ROUTE MODEL / FRONT ELEVATION',12,C['green'],700,spacing=1)
-    s.text(64,240,'Boards at their R05 centres. Harness runs follow the front cable notches of each deck lane.',14,C['muted'])
-    # walls, decks, tray
-    for y0 in (0,-135):s.rect(X(y0)-(0 if y0==0 else 6*SC),Z(180),6*SC,(180+35)*SC,'#9fb3ad',2,'#9fb3ad')
-    for name,z in HX.DECK_Z.items():
-        s.rect(X(0),Z(z)-4*SC,135*SC,4*SC,'#d7e0dc',1,'#c3cfc9');s.text(X(0)+135*SC+12,Z(z),f'{name} Z +{z}',14,C['muted'],600)
-    s.rect(X(0),Z(-31),135*SC,4*SC,'#d7e0dc',1,'#c3cfc9');s.text(X(0)+135*SC+12,Z(-35)+6,'TRAY Z −35',14,C['muted'],600)
-    s.rect(X(-67.5)-17.5*SC,Z(-5),35*SC,25*SC,'#f3dad3',3,C['red'],True);s.text(X(-67.5),Z(-17.5)+5,'BAT',14,C['red'],700,'middle')
-    s.text(X(0)+6,Z(185),'NEAR WALL · LEFT',12,C['muted'],700,'end');s.text(X(-135)-6,Z(185),'FAR WALL · RIGHT',12,C['muted'],700)
-    for lane,y in HX.LANE_Y.items():
-        s.line([(X(y),Z(175)),(X(y),Z(55))],C['muted'],2,True);s.text(X(y),Z(178)-6,f'{lane} notch',12,C['muted'],600,'middle')
-    boards=[('P1',38,16,C['green']),('U1',24,10,C['green']),('PDB',36,20,C['orange']),('KC',36,20,C['red']),('DB',36,20,C['blue']),('JLEG',52,10,C['green'])]
-    for ref,w,h,col in boards:
-        x,y,z=HX.LOCATIONS[ref]['xyz'];s.rect(X(y)-w*SC/2,Z(z)-h*SC/2,w*SC,h*SC,'#fffef9',3,col);s.text(X(y),Z(z)+5,ref,15,col,700,'middle')
-    for ref,col in [('ML',C['blue']),('MR',C['blue'])]:
-        x,y,z=HX.LOCATIONS[ref]['xyz'];s.rect(X(y)-7*SC,Z(z)-17*SC,30*SC if ref=='MR' else 30*SC,34*SC,'#e4ebf3',4,col) if False else None
-        cx=X(y)+(-10 if ref=='ML' else 10)*SC
-        s.rect(cx-17*SC,Z(z)-17*SC,34*SC,34*SC,'#e8eef4',4,col);s.text(cx,Z(z)+5,ref,15,col,700,'middle')
-        s.rect(X(y)+(-67 if ref=='ML' else 40)*SC,Z(z)-50*SC,24*SC,100*SC,'#2b2f33',6,'#2b2f33')
-    s.text(X(-67.5),Z(-150),'wheels and gearmotors hang under the body; pigtails rise to JLEG',13,C['muted'],400,'middle')
-    # draw the modelled paths
-    for r in H['bundles']:
-        if not r.get('path'):continue
-        raw=[(X(y),Z(z)) for x,y,z in r['path']]
-        # Orthogonal drawing of the Manhattan model: vertical first, then across.
-        pts=[raw[0]]
-        for (x1,y1),(x2,y2) in zip(raw,raw[1:]):
-            if x1!=x2 and y1!=y2:pts.append((x1,y2))
-            pts.append((x2,y2))
-        s.line(pts,C['cyan'],2)
-        s.dot(*pts[0],C['cyan'],3);s.dot(*pts[-1],C['cyan'],3)
-    # Right: table
-    tx=1300;ty=260
-    s.text(tx,217,'BUNDLES / CUT LENGTHS',12,C['green'],700,spacing=1)
-    cols=[(0,'Bundle'),(90,'Name'),(560,'From → to'),(820,'Wires'),(920,'AWG'),(1030,'Model path'),(1200,'Cut length'),(1400,'Connectors')]
-    for dx,t in cols:s.text(tx+dx,ty,t,14,C['muted'],700)
-    s.line([(tx,ty+10),(tx+1800,ty+10)],C['line'],1)
-    bconn={}
-    for b in HX.BUNDLES:
-        ends=set()
-        for a,c,n in b['wires']:
-            for e in (a,c):
-                if e in HX.SPLICES:ends.add(e)
-                else:ends.add(e.rsplit('.',1)[0])
-        bconn[b['id']]=' · '.join(sorted(ends))
-    for i,r in enumerate(H['bundles']):
-        y=ty+40+i*34
-        cut='—' if r['cut_mm'] is None else f"{r['cut_mm']} mm"+(' fixed' if r['fixed'] else '')
-        path='—' if r['path_mm'] is None else f"{r['path_mm']} mm"
-        for dx,t,w_ in [(0,r['id'],700),(90,r['name'],600),(560,' → '.join(r['ends']),400),(820,str(r['conductors']),400),(920,str(r['awg']),400),(1030,path,400),(1200,cut,700),(1400,bconn[r['id']],400)]:
-            s.text(tx+dx,y,t,15 if dx!=1400 else 13,C['ink'] if w_==700 else C['muted'],w_)
-    yb=ty+40+len(H['bundles'])*34+20
-    s.line([(tx,yb-24),(tx+1800,yb-24)],C['line'],1)
-    s.text(tx,yb,'Length rule: ' + H['length_model']['rule'],14,C['muted'])
-    s.text(tx,yb+24,'Totals: '+', '.join(f'{kk} {v} mm' for kk,v in H['bom']['wire_mm_by_awg'].items())+'. Buy about 1.5 m of each.',14,C['muted'])
-    s.text(tx,yb+48,'Pigtail reach check: left motor exit to JLEG = 179 mm Manhattan, pigtail 200 mm. The left pigtail cannot reach the driver board (216 mm). JLEG accepted 2026-10-17.',14,C['muted'])
-    # Standard
-    sy=yb+100
-    s.text(tx,sy,'CONNECTOR STANDARD',12,C['green'],700,spacing=1)
-    for i,(kk,v) in enumerate(H['standard'].items()):s.text(tx,sy+28+i*24,f'{kk}: {v}',14 if len(v)<120 else 12,C['ink'] if i==0 else C['red'] if kk=='pico_end' else C['muted'],600 if i==0 or kk=='pico_end' else 400)
-    hy=sy+28+5*24+16
-    s.text(tx,hy,'HARDWARE COUNT (V1-PROOF harness)',12,C['green'],700,spacing=1)
-    items=[f'{kk} × {v}' for kk,v in H['bom']['xh_housings'].items()]+[f'{kk} × {v}' for kk,v in H['bom']['xh_headers'].items()]
-    s.text(tx,hy+28,'Housings: '+'  '.join(items[:6]),14,C['muted']);s.text(tx,hy+52,'Headers: '+'  '.join(items[6:]),14,C['muted'])
-    s.text(tx,hy+76,f"Contacts SXH-001T-P0.6: {H['bom']['xh_contacts']} used, buy {H['bom']['xh_contacts_with_spares']}. XT30 pairs: 2. 1x6 0.1 in male headers: 2. Crimp tool: IWISS SN-01BM or Engineer PA-09.",14,C['muted'])
-    s.text(64,Z(-200),'Left: robot LEFT = near wall. The pack lead exit is an assumption; measure the pack. Button leads are fixture runs (600 mm).',14,C['muted'])
+    s=Sheet('EL-06','Harnesses','Twelve harnesses. Each card shows the two ends, the housings with their position count and the cut length of each branch. Lengths are estimates: cut long, route on the frame, trim, record.',3200,2000,tabloid=True)
+    FAM={'XH':C['green'],'XT30':C['red'],'P6':C['blue']}
+    def housing(x,y,key,anchor='start'):
+        c=H['connectors'][key];n=c['positions'];fam=c['family'];col=FAM.get(fam,C['muted'])
+        w=n*16+8
+        x0=x if anchor=='start' else x-w
+        s.rect(x0,y-14,w,28,C['white'],4,col)
+        for i in range(n):
+            pin,net=c['load'][str(i+1)] if str(i+1) in c['load'] else c['load'][i+1]
+            s.rect(x0+4+i*16,y-9,12,18,col if net else '#e9ebe7',2,col if net else '#cfd4ce')
+        label=f"{key}  ({n}{'' if fam=='XH' else ' · '+fam})"
+        if anchor=='start':s.text(x0+w+12,y+5,label,15,C['ink'],600)
+        else:s.text(x0-12,y+5,label,15,C['ink'],600,'end')
+        return (x0,x0+w)
+    # bundle touching a far-end connector -> its cut length
+    touch={}
+    for bnd in HX.BUNDLES:
+        for src,dst,net in bnd['wires']:
+            for e in (src,dst):
+                if e not in HX.SPLICES:touch.setdefault(e.rsplit('.',1)[0],bnd['id'])
+    cut={r['id']:r for r in H['bundles']}
+    cw,ch,gx,gy=1000,330,36,26;x0,y0=64,225
+    for i,h in enumerate(H['harnesses']):
+        col,row=i%3,i//3;x=x0+col*(cw+gx);y=y0+row*(ch+gy)
+        s.rect(x,y,cw,ch,C['white'],10,C['line'])
+        s.rect(x,y,6,ch,C['green'],3,C['green'])
+        s.text(x+24,y+34,f"{h['id']}  ·  {h['name']}",22,C['ink'],700)
+        s.text(x+24,y+58,f"{h['wires']} wires  ·  longest cut {h['longest_mm']} mm",14,C['muted'])
+        # left ends: Pico housings, or the first end of a plain harness
+        lefts=h['pico'] or [h['ends'][0]]
+        rights=[e for e in h['ends'] if e not in lefts]
+        ly=y+100;spots=[]
+        for k in lefts:
+            housing(x+24,ly,k);spots.append(ly);ly+=38
+        ry=y+100;rspots=[]
+        for k in rights:
+            housing(x+cw-24,ry,k,'end');rspots.append((ry,k));ry+=38
+        # trunk: a bus from the left housings to each right end with the branch length
+        bx=x+430;by0=min(spots);by1=max(spots)
+        s.line([(bx,by0),(bx,by1)],C['cyan'],3) if by1>by0 else None
+        for sy in spots:s.line([(x+24+ (len(lefts) and 0) + 330,sy),(bx,sy)],C['cyan'],3)
+        tx=x+cw-24-330-20
+        mid=(by0+by1)/2
+        if len(rspots)>1:s.line([(bx,mid),(bx+60,mid)],C['cyan'],3);s.line([(bx+60,rspots[0][0]),(bx+60,rspots[-1][0])],C['cyan'],3)
+        for ry_,k in rspots:
+            bid=touch.get(k);L=cut[bid]['cut_mm'] if bid else None
+            sx=bx+60 if len(rspots)>1 else bx
+            if len(rspots)==1:s.line([(bx,mid),(bx,ry_)],C['cyan'],3) if ry_!=mid else None
+            s.line([(sx,ry_),(tx,ry_)],C['cyan'],3)
+            lab=f"{L} mm" + (' fixed' if bid and cut[bid]['fixed'] else '') if L else '—'
+            s.label(sx+30,ry_-8,lab,C['cyan'],14)
+        s.text(x+24,y+ch-18,h['note'],13,C['muted'])
+    s.text(64,1690,'Housings: green = JST XH 2.50 mm, red = XT30, blue = the Pololu 1x6 0.1 in housing. Grey cells are empty positions.',15,C['muted'])
+    s.text(64,1716,'Cut length = route model x 1.10 + 2 x 15 mm, rounded up to 5 mm. The USB cable and the optional UART0 header are not harnesses. EL-07 has the pin of every position.',15,C['muted'])
     return s.save('v1-proof-el-06-harness-runs')
 
 def connectors():
