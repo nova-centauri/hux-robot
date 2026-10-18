@@ -50,7 +50,7 @@ The current project has six primary sections, with the same navigation on drawin
 | --- | --- | --- |
 | Overview | `/` (also `/v1-proof.html`) | Build status, the live R05 anatomy, the R05 kit links and the design targets |
 | Mechanical | `/mechanical.html` | Assembly, interactive general arrangement and drawing register |
-| Electrical | `/electrical.html` | EL-01–07 wiring atlas, harness register, enlarged vector viewer, printable PDF and architecture |
+| Electrical | `/electrical.html` | Harness assembly guide, EL-01–07 wiring atlas, enlarged vector viewer, printable PDF and architecture |
 | Build & test | `/build.html` | Workbench, milestones, updates and local session notebook |
 | Parts & budget | `/parts.html` | Paid orders, shopping list, component register and allowances |
 | Documents | `/documents.html` | Discipline-grouped source register and historical archive |

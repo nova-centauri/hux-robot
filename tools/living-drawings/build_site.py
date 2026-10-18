@@ -40,7 +40,7 @@ MAIN_ROUTES = (
 SUB_ROUTES = {
     "mechanical.html": (("mechanical.html", "Assembly"), ("anatomy.html", "Anatomy"), ("docs/r05-assembly.html", "R05 assembly guide"), ("joints.html", "Joint details"),
                         ("wheel-mount.html", "Wheel mount"), ("mechanical-tests.html", "Mechanical tests")),
-    "electrical.html": (("electrical.html", "Wiring"), ("controls.html", "Control software")),
+    "electrical.html": (("electrical.html", "Wiring"), ("cad/wiring/v1-proof-harness.html", "Harness guide"), ("controls.html", "Control software")),
     "build.html": (("build.html", "Build plan"), ("docs/electronics-bench-guide.html", "Electronics bench"),
                    ("proof-simulation.html", "Simulation evidence"), ("proof-sandbox.html", "3D sandbox")),
 }

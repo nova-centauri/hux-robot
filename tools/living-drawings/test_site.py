@@ -124,6 +124,9 @@ class BuildTests(unittest.TestCase):
         for path in ['one-leg-bench', 'electronics-bench-guide', 'r05-assembly', 'parts-on-hand', 'decisions', 'checklists/README', 'archive/stair-v1/README']:
             (self.root / f'docs/{path}.md').write_text('# Working document\n\n## Setup\n\n- [ ] Verify\n')
         (self.root / 'README.md').write_text('# Hux\n\n[Models](tools/living-drawings/assets/)\n\n[Checklists](docs/checklists/)')
+        wiring = self.root / 'cad/wiring'
+        wiring.mkdir(parents=True)
+        (wiring / 'v1-proof-harness.html').write_text('<html><head><title>Harness assembly guide</title></head><body><main><h1>Harnesses</h1></main></body></html>')
 
     def tearDown(self):
         self.temp.cleanup()
@@ -217,7 +220,7 @@ class BuildTests(unittest.TestCase):
 
     def test_stale_electrical_sources_or_outputs_keep_the_prior_build(self):
         wiring = self.root / 'cad/wiring'
-        wiring.mkdir(parents=True)
+        wiring.mkdir(parents=True, exist_ok=True)
         checker = site.ROOT / 'cad/wiring/exports.py'
         spec = importlib.util.spec_from_file_location('test_wiring_exports', checker)
         exports = importlib.util.module_from_spec(spec)
@@ -290,7 +293,7 @@ class BuildTests(unittest.TestCase):
             '<html><head><meta http-equiv="refresh" content="0;url=proof-sandbox.html?robot=v0-genesis"></head>'
             '<body><a href="proof-sandbox.html?robot=v0-genesis">Open the archived robot</a></body></html>'
         )
-        (self.root / 'cad').mkdir()
+        (self.root / 'cad').mkdir(exist_ok=True)
         (self.root / 'cad/README.md').write_text('# CAD files\n')
         report = site.build(self.root, self.output)
         self.assertEqual(report['errors'], [])

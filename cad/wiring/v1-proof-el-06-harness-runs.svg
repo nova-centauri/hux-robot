@@ -269,7 +269,7 @@
 <polyline points="1530,1037 1726,1037" fill="none" stroke="#218ca0" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
 <rect x="1554" y="1013" width="104.4" height="23" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
 <text x="1560" y="1029" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0" fill="#218ca0">200 mm fixed</text>
-<text x="1124" y="1249" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Vendor cable, 200 mm, 1x6 0.1 in housing. No work.</text>
+<text x="1124" y="1249" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Supplied cable, 200 mm, 1x6 0.1 in housing.</text>
 <rect x="2136" y="937" width="1000" height="330" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4"/>
 <rect x="2136" y="937" width="6" height="330" rx="3" fill="#387b65" stroke="#387b65" stroke-width="1.4"/>
 <text x="2160" y="971" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">H9  ·  Right motor pigtail</text>
@@ -294,7 +294,7 @@
 <polyline points="2566,1037 2762,1037" fill="none" stroke="#218ca0" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
 <rect x="2590" y="1013" width="104.4" height="23" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4"/>
 <text x="2596" y="1029" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600" text-anchor="start" letter-spacing="0" fill="#218ca0">200 mm fixed</text>
-<text x="2160" y="1249" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Vendor cable, 200 mm, 1x6 0.1 in housing. No work.</text>
+<text x="2160" y="1249" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Supplied cable, 200 mm, 1x6 0.1 in housing.</text>
 <rect x="64" y="1293" width="1000" height="330" rx="10" fill="#fffef9" stroke="#ced8d7" stroke-width="1.4"/>
 <rect x="64" y="1293" width="6" height="330" rx="3" fill="#387b65" stroke="#387b65" stroke-width="1.4"/>
 <text x="88" y="1327" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">H10  ·  Pack lead</text>

@@ -206,7 +206,7 @@ PURCHASE = [
     dict(item='Ratcheting crimp tool for open-barrel JST / Molex contacts, 32-20 AWG (iCrimp IWS-3220M or IWISS SN-01BM)',
          vendor='Amazon', price_usd=25.99, asin=None,
          url='https://www.amazon.com/jst-xh-connector-kit/s?k=jst+xh+connector+kit',
-         note='Listed with the kit as frequently bought together. Any 0.1 in open-barrel ratcheting crimper works.'),
+         note='Verify tool and die compatibility with the exact contact. A generic pitch label does not establish compatibility.'),
     dict(item='Pre-crimped XH leads with housings, 2 to 7 positions (alternative to crimping)',
          vendor='Amazon', price_usd=16.99, asin=None,
          url='https://www.amazon.com/jst-xh-connector-kit/s?k=jst+xh+connector+kit',
@@ -229,8 +229,8 @@ HARNESSES = [
     dict(id='H5', name='Encoder supply', bundles=['B11'], pico=[], ends=['PDB.J5V', 'JLEG.J5V'], note='5 V and GND down the mid gap to the leg junction board. 22 AWG.'),
     dict(id='H6', name='Left motor power', bundles=['B12'], pico=[], ends=['DB.JML', 'JLEG.JPL'], note='OUT1 / OUT2, straight down. 22 AWG.'),
     dict(id='H7', name='Right motor power', bundles=['B13'], pico=[], ends=['DB.JMR', 'JLEG.JPR'], note='OUT1 / OUT2, straight down. 22 AWG.'),
-    dict(id='H8', name='Left motor pigtail', bundles=['B14'], pico=[], ends=['ML.PIGTAIL', 'JLEG.JML_IN'], note='Vendor cable, 200 mm, 1x6 0.1 in housing. No work.'),
-    dict(id='H9', name='Right motor pigtail', bundles=['B15'], pico=[], ends=['MR.PIGTAIL', 'JLEG.JMR_IN'], note='Vendor cable, 200 mm, 1x6 0.1 in housing. No work.'),
+    dict(id='H8', name='Left motor pigtail', bundles=['B14'], pico=[], ends=['ML.PIGTAIL', 'JLEG.JML_IN'], note='Supplied cable, 200 mm, 1x6 0.1 in housing.'),
+    dict(id='H9', name='Right motor pigtail', bundles=['B15'], pico=[], ends=['MR.PIGTAIL', 'JLEG.JMR_IN'], note='Supplied cable, 200 mm, 1x6 0.1 in housing.'),
     dict(id='H10', name='Pack lead', bundles=['B16'], pico=[], ends=['BAT.LEADS', 'F1.INLINE', 'KC.XPACK'], note='Pack to the inline fuse to the kill-chain board. XT30 at the board. 20 AWG.'),
     dict(id='H11', name='KILL button lead', bundles=['B17'], pico=[], ends=['SWK.LEADS', 'KC.JKILL'], note='Fixture lead, 600 mm.'),
     dict(id='H12', name='ARM button lead', bundles=['B18'], pico=[], ends=['SWA.LEADS', 'KC.JARM'], note='Fixture lead, 600 mm.'),
@@ -360,7 +360,7 @@ def data():
                     low_voltage='JST XH 2.50 mm: header B#B-XH-A, housing XHP-#, contact SXH-001T-P0.6 (22-28 AWG)',
                     power='XT30 for the pack, the fuse and the switched rail',
                     motor='Pololu 4752 pigtail keeps its 1x6 0.1 in housing; mates with a 1x6 male header on JLEG',
-                    pico_end='Decided 2026-10-17: the user desolders the pre-soldered pins of the Pico 2 and solders the XH headers to the board. The harness plugs into the Pico directly.',
+                    pico_end='Direct XH attachment was proposed on 2026-10-17. PH-C spans both Pico rows and needs a corrected interface. Verify 2.50 mm versus 2.54 mm fit before any header removal.',
                     wire='24 AWG signals, 22 AWG for 5 V / 3V3 / motor OUT1-OUT2, 20 AWG for the pack and the rail'),
                 length_model=dict(rule='Manhattan path: board -> front deck notch -> front face -> notch -> board. Cut = path x 1.10 + 2 x 15 mm, rounded up to 5 mm.',
                                   status='Estimate. Cut long, route on the frame, trim, record the measured length.'),
@@ -428,7 +428,11 @@ def write_outputs():
 <h2>Purchase candidates ({DATE})</h2><div class="scroll"><table><thead><tr><th>Item</th><th>Vendor</th><th>Price seen</th><th>Note</th></tr></thead><tbody>{prows}</tbody></table></div>
 <p><small>Counts cover the V1-PROOF harness only. Wire lengths are the cut lengths multiplied by the conductor count. Buy contacts with spares for crimp practice.</small></p>
 </main><script>const q=document.getElementById('search'),rows=[...document.querySelectorAll('#wires tbody tr')],count=document.getElementById('count');function filter(){{const term=q.value.toLowerCase().trim();let n=0;for(const row of rows){{row.hidden=!row.textContent.toLowerCase().includes(term);if(!row.hidden)n++;}}count.textContent=n+' of '+rows.length+' wires';}}q.addEventListener('input',filter);filter();</script></body></html>'''
-    (HERE / 'v1-proof-harness.html').write_text(html)
+    from assembly import render, wire_color
+    d['assembly_colors'] = {w['id']: dict(color=wire_color(w), status='vendor' if w['awg'] == 'vendor' else 'proposed')
+                            for w in d['wires'] if w['bundle'] != 'B19'}
+    (HERE / 'v1-proof-harness.json').write_text(json.dumps(d, indent=2) + '\n')
+    (HERE / 'v1-proof-harness.html').write_text(render(d, html))
     return d
 
 

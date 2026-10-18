@@ -5,7 +5,7 @@
     "low_voltage": "JST XH 2.50 mm: header B#B-XH-A, housing XHP-#, contact SXH-001T-P0.6 (22-28 AWG)",
     "power": "XT30 for the pack, the fuse and the switched rail",
     "motor": "Pololu 4752 pigtail keeps its 1x6 0.1 in housing; mates with a 1x6 male header on JLEG",
-    "pico_end": "Decided 2026-10-17: the user desolders the pre-soldered pins of the Pico 2 and solders the XH headers to the board. The harness plugs into the Pico directly.",
+    "pico_end": "Direct XH attachment was proposed on 2026-10-17. PH-C spans both Pico rows and needs a corrected interface. Verify 2.50 mm versus 2.54 mm fit before any header removal.",
     "wire": "24 AWG signals, 22 AWG for 5 V / 3V3 / motor OUT1-OUT2, 20 AWG for the pack and the rail"
   },
   "length_model": {
@@ -2389,7 +2389,7 @@
     {
       "id": "H8",
       "name": "Left motor pigtail",
-      "note": "Vendor cable, 200 mm, 1x6 0.1 in housing. No work.",
+      "note": "Supplied cable, 200 mm, 1x6 0.1 in housing.",
       "pico": [],
       "ends": [
         "ML.PIGTAIL",
@@ -2419,7 +2419,7 @@
     {
       "id": "H9",
       "name": "Right motor pigtail",
-      "note": "Vendor cable, 200 mm, 1x6 0.1 in housing. No work.",
+      "note": "Supplied cable, 200 mm, 1x6 0.1 in housing.",
       "pico": [],
       "ends": [
         "MR.PIGTAIL",
@@ -2555,7 +2555,7 @@
         "price_usd": 25.99,
         "asin": null,
         "url": "https://www.amazon.com/jst-xh-connector-kit/s?k=jst+xh+connector+kit",
-        "note": "Listed with the kit as frequently bought together. Any 0.1 in open-barrel ratcheting crimper works."
+        "note": "Verify tool and die compatibility with the exact contact. A generic pitch label does not establish compatibility."
       },
       {
         "item": "Pre-crimped XH leads with housings, 2 to 7 positions (alternative to crimping)",
@@ -2596,6 +2596,244 @@
       "AWG 20": 790,
       "AWG 22": 2880,
       "AWG 24": 9685
+    }
+  },
+  "assembly_colors": {
+    "H001": {
+      "color": "Green",
+      "status": "proposed"
+    },
+    "H002": {
+      "color": "Gray",
+      "status": "proposed"
+    },
+    "H003": {
+      "color": "Black",
+      "status": "proposed"
+    },
+    "H004": {
+      "color": "Yellow",
+      "status": "proposed"
+    },
+    "H005": {
+      "color": "Orange",
+      "status": "proposed"
+    },
+    "H006": {
+      "color": "White",
+      "status": "proposed"
+    },
+    "H007": {
+      "color": "Violet",
+      "status": "proposed"
+    },
+    "H008": {
+      "color": "Violet",
+      "status": "proposed"
+    },
+    "H009": {
+      "color": "Violet",
+      "status": "proposed"
+    },
+    "H010": {
+      "color": "Blue",
+      "status": "proposed"
+    },
+    "H011": {
+      "color": "Green",
+      "status": "proposed"
+    },
+    "H012": {
+      "color": "Gray",
+      "status": "proposed"
+    },
+    "H013": {
+      "color": "Orange",
+      "status": "proposed"
+    },
+    "H014": {
+      "color": "Black",
+      "status": "proposed"
+    },
+    "H015": {
+      "color": "Blue",
+      "status": "proposed"
+    },
+    "H016": {
+      "color": "Green",
+      "status": "proposed"
+    },
+    "H017": {
+      "color": "Gray",
+      "status": "proposed"
+    },
+    "H018": {
+      "color": "Orange",
+      "status": "proposed"
+    },
+    "H019": {
+      "color": "Black",
+      "status": "proposed"
+    },
+    "H020": {
+      "color": "Violet",
+      "status": "proposed"
+    },
+    "H021": {
+      "color": "Yellow",
+      "status": "proposed"
+    },
+    "H022": {
+      "color": "White",
+      "status": "proposed"
+    },
+    "H023": {
+      "color": "Yellow",
+      "status": "proposed"
+    },
+    "H024": {
+      "color": "White",
+      "status": "proposed"
+    },
+    "H025": {
+      "color": "Black",
+      "status": "proposed"
+    },
+    "H026": {
+      "color": "Green",
+      "status": "proposed"
+    },
+    "H027": {
+      "color": "Orange",
+      "status": "proposed"
+    },
+    "H028": {
+      "color": "Black",
+      "status": "proposed"
+    },
+    "H029": {
+      "color": "Blue",
+      "status": "proposed"
+    },
+    "H030": {
+      "color": "Black",
+      "status": "proposed"
+    },
+    "H031": {
+      "color": "Red",
+      "status": "proposed"
+    },
+    "H032": {
+      "color": "Black",
+      "status": "proposed"
+    },
+    "H033": {
+      "color": "Red",
+      "status": "proposed"
+    },
+    "H034": {
+      "color": "Black",
+      "status": "proposed"
+    },
+    "H035": {
+      "color": "Blue",
+      "status": "proposed"
+    },
+    "H036": {
+      "color": "Black",
+      "status": "proposed"
+    },
+    "H037": {
+      "color": "Red",
+      "status": "proposed"
+    },
+    "H038": {
+      "color": "Black",
+      "status": "proposed"
+    },
+    "H039": {
+      "color": "Red",
+      "status": "proposed"
+    },
+    "H040": {
+      "color": "Black",
+      "status": "proposed"
+    },
+    "H041": {
+      "color": "Red",
+      "status": "vendor"
+    },
+    "H042": {
+      "color": "Black",
+      "status": "vendor"
+    },
+    "H043": {
+      "color": "Green",
+      "status": "vendor"
+    },
+    "H044": {
+      "color": "Blue",
+      "status": "vendor"
+    },
+    "H045": {
+      "color": "Yellow",
+      "status": "vendor"
+    },
+    "H046": {
+      "color": "White",
+      "status": "vendor"
+    },
+    "H047": {
+      "color": "Red",
+      "status": "vendor"
+    },
+    "H048": {
+      "color": "Black",
+      "status": "vendor"
+    },
+    "H049": {
+      "color": "Green",
+      "status": "vendor"
+    },
+    "H050": {
+      "color": "Blue",
+      "status": "vendor"
+    },
+    "H051": {
+      "color": "Yellow",
+      "status": "vendor"
+    },
+    "H052": {
+      "color": "White",
+      "status": "vendor"
+    },
+    "H053": {
+      "color": "Red",
+      "status": "proposed"
+    },
+    "H054": {
+      "color": "Red",
+      "status": "proposed"
+    },
+    "H055": {
+      "color": "Black",
+      "status": "proposed"
+    },
+    "H056": {
+      "color": "Violet",
+      "status": "proposed"
+    },
+    "H057": {
+      "color": "Orange",
+      "status": "proposed"
+    },
+    "H058": {
+      "color": "Violet",
+      "status": "proposed"
+    },
+    "H059": {
+      "color": "Green",
+      "status": "proposed"
     }
   }
 }

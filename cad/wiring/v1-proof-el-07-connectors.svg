@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="3200" height="2000" viewBox="0 0 3200 2000" role="img" aria-labelledby="title desc">
-<title id="title">Hux V1-PROOF Connector loading</title><desc id="desc">Every harness connector with its positions. XH = JST XH 2.50 mm. Position 1 is the header pin nearest the triangle mark on the housing; mark pin 1 on each board. Source-checked planning drawing; proposed harnesses and unresolved interfaces require physical verification.</desc>
+<title id="title">Hux V1-PROOF Connector loading</title><desc id="desc">Logical position schedules, not connector face views. XH = JST XH 2.50 mm. Verify position 1 on the actual mating parts. PH-C spans both Pico rows: physical interface unresolved. Source-checked planning drawing; proposed harnesses and unresolved interfaces require physical verification.</desc>
 <defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r=".7" fill="#c9d5d1"/></pattern></defs>
 <rect x="0" y="0" width="3200" height="2000" rx="0" fill="#ffffff" stroke="#ced8d7" stroke-width="1.4"/>
 <rect x="32" y="32" width="3136" height="1936" fill="none" stroke="#ced8d7"/>
 <text x="64" y="72" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" text-anchor="start" letter-spacing="2" fill="#387b65">HUX  /  V1-PROOF  /  ELECTRICAL</text>
 <text x="64" y="119" font-family="Arial,Helvetica,sans-serif" font-size="44" font-weight="700" text-anchor="start" letter-spacing="0" fill="#20343e">Connector loading</text>
-<text x="64" y="150" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Every harness connector with its positions. XH = JST XH 2.50 mm. Position 1 is the header pin nearest the triangle mark on the housing; mark pin 1 on each board.</text>
+<text x="64" y="150" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Logical position schedules, not connector face views. XH = JST XH 2.50 mm. Verify position 1 on the actual mating parts. PH-C spans both Pico rows: physical interface unresolved.</text>
 <rect x="2590" y="58" width="546" height="65" rx="8" fill="#ece7d7" stroke="#ced8d7" stroke-width="1.4"/>
 <text x="2863" y="86" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" text-anchor="middle" letter-spacing="1" fill="#20343e">SOURCE-CHECKED PLAN</text>
 <text x="2863" y="112" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="500" text-anchor="middle" letter-spacing="1" fill="#647780">HARNESS / BENCH RELEASE OPEN</text>

@@ -229,8 +229,8 @@ def full_system():
         s.text(84,330+i*26,t,14 if i else 12,col,w,spacing=1 if not i else 0)
 
     # ---- Pico 2 ----
-    d.box('P1',1560,300,860,830,'Pico 2','RP2350 · 3.3 V GPIO · eight XH headers in contiguous pin groups · GP25 LED onboard',color=C['green'],
-          lines=['Headers: PH-A p4–p7, PH-A2 p8–p10, PH-B p11–p15, PH-C p16–p21,','PH-D p24–p29, PH-E p31–p34, PH-F p36–p39, PH-G p1–p3.','Desolder the pre-soldered pins, then solder the XH headers to the board (2026-10-17).','NC: ADC_VREF p35, RUN p30, 3V3_EN p37, GP17 p22, GP19–GP21.','EL-02 shows the physical board and the IMU pins.'],line_y=1000)
+    d.box('P1',1560,300,860,830,'Pico 2','RP2350 · 3.3 V GPIO · proposed XH groups, physical layout open · GP25 LED onboard',color=C['green'],
+          lines=['Headers: PH-A p4–p7, PH-A2 p8–p10, PH-B p11–p15, PH-C p16–p21,','PH-D p24–p29, PH-E p31–p34, PH-F p36–p39, PH-G p1–p3.','PH-C crosses both Pico rows. Resolve the interface before header removal.','NC: ADC_VREF p35, RUN p30, 3V3_EN p37, GP17 p22, GP19–GP21.','EL-02 shows the physical board and the IMU pins.'],line_y=1000)
     s.text(1990,520,'P1 / Pico 2',30,C['green'],700,'middle')
     for pos,y in zip(range(1,7),range(380,620,40)):hx_port(d,'P1.PH-C',pos,1560,y,'left')
     for pos,y in zip(range(1,5),range(680,840,40)):hx_port(d,'P1.PH-F',pos,1560,y,'left')
@@ -472,7 +472,7 @@ def harness_runs():
 def connectors():
     """EL-07: connector loading tables, one small table per connector."""
     H=HX.data()
-    s=Sheet('EL-07','Connector loading','Every harness connector with its positions. XH = JST XH 2.50 mm. Position 1 is the header pin nearest the triangle mark on the housing; mark pin 1 on each board.',3200,2000,tabloid=True)
+    s=Sheet('EL-07','Connector loading','Logical position schedules, not connector face views. XH = JST XH 2.50 mm. Verify position 1 on the actual mating parts. PH-C spans both Pico rows: physical interface unresolved.',3200,2000,tabloid=True)
     keys=[k for k in H['connectors'] if k not in ('BAT.LEADS','F1.INLINE','JUSB.CABLE')]
     col_w=760;x0=64;y0=230;col=0;y=y0
     for key in keys:

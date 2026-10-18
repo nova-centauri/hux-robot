@@ -650,10 +650,10 @@
 <text x="84" y="469.835" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">1x6 0.1 in = the Pololu pigtail housing.</text>
 <rect x="1560" y="276.404" width="860" height="674.57" rx="8" fill="#fffef9" stroke="#387b65" stroke-width="1.4" />
 <text x="1578" y="300.787" font-family="Arial,Helvetica,sans-serif" font-size="22.0" font-weight="700" text-anchor="start" letter-spacing="0" fill="#387b65">P1 / Pico 2</text>
-<text x="1578" y="322.73" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">RP2350 · 3.3 V GPIO · eight XH headers in contiguous pin groups · GP25 LED onboard</text>
+<text x="1578" y="322.73" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">RP2350 · 3.3 V GPIO · proposed XH groups, physical layout open · GP25 LED onboard</text>
 <text x="1578" y="845.318" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Headers: PH-A p4–p7, PH-A2 p8–p10, PH-B p11–p15, PH-C p16–p21,</text>
 <text x="1578" y="864.824" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">PH-D p24–p29, PH-E p31–p34, PH-F p36–p39, PH-G p1–p3.</text>
-<text x="1578" y="884.33" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">Desolder the pre-soldered pins, then solder the XH headers to the board (2026-10-17).</text>
+<text x="1578" y="884.33" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">PH-C crosses both Pico rows. Resolve the interface before header removal.</text>
 <text x="1578" y="903.835" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">NC: ADC_VREF p35, RUN p30, 3V3_EN p37, GP17 p22, GP19–GP21.</text>
 <text x="1578" y="923.341" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="400" text-anchor="start" letter-spacing="0" fill="#647780">EL-02 shows the physical board and the IMU pins.</text>
 <text x="1990" y="455.206" font-family="Arial,Helvetica,sans-serif" font-size="30.0" font-weight="700" text-anchor="middle" letter-spacing="0" fill="#387b65">P1 / Pico 2</text>
@@ -1071,6 +1071,8 @@
 <text x="2460" y="569.801" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="start" letter-spacing="0" fill="#218ca0">W050</text>
 <rect x="2462" y="686.022" width="45.0" height="19.506" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
 <text x="2468" y="699.839" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="start" letter-spacing="0" fill="#bd9221">W051</text>
+<rect x="2469" y="848.569" width="45.0" height="19.506" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
+<text x="2475" y="862.386" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="start" letter-spacing="0" fill="#437fb4">W052</text>
 <rect x="2477" y="637.258" width="45.0" height="19.506" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
 <text x="2483" y="651.075" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="start" letter-spacing="0" fill="#52676d">W053</text>
 <rect x="2484" y="588.494" width="45.0" height="19.506" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
@@ -1079,6 +1081,8 @@
 <text x="2498" y="626.693" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="start" letter-spacing="0" fill="#218ca0">W055</text>
 <rect x="2499" y="718.532" width="45.0" height="19.505" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
 <text x="2505" y="732.348" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="start" letter-spacing="0" fill="#bd9221">W056</text>
+<rect x="2507" y="868.888" width="45.0" height="19.505" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
+<text x="2513" y="882.704" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="start" letter-spacing="0" fill="#437fb4">W057</text>
 <rect x="2514" y="799.805" width="45.0" height="19.506" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />
 <text x="2520" y="813.622" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" text-anchor="start" letter-spacing="0" fill="#52676d">W058</text>
 <rect x="2434" y="1628.794" width="45.0" height="19.506" rx="3" fill="#f7f5ee" stroke="#f7f5ee" stroke-width="1.4" />

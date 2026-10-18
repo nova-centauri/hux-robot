@@ -598,9 +598,9 @@
           "kind": "source-checked planning drawing, Rev C"
         },
         {
-          "title": "Harness register · bundles, cut lengths, connectors",
+          "title": "Harness assembly guide · plug views, colors, wire maps",
           "path": "cad/wiring/v1-proof-harness.html",
-          "kind": "generated register, estimates"
+          "kind": "assembly proposal and register, physical checks open"
         },
         {
           "title": "Pico 2 USB bring-up · 3 October",
@@ -699,6 +699,16 @@
         }
       ],
       "updates": [
+        {
+          "date": "2026-10-17",
+          "title": "Harness guide: one cable at a time",
+          "summary": "Each harness now has connector parts, wire colors, endpoint positions and assembly checks. Shaded plug views show sockets, reversed wire entries and separate board pins. Select a wire to highlight its position. The review found that PH-C spans both Pico rows and needs a corrected interface. Splice lengths, XT30 contact sex and button-side mating parts remain open. No physical release changed.",
+          "sourcePaths": [
+            "docs/wiring-atlas.md",
+            "cad/wiring/v1-proof-harness.html",
+            "tools/living-drawings/electrical.html"
+          ]
+        },
         {
           "date": "2026-10-17",
           "title": "Wiring atlas Rev C: boards by location, run lengths, connectors",

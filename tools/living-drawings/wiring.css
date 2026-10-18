@@ -1,5 +1,11 @@
 /* The wiring atlas shares its ivory, slate and teal with the drawing sheets. */
 :root{--atlas-ivory:#f8f6ee;--atlas-slate:#263840;--atlas-teal:#237a7b;--atlas-coral:#dc6e57;--atlas-amber:#c68a32;--atlas-purple:#8470b4}
+.harness-start{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:36px;background:#e8eee5;border:1px solid #c5d0c2;margin:24px 0 44px}
+.harness-start h2{font-size:42px;line-height:1.05;letter-spacing:-1.5px;margin:12px 0 18px}.harness-start p{font-size:14px;line-height:1.7}.harness-start .harness-start-note{font-size:11px;color:#596b70;line-height:1.65}
+.harness-start-button{display:inline-flex;gap:32px;align-items:center;background:#285d4d;color:#fffef4!important;padding:12px 18px;text-decoration:none;font-size:13px;font-weight:600;margin:8px 0}
+.harness-example{background:#fffdf5;border:1px solid #cad2c7;padding:26px;align-self:center}.harness-example .eyebrow{font-size:10px}.harness-example-ends{display:flex;justify-content:space-between;gap:20px;font-size:13px;margin:24px 0}.harness-example-ends strong:last-child{text-align:right}.harness-example-ends small{display:block;font:10px/1.7 var(--mono);color:#596b70;margin-top:7px}
+.harness-example-wire{display:flex;align-items:center;gap:12px;margin:18px 0;font-size:12px}.harness-example-wire b{display:grid;place-items:center;width:28px;height:30px;border:1px solid #a7b5a8;background:#eeeee4;font:12px var(--mono)}.harness-example-wire span{flex:1;text-align:center;border-bottom:4px solid;padding-bottom:5px}.example-red{border-color:#c74339!important}.example-black{border-color:#29333b!important}.harness-example>a{font-size:12px;font-weight:600}
+@media(max-width:760px){.harness-start{grid-template-columns:1fr;gap:20px;padding:22px}.harness-start h2{font-size:36px}.harness-example{padding:20px}.harness-start-button{gap:18px}}
 .atlas-toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px 20px;padding:14px 20px;background:var(--atlas-slate);color:var(--atlas-ivory);border:1px solid var(--atlas-slate)}
 .atlas-toolbar-links{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .atlas-issue{display:flex;align-items:center;gap:10px;margin:0;font:10px/1.5 var(--mono);letter-spacing:.35px;color:#d0dddb}

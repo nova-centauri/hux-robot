@@ -15,6 +15,12 @@ The active objective is a useful, inexpensive proof robot. **Under $1,000. Reuse
 
 ## Next physical work
 
+**2026-10-17 harness assembly review:** the user requested clear instructions for a novice. The [harness guide](cad/wiring/v1-proof-harness.html) now groups parts, wire colors, connector positions and checks by cable. The Electrical page links to the guide before the system drawings. H6 is the simple two-wire example.
+
+The user then requested plug renderings and 3D pinouts. The guide now shows shaded XH and motor plugs, socket faces, reversed wire entries and board header views. Select a connector, then a wire, to inspect its position. Empty cavities have no wire or metal socket. Motor labels show the wire functions. Orientation and physical release remain open.
+
+The review found that PH-C spans both Pico pin rows. Direct XH attachment needs a corrected interface before header removal. Splice SP1 needs measured segment lengths. The XT30 contact sex and button-side mating parts remain open. The guide marks these limits. No physical harness or powered test is complete.
+
 **2026-10-17 wiring atlas Rev C, by location:** the user asked for a new pass on the schematic. The wiring stays. Each item moves to where it mounts in the machine, each run gets a wire length, and the harness gets bundled connectors. The user then asked for one JST connector type for the low-voltage circuit and for an Amazon kit link in the BOM.
 
 EL-01 is now a rear elevation of the R05 body. The CTRL deck is at the top with the IMU and the Pico 2. The BUS deck with the power distribution board is next. The PWR deck with the kill-chain board and the driver board is below it. The leg junction board and the pack are below.

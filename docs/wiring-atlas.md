@@ -2,7 +2,27 @@
 
 **Revision dated October 17, 2026. This is a source-checked build-plan drawing. The physical harness and circuit release remain open.** Rev C puts each board where it mounts in the R05 body. It adds the harness run lengths and a connector standard. The [Electrical page](../tools/living-drawings/electrical.html) leads with the full system schematic by location. Download the [seven-page printable atlas](../cad/wiring/v1-proof-wiring-atlas.pdf) or search the [conductor register](../cad/wiring/v1-proof-wire-register.html).
 
-The [harness register](../cad/wiring/v1-proof-harness.html) has the bundles, the cut lengths and the connector loading.
+The [harness assembly guide](../cad/wiring/v1-proof-harness.html) has one card for each cable. Each card shows the parts, proposed wire colors, connector positions and checks. The full engineering register remains available below the cards.
+
+Each XH or motor connector has a shaded plug view and numbered end views. The wire-entry view reverses the socket-face order. Select a color to highlight its position. The adjacent list gives the function and the other endpoint. Board views show the separate mating pins.
+
+These illustrations use the proposed schedule. Verify position 1 against the physical parts before assembly.
+
+## Assembly review — October 17, 2026
+
+The previous register required several tables to assemble one cable. It did not specify physical wire colors for new cables. The new guide groups the information by harness. H6 is the first example, with two wires and two XHP-2 housings.
+
+The guide defines a proposed insulation color for each new wire. Vendor motor colors stay unchanged. Black is motor OUT2 on H6–H9. Green is encoder ground on H8 and H9. Read the endpoint labels as well as the colors.
+
+The connector strips are position schedules. They are not physical face views. The guide explains the mirror effect between the mating face and the wire-entry face. Verify the actual orientation before contact insertion.
+
+**Pico interface correction required.** PH-C groups physical pins 16–21 into one six-position header. Pins 16–20 are on one row. Pin 21 is on the opposite row. One straight header cannot span this group. See the [official Pico 2 pinout](https://datasheets.raspberrypi.com/pico/Pico-2-Pinout.pdf).
+
+Do not remove the existing Pico headers until the interface is resolved. The electrical endpoint assignments remain unchanged. A revised connector split or an adapter needs a separate layout check.
+
+**Cut-length limits.** SP1 needs three individually measured legs. Its position is about 30 mm from the Pico housing. The 95 mm sensor route and 335 mm driver route do not specify these three cuts. H10 also needs separate measurements after the pack connector and fuse holder are selected.
+
+**Mating parts remain open.** H4 and H10 need an exact XT30 contact-sex schedule. H11 and H12 need button terminals and button-side XH mating parts. The custom boards need physical header positions. None of these changes releases a harness for power.
 
 | Sheet | Drawing | Coverage |
 | --- | --- | --- |
@@ -57,7 +77,9 @@ This changes the R05 module table. The far cassette of the BUS deck, planned for
 
 ## Connector standard
 
-**JST XH 2.50 mm is the standard for every low-voltage harness connector.** Every board that we terminate has 0.1 in through-holes: the Pico 2, the LSM6DSO, the Pololu 4035 carriers, the Pololu 2813 and the protoboards. An XH header with up to six positions solders into a 0.1 in grid. The pitch error is 0.2 mm over six positions. XH has a friction lock, 3 A for each contact and takes 22 to 28 AWG wire.
+**JST XH 2.50 mm is the proposed standard for the low-voltage harness connectors.** The selected boards use 2.54 mm grids. Do not assume direct fit. A six-position header accumulates 0.20 mm of pitch difference. Check the exact board footprint and connector dimensions before solder work.
+
+The [JST XH specification](https://www.jst-mfg.com/product/pdf/eng/eXH.pdf) lists 3 A with 22 AWG wire. SXH-001T-P0.6 accepts 22–28 AWG with insulation diameter 0.9–1.9 mm. The current rating depends on the selected wire and assembly. It does not release the motor or power circuit.
 
 | Part | Use |
 | --- | --- |
@@ -71,11 +93,11 @@ This changes the R05 module table. The far cassette of the BUS deck, planned for
 
 One kit covers the housing, header and contact counts of this harness. The [harness register](../cad/wiring/v1-proof-harness.html) lists the kit, the crimp tool and a pre-crimped alternative, with the prices seen on 2026-10-17. Record the paid order in [purchases.md](purchases.md).
 
-**The Pico end.** The received Pico 2 has pre-soldered pins. The user decided on 2026-10-17 to desolder them and to solder the XH headers to the board. The harness then plugs into the Pico directly. Desolder with a pump or low-melt alloy, one row at a time, and check each pad for a lifted trace before you solder the headers.
+**The Pico end.** The received Pico 2 has pre-soldered pins. The user proposed direct XH attachment on 2026-10-17. The assembly review found the PH-C row conflict described above. Resolve this interface before header removal.
 
 ## Pico 2 headers
 
-The Pico 2 gets eight connectors in contiguous pin groups. Each harness branch plugs into one group.
+The model proposes eight Pico connector groups. PH-C crosses the two rows and needs correction. The table records logical assignments, not a released physical layout.
 
 | Header | Pins | Positions | Function |
 | --- | --- | ---: | --- |

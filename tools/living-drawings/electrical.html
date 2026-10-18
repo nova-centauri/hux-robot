@@ -16,10 +16,29 @@
       <div>
         <p class="eyebrow">V1-PROOF / Electrical engineering</p>
         <h1>Electrical &amp; wiring</h1>
-        <p class="intro">Individual power, command and feedback wires for the proof chassis. Trace both wheel motors, the controller and the IMU in the complete proposed wiring schematic. The leg servo circuits are for the next version.</p>
+        <p class="intro">Start with one harness. Identify its plugs, wire colors and numbered positions in the assembly guide. Use the system drawings below to trace the complete circuit.</p>
       </div>
       <p class="document-code">EL / V1-PROOF</p>
     </div>
+
+    <section class="harness-start" aria-labelledby="start-title">
+      <div>
+        <p class="eyebrow">Start here / Harness assembly guide</p>
+        <h2 id="start-title">From a drawing<br>to a cable.</h2>
+        <p>Choose one of twelve harnesses. Each card shows the connector parts, wire colors, wire sizes, endpoints and assembly checks.</p>
+        <a class="harness-start-button" href="../../cad/wiring/v1-proof-harness.html">Open the harness guide <span aria-hidden="true">↗</span></a>
+        <p class="harness-start-note">Proposed assembly. Lengths are estimates. Each card identifies the physical checks and parts that remain open.</p>
+      </div>
+      <div class="harness-example">
+        <p class="eyebrow">H6 / A simple two-wire example</p>
+        <div class="harness-example-ends"><strong>Driver board<small>DB.JML</small></strong><strong>Leg junction board<small>JLEG.JPL</small></strong></div>
+        <div class="harness-example-wire"><b>1</b><span class="example-red">Red · OUT1</span><b>1</b></div>
+        <div class="harness-example-wire"><b>2</b><span class="example-black">Black · OUT2</span><b>2</b></div>
+        <p>Two XHP-2 housings. Four metal contacts. Two 22 AWG wires.</p>
+        <p class="harness-start-note">Black is a motor lead. It is not ground. Position numbers here are a connection map, not a connector face view.</p>
+        <a href="../../cad/wiring/v1-proof-harness.html#H6">See the H6 parts and wire map →</a>
+      </div>
+    </section>
 
     <section class="section" id="wiring" aria-labelledby="wiring-title">
       <div class="section-head">
@@ -143,7 +162,7 @@
             <p class="eyebrow">EL-07 / Connector loading</p>
             <h3>Every connector, every position</h3>
             <p>Each harness connector with its positions, pins, nets and the wire that mates with it. Position 1 is the pin nearest the mark on the housing.</p>
-            <p class="small">The received Pico 2 has pre-soldered pins. The user desolders them and solders the XH headers to the board, so the harness plugs into the Pico directly.</p>
+            <p class="small">The Pico interface needs correction. PH-C spans both pin rows. Do not remove the existing headers until the connector layout is resolved.</p>
             <a class="atlas-sheet-link" href="../../cad/wiring/v1-proof-el-07-connectors.svg" target="_blank" rel="noopener">Open full-size vector <span aria-hidden="true">↗</span></a>
           </div>
         </article>

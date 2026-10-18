@@ -20,6 +20,12 @@ The [searchable conductor register](v1-proof-wire-register.html) maps EL-01 cond
 
 Drawing logic lives in [build.py](build.py) and [complete.py](complete.py). The harness model, the mount positions and the length rule live in [harness.py](harness.py). EL-01 must draw exactly the wires of the harness model. The build stops on a difference. The same SVG supplies the website diagram and its PDF.
 
+The [assembly guide](v1-proof-harness.html) adds one selectable card per harness. [assembly.py](assembly.py) generates the cards from the same model. It adds proposed physical wire colors without a circuit change. The JSON includes these color assignments. The guide identifies the PH-C layout conflict, the splice-length limits and the unspecified mating parts.
+
+The connector inspector adds shaded plug views, socket faces, reversed wire entries and separate board headers. Select a wire to highlight its position. [connector_views.py](connector_views.py) draws each view from the same position schedule. The XH and motor shapes are illustrations. Their orientation still needs a hardware check. The motor guide starts with its supplied plug.
+
+The guide supports a direct link such as `v1-proof-harness.html#H6`. Its print control prints the selected harness. Without JavaScript, all cards and views remain available. Print output includes every connector and view in the selected harness. Run `python3 cad/wiring/test_assembly.py` to check wire coverage, colors, connector counts and unresolved cuts.
+
 Do not edit the PDFs or PNGs by hand. Keep electrical source changes and regenerated exports in the same commit.
 
 Run these commands from the repository root. The Python command rebuilds all seven SVGs and the three registers:

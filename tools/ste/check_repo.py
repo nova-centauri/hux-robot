@@ -85,7 +85,9 @@ def markdown_files():
 
 
 def html_files():
-    return [p for p in sorted(DRAWINGS.glob("*.html")) if p.name not in ARCHIVE_PAGES]
+    pages = [p for p in sorted(DRAWINGS.glob("*.html")) if p.name not in ARCHIVE_PAGES]
+    guide = ROOT / 'cad/wiring/v1-proof-harness.html'
+    return pages + ([guide] if guide.exists() else [])
 
 
 def json_files():

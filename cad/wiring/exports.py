@@ -18,7 +18,7 @@ PRINT_PDFS = (
     'v1-proof-el-05-both-wheels-11x17.pdf',
     'v1-proof-wiring-atlas.pdf',
 )
-INPUTS = ('build.py', 'complete.py', 'harness.py', 'render.mjs', 'exports.py',
+INPUTS = ('build.py', 'complete.py', 'harness.py', 'assembly.py', 'connector_views.py', 'harness-guide.css', 'harness-guide.js', 'render.mjs', 'exports.py',
           *(stem + '.svg' for stem in STEMS))
 OUTPUTS = (*PRINT_PDFS, *(stem + '.png' for stem in STEMS))
 MANIFEST = 'v1-proof-export-manifest.json'
