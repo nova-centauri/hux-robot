@@ -25,7 +25,7 @@
 #ifndef HUX_BUILD_ID
 #define HUX_BUILD_ID "dev"
 #endif
-#define HUX_FW_VERSION "bench-0.1.0"
+#define HUX_FW_VERSION "bench-0.1.1"
 
 typedef enum { MODE_DISARMED = 0, MODE_BENCH_ARMED, MODE_FAULT } mode_t_;
 typedef enum { MOTION_NONE = 0, MOTION_JOG, MOTION_SPEED, MOTION_FOLLOW } motion_t;
@@ -46,7 +46,8 @@ static struct {
     // IMU
     bool imu_ok;
     lsm6dso_sample imu;
-    float pitch_deg;
+    float pitch_deg;         // filter output, before the tare
+    float pitch_zero;        // tare offset, set by "tare"
     bool pitch_init;
     volatile uint32_t int1_edges;
     uint32_t int1_rate_hz;
@@ -54,8 +55,10 @@ static struct {
     uint32_t int1_last_edges;
 
     // wheel
-    int32_t enc_raw;
+    int32_t enc_raw;         // after the encoder sign
     int32_t enc_zero;
+    int enc_sign;            // +1 or -1, set by "sign enc"
+    int mot_sign;            // +1 or -1, set by "sign mot"
     float speed_rpm;
     float current_a;
     float rail_v;
@@ -77,6 +80,9 @@ static struct {
 } S;
 
 static inline uint32_t now_ms(void) { return to_ms_since_boot(get_absolute_time()); }
+
+// Pitch after the tare. Telemetry and the follow mode use this value.
+static inline float pitch_out(void) { return S.pitch_deg - S.pitch_zero; }
 
 static void int1_irq(uint gpio, uint32_t events) {
     (void)gpio; (void)events;
@@ -135,9 +141,11 @@ static bool arm(void) {
 static float clampf(float v, float lo, float hi) { return v < lo ? lo : (v > hi ? hi : v); }
 
 static void print_id(void) {
-    printf("ID,%s,%s,who_am_i=0x%02X,imu=%s,control_hz=%d,deadman_ms=%d,watchdog_ms=%d\n",
+    printf("ID,%s,%s,who_am_i=0x%02X,imu=%s,control_hz=%d,deadman_ms=%d,watchdog_ms=%d,"
+           "enc_sign=%d,mot_sign=%d,pitch_zero=%.2f\n",
            HUX_FW_VERSION, HUX_BUILD_ID, lsm6dso_read_reg(LSM6DSO_REG_WHO_AM_I),
-           S.imu_ok ? "ok" : "absent", CONTROL_HZ, DEADMAN_MS, WATCHDOG_MS);
+           S.imu_ok ? "ok" : "absent", CONTROL_HZ, DEADMAN_MS, WATCHDOG_MS,
+           S.enc_sign, S.mot_sign, S.pitch_zero);
     printf("H,T,ms,mode,fault,ax_g,ay_g,az_g,gx_dps,gy_dps,gz_dps,pitch_deg,enc_counts,"
            "speed_rpm,duty_pct,current_A,nfault,loop_us,rail_V\n");
 }
@@ -145,7 +153,7 @@ static void print_id(void) {
 static void print_help(void) {
     printf("# id | imu on|off | imu rate | imu regs | enc | zero | arm | jog <duty%%> <ms> | "
            "speed <rpm> | follow <gain> | stop | disarm | k | tele on|off | rail on|off | "
-           "kp <v> | ki <v> | hang | help\n");
+           "kp <v> | ki <v> | tare | sign enc|mot 1|-1 | hang | help\n");
 }
 
 static bool require_armed(const char *cmd) {
@@ -193,6 +201,26 @@ static void handle_line(char *line) {
         return;
     }
     if (!strcmp(cmd, "zero")) { S.enc_zero = S.enc_raw; printf("OK zero\n"); return; }
+    if (!strcmp(cmd, "tare")) {
+        if (S.motion != MOTION_NONE) { printf("ERR tare needs no motion\n"); return; }
+        S.pitch_zero = S.pitch_deg;
+        printf("OK tare %.2f deg\n", S.pitch_zero);
+        return;
+    }
+    if (!strcmp(cmd, "sign")) {
+        if (S.mode != MODE_DISARMED) { printf("ERR sign only in DISARMED\n"); return; }
+        int v = (argc > 2) ? atoi(argv[2]) : 0;
+        if (argc < 3 || (v != 1 && v != -1)) { printf("ERR sign enc|mot 1|-1\n"); return; }
+        if (!strcmp(argv[1], "enc")) {
+            S.enc_sign = v;
+            S.enc_raw = S.enc_sign * encoder_count();
+            S.enc_zero = S.enc_raw;
+        } else if (!strcmp(argv[1], "mot")) {
+            S.mot_sign = v;
+        } else { printf("ERR sign enc|mot 1|-1\n"); return; }
+        printf("OK sign %s %d\n", argv[1], v);
+        return;
+    }
     if (!strcmp(cmd, "tele")) {
         S.tele_on = !(argc > 1 && !strcmp(argv[1], "off"));
         printf("OK tele %s\n", S.tele_on ? "on" : "off");
@@ -214,6 +242,13 @@ static void handle_line(char *line) {
     if (!strcmp(cmd, "disarm")) { disarm(); printf("OK disarm\n"); return; }
     if (!strcmp(cmd, "stop")) {
         if (S.mode == MODE_BENCH_ARMED) {
+            // From a jog or from rest, start the ramp at the measured speed with
+            // an empty integrator. bench-0.1.0 kept the old ramp state here, so a
+            // stop during a jog could command up to 30 % reverse duty.
+            if (S.motion != MOTION_SPEED && S.motion != MOTION_FOLLOW) {
+                S.pi_integ = 0.0f;
+                S.speed_ramped = S.speed_rpm;
+            }
             S.motion = MOTION_SPEED;      // ramp to zero through the speed loop
             S.speed_target = 0.0f;
             S.last_cmd_ms = now_ms();
@@ -322,7 +357,7 @@ static void control(uint32_t t_ms, float dt) {
     case MOTION_FOLLOW: {
         float target = S.speed_target;
         if (S.motion == MOTION_FOLLOW) {
-            target = clampf(S.follow_gain * S.pitch_deg, -LIMIT_SPEED_RPM, LIMIT_SPEED_RPM);
+            target = clampf(S.follow_gain * pitch_out(), -LIMIT_SPEED_RPM, LIMIT_SPEED_RPM);
         }
         float step = RAMP_RPM_PER_S * dt;
         S.speed_ramped += clampf(target - S.speed_ramped, -step, step);
@@ -343,7 +378,7 @@ static void control(uint32_t t_ms, float dt) {
     }
     duty = clampf(duty, -LIMIT_DUTY_PCT, LIMIT_DUTY_PCT);
     S.duty_cmd = duty;
-    drv8874_set_duty(duty);
+    drv8874_set_duty((float)S.mot_sign * duty);
 }
 
 static void update_pitch(float dt) {
@@ -389,6 +424,9 @@ int main(void) {
     S.kp = 0.8f;
     S.ki = 3.0f;
     S.rail_check_on = false;   // enable with "rail on" after the kill chain is built
+    S.enc_sign = 1;
+    S.mot_sign = 1;
+    S.pitch_zero = 0.0f;
 
     // Give the host a moment to open the port, then announce.
     sleep_ms(500);
@@ -424,9 +462,11 @@ int main(void) {
             lsm6dso_read(&S.imu);
             update_pitch(dt);
         }
-        S.enc_raw = encoder_count();
+        int32_t enc_hw = encoder_count();
+        S.enc_raw = S.enc_sign * enc_hw;
         if (t_ms - last_speed_ms >= SPEED_EST_PERIOD_MS) {
-            S.speed_rpm = encoder_update_speed(S.enc_raw, t_ms);
+            // The speed history keeps the hardware count, so a sign change gives no speed spike.
+            S.speed_rpm = (float)S.enc_sign * encoder_update_speed(enc_hw, t_ms);
             S.rail_v = drv8874_read_rail_v();
             last_speed_ms = t_ms;
         }
@@ -459,7 +499,7 @@ int main(void) {
                    (unsigned long)t_ms, MODE_NAMES[S.mode], S.fault_reason[0] ? S.fault_reason : "-",
                    S.imu.acc_g.x, S.imu.acc_g.y, S.imu.acc_g.z,
                    S.imu.gyro_dps.x, S.imu.gyro_dps.y, S.imu.gyro_dps.z,
-                   S.pitch_deg, (long)(S.enc_raw - S.enc_zero), S.speed_rpm, S.duty_cmd,
+                   pitch_out(), (long)(S.enc_raw - S.enc_zero), S.speed_rpm, S.duty_cmd,
                    S.current_a, S.drv_fault ? 0 : 1, (unsigned long)S.loop_us, S.rail_v);
         }
         led_update(t_ms);

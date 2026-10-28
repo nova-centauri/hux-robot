@@ -55,9 +55,14 @@
 #define RAIL_PRESENT_V       8.0f      // rail check threshold when enabled
 
 // ---- IMU axis mapping (record the real mapping in stage E1) ---------------
-// pitch = rotation about the wheel axle. With the SparkFun board flat and its
-// Y axis along the axle, X forward and Z up:
-#define PITCH_RATE_FROM(g)   ((g).y)                // deg/s
-#define PITCH_ACC_ANGLE(a)   (atan2f((a).x, (a).z)) // rad, 0 when level
+// pitch = rotation about the wheel axle. With the SparkFun board flat, X
+// forward and Z up, the right-handed sensor frame puts Y to the left. A forward
+// tilt (nose down) is a positive rotation about +Y: the gyro Y rate is positive
+// and the accelerometer X reading goes negative. Both terms below give a
+// positive pitch for a forward tilt. (Fix 2026-10-28: bench-0.1.0 used
+// atan2f(x, z), which has the opposite sign to the gyro term, so the
+// complementary filter moved the wrong way for about 0.1 s and then lagged.)
+#define PITCH_RATE_FROM(g)   ((g).y)                  // deg/s, + = forward tilt
+#define PITCH_ACC_ANGLE(a)   (atan2f(-(a).x, (a).z))  // rad, 0 when level, + = forward tilt
 
 #endif

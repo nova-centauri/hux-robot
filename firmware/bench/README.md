@@ -4,6 +4,10 @@ This program is the first Hux firmware. It runs the stages of the [electronics b
 
 **Status, 2026-10-15:** the code compiles for `PICO_BOARD=pico2` with Pico SDK 2.2.0 and Arm GCC 15.2.1. No board test is recorded. The first flash is stage E0 of the guide.
 
+**2026-10-28, bench-0.1.1 (source only):** the pitch filter had a sign error. The accelerometer term and the gyroscope term had opposite signs. Thus the estimate moved the wrong way at the start of a tilt and then lagged. A forward tilt now gives a positive pitch from both terms.
+
+The `stop` command now starts its ramp at the measured speed. New commands: `tare`, `sign enc` and `sign mot`. The file `release/hux_bench.uf2` is still bench-0.1.0. Build a new UF2 before stage E6.
+
 ## What it does
 
 - Holds the driver nSLEEP line (GP10) low as its first instruction after boot.

@@ -253,6 +253,9 @@ The bench firmware is the [`firmware/bench`](../firmware/bench/README.md) progra
 | `rail on` / `rail off` | Enable the switched-rail check on GP28, after the kill chain exists | all modes |
 | `kp <v>` / `ki <v>` | Set the speed loop gains | all modes |
 | `tele on` / `tele off` | Start or stop the 50 Hz telemetry line | all modes |
+| `tare` | Record the current pitch as zero. Telemetry and `follow` use the pitch after the tare. Added in bench-0.1.1. | all modes, with no motion |
+| `sign enc 1` / `sign enc -1` | Set the encoder sign without a new build. The value resets to 1 at boot. Added in bench-0.1.1. | `DISARMED` only |
+| `sign mot 1` / `sign mot -1` | Set the motor polarity without a new build. The value resets to 1 at boot. Added in bench-0.1.1. | `DISARMED` only |
 
 Rules for the firmware:
 

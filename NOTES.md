@@ -15,6 +15,15 @@ The active objective is a useful, inexpensive proof robot. **Under $1,000. Reuse
 
 ## Next physical work
 
+**2026-10-28 one-motor bench review:** the user has the Pico 2 and the IMU on a breadboard and a bench supply. The user wants to bench test the feedback loop with one wheel motor before the second motor arrives. A review of `firmware/bench` against this bench found four items.
+
+1. The pitch filter had a sign error. `PITCH_ACC_ANGLE` used `atan2f(x, z)` and `PITCH_RATE_FROM` used `+y`. For a right-handed sensor these terms have opposite signs. A simulated 20° tilt at 100°/s moved the estimate 3° the wrong way and then lagged by 0.5 s. The fix is `atan2f(-x, z)`, so a forward tilt is positive from both terms.
+2. A `stop` during a jog kept the old ramp state and could command up to 30 % reverse duty. The fix starts the ramp at the measured speed.
+3. The firmware had no pitch tare and no run-time sign for the encoder or the motor. The commands `tare`, `sign enc` and `sign mot` are new.
+4. At 12 V, a jog above approximately 18 % duty gives more than the 60 rpm fault speed. The E3 steps at 20 % and 30 % will stop on `overspeed`.
+
+The source is bench-0.1.1. It passes a syntax check with stub headers on the host. No ARM build and no board test are recorded. The prebuilt UF2 is still bench-0.1.0.
+
 **2026-10-17 harness assembly review:** the user requested clear instructions for a novice. The [harness guide](cad/wiring/v1-proof-harness.html) now groups parts, wire colors, connector positions and checks by cable. The Electrical page links to the guide before the system drawings. H6 is the simple two-wire example.
 
 The user then requested plug renderings and 3D pinouts. The guide now shows shaded XH and motor plugs, socket faces, reversed wire entries and board header views. Select a connector, then a wire, to inspect its position. Empty cavities have no wire or metal socket. Motor labels show the wire functions. Orientation and physical release remain open.
